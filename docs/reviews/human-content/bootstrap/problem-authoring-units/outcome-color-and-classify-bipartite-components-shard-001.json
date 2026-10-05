@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-color-and-classify-bipartite-components-shard-001",
-  "shardSubjectDigest": "336bce90b115efa398c4159972980e027323aa363b58cbbf062d1ef8e92d63f1",
+  "shardSubjectDigest": "3131e40605f283e76c34696b7ad6ad5fc3c36851b718c5ea0cf11b569d1e579f",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -16,8 +16,8 @@
   },
   "riskReasons": [],
   "sourceVerifications": [],
-  "priorReviewInventoryDigest": "e66f2d28364fc1cac6baab036ad80b06bd9eb0ab210323889473b8efc6953674",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "827df0456840a3d67fbd322bb941a704ffeeffde49ebb103bc2fc15d7333b94c",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -34,5 +34,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "531f85d8828b0711b4b7f71a8267c3ee98551e2c5c20f48e87d1088eee8dbacb"
+  "evidenceDigest": "9db68c712a54fee926e46a4387a28f77642013ba74aa48a58a3a7af82fb651d9"
 }

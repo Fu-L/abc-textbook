@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-select-state-graph-search-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e2c73a4e4328d5b72c08814951f564aa59fa8701539eb83c2b77c16eaa1682ac",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3cfe6e7089f66efcb213df3c02a0b13b4068e8db559820941a0195237b784b3c",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8765bd5df057a421dbf370267f64dcc78dd6c558e463b0a345dd09185512fc30",
-  "reviewDigest": "f79c8bb6615cdb7aa07336fa1e3ec2c751750837032c95490f19c6cc9bc5a5a1",
+  "checksDigest": "4aeb584c3e91f60138deb9210bf9e9b8b491d8e5d201e7f1175f665b42d19ae6",
+  "reviewDigest": "b2b9c9c736b236708e4b2fa243a9e0b45a24d2791ca49aacd012da2838ba5e58",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-select-state-graph-search/outcome-select-state-graph-search-shard-001/abc241-f.html",
@@ -47,5 +47,5 @@
       "digest": "827e6478f060eddcb55618beb1dbf43f5222d35f69b7ad1893141fc08cfacde4"
     }
   ],
-  "snapshotDigest": "3d0d7585caa269182b20c45682ff59ced29161aa4cde28d5c00122133afa38ad"
+  "snapshotDigest": "934868c538f70dca652b94b2766c6c95ebfa8b4d2007c1ae3114031b8f2e2ade"
 }

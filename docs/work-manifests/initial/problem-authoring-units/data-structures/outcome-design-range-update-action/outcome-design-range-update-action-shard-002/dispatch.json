@@ -44,7 +44,7 @@
       "official_source_conflict"
     ]
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "c61a4bde4d2732e44df637d85d3af37f55f1c5d8390b7ef50d95d6677c70b9ae",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-range-update-action/outcome-design-range-update-action-shard-002/checks.json",

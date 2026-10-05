@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-query-bitwise-order-with-trie-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "45a15542b15169d2ffbeb968762abe4ad181db7507c2935cf53e7c58c3042859",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "2aff802dea7540506ba4d2e295fd9aa6c082d73a4dde05a2810a32c284c01794",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "e57716c34aacb69fb71b3e439406dc938b2c0b403cd8d79fa1eb00291da44e6c",
-  "reviewDigest": "b2b52727bb3aa74b91dd48b0998bc24c4bd9b00ff62c794600481d3cf964773a",
+  "checksDigest": "9c980337cc973f8a34a3c3d20888e750d4d07d056a2e38faa50110b47d1be9e1",
+  "reviewDigest": "85ddcae5fb8176af58edfd08b9df32b77ddf8de412f05e8892933f71afac127b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-query-bitwise-order-with-trie/outcome-query-bitwise-order-with-trie-shard-001/abc425-g.html",
@@ -19,5 +19,5 @@
       "digest": "b9bd9fe9d87a9ae4981ac967afa1b0e1ce6f81d93506b1c068f32cc3dcd82768"
     }
   ],
-  "snapshotDigest": "72633b1bf3bbfe9992ca6da746c6f953df23efa14b2f3d0e14b932916d90606d"
+  "snapshotDigest": "7ec47d11f559aff587fb73f711aab31e7c954fcebfc7eb7ef501d3abc5ef8ef8"
 }

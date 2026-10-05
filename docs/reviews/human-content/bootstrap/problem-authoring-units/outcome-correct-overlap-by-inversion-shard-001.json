@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-correct-overlap-by-inversion-shard-001",
-  "shardSubjectDigest": "0aa36a32f441807feb06ecb6585edef0dd115346f4dc7e9001ea5e7714966e63",
+  "shardSubjectDigest": "79b845310c48d8a1a31f55c361e09921ea6de9c35da1d507383243af290db561",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5403918168: Signed connected graph coefficient derived from root-component recurrence and checked by complete graph enumeration. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
     }
   ],
-  "priorReviewInventoryDigest": "3c67c8f55eb5280b6c3867730677b58262ecc784c71dfe63cfd87b36794571a7",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "4b81f40c00e14ebce940309c8677b69286ade00b79cded97a9d9d0636ce52cec",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -86,5 +86,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "33f69b031dbc465f74d9f19c8a4431dea8f3acea9315c1dcbc314450753a83de"
+  "evidenceDigest": "ac93ce36d73f68606ebb0cc8495663b6c1f28e31d3beaf4723fde3fd27856277"
 }

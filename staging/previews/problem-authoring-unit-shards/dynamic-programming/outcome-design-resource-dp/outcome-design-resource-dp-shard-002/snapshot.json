@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3dfefa483ae14b46ed2d58d16c71bec834ab646c693203b177f7274fb06c9e3b",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "4b16579356cf84ff4015bc7398ff5b8122206c805e479c9b890cf6891518256c",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "026e8b1e44e1956086446e3b0bd4da819d857a7030bcaa2edaa11f27dc9fea55",
-  "reviewDigest": "4312dec7d4100a6022010139dc7511201dfff6611fc7fdb7451f0860d085863b",
+  "checksDigest": "224a1b750975378b4ad3537983d9ddf600ee039554ac822ad1fdcddaa2c6d5da",
+  "reviewDigest": "636acaa62e712fd1f53011b3deb0d390496289186449a29973077b85c85efb8e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-002/abc322-e.html",
@@ -47,5 +47,5 @@
       "digest": "c28d56fd4fd0558c06b025f35c2fa83602e4048518acbf13183ec0f87dbff9b6"
     }
   ],
-  "snapshotDigest": "201eb34f49c3b18577d30e5e46d0a298c6e327c943b0ad7e99a0d1fe0d3a935c"
+  "snapshotDigest": "5ee9ce1b406ca7c61dc339892197f541cfbc68426c061f9daadd14248d286348"
 }

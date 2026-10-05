@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7273e6144837d7375507891388f6c7741e97c413f348e547969a8c78835800cc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3dcd6393a715eb64b6abddab09c72a65ae26e462a4634efa8bcaaa61d9cdb455",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a533da4f9603b4bd4fcc2ab7760005997c5d163bc3436f2a74e9ac36dc938f95",
-  "reviewDigest": "eb19c6faf2bb86adf49e706e53018f7b0bb66451c5af29091379950007d46e6e",
+  "checksDigest": "fe749f50f6f1f087a9f775167bec3ae8333d6060bba30efde8f94db8c5a87793",
+  "reviewDigest": "df4c739cb57366d167142a41215be17cf7e503b327567551b9b9b702ef967c4a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-002/abc262-f.html",
@@ -47,5 +47,5 @@
       "digest": "3be5fb894b5aaa390ad8294724cd7f124540117a77be0cae6d68e0696d77caca"
     }
   ],
-  "snapshotDigest": "a1a0bed5f4220a25f4ee49eace25e78a6669b6433417625177d8bf5e11ba92e2"
+  "snapshotDigest": "fe3ed53d52c6c7324510f9c72cddd249cbe8d608254794b3c0742ce8d0b486fa"
 }

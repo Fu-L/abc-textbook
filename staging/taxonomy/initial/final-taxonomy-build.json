@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
   "id": "final-taxonomy-build-initial",
-  "generatedAt": "2026-09-29T07:53:12.307Z",
+  "generatedAt": "2026-10-05T11:48:27.874Z",
   "inputs": {
     "inventory": {
       "evidencePath": "docs/verification/bootstrap/technique-inventory.json",
@@ -32,7 +32,7 @@
     "name": "full-corpus-taxonomy-recompute",
     "version": "1.0.0",
     "inputScope": "accepted-t044-complete-technique-inventory",
-    "rulesDigest": "091c879add14374ada033c4abafbcecbaadaf82e6f936c3cd03b2bf4ef9e6d15",
+    "rulesDigest": "1ed9032d36501bf2bbde16cba41fd6bc57a590a8c4182faab2031f2d9f9eda86",
     "requiredReviewMode": "self",
     "riskReasons": [
       "major_classification_change"
@@ -16757,7 +16757,10 @@
         "definition": "奇cycleを含む一般グラフで全頂点をpairにし、weighted blossomまたは重み付きTutte多項式の最小次数からperfect matchingの重みを最小化する。",
         "parentId": "tag-graph-model-structure",
         "prerequisiteTagIds": [
-          "tag-bipartite-matching-hall"
+          "tag-bipartite-matching-hall",
+          "tag-linear-system-rank",
+          "tag-modular-arithmetic",
+          "tag-randomized-algorithm"
         ],
         "semanticSignature": {
           "objectPatterns": [
@@ -16829,7 +16832,7 @@
       "entity": {
         "id": "tag-min25-sieve",
         "name": "Min_25・Lucy DP型の総和篩",
-        "definition": "floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。",
+        "definition": "素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。",
         "parentId": "tag-number-theory-structure",
         "prerequisiteTagIds": [
           "tag-prime-divisor-decomposition"
@@ -40498,7 +40501,10 @@
         "statement": "一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。",
         "prerequisiteOutcomeIds": [
           "outcome-characterize-bipartite-feasibility-by-hall",
-          "outcome-solve-bipartite-matching"
+          "outcome-compute-in-modular-arithmetic",
+          "outcome-design-and-bound-randomized-algorithm",
+          "outcome-solve-bipartite-matching",
+          "outcome-solve-linear-system-and-rank"
         ],
         "scopeIds": [
           "abc412-g",
@@ -41010,7 +41016,7 @@
       "kind": "outcome",
       "entity": {
         "id": "outcome-sum-multiplicative-function-by-min25-sieve",
-        "statement": "floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
+        "statement": "素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。その発動条件、正当性、計算量を説明し、未知問へ実装できる。",
         "prerequisiteOutcomeIds": [
           "outcome-decompose-by-prime-or-divisor"
         ],
@@ -96020,6 +96026,18 @@
       "prerequisiteId": "tag-bipartite-matching-hall"
     },
     {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-linear-system-rank"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-randomized-algorithm"
+    },
+    {
       "nodeId": "tag-min25-sieve",
       "prerequisiteId": "tag-prime-divisor-decomposition"
     },
@@ -96608,6 +96626,18 @@
     {
       "nodeId": "unit-min-weight-general-perfect-matching",
       "prerequisiteId": "unit-bipartite-matching"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-linear-system-rank"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-randomized-algorithms"
     },
     {
       "nodeId": "unit-min25-sieve",
@@ -384156,8 +384186,8 @@
     {
       "evidenceId": "human-content-review-bootstrap-us2-final-taxonomy",
       "path": "docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json",
-      "digest": "ca5be4d437cbfd2c7f56aef26e713f00b868cf233ce0b3c73aacf5b72e8b3135",
-      "subjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
+      "digest": "2a70529f339e13142d2170a71d68a1cff43955f08522e54b6205ecf9b73698a9",
+      "subjectDigest": "023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251",
       "authorIds": [
         "person-maintainer"
       ],
@@ -384168,15 +384198,15 @@
       "aggregatePassed": true
     }
   ],
-  "taxonomySubjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
-  "taxonomyDigest": "79389dd3f933fa30f4a74b420d51b383b25bb844bfa29ed891e143321503286d",
-  "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
-  "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30",
+  "taxonomySubjectDigest": "023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251",
+  "taxonomyDigest": "50bcb84e0ee861db3ab23d86aa71e366efef6fb96a49654e20dc39f9ef8c1c96",
+  "tagDagDigest": "45a9410885de79fa3588027c5f91d348830c81960ecc80110a525d49b7c1bfcc",
+  "learningUnitDagDigest": "b4bf5a740764e19596456b7066dde563add3aad08ade281eb81c7b9a75959b62",
   "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
   "correctionImpactDigest": "3d9f3d374c2532f7a38478ec40f93d431071c520909d0ad3a021022d99d1d56a",
   "status": "accepted",
-  "acceptedAt": "2026-09-29T07:53:12.307Z",
+  "acceptedAt": "2026-10-05T11:48:27.874Z",
   "holdReasons": [],
   "canonicalMaterializationAllowed": true,
-  "buildDigest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5"
+  "buildDigest": "f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe"
 }

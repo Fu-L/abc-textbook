@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-edit-distance-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "76d0d816ab230e30a07170393ddf8a590ea75d6847fb8cbb64fb3bb0f3d7496c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "e925f3374ec18ae5e89183a4d9edf73e545b405c2ca0b81501604c5cda9581e9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9fb08811f2c255ded63303e55173357df27943399135a09c4a536c82a7603335",
-  "reviewDigest": "c236dd51ffd3673d635748730c765934152005581be4feec3f2e7ad547c54add",
+  "checksDigest": "a9c224fd15053c01d41a4a5cd04f7bd5afb3e947ea4821f0c62cc8b053e527b8",
+  "reviewDigest": "1bbc67b1edffae9e87b83cfb311f6ae7778db40f0c86f4ee90be35a33c2f87e7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compute-edit-distance/outcome-compute-edit-distance-shard-001/abc386-f.html",
@@ -19,5 +19,5 @@
       "digest": "f02f4aa83ea114340bfd1dabcc3f3129dfceecfaac27d27c3ea8921a973f0bed"
     }
   ],
-  "snapshotDigest": "71a72ea6dfd0ffac543466efa74cb2ca09e480ce301175f1c5192b930e0bf042"
+  "snapshotDigest": "535afad4ac32b20df6da901b349bd32eb3e481ae14afe7a2f08855cf269c3ed5"
 }

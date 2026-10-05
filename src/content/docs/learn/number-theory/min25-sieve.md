@@ -16,11 +16,11 @@ sidebar:
 
 ### Min_25・Lucy DP型の総和篩
 
-floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。
+素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。
 
 ### 習得する技能
 
-- floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
+- 素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。その発動条件、正当性、計算量を説明し、未知問へ実装できる。
 
 ## 考え方
 
@@ -90,7 +90,7 @@ Lucy DPの更新回数を数える。p≤N^{1/4}では一素数につきO(√N)�
 
 ## 問題一覧
 
-- [ABC370 G「Divisible by 3」](https://atcoder.jp/contests/abc370/tasks/abc370_g) — 主題: [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/)（floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)（floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。）。
+- [ABC370 G「Divisible by 3」](https://atcoder.jp/contests/abc370/tasks/abc370_g) — 主題: [Min_25・Lucy DP型の総和篩](/learn/number-theory/min25-sieve/)（素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。その発動条件、正当性、計算量を説明し、未知問へ実装できる。）。既習技能: [整数境界と同値区間を正確に分ける](/learn/number-theory/integer-boundary-blocks/)（floor(N/i)が一定の最大区間を整数除算で列挙し、O(√N)個の区間へ集約できる。整数根・桁数の境界も誤差なく扱える。）。
 
 各問題の解説は問題ごとの本文として執筆します。各項目には主題・追加で学ぶ技能・既習技能の役割を示します。
 
@@ -99,4 +99,4 @@ Lucy DPの更新回数を数える。p≤N^{1/4}では一素数につきO(√N)�
 - [ABC370 G 公式解説](https://atcoder.jp/contests/abc370/editorial/10869)
 - [ABC370 G 公式問題文](https://atcoder.jp/contests/abc370/tasks/abc370_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-min25-sieve`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-min25-sieve`

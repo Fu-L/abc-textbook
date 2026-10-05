@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-integer-structure-by-gcd-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e7e31aaa673b0faac4133919790c95d48bd4ea3f9a4f67ccb975a463d946978c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "743cb20475021019063c039749ebca4f7a8383d109390bb8c68f413ea7f54205",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "239ae25d5bf792837be9f17c7fb44589224c7542f198b290b83aae14ac5b5ee6",
-  "reviewDigest": "5029bb56c4def5f607aecf842fe018728dda9237ad4a04bfbbdf3ca9d286f9b3",
+  "checksDigest": "d40ef444b058dbd84a931559027a682f67a7703dbe353c687fa2d7b2fc0664e6",
+  "reviewDigest": "6392962af3600453baf99df8b0696c44a76ef231400ed74c227b27e72e19eb02",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-reduce-integer-structure-by-gcd/outcome-reduce-integer-structure-by-gcd-shard-001/abc254-f.html",
@@ -23,5 +23,5 @@
       "digest": "5c3657d82cfc02eec2f305ece31405c0f334064a0d020fb1363b92f93e6e3db8"
     }
   ],
-  "snapshotDigest": "1e0a871f01f838d59f1fd022b0da91612c8c39cdf66714cc581b475ad57440d4"
+  "snapshotDigest": "b14735638ee47e35d39f9f6c500f2f1be62a079667366d2396b24fb48616c141"
 }

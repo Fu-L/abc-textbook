@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-game-states-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6725b67a2ccfddfb002a3ea75a5192b97fe622469025807b06a1e13693a33a3a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "81a4306baeed2c94e480bd06eaf2125a129746b5d7ddef724d303e3d905ea9d6",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-tree-order-by-cluster-contraction-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e2f1b53dbbf1f47e9e5e02440be8369c6f6fcf57644d47e6b85bedf4c33ea78c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "edc42e43e69b7966e1a86dea53f74b59e06c3eaba5d6e43f1dde53638662dcdd",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f0191e65a1c59093c60db6847d4c12205c499e299fef1704e28e4215691782ec",
-  "reviewDigest": "82eb1953629d035f4f0c428f28f8e28323a0ada7b7b36af3a18ad62550ff24f0",
+  "checksDigest": "321005497b7e26b9ff4af8842b076e8b1a28cf3ce0f9841ec733345871bee215",
+  "reviewDigest": "d3ba1e8aa0c96ee319f01ed5a02cc72b606c65e5718b72f75acc88ea27174da6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-tree-order-by-cluster-contraction/outcome-optimize-tree-order-by-cluster-contraction-shard-001/abc376-g.html",
@@ -19,5 +19,5 @@
       "digest": "5316665102ddfc5d46e5a0ed7b81cf5bf215360f3219789af433d744eac80b94"
     }
   ],
-  "snapshotDigest": "f5a63ae9fcf886f47f6a6e2cbd4f4ac689436071d0940f495abfc90bd263521a"
+  "snapshotDigest": "642bd0701b37bd926d345054b90bc12aa73ff62b6f5722d8a1b419187b0c0df8"
 }

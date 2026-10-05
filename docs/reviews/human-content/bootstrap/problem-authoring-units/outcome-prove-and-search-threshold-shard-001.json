@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-prove-and-search-threshold-shard-001",
-  "shardSubjectDigest": "6aefa748ab0ec1f7f19f3d68e6dede7187c45ea0ad9a61829f831fd36498bf4f",
+  "shardSubjectDigest": "e03f004afb1059a099019f8a1389648ec35d16b4dc9795b568c18893769d3cc4",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "公式解説自身が縦幅をl sinθと誤記。二辺の角θ,θ+60°から第三頂点の高さを再導出し、l sin(θ+60°)へ補正。"
     }
   ],
-  "priorReviewInventoryDigest": "acf844d0b4ad6b4ac0d0eff3f257ef89191d8a2d1bbab6918835aacfb79eee7f",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "b999c675d3b75357b0e19089fc967537acfd0aaea4afd3941a8c66c44e1b9300",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -83,5 +83,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "49b0edee3b2cb3bc9e8e707902bd3562c09b9899f4a84a74eb4ea964be99cad6"
+  "evidenceDigest": "b2b8c7ddf9e42e11f714ea552bf71b437d801ed19d15477cf26ec4ad690e5786"
 }

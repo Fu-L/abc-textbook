@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ec98559a34bc9f1357ec7750a0d8f643ca80a6ac92400eeca52440a72af77b0d",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "721ec14f3d29dcbab9a4eb795effef9945ed3e36806267b0f215992a1415fb14",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "277768f1dd064181f8e577a1028fcfdd6eda4ae9cf4efa11abccacc18cfbe3d3",
-  "reviewDigest": "41cc14840eee96860a008cc0b295d62af95c39070c70269630c55dd27e835155",
+  "checksDigest": "342c683be6dc931b328681a1d9c0e8f24df453735170dc68bb1b5f793b0769eb",
+  "reviewDigest": "f2d03a3c4efbd344916db46ca6f7c884cafd39662f13efe6e7f801518fe03ab6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-compare-sequences-by-rolling-fingerprint/outcome-compare-sequences-by-rolling-fingerprint-shard-001/abc274-ex.html",
@@ -19,5 +19,5 @@
       "digest": "905f2f37a9d5ccb0c7af06374df1c801c5cc5b8d7912acd066c6a0f0806d3697"
     }
   ],
-  "snapshotDigest": "c4ee7288d5ee349c02cd763daf02a334e951b8afcb78e81a20e225c8db325e67"
+  "snapshotDigest": "fc084f25b37a867eaf4742543a751e2bbe60d7eb4f479fa1ba0811b337c07630"
 }

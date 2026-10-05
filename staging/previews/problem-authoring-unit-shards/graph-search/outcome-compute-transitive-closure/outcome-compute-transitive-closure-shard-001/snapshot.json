@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-transitive-closure-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "089e1a5da5f1fea845b303e3b37323d0901b326b953d88be104432f07f50200c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6b02dd58be327d621cfcf1c21685234aff79ec3cf689d8abd7703bcfae106d48",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8eaa04b5b59d4e75de651ef650cdbd146cb2aab9829b62966ca9565f7813a42a",
-  "reviewDigest": "86382ae8572a7f60ae67ff765190854390e97ef4e365463ec517497ca53f7c48",
+  "checksDigest": "0a29862b252993aab7f4582a2cd4d99f8f5fb30c242e5898695532d8a964ed4d",
+  "reviewDigest": "2d17684fc218fc7f0c180392f1ba61e963b00e0d47558b8dd71c342bad67ffad",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-transitive-closure/outcome-compute-transitive-closure-shard-001/abc287-ex.html",
@@ -23,5 +23,5 @@
       "digest": "e5b4520aab91f033ee8e8bee3abac94514558bfc60f6a267e637e41c622150d9"
     }
   ],
-  "snapshotDigest": "9e9889ac7e827387f7540b05429e94141e4212bc2620bd45dfbe0a65237a00d4"
+  "snapshotDigest": "710b71b0558bde4c99802147b6232f8829bfa16e6841fb6124399f3a470ee8e8"
 }

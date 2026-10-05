@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reorder-counting-contributions-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "89453d497cfaa50411347f4b4b85f17cbaefab413dd3e5df00840a302cc3c171",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "abb3c9291fef13edbfebd32e47a9616d67ed29adcf5bad5e166dbcb80ca90cc9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "65f62fbdd6c5cc80f324546f3126d4c4686748fd1922998b970478d56811edea",
-  "reviewDigest": "8f32207a087d2eeb7c862ef0f5ead5d8dfe91737021830bd079e16e15de1c83c",
+  "checksDigest": "8374056d1b8dc2aec23bb7df020f03a8053fa054cf6b7a7ffa6d71ad59c10049",
+  "reviewDigest": "75e7fa4e6c98015bfad6007bc920980e89e6ff206a03526edb5dba1e69518dbb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc269-f.html",
@@ -47,5 +47,5 @@
       "digest": "cdb6233fbfd3ff5112476d5893aa696e80274b3ccd3c018f74875672e18eede8"
     }
   ],
-  "snapshotDigest": "0f8ad5e211bde4cd59329b2c76a4e43f0a5838c017f062cd39fe086cb33b84f1"
+  "snapshotDigest": "dbb82cc763c8abd3304737985ad85a7fb543ea330b3c276fabdae4ce6e64704e"
 }

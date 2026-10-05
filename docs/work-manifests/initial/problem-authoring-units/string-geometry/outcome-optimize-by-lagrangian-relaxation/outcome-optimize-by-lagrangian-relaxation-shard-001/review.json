@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8fb246b1ef7acfd4f2ab40ea65a72b6b9c00f533c8029d0049d800b446266f44",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0131ba7a3aef10ed17be7111d1dd7ed094a40fe43a5f0b9d37c4152be138a54f",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

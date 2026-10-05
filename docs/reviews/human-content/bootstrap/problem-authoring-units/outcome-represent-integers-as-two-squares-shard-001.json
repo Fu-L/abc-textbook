@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-represent-integers-as-two-squares-shard-001",
-  "shardSubjectDigest": "3f07875ce30288fb165ae8578ff9db86f4381ef8d8974a773b1d76cffd2baee5",
+  "shardSubjectDigest": "0a0d896a30e97bb74d56964a751b9b96513f968652bd4a8dda31c1fee09f20c2",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "中心(A/C,B/C)、半径sqrt(N)/Cから整数二平方和と座標合同条件へ変換する。"
     }
   ],
-  "priorReviewInventoryDigest": "550bd67fc24207dd29faf3ec2367c2c1502ca6cf8e1839514c4b0862303c0b0a",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "3ac058658f7308103921472aab6d89efef81e725eef8b30857ca2f3b93e1f194",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "2780514780d56fb7a0bd7f5ee31c386acfbf05a4a00faeb66cf6a487f1aec4e9"
+  "evidenceDigest": "53f92b1269d71940e007c9233d0615fcb0af4fceab4b3985ded9d98937aa0945"
 }

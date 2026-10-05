@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-probability-distribution-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3c064ee6e0b7c401d5f2e3883a3e927a924662a198223a7101e74cb9401edb67",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1959d15b3165d90b0dc0f24597d63ff4cfaaf95f6fb61ac0e7e58a46cf87a3d6",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

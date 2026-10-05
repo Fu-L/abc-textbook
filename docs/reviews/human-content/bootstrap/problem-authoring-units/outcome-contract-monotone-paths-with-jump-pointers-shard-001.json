@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-contract-monotone-paths-with-jump-pointers-shard-001",
-  "shardSubjectDigest": "10731a02fa963a7fd961c948c4c62e17bfb3efcda8dcf8d84deefccbfc83cf34",
+  "shardSubjectDigest": "fc01bbeca190170f4efbff55a7ea32db329c304e123a148bc2055e866b916b01",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404024001: 元の親→子と戻り辺u→vを公式問題・実装から再照合。u成分topからparent[top]へ上る手順とDSU代表属性を修正。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "7cfaae5ed0d59052d2ceb825f59c52fe8a22606be42a1a275756132c716d02cd",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "d0131ccf0fc04676be29b141dd927b66b4d56edc0f2598600b9ae618d054c874",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "c82bcd3745a144b5581ad1a71987747c1723f04676aeaa32e83bb6aac5ca5b71"
+  "evidenceDigest": "ea543ac73efdb2492825ae717665da69464eded0fb00a3824c6939cf69983ca9"
 }

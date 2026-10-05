@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-represent-convex-intersection-by-halfplanes-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e1a292d7d78e3f591cf57ee90c3068fe0e0c9219f43f92f6a2bb7aaa6483526a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "576cbbc4926153835495dd03488384e6b5b5375f1469ecbf44afcfcf4aac63ad",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0450bdc49a0d2b591e0e1961490b5d3eaf72ac0352d5a64c4be81d984a98f965",
-  "reviewDigest": "73195311df40b8616e497d5b6d473ee1ae6328dc78d7b1d2f748467b2d6d8741",
+  "checksDigest": "a4879a3f3e8a59ff1f2639b797168bcfe22ab85cfecde870392b111cdca6c9f7",
+  "reviewDigest": "7205d975d90a833527e7becb7314fd55eb01c7854b0f2c712a112a0d589c3033",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-represent-convex-intersection-by-halfplanes/outcome-represent-convex-intersection-by-halfplanes-shard-001/abc251-g.html",
@@ -19,5 +19,5 @@
       "digest": "8156e81220b9fa0a974c5616649e6f9f01ed39f2bd97674b592c916ab375385d"
     }
   ],
-  "snapshotDigest": "ad4dbc21dc54e0e5e78ccfaa856bcd906dfabf2cae9b40099d409274e38f0f21"
+  "snapshotDigest": "bc4cfbb07c828ab1c1ddd3387e46e0ca0142c949fa2d51cdb0e7ad7ede1d12eb"
 }

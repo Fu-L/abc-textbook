@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "command": "npm run verify:fast",
   "exitCode": 0,
   "status": "passed",
-  "completedAt": "2026-10-05T11:26:45.808Z",
+  "completedAt": "2026-10-05T11:57:26.258Z",
   "runtime": { "node": "24.18.0", "npm": "11.16.0", "python": "3.9.6" },
   "results": {
     "testFiles": 60,
@@ -22,8 +22,8 @@
   },
   "rawLog": {
     "path": "docs/verification/bootstrap/problem-corpus-verify-fast.txt",
-    "digest": "aabca495ee1a79cf7e3b1262fc914b9f357c78beec2acead6ddfd90e3824f7f2",
-    "originalDigest": "f7f9ddc0ce1a4bd9b64ee79a71da2a7234ef6b59163d6b445942291670fa2262",
+    "digest": "2b94b15f9926df57ff76890e1416d9769f8e421f7860304dbbf925d9af4aced3",
+    "originalDigest": "110bc355ec228e3e246b8b162a58db9ffe7de421403059981d6b5c1605b47a20",
     "normalization": "Trailing line whitespace removed; substantive output preserved."
   },
   "testedFiles": [
@@ -74,8 +74,48 @@
     {
       "path": "tests/contract/verify-fast.test.ts",
       "digest": "114f0ad466651615713b69fc67061a3c5ce5a3ebcc4dc438f1f263ecf18ba708"
+    },
+    {
+      "path": "src/lib/taxonomy/final-taxonomy-policy.ts",
+      "digest": "ed7843c7806759356d4955193cda32e4627cbe761fe767d103c1ec85299f7249"
+    },
+    {
+      "path": "src/content/policies/learning-prerequisites.json",
+      "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+    },
+    {
+      "path": "src/content/tags/tag-min25-sieve.json",
+      "digest": "6c8cef274c4fb0f0a66412eef36810597256840949da7712dd851a2d26817292"
+    },
+    {
+      "path": "src/content/learning-outcomes/outcome-sum-multiplicative-function-by-min25-sieve.json",
+      "digest": "c92698b14341853461f944196b2b112eaf05766df896906f0a9e49d19b47ce22"
+    },
+    {
+      "path": "src/content/learning-outcomes/outcome-solve-min-weight-general-perfect-matching.json",
+      "digest": "6046324293f6031a8c212aa8cdf36ee1c84875c932c15cd8a1f171d553fbcc4f"
+    },
+    {
+      "path": "src/content/docs/learn/number-theory/min25-sieve.md",
+      "digest": "9f1347168b3d9cb239e7fb80cec0fe5ae4d9f180775abf8a82a6ecb2405e7d82"
+    },
+    {
+      "path": "src/content/docs/learn/graph/min-weight-general-perfect-matching.md",
+      "digest": "b19a68eb89dcda3ea93d88cdbd3cafe977682015e340ce34420376b54ca27a20"
+    },
+    {
+      "path": "docs/reviews/agent-content/bootstrap/problem-corpus-quality.json",
+      "digest": "6b5eb39c4c7e759ea8891914cc788a272827bd9deaa2a80d8cf14170db1f9464"
+    },
+    {
+      "path": "src/content/docs/problems/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.md",
+      "digest": "9fe0eedaf6f22cb805fb61429c460115c24b91b798c99df84ef49804a137ecc2"
+    },
+    {
+      "path": "src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md",
+      "digest": "8f0aee9a7193827fcccae5f66c05667d1e9370c5f3fb37a09e94b93a54c53722"
     }
   ],
-  "scope": "Local current-subject verification and initial content acceptance; public pipeline switch and production release remain pending T160 and later tasks.",
-  "evidenceDigest": "a04e6c8bb80a481c0d2a458b7caba607673be564386423f2a26384986d6d998b"
+  "scope": "Local current-subject verification after PR #66 review 5413939464 corrections. Public pipeline switch and production release remain pending T160 and later tasks.",
+  "evidenceDigest": "dbd0844db2591ef8df8ded35707f3f54b88b7e368669e94a8ad6e28f2a816f9c"
 }

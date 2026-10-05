@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-bound-monotone-total-work-shard-001",
-  "shardSubjectDigest": "12c39f9197103567cd5ec7dd08b737a3def9df3f6367d53eb311824829cfe1f4",
+  "shardSubjectDigest": "55ceaea65aeea18c8b8fb1291dbf444ebf00b37bad3b712f266eb53ebc4b187c",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400631527: 正の入力と最終値上限、単調な操作による貪欲の優越性を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "e166323ff2c8c5340dfef9db284f4e058a54f9ff1c552b022ed30ba352fd0fa6",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "bc08d55230ec7ed283feea5973f3ed88a2c5530b5f5acfefba552a256f61fb84",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -77,5 +77,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "00836da3a64c953540880b055499c70b9be965721a74600a42e3e26c55fed5a9"
+  "evidenceDigest": "9f8e14969bc552cee71b31b1046bdcb29a0515adbb19d49d9c2e1475d0bea74a"
 }

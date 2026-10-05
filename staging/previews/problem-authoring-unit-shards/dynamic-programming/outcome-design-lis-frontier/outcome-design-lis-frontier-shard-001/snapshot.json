@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-lis-frontier-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "60c09fa266344457ba87c25aab4633d9584b91ca2f64727c076bbd23e4887bd3",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0a78f8f231253b1739ba1a6102bfe209e113f087c9ff4030a8ca26632e08325e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2a4ac5bc9bca17dce0e9c4d25bde2e1ea1ddec51e036af389d1ba3080bed0377",
-  "reviewDigest": "cfb56878cfe1b474bae09aebea5232586f75de7ec39a2f14af3019ca364575ac",
+  "checksDigest": "e5ea685062681816723d3267fef576d4b37020ec7d4ea7f89f6ff769560c8a71",
+  "reviewDigest": "9a64b4bbb59be69858f9f7d0fa3a296bcb3ed170c202036d3c3cdf1b137ad830",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc369-f.html",
@@ -27,5 +27,5 @@
       "digest": "628b29b0d456e97f176937334cc39cd5ebbf161c6a0d3fc9b72835325c32b065"
     }
   ],
-  "snapshotDigest": "a99087d1e6c1b3c0c45bcf7f61f61e155cae5caf83eaf813bf4bbf4cfcc43aad"
+  "snapshotDigest": "5e8159ab0b233a0dcb6e2e0c7108e03c6040ea56b1fc06209717f29e7230a956"
 }

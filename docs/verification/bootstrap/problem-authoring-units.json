@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "status": "passed",
   "problemCount": 868,
   "duplicateProblemCount": 0,
@@ -15005,7 +15005,7 @@
     {
       "problemId": "abc412-g",
       "path": "src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md",
-      "digest": "3db88357c5ccf3f303bd45f36b1faba0a14fbea18681dde9fcd689f04ec2c2e5",
+      "digest": "8f0aee9a7193827fcccae5f66c05667d1e9370c5f3fb37a09e94b93a54c53722",
       "claimLocators": [
         {
           "ownerType": "problem",
@@ -15584,7 +15584,7 @@
     {
       "problemId": "abc370-g",
       "path": "src/content/docs/problems/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.md",
-      "digest": "b99951b59242cf8ec540301a0c42228c2be672f8a6b9d3d75494ecb0fc4f73fd",
+      "digest": "9fe0eedaf6f22cb805fb61429c460115c24b91b798c99df84ef49804a137ecc2",
       "claimLocators": [
         {
           "ownerType": "problem",
@@ -17535,5 +17535,5 @@
     }
   ],
   "publication": { "status": "pending", "ownerTaskId": "T160" },
-  "evidenceDigest": "85f9fd5e46e5bab670bfbd9391d69e44e3b8961e9f00d808fd6d233f3d6b5282"
+  "evidenceDigest": "3e18b75a6487489e56544373753544c6168e7ca4333bf2b0c7e637425d108eb0"
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d1d388151d5fc1f7dae3da9615a900a4258392a568de7bc6cf6be5989f8c554c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "d404ff00ead4e0019636c6b6647bca6e1294bab5162280e6f248760af736037b",
   "requiredChecks": [
     "source",
     "structure",

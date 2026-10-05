@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-decompose-expectation-by-additive-potential-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "aeb658b1c7c56296e84010fbfb5c63a7efa32f5422cc569d1fc1ce1eff69e895",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a91ff2e9c62daf1a16ebff192b187b8a8617c078365887223af09372f072c34b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "894378b67ed18ccb5cc3a4be5696e8bea673ef4dcea05e744556d1923b46fe2a",
-  "reviewDigest": "9e965ab5663c17f7aec813cab5f86cecd7c556f0e133560f0815eb92ad1c2151",
+  "checksDigest": "1bd6f1df5efe130b19e6029605e34bc5c591c35b20b605051edc526c51fc60e7",
+  "reviewDigest": "88ab99df831692fc9d7a6aa25a3a95c042862d33b824bb9d2a39af3e494682f7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-decompose-expectation-by-additive-potential/outcome-decompose-expectation-by-additive-potential-shard-001/abc249-ex.html",
@@ -19,5 +19,5 @@
       "digest": "564867c3c8ce1321df5f0ea78782acb834b998ecd0e441eb8cac16a3bc20d5f5"
     }
   ],
-  "snapshotDigest": "8a0b03ae7fc584d4c9ad0e4815cc56f67f2415ce4ec1fd2608a2aa762da9b311"
+  "snapshotDigest": "b752824491b02edc07650d0c7762636f9c5b98482529d19605c2e17ff58e5910"
 }

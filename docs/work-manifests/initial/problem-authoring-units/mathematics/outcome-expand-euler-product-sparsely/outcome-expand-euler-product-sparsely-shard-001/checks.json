@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-expand-euler-product-sparsely-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4b1ea79fbc2a2eba5e7f339d4aa2a38c40e0e499cdca97e1cebaa4f5c06ab4e5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "747c0b1a75ff45be0b55b93c4e01a8d093b096b216b52661a5b69d4934f6c7e9",
   "requiredChecks": [
     "source",
     "structure",

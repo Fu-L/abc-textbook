@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3074d36070c5955c4d142f7333e610ae4c92c0b942195d312eec6bc8521cd574",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "ebbbd0405d266e6c149ab5717515b5d8c555e63d72516a65a7ac085fb2a1def7",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f8fc778ea817fe390a65c5ad48afcffd71cfd4f315a469d7dabb528c53e7015c",
-  "reviewDigest": "dc604b25f53d97385e68cfd884becdd1748a945c4602da8fac896c32deb97332",
+  "checksDigest": "6ed390ccdabcce55a3183bc88ce151850a04b2870235edf19cb0a0c317ffacf0",
+  "reviewDigest": "452ddf2491749bd4e834b549067cad438f6e721a528514495fb242d96130c3ac",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc281-e.html",
@@ -43,5 +43,5 @@
       "digest": "59730713bd3f0e7aa0644889405aabddd965335ec5f26f655597a36c44cdc27b"
     }
   ],
-  "snapshotDigest": "e2016fadf4b685e4b1affde9c9975e77356cc3175f21ed02f1452ea7d0df87ea"
+  "snapshotDigest": "af7f16d41b019e7bd34518d26e78c05a56eba81821ef8311eb00149114ce50ca"
 }

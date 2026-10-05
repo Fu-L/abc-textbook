@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-frontier-best-first-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "766bd5e6bae9cd4215d5016069d34be9ec27d3d9617aad64b93be5d3c2c266c4",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "b7a9f1f6406ff75a11c59b7c9cf22676e49f6a04ead2048ecd59e3e8682b5ecb",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "63b77ba4e48ea094b0e42d3b93a9c4b2fd42b40bae8de306d19a63be492459ee",
-  "reviewDigest": "82e1fba494bc34dc42e5fb1d6956db6f41b4298d61d2dfbdce3414229174ee0e",
+  "checksDigest": "80f1a95746228a47002c63dd207ef146a1c53de19292e8caa64870b6b60749a7",
+  "reviewDigest": "da7122842545b23c14fa0c5930a49128441fe59805d2098f17b82cf03bc00248",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.html",
@@ -43,5 +43,5 @@
       "digest": "5b026bbd3021fe6e6a1cf63e2fda638068b33b908e1fde0c31affeb4a5fd4a72"
     }
   ],
-  "snapshotDigest": "2c12cd677665b61aa8c921b5d825147e0999dc5a9b0b1199adfa14f315e14e58"
+  "snapshotDigest": "8c464fecd5c89c648fcfa5699174bde0ca6a61790732687d4841e8eb92ddedf0"
 }

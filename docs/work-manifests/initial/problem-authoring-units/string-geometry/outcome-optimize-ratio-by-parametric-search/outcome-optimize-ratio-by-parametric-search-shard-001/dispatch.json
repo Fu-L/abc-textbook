@@ -37,7 +37,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "8046fab99915fce03cc710c586fa007a6647ce53cb898b3a01c5f673fb632e00",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/checks.json",

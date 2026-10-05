@@ -35,7 +35,7 @@
       "official_source_conflict"
     ]
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "7fe45886a19507991db25704c7d3245275eb1ca130889bd4a6e843cce2231a67",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/checks.json",

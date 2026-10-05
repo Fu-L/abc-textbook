@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-local-sequence-links-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2b96ceccdff1cd46bb3be46c05393397993552c54ee4f3c0becbf4243be2caea",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7c990f80571a78ce9f97bd49211094bab83bcf0a0c2353ee7ff9f0e03aee9a48",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "437fc418a86fbe76f78bcee33e0914e81da494a7327d3fa3775b74f73bc4f513",
-  "reviewDigest": "eafabfc5a4bd9100d12f5ada3d6d28095be16628fd3aed5f6406f74b629392be",
+  "checksDigest": "de55eb148144e7013347b74560e28997c7e2771eebca87b18a298ee58840fe98",
+  "reviewDigest": "6eb2c1a8a55eb354c9c87526337458caca9d37a1b7c014eafecbd01a702a3fff",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-local-sequence-links/outcome-maintain-local-sequence-links-shard-001/abc344-e.html",
@@ -23,5 +23,5 @@
       "digest": "7371c75155657e39a4ba09e6c9d00510cf11fca9141a88ee41f597307ca14220"
     }
   ],
-  "snapshotDigest": "f1776ddae632a48f93c3f6ad8d6656215fdc4a8dc2ec33c35e50dca5dccf1fb4"
+  "snapshotDigest": "bb6f4ca14a79cdf41b96d7b5d217974c2a22b2567e2ee58c2161dce86bddfa22"
 }

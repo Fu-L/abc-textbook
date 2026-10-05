@@ -1,23 +1,23 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-multiplicative-function-by-min25-sieve-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d9f216649fb7bfc6405bd4f6dd4d1da6c7fa131caf2539da2240fbe9f544b51",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "afe6cb546b2e1a118657fad509f122331d8ace02621d5c04112a00c5f24405e0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3e4187bf86005b713b759daba108d8de89d2b352dbb801a7837f7f45edbb83fc",
-  "reviewDigest": "c6dea3c1484b270ec64e722195a054e2fb422394f274a630cf448e1d8c547020",
+  "checksDigest": "088931cc37168748f2ba1ce2171636a1c4244aea6eb2a9b9f1756ebfb75ff271",
+  "reviewDigest": "b06be95dd6de1de4725bc7a2b41345c1f5f1802bc762a200d9121855407122e0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/abc370-g.html",
-      "digest": "476a76df1b6f80f1cfda4f4ff8e369ec0226c248c769fa7517775a5510ef26f2"
+      "digest": "7f8d98b9bc43bb08c1deca0d6fedd9dfe3eedc1d32a3a4274a1b9f7db72e3368"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-multiplicative-function-by-min25-sieve/outcome-sum-multiplicative-function-by-min25-sieve-shard-001/index.html",
       "digest": "ef16adc6b5453e94abc851ba75170806f93edad4c142c062dfceeb4bc47280d4"
     }
   ],
-  "snapshotDigest": "7d39f88307c2b2570af0fd462167bfedb6524b39e5fe428f2be1d99beb648be1"
+  "snapshotDigest": "706f97997230ef4f029f74584295255d7202e33bbac918ebcbd8c05aa874ac7b"
 }

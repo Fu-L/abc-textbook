@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-expand-euler-product-sparsely-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4b1ea79fbc2a2eba5e7f339d4aa2a38c40e0e499cdca97e1cebaa4f5c06ab4e5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "747c0b1a75ff45be0b55b93c4e01a8d093b096b216b52661a5b69d4934f6c7e9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8f1e7e5a1e5cd4dcda8f249fd44c31337bb2f4ff646dd65306b35891c7f63db4",
-  "reviewDigest": "b253082895cb4afdc585e9bc33f73ea9ff5d4f419bf6a6d052ab8c544db5f21b",
+  "checksDigest": "c85e4c32902ff67894ea09ae5b5e85e2b20af82d42e07f795e6cdf7dcc9b11fb",
+  "reviewDigest": "b5a6c41d37de6b9cd9746b044afd354958beb9d8d75715ea1e385fd9413fdc92",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-expand-euler-product-sparsely/outcome-expand-euler-product-sparsely-shard-001/abc279-ex.html",
@@ -19,5 +19,5 @@
       "digest": "7f72f13e15553fbaf563bd2d28f5fd27523d90c56c1fa3e287e7c314afe1d844"
     }
   ],
-  "snapshotDigest": "65fae089034b905050dce4011f1647a7b75a6ac9e21a4dc2dbbbfde66b4a348e"
+  "snapshotDigest": "1a7bd74e8f46c10cec8cd04dd67764f60c88d128e351054790c08be7e06f2fa6"
 }

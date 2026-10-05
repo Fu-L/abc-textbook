@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
-  "shardSubjectDigest": "c47efa2e0016cd760dd63f5e97962ce3ebd9bf0788a923a92afbd141f0499791",
+  "shardSubjectDigest": "6e56704d14876da7aefa0d4ed3254b224c0cb5f1f9fcd87f6e0ae364cb72cea8",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。公式解説の最大重みという記述を最小重みに訂正し、各入力の AC/WA と EGF の集計対象を区別した。"
     }
   ],
-  "priorReviewInventoryDigest": "f95d771a95a47255072266d361464fc21817a9da40ecdb05adebb4e8840b2031",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "0001bff1fdc4fffd1f2049cd05c81577544f6f88ac735d311afb29ef5463988c",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -71,5 +71,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "67e41dcfc1d0ec903e477b8a072fa910f5cc04303b036836619bf1b97c7bc54e"
+  "evidenceDigest": "65b32d4f6990f1e54178de3f0bf4fcbeb30184e34b15ef088708efc7ae368374"
 }

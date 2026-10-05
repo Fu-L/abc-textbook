@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-maintain-xor-linear-basis-shard-001",
-  "shardSubjectDigest": "a3bc154c4a9d5a04d11df96e4cb34e38cb2fc00479d0001d4abdd7d6f03bebbb",
+  "shardSubjectDigest": "f8591837883a0fbed79ef953994cc458133511cc85d61a7dd8db63991794bd62",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5401737525: 接頭辞固定後の代表解・自由基底・矛盾枝と、N−rankによる非空な零表現の判定を具体化。英訳公式解説でも代表Bから最大化する手順を再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "668cd81e0ea83763229b58beee4df3bc57588413bff41bf6fef1026ff5a24efe",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "ee9abf8551f075c21ef0cedc991977c81543e31a98d723001a1e3017a1896b47",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -59,5 +59,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "0227f4431bcc70ea31bb26cea5338c57b220fef80e060ccd669f7943bcf55967"
+  "evidenceDigest": "0bbb38f0b40f6c488253991db22f817feda241f0b1bfe1d047f2eb4a7b9a5ed7"
 }

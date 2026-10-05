@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7a5ff0554690659939a4df9376861884944c0cbebd1b80ba650edbecf7ca6435",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a8a847b3d71d94a054e626cc1cd89b8c238b1a42f401cf050c30fc0102e7875f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0855d5d3f668d4e41a5bc8703cbd006b3c6386257e98f55b3db4525e3ddc86a8",
-  "reviewDigest": "6e850bbb9d463d97959b1b0e0d9c3f7ddc4ef62a2ded31c02c20826a9331b1fa",
+  "checksDigest": "9b545c53f38e6c1664f0623bdea892327340c4ee22dbc0c7b92178652b66ad99",
+  "reviewDigest": "93ec948c8594519be36a56c6045c7f1ecc0e51feae0bd316026bf8a90ea0f75a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-normalize-string-to-primitive-period/outcome-normalize-string-to-primitive-period-shard-001/abc312-ex.html",
@@ -19,5 +19,5 @@
       "digest": "64f3f038432233135ef12f18beaf1e31643e2c1c7feac6afd4f7bf3a70c16b49"
     }
   ],
-  "snapshotDigest": "2acfb16d54de69c8a25fac9581ca482139075a1b0060c77b23f95b07a5ab3a4c"
+  "snapshotDigest": "3ab53af2ba78c47e3b278bad0c7ac16dd2b293e8a9da295280367f898ae98e2f"
 }

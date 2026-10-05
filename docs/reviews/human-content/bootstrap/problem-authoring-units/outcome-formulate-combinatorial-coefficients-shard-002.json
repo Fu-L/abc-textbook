@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
-  "shardSubjectDigest": "96475d1ec37997206e41ea2ec1d7b37d4533adfebd87eacbd45963bb479730e7",
+  "shardSubjectDigest": "1379c37ed60d9b9df439d93166b56b01bdef0c59df837931157f268fbb0113d7",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -41,8 +41,8 @@
       "reason": "PR65 review 5400631527: 最大値挿入のgap・逆削除・頻度窓・同値個数を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "a298482abea423c4c7a0105e43b07878f55b413b5e96593a512f323d6b886208",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "19cf401ebc784e283c1775aec053e39e495a73884ca1eb4e8da36b54623e496c",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -101,5 +101,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "63f5c053dc16c3d2b644d2c5c4539eabbea4845718e75420501bf78ed5cc0c48"
+  "evidenceDigest": "ab83e33f03dca5a68b008c29e4a834998d5e1e5f337a48b9a655e5f2ca47889f"
 }

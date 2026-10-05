@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-persist-data-structure-versions-shard-001",
-  "shardSubjectDigest": "01a533a1134d010678491004aa45c237c1106a747f0781cdeec7c9bb99a630e6",
+  "shardSubjectDigest": "8f38fd3555867c9d5294eb5b6c47514756e204c2ff041a0468ea04da2d6f9035",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404957719: 問題文のN本・長さMとコードの一初期root共有を再照合。解説中のlog N表記は木の位置数Mに修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "b75b2fbcbe9f90b981703150b35cb6545da185b35ec857544b76fdbd3738768a",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "97351579fea584e6e65ccfc08c3994e42e3a7e172a02ca5977e412572d81a512",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -47,5 +47,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "fb78ab737683838e9b9b19d8f2f8d1acefe5210511def87f35b2d8e3d2968d63"
+  "evidenceDigest": "7cebe5b689cf752072d4da74c3ac4c094f84fa7cd5120a1c0206f019997215f5"
 }

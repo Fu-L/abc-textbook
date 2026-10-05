@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-through-cyclic-exponents-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9cde109eeca73032b6655f6dd76217a5dc66fb0e6d29d12d5c345198657ce2fc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3e0d7784edb57de8ae5927ef914797e848a45dc7985db9b2811d463adbfec79d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a09bb1a2fdaae852e2abc5d1f15b04ecac19027f94b1a1eb958be7af9ccc9c38",
-  "reviewDigest": "62bef595aa5dfee88e8d75ea22a9308d7a213e79a6b6a302fbd4fc1e1dfb1da3",
+  "checksDigest": "824b51b7973fe9825ce3ea5a4e9082a420ac094f8c650bd762150dbefda8c54e",
+  "reviewDigest": "2fd3ff1a35aa198f0463e00bd4c66a7d9f59a57b54e6c11294ff48f4dcd2d61a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.html",
@@ -23,5 +23,5 @@
       "digest": "02443fa9191d0f46ea4c217a54ca4cc30b4c8e8a2bd0ea68a644d342bd95dfb4"
     }
   ],
-  "snapshotDigest": "8d273ea7e9733e022b79154e4e2dfb07cb26ae36f49b580d11f73c48215da143"
+  "snapshotDigest": "7a3fa625d8e2d7759c0248ab5f6342f79f0e6a451ab34d30aacde3ad1fa63459"
 }

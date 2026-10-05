@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
-  "shardSubjectDigest": "8fb246b1ef7acfd4f2ab40ea65a72b6b9c00f533c8029d0049d800b446266f44",
+  "shardSubjectDigest": "0131ba7a3aef10ed17be7111d1dd7ed094a40fe43a5f0b9d37c4152be138a54f",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review11: matchingの交互路交換から凹性を導き、2倍整数penaltyのDP・tie・復元式を再照合。"
     }
   ],
-  "priorReviewInventoryDigest": "1ec406e4af1099bc0c2f430a271b5587ee7256aad19c8a06d66da671ee769dc2",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "98ad9c28800734017704edd7ed6b60c982b0f98a5a1dc1f5638be9dd6dd6b849",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -62,5 +62,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "f7c57b2e8acc1c5ebd5be7c890303187fc9a36e713e9e82baca4344e08ee309f"
+  "evidenceDigest": "04018b7fc261b459b67f9aee87e131ab745dbbb35f3e0f1bd61186e84a2aa626"
 }

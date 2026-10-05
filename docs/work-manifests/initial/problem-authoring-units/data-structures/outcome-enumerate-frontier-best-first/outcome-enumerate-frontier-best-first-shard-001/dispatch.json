@@ -39,7 +39,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "736f33dd48672b8cbf11ab3a33c4b787246c5bd91ce633d347256630d1ddfdd5",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/checks.json",

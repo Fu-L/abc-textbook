@@ -100,4 +100,4 @@ XORはO(1)。W-bitラベルの成分別基底構築はO(V+EW)、保持する基�
 - [ABC451 G 公式解説](https://atcoder.jp/contests/abc451/editorial/18047)
 - [ABC451 G 公式問題文](https://atcoder.jp/contests/abc451/tasks/abc451_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-cycle-space-basis`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-cycle-space-basis`

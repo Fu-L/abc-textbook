@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-resource-dp-shard-003",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "49318ac561bb8fc920405f716130cec2e6f1cde673bdca036d892bc1a5232846",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "06c1f5232801aedd1f92c5e8e0663eefb27496abaae82cb9304139953f3aedef",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "14dcf79411fe3baca14920e5d2df4a80191d4e9105e84535b1d8d58ccd51ea8d",
-  "reviewDigest": "18e10f80aec769e2670c77d7b11051b18747e5e904d6d49586df2c5e1aca64da",
+  "checksDigest": "0beb296a1b67eb839c153d87da1cd0563319f8dac94cd5712076b91e3d87595d",
+  "reviewDigest": "dcb675795a5faa5694c0285d26b48dc721b838f10561407cfc99bd3beb4abab7",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-resource-dp/outcome-design-resource-dp-shard-003/abc424-g.html",
@@ -27,5 +27,5 @@
       "digest": "ad812da12a5dac3a259e822f05e6dbee9c7689b77fd667572f840dfacc216246"
     }
   ],
-  "snapshotDigest": "d27866cb15c6d160683caff47831b6fd57efce6064485298f95c0859cc7aeeb1"
+  "snapshotDigest": "a68e3fb0ab904f808cc2a0b14c136749f712712265c9c4c5f894bcfd3b5bcb6d"
 }

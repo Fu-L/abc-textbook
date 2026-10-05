@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-subset-convolution-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "830b4c7a1e6e4f44c64b86e050804f42a437c34c915aad244c1525b47a711414",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "bb6fa798ad0c3054fd781b1b4a58bf3be15f7a8f61d8adf1f162e5d0096b254c",
   "requiredChecks": [
     "source",
     "structure",

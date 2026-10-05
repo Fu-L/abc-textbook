@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-virtual-tree-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e629c0f361c6113205da5a9d16413e9d060fdf504cef809a633ec44dccea7e9e",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "529ab22b264f0d1f3d6721340533e82979a77ccc29dedde01ca8c5f08f65eda9",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "60cec02ca028a668866aa6d2c5b0b6bf75dc7d1a194211f44255f9107d5c6958",
-  "reviewDigest": "1e8a561a59a0c5bb2ce4067bfbe3b269f822dc16eb681313fc0f181f7cb24363",
+  "checksDigest": "7c3a4696192fe1b7a0ce8bcd2b92f40dcd25d143cae11c8ddbbf1c54aaec6aaa",
+  "reviewDigest": "e4640552ce891a3d8f3974e1745d5c76759d94ba86fa4df18f0924a6c8c6b604",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-virtual-tree/outcome-build-virtual-tree-shard-001/abc340-g.html",
@@ -19,5 +19,5 @@
       "digest": "3645cd520da6e63bace7696de45ba9129fde9d50de2fa7cf66ce87bddb869124"
     }
   ],
-  "snapshotDigest": "2b6fd8dd378f90b189bb8c8d5bb076228ca6004b5b806aef48ca917139cfeafe"
+  "snapshotDigest": "e074ffdd625952352514625a08365e445c0997f3b5b9bf7cb833b343cf6361b7"
 }

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-prefix-constrained-objects-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "23ec62ac94ac0b825a49812de3d6162ba9c9ffaa86da24892558d79b36895a4d",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "ef5f3a3a73fb453863c9941ace1d86aecdba7f871fdd6cee3a82d2821a27295f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c0b89674ec2d483d86f8584acbe6e022405838c3d14de742ed93818b7d34f773",
-  "reviewDigest": "cde5cc02f94308e3e22caac8c2d7717e4712fb9aef05ea89a25f445fbe4bece5",
+  "checksDigest": "4270ed55c8c3b37c5eb0a3e9abf3604996baa612a3f948b47d01b0747c8e873d",
+  "reviewDigest": "54113e3826db3a80fe2a6f7eca201c927e07dc913f4f07ae1531cb99fc37abf6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.html",
@@ -39,5 +39,5 @@
       "digest": "d25f46f5c645a33abe20c6887fc19163ac07c12a0db1b8d9472d4c50ebd30b11"
     }
   ],
-  "snapshotDigest": "c945e3b88597d8cc81a035f59b102682031268248268f62968350e249d7d74b5"
+  "snapshotDigest": "7e1b3146c58daff1419fcbe6cf5c33f3ed9b4d8b4e21acfcbb6918a1bef04955"
 }

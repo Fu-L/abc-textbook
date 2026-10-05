@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-jump-deterministic-transition-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c71eee0f41239b0b8ee62698df381e65f8292c496da490bac13cb602213bf392",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "fd617dfe1abae1691c1c762d29e3a76234b356b8fb0d4ad11e462185e0524c63",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2fe529657ab920835ea213c026ec2017fb23d0ad95a54e47d26210702b2c161f",
-  "reviewDigest": "5226a7a75175052a129ff0cd4c012147a6ed29cfb9aba7f6fae79d47f5de49b5",
+  "checksDigest": "43f432118d05dd165c7c1b2f5bb4f63e98429fcd4105c460e9d04feeca0f9033",
+  "reviewDigest": "593f9ee2663f856bbd9bb3380bb08f4692f37196d93b71c18a518202153be90f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-jump-deterministic-transition/outcome-jump-deterministic-transition-shard-001/abc212-f.html",
@@ -35,5 +35,5 @@
       "digest": "592029712d933de76c2dc46091d665fe66316077d06b23c3e03cc41494e190d3"
     }
   ],
-  "snapshotDigest": "92a3f636e71c3b53a7375e57126b1d5426a759141ec40843514287444b7dfddd"
+  "snapshotDigest": "a0c012d3ce27e0df718b76ecaf8688cf06ab5b8a09d98f8b94b95667cfd9fbda"
 }

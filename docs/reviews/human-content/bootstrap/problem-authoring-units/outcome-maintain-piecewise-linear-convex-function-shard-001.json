@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
-  "shardSubjectDigest": "2dc1ea45976c62a425e8f56299ef5ca9fc72c872ae08e4d314e4eac15ff74e31",
+  "shardSubjectDigest": "80f7148b71fdcac77880b877e6c99df1ec586f60401a71a63689a6819121ca7b",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -47,8 +47,8 @@
       "reason": "PR65 review 5404957719: 整数人数DPと一次mask、両端切断・延長の床除算と余り、dequeの全手順を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "7e1be6bf9ff7f9e5d3c52582107cc8335c8fa44be9678338ae8481728d4713f6",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "fc0e84176bbcec7c7f4c786978996237a56626fd6d5839694ad410fe6844e0fb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -92,5 +92,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "34813b13048dd465804a9e177b69a3d804807ea1a96180eb6a89073e38b0667a"
+  "evidenceDigest": "0d01deda2a0097b30c0cfaf463cfbabe3fce00f690d07d88efbc6868b29ae1b9"
 }

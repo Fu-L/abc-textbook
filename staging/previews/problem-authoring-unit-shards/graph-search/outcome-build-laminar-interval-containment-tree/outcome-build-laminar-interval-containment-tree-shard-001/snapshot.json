@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-laminar-interval-containment-tree-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "875cf38639cf8edcb28d5ccbcc5f973e2ad631d7a7d4a8d14239158d5c683ee8",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "8377a3c0e8f08b60442e89a44901a2403f9e8c13f836f34ee4d3087e2f47198e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "00cddc89b24f3e8b01154a4539a6ecd877f0751a8bc1d97c3a35134af6ba4b74",
-  "reviewDigest": "201337668858d2d75f7d937f31e8d0723c4f859946131378b496e5aa877f82bc",
+  "checksDigest": "31c88202821135e3f5f27c781393425363dbf74ee6977636c60e237488fbbb08",
+  "reviewDigest": "ab5d77e3f6d42e0e102f8cf1d6e8ac21d88a5d90ad074b19d923d6c09ee8d298",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-build-laminar-interval-containment-tree/outcome-build-laminar-interval-containment-tree-shard-001/abc405-f.html",
@@ -19,5 +19,5 @@
       "digest": "adbdaab8497cb4d4c85faf20f9acb89a47da227831b935bc25ae59396b42427c"
     }
   ],
-  "snapshotDigest": "8a64f6b11b271aa3bb1b0358dc2f6cff2c5474be0b2665eba17e2b5dee7ed85f"
+  "snapshotDigest": "29418745058c6a51b5f03c7e658d5e55efd817c9c41c7ffbc201c20aaeda618d"
 }

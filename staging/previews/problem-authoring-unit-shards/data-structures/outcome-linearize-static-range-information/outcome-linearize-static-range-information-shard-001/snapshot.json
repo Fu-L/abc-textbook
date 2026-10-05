@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-static-range-information-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f787447611fe8ab3b9327d6254e26f5df5d9db2ed0d3a001377c2c910c223d4b",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1ebd68d8ce3d9afde9104ae2572fc81c1cd5d3679bcddae957fae2d23be761d3",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "010f11816cc8e62e3486dca70a76e65e59ed96659178a445076351cfdc4cceb3",
-  "reviewDigest": "e2e4bf6d0130a76250da670a128cd9f4cb9612005e5e9fb80c4b2f39f0d55765",
+  "checksDigest": "fab1d7e1552e1b2a5d7c17aceaeb324cd27d9bba6268d33ba115ed3c1b76f490",
+  "reviewDigest": "d544af71333daf1862f915d535993a6789084a666985ff7f9c7ad078b64f37c0",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-linearize-static-range-information/outcome-linearize-static-range-information-shard-001/abc260-g.html",
@@ -47,5 +47,5 @@
       "digest": "595514247b47f9c8872162d47c4d1914609ec81da1bff052d1b97b497d158068"
     }
   ],
-  "snapshotDigest": "fe659932f35cc01b612a3a6c38bfee64d0b647f150116c6974a54242894cb3e7"
+  "snapshotDigest": "bd107eccfe7affcdcd28ffad46c931dc9f2799742de6397e324562eef57358d4"
 }

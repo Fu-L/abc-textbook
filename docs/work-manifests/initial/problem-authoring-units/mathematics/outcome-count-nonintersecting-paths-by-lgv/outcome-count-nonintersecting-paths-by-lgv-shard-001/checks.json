@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-nonintersecting-paths-by-lgv-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f67f4bc904e60d4d05ee465f8d8fb493161214c935ee31cb8eedfe969ac3d0c0",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "b89068a9466f7e012ec9cfd9cac000c5b7a42040c7f5afe18e708a9bad306b57",
   "requiredChecks": [
     "source",
     "structure",

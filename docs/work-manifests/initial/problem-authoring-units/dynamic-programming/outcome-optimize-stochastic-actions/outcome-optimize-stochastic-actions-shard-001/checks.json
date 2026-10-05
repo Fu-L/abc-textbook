@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-stochastic-actions-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9bce0fd24c4ad48cde47f228caa18cf48c984791508eaaab0d411d426c2e376c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "275bd30ba6e1b956cab3f48e0ae194a521c43b4d362685760532a42283062739",
   "requiredChecks": [
     "source",
     "structure",

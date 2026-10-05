@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-reorder-counting-contributions-shard-002",
-  "shardSubjectDigest": "89453d497cfaa50411347f4b4b85f17cbaefab413dd3e5df00840a302cc3c171",
+  "shardSubjectDigest": "abb3c9291fef13edbfebd32e47a9616d67ed29adcf5bad5e166dbcb80ca90cc9",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -35,8 +35,8 @@
       "reason": "PR65 review 5400631527: 桁位置を固定した整数の生成式・先頭0 offset・二分探索を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "8f32207a087d2eeb7c862ef0f5ead5d8dfe91737021830bd079e16e15de1c83c",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "75e7fa4e6c98015bfad6007bc920980e89e6ff206a03526edb5dba1e69518dbb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -95,5 +95,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "10738320110c58e2da530d8752c76f2f7f8fcb127f4190113353a861b6c2378c"
+  "evidenceDigest": "0d200fbbaec1bd18d56933b2872c32c82354e3799e9c403be819e8353a100795"
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-build-suffix-lcp-index-shard-001",
-  "shardSubjectDigest": "1fd55b7d562691e016a8484819f67e7ecc14845fb76846e641bc88c6f842c60a",
+  "shardSubjectDigest": "06bf379bd3a082de116ffefb3023794ba688d03a36a3c5646b241f2e1217befe",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5404336223: 連続部分列の値列の種類に対するRLE変換とSA/LCP集計を再照合し、出現位置の多重度と区別。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "d47f8b2fa02da80ebfc893be344c24da6cd66c2824d49d972e78eae7dfd74a1f",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "78e8289e9d2b107186828158e80e31bba376b7a3a5004ac2b0edacb1f3a6e19e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -77,5 +77,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "ea6473495b136ebc61854f088f0e2f460be0640e2f4c0770dd6374c1566e2ddf"
+  "evidenceDigest": "81db635b492d77c8f1967c5d30d8365c441cba271f85a03fb93a93974b18f92e"
 }

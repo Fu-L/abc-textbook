@@ -1,53 +1,53 @@
 {
   "schemaVersion": "1.0.0",
   "taskId": "T159",
-  "taxonomySubjectDigest": "f4a8c6a66a735c68b1d95c1f5e39eea9b21991a3c812d4c205a9fd8738731e40",
+  "taxonomySubjectDigest": "023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251",
   "reviewerId": "person-maintainer",
   "results": [
     {
       "checkId": "check-corpus-final-taxonomy",
       "command": "npx vitest run tests/contract/final-taxonomy-build.test.ts tests/unit/final-taxonomy-policy.test.ts",
-      "completedAt": "2026-09-29T07:52:49.671Z",
+      "completedAt": "2026-10-05T11:48:06.106Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "231fb0c3139733953acfbb6f149332ce5d406109e88a474416cfe854f4d19030",
-      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+      "stdoutDigest": "3170e2261874c424f05bc4d244889574a8be7f5cb1b704eb147901f2b5bfaea0",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "checkId": "check-current-final-taxonomy-output",
       "command": "npm run corpus:final-taxonomy",
-      "completedAt": "2026-09-29T07:52:57.998Z",
+      "completedAt": "2026-10-05T11:48:14.201Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "8a40fb3d8735cbb02b21dbe82e468645b4ee83e7eab6e8adca8b058bcd4b9a23",
-      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+      "stdoutDigest": "e02b06f817d23612df5f2355655ad28ad19799f02e01e9c8d50a9ca6d04d6ef3",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "checkId": "check-human-content-review",
       "command": "npx vitest run tests/unit/human-content-review.test.ts",
-      "completedAt": "2026-09-29T07:52:58.481Z",
+      "completedAt": "2026-10-05T11:48:14.743Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "a60775fd80d3ab7535fc17c59b7afbb2598de9cf4c2cf844291121663f03de4a",
-      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+      "stdoutDigest": "766e8e60ca90dfbfcf55b3b1cc993cf9a46d4075c031cd1618c50e0bd32cca7c",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "checkId": "check-schema-parity",
       "command": "npm run schema:check",
-      "completedAt": "2026-09-29T07:52:58.763Z",
+      "completedAt": "2026-10-05T11:48:14.966Z",
       "exitCode": 0,
       "passed": true,
       "stdoutDigest": "60ea1640c5667856da1032ef675c5ba967f56135c286491a4b0a7f09fb25f9c2",
-      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "checkId": "check-taxonomy-integration",
       "command": "npx vitest run tests/contract/final-taxonomy-integration.test.ts",
-      "completedAt": "2026-09-29T07:53:06.216Z",
+      "completedAt": "2026-10-05T11:48:22.069Z",
       "exitCode": 0,
       "passed": true,
-      "stdoutDigest": "e50f3c16bda149e05a2108998748db5c41cd3fc0a55e4fe78fd74054320aba45",
-      "stderrDigest": "a65c7f19730960ef7fdf5d3028d605f129290af661d6b58f7d70425bae599105"
+      "stdoutDigest": "9736be51eb5dd4bcc593617a45a46eff27ef68984bbe7bd57a04c9e09c5bb302",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]
 }

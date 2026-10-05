@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-monge-transitions-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d47b8cb4138c659514eff431f686a80856491c188610cfe169ababa96864c55",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "75bd42e4370b7b4e94f990fd0e29826984a0e4a0a202a82f7429a72d16d182d8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a8042705d2fa10146cbca771b3621cfc2c8c22570ced23f7f49184bd83745599",
-  "reviewDigest": "23a7a39c60af2e5514851abab1a768b0028b1c8a97952e4a09ba854b9a754366",
+  "checksDigest": "5a727f623c81695d365c3d8056a299a9dfa7787bb2f2b240b4863ce88f8ce7c6",
+  "reviewDigest": "f17c86304bf94765004410b73e127d6e099f735e42be6a717fc711afcb9bd583",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-monge-transitions/outcome-optimize-monge-transitions-shard-001/abc348-g.html",
@@ -19,5 +19,5 @@
       "digest": "1a83198f64a2162e447fecbb67b7d063118b91ac33d43cc939d6cfa687b63794"
     }
   ],
-  "snapshotDigest": "5b0b0bca6c40c3eb5bcf5433e37f08db04bbd8104e27a05d92138b6f00bc4b45"
+  "snapshotDigest": "900acc18eaf3249823abf7ada7b82981d94ad7f0788a8f4ce8b5e0eeecfe666d"
 }

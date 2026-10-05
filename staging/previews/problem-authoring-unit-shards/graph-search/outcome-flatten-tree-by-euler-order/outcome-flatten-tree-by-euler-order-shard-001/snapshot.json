@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a6b3c689fd045fcd34457ad418ea6e4571e70712bbd8173ef9dc9627b1100c7f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "fe8486fe5991fb3be5cf4ba73ac15024ae9c9cc131dc55870ffcdf72ca5c8aa4",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "279a750b084c1736688ea11da333213f7b30f8049cb7a3ac85f295820b50d9a8",
-  "reviewDigest": "88047f72662d65aefaa73f8e8e0999a27d26f51edd223a0e5c5207f777e22382",
+  "checksDigest": "086db88ce8f519c22464562c0542485001fc4859130663fca27c110564064dc8",
+  "reviewDigest": "87502dcdfffb4b7af790ca9a842de74dab802b67d765318a44538740a14cc935",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-flatten-tree-by-euler-order/outcome-flatten-tree-by-euler-order-shard-001/abc240-e.html",
@@ -31,5 +31,5 @@
       "digest": "3664cdd7d6a9731f3ee9b3c31a5db4fbe54a81a739bab9289f5ef76672ffb36b"
     }
   ],
-  "snapshotDigest": "2be80bad49f1aeb1a1fc6d77e1a46086564d7a6a38a548a13de0c423c9625c1a"
+  "snapshotDigest": "5516bfa48cea8f61a45d763b890ca19f21d98d3d59067b177d059ccdbe8800f6"
 }

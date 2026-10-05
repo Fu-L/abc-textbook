@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-linear-system-and-rank-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf94f14f5c1520814df2d88583f5c14ff147792d54f0e836c96a0bc5202d3f6e",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "499cb53e6e39210e53e722ebc2f38cf5f1a13c77d0d972d7713960a8dc8e4995",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "c2a77898cd5b989316c4b367086dc7a4d1a0bd7d64da2f9de9738d443afbd4cf",
-  "reviewDigest": "2dcd04e1c92f9dc64db996381ccdaeae912f9444593e92c0e678ac18b7562f4b",
+  "checksDigest": "2cc5a539d3623ada4fd088787071c5126d8edaebf358a9c98a8d0471400d872c",
+  "reviewDigest": "489b1d2af3bb2d56fc9a173d8c2230929dcf4f8db4c9e4032a1abc01d07aae1f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-linear-system-and-rank/outcome-solve-linear-system-and-rank-shard-001/abc276-ex.html",
@@ -23,5 +23,5 @@
       "digest": "b22ee63673c20c80f6a2453b3291054ae566b22888a49f7cc02b660d8315c0f1"
     }
   ],
-  "snapshotDigest": "d5f351da475451c36bf462cb976b652a9398a60114136619ad532a929f186901"
+  "snapshotDigest": "f23e2ca9503652c1fb4c9d0e78079de0a6243c410e803609c357f8861d843f69"
 }

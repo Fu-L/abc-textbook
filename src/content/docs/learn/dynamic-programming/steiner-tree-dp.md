@@ -65,4 +65,4 @@ k端子・V頂点E辺なら典型的にO(3^k V+2^k(E+V) log V)。非負重みを
 - [ABC395 G 公式解説](https://atcoder.jp/contests/abc395/editorial/12307)
 - [ABC395 G 公式問題文](https://atcoder.jp/contests/abc395/tasks/abc395_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-steiner-tree-dp`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-steiner-tree-dp`

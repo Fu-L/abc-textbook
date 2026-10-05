@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-all-pairs-distance-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fbc7cf6362062797453b086b010c56ad9b94c72fe037e1fd5d4c52f11512fc46",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "51e69e379d057f81550da83476986c760fa6f1ac0de404eb468a3d862cb6bf9d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4438fe806609f32f3803820976e170c3acbc3c164cb6e52218639bf1ad5ad52f",
-  "reviewDigest": "0a0b7ae5ca812d223626d00f5595aa5d0e8a68412bae211f258a480b459af37e",
+  "checksDigest": "f2b891d172568fc75487d5b17469018ec3569e316c6fe207a68ea56663b1cedd",
+  "reviewDigest": "52752b74a2ead645724391a2247245c23e958174a15085b3c26221be4b726ec6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-all-pairs-distance/outcome-compute-all-pairs-distance-shard-001/abc243-e.html",
@@ -27,5 +27,5 @@
       "digest": "bebf110b8cfc9c03f2a43419df925defdaa845e55a3b02d9318a82bc8597e6ea"
     }
   ],
-  "snapshotDigest": "fb1cd9756cef60621b06193545b59c472c2bc340ce5ba41f98ea70e4ac83e3c0"
+  "snapshotDigest": "1d489cef0a58b6ec51ce1acdfee07ac2ded8b74614b0882a7b69214f5ad0d4c3"
 }

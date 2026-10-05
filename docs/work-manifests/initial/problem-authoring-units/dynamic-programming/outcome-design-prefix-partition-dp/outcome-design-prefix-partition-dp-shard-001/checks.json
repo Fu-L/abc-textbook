@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-prefix-partition-dp-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2a680be72988acce757adbbaaa94db6639b98898c52c6c0d01a10e7ef3d62e37",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9b3afaf30586c10d56fc269343a368e3cfb1bb86fbda7eb769cfd04bb0495d41",
   "requiredChecks": [
     "source",
     "structure",

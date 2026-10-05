@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-enumerate-subset-state-space-shard-002",
-  "shardSubjectDigest": "d403abd65de422d86ac03eb29bf3dab4a736de3b853f0c66eaf9af2e5963b198",
+  "shardSubjectDigest": "51f524b9a2d9861219f22cfefed02ca8c2ce1dfa5f8b262a1f90d9704808ed52",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400631527: 一要素追加の0prefix DP、復元・最小操作数、整数平均を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "a318b9edd1a6f8596687d12dcce7213948a26ccd01085d2a241b65aafa5449b1",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "b4e685bd5c3689126aaf69e13827906b046fa882dfd4b72b385f2f687e4f5deb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -77,5 +77,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "ee3c4c42dd9ffe7ef329ff127dd460589df2002c870cef0bf025ba168bdaafc5"
+  "evidenceDigest": "6272ce3a49f4fd81decfa88a128b6f64abbb5ad0fb73bfdff8f1267e9eda8ec2"
 }

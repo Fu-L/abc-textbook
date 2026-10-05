@@ -98,4 +98,4 @@ t個の独立な法を使う場合、入力の総桁数D_totalに対する剰余
 - [ABC367 F 公式解説](https://atcoder.jp/contests/abc367/editorial/10692)
 - [ABC367 F 公式問題文](https://atcoder.jp/contests/abc367/tasks/abc367_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-randomized-algebraic-fingerprint`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-randomized-algebraic-fingerprint`

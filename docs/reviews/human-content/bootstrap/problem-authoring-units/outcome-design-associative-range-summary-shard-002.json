@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-design-associative-range-summary-shard-002",
-  "shardSubjectDigest": "49df964ebb131ba174399839c1f56834cfa74706ff3bdc6d2bd9756b89fc1140",
+  "shardSubjectDigest": "e74118ec53ab78c5f1c59d3e51769b3ffd3beffab1753277fdf3ffd4d14a3e27",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -47,8 +47,8 @@
       "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
     }
   ],
-  "priorReviewInventoryDigest": "18e66ece2ade9280d88b18b7d1c74950fb62fc03aa737d954d92f3e726705ef5",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "09b2f16105841a460dfaabb1cef575025b4baf0f5581b80149e07b2885c43366",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -107,5 +107,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "dfb85d1a4893fd40120777d10ef3d06277511da9e05034aeee29be148371c808"
+  "evidenceDigest": "79dfe34bc8dc7484be79628611d5a1628050ba3014fd83bb319af52b7ff9d475"
 }

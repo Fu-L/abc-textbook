@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
-  "shardSubjectDigest": "ec98559a34bc9f1357ec7750a0d8f643ca80a6ac92400eeca52440a72af77b0d",
+  "shardSubjectDigest": "721ec14f3d29dcbab9a4eb795effef9945ed3e36806267b0f215992a1415fb14",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400631527: mex定義・Nim積の半幅再帰と8bit表を再照合し、traceの既約性証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "41cc14840eee96860a008cc0b295d62af95c39070c70269630c55dd27e835155",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "f2d03a3c4efbd344916db46ca6f7c884cafd39662f13efe6e7f801518fe03ab6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -44,5 +44,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "772589f9661c3ca9d4289f574285c2649063404bf20b83e4cb74f4b1289ffb0b"
+  "evidenceDigest": "b62e9435af52992222c62a43729e91d6f235600b69000687e05a7165d4020ef6"
 }

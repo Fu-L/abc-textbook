@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-prove-and-search-threshold-shard-002",
-  "shardSubjectDigest": "d1d388151d5fc1f7dae3da9615a900a4258392a568de7bc6cf6be5989f8c554c",
+  "shardSubjectDigest": "d404ff00ead4e0019636c6b6647bca6e1294bab5162280e6f248760af736037b",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5403918168: Strict threshold, ties and remaining-budget equality verified by exhaustive vote distributions. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
     }
   ],
-  "priorReviewInventoryDigest": "f450b984562dde8ad8bd70d596d3fcabfb173847f1d472aabaa63ee2a576530d",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "21e3e89db14ca3517755cc77168df103a168368bc13fd99e4f77c50ab461545b",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "ef33d7a457e08b8585bf06181f5e862861a1daeb50401f952ecf6976c618c630"
+  "evidenceDigest": "961fe189f441145bd8351e7c3f5ffa3a1ec398306ee01dbef9e5101242935fda"
 }

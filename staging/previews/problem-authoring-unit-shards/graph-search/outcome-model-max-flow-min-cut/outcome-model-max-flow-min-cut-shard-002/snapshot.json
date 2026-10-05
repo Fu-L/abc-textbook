@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-max-flow-min-cut-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "803afae4d3697ad190339331891cc7b15d872287747f92efc3ac71516606f609",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "5bd7019e90ecd269ed4fe9258583a7b8f175ceff89af27722410aac761f2627b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1dfa59ab2660946178576460e049d020d79340002807b164010fe81e28e17873",
-  "reviewDigest": "2d123e3f066c1d3ca24105f4be34abfa2076dd6b2368ec0f768aa6e08770166a",
+  "checksDigest": "c464d35722732f016ba0548a86a450f5fbff35a644f8a53bb08bbfe62a346d89",
+  "reviewDigest": "8fe952f8e9f0774accf98494bc923e22a834e310c24cb9d654fadce109a08772",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-002/abc332-g.html",
@@ -31,5 +31,5 @@
       "digest": "1fc7f4239db7835d535bff52a7fb59197b78bf1c9e88053b93310d9b444f6d27"
     }
   ],
-  "snapshotDigest": "ea24424887b776c5a9796e043cd55cf46385fa6c723d028e33aafab906189bb2"
+  "snapshotDigest": "59581d1744eb0784f1c2de57fb75ec12ee2a5a3bc11d548fbe5e61d0dd02680e"
 }

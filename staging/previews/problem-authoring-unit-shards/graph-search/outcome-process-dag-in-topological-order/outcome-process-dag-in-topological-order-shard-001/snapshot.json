@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-process-dag-in-topological-order-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fd9c708537b8125623a957bd545263cab58e5d7835f75dea54bf859ae32aa33f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "361f75fc1c5cc89788ab6553bafafb4f6145f5de795d2de8ddd13d583cb70bf3",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1b7d1d6198a1c9c9428d27882d145570095fb7a1115b4e5b0dd708aeb09fa5ad",
-  "reviewDigest": "f3bba7ef5afc123df9a3265ae08d49b6c167e81863ee5f35d59a07b195baeb28",
+  "checksDigest": "2f12a5630feff8683b4aab1222b0ee8fda36b6d40a622c646bdc06db940d0efd",
+  "reviewDigest": "b1ac44b3d478550d7be8f6942aa7299db46f9e231391fb547c8e9d4c5e5cfc77",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-process-dag-in-topological-order/outcome-process-dag-in-topological-order-shard-001/abc277-f.html",
@@ -27,5 +27,5 @@
       "digest": "c34b378f6708d68212936b11234e03fd170a54745e4adc17619bea49cc4d9e3c"
     }
   ],
-  "snapshotDigest": "11e168af5f54a35eb5149152bf8e8f6f045b0dd92d7efe44cce96ab6dee96ec6"
+  "snapshotDigest": "ad896efb6f7cea83d274d3ccdca6a2dfe2cc1fb1e0e1c6de928e15bca195fa9f"
 }

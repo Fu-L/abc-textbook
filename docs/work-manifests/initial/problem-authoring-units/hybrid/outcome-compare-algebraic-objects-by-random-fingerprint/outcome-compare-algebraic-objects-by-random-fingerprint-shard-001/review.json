@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "799d52ff4659c78ab2c08f7c0411432f0d9dd8c24945f8f2ed884e0786051c88",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7a866481fb556fc503bae3f90b176a14acecd48a7467fbd1e57b3f8ee862606e",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
-  "shardSubjectDigest": "158bf68a417dcd39c51721b0286d96adf5635eac121456705c17b70b4c3e89e9",
+  "shardSubjectDigest": "b16d4301cc94bfef6ecf4fab8c313f8ec3fe30d81d5733c4cab5aef58b340b9a",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "任意root取得と両向きclusterの必要性、O(N+Q log N)を公式で確認。"
     }
   ],
-  "priorReviewInventoryDigest": "ae41d501eb8fbd49972d1becdd0279d8f2a864d551dbbeda42812f076fb794b4",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "cbb616a7ab7cde1c338299910ecfb39777903501691bb755c51b18201300bccb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -53,5 +53,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "a4c621b273bb796e045a0b45fe0892e13580549d55663eaab85b4c91ac4f9a06"
+  "evidenceDigest": "300b8f89dcdc6db8bf56d80876dacac0d3574408556b52c6f0d0fe393fd4d0d3"
 }

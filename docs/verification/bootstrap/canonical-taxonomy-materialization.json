@@ -31,8 +31,8 @@
   ],
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-    "acceptedAt": "2026-09-29T07:53:12.307Z"
+    "digest": "f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe",
+    "acceptedAt": "2026-10-05T11:48:27.874Z"
   },
   "taskIds": [
     "T047",
@@ -62,12 +62,12 @@
     "materializationEvidence": "docs/verification/bootstrap/canonical-taxonomy-materialization.json"
   },
   "digests": {
-    "tags": "d6b2820077125301a6806b876a53b5f2f5270b5ae7e04b8e4dee5d2116787a45",
-    "learningOutcomes": "f4f75993b64f6f33e11918d4ec3c52b6cc9365dfa2c960d21ab949306bd72ae7",
+    "tags": "3e28da2fc259505f0e00d52b63c870cfe8dcb43860343910085d89dd2a148cc0",
+    "learningOutcomes": "16984644255fd27094d394c13a31e9e3a8654f38c42865ffbb444e17c401e478",
     "learningUnits": "6d05b37a2441ccc367a2d2b70f8828a070d959c3260e0fde35e4a0ebe6261603",
-    "learningDocuments": "cd5b1bf12a81de07f323f68010790329cbc64557a80d79db3ac6ec9857719f6c",
-    "learningPrerequisitesDigest": "f628565df2d845239e5b98a4a556c34678ab19cd15db87b59ed7dd23dd64be6d",
-    "problemPlacementPolicyDigest": "0c38b48b4bd88529ef443f52839888af6667502c63eb19245a64c85796a89787"
+    "learningDocuments": "2336b9893d08fd86c8fdc8d1276c625004486830eaf83e5f0d69fc7f64cda746",
+    "learningPrerequisitesDigest": "86939a155671ce0f6c97f4ae4c85235909c3fb6521fb193d20f6a5e4d6becb32",
+    "problemPlacementPolicyDigest": "5dd13414ea3c2d51b28da4ca736a9d0474d8dc0f3df1983ccdf1f3a299237096"
   },
-  "materializationDigest": "f8f22fe23841302f7d269cd278e0c05b2bada532d2244e71f13c68acfa2084f9"
+  "materializationDigest": "4702d36efec6a5c6f8d49468a68f1d472cc3f0f31f17b6404ebe13612de0532c"
 }

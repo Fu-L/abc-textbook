@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-invert-generating-function-equation-shard-001",
-  "shardSubjectDigest": "1e28fed1127ff0b31fb074d455cc2dd7974067f2d766a52703172b73e48dd4df",
+  "shardSubjectDigest": "3b4c3a08405152fa0a731661b2516a936a9d12047be8354e263f21c536847cdf",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "e5c02a777a12d5887ea63cb5727cbf5c90ef74de1409303a9ed4a409d2b9a3b7",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "b9e030cbfe87a5802b9fbe5586c3934a1a17fe24841dfce104f740c2c81ec5d4",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -44,5 +44,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "98cf89e18f06ef495f4c966ad9ad22fea225802fc1c59e4e7d835560919520c3"
+  "evidenceDigest": "ff071dbc470311c96d3c33b76edb22ee1ae743dff8164d9ddb23c939d09656db"
 }

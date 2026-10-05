@@ -43,7 +43,7 @@
       "official_source_conflict"
     ]
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "f00f8f5984d1562fde58ac26dc9c42af7c0140eefea1d4e05087ff5e483413e8",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/checks.json",

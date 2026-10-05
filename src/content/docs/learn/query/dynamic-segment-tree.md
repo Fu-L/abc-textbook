@@ -60,4 +60,4 @@ sidebar:
 - [ABC403 G 公式解説](https://atcoder.jp/contests/abc403/editorial/12770)
 - [ABC403 G 公式問題文](https://atcoder.jp/contests/abc403/tasks/abc403_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-dynamic-segment-tree`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-dynamic-segment-tree`

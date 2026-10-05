@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
-  "shardSubjectDigest": "5d2320728df8183e4effdd48c4720f49847988386ff344ce95ab733e167c08b5",
+  "shardSubjectDigest": "00615def5ecc992036aa22d1f02aaed18604b771883317b763c111a6d63c6cf8",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -16,8 +16,8 @@
   },
   "riskReasons": [],
   "sourceVerifications": [],
-  "priorReviewInventoryDigest": "7e81d01bef1ab33335268d1d3eacd57bd45352ce699f7fb3f20cce33758dcab6",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "5da0eb3a3938cffd0b03f645c44eabb14a6b7a1259598611f7023bd09d4475db",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -40,5 +40,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "561ed7eaedde0672bea49e681cd0a0914d10cdc3dc0a3dbc40e36fb29c14c6f4"
+  "evidenceDigest": "8419335cc6335fe23e15237f6e41edc056320b67f3b93b4a4fa1ffdfd3b2acf9"
 }

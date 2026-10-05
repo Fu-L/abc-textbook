@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-design-minimal-sufficient-state-shard-003",
-  "shardSubjectDigest": "44338416e61aacfa4c5b0015d86a8057b8f52551ea6bd71448f46084c235d224",
+  "shardSubjectDigest": "85b661929788429c31cab67ab649bc4eff4373a5c9c9eadea8ec93a126ced21d",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
     }
   ],
-  "priorReviewInventoryDigest": "b05bc2c5e1bef30483bc7aa5318d63228e23b34e3ef00d53c935e026c2b93463",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "7cbcdc5e9ef8b44939b166d1702d66f71b86c9a121dcce5a382cdc7ec0f2e6f6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "08d11aa3d9a80d29b09c21e88bc7516600781337e6fb7e14015f9a97f328c733"
+  "evidenceDigest": "0131b68a6924225c288c1d8a3d7992474ae6845ddd6b37714b4a79bdb1e4dd4f"
 }

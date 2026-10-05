@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-linearize-events-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3ca215e8eb2897ad55766788ca99e8330c3220aab26dad120a192800283c40a1",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "ac2f14f73ae359247a93877412554c61251c3a654ea5633167dc155cf5fbb418",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5384d473a6e7d83500ee3503eecb6660b19bf7f3b033836c253a1bd00563380c",
-  "reviewDigest": "80949c4ff0412d274ee9dada522fee3505b05c7d8388bd3ee83317173862f5ce",
+  "checksDigest": "82f3ea9a5a5fb014248cc93026e031b6bdbd7d147ff7f4ccdc61892ecf2ad515",
+  "reviewDigest": "ce186553c94544a18840508b7f34db01ef648caffba0f82a1d76f34034b163e4",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-linearize-events/outcome-linearize-events-shard-002/abc346-g.html",
@@ -43,5 +43,5 @@
       "digest": "fb2c581c4019424cd54def72c19da3d33832f076e046b1359ee9662c8fd83c4d"
     }
   ],
-  "snapshotDigest": "8db5c5ade1e2260deb752efeef4e82d4a40710d2d739814ae807c0d797fbd129"
+  "snapshotDigest": "b657bd093e7a42681236b66dbedf5a15904784ebc5042b0e751b4c4be6cf7dcc"
 }

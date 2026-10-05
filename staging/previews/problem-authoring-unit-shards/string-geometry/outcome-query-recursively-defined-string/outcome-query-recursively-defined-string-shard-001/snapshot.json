@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-query-recursively-defined-string-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "312d4d91f79e8a3c8663c1b2be91b0a32bbc50a064cebc1c06d5c25ecb180760",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "948046e70cfc9516daddcace4c7427ceceb9b46bb561da5bd7705792312765c2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1408022731c12c8f5894413a430b699f87d2e54b86273708e5273b94704b92e4",
-  "reviewDigest": "03edd49a66a14934ed1d6c40734d89ccc2ff30a885b933e7865fb5965542185e",
+  "checksDigest": "5e97e48319be212181bdd259d09e1936edf63f489299a4752720cbb2a2a16ca2",
+  "reviewDigest": "6f203352a2ac8887f43912937da3cadeb7dcd3c1c23032a9a0ab6551e7520494",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc346-f.html",
@@ -31,5 +31,5 @@
       "digest": "37ddfeb9c2b05972d8a176c887a11de2fa3d0266dab47df06f5bf5a8fabe2630"
     }
   ],
-  "snapshotDigest": "0d9b64872ea1714a3bb2c5ba891f11375994f7c3ea6012f18582a221db89fb9b"
+  "snapshotDigest": "4b48490bc5daf374c3810e6d46a7c9ed86b0189305148afa9d62fd75472b8f84"
 }

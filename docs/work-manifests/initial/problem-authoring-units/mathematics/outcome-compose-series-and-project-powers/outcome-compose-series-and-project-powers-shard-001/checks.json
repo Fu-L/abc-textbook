@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-series-and-project-powers-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "70b40b7d7afba8aa896e57cc09fb1b98b56e517ebb2cfe08c2b8002e953cf378",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0af2c904eb1977c6c3086a5536b703987f07d068abf8a95b903f56c0de3cde57",
   "requiredChecks": [
     "source",
     "structure",

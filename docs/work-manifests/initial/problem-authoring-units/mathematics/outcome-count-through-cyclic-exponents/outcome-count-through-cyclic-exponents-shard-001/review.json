@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-through-cyclic-exponents-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9cde109eeca73032b6655f6dd76217a5dc66fb0e6d29d12d5c345198657ce2fc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3e0d7784edb57de8ae5927ef914797e848a45dc7985db9b2811d463adbfec79d",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

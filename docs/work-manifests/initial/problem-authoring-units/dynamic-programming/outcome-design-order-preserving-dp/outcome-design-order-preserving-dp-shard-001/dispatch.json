@@ -44,7 +44,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "0c50cd89a55e27910c6ea9efaefb293e7d6becc9b6a5ebf3e6090428da64fdd0",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-design-order-preserving-dp/outcome-design-order-preserving-dp-shard-001/checks.json",

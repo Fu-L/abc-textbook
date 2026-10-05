@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compare-algebraic-objects-by-random-fingerprint-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "799d52ff4659c78ab2c08f7c0411432f0d9dd8c24945f8f2ed884e0786051c88",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7a866481fb556fc503bae3f90b176a14acecd48a7467fbd1e57b3f8ee862606e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a9a4358d5ff5222c8f89f41e8e76301f492f58e943a609c3cff980da103e51fc",
-  "reviewDigest": "4b8b3009ea067d6b4438a370a47ba72df8ccea58957fe767ea5d54573446ff4d",
+  "checksDigest": "87d0fa61fcad54bdcdc90c03998b8a28a6c1853d32774005661d3dc8c0102a8d",
+  "reviewDigest": "f65543f58f40b49b00f7778e39a483f1ced370891c4cb07e4f4399d4b68e33dc",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc238-g.html",
@@ -31,5 +31,5 @@
       "digest": "eb4d6e6e17dd74be1b7cc78e2920f4d9c2a7faca4be8ac06403dbc68e608cc04"
     }
   ],
-  "snapshotDigest": "81bad6ddbf997b0bfa2e41ba94b02f94ab2743cebd17ad501e2b49f05b55002e"
+  "snapshotDigest": "5250359217714b62323d1de3345d2a65a830a3cc0296bf31f4acea31d2d981d7"
 }

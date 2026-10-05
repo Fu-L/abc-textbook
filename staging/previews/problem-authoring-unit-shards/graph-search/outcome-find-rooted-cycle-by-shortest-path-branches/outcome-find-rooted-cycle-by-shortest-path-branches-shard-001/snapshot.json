@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-rooted-cycle-by-shortest-path-branches-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2885d0e7ba532c75f89c76511d4c7d39b6c2a8d0911efaf10b06542442d32a47",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "02bd48066c3407ac89867943a3b9315677305dd334761b29bf2730b25dc4ac58",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "85c3319ce1359a0e743f09922b8d6380060012ce856e0dc54bc703fa40d0bead",
-  "reviewDigest": "b8fa984f99aecc00c87904fd9c6ebb743cdbfd93eac204530026d3786566760a",
+  "checksDigest": "978cc7e0a8f02f1c2fb5fb43f37324900ffb893813303598f889127f4bdf0365",
+  "reviewDigest": "c1874dc6910998cfef6c9ab55875339211f4bbc7bd9a3809cc447af2b6abbe13",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-find-rooted-cycle-by-shortest-path-branches/outcome-find-rooted-cycle-by-shortest-path-branches-shard-001/abc308-ex.html",
@@ -19,5 +19,5 @@
       "digest": "dded7faddce8f87e85ca05eca8e70ab7a399c0384072e887164aea05a8d7f787"
     }
   ],
-  "snapshotDigest": "f7bb3c503b70940056885278db5bcd0b21b1f1a74e67a220dd81b4ff11e3f9ef"
+  "snapshotDigest": "900aeab9c205dc58468d6114b0b5b9bbe343cc34bebcf89139c975f402eaccbf"
 }

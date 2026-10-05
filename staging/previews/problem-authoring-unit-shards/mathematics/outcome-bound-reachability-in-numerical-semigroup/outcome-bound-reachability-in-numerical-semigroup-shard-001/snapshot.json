@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "daad68cab73a392c808e7361b489bd9227c1db77a60e255de180e9f11cbdfe51",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "b2f981dab016bd023c7748226aa3a11bd6bf52a06eb99eff1d21ed89ab5f753d",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9832ee5fab97d0e57e77dd01303eed579b0b2690fb10fa508fe3474612e76a83",
-  "reviewDigest": "49485ec165765e7b9722c4c832bc49dd383cd3fa208624e2f3483e3042fcfb13",
+  "checksDigest": "c13d1d45802fdbe420250f2291fff3e23e301aa5a1b2254673941faffad9c473",
+  "reviewDigest": "1710c8ce675701fa79d97df4d38428981275c4f2fb4775a9a4b2b941393024eb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-bound-reachability-in-numerical-semigroup/outcome-bound-reachability-in-numerical-semigroup-shard-001/abc388-f.html",
@@ -19,5 +19,5 @@
       "digest": "9425142e21149f8da536087a1714a1f32b411d3f2f7dedb9430cda8683d75311"
     }
   ],
-  "snapshotDigest": "a5dcc2455f4fcc4511e97c48032a26a9a8405e5ef685468405ab4e8d97fbca2d"
+  "snapshotDigest": "ecb0fa789e4c2cfb3632e5151ad989796c20a5fc67223132455a1728220ebe1e"
 }

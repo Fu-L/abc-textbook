@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "dc683371cb2bff0cf898e46f737913281274c38aa56b1d8d079d806d413fcf56",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "20e3844f28ad05edfce64ff8c6762af14dba6a23523c2c8c1481da34e0b1658f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6b8e8264c5822b06f7d9204df107784babe544c948179ed91b1ace55f18bfae4",
-  "reviewDigest": "aac66b2be55f8d3f9643a979dd34642c23f86b83e14ee0de26e87da2f15d00f4",
+  "checksDigest": "96ac4ad2ee31ea706c2c13be1c0cebe237ee56ce738cfa397762b55ff4d6f827",
+  "reviewDigest": "31193a3df408ce7fdda16f208e59016a690b5b3f1d4d5e4f02de755aa2191da6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-index-shared-prefixes-with-trie/outcome-index-shared-prefixes-with-trie-shard-001/abc287-e.html",
@@ -31,5 +31,5 @@
       "digest": "375f6ca2bd75424d841e1ee85dc0c089a27a4e796acfece5f1baaf5bd2cefd73"
     }
   ],
-  "snapshotDigest": "6790f77af1553b7805f3954e8fc1383b37b4e1b109faec7bb957d2acec9a6c23"
+  "snapshotDigest": "4ffb96fd9eadd8c3fd7a91898de7098a1479191195a10ada0eba39e4142bc2a8"
 }

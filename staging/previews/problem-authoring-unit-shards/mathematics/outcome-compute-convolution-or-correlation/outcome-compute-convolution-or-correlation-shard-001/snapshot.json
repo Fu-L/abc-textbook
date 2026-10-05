@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-convolution-or-correlation-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bb515cc34eb2fb0cfb216a84d30622e750a0a51cdf6d4dfb5bd878c242d23e43",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "493003204eaf4a885c280fc58bd3fa829c94feb730c428b13e0ea0f39b648e0f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "977abe6c3a9be4ec6d840c08e88ff8052a438a37f6163dc308ec65e84ae97090",
-  "reviewDigest": "df744ca38b50ae53e5f7734f1eb76ab6a2dbde8a5a729c6f89004cdaa7fde369",
+  "checksDigest": "b987818fab5d36c472d34092616860cd02b867abd4d7cea31c3ac13e41a936ac",
+  "reviewDigest": "aa9891f22354839e9aaef61dd946ed191416d61f15150cb6c5d2749fdf798da9",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-convolution-or-correlation/outcome-compute-convolution-or-correlation-shard-001/abc265-ex.html",
@@ -39,5 +39,5 @@
       "digest": "b71e4b41e777a0b380ce6b431f6ff57d1a1e58b73a14ee9e132c9cb8434beaea"
     }
   ],
-  "snapshotDigest": "20e5640c931bdfcaf2e081f7f7f08e63d395490dcef5593f671c267e89135878"
+  "snapshotDigest": "69883b29bd8426a5f21abe2a508c58e9823ae66e59c50bb02784961e4e00f3ea"
 }

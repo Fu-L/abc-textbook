@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-propagate-probability-distribution-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d804f3bc97eff92909ab84a0e2322b76fd2dd3d66080a62e56ef870cfb86e80",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1aa01a68b678ff95e43f2dcb76f8276af234a70d32d851268bea6f3f952dc5f1",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "bc01d345c60b32361c8909f6d2f224bd4f2810c1c4860023ad299ec56dfdacbe",
-  "reviewDigest": "2efce8ae0d042d46ee58eece986e956eceb9ba7cf01c055151962b4f56282e19",
+  "checksDigest": "d358ba7c77d2157ddb464bf4659aa6ad5e63f496535bd2e8278c97e79e52af78",
+  "reviewDigest": "997ea27239616fe5b0fed1f003063891955d305956eb5fcbe9799c6f5e054851",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-propagate-probability-distribution/outcome-propagate-probability-distribution-shard-001/abc226-h.html",
@@ -47,5 +47,5 @@
       "digest": "ef52dc2f5e36b5edcd57209b04ff060634cda553294bcde45475d88a49edd42d"
     }
   ],
-  "snapshotDigest": "e9cc8186a21ebe8797cc54d9059431c7da87ca2568f26f54b983c5872d093603"
+  "snapshotDigest": "5e9acd794d3d3b2f5b78acfc840f79f12447eec59fbe72c1663ef91f5d153442"
 }

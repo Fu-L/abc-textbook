@@ -87,4 +87,4 @@ log(V+E+1))となる。同重みの辺は最適値を変えなくても木の形
 - [ABC250 H 公式解説](https://atcoder.jp/contests/abc250/editorial/3908)
 - [ABC250 H 公式問題文](https://atcoder.jp/contests/abc250/tasks/abc250_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-spanning-tree-optimization`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-spanning-tree-optimization`

@@ -33,7 +33,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "d4c60d210f289169297d875e9b672e2c5afc7b6a4f14802773e5eb52f5d2586f",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/checks.json",

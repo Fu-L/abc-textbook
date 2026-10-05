@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-peel-graph-core-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f1f5f5725b400b4367f98a7d9125678e1601a89b128b85de4062493594f4a0db",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "dc78fc4dd408609b4d5ec736ca3eaca75ba7e76e444a983302558a46917f528c",
   "requiredChecks": [
     "source",
     "structure",

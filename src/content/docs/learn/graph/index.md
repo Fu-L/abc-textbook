@@ -170,4 +170,4 @@ V頂点E辺の明示的な構築だけでもO(V+E)が必要。暗黙の状態グ
 - [ABC214 H 公式解説](https://atcoder.jp/contests/abc214/editorial/2441)
 - [ABC214 H 公式問題文](https://atcoder.jp/contests/abc214/tasks/abc214_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-chapter-graph`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-chapter-graph`

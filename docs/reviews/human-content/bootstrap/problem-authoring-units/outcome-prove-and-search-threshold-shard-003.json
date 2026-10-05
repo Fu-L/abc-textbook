@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-prove-and-search-threshold-shard-003",
-  "shardSubjectDigest": "be15eb93156cb70e06898c314866e2701641a84ef17a3f52d87bd424e7878b22",
+  "shardSubjectDigest": "d95cfab5f3d59c3c40b9fe13f2f9eb39d794664d2004fe05bcbd8e27e1994bcf",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65: 分割回数の必要条件g0+M>=kを追加。A=(100,1,1,1,1),M=2,X=20は公式本文の二条件だけだと反例。全探索1767状態で三条件を確認。"
     }
   ],
-  "priorReviewInventoryDigest": "add8e90b8e25bafa8c7f693b9331e0fd2565b59933e13d5192a65d8c4d688d3c",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "7316123d4273853de186c34ba77c06da90634c2f49aebaea3477a258b135313e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -53,5 +53,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "95c88013db04ed7b008a1fad99f8219ce1e628deed239cc42b75858f9037837f"
+  "evidenceDigest": "18bd5a4a2e82213d0df501dbcbd843cd7f9563dd5281eba76e987e8c09b2c097"
 }

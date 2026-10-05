@@ -48,7 +48,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "bbe3f51b32065557375ea6f657e626dcef612e37456854b107409e0738894009",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-001/checks.json",

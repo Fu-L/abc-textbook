@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-approximate-rational-by-euclid-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "360db5d1d48fc4aa84649858263b799f81fd16a7917e8ca6d577a0dce74ef67a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "03cae6cd82d7ba66e4a820a3e6d8c44801d096bbb7b12426ba2f2ae7222cc72d",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "388c301a0b882d5860212ec513b8ec09dbc9ccf4fe639cf248422822e77264cb",
-  "reviewDigest": "54f5fec27197c55473cabf7647533f90d2333f7b8131353e35f17951c6462675",
+  "checksDigest": "d1e85908e8ffdf157321b116b4a20a6bc1dcd720a466be7e4c7a9cf54889b0be",
+  "reviewDigest": "7aeb267cf472ab6cde843671e777c23a7f7fa8a85a95711f71c41a167125db79",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-approximate-rational-by-euclid/outcome-approximate-rational-by-euclid-shard-001/abc333-g.html",
@@ -23,5 +23,5 @@
       "digest": "75b4c6de761c2347048786f1b77814ddb69d0a33f06f06cf822c4ecc38792895"
     }
   ],
-  "snapshotDigest": "67159f1efde2d77685532bd851e8048b06e28f045b90dd2eec0b5ca0912856bf"
+  "snapshotDigest": "07fa02a6ac09eb19f02d4b859ad7a1ae242da4250b9ee43c022b2bb12589eff2"
 }

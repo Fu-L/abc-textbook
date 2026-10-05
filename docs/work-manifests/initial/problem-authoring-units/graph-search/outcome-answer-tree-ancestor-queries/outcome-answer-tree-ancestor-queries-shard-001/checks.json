@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-answer-tree-ancestor-queries-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "46d8ce9db3d146c1ec53fd0efa4000a0fdfc2adc48fb9c409fdc719335f4f6f7",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3b8ff4618b8ed3b00554a5bb88f6ea9b9202324d0c35c17e599abfe707cc78dc",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-exponentiate-associative-composition-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6692d7aa8dfdd9b7c86680cf9e8fa92a0fc1da1c24a0d592ce8c586d3badd34f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "54e3a86e58f75ffba0254ccf84bd0b7acf8a4d28c1fafdc134d2fb8f5c497f6f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a7e931e7cf45fe2cbf978cd6c61745a46679317d8a58b272a3b8d9d3ec935008",
-  "reviewDigest": "5a43d11fdaedf81991897b20dfbd6a2a2de9cf2318d7973dfaa3a7645bfbc3cb",
+  "checksDigest": "16ac28ce28c7c9d11ccb106acfe90b3453d75166afb6f3180e304aec614086a8",
+  "reviewDigest": "fef4a5babd8d1485bffdeb96b179fff104ac1f9260efc6339c5891537afb2508",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-exponentiate-associative-composition/outcome-exponentiate-associative-composition-shard-001/abc448-e.html",
@@ -19,5 +19,5 @@
       "digest": "ff6f256817f8b420132cec3dc9afbeb8e70b22d9dc1da604934c5c7967509e52"
     }
   ],
-  "snapshotDigest": "be8a6e59d8d39407fb2aef53a895bd4cc03655e59d39c07f85cf513eb2195813"
+  "snapshotDigest": "ec4f92102c0d3799ae3dddcc8466676292221ef78799c293b3108618125acc12"
 }

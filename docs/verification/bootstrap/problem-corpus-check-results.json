@@ -1,21 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "status": "passed",
   "runtime": { "node": "v24.18.0", "pythonMinimum": "3.9" },
   "commands": [
     {
       "command": "node --import tsx scripts/corpus/author-problem-shards.ts --check",
       "exitCode": 0,
-      "observed": "{\"status\":\"automated_checks_passed\",\"indexDigest\":\"cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}",
-      "digest": "bcb3e3dcffb3ad9dcc2e152e81701a0693fe0c1ac039dde64d1b4f62dea32fa6"
+      "observed": "{\"status\":\"automated_checks_passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}",
+      "digest": "53650af5ea905281586ab22ca64363d732563e0b97f62d4adf09ad5d5a9f9268"
     },
     {
       "command": "node --import tsx scripts/corpus/verify-full-learning-units.ts --check",
       "exitCode": 0,
-      "observed": "{\"status\":\"passed\",\"subjectDigest\":\"cd7ca51be7f63dec6e4fa6f4e038233711b2f1634e4511cd73982f0e8a7e0c70\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}",
-      "digest": "a9543563fd330e4f313027a96a6abe19bcbf729950715985d8c0bbcdf3d2a9b3"
+      "observed": "{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}",
+      "digest": "93ee23724af36c61bf54f9dd8ea13857014b99eb9d34148e240426d2ffeb4697"
     }
   ],
   "mathematicalChecks": [
@@ -266,9 +266,9 @@
       "digest": "b9d1aa6d54433b71935743581c719916e07dc2c82364a8961e109c9204ed28c6"
     }
   ],
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "qualityReviewPath": "docs/reviews/agent-content/bootstrap/problem-corpus-quality.json",
-  "qualityReviewDigest": "fc4df60fa31a3f31185f3129383b37075b5161472cccd5c365ab34dea6f3c19b",
+  "qualityReviewDigest": "2111aed251e7f1d2046dff2e0bc738ba12c75cd09514c7eb461adf13ad61c734",
   "limitations": "Finite regression checks do not prove arbitrary-input correctness. General arguments remain in the source-bound Problem prose and the tracked full-corpus prose reviews.",
-  "evidenceDigest": "4e9fb38587f7c98e02137297864b4f7a29de12c78151c22a3f5ac0660fea97c3"
+  "evidenceDigest": "f781c4abf3143cebb755040e6aeb5524d401feda62916b2915f420a03a18ff48"
 }

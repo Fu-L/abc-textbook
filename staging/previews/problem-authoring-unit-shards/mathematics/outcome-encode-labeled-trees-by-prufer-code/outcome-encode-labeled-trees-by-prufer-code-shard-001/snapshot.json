@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-labeled-trees-by-prufer-code-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a889ef80552436834113997230185755316c277f3bedc0bb61992231d246e428",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "38029b525da3516c14efec0d6fcb7eac4bd48ac2ab58307703ba19a7c15617ea",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "edae5a74f3a40dadbf082aad9720d06e78f3db2c46280e3f5fb5d8686f03ed1b",
-  "reviewDigest": "2798b7d4ece77bffe59bf95da12f742cfa738bdffa8e1c2afd637b106be98a61",
+  "checksDigest": "375b8631dccaa436e0fa09fac0353df3c41b5fcaebf7f511ca7178363c38756f",
+  "reviewDigest": "ce2264701a2a1ec4bb608bcbd6c5a21cf325aba7516f18332c63008ffdefc6bf",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/abc303-ex.html",
@@ -19,5 +19,5 @@
       "digest": "92b42dbf16b609599f3ee544af62f0a30d55599e75a92b3499a40cde33118600"
     }
   ],
-  "snapshotDigest": "d4138098cd0a0859eb20d8623e1da77f1dab23120835c703d0afadaff9a14bc4"
+  "snapshotDigest": "369dd13fbf46c288e15e3958be7ee8a21e10272e8a96f434781e3a75de3ba1a7"
 }

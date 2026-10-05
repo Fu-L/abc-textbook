@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-greedy-order-shard-004",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f76916c5e7a5c370522da624f91ca508870568d56dd5e19fbf4662a5678280c4",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1a8b1260a14b20d5f380448f30d5d1c2e5a9a17551d3ff37f2ff1747ebf73202",
   "requiredChecks": [
     "source",
     "structure",

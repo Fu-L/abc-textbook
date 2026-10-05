@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-counting-by-generating-function-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "21ce8ef7f464079d494c0b7b48213d1dbe624ea6dcc36822529364bc7abb0a57",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "2837fb58eb4ec4107d8f11d4367f172250d2b7c9d3c82291a5673f061ed98dd6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "51cbe06c4ad855bb74a88d5420dbd158a7a905e3cfb308a939db7fe9bfc6c27f",
-  "reviewDigest": "0573edbaa409f5da9cbb7544a63567e026c655a18f6c9a8dd0a879ec464f124c",
+  "checksDigest": "a229fe3bac1ba4c4087e01942c4d662c0e692a5440f2607e293f8f92a9084ce1",
+  "reviewDigest": "93ce3ef87633bde965851602e89e8073f1e49cc52932df9e39ba962c299b9a39",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc345-g.html",
@@ -43,5 +43,5 @@
       "digest": "496713a194579450836f0938ff6a161fbfca159f069f4a51ffd96343edf2c1ac"
     }
   ],
-  "snapshotDigest": "91d4f86b5cc583eca8e5aff2b753b2e29fe364f2c5b7f482d7741253dfe0398a"
+  "snapshotDigest": "ce1096845c1baf3ba5b276a19f4203a99b5461a722d39e939b3c05a32ef7fec5"
 }

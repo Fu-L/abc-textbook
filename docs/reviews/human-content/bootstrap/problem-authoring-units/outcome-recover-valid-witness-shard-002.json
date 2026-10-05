@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-recover-valid-witness-shard-002",
-  "shardSubjectDigest": "83daf40f4796bedb2cbc857d65b56a5d61383854f6af3a069b53192fd161c497",
+  "shardSubjectDigest": "7cb9d5a69767df2ecdec264abffa3ba83071b2c648a6347ddd7e50a1092d3faf",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5404148632: 公式の最後三行の構成を再照合し、四cell迂回・残extra上界・終点未使用と壁変換を明示。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "6d33f2b0be68049d49d28fdc118744cc950f682aafd696f54d5e0fed4767bf52",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "2aec817d60a4b0c66acd91756832a80e704bf2127d7c297e889223300d6aead6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -83,5 +83,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "027c498298842a867a389c8bcbb6b03e80ffe14d6b05213917fa116d34de5c8f"
+  "evidenceDigest": "d028a08eb6ecd3d88e57c602afec557ea85f5d24d11141c8a59213df6adb1448"
 }

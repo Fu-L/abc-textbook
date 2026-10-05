@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-prove-greedy-order-shard-002",
-  "shardSubjectDigest": "7273e6144837d7375507891388f6c7741e97c413f348e547969a8c78835800cc",
+  "shardSubjectDigest": "3dcd6393a715eb64b6abddab09c72a65ae26e462a4634efa8bcaaa61d9cdb455",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5401737525: 硬貨の正準性を具体的な交換式で独立に補証し、完全部分木の互いに素な配置を深さの帰納法で補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "eb19c6faf2bb86adf49e706e53018f7b0bb66451c5af29091379950007d46e6e",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "df4c739cb57366d167142a41215be17cf7e503b327567551b9b9b702ef967c4a",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "7d765f021810a47add5b0535ec0aaddfad29272e90f4a16e4047df4b7fbe3e40"
+  "evidenceDigest": "2e34f377c2e04243c0b0328cfe5c0ce9855a4a44f0787209bad14da381a94008"
 }

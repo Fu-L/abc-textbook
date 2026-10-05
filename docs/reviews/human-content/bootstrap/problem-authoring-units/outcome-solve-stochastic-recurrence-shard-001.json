@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-solve-stochastic-recurrence-shard-001",
-  "shardSubjectDigest": "6ea4f3fcf76ef23811049b984cd28178c495ea34a6ca3f3b8cabb44207b77950",
+  "shardSubjectDigest": "efd41898bc1621fcb1f7ca17a8ac0ca42beb9c15e96d6ee324814c5c8b511850",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5404024001: 公式の相関再帰を初手の内部・外部pairと小問題の全pair数の比から補証し、N=1,2の基底を明示。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "8e1d9ac83bffb8161ad56f9d543f787e54f14bd0f029572331ce41620bd694d8",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "5f52ce966c42b83d6935f62bb018a5ed9d0f57d1a193e1dedaac9fdbedcac8d0",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -83,5 +83,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "8966a373dc09bb27a5d818d0c5808299e42db4ebd8e7859836a709ede85cc624"
+  "evidenceDigest": "84d806cbd28c677edc5942f590117c5d38da35bf8bb11cc5546a0dee7d4f499b"
 }

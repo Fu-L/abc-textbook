@@ -33,7 +33,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "ba9820b80388f2f76bc8668402f8a637fa13b933b04076009af7ff4ff818a0de",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-evaluate-polynomial-at-many-points/outcome-evaluate-polynomial-at-many-points-shard-001/checks.json",

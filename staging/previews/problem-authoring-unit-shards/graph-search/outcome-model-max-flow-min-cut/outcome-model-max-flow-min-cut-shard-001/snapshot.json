@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-model-max-flow-min-cut-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1fc0f43b3bc3a65830d0a2b3bde36423d94cfd3fc190fa2cc62fd2179ce1fe14",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a0c7cafc279228fccb97d778e0f061e157f054a0b411e1115f8dddaf653dcfd3",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "69181c0e06c464b1229d3a668bc15e8c63abaa7ffa890e6a70da711529ba184e",
-  "reviewDigest": "e277e85bd56f25cab380d78c7c55f0b4f2bf7f2cc56133d6f8a9a04ae977a9de",
+  "checksDigest": "9b1065b7246a470baa862e6c2a8fa1ffa5346ebe6249f826a43e7b546d6bf7b0",
+  "reviewDigest": "04339aa54788a6153b3f912a6488af6777a47dfa4e68bb2e51864d6fd8bd49fd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-model-max-flow-min-cut/outcome-model-max-flow-min-cut-shard-001/abc225-g.html",
@@ -47,5 +47,5 @@
       "digest": "0c16d36719c72cd43c2251ddcefa5dec07a05b5a1ba2c8659ea165750d8006b7"
     }
   ],
-  "snapshotDigest": "d45798dfb1d05819fafb1c1e6d1f27b9e98e7284e3174859cdf69226fc48141e"
+  "snapshotDigest": "406c1f5222b774cc095caf6af988f443c91e1aa8b6c16cbee76c3f50f7a90d58"
 }

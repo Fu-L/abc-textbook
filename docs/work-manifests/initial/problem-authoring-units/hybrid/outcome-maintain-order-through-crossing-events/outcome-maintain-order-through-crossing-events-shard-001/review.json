@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-order-through-crossing-events-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "316240c80fd94e343371ee2785304d6d169f8214945a2e0badb643ee54345ce2",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "e84d615f5e7eabea4897bcfdb140492e20707e80c88b303a7481f8c5fffde520",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

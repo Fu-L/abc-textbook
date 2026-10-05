@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-enumerate-frontier-best-first-shard-001",
-  "shardSubjectDigest": "766bd5e6bae9cd4215d5016069d34be9ec27d3d9617aad64b93be5d3c2c266c4",
+  "shardSubjectDigest": "b7a9f1f6406ff75a11c59b7c9cf22676e49f6a04ead2048ecd59e3e8682b5ecb",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5403918168: Strict integer absorption threshold and final-set containment proved; all small-grid absorption orders checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
     }
   ],
-  "priorReviewInventoryDigest": "82e1fba494bc34dc42e5fb1d6956db6f41b4298d61d2dfbdce3414229174ee0e",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "da7122842545b23c14fa0c5930a49128441fe59805d2098f17b82cf03bc00248",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -77,5 +77,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "74ebde4606e0a4a0082f842f129f9c0aa9e6139fba6cf63ff90eed0b4ba4dac0"
+  "evidenceDigest": "a2f0abc6c2b9346eeced24ed377c0bc38e7692d091aef0bd661ac00dc65a620e"
 }

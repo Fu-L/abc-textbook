@@ -71,4 +71,4 @@ Mの素因数の重複込み個数と最後の失敗検査はO(log M)回なの�
 - [ABC335 G 公式解説](https://atcoder.jp/contests/abc335/editorial/9017)
 - [ABC335 G 公式問題文](https://atcoder.jp/contests/abc335/tasks/abc335_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-multiplicative-order-periods`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-multiplicative-order-periods`

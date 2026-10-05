@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "30764da41e2324891565436122836f313eb88cadc5b759e14e7b8d4e29857d2f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6528301baaba37c644dacc949ef179f11e0e8ff7314372e7cff6f0796e662c0c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9fb02de2a52cabe9fafe175724142a45c0f40aadfd08f36597c43a4eb08cd174",
-  "reviewDigest": "3a742f1610ee49e5cfe734a8ab07c73a94d8518762ef615923afa5ce9a35a858",
+  "checksDigest": "110ab8a440a0cfc3436d6d08e7c0cf772640a82321f8ec32a7761883a5614a09",
+  "reviewDigest": "0d03134adc4a9aac4be35524cdcdf8d03cf93cfafb03fab66c8619be09d35388",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-share-threshold-checks-by-parallel-binary-search/outcome-share-threshold-checks-by-parallel-binary-search-shard-001/abc233-ex.html",
@@ -23,5 +23,5 @@
       "digest": "b16a5fcb8dd1d81d92b7b90a523ec2159532135e289629b90f5af3c9662a4859"
     }
   ],
-  "snapshotDigest": "434f42d92dbdb82f3361466228394ab38b401e8e345f125afed45d771672a83e"
+  "snapshotDigest": "88c37aee29008e3288f19efadefb73f45fbc20ecd60c38ebf7887b7a0e8e9e20"
 }

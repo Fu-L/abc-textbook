@@ -34,7 +34,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "88d6e8155ea7bcb4dd5d592d14c1487c19ec86cb1f270c8a0e826474e314cd67",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/mathematics/outcome-encode-labeled-trees-by-prufer-code/outcome-encode-labeled-trees-by-prufer-code-shard-001/checks.json",

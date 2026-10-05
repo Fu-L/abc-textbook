@@ -93,4 +93,4 @@ c=a_1⊗b_1、d=a_0⊗b_0、e=(a_0 xor a_1)⊗(b_0 xor b_1)とすると、積の
 - [ABC381 G 公式解説](https://atcoder.jp/contests/abc381/editorial/11378)
 - [ABC381 G 公式問題文](https://atcoder.jp/contests/abc381/tasks/abc381_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-finite-field-extension`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-finite-field-extension`

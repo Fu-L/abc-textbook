@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-kernelize-near-tree-graph-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "410f993df08a63ab1e5b120506553665ef9c4fcc48b1e027fe9d38ae624f3dad",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "dc5b1f337fb001b50afb31fce4648f2ec7786b060b3b0aa28bc0cf084c77aa98",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "bb32ef5310c11265fcb1c0d731674636b5d0eb4f0f0fb040c9098fda406b68f7",
-  "reviewDigest": "353cb7fcdfdffd012f7b05319208a548d7abbca6fe6d1afb376a8d512b497295",
+  "checksDigest": "1a03bd3e0a759d77136fdfea11edd698ce575fd14eac507512d521bcbaf87e6f",
+  "reviewDigest": "07c5af3908309f338b1a08392e086796bf77e71831b522529ab85202b8da7e0a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-kernelize-near-tree-graph/outcome-kernelize-near-tree-graph-shard-001/abc419-g.html",
@@ -19,5 +19,5 @@
       "digest": "ad831db3687af97c340e0765ae6913a6f9da90ea29156a76a1aea5c4664326f0"
     }
   ],
-  "snapshotDigest": "049a36a5d5f23bd1128c5a441d343114e97269cf38b4c826fbef8e5b3b797523"
+  "snapshotDigest": "231e265100370e2d8f8abb4adbf672a9a944bab63ddfe5bfdfdf00fb641c1618"
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
-  "shardSubjectDigest": "119fb52349a28946d9324b0b714d197969e5bcb60743fa1ccaf138e55ec8abb1",
+  "shardSubjectDigest": "45cd5cfbc08ef5905f1795be5b97d895024212c387823233e4b5b4f83752898c",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
     }
   ],
-  "priorReviewInventoryDigest": "4c444b63383f2f61c8bf5e22dcf976c3279deabe96b7f31776fcb3f7caeb44a7",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "b8f3b91a95b589e395b10e0b08c357b993563305829e033e1e41f581a85da82e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -35,11 +35,11 @@
   "items": [
     {
       "problemId": "abc412-g",
-      "documentDigest": "3db88357c5ccf3f303bd45f36b1faba0a14fbea18681dde9fcd689f04ec2c2e5",
+      "documentDigest": "8f0aee9a7193827fcccae5f66c05667d1e9370c5f3fb37a09e94b93a54c53722",
       "learningOutcomeIds": ["outcome-solve-min-weight-general-perfect-matching"],
       "status": "accepted"
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "5f7b7065b22fe6ee88b76cac1f1ac1ea2e1e02f7704d79afe14b1487c9a4461f"
+  "evidenceDigest": "c4e5bd750832b3f5db3349e9486ead849dc7f5c66bac22f2e5ccd406d8e02de1"
 }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-optimize-poset-antichain-by-dilworth-shard-001",
-  "shardSubjectDigest": "df46aed676e0d77d4b0be27fe2c2d1cd5a4316588bffceec08169a248bbddb5b",
+  "shardSubjectDigest": "b0f256d7f049896e33b62dfa7f2f00001a9d2c9953c0fed2c2a56845b13d8dd9",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5400631527: 包含の推移性、回文種類上限、KMP包含検査を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "2076b815f1a7c10b27a522047a1f975080120bb4b3788246426d32e76f9f2caa",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "e0fdccba8b38f7fe6e440b404c34d477ac44ea7d4e2ec745ea0200339b2193c6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -59,5 +59,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "3c64b0a4c3d11a392fa7d6a71d707c37559de3287eaeb461e62548e7368161c1"
+  "evidenceDigest": "8bf041cc93bb15ec582f66cf4d50b20c5dfe6d2cffdf77e93de434477c6c051d"
 }

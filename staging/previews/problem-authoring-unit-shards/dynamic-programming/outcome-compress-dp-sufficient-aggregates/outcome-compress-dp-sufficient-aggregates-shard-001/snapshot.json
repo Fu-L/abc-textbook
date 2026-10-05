@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5f53923508cf151ecd97aa0b153ffcfd0dce37f86fe2545c9b2852722028179c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "5ca353a62d35dcda254e3de6cdbc4c1be007980626ff386e5e0759e582114a37",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8bb057ff7b7e39b63f8c44e92ae1f52c2c608b3bc43532632c41de9dec575357",
-  "reviewDigest": "a9b8925d1408859a5e31edf877a21dd15c7310dcc76edc8aeb3ac673e2dae815",
+  "checksDigest": "6c2f6fadc536410c3e46572b513cabe710a12e9c4b2b2ffb630ac14c43cdb564",
+  "reviewDigest": "6f628d71f1ba8e5a16d58f88a39c1bbef9e132f163c75f20be39344fcecdd64e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc224-e.html",
@@ -31,5 +31,5 @@
       "digest": "c4e062958f88b70290d0b64c3901f3a7ef72c71c271411249eae49e67d51d4eb"
     }
   ],
-  "snapshotDigest": "d4d3331776522adae40a5cecdd1116aa6d1b66c0c1906329628883b043ef2924"
+  "snapshotDigest": "00ae3bbc36fa27062d8b74efe33faa847b2e9a169ec2fc457981636b59676f75"
 }

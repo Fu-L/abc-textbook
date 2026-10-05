@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-compute-subset-convolution-shard-001",
-  "shardSubjectDigest": "830b4c7a1e6e4f44c64b86e050804f42a437c34c915aad244c1525b47a711414",
+  "shardSubjectDigest": "bb6fa798ad0c3054fd781b1b4a58bf3be15f7a8f61d8adf1f162e5d0096b254c",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404024001: 公式のranked zeta後の冪にA B′=K A′Bからの係数再帰を独立に補証し、低次数再帰とrank反転へ接続。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "e7f9fc7afe3a0f9d24504e4f3c1f6145d77b29a03089c57da1d1aaec4dbe5d9c",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "4c6ec2e73a6c39c0935a1ab0bc5764f94554692b1e6ce05a6636f06dd6e52dce",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "b341bba0cf0c3c5012bf7beabd4ddb1e19d5bc6940c4a7df0a88eb1d51f9bf90"
+  "evidenceDigest": "50f1f461e9d5b5ab9dc2a0e966ce672e05090902e4ca9c26c71ed760fb5e6cf3"
 }

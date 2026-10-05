@@ -97,4 +97,4 @@ DPの最小十分状態で得た考え方と実装を再利用し、根付き木
 - [ABC248 G 公式解説](https://atcoder.jp/contests/abc248/editorial/3795)
 - [ABC248 G 公式問題文](https://atcoder.jp/contests/abc248/tasks/abc248_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-rooted-tree-aggregation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-rooted-tree-aggregation`

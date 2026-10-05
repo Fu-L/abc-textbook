@@ -26,6 +26,8 @@ sidebar:
 
 二部matchingと異なり、一般グラフでは奇閉路が交互路探索を妨げる。weighted blossomは奇閉路の縮約と奇集合を含む双対制約を扱う。この単元では、非負整数重みが小さく、対応そのものより最小重みが欲しい場合に使える代数的な手順を導く。
 
+掃き出しの更新は[線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)、有限体上の除算は[法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)、非零多項式を乱数で評価する誤り上界は[乱択の成功条件と誤り確率](/learn/modeling/randomized-algorithms/)で確認する。以下では、それらを行列式の最小次数を読む手順へ組み合わせる。
+
 ### 重みをTutte行列の次数へ写す
 
 頂点数Vが偶数の単純無向グラフで、各辺e={i,j}に非負整数重みw_eを与える。自己ループはpairを作れず、多重辺は各頂点対の最小重みの辺だけを残せばよい。まず辺ごとに独立な形式変数z_eを置き、i<jの辺にはB_ij=z_e y^w_e、B_ji=−z_e y^w_eを置く。対角成分と非辺は0。符号は同じ無向辺の変数に対して逆向きに付ける。
@@ -62,7 +64,7 @@ P(y)=det Bを展開すると、各置換の項は頂点を覆う有向cycleの�
 
 共通前提: prereq-abc-advanced-v1 (1.0.0)。
 
-直接の前提単元: [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/)。
+直接の前提単元: [二部matching・Hall・Kőnig](/learn/graph/bipartite-matching/)、[線形方程式・rank](/learn/combinatorics-algebra/linear-system-rank/)（後の章）、[法上の四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)（後の章）、[乱択の成功条件と誤り確率を設計する](/learn/modeling/randomized-algorithms/)。
 
 このUnitを直接前提とする単元: なし。
 
@@ -83,4 +85,4 @@ P(y)=det Bを展開すると、各置換の項は頂点を覆う有向cycleの�
 - [ABC412 G 公式解説](https://atcoder.jp/contests/abc412/editorial/13380)
 - [ABC412 G 公式問題文](https://atcoder.jp/contests/abc412/tasks/abc412_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-min-weight-general-perfect-matching`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-min-weight-general-perfect-matching`

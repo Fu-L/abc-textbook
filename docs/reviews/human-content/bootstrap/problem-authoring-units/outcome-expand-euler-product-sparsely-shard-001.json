@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-expand-euler-product-sparsely-shard-001",
-  "shardSubjectDigest": "4b1ea79fbc2a2eba5e7f339d4aa2a38c40e0e499cdca97e1cebaa4f5c06ab4e5",
+  "shardSubjectDigest": "747c0b1a75ff45be0b55b93c4e01a8d093b096b216b52661a5b69d4934f6c7e9",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -16,8 +16,8 @@
   },
   "riskReasons": [],
   "sourceVerifications": [],
-  "priorReviewInventoryDigest": "b253082895cb4afdc585e9bc33f73ea9ff5d4f419bf6a6d052ab8c544db5f21b",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "b5a6c41d37de6b9cd9746b044afd354958beb9d8d75715ea1e385fd9413fdc92",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -34,5 +34,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "c50087792b53e3be954b6360106b6aaa0fac4ac3b97a4ba36f69524349c56f42"
+  "evidenceDigest": "4ca19dd6c6ae06837b0cad948a77b576a2a09d2c48c5c665d5dc4a9bb1186d15"
 }

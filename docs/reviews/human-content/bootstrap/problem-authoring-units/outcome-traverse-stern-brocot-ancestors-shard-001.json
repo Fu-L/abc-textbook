@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-traverse-stern-brocot-ancestors-shard-001",
-  "shardSubjectDigest": "3891c9bb484f2796f8f2459fcbf848af9982f31d407738f30806a31fd05e808f",
+  "shardSubjectDigest": "ac27ad3ee4ac98955f97fda552c77e4524c6ae2e9530b9056f21fdac9e44b16f",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -16,8 +16,8 @@
   },
   "riskReasons": [],
   "sourceVerifications": [],
-  "priorReviewInventoryDigest": "7a4b78f46e85df9c0ed29a5cdb847f87caea92fd15e95c36814f44f822990091",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "e1255c910887de8994a832d5b312bc544af0d5a1c8a71aae08ac367f9c0da767",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -34,5 +34,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "b7a186820fa148d30a43e675902afd61d86319f43ca427961337f9471d7f4c0a"
+  "evidenceDigest": "1c02e03cd6560bc0ff5bdffeb773d3af81ac7bf2e1d2effa18fe419fb2554f12"
 }

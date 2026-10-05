@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-minimize-xor-coset-representative-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "82d28ba0525f977147bf2032973dded5841b71dd609fc8ec10507698a3a375f3",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "857f16dd659f9bd5efc8cbe14ba33e0cd5cdaf4e292127d952d78fadaacdd88b",
   "requiredChecks": [
     "source",
     "structure",

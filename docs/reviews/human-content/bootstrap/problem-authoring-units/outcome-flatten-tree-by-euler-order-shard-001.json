@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
-  "shardSubjectDigest": "a6b3c689fd045fcd34457ad418ea6e4571e70712bbd8173ef9dc9627b1100c7f",
+  "shardSubjectDigest": "fe8486fe5991fb3be5cf4ba73ac15024ae9c9cc131dc55870ffcdf72ca5c8aa4",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "u=w endpointも含まれる条件を確認し、inventoryの削除成分のみの説明に自己root寄与を補った。"
     }
   ],
-  "priorReviewInventoryDigest": "88047f72662d65aefaa73f8e8e0999a27d26f51edd223a0e5c5207f777e22382",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "87502dcdfffb4b7af790ca9a842de74dab802b67d765318a44538740a14cc935",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -62,5 +62,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "ad9ede020d265103114719f61fd4ff8f77f94cbd34ddc846f205403229ab1016"
+  "evidenceDigest": "58dccff5e59c354321160901e63c22d93f09bca40a77a9297ff81dee564b151e"
 }

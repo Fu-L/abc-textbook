@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-maintain-ordered-set-statistics-shard-001",
-  "shardSubjectDigest": "3074d36070c5955c4d142f7333e610ae4c92c0b942195d312eec6bc8521cd574",
+  "shardSubjectDigest": "ebbbd0405d266e6c149ab5717515b5d8c555e63d72516a65a7ac085fb2a1def7",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "dc604b25f53d97385e68cfd884becdd1748a945c4602da8fac896c32deb97332",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "452ddf2491749bd4e834b549067cad438f6e721a528514495fb242d96130c3ac",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -77,5 +77,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "9c4c235f2000b865a5ce1f5007d30981b804e14d6afc7acba54618e52f4a4392"
+  "evidenceDigest": "78b1b89b0884515c1b59ebfbcd01fb26d027e79f846b91d5ba8b79f290ce2ffb"
 }

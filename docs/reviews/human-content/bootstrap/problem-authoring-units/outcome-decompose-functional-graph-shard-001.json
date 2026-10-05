@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-decompose-functional-graph-shard-001",
-  "shardSubjectDigest": "1bdc006ea5f286c1c44e8f3bc6e1954405f9c9aad57b50395087217ae9db4a0b",
+  "shardSubjectDigest": "7f662a937bdab3e6ed1ec1f4f4ec505cd04b4e5f10024a6e6ffe3917d96ad426",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5404336223: 純cycleと流入木付きcycleの区別、合流・回転の具体的操作、他成分から得る空き文字を再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "fdd2019f7a5bb32c3e73b87252d29929140171a173916f265e66ab5c25efd3cc",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "910156af661ed1c8270aa3f972bdfc7a599cf5278b907cf26797a2561827b695",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "64b02b11fb62cdf0d83a9517004fb94f5b380587ee31b90a151607e3730eb7aa"
+  "evidenceDigest": "9d7c1f33334a29aa824d71e0298dbb176f90529e6fa415b317527d99cabb3eb1"
 }

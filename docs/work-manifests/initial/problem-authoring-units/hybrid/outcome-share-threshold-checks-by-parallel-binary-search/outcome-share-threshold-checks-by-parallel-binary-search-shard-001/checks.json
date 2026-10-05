@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-share-threshold-checks-by-parallel-binary-search-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "30764da41e2324891565436122836f313eb88cadc5b759e14e7b8d4e29857d2f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6528301baaba37c644dacc949ef179f11e0e8ff7314372e7cff6f0796e662c0c",
   "requiredChecks": [
     "source",
     "structure",

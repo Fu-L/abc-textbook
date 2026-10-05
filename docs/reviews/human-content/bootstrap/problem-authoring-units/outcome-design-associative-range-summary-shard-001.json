@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-design-associative-range-summary-shard-001",
-  "shardSubjectDigest": "83c76ef8409d5aa86f9b0a4899d194b052cac0c5719af0790b4dd05770925957",
+  "shardSubjectDigest": "8384009b4f2adb788b17c05c9d6620fad12ec6a9f8838e0f764bd8c033a7bec8",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -35,8 +35,8 @@
       "reason": "PR65 review 5404957719: 同一文字runという定義と閉区間を再照合し、prefix/suffix延長の文字一致条件を修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "dda760b4e5e4dcae4634aec37a0e001d09a8ef86c4b50de4d7a659675df77431",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "95e80d4dc6d69cc3b1677c1a8fc89d1dc3ebefddab5333b57811464c6ddfdef1",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -95,5 +95,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "56b4ac6d54bc9735affe45cf68c55e4d22ca754ec1ca0a85d51e904b06a056fb"
+  "evidenceDigest": "17eb72939c890bf01912da6eec72496d644dcc12089f2c7f760d3f2707cf755e"
 }

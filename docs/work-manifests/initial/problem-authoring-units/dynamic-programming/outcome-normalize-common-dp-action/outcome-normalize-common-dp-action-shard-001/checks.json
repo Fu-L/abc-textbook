@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-common-dp-action-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d70a3a18b4535ac8f57d4a8ed1b87c715c9a3ae503596d8b0ad54f3ed59eb397",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f1605ff00c4f732ea0df103d91a28459786ddce2f14b4b7ab8c3fe0838511192",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-labeled-trees-by-prufer-code-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a889ef80552436834113997230185755316c277f3bedc0bb61992231d246e428",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "38029b525da3516c14efec0d6fcb7eac4bd48ac2ab58307703ba19a7c15617ea",
   "requiredChecks": [
     "source",
     "structure",

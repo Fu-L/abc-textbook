@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-finite-string-automaton-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a134660a338c65fa86d8bdb892a12210f27f8b2612f7349f773043dfe4fefc81",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a7b29587cc4aa983ded8633176c56d7d6dd9bb0789e3a8087060097c8e603008",
   "requiredChecks": [
     "source",
     "structure",

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-solve-isotonic-regression-by-pav-shard-001",
-  "shardSubjectDigest": "a5b78d5c32d24ad0c67aa9fbc3f051ac89c0acd5f98377a1b3c3facd0b278745",
+  "shardSubjectDigest": "7e57c83108631603ec73f857ceafbdea00db2b1a83e30dc1508a18432a5534e9",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404957719: 整数block均しと両端比較を再照合。prefix移送数の最小性を独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "13ddb1bfaaff60131c4c2693c2212dbb2312cb9165e7a3aa8a64ca8b8e0299ed",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "0489a89f26de0ab11be95ccf57ef9123b726fef9e57ec95de7eacb6698ba0d58",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "cacf9130e50e7dab1fbed44b67b82781b9731ca43dbe1491df7d5b824fd0d21b"
+  "evidenceDigest": "08799b9f391d285250e93c0020bca65ec582eae4aa2bd98d0d81cf48bf8c3977"
 }

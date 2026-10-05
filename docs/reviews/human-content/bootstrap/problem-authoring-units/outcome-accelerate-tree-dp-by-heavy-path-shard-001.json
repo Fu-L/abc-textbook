@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-accelerate-tree-dp-by-heavy-path-shard-001",
-  "shardSubjectDigest": "7ae2184d370eede33181847e1ab00c554c3f9c978f547b290ac20ef3407fe672",
+  "shardSubjectDigest": "72b5141df0c48c0b08f40b2767b85996f8f67227321a5c8599ef0b45c309b6e9",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5401313426 を起点に公式根拠と本文を再照合。局所操作・非負条件・境界・最終集計・全層の計算量を具体化し、補助証明と別モデルの比較を pr65-review10-corrections.md / pr65-review10-mathematical-checks.py に記録する。"
     }
   ],
-  "priorReviewInventoryDigest": "f8af357ae0d60e08319219cfd242135ddc1fc2189e58cc3fd68b8c6fa6a01942",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "95ba0e7b99f526291e2330258cd4c50f7f84d7b2ed84d84245c45a86677c0f46",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "4546fc86cdae584b3f5b8d269da8221537b8eb08deb25cbb3396757d5104c3d8"
+  "evidenceDigest": "21e27e2f51c357678b2b730c122f11b7726b255d7fab3db884880530b24cb8a2"
 }

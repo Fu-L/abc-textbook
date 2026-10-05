@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
-  "shardSubjectDigest": "57b27cdbccef6c62c0cba3a012b02f85bb148f3fe15fc77a05b4c0579bad8a48",
+  "shardSubjectDigest": "37df705293b27abb48864b47ec2618e664daab023405d5b79aaaf46bb01ece5e",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404957719: 公式制約A_i≠B_jを再照合し、初期token不変量へ接続。異種同居を前提とした範囲外の説明を削除。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "cbdf82cd8b31783cb7cd15b1c8fca97ede7ca0fb7d6344368df2989c6f39a784",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "1add2a0c2de91741e6df586b46e5ba616768d068b057a694b5b9f65a38dece25",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -56,5 +56,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "f8818d03f19a2f04263b93b0c5fc7d88a930d145f96c66dbb7b52240ccdbad57"
+  "evidenceDigest": "ca28ab7069ac62fc1a5e15752784aff8e901183ea2a62c5ff99563d1dabc2b0f"
 }

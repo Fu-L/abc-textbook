@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-design-minimal-sufficient-state-shard-004",
-  "shardSubjectDigest": "54aa89de2eb433e69903290f26319c69acf8d75c48ba1ec06c0eda84bc35c19d",
+  "shardSubjectDigest": "b5eaf4d3b3a8cf453316477c7dbdd6dbb3787715950a04670279ea151ecae075",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -35,8 +35,8 @@
       "reason": "PR65 review 5400631527: X/Y/Zと両遷移を再照合し、下限DPのK超省略・ちょうどKへの補助証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
     }
   ],
-  "priorReviewInventoryDigest": "a2395b77d6aa42ba57fd410dfb9b993e63fb5cfc00fe6e0ea95f8a8af904b3ab",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "a828e8afe6d080e45420c399d16a782348dfc12d05d718027f8cc8bcfe9eff43",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "4999aaccc0507dfd2ee5ada509d52f5eb546311baf986212e5c03c3767b1d4cb"
+  "evidenceDigest": "0bac5feaa83a44c61dc5f918551112895564630e931f392c3ef2d8c09ebe2067"
 }

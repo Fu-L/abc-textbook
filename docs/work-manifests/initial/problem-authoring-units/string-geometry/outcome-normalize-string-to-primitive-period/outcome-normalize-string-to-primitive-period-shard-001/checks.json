@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-string-to-primitive-period-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7a5ff0554690659939a4df9376861884944c0cbebd1b80ba650edbecf7ca6435",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a8a847b3d71d94a054e626cc1cd89b8c238b1a42f401cf050c30fc0102e7875f",
   "requiredChecks": [
     "source",
     "structure",

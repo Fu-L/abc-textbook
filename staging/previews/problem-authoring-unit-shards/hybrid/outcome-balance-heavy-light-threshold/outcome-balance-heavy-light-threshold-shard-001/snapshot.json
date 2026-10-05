@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-balance-heavy-light-threshold-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "68c30b200f7e134ab8f4522329dd6a10f858bc90619141aeb0c3a2fa4b19c7dd",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1153ec2554edab0728ace6d9cd175f8cd70216e10bfe2ea791d95adce8781458",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7a04f053b270a37c3ac8ea3b4cf56f130cdf71430036f7d02a11b73cd4b06137",
-  "reviewDigest": "d85c9a6b32674c5889d1c9ba91fa4c8cca661f5f0bb26bbfc06c3825b06c92b0",
+  "checksDigest": "1d9f6421522796f8c8b7dc2fd8d7161baee3b2b0b7af720e88b7ace1ea1d0fcc",
+  "reviewDigest": "83b710b594d070601834b171b749be3faba5d1af06f9131821318296b765847e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-balance-heavy-light-threshold/outcome-balance-heavy-light-threshold-shard-001/abc219-g.html",
@@ -35,5 +35,5 @@
       "digest": "cabf35158a58ba15fd37075d4bfe560f36f198d1b98f7670c3226d13b0a4fac7"
     }
   ],
-  "snapshotDigest": "223a0b00a79ced42f20c3eb3d28c6a3c3f2588479a613c89f561ad9ff1e9db02"
+  "snapshotDigest": "c37071a1a3b59eb5270c14a380182ca14f51b51277ffd8b8bd81357208f51b84"
 }

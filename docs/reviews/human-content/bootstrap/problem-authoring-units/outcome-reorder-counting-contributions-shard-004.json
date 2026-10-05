@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-reorder-counting-contributions-shard-004",
-  "shardSubjectDigest": "b69f14bfc58b24ebb1312136878773467aad680ac2580daf963584db70d2bb95",
+  "shardSubjectDigest": "f551f714437b303da601f446825d702350f9e3620e55e5d9e42c19f122c4ce7f",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5404336223: K(K−1)/4のinv4と窓数平均を再照合し、逆元2の二回適用を明示。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "d48d925d150fbc83af7970c010dd4bb211faef3ca7907138ac7ca7ca084d6d34",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "1182563e3a78f2c7cf60ce4dd4101e37c31ecafea4d31669c7aff7e43aa8b315",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -86,5 +86,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "1cf51f21ab28a9d48a188be91e34ce828c39ba488bb3a56c1a1c040d1c8ed94f"
+  "evidenceDigest": "3f87d8ccc4028ad080ececb3c09db24c80905eb583ab48f7dd333c4844eb3974"
 }

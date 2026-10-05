@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-palindrome-intervals-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fb4993c342c5c6aa5e91d1b39b3b8d355fec2a6285e5c5a376e0df5f96236fc9",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "02a1479844679044fbf53a675572f1d6e7d48fc4e005a35dd1fbe8de61de9099",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f086c37670d9abb25590a9fa446c0f64e7ba9d25f699f37f4c413167abf06f08",
-  "reviewDigest": "0fcdb53f4f26c240052eefaa35817981721d7c720cabd5a943200cff57dff8c9",
+  "checksDigest": "52fa45bcab8130588857da29bfcf509f0e6974f3ba4359862d38df401e8bf71f",
+  "reviewDigest": "efe925776726e26b2cb45cb615294364c3858ff45bf2cb7c68118bde33d6d5ec",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-characterize-palindrome-intervals/outcome-characterize-palindrome-intervals-shard-001/abc349-g.html",
@@ -23,5 +23,5 @@
       "digest": "0b85c740ed9b9b2787c41f29fe8a316d4b1edf8f70ec029ea33b81953dcc48df"
     }
   ],
-  "snapshotDigest": "cf541605cb8df3c132b5e7d9d63e204c753a254c3ced778c2cc80b6aec9aa400"
+  "snapshotDigest": "4c3b0fc99a0529bafb99576ce6bf20c90c3fa2b68462bfd0ca464a3efa057062"
 }

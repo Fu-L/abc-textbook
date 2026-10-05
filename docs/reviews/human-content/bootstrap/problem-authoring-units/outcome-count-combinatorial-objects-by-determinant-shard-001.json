@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-count-combinatorial-objects-by-determinant-shard-001",
-  "shardSubjectDigest": "973d0413ca6a705f42a1d748e272ae4e63c7ba03c50469cfc6ccb234473664b0",
+  "shardSubjectDigest": "b7f15af8f5ebad3c83edadd47b399797779bcdec431de6169359f1865b32450b",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -23,8 +23,8 @@
       "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。a=1の正則性と上Hessenbergの相似変換・係数漸化式は本文で独立に証明し、小行列・全域木の全探索で検算。"
     }
   ],
-  "priorReviewInventoryDigest": "05779853c66c4fdc336884de5508e8567f8dd4d4f04191eb0e438e8662dbd729",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "3ecca43d5fe978b7b189bf547dacbe8ce0b73ce9f8707abf920c248e3d4b9e4f",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -47,5 +47,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "e5880b48b4f0366e15428dd5958737b6359e46a6f70d1214556af193f12b738f"
+  "evidenceDigest": "67ca29045ae31c5f56bde871bae1f33ff211ac25e9b13b6a55cb88e81f62a166"
 }

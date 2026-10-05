@@ -1,9 +1,9 @@
 {
   "schemaVersion": "1.0.0",
-  "subjectDigest": "b0f8d6a1a5fcc75bf06fc064901512ea7894945d3bb25a65ca7a714fe6eb4bc1",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-normalize-equivalent-states-shard-001",
-  "shardSubjectDigest": "6985807c70b880c4a5c80fc9da35ce69dc00ed79d7c2ac6c03b783ac443a0c81",
+  "shardSubjectDigest": "1921163fbfdc8d90705d038d4f5961433b7f0c7fd6efdbffab818deadc9fc381",
   "status": "accepted",
   "policy": {
     "decisionSource": "owner_instruction_issue_48",
@@ -29,8 +29,8 @@
       "reason": "PR65 review 5404336223: 全順序potentialの変化、逆pair相殺、重み0の補完、4頂点の分類と具体的cycle交換列を再照合。SCCから補完する説明は独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
     }
   ],
-  "priorReviewInventoryDigest": "7cfdd74db4793717db40ac1700e8dee71415f138afd5e24a169fe08527bc199c",
-  "qualityBasisDigest": "ab47d086ab8e2a2c2fb2f73792d8230cf488394c9236f6ef2b425eac087b9257",
+  "priorReviewInventoryDigest": "afa27678099520a54db784468a6366caf3e0c33e6b8ed78ae1a303e3399ebd2f",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -89,5 +89,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "14800ca6a680f95dc2a32b74e4fcbbeecabe10adaf8fa999d6decab6c0b693f0"
+  "evidenceDigest": "70d5638d5a0fd91ac30b8cebb803ec4edf34c8e5daa51c99a8e1e312e6e55a8a"
 }

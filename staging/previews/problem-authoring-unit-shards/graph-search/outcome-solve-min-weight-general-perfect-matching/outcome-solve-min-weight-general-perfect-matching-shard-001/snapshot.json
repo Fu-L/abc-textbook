@@ -1,23 +1,23 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "119fb52349a28946d9324b0b714d197969e5bcb60743fa1ccaf138e55ec8abb1",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "45cd5cfbc08ef5905f1795be5b97d895024212c387823233e4b5b4f83752898c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4a088c8eab1dec4971ce29a1b7113bf93af92a7a1246aa5cdb104d59c309d550",
-  "reviewDigest": "4c444b63383f2f61c8bf5e22dcf976c3279deabe96b7f31776fcb3f7caeb44a7",
+  "checksDigest": "d42b2a4fe06497364a445ab73aae63d65b1ebfab6850d54fed4cfb7e212c6b4c",
+  "reviewDigest": "b8f3b91a95b589e395b10e0b08c357b993563305829e033e1e41f581a85da82e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.html",
-      "digest": "986f11c0efadc8ee71bed3d5c93f096775d9a61555be8be32f7db0e9cd4040bc"
+      "digest": "71ea5cbdff508f78745b276a7bcc4f7aca76e05d448871021b2605a2591fb958"
     },
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/index.html",
       "digest": "5d8ce3acb7ef952e337e67387a0a5a563738953772b09e279be9eca39260f975"
     }
   ],
-  "snapshotDigest": "5254928b9d86a71ee1821c346f414c0f6a8c876431c429a8c3b71364ae0a74f3"
+  "snapshotDigest": "8c2cc1928c039911cc2ec555dfb5862d0383194024f9fb03c81f99025c7c7c89"
 }

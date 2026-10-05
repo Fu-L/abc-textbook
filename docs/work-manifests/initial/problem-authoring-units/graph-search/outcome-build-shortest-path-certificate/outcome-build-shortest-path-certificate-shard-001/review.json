@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-shortest-path-certificate-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5588142ccac4dc4a36cb3e5cfc32fd0a0b758fd09b6978675207d09f5f26cfc5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "c43b5870a3932077a00f50b68a6c21e12d8f282e2de6eb240ab51386dadab35f",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

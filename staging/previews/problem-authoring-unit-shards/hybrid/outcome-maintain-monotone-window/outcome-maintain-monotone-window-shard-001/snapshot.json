@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-monotone-window-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1daf09b1d581054813ebe8ee4a3b62edd08637009ff0df80d3b771153d37d4fc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "30b28741a77e9aee7546cd1d053808cb29863429e5332c2583f4f60f99e61f5b",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8ff4d5ff5f969161c71d15577324a5ba09fd8c2f8d28f2c9c44d9c6f863476b9",
-  "reviewDigest": "59d9190e80a1d1bf934edf4917cf5cc7c46b92863caea15101743fe7078e631c",
+  "checksDigest": "012321168d085b3b5468c0724b7dddc763b081dc8edc4500f6e542854d4c60ef",
+  "reviewDigest": "77fa2f1b388a0a805a42786d3e009e46c9258f15e9fd7b290c115cbebcecd32c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-maintain-monotone-window/outcome-maintain-monotone-window-shard-001/abc250-f.html",
@@ -47,5 +47,5 @@
       "digest": "671a508e75e2854c0ebc7798b0ceeb8ac02b8b45075fcb26813ca8df37fd24d1"
     }
   ],
-  "snapshotDigest": "9ef11578dbd416413bab50ab80c825359fe5be533f9d59435043aa97c4c6bf95"
+  "snapshotDigest": "d46400d173af621f0cddbffde1b66365f15e6a2dccdfcd6b73878ca2f8b9d7d4"
 }

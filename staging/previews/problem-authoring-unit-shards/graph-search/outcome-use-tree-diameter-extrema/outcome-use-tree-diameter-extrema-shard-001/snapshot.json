@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-use-tree-diameter-extrema-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d9fcf2e3c7ae28e32bdd4bd247a33a9e742313ad19a1913f8c3c957450ee5c5b",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f0a7bf23444aae340ddf21ccbfd705176ddb020339902c8bb6df5b71c3f0999b",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d19f5ecec334b7355d8f5f7073a2a309010ded63dbf5ec8608696e10669161ff",
-  "reviewDigest": "98b7e11d5186fc08a213eefe5ea7aad5530dd4a1626ed40c4bb6f306655d2196",
+  "checksDigest": "61226f7f42f45922954eb94b90cada8151fdf8f8842959fb4173a53f42e52342",
+  "reviewDigest": "1f45732a89d15c0414b4569c081b135d6901d4ba73f1257ef28a980d34480beb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-use-tree-diameter-extrema/outcome-use-tree-diameter-extrema-shard-001/abc221-f.html",
@@ -39,5 +39,5 @@
       "digest": "e0ccdc869b9fa5f03f899780f07fdb29c6d3e2ccb1d8a8e8c98dbedcfb367eab"
     }
   ],
-  "snapshotDigest": "a7e2a22366bce0dbaad0f1d8bb896849b8f398f74a584100913a721e0e4dfe9c"
+  "snapshotDigest": "485a66a115d7e34e5f21f0692941fd8d97f59493accc782147823f37096e037a"
 }
