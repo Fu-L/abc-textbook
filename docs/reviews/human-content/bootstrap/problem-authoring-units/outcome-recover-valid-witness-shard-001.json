@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-recover-valid-witness-shard-001",
+  "shardSubjectDigest": "57a598fbb983231504d5f7f985db29ede2ae682d2d4767122bbc810f85c96c2f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc251-f",
+      "url": "https://atcoder.jp/contests/abc251/editorial/3967",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 再帰と同じframe DFS、非木辺の祖先関係とBFSを再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc299-e",
+      "url": "https://atcoder.jp/contests/abc299/editorial/6249",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 白の強制と黒の存在検査の順序、K始点BFSの費用を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "3c768da1b7081f08986f874464e0dbd3ebba8220787fced03fbade73476bf09e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc232-h",
+      "documentDigest": "0c062d700a9d8e2ab452e66c2e205e51e7fab8ecd3c791e4e1ee96aad2f23d3f",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc233-f",
+      "documentDigest": "82a6bdcccdb683cccc54f383582f35974df6b827867dfe6fd2089ac2d7ba6f79",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc239-f",
+      "documentDigest": "a2f803eb2d43d6f869f15c5149ffaf5bfc0a62c3910eb6f5b5c7687ed19d34aa",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc244-g",
+      "documentDigest": "3ed8572b300b4d8d7d572749245d2f8518db939cafaf7130a7a9de0b3dcdde7d",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc251-f",
+      "documentDigest": "d8085b761c3072955a3b6940f705701992a6d747009dd124d52752ac524a9cb6",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc255-f",
+      "documentDigest": "7b6f801b6564e52feee64ca3bf6b8f89a984e0271e358e7db80871db13de5e22",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc289-f",
+      "documentDigest": "99389f411e64146415e327feef3c38a42c52b6a93d17f115782bbb473af3f99c",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc299-e",
+      "documentDigest": "af1e319a902a6e008ed8b3f66185b301245fd7f62a6648b5e10a0cf44d5a9a52",
+      "learningOutcomeIds": ["outcome-recover-valid-witness"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "af974c287973c69cc8bfab1d16fcc43a93d23adf2ffc51ce67d9ac7ec11f9321"
+}

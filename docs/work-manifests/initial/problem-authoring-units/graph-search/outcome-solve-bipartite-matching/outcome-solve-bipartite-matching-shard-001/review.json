@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-bipartite-matching-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "36e18f90a060a8bac3e43ffec39012952b6f5c3af8f09ebb26530142ae6f0093",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6bba5bb2238e689d0ff17a26402e22f0484955c805b88cb696b8eaa3c966581a",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

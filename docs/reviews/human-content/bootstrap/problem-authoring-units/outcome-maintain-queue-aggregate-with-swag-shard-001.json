@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
+  "shardSubjectDigest": "599e458d9df2336b6c2a465dce21c123a7cea4d9c58738ca5687f80ae3d18005",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc456-f",
+      "url": "https://atcoder.jp/contests/abc456/editorial/19850",
+      "checkedAt": "2026-10-04T16:35:48.975099Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "3e82e5c4fe6b020be55756bbba7874a595c0cd056e65a21c27d087bf1482fa72",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc456-f",
+      "documentDigest": "8927bf2d02bbb4330185f550c50be3b3a2edfef079d28a9529965382e063de4d",
+      "learningOutcomeIds": ["outcome-maintain-queue-aggregate-with-swag"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "435f34a2ee4c1c50e94c75795b64d4619d39fe402395341751928d61bc2860d0"
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
+  "shardSubjectDigest": "3a9843110ab8eae9253f99837d31cba8de95a61ed9ffd26acdcebe4c6e01406a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "c5a78f36e16524c12f033824093e175f4c742dd5b66c4116f70c975b355bc12e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc283-ex",
+      "documentDigest": "a89137a7f75e7869da5121fdecd1853dd143487f8a8b18fce6387d3bc60e88e4",
+      "learningOutcomeIds": ["outcome-sum-affine-floors-by-euclid"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc402-g",
+      "documentDigest": "c5dc4cecf28d5a7bc0decdd5f08617807f3a6450ca45bf0ff222edc23a0d414c",
+      "learningOutcomeIds": ["outcome-sum-affine-floors-by-euclid"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc443-g",
+      "documentDigest": "e06076a56966b8988b8d5bdc400e7cfa53692b2db9d2c4246f9af3031d271e73",
+      "learningOutcomeIds": ["outcome-sum-affine-floors-by-euclid"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "89c82d15d5e09811b75d5347c7fc09a14fc1e2dcfd29b3a19e3babfd682c1328"
+}

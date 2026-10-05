@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-grid-table-dp-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3c83320ba6e92fd94ccaf3e00c5870ba3da1dca1a9b843433f32b219209fa35c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "931eb28ba5e48e2ed192edc6e0578370d5dc7f16577d46a10f15cfed8f0fcc24",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "dbc6e1e84cfdf2fa7c0f30cadeccc650ad51a25d62fcbd1ddc63a706d726dfad",
-  "reviewDigest": "a75e888a1f24779373b63c84e7373b8368ceee1405b828173fb5601e02e28d06",
+  "checksDigest": "c0b562dacabc3053e11654b5767a597a07dc4d237eed148fdf671dfd8a0b6bc3",
+  "reviewDigest": "d0304e93a68635f0cf5380f6df0bd3822bff3c1099248e8490f3e5373209f55a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-grid-table-dp/outcome-design-grid-table-dp-shard-001/abc311-e.html",
@@ -27,5 +27,5 @@
       "digest": "648a7ac8ed24a4a34c07c669d261135ddb3fb6ce7bfa20f6003e7faffabcb021"
     }
   ],
-  "snapshotDigest": "5c11fb554167a6b8a177f0bd8da1f94ee05a200ebd382a5b80b24aae4c6a9314"
+  "snapshotDigest": "09b0a5e62bb1e59fdc940d70193a92d76194145619c3427d3130d22dcdcbb94d"
 }

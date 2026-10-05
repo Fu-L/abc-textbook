@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "72d1c39c0cac8e2e15a350023a8cd6ad85c0875bbb5edf9f1a5a30eec9e43fb7",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "4bffae530dbbc16e774e9944bcb3f55afe5f373a9d3e5189be21c52d98bf0711",
   "requiredChecks": [
     "source",
     "structure",

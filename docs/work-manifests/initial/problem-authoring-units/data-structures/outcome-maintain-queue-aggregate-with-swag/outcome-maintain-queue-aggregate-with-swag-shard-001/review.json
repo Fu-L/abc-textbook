@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-queue-aggregate-with-swag-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "53cc0b587b583158deff234aebfa6f547718044dc49988caa30dc463ed0c6812",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "599e458d9df2336b6c2a465dce21c123a7cea4d9c58738ca5687f80ae3d18005",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

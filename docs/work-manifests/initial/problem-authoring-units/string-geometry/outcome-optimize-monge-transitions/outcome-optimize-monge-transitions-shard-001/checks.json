@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-monge-transitions-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d47b8cb4138c659514eff431f686a80856491c188610cfe169ababa96864c55",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "75bd42e4370b7b4e94f990fd0e29826984a0e4a0a202a82f7429a72d16d182d8",
   "requiredChecks": [
     "source",
     "structure",

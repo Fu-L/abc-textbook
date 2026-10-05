@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-prefix-match-state-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "beaaacdc8d3841c9f0b071f179ce3c88984b23e1775fc1a21f93d088dd2d2fed",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f0c20af8f9c0eb2c39928e3d405551a34cb460049fbee6f06d6054a8bd9bc37d",
   "requiredChecks": [
     "source",
     "structure",

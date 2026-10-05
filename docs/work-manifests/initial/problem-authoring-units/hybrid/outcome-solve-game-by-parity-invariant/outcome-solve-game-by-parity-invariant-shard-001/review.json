@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-game-by-parity-invariant-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a15d26851891145c15227da4127913606c36023062a6718e20ad2338a7e2d788",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "ed0464be8f9d56f23e52fae3fe411b919dc8cf567569f28a5e02004de1ef6015",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

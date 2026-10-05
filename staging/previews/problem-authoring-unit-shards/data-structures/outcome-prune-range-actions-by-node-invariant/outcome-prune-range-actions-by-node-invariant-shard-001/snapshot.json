@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-range-actions-by-node-invariant-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "fafff5dee54de51af6a5fe1666a43843f8c3f6256f04e099379d5b1433df6cf9",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a3bb4880919429ae4862a9ac4d126540b20961fd20e269728da35d5aaaa3c50e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9520709b37bd1191cf69f010be76cc26828664e32ae1a7f383fe8163a4df4287",
-  "reviewDigest": "9ca06c3ead0f67fb5d8bc444bd12564aca36bfde9da5a6eb050c4f845c2186bb",
+  "checksDigest": "f4e302cef6da8cc9a826e2564c9e2932105f33f205811da8989460927a29c4bd",
+  "reviewDigest": "ab4018ba6f980a71f1ce496b523b98c0457da52d6afc155558237bdb7e6de4d1",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-range-actions-by-node-invariant/outcome-prune-range-actions-by-node-invariant-shard-001/abc430-g.html",
@@ -19,5 +19,5 @@
       "digest": "b77e72993082fcce32785ae6a4878cde7b2e2fcc6f0a63d5b3cb359a880b50b6"
     }
   ],
-  "snapshotDigest": "7c0a25f10d0bfda7768fb70b0ffacad7b8559c06c6198ac8ff46d7d95f69cfc3"
+  "snapshotDigest": "7aa0d8a11362f2bffe8ffa565228ab3994c24fc098deebf03b0b49421c97e23b"
 }

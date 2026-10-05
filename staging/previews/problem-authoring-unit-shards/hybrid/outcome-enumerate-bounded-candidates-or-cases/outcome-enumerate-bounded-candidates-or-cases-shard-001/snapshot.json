@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ada5d3162e159679800350eb818564583bacee66a48da3dd8f5007f850154afc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "8b33c93bd201a35ee1d1b95293b689493eecf5b800570ef01d452c48317642db",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f5754332927dfdc97bc2198a34608cabdd8ed1d1fbe0c7b1dd8ca9546d608478",
-  "reviewDigest": "f15b5de70ea2428cf07a160de3493c1b4c3c5f7b797713af627749e161c001aa",
+  "checksDigest": "00bc44644b0b870250c890d1bc580014e545655a21ddb195b1c1127eddb58c79",
+  "reviewDigest": "88f74687b394bb0ef0b076690d60d3b55b329ef78ea96858d3ae462a0043cf31",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc219-e.html",
@@ -47,5 +47,5 @@
       "digest": "5822d53adf244659f4ab2251dd1499fb07118c825a742447f39e89ababbc7301"
     }
   ],
-  "snapshotDigest": "85a19f7826f3332008cc6c8fdcee818ace343be71e63f0a4d4084efc953c9479"
+  "snapshotDigest": "ec829084b80ebf250e5bdaf16604eda37065d7db5d4de18f5929626e66d7d52d"
 }

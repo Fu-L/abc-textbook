@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compose-finite-functions-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2de08bc09eb6938e044c5489475e6eb16e9949469462622e26866a1dc38bce56",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "afc72fcc6fd67129eedcee41aa9342bd6be7bbbf4d5bf4931e979a4d293a6cc2",
   "requiredChecks": [
     "source",
     "structure",

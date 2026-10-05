@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-build-cartesian-tree-decomposition-shard-001",
+  "shardSubjectDigest": "1d02cc132136a299d4221293516398dd5bc712ec8a142fd8b9386fbb6c96a01b",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc435-f",
+      "url": "https://atcoder.jp/contests/abc435/tasks/abc435_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "0e309f9d1ddeb16efa299ce08b88fdb3cb32435dd477bdc0c9236a02066e1686",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc420-f",
+      "documentDigest": "941b1071932e6d33b64769489dacd537ace82a188eea3a732d3a350f8cd63867",
+      "learningOutcomeIds": ["outcome-build-cartesian-tree-decomposition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc435-f",
+      "documentDigest": "a2c079cedb59b2d683c741b0707c677fb2f546c663ace67d8bb91ea91bb94936",
+      "learningOutcomeIds": ["outcome-build-cartesian-tree-decomposition"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "4209c4ba2aaf6381a616690b0302dd1f1ffdac50ceda40caffc96957da82da12"
+}

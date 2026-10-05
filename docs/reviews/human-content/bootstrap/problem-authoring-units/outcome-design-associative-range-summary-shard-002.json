@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-design-associative-range-summary-shard-002",
+  "shardSubjectDigest": "e74118ec53ab78c5f1c59d3e51769b3ffd3beffab1753277fdf3ffd4d14a3e27",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc418-f",
+      "url": "https://atcoder.jp/contests/abc418/editorial/13626",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc447-g",
+      "url": "https://atcoder.jp/contests/abc447/editorial/16718",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc429-f",
+      "url": "https://atcoder.jp/contests/abc429/editorial/14274",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc440-f",
+      "url": "https://atcoder.jp/contests/abc440/editorial/15032",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc429-f",
+      "url": "https://atcoder.jp/contests/abc429/editorial/14274",
+      "checkedAt": "2026-10-04T16:35:48.974336Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "09b2f16105841a460dfaabb1cef575025b4baf0f5581b80149e07b2885c43366",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc418-f",
+      "documentDigest": "1dd4009383366704e793aa4e218ac0cfa47de06f56d795abb68ce9a7252ae27d",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc424-f",
+      "documentDigest": "086ea17573a9a867a97d37e973ebdcd108e57acb4aada2e01ca3d9b3f86fce44",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc429-f",
+      "documentDigest": "4184cc9f7601678444894f2f6062fefdaf16238c19c9dc5a68bd1cdf080e4e16",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc432-e",
+      "documentDigest": "80d083caf92f47c8ea65e935827a0b5dfe829ee66fc89346fb9a62cf6899552a",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc434-g",
+      "documentDigest": "fb48adac4ee7046b9ff68d48cee70f38bad89ab3633ccba149d14d28898bf169",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc440-f",
+      "documentDigest": "24cb3797569442238e692b3b21933b6127b01f99cbbed50ec1882a098b270b27",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc447-g",
+      "documentDigest": "fb9d05a363bcd875b2e878782f1b2c106137780c6a62354a45ff2be079e32851",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc460-f",
+      "documentDigest": "3a450dd7d384e1503e85249d2571f8051f240afee666bd9ae17ac10799ab33a6",
+      "learningOutcomeIds": ["outcome-design-associative-range-summary"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "79dfe34bc8dc7484be79628611d5a1628050ba3014fd83bb319af52b7ff9d475"
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-find-rooted-cycle-by-shortest-path-branches-shard-001",
+  "shardSubjectDigest": "02bd48066c3407ac89867943a3b9315677305dd334761b29bf2730b25dc4ac58",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "c1874dc6910998cfef6c9ab55875339211f4bbc7bd9a3809cc447af2b6abbe13",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc308-ex",
+      "documentDigest": "eaf7913528bfbe7a071fce8b5faf8cb7eba8365b3ac56ea2114fe33a5db6f18f",
+      "learningOutcomeIds": ["outcome-find-rooted-cycle-by-shortest-path-branches"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7c543b86bd643efccdc8ceba0f2cf597278c58c16d76e469860c4830e79d0542"
+}

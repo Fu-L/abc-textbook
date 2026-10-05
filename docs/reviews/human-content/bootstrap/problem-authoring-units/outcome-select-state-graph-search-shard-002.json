@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-select-state-graph-search-shard-002",
+  "shardSubjectDigest": "f10f04d7ba2d25a0f50989d4fa28e6e49549e12b5fd5d43f0d4204125ff884e2",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc394-e",
+      "url": "https://atcoder.jp/contests/abc394/editorial/12279",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 全対角0を先に入れる探索と自己ループ非上書きを再照合。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc443-f",
+      "url": "https://atcoder.jp/contests/abc443/editorial/15197",
+      "checkedAt": "2026-10-04T16:35:48.976041Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "594bc51f0358f611b299ec2d56e88a6d42725ad71acc70a97ce09f2f9ebab1bd",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc394-e",
+      "documentDigest": "22c37b823c48e0b6ddace067554638174ae8c6510f1af963936bdebaae090d0c",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc414-f",
+      "documentDigest": "977909c3399f4389880b6005d737afb50fe28db18f6327bd32555dd9d3528622",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc427-e",
+      "documentDigest": "cd3f5cd7eb1bd2ea2c3f1e7a0b7d2fcb43ad1a512f02b5c09d812081121868fb",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc429-e",
+      "documentDigest": "b0760915604b34eccb24c707359a74d5ce844aef666858b924f07d509ac42a43",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc443-f",
+      "documentDigest": "f672063c33d0b5294d530b80973f195fc1bb0603be7f03c0bd5d50e52594ee28",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc446-e",
+      "documentDigest": "c84de3accc830666ccbb66a5809dc85645b38b8c0f67563f0e2aee2d0866f76b",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc446-f",
+      "documentDigest": "24ce8e135f6cfcb6045fc8603fe7b721318fceb94e6b2b23b11681dfe8309c46",
+      "learningOutcomeIds": ["outcome-select-state-graph-search"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "c7e0e14e2a8064f6ab5d9f7ea790e0dba1ab1829700a45fb86a4b7e1328a93cf"
+}

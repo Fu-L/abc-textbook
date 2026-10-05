@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-normalize-equivalent-states-shard-002",
+  "shardSubjectDigest": "6641087a86b47132f1f235a6b3b3692980f8fa493d0b389cb7497bd71092a49c",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc446-g",
+      "url": "https://atcoder.jp/contests/abc446/editorial/16371",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 空列0と出現番兵−1、開区間・累積和差・非空末尾の和を公式と再照合し、最小入力・全サンプルと元の部分列全列挙を確認。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc462-e",
+      "url": "https://atcoder.jp/contests/abc462/editorial/21400",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 奇偶と軸による費用を再照合。K>vでは下界だけで棄却し、任意Kの全安歩の断定を避け、負の直前座標とevenの単調性を独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f604140cc86405ec3f0afe877e7ba73f6c4ac9e0ff2e522302a287d2410a3e60",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc446-g",
+      "documentDigest": "e21eecd66822fecf8bee77fe234871913dd3737232a4b44e900f767e5acfa437",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc462-e",
+      "documentDigest": "f17981e6427c01a3e0fdf39c495b38101aebf75205fdb20c15ff249a9c7c9aa9",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc463-f",
+      "documentDigest": "bd8132496b865b4b23fa11b5b23a85028cfecc5a7687202e4281228a1bfa13a8",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "830153d0f17119026dcf9b007cf9bca713ab872ed5454a7d01ac48ba8dbf676d"
+}

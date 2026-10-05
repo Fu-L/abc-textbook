@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prove-greedy-order-shard-003",
+  "shardSubjectDigest": "e93d513e811b320db07b65f91d4d48259b85e8f29a874b3eabe22508e89fdbcf",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "0cd95900cc9308742f5987dd8d1322f42d3d1d8f1bbbcb16d733ae474c04865b",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc312-f",
+      "documentDigest": "49a9d9adeaeac04076ca620c26418c66ea30bb388b0f13210b6696874c32a416",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc366-f",
+      "documentDigest": "606b209bf581aa2f20177b3aefa8dd64adc3e0fda28699aad78cecef0da27a2f",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc371-g",
+      "documentDigest": "e452316a7a0a8ed073654c6844da1b1cf6eccb5fc9c27f2ec2e551d5cca7d847",
+      "learningOutcomeIds": ["outcome-prove-greedy-order", "outcome-solve-modular-constraints"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc376-e",
+      "documentDigest": "5397780a8fd53b6d387aab1d6fb07b3aa368b67cc4dd361d2609556991b181ea",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc385-e",
+      "documentDigest": "b7568032c982d3128f1c3832f70781b173c9c26ef359f614addfc7eb6006eaab",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc388-e",
+      "documentDigest": "fadcbf8a44032f8484e5ad997be67299174377aa8d249a61f854894640f69d8c",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc404-e",
+      "documentDigest": "2a8dc49c3cd29ad9dd3f812e8385319ec2aee0812c8bacd6e386717ff7519151",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc407-e",
+      "documentDigest": "b3efa10495a9e24a5d845450352169633aae1faeb62a5573bd1abb4dbdd0a70b",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "c64272e3286bda20a573215badad0ecc079087130ec9d88a86a7807d03ec3160"
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-normalize-common-dp-action-shard-001",
+  "shardSubjectDigest": "f1605ff00c4f732ea0df103d91a28459786ddce2f14b4b7ab8c3fe0838511192",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc457-f",
+      "url": "https://atcoder.jp/contests/abc457/editorial/20140",
+      "checkedAt": "2026-10-04T16:35:48.975417Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "27a79e23fb2aecb6461b7436a3e487376a0566c60f3799beded8fbfe420e45fa",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc372-f",
+      "documentDigest": "8a07a192938fb2ea91e812863ec0840aa2710b0f7d3baa805e7e0864a156e84f",
+      "learningOutcomeIds": ["outcome-normalize-common-dp-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc435-g",
+      "documentDigest": "73d35a9149ed7074bfd8bc539806218961d8bd4870be0d158000afa4e4361d02",
+      "learningOutcomeIds": ["outcome-normalize-common-dp-action"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc457-f",
+      "documentDigest": "df5f8278a45a4dd2fe970dbd42b6b2b076ddd93855c0d6c10c12848362fe858b",
+      "learningOutcomeIds": ["outcome-normalize-common-dp-action"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "fad6bdd5cddda707b28e0dc57ede83dd72d15120385a4057ccac4e8fcdee05c7"
+}

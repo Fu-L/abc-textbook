@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-classify-tree-by-distance-residue-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ef6462a0c75614141885f4b07c4a3504935ba09d1129da90d86cf1eb26ffe6bb",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "cdcd5eb6d703c8ffd5aee53b7af4550ca3904b32c26d5df07ddba6a7eb83e9f0",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "726977615f5798d8a54b1a6c4a7697ce849569918b5db11adbb3b8a8eb7143e8",
-  "reviewDigest": "cded7e19ba9e3db0eb8fc53d3e3caa6c08b850c364ef14544348f6a6efbff40c",
+  "checksDigest": "c13d094ceb3ac3d234368d18e4fca49fec94ea90447e6b24b344ff39c8580ef3",
+  "reviewDigest": "6e1f01996fe61d016d8e723d1fd3e0c51369328724fc435b644c589cacd74e20",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-classify-tree-by-distance-residue/outcome-classify-tree-by-distance-residue-shard-001/abc303-e.html",
@@ -19,5 +19,5 @@
       "digest": "a9363b2647dbc9512a2ccae805886d2be55d1af88036f2b3d43e2730c218b44c"
     }
   ],
-  "snapshotDigest": "69979f11a67ec2cd696857da891596fb5928a180afcd0662fd0fe9d9b865c20c"
+  "snapshotDigest": "b009a7d28ed80e0a4f0eb98689e9a41be7a41510b729bb5929f3911aec8fc734"
 }

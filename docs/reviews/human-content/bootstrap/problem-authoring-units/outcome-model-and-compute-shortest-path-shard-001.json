@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-model-and-compute-shortest-path-shard-001",
+  "shardSubjectDigest": "362902b4e2f4aeb9e32065caab8ee6f0be68f3643ef6c121949241bbc849c62a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc213-e",
+      "url": "https://atcoder.jp/contests/abc213/editorial/2397",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "7adbbd8c2e4df8a2e3c744753576ce3f43f8802945c16248df273ff9220f859c",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc213-e",
+      "documentDigest": "22568883b40f854ae0bcc4abb0e5aa8c0bd1f0552b39d3d08ffc8db107a87a4d",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc232-g",
+      "documentDigest": "1bfd27231c224be17baab55b87c5c2e5bd2ce0016b10255d9ab6010eaba4ca8f",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc237-e",
+      "documentDigest": "8517c7ba22d529d697459a1eafc6f4c2c7b3c22ac632110bc59efe53395e82f3",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc243-ex",
+      "documentDigest": "46c2ff466f9e60954ccd16ad2fe91edef0afa253454df79f846e72cabb184af4",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc245-g",
+      "documentDigest": "f7521b640f5a78e71833d8c86ba586bbd486e2538e9c6d7f45fe8da5cd204e33",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc246-e",
+      "documentDigest": "c1eec46bf7bca4aeb007dd1343105f9c2d404881e84bf21a009e9007f6c0f171",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc257-f",
+      "documentDigest": "c9683b13d5876627e8e8267d71d97eda6d71d95810b38c4f2ef35416c256870e",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc277-e",
+      "documentDigest": "a0a2cf810b0f1a74e9aa6711ad95cf67aac003d3b681975aa15097c2fcbe0277",
+      "learningOutcomeIds": ["outcome-model-and-compute-shortest-path"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "343e28bef687ef3cf8db6193b8c9a7588d1a744506bdc0b04ae978f3af23b7f1"
+}

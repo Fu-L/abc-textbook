@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-construct-degree-parity-subgraph-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6d151205d1cd289ef3ed85422baeff30ff5738b25257eb11159f2de079320d2a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9484b378a8c933951fd95ca45f6303ce131225ee2615d68c08a506db3a9478b5",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3f9024ee661d552ee7518297e2bd169b9ec2e2d25bec34af79e551c8752d2cc6",
-  "reviewDigest": "b117a80dd05f536d9b953f3efe08bcc516463b488ba688d5e0004b3e8b4cb886",
+  "checksDigest": "68f2960e29b0feae5cc742a958c16c1bed1b271394774af0c2361c0f422d3de1",
+  "reviewDigest": "201a8d725472030cf01474cc3a5a0be025ba00ab1b509948b11243e0518f89cd",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-construct-degree-parity-subgraph/outcome-construct-degree-parity-subgraph-shard-001/abc345-f.html",
@@ -19,5 +19,5 @@
       "digest": "138bce2646bc7782d37fda8c7d062dda0cdef2280a72e2025e83cfbd6fe4f941"
     }
   ],
-  "snapshotDigest": "2c2d4595e04e749c257af4a1cc1faafdbe0c063717bbffaadc1d8f2c6f003c68"
+  "snapshotDigest": "6beff418db06222344aaaad120c6d4c9e480a66c423bb6b625be4159dab5535f"
 }

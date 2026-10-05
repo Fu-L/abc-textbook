@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-subtract-exception-transitions-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cad875402791c2d365b450348e4d2a7bf889c041a8f00df8c94bb6f9c4f22cf5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "8f43e690681e86cf4f965f62f0ea2da6cc0ba5c49ba8982f754fab67c7532ec7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "019eea5ef927ef11ad5b319c6891c29c9292430c4bf9b910db14433e8f5220fc",
-  "reviewDigest": "6fd96b1ddaaeb1ec16c653f9c027ce27744dec0ac7791c6d9884e0bc3e5c51db",
+  "checksDigest": "9049335dc76a77401702ca6d322f690abd3885f8a9f523271f03eabdc963c1e4",
+  "reviewDigest": "627a8064aca8fd0205f8be50d6578236abbf121f3055362362102a56ed9cbcd2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.html",
@@ -23,5 +23,5 @@
       "digest": "f66aeb70208797c1d17c7ef619c1fecd598dbb35f11a9cf83f3fcea2f3a3e197"
     }
   ],
-  "snapshotDigest": "352d919d26ec62d7e164e9adc0cc9b9429170e20908f9ba8af520615a84c3217"
+  "snapshotDigest": "df5f45e84d7d5b5306ca04c6fea2bc713452c186515102a3e1b17326e65d17bf"
 }

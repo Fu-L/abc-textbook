@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-xor-threshold-matching-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e619e667ee9b43626c72dba606152abaaa3ac38ff44b28f242035ca989ff0cdd",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "caa0ba45bede4cad31cf824a1cee5c11846f7d3395d6778ff8aeae39d3d28ff2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2cdeba53e2703ebd930f65a1c21bb35a24763e48bba00ef807e1913f6023f8d6",
-  "reviewDigest": "55914a0a13dc9a6ec4ed40bb928da6e15c49a443203a1b8605fce6aa5070466a",
+  "checksDigest": "8188e6795ffc45ed651d3f34371cae590478b38d1264e4a16c2f591ae18ba291",
+  "reviewDigest": "b4a4860a5d4c70c131b590a4bf242aa95d0af172f9844ccff593922f24286627",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-solve-xor-threshold-matching/outcome-solve-xor-threshold-matching-shard-001/abc304-g.html",
@@ -19,5 +19,5 @@
       "digest": "4a695a0fcf43aecebc17753622151717ac6e59d81f5e62e0b8917471f2e6dd5d"
     }
   ],
-  "snapshotDigest": "1ebc35724a264b21fca611e18327af13ec276f9cd3fdaf6a4b72a73992cd3647"
+  "snapshotDigest": "69264165fc9de7a1359b95131b0299be7dabd353ca510b598545262b74c79dc8"
 }

@@ -1,5 +1,5 @@
 {
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "shardId": "outcome-solve-min-weight-general-perfect-matching-shard-001",
   "packets": [
     {
@@ -12,7 +12,10 @@
         "version": "1.0.0"
       },
       "additionalPrerequisiteUnitIds": [
-        "unit-bipartite-matching"
+        "unit-bipartite-matching",
+        "unit-linear-system-rank",
+        "unit-modular-arithmetic",
+        "unit-randomized-algorithms"
       ],
       "excludedTopics": [
         "一般グラフの最小重み完全matchingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"

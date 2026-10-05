@@ -3377,7 +3377,12 @@ const FINAL_TAG_CURRICULUM_PREREQUISITE_ADDITIONS: Readonly<Record<string, reado
   'tag-tree-ancestor-lca': ['tag-binary-lifting'],
   'tag-heavy-light-decomposition': ['tag-tree-ancestor-lca', 'tag-tree-euler-flattening'],
   'tag-bipartite-matching-hall': ['tag-bipartite-structure'],
-  'tag-min-weight-general-perfect-matching': ['tag-bipartite-matching-hall'],
+  'tag-min-weight-general-perfect-matching': [
+    'tag-bipartite-matching-hall',
+    'tag-linear-system-rank',
+    'tag-modular-arithmetic',
+    'tag-randomized-algorithm',
+  ],
   'tag-degree-parity-subgraph': ['tag-euler-trail-circuit'],
   'tag-near-tree-kernelization': ['tag-cycle-space-basis', 'tag-graph-core-peeling'],
   'tag-planar-duality': ['tag-max-flow-min-cut', 'tag-shortest-path'],
@@ -5379,7 +5384,7 @@ const REFINED_TAG_SEEDS: readonly TagSeed[] = [
     id: 'tag-min25-sieve',
     name: 'Min_25・Lucy DP型の総和篩',
     definition:
-      'floor(N/i)の異なる値だけを状態に、prime追加で篩更新して乗法的関数のprefix sumをN^(2/3)級で求める。',
+      '素数和を定数個のLucy DPで求められる乗法的関数について、floor(N/i)の商集合上で素数冪を逆順に追加する簡略版Min_25でprefix sumを求める。素数冪の評価がO(1)なら、O(N^(3/4)/log N)時間・O(√N)空間。',
     parentId: 'tag-number-theory-structure',
     prerequisiteTagIds: ['tag-prime-divisor-decomposition'],
     outcomeIds: ['outcome-sum-multiplicative-function-by-min25-sieve'],

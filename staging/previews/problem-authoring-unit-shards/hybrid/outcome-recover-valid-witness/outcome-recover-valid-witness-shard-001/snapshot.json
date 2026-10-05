@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e1f46bb621ffa49099ae17110704c4b2fd18756a4638292968dbef82788cf4d6",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "57a598fbb983231504d5f7f985db29ede2ae682d2d4767122bbc810f85c96c2f",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8509390e4c3205fbb8c7818a44cda06259ce1b50145e4ed77cf999ca75da52d4",
-  "reviewDigest": "5f256fc9def0da36f50cc3b181aaf9d6c079de73e697e5fdf135ee80aa3f3c39",
+  "checksDigest": "e2bb4f40f96bdefd040bcf21f7f64f49f9f7308ce7c4fab12689430baec12993",
+  "reviewDigest": "3c768da1b7081f08986f874464e0dbd3ebba8220787fced03fbade73476bf09e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-001/abc232-h.html",
@@ -47,5 +47,5 @@
       "digest": "908e4383ee3cd47aa396af656e9b935decb4201095a38a0874b0af425f3c0e83"
     }
   ],
-  "snapshotDigest": "1c1800154cd7bb35a47c861a2beaaf3fb36b6129d4b304e22989713f874bd38c"
+  "snapshotDigest": "aef2bb6d802575cfcafec9fd9e6d05181678381fec4a3124ce03be25cd78735b"
 }

@@ -6,6 +6,9 @@
 <p>先に読む単元:</p>
 <ul>
 <li><a href="../../../../../../src/content/docs/learn/graph/bipartite-matching.md">二部matching・Hall・Kőnig</a> — 二部グラフの彩色と成分構造で得た考え方と実装を再利用し、二部matching・Hall・Kőnigの発動条件・正当化・境界を重複なく学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/combinatorics-algebra/linear-system-rank.md">線形方程式・rank</a> — 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。</li>
+<li><a href="../../../../../../src/content/docs/learn/number-theory/modular-arithmetic.md">法上の四則演算・高速累乗・逆元</a> — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。</li>
+<li><a href="../../../../../../src/content/docs/learn/modeling/randomized-algorithms.md">乱択の成功条件と誤り確率を設計する</a> — 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。</li>
 </ul>
 <h2 id="考察">考察</h2>
 <p>良いsubgraphのdegree d_iは、A_i個のstubのうちd_i個を他labelと組ませ、残りA_i−d_i個を同label内でpairにすると解釈できる。後者が可能な条件はd_i≤A_iかつparity一致である。X=ΣA_i≤150個のcopy頂点へ展開すれば、上限・偶奇・辺数最小化を一般graphの最小重みperfect matchingへまとめられる。</p>

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-peel-directed-graph-toward-cycles-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8b5609ecd8dce7f23eb3990c3eb64a35157d765f124bede1c3f9b0e03ff21615",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "77e381f48578954dc881b5d0b3d2662c5b2767f8b73997206e081bc5e51f65d4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "48e312d028cac2a3d6e4ab12937a3b5e766b9693ea67d50ee34d3d2094fa06e9",
-  "reviewDigest": "6b24d1e5337789164c2bf8711300fc95f343e5b8c203aed4b15cc68f3076b1ea",
+  "checksDigest": "86cc8d34d5ae82cd19861d23300ce3e331b8cb1e8f89bc70d68a9e36e9aae7a9",
+  "reviewDigest": "6b20f6a1829a6a87560342cb59d744790124fab5bccf15cf2496952545b74637",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-peel-directed-graph-toward-cycles/outcome-peel-directed-graph-toward-cycles-shard-001/abc245-f.html",
@@ -23,5 +23,5 @@
       "digest": "46dc1e876b2487fe36761038c0e799bb6d0b48e186d9c00fa42b737a9a0388ad"
     }
   ],
-  "snapshotDigest": "b71196f8d97586e006033b76a241b4bb2a5a0207e84e4bb376b8f1cf03d4324f"
+  "snapshotDigest": "3a39979da0d985e50b686246b3ddbdb5fb8dc132100b0276d17b9394354f4278"
 }

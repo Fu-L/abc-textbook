@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-build-finite-string-automaton-shard-001",
+  "shardSubjectDigest": "a7b29587cc4aa983ded8633176c56d7d6dd9bb0789e3a8087060097c8e603008",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc418-g",
+      "url": "https://atcoder.jp/contests/abc418/editorial/13620",
+      "checkedAt": "2026-10-02T15:43:43.263668+00:00",
+      "reason": "PR65: 独立に補った16 DFAの文法等式を実際の本文表から積オートマトンで検査。全498到達状態で左右の言語の受理が一致。"
+    }
+  ],
+  "priorReviewInventoryDigest": "7fc1627ffbff63bf6fba2f983fb07ab7c6afd9ec7ba4eebfd7448eccbcf3389d",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc264-g",
+      "documentDigest": "d2aae9ee694116df2431d62c05e0cbdcd19b1fc52dd3f1b708d7ee75f24a6583",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-detect-improving-cycles"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc301-f",
+      "documentDigest": "623114e9ee272de932af46c74d1bb95d1c029b9e7519b8dd476c83757fefaa54",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc305-g",
+      "documentDigest": "2ecb4d1bd2725a4d7bb780174b75dcc2c730807e6eaa6fb818d52769178913c4",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc418-g",
+      "documentDigest": "f5cecc2984915fcbdb78aeeab98679e190ee0c9c583b281ac5bc60526ef67860",
+      "learningOutcomeIds": [
+        "outcome-build-finite-string-automaton",
+        "outcome-run-dp-on-finite-automaton"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "83c7b9150d7f76edc4aabeffcf900e68c1270d3763601958122e5b9872fdf540"
+}

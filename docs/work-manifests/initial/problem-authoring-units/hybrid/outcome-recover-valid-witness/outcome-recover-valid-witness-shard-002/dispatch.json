@@ -41,7 +41,7 @@
       "original_proof"
     ]
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "831a82a8e481f6dfcc67e2f855349ce770b27c77af80ba049f3c5aa917f209d5",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/checks.json",

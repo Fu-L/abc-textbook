@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-design-frontier-profile-dp-shard-001",
+  "shardSubjectDigest": "7ad8ddf862f623c3837b2a20edc075fc1509131a465a24edb9a68c5b7f889035",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "01ed457302de8233e2d3fd21021f74e54dc7094d9142cc8c9b0f1a463941a7ff",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc248-f",
+      "documentDigest": "ee892d93fcfe8b5eaf497c6df43ea37793fc2e2a1d975c4e6d66523632272f8b",
+      "learningOutcomeIds": ["outcome-design-frontier-profile-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc296-ex",
+      "documentDigest": "dd497a97dcc97c9f1dac95ab016670233a9a240b38f85fe740924d3cdb978846",
+      "learningOutcomeIds": ["outcome-design-frontier-profile-dp"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc379-g",
+      "documentDigest": "4e33f3f5eab6d086cefe026d6404c5d096c3343d2a189ccd3895603f30977d8d",
+      "learningOutcomeIds": ["outcome-design-frontier-profile-dp"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "c2c44a73234c9ae08187329e09920b9444ec03988fbfca0b8d383f6d088ddcaa"
+}

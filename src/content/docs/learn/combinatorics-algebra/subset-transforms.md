@@ -74,4 +74,4 @@ N bitに対しO(N·2^N)時間・O(2^N)空間。部分集合向きと上位集合
 - [ABC349 F 公式解説](https://atcoder.jp/contests/abc349/editorial/9771)
 - [ABC349 F 公式問題文](https://atcoder.jp/contests/abc349/tasks/abc349_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-subset-transforms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-subset-transforms`

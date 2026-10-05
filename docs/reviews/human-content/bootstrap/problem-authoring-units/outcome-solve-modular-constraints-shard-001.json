@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-solve-modular-constraints-shard-001",
+  "shardSubjectDigest": "c43dbd29e40e5e46252c1f5b0088167330bec3652a8b2d64a1c8d51fdea1a70d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "699fb9255699c6d963d61befe02b5ffa41dc8ed46c5794b0be125e36922e743f",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc245-ex",
+      "documentDigest": "798187c2bb7e94b86cdb7c3bf9c9e262eb0e71ae9a1b02028862ae3a3925f082",
+      "learningOutcomeIds": ["outcome-solve-modular-constraints"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc286-f",
+      "documentDigest": "0e27575aec24dbe3bbc543f9f847ff2b85f163c6b300e4a20c637e5db767cfc4",
+      "learningOutcomeIds": [
+        "outcome-solve-modular-constraints",
+        "outcome-exploit-modular-periodicity"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc423-g",
+      "documentDigest": "1809005a29eb45ab93580dbe6dbb107b05284ee2c04b4b6521d7b53bad713826",
+      "learningOutcomeIds": ["outcome-solve-modular-constraints"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc460-e",
+      "documentDigest": "db81bbd51ff2fe331b34d84248ae84ef5063156251e66c3664e9f420ce55216f",
+      "learningOutcomeIds": ["outcome-solve-modular-constraints"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0309330e346f775ddbdb07bc2dbf24432c3c3f98cd1b63bb360b1fa5ebf1cefe"
+}

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-labeled-structures-by-components-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c47efa2e0016cd760dd63f5e97962ce3ebd9bf0788a923a92afbd141f0499791",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6e56704d14876da7aefa0d4ed3254b224c0cb5f1f9fcd87f6e0ae364cb72cea8",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0d7ad1c9e3aee4c059d98f4322b22a0024e710e3343e1b1ebcb9c75ce0755744",
-  "reviewDigest": "f95d771a95a47255072266d361464fc21817a9da40ecdb05adebb4e8840b2031",
+  "checksDigest": "0e521a45f1017cd9826c2ea39859eac4c0d10768daa3cebbe3a5286724822bde",
+  "reviewDigest": "0001bff1fdc4fffd1f2049cd05c81577544f6f88ac735d311afb29ef5463988c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc213-g.html",
@@ -35,5 +35,5 @@
       "digest": "3fe148e8b263960556ad6fb1ca273e6dd13627e42dab1cc47d8adf0e95186b17"
     }
   ],
-  "snapshotDigest": "f67c7f7eead60be6aa880d2d524cd84c26d3ab761896159b7b18fe1b2dcab37b"
+  "snapshotDigest": "204b62a03e5afb76cbc89268b1295d3bf2c4d715b6799af3316fe76fa7167161"
 }

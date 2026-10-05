@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-design-lis-frontier-shard-001",
+  "shardSubjectDigest": "0a78f8f231253b1739ba1a6102bfe209e113f087c9ff4030a8ca26632e08325e",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "9a64b4bbb59be69858f9f7d0fa3a296bcb3ed170c202036d3c3cdf1b137ad830",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc369-f",
+      "documentDigest": "cc4acdfd2b2f35086be7453ff4378bbc6e10bce0e78aba44e2abeca8d22e200f",
+      "learningOutcomeIds": ["outcome-design-lis-frontier"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc393-f",
+      "documentDigest": "803f10ae60b5011473da323cdd7c563004b46b7bd8baba4c2d98a7fe97f69e78",
+      "learningOutcomeIds": ["outcome-design-lis-frontier"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc439-e",
+      "documentDigest": "e8085fa6cc1c8315c9268fced3dce109b13f5eec684cc42a8051cdc91510a4c8",
+      "learningOutcomeIds": ["outcome-design-lis-frontier"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "fee32773e313ac23fd6103829407e1952fbb4ab13ba7ef6b4aaf5b93ae9ce558"
+}

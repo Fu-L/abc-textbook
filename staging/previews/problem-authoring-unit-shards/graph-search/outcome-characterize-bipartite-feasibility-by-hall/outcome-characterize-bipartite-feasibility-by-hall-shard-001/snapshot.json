@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "f87ab3f546e14b6e173a8cdbdfe8dde23a12dc0af10090af30f0355659997b18",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7e3fb132ad503bbe4ef8b8b42678edd498ce708aff7d9627c89a2225e76f3572",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2d82b8c6eaf5b9758bfd9d5c3cba6340148878a968aca1b9f7f5b0857c6a298b",
-  "reviewDigest": "1be7eaf1c827c3f75321e0be4ff9a1cf219116cfeabcb691f988685ebb26250b",
+  "checksDigest": "52b81184a28d20a423a865b3bd6a397abe5f8b1c383cb7801dc9beb7f0739a54",
+  "reviewDigest": "d060a991b24a2c511050271cb7ee3c231fd03acbea297d59b8d2c1554e5b556a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-characterize-bipartite-feasibility-by-hall/outcome-characterize-bipartite-feasibility-by-hall-shard-001/abc215-h.html",
@@ -19,5 +19,5 @@
       "digest": "6d029db91022227d3f75b055ca303ed5627eaa24cfdd4eea581b092926e73751"
     }
   ],
-  "snapshotDigest": "9345fe3966f58838b491f39fd844b9c705817ab659cb395af48ad71e8f34892a"
+  "snapshotDigest": "85674ffb759b3553e363d3c05f3ae6ee800f352ba911939647d24745b98e91af"
 }

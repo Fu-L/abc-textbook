@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-compute-subset-convolution-shard-001",
+  "shardSubjectDigest": "bb6fa798ad0c3054fd781b1b4a58bf3be15f7a8f61d8adf1f162e5d0096b254c",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc294-ex",
+      "url": "https://atcoder.jp/contests/abc294/editorial/5999",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式のranked zeta後の冪にA B′=K A′Bからの係数再帰を独立に補証し、低次数再帰とrank反転へ接続。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "4c6ec2e73a6c39c0935a1ab0bc5764f94554692b1e6ce05a6636f06dd6e52dce",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc294-ex",
+      "documentDigest": "ef06b6bf5b0e1c929b9c754e2424c77ae91d58174426b4acbe98d002fc4d5bde",
+      "learningOutcomeIds": ["outcome-compute-subset-convolution"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "50f1f461e9d5b5ab9dc2a0e966ce672e05090902e4ca9c26c71ed760fb5e6cf3"
+}

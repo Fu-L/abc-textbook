@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-static-sorted-range-index-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "bf486117c0855e5e258a4b87f74a872dfcf107d9122836de3dbd6a3d07632d3a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "82fda4e73f883fd293b0d822b3939f3b1a2f48490e0701279cc7264a8ff8edf2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6ece40dd664a2212fc8f375931188949346a82148ecf5910490277da3f53bb00",
-  "reviewDigest": "53e712ed1818ad026835fb332bfff3b25959923f3756ab6c97e041d61090fcd2",
+  "checksDigest": "0063ab61adbf8518bc9199a560a079d0e61c2dc1b27ef46274a2c4d83f8cb841",
+  "reviewDigest": "bb319b598afce69b6cca36bf66336eab2305f7e3d7778af32cf1f2faac8e79f5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-build-static-sorted-range-index/outcome-build-static-sorted-range-index-shard-001/abc339-g.html",
@@ -19,5 +19,5 @@
       "digest": "b7035f0fd43443e9b30f201c10960214d87bccf6bd2419cdc096a33fce6b4c98"
     }
   ],
-  "snapshotDigest": "381ab19b1b6c0dbc6fccb21139da0ce808dfcb6a6bccd38e87af32b06e9d9082"
+  "snapshotDigest": "fdc27453a1340cf28d9e5bed2c32615ba7d5ec85f039a4e2ac31dad6e9af4c9d"
 }

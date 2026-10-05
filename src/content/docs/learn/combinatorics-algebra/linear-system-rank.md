@@ -43,7 +43,7 @@ r×c行列の素朴な消去はO(rc·min(r,c))。有限体F_qでは整合する�
 
 直接の前提単元: なし。
 
-このUnitを直接前提とする単元: [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)、[線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)。
+このUnitを直接前提とする単元: [行列式による数え上げ](/learn/combinatorics-algebra/determinant-counting/)、[線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)、[一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/)。
 
 制約を体上の連立一次方程式へ写し、Gaussian eliminationでrank・可解性・解空間次元を求める。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
 
@@ -75,4 +75,4 @@ r×c行列の素朴な消去はO(rc·min(r,c))。有限体F_qでは整合する�
 - [ABC323 G 公式解説](https://atcoder.jp/contests/abc323/editorial/7356)
 - [ABC323 G 公式問題文](https://atcoder.jp/contests/abc323/tasks/abc323_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-linear-system-rank`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-linear-system-rank`

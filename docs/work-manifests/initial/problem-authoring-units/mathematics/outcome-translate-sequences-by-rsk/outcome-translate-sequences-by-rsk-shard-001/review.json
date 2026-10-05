@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-translate-sequences-by-rsk-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9f08ea8105eba49c001cc7acdb1585235aba430c3724f181c23c83851f6d9929",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "54deafe268c961b7683720dc7e3b8c35f460f5a7d6350ee5ea9000bc14b68eed",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

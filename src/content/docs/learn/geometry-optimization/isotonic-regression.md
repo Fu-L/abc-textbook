@@ -72,4 +72,4 @@ w_i>0としてΣ_i w_i(x_i−a_i)²をx_1≤…≤x_Nの下で最小化する。
 - [ABC459 F 公式解説](https://atcoder.jp/contests/abc459/editorial/20507)
 - [ABC459 F 公式問題文](https://atcoder.jp/contests/abc459/tasks/abc459_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-isotonic-regression`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-isotonic-regression`

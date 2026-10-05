@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-maintain-connectivity-components-shard-001",
+  "shardSubjectDigest": "2a465512c4e58454f3cd81f46982804948291062a7eaffd4c6d81f910b5b247d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "22ddaab604a37bebee1467b90f86fa27281404e3d831ee4c0dd7392cea74a128",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc238-e",
+      "documentDigest": "5f2a7190eb8b71bf1e85a6255dc95caf21e1272e26e1635a2bae832acf78b42c",
+      "learningOutcomeIds": ["outcome-maintain-connectivity-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc276-e",
+      "documentDigest": "02fde2af94c354ae75c0a35252a2e3f0c317d6157ee09efa6b2f65d6cac995e1",
+      "learningOutcomeIds": ["outcome-maintain-connectivity-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc304-e",
+      "documentDigest": "747e387bc8d2b0fe6b5ee0c051f774fc40e24e78c430482720231748fb24ad90",
+      "learningOutcomeIds": ["outcome-maintain-connectivity-components"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc335-e",
+      "documentDigest": "9f4f8b52efe0415f6f26520fc70ba44f9c7cdf32f33147d53bf2b00f5fcad423",
+      "learningOutcomeIds": [
+        "outcome-maintain-connectivity-components",
+        "outcome-process-dag-in-topological-order"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "d13e00cf53828b5ec2a379abbeafa4b14a2a383b4ed3ec9311a66d2ecbf7f94b"
+}

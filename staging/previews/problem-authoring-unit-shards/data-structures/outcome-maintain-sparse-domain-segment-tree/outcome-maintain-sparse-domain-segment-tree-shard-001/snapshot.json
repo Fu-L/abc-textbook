@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-sparse-domain-segment-tree-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8f314cc62527fcc260e64969b8c2612655b172ccb5c439ded5b106bd1f2fd1a6",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "e3d73d06a6b07b9cb16686f90d75bff0f1dd9c9bc65a6c7357fc6346d23a88fe",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0f1a63fdcccf08baec3e2788f0f44c5a7012d7e547806bf2b3ead0b4553a4fab",
-  "reviewDigest": "e613b870020ff58a57e436b41abba1ea351a6b2eaf268e940a2f6aad3b4139cd",
+  "checksDigest": "b6c17450e62fed3bcedb0ddf42e18deda79f98255f72893f43e38ac0d5ad34e3",
+  "reviewDigest": "1b91f5c10688435f17ff30b5331a0a9e11a09be7d17fbf77b64014a7cbf5f2ee",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-sparse-domain-segment-tree/outcome-maintain-sparse-domain-segment-tree-shard-001/abc403-g.html",
@@ -19,5 +19,5 @@
       "digest": "2a34c8c7abc0300e67ff8a945a3669e83a2d9b8eed7c0d36ffdacae42a383019"
     }
   ],
-  "snapshotDigest": "c7f7971b64f1e9886a84a0c19e425ec436a29a081c0f33e2b38d7a4fbac3931a"
+  "snapshotDigest": "6724a30c1b762388073a0dd2e5322aff7ccfd5e91fb17bb0f16118f08f8a22da"
 }

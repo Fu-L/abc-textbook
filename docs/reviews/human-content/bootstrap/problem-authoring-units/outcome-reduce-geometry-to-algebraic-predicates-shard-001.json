@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-001",
+  "shardSubjectDigest": "365bf33628fe70b41ed1104bf3d62847c41cc82efa05b975870f965879cac6d6",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc301-g",
+      "url": "https://atcoder.jp/contests/abc301/editorial/6330",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 有理四係数の正規化、二座標の同時一致、平行・ねじれの位置、交点ID重複除去を具体化。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "3be067f81cdea9846b4a24a0f762a65cd4f22b201a319179d49615c14b990160",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc220-g",
+      "documentDigest": "77357591d750d0d75b76f511217003a75497075bc0f972cff85c2e0c1cd01111",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc223-e",
+      "documentDigest": "40072fbf2da8247b5fcc3c48376681447eb6d5c2b3f78fffceee0ef49b5d5bd7",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc234-ex",
+      "documentDigest": "5014a3bf154f5a42ea7770d4d4bd95e871422380fc0c006920ba0e338cdbaadc",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc248-e",
+      "documentDigest": "b7765327062707170ca0aa7c761d8d26597feb7109fe3204ceae316634ff0b9e",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc258-f",
+      "documentDigest": "c8954fea08447787226cee1b129053699f02bafe6b1c6a76a211e07279926816",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc296-g",
+      "documentDigest": "10eef9f76f6d6d23cc8f4737f206afcb5064fc72afaae318688088137cd5b981",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc301-g",
+      "documentDigest": "992bdf9fb6e4e680df93729b499ca911c0db1188bf2955df8958e7eacb0a9432",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc351-e",
+      "documentDigest": "1dc8a11dbc9986c26dab5350004a66e614832ed663643ccf8be71d922fa09e12",
+      "learningOutcomeIds": ["outcome-reduce-geometry-to-algebraic-predicates"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "5960f0751abaffd17f5d50b086bca7e5d1069d08191bcbc6d318b0c0db9ea75c"
+}

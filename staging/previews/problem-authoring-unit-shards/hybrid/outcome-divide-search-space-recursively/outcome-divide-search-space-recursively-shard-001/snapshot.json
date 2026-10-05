@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-divide-search-space-recursively-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6d2af40fda15c2606e45366d1d5bfaea8340ce6146f27e6632d54bad6dced9c6",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9c6197dba28239afd20853800eb5c7f808c919c1375340869cf9dce21ff074ae",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1739391d99c5492a73f9848139cb96996cf8e61b3cf66904694b699265c4bed5",
-  "reviewDigest": "66db64240df70e5912b6280e470bdd4cc6757ea710bc4303079031a429412f40",
+  "checksDigest": "904f32e50e419f82b2299c70b063b172b8d22ea395e31132ecbe20e8c1fa8767",
+  "reviewDigest": "f2d2de40215ea4bc16871cc7536502bb58c90c3bf08b775fa2c69874e78909c5",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.html",
@@ -27,5 +27,5 @@
       "digest": "f8227db405e07d913b251074f7359dd1fe07252f224d6541caf5f85783d4b12c"
     }
   ],
-  "snapshotDigest": "70d30ec0785191fa64719f7bd7fdceaa3e1e42de0655521ba65d0d69934aab5a"
+  "snapshotDigest": "101840fa3060489493d8a25c801c513b41fd4c5c0f4ecffcbf6ec80c46e398d8"
 }

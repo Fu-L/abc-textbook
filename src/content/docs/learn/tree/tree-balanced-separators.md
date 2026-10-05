@@ -93,4 +93,4 @@ log N)、平衡木ならその索引費用を掛ける。毎成分で全色域�
 - [ABC362 F 公式解説](https://atcoder.jp/contests/abc362/editorial/10400)
 - [ABC362 F 公式問題文](https://atcoder.jp/contests/abc362/tasks/abc362_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-tree-balanced-separators`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-tree-balanced-separators`

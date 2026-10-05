@@ -37,7 +37,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "5c4eb2c2cb7f631ba3c1d34160aebd0a77b509137c55983c6bfe387bbbeda59a",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-reroot-tree-aggregation/outcome-reroot-tree-aggregation-shard-001/checks.json",

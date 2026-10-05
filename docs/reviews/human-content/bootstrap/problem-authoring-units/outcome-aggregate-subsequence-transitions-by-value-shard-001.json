@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
+  "shardSubjectDigest": "42b85e7e5067c75e925fbc40bb72c822b3e93dff83995422464816574eaa84bf",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc360-g",
+      "url": "https://atcoder.jp/contests/abc360/editorial/10311",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 変更値の正規化、二層DPの三遷移、更新順を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "3d6e792d41c5df2b7dff082013e0da0c3c03d06679f43f91211a2b3217bed185",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc240-ex",
+      "documentDigest": "d4b81563788af5769cad98c0c18c733ae96307ee8edd943d35339b441d0dbb7d",
+      "learningOutcomeIds": ["outcome-aggregate-subsequence-transitions-by-value"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc339-e",
+      "documentDigest": "31e7f17eace7641cd4196f2903d09a32ee039d6ca66c6f777e8b99c8b1dd1ea5",
+      "learningOutcomeIds": ["outcome-aggregate-subsequence-transitions-by-value"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc354-f",
+      "documentDigest": "8900f7d2d764be6dda6a3bac6cfc732b6b2f3ab3ecc70019b9bd8fe7d416fea4",
+      "learningOutcomeIds": ["outcome-aggregate-subsequence-transitions-by-value"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc360-g",
+      "documentDigest": "5ca77ebe90bf425d57f19e0dbf9e1b8f68955f72611836b8df8a7b3ceb2269d7",
+      "learningOutcomeIds": ["outcome-aggregate-subsequence-transitions-by-value"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc410-g",
+      "documentDigest": "da6f9369787cf990814f7f861618b5b798073f30f4258940bd1c9562ee3aa2ea",
+      "learningOutcomeIds": ["outcome-aggregate-subsequence-transitions-by-value"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "4e43549f0f704771e22b5323d7288cb5170aa3fce2ba49c280822160a05f468f"
+}

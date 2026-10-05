@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-affine-floors-by-euclid-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "22c2cc334abf36c43465a2ebbdd788986ee311b70a38f05cccb743470d46f5c8",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3a9843110ab8eae9253f99837d31cba8de95a61ed9ffd26acdcebe4c6e01406a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1d180e1f7157314409a85575143704aaf97bf9b1485b8d18b1ae82a2dd96165c",
-  "reviewDigest": "bf5ff26d145d583981f604fd2738edd041e9af4aa7dedd7f15f32fd2fdeaef90",
+  "checksDigest": "d0b5e19aff394462caf332d9eef3dfbda71cf23d94cb9fdf7808b02193095b2b",
+  "reviewDigest": "c5a78f36e16524c12f033824093e175f4c742dd5b66c4116f70c975b355bc12e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-sum-affine-floors-by-euclid/outcome-sum-affine-floors-by-euclid-shard-001/abc283-ex.html",
@@ -27,5 +27,5 @@
       "digest": "603561d78719a4b79455f52dcb316a03aaaecc4fc05f7057e111c3b77b08c684"
     }
   ],
-  "snapshotDigest": "75ee8a29ad0c71eec0e8bc255b321e60fe9307340bf40990a44e2080bbc0a1e7"
+  "snapshotDigest": "dbf9c52fad64843e4d6bc3b78661836494eb51e9a5cd3fa02b486b065065fa39"
 }

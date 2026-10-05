@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-modular-constraints-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "394130f2c85e673cbfefafe012b3820a300fbf5967c36b35f97ebf483a36d3e0",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "c43dbd29e40e5e46252c1f5b0088167330bec3652a8b2d64a1c8d51fdea1a70d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "5ae28d02df6e5f59bafe127edfac646e6ee9cfe5c835f3643cdd5275eefee656",
-  "reviewDigest": "3e4e293b8dbf3f979846fcef4f843e24c767399ad9e17ef88e0cfb9d7fb39a8a",
+  "checksDigest": "13be5cd093f687d3505236df92573eb3733d3ccaa06f83062cc9a1865e5ac9e5",
+  "reviewDigest": "699fb9255699c6d963d61befe02b5ffa41dc8ed46c5794b0be125e36922e743f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-solve-modular-constraints/outcome-solve-modular-constraints-shard-001/abc245-ex.html",
@@ -31,5 +31,5 @@
       "digest": "a2284bf1fa33650a04323cc747aa411d309af08762e7484d638964d1decefd21"
     }
   ],
-  "snapshotDigest": "261bf10868b65f1d47d6e789e74cf29fcc7793da6adb5e22dc95d7fdf55a19e8"
+  "snapshotDigest": "30270af60555c32750927d8e40f5d56d7e7d53e25cd18bc36cefd39551549861"
 }

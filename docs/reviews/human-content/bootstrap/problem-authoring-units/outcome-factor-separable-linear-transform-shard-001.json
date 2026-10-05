@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-factor-separable-linear-transform-shard-001",
+  "shardSubjectDigest": "064cf781330086aaff6aee04def9862cecde9e52a5af6c1c5b9bd3a918960b08",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc367-g",
+      "url": "https://atcoder.jp/contests/abc367/editorial/10690",
+      "checkedAt": "2026-10-02T22:25:39+09:00",
+      "reason": "公式の巡回二項冪表と定数項内積の構成を確認し、時間O(NM+B(logB+logK))・空間O(NM+B)へ具体化。"
+    }
+  ],
+  "priorReviewInventoryDigest": "ef88b227e78c7815db6cf6ded2f77b57fc27d872d56614e70e739453ecacc40b",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc212-h",
+      "documentDigest": "caae1268374bdb66d7c22cc42880d663853a1cbf22ca082a09201c9d49d2451d",
+      "learningOutcomeIds": ["outcome-factor-separable-linear-transform"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc288-g",
+      "documentDigest": "85fd9029b4d05bb66fda4015ec956bd77daf16383aa44feb32d00f0c00b2cd5a",
+      "learningOutcomeIds": ["outcome-factor-separable-linear-transform"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc367-g",
+      "documentDigest": "a35813ac4dfcf881e0bc655a06cbbda4dcfd7473dfe1e33ff510b9b616c0e1a7",
+      "learningOutcomeIds": ["outcome-factor-separable-linear-transform"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "18673ed6d249c2ddc9d59ed06e8fb8824e6eae10e84c21b10e3345b8aef293bb"
+}

@@ -60,4 +60,4 @@ H×W盤面なら固定方向数についてO(HW)。壁で状態を止める条�
 - [ABC317 E 公式問題文](https://atcoder.jp/contests/abc317/tasks/abc317_e)
 - [ABC317 E 公式解説](https://atcoder.jp/contests/abc317/editorial/7031)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-directional-grid-effect-scan`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-directional-grid-effect-scan`

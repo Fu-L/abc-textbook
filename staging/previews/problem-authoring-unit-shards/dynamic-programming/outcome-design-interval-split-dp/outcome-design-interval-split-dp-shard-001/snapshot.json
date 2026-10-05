@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-split-dp-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "78f5b79c0d9de2e9cd297f14ee91b3cc86eecad3e97785211c0519d5f9fcfe72",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7532d4498f56d3a14c2c0e207df502d211836531994a1e125a8dbc92b392abd7",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "a929a167d640f4be7b681b25ed352c720f55600e051b8c448dc06edf6c0fd077",
-  "reviewDigest": "fb7f5d3849226541404188192ba00fd78748d18084ee9e5c84455e87459fd816",
+  "checksDigest": "99e42440da93ccdcafec28e563f5dd8f9c0ab5dc2649d09ad03f4d068726ae78",
+  "reviewDigest": "63c8145fd9b986bc2325f55992af639a6cfca9b2e4c38e805592f410ef15583d",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-interval-split-dp/outcome-design-interval-split-dp-shard-001/abc217-f.html",
@@ -47,5 +47,5 @@
       "digest": "5e86bee5a071ed0b896f7573b3201227ab967ac02d54076e4a11f83c363ff64a"
     }
   ],
-  "snapshotDigest": "0b5ae9c5d07bc7c7c367e4c22aa5a0b88d3f4a82e801c02731a38db656487b68"
+  "snapshotDigest": "eecf41813c28e71b37f6ff7ae6268257d57e2abbfdd3f5500d19b284a3367019"
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-construct-optimal-spanning-tree-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b23dacc41f4d0de589954a7e8a522bea87853877262819b16aa8bf38af6b93c2",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3387848c2d59f9afc108c66f0f24a25599ba8f38f0e45a4817de80af9ffdf63e",
   "requiredChecks": [
     "source",
     "structure",

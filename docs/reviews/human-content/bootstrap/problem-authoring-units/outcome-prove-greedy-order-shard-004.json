@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prove-greedy-order-shard-004",
+  "shardSubjectDigest": "1a8b1260a14b20d5f380448f30d5d1c2e5a9a17551d3ff37f2ff1747ebf73202",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc434-f",
+      "url": "https://atcoder.jp/contests/abc434/editorial/14670",
+      "checkedAt": "2026-10-03T06:56:14.794205+00:00",
+      "reason": "PR65 review 5399363439: 問題条件・具体的遷移・回答復元・計算量を公式資料へ再照合。補修と独立検算は docs/verification/bootstrap/pr65-review5-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc447-e",
+      "url": "https://atcoder.jp/contests/abc447/tasks/abc447_e",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    },
+    {
+      "problemId": "abc434-f",
+      "url": "https://atcoder.jp/contests/abc434/editorial/14670",
+      "checkedAt": "2026-10-04T16:35:48.975677Z",
+      "reason": "PR65 review 5407113841: 状態・遷移・終端と問題固有の削減根拠を公式解説へ再照合。独立した有限検算の範囲はpr65-review20-corrections.mdに記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "eaa73655aee71993ba68a32873b740ec8b70a893ef643c3f829fa5e51a7f8b02",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc417-e",
+      "documentDigest": "df0641fd3a602c547796aaafd41f3d0ea29935f1c1ec5cbcf58bc54226e69058",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc433-e",
+      "documentDigest": "45dfed24c1160c463584c7e6791d66a56d057f33a4d89b4c0356ab76c348a6dc",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc434-f",
+      "documentDigest": "29df169a0035575c74ae600a12d20e98484243d19cec68444681b5579abba14f",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc447-e",
+      "documentDigest": "e2bbe8e4a4b0916a471e1fb14089a155158ea740ef09b8345bd1c918b05ebb8c",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc457-e",
+      "documentDigest": "ac00b6726837ac0d54e3a77a8b364d811f12967635d06bcdcf8a41f25d093124",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "11de186b62d08392c0b651add349100b852b5dbdb7f3607a56e6b4b3faa73f43"
+}

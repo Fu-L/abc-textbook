@@ -77,4 +77,4 @@ rootの通過数と終端数を0で初期化する。文字列を挿入すると
 - [ABC287 E 公式問題文](https://atcoder.jp/contests/abc287/tasks/abc287_e)
 - [ABC287 E 公式解説](https://atcoder.jp/contests/abc287/editorial/5609)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-trie-prefix`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-trie-prefix`

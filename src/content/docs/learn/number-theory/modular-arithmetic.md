@@ -43,7 +43,7 @@ sidebar:
 
 直接の前提単元: なし。
 
-このUnitを直接前提とする単元: [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)、[可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/)、[拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/)、[標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/)、[一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)、[剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)、[乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)。
+このUnitを直接前提とする単元: [Baby-Step Giant-Step・可逆作用の反復到達探索](/learn/number-theory/baby-step-giant-step/)、[可逆な非零剰余と剰余 0 因子を含む法上の動的積](/learn/number-theory/dynamic-modular-product/)、[拡大有限体の表現と四則演算を構成する](/learn/number-theory/finite-field-extension/)、[標数pのFrobenius恒等式による反復高速化](/learn/number-theory/finite-field-frobenius/)、[一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/)、[一次合同・CRTで解の類を統合する](/learn/number-theory/modular-congruence/)、[剰余周期と指数法則を利用する](/learn/number-theory/modular-periodicity/)、[乗法的位数から最小周期を求める](/learn/number-theory/multiplicative-order-periods/)。
 
 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
 
@@ -159,4 +159,4 @@ sidebar:
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-modular-arithmetic`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-modular-arithmetic`

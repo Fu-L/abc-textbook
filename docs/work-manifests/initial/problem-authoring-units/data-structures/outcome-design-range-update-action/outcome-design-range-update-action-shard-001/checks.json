@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-range-update-action-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "36521653e993ffdf8c99e4e2c1d953a7bc85c0957fdb59966655c83388f9031a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "c3d6626b167309fbccc9c1afcd8492b4981996b904b2bf5228315671e2697074",
   "requiredChecks": [
     "source",
     "structure",

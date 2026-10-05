@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-fixed-linear-transition-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6ee8feef63a762e25dc8483c2167e3281e83bde699cbc2c150c712d1d1b5543f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "b32d7ca31a4b576a2268d44a72d90127369fe1ab59bc9104c850b2d2e4bf5a28",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cf6a3abfc13af68be35f9b93f71abaf9219436b39e20065cc43e66b792f2cc4f",
-  "reviewDigest": "3e99403c8fd0101b25014cdf8af8810d31761876771ee7a1eacb24867c603d93",
+  "checksDigest": "d589d0e34f4122ca43c4cd999eef5b444bec5d0f81ab88ec1b7e538c90f14b20",
+  "reviewDigest": "745b478191b7ff485f27ae460bb03bd35f07bf05ca5104093ed95cc801302d3a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-accelerate-fixed-linear-transition/outcome-accelerate-fixed-linear-transition-shard-001/abc256-g.html",
@@ -31,5 +31,5 @@
       "digest": "7c36826f0291f7ef01702694835af2cc62ac814a5173f9ab1075857eca67e992"
     }
   ],
-  "snapshotDigest": "16e40bd30704be238fd840e05d13b4dd8714821f9eee3a7760491ce187dca4bf"
+  "snapshotDigest": "ed27897de5859acedb5b505aa777aaf38f0f6c8007605106f5d767f047f3b71a"
 }

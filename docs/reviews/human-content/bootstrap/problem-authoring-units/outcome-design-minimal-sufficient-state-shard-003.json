@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-design-minimal-sufficient-state-shard-003",
+  "shardSubjectDigest": "85b661929788429c31cab67ab649bc4eff4373a5c9c9eadea8ec93a126ced21d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc344-f",
+      "url": "https://atcoder.jp/contests/abc344/editorial/9496",
+      "checkedAt": "2026-10-02",
+      "reason": "最大収入率を状態とする辞書順DPを公式解説と照合し、残金<pの正規形からaction差がある場合の支配性も補足した。"
+    },
+    {
+      "problemId": "abc311-f",
+      "url": "https://atcoder.jp/contests/abc311/tasks/abc311_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "7cbcdc5e9ef8b44939b166d1702d66f71b86c9a121dcce5a382cdc7ec0f2e6f6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc310-e",
+      "documentDigest": "5ff523d96413657af0196dde5db96d2b59d29b040ec6792959c5e53ce8ce412f",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc311-f",
+      "documentDigest": "06a8df2fb3003b2887e5815a8fd88bd657be6fc0e435b55e5dfe9e3e986b6481",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc313-ex",
+      "documentDigest": "a8ab324e1eec4668a6cf785b16a3322b99ae3203a4133d50d0463becc549436d",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc344-f",
+      "documentDigest": "3b2e358238089eb8b3e0d46e2e0730ce0ec696722c9b1b08fe70041104efb0a1",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc345-e",
+      "documentDigest": "a3cb6224109c079e0ca50d62ad6c11779ba90c80e59265910381600aea57b59f",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc375-e",
+      "documentDigest": "45df66e82f7627434cd45b6dc78d5a0b94ab1463b5e15c4e7a42a977f406e817",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc376-f",
+      "documentDigest": "55baaf2a1a80fabe2d304c5b15d36acd8b5b968f0a0e9dcb7c9184a409ce3aac",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc389-g",
+      "documentDigest": "45f541f7d7a26cafe422a5797331d932cf530c70a0b1e0b64b053eb0f1a8788f",
+      "learningOutcomeIds": ["outcome-design-minimal-sufficient-state"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0131b68a6924225c288c1d8a3d7992474ae6845ddd6b37714b4a79bdb1e4dd4f"
+}

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "sourceBuild": {
     "id": "final-taxonomy-build-initial",
-    "digest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
-    "acceptedAt": "2026-09-29T07:53:12.307Z"
+    "digest": "f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe",
+    "acceptedAt": "2026-10-05T11:48:27.874Z"
   },
   "tagPrerequisites": [
     {
@@ -325,6 +325,18 @@
     {
       "nodeId": "tag-min-weight-general-perfect-matching",
       "prerequisiteId": "tag-bipartite-matching-hall"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-linear-system-rank"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-modular-arithmetic"
+    },
+    {
+      "nodeId": "tag-min-weight-general-perfect-matching",
+      "prerequisiteId": "tag-randomized-algorithm"
     },
     {
       "nodeId": "tag-min25-sieve",
@@ -1282,7 +1294,19 @@
     },
     {
       "nodeId": "outcome-solve-min-weight-general-perfect-matching",
+      "prerequisiteId": "outcome-compute-in-modular-arithmetic"
+    },
+    {
+      "nodeId": "outcome-solve-min-weight-general-perfect-matching",
+      "prerequisiteId": "outcome-design-and-bound-randomized-algorithm"
+    },
+    {
+      "nodeId": "outcome-solve-min-weight-general-perfect-matching",
       "prerequisiteId": "outcome-solve-bipartite-matching"
+    },
+    {
+      "nodeId": "outcome-solve-min-weight-general-perfect-matching",
+      "prerequisiteId": "outcome-solve-linear-system-and-rank"
     },
     {
       "nodeId": "outcome-solve-modular-constraints",
@@ -1699,6 +1723,18 @@
       "prerequisiteId": "unit-bipartite-matching"
     },
     {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-linear-system-rank"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-modular-arithmetic"
+    },
+    {
+      "nodeId": "unit-min-weight-general-perfect-matching",
+      "prerequisiteId": "unit-randomized-algorithms"
+    },
+    {
       "nodeId": "unit-min25-sieve",
       "prerequisiteId": "unit-prime-divisor"
     },
@@ -1947,7 +1983,7 @@
       "prerequisiteId": "unit-recursive-divide-and-conquer"
     }
   ],
-  "tagDagDigest": "aeeee4de6bd38141a85ee962d6633ce47251ad091637957e0f1f382f4200a802",
-  "learningOutcomeDagDigest": "1ffe80681b3f8869b99cf88d9551c61d4f9a008163480cec0da4a2efd141077a",
-  "learningUnitDagDigest": "50a2fa2346b413acb3f5849e6546df98eb48385e3dd49ada026e4df943242f30"
+  "tagDagDigest": "45a9410885de79fa3588027c5f91d348830c81960ecc80110a525d49b7c1bfcc",
+  "learningOutcomeDagDigest": "76d80fcb607b21c2c6fd52ba9eaeaad2ee1318eae7f5e95b6437bc35ff78d2b1",
+  "learningUnitDagDigest": "b4bf5a740764e19596456b7066dde563add3aad08ade281eb81c7b9a75959b62"
 }

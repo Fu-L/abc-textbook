@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-merge-small-into-large-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6923c66a4e1bac1e85e99de01384ec36cc723f02d53177e30425268345061c56",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "34abae6e7317f459e37db2db583b9d066a6575317634cabcde2529cec0a155dc",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "6cae04d4cb6c38af323ccd5d8ac69958f354aaea499b05109f1d744a6ad76243",
-  "reviewDigest": "1a30f6566c7c8db78a44ab08a5bda833efa6ba5b1f88e51820a1454e1c3c3dd7",
+  "checksDigest": "5245cf7c2e20d40e90dc93812874de0992043cbf2bef5a21f36279fe8552c667",
+  "reviewDigest": "7f5a51d11bcc86520dcd20967ccefcc4ac51bd16af39ee548e38afba8bb86961",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-merge-small-into-large/outcome-merge-small-into-large-shard-001/abc324-g.html",
@@ -31,5 +31,5 @@
       "digest": "09d9f1d7a943adb809da494a54d33c4aa9d1b3a6ca3811801b039c25aec2b1cb"
     }
   ],
-  "snapshotDigest": "37cad686c95614aefe9e3d96f088a69a8a0897efde84befd243f30dec2d93a55"
+  "snapshotDigest": "86d94acef812f79417865931c826f5e816390c1744787e8c3f2f9ad559c12653"
 }

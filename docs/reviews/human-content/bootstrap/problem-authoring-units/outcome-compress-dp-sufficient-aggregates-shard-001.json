@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-compress-dp-sufficient-aggregates-shard-001",
+  "shardSubjectDigest": "5ca353a62d35dcda254e3de6cdbc4c1be007980626ff386e5e0759e582114a37",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "6f628d71f1ba8e5a16d58f88a39c1bbef9e132f163c75f20be39344fcecdd64e",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc224-e",
+      "documentDigest": "9991ca75a8a5d00a723e065aeae0da0fd6a969b944825c63d6a10f27f9cd5903",
+      "learningOutcomeIds": ["outcome-compress-dp-sufficient-aggregates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc224-f",
+      "documentDigest": "17057f4911109e2751a9736cd57427ec89daf503700e5123354b6ceb31b30a98",
+      "learningOutcomeIds": ["outcome-compress-dp-sufficient-aggregates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc243-g",
+      "documentDigest": "5bf988ed6f7948f7b73916e9dddf0d91b46c13473dfa9f2d03afc06e4ab8e25e",
+      "learningOutcomeIds": ["outcome-compress-dp-sufficient-aggregates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc338-g",
+      "documentDigest": "c72cef7cbe8c7fa9d7eebe744b7029f32ef5d60888218aa1987746973ea10b08",
+      "learningOutcomeIds": ["outcome-compress-dp-sufficient-aggregates"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "612797579b4d6d9f18a6f89da26f6ee96b351c81cb4211385337d0d29e58a959"
+}

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-frontier-profile-dp-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b6461090d46ec2d746a065356d1cbf2953408557b1adc11ee9dd5ff45233a046",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7ad8ddf862f623c3837b2a20edc075fc1509131a465a24edb9a68c5b7f889035",
   "requiredChecks": [
     "source",
     "structure",

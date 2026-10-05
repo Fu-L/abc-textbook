@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-precompute-directional-grid-effects-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6c6cd590203b5dc8f3f14d6a10000023e119ed886237a5317e825c0a572b5871",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7304bc6720c13c59352d19de632210df6ff949b118616317046311083690a931",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f317376a405bdf54851e1969b96265c989375e02869e545b33a242909c181617",
-  "reviewDigest": "382d623b9238c6fb3ccf21bf971c29e4614b3487560aa44cd4aa22633c8dc98a",
+  "checksDigest": "81d31a4ec6665009496b513a82bcfd60e50cf41de5366ec21fb1f0d4d0501b6d",
+  "reviewDigest": "2e633415ccd26212f3c8569a0a54fb0dfc7c62027ff6da7ecfb13a99b782cf38",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-precompute-directional-grid-effects/outcome-precompute-directional-grid-effects-shard-001/abc317-e.html",
@@ -19,5 +19,5 @@
       "digest": "5999f13489809a8a11123f03a8eb3da56b10e77deef08da149e964fb8660de68"
     }
   ],
-  "snapshotDigest": "724ad017378010a45685d6ef848aed473805a28519488debac6103abc51dddfc"
+  "snapshotDigest": "560d0381386e3b1017bb63bd3704a7f3489d49d8dbd3e5e2fd961d8c88270b6f"
 }

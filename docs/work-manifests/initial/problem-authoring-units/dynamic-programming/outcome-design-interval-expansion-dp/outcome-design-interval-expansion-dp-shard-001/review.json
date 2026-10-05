@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-interval-expansion-dp-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "80cd9ec4f472915ffc43f515d7371e071be033ab2ad3465918db73f04c8944c4",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "c13a31120960aab3defcf735095fb05feb3661476c8859ab80067f72d5f3e20e",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

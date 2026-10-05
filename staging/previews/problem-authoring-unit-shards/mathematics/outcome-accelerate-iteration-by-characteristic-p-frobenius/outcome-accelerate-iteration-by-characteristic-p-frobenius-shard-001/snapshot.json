@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a56f6e1136d6d5d242282c054b8b128433b505078b8c57c85c4a7a3028896043",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "12ceabcd9cfb12efc2710ab87d9eee78a288da52765dfe1b726a56e0a762db12",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "15491b9cbe8435ebcb9d500bf860c52b3e8966971bb6bcf57bcd61a37b5d41c6",
-  "reviewDigest": "28e06fe0e88a1835757df47e2ed253e87e6516f4fd40b14088e092a5dac94279",
+  "checksDigest": "21e6bf18241a965f893443a2aee1d4ac8db25369e183df4c4474c945e7a43d7f",
+  "reviewDigest": "8dfb96ce2059ebbe532628881614a551281d9926991970e59f22035a3d88b010",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-accelerate-iteration-by-characteristic-p-frobenius/outcome-accelerate-iteration-by-characteristic-p-frobenius-shard-001/abc251-ex.html",
@@ -19,5 +19,5 @@
       "digest": "7453723bf1de19d3f3372b0899047f4dfe494c24647e9c8a8df766a9c973f7f8"
     }
   ],
-  "snapshotDigest": "2c6c01abf6c389585d6e8c4636d9ade3924fb5538d8d9044665864842c243336"
+  "snapshotDigest": "bc0200599c957f1dec21b6b0bae4592fd5a7c231c30cfa6287415d31edfc223f"
 }

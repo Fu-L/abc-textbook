@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b922c4ec36004bb7ae873589d991df7ec310ff90c98532a4dc3c3395e4d4b5b5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "4c5a7cdc8cf7a5e59ffc8379811ad2c115a818c3e6ecae34a379966ed34d3a0f",
   "requiredChecks": [
     "source",
     "structure",

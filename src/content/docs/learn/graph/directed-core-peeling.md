@@ -65,4 +65,4 @@ O(V+E)。入次数だけの剥離ではcycleから到達する頂点も残り得
 - [ABC456 E 公式問題文](https://atcoder.jp/contests/abc456/tasks/abc456_e)
 - [ABC456 E 公式解説](https://atcoder.jp/contests/abc456/editorial/19849)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-directed-core-peeling`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-directed-core-peeling`

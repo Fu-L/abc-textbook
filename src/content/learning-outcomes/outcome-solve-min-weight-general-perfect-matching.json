@@ -3,7 +3,10 @@
   "statement": "一般グラフの最小重み完全matchingをweighted blossomまたは重み付きTutte多項式へ帰着し、存在判定だけでなく最小重みまで求められる。",
   "prerequisiteOutcomeIds": [
     "outcome-characterize-bipartite-feasibility-by-hall",
-    "outcome-solve-bipartite-matching"
+    "outcome-compute-in-modular-arithmetic",
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-solve-bipartite-matching",
+    "outcome-solve-linear-system-and-rank"
   ],
   "scopeIds": [
     "abc412-g",

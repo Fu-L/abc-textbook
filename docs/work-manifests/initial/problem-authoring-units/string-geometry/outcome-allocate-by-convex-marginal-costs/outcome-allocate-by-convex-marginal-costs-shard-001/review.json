@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "a14ea7d81676d7b79218043896f51e097750484542b04f86de028890e711c3a7",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "492bb4162ae750209cd608bc72fae5b6253606e0fffd0b24b0ded52ed8a3bdf8",
   "reviewPolicy": {
     "requiredMode": "third_party",
     "riskReasons": [

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-correct-overlap-by-inversion-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0aa36a32f441807feb06ecb6585edef0dd115346f4dc7e9001ea5e7714966e63",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "79b845310c48d8a1a31f55c361e09921ea6de9c35da1d507383243af290db561",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "cd7a7ccffb5c28ec484310bc215349ebea58b141801c5aeae136808260c1d1e2",
-  "reviewDigest": "3c67c8f55eb5280b6c3867730677b58262ecc784c71dfe63cfd87b36794571a7",
+  "checksDigest": "6767448cffa83e294a9bdc525491cd98db4e0f35931d2447536aa849d2e4a320",
+  "reviewDigest": "4b81f40c00e14ebce940309c8677b69286ade00b79cded97a9d9d0636ce52cec",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-001/abc214-g.html",
@@ -47,5 +47,5 @@
       "digest": "e61b5f099092aab289e87043a3fddce3859ca65e31a3c66695cbb89261203d03"
     }
   ],
-  "snapshotDigest": "04e24c57e6446a27a8c858317dacbbc0a9667be8ea7f71df6fe2c66a23c77877"
+  "snapshotDigest": "38988d8dab811466793619d8c33628dea052c7a1553a00cefa4fab1e860f31b5"
 }

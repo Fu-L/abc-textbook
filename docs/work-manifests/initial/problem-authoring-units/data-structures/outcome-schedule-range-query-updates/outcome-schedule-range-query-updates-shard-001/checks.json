@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-schedule-range-query-updates-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "efefab1ce41c31c92026dff3ae3835c96ffd3cb61b2687aa4d8d66cbec6b07ed",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0e7e6ecb509411ce870e28cfdbc56f8b2b5afd0d7e10a980e3d51baea08c5c25",
   "requiredChecks": [
     "source",
     "structure",

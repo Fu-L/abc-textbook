@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-normalize-equivalent-states-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "98cf5fc71e5db916b9cc5d8e8f75c418d62c2419d8e2cb4aa77c361e5d4ca84d",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6641087a86b47132f1f235a6b3b3692980f8fa493d0b389cb7497bd71092a49c",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ff8eab541faf1edf362bbd6930f81ecde263ed94a5cd6b00d0403595c20ae420",
-  "reviewDigest": "7f412789361b76c1c70b820cab7cc28d2ecb50ee8ed5da7b260778810b9c5640",
+  "checksDigest": "8b538d659f859853042e681dd1cbd28e712b55ecdf5b9e418504e3155fcbff41",
+  "reviewDigest": "f604140cc86405ec3f0afe877e7ba73f6c4ac9e0ff2e522302a287d2410a3e60",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-normalize-equivalent-states/outcome-normalize-equivalent-states-shard-002/abc446-g.html",
@@ -27,5 +27,5 @@
       "digest": "564875ce0236008b862046ce3397877c11153e206e726b528a73b0986c4b262a"
     }
   ],
-  "snapshotDigest": "4cae2002ebf81146bb70abe129917252ffb6c18edea07e47eef91cda09f402da"
+  "snapshotDigest": "5e3721f0f45a00d34d7cc12fc5ae9d24bd9e0a04343ebef85177b4bf001a94f1"
 }

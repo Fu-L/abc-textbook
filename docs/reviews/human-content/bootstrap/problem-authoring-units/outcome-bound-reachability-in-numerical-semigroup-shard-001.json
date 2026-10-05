@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-bound-reachability-in-numerical-semigroup-shard-001",
+  "shardSubjectDigest": "b2f981dab016bd023c7748226aa3a11bd6bf52a06eb99eff1d21ed89ab5f753d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc388-f",
+      "url": "https://atcoder.jp/contests/abc388/tasks/abc388_f",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "1710c8ce675701fa79d97df4d38428981275c4f2fb4775a9a4b2b941393024eb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc388-f",
+      "documentDigest": "6539b001e64e04ab8a073aaa44a16ca0f59b15b8455f0748d59a46951da77bcf",
+      "learningOutcomeIds": ["outcome-bound-reachability-in-numerical-semigroup"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "51a13dfc448c0464b274ca0eb566cd9f017ca5cf18abf3cde1b81f97f150f9e5"
+}

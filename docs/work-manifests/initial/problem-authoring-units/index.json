@@ -3,7 +3,7 @@
   "algorithm": "semantic-primary-official-order-chunks-8-v1",
   "frozenAt": "2026-10-02T11:55:13.087Z",
   "inputs": {
-    "acceptedBuildDigest": "b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5",
+    "acceptedBuildDigest": "f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe",
     "placementDigest": "0413e0e2a9b0d00e975da9881746d8ec6e78b6faa9596c8d83c002c2400f89f5",
     "passedPreviewDigest": "719ecf851c4a5e8a565ac2184d653c1b0042dbfcea152b465c1580ad17753f2c",
     "authoringSkillDigest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa",
@@ -8887,11 +8887,16 @@
       "homeUnitId": "unit-min-weight-general-perfect-matching",
       "prerequisiteOutcomeIds": [
         "outcome-characterize-bipartite-feasibility-by-hall",
-        "outcome-solve-bipartite-matching"
+        "outcome-compute-in-modular-arithmetic",
+        "outcome-design-and-bound-randomized-algorithm",
+        "outcome-solve-bipartite-matching",
+        "outcome-solve-linear-system-and-rank"
       ],
       "dependencyShardIds": [
         "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
-        "outcome-solve-bipartite-matching-shard-001"
+        "outcome-design-and-bound-randomized-algorithm-shard-001",
+        "outcome-solve-bipartite-matching-shard-001",
+        "outcome-solve-linear-system-and-rank-shard-001"
       ],
       "documentPaths": [
         "src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md"
@@ -9519,5 +9524,5 @@
       }
     }
   ],
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335"
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873"
 }

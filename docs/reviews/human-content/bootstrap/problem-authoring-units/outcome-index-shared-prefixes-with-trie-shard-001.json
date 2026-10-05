@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-index-shared-prefixes-with-trie-shard-001",
+  "shardSubjectDigest": "20e3844f28ad05edfce64ff8c6762af14dba6a23523c2c8c1481da34e0b1658f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "31193a3df408ce7fdda16f208e59016a690b5b3f1d4d5e4f02de755aa2191da6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc287-e",
+      "documentDigest": "b10f3c63118ff3eb2c5d06c06f287872ed0b8e2dcf3cc8e2f7aa335c030015e8",
+      "learningOutcomeIds": ["outcome-index-shared-prefixes-with-trie"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc353-e",
+      "documentDigest": "315b33892e521a14d13eb5c416bcbe0ca98826c4c58f5216f454e13e0ba19e2b",
+      "learningOutcomeIds": ["outcome-index-shared-prefixes-with-trie"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc377-g",
+      "documentDigest": "dc407fb86a542e96ad3020d3bf9b8225723e6f48bb51262aa906d4da2dd75963",
+      "learningOutcomeIds": ["outcome-index-shared-prefixes-with-trie"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc437-e",
+      "documentDigest": "9bf93e5947e4a91c662c1af8c9f679168101c3f62dba5435701e5507c778a921",
+      "learningOutcomeIds": ["outcome-index-shared-prefixes-with-trie"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ca09c45ab9384e624ac1841dd98151a5d265e9fb82379700449c2d9b068cf984"
+}

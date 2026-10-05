@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-aggregate-subsequence-transitions-by-value-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8ef41afa126a8dc3e1829bf2dbbc1055e4cec104c88971c24c113d386cce5a16",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "42b85e7e5067c75e925fbc40bb72c822b3e93dff83995422464816574eaa84bf",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0c9bf510322786445e3b41a378ec30d108daaa71239d0d8b95206d10827fb37f",
-  "reviewDigest": "3e84943cf8eab62b70a6622f90442b0ace2c1d8defc3920c89f932980e902b65",
+  "checksDigest": "b3d3d7e3d054b4ba0f1ffad45b9f60287196bdde79884c02c95a09b9c0afd75e",
+  "reviewDigest": "3d6e792d41c5df2b7dff082013e0da0c3c03d06679f43f91211a2b3217bed185",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-aggregate-subsequence-transitions-by-value/outcome-aggregate-subsequence-transitions-by-value-shard-001/abc240-ex.html",
@@ -35,5 +35,5 @@
       "digest": "2abbac45cf0bb8914244dd644ef99dece051af6424f14fd645ebb4df28a12632"
     }
   ],
-  "snapshotDigest": "d57760d7d1e0f969453ea43383727f88d5f8f8135ab60b2c499dab9080fe8e59"
+  "snapshotDigest": "5e5dbc1a90327d70ad4b7c5d4088e5d9de7e9a0c282f6d21cb63651e13385c89"
 }

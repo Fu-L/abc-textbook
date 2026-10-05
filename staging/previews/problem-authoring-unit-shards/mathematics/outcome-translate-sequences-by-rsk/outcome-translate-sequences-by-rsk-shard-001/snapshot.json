@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-translate-sequences-by-rsk-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9f08ea8105eba49c001cc7acdb1585235aba430c3724f181c23c83851f6d9929",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "54deafe268c961b7683720dc7e3b8c35f460f5a7d6350ee5ea9000bc14b68eed",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "497ba8ee55d6459dc6ea2ac66c795cfbe27cdb37fbbff2d4218a768b660736b2",
-  "reviewDigest": "25eef37b38f7d0447a850d6df847f065cd55648237c4a6bb0816ab53c363b9ca",
+  "checksDigest": "155319f1c4f7c45cf4a791b716b4c5ffc053c6c4e8376ad502870f3af4d98ea2",
+  "reviewDigest": "84d7e7f358c57ea21e5a904b18677fdf0d1fc9ec42bc6a357cc9e136a82ff2ed",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-translate-sequences-by-rsk/outcome-translate-sequences-by-rsk-shard-001/abc378-g.html",
@@ -19,5 +19,5 @@
       "digest": "8d20b11637b5cb6d4a3766913bcc8fe952a42b5b37253ed63b88620d1caf1d06"
     }
   ],
-  "snapshotDigest": "dd23b095759b50d05788e9ac9f4ab0ffbe7c5f1737875d2ef089305028d6b398"
+  "snapshotDigest": "cbf4f19da8fdd2e94020e1d8dbefeb932890954f1448fb02ff7dca6616f7d672"
 }

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-model-max-flow-min-cut-shard-002",
+  "shardSubjectDigest": "5bd7019e90ecd269ed4fe9258583a7b8f175ceff89af27722410aac761f2627b",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc347-g",
+      "url": "https://atcoder.jp/contests/abc347/tasks/abc347_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    }
+  ],
+  "priorReviewInventoryDigest": "8fe952f8e9f0774accf98494bc923e22a834e310c24cb9d654fadce109a08772",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc332-g",
+      "documentDigest": "27f051b560b221e55df8a9b2859aef18a49d8d4a8d03fb92ad665f0cd624dfc5",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc347-g",
+      "documentDigest": "1a31863a967dcda0e3ab909a1555c1bfefcf8e9d2ce303851ec310765dddc0be",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc397-g",
+      "documentDigest": "c7e25ca90c9b63e19108710ffe94e0837d24aac88c612e10628ee6e2b753a152",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc437-g",
+      "documentDigest": "7d99fc425bf62c67cbfd9f5fa88fde6149747bbbfb2750c17f468ebaf8dac8ac",
+      "learningOutcomeIds": ["outcome-model-max-flow-min-cut"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ef257169c6ec7d084400a867652246e6991032099abac147609267cd06389f55"
+}

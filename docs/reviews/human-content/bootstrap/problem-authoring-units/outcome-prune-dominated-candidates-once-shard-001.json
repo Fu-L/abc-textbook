@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prune-dominated-candidates-once-shard-001",
+  "shardSubjectDigest": "9d59aefef7fd09f23a61bcc42c0f95bac50ba3c5b8b8fefa160790ea3d898dc9",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc379-f",
+      "url": "https://atcoder.jp/contests/abc379/editorial/11309",
+      "checkedAt": "2026-10-02",
+      "reason": "公式問題文と公式codeを照合。inventoryの「H_l以上を除く」を「H_l未満を除く」へ補正し、queryを挿入前に処理する順序を明示。"
+    },
+    {
+      "problemId": "abc234-g",
+      "url": "https://atcoder.jp/contests/abc234/tasks/abc234_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400429043。公式条件と本文・前提単元を再照合し、境界・係数・具体的更新・最終出力を補修。小例の独立モデルはpr65-review8-mathematical-checks.py、Hungarian法は既存主単元の手順へ接続。"
+    }
+  ],
+  "priorReviewInventoryDigest": "25da90a8b1d127e5efa00e385932ff05572deb4a53ed0b7c97c0bdf895e45636",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc228-f",
+      "documentDigest": "b5f2ec7b3d655bd2d4d81368d6776e1ab0d9d0fea22d8f5326134ee25be7b511",
+      "learningOutcomeIds": ["outcome-prune-dominated-candidates-once"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc234-g",
+      "documentDigest": "b57ef189cccc665be78b4b91e505ae05ba237e3f9434474c07ba474b6cda56fa",
+      "learningOutcomeIds": ["outcome-prune-dominated-candidates-once"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc248-ex",
+      "documentDigest": "ce8633747fb80ac4e472af463b3d1145fa7dd47aa905d25103c2b394f67b43ea",
+      "learningOutcomeIds": ["outcome-prune-dominated-candidates-once"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc359-e",
+      "documentDigest": "3ce6ec5e0d941e4a13f821c3f4e6eacbe16c810a1ff663736795140756e853a5",
+      "learningOutcomeIds": ["outcome-prune-dominated-candidates-once"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc379-f",
+      "documentDigest": "af6a4c445f76b983420e5a52a84149f50c0fc3543e38c74164949b8af5841c2c",
+      "learningOutcomeIds": ["outcome-prune-dominated-candidates-once"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "d550c32f8792b058fc1bfea32419266dee81d6e7db0510a027939a87a0d9563b"
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-persist-data-structure-versions-shard-001",
+  "shardSubjectDigest": "8f38fd3555867c9d5294eb5b6c47514756e204c2ff041a0468ea04da2d6f9035",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc453-g",
+      "url": "https://atcoder.jp/contests/abc453/editorial/18526",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 問題文のN本・長さMとコードの一初期root共有を再照合。解説中のlog N表記は木の位置数Mに修正。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "97351579fea584e6e65ccfc08c3994e42e3a7e172a02ca5977e412572d81a512",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc273-e",
+      "documentDigest": "a33760d11f5eba65b91ec8168403b9f2e2abe3b66ca5dcf9e18bb206a74bcecd",
+      "learningOutcomeIds": ["outcome-persist-data-structure-versions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc453-g",
+      "documentDigest": "8868d9e3a684e7559335496bd67e2c67bb6a313e4ac513b00ccc2dd7bdde5520",
+      "learningOutcomeIds": ["outcome-persist-data-structure-versions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "7cebe5b689cf752072d4da74c3ac4c094f84fa7cd5120a1c0206f019997215f5"
+}

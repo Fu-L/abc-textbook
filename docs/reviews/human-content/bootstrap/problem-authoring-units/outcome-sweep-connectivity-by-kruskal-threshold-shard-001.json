@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-sweep-connectivity-by-kruskal-threshold-shard-001",
+  "shardSubjectDigest": "37df705293b27abb48864b47ec2618e664daab023405d5b79aaaf46bb01ece5e",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc383-e",
+      "url": "https://atcoder.jp/contests/abc383/tasks/abc383_e",
+      "checkedAt": "2026-10-04T08:37:32.522298Z",
+      "reason": "PR65 review 5404957719: 公式制約A_i≠B_jを再照合し、初期token不変量へ接続。異種同居を前提とした範囲外の説明を削除。 一般証明と有限照合を docs/verification/bootstrap/pr65-review17-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "1add2a0c2de91741e6df586b46e5ba616768d068b057a694b5b9f65a38dece25",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc235-e",
+      "documentDigest": "bb49373b52b914ea50929865df912e0e5c667c7a83dc7abd672ef747c470253f",
+      "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc250-ex",
+      "documentDigest": "f090caf9019900f15fe4fe5ae05d4372972fb670c6e25bbd03acf29b29f725d6",
+      "learningOutcomeIds": [
+        "outcome-sweep-connectivity-by-kruskal-threshold",
+        "outcome-model-and-compute-shortest-path"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc383-e",
+      "documentDigest": "677153114915c275e8ac07a0781cf873c209aa9eb87752ca462cd6b417d6972c",
+      "learningOutcomeIds": ["outcome-sweep-connectivity-by-kruskal-threshold"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ca28ab7069ac62fc1a5e15752784aff8e901183ea2a62c5ff99563d1dabc2b0f"
+}

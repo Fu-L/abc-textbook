@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-minimal-sufficient-state-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "be5b5a52440d8c78f5183b5f12ca35aed19b84260a9316e4369f9144aa55cab3",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "930c34738ed4a75f8630dc7e0e55764ea0a561c6a5f8e6d9ba13dffafc41fff2",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3ab2687c17a53f6aa173aeefd2e06a4adea792aa882204ff8ffb64629b5bac7e",
-  "reviewDigest": "8f5c065a8311b9ea5ea2a5ac244b744d2df77cfbb3f77531c9a56bc73ac56c44",
+  "checksDigest": "66368da620d9832b8e74aa9a726924e59bbf253705b2ecf597153a0b423d602c",
+  "reviewDigest": "f65821d0cfa18b38fe381da4570b3d022d1b13cb84c422709d938b3566b0f26a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.html",
@@ -47,5 +47,5 @@
       "digest": "4278dbbc551737c5cc3278dc39b68427386e68fbdb5ac5d0a238b645759f7d95"
     }
   ],
-  "snapshotDigest": "aef042bffb4617709a3eb05e218003975e5bad08deb6d3fb8cb69a1ccd7478ca"
+  "snapshotDigest": "a0e280d786be9d5ec9c21b624f59735cc3521c382f95541d7e56a53e7676c684"
 }

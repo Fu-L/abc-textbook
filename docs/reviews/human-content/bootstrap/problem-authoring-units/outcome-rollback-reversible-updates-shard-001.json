@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-rollback-reversible-updates-shard-001",
+  "shardSubjectDigest": "82de35e7b9b0eab03c954d02c81ebcab62d4bb0b3f556cc0d08e26b4503143e5",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc302-ex",
+      "url": "https://atcoder.jp/contests/abc302/tasks/abc302_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    }
+  ],
+  "priorReviewInventoryDigest": "af6de3a42e33b3654b9ecf9c32ca6331cfc5de25731da92fcf220862c6518274",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc218-g",
+      "documentDigest": "b7e9b5f1a62d3a2ac91359a428f25cd1affd31853ad5607e4ce746f6a08ec8ae",
+      "learningOutcomeIds": ["outcome-rollback-reversible-updates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc302-ex",
+      "documentDigest": "dab36775f5caecd0d87dbd182308098e1973eb875d873fb1446ea6853ce32ebb",
+      "learningOutcomeIds": ["outcome-rollback-reversible-updates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc363-g",
+      "documentDigest": "62a25d2c0810d8333eaaabebcba33905a172dd5209e2ac8445d0788214f590ff",
+      "learningOutcomeIds": ["outcome-rollback-reversible-updates"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "337a8d8f78d7709a304bcaeb7e6de077dc9a36b6e84e1c58fea45d94e4f14969"
+}

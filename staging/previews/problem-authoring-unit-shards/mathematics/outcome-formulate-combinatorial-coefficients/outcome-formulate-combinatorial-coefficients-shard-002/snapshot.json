@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-formulate-combinatorial-coefficients-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "96475d1ec37997206e41ea2ec1d7b37d4533adfebd87eacbd45963bb479730e7",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "1379c37ed60d9b9df439d93166b56b01bdef0c59df837931157f268fbb0113d7",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fba52288bb4b6f784a2e16b9e54a7c3d02521d904716a6411f456937f498d412",
-  "reviewDigest": "a298482abea423c4c7a0105e43b07878f55b413b5e96593a512f323d6b886208",
+  "checksDigest": "8ade8a83620f8bd21bf447639ca295dfeca91cc228faa7c8863d74858b88e73c",
+  "reviewDigest": "19cf401ebc784e283c1775aec053e39e495a73884ca1eb4e8da36b54623e496c",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-formulate-combinatorial-coefficients/outcome-formulate-combinatorial-coefficients-shard-002/abc290-f.html",
@@ -47,5 +47,5 @@
       "digest": "0522d1a9a8e8a3104cf9f0938572aa44362fd1e8b7ee94a250271d99de777831"
     }
   ],
-  "snapshotDigest": "526e700fb5ef1219989fdd44f82f326e8a7b1e5491fa488b2e90dfae04145d1d"
+  "snapshotDigest": "090f05d2f89792a44a659f51516ae685d27c993fcd1150b31617f57d08b4b86c"
 }

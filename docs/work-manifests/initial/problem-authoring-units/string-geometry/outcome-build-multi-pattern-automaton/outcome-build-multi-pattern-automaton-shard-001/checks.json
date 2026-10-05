@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-multi-pattern-automaton-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d723bdad72281088b4e8386f3916b7c99bff32b7e1d70d152e54f29315ac0c2",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "16bf010c4c583b91c49c0d6fa972e43cbf963de62dae6436bc9bfa5a3707a8b8",
   "requiredChecks": [
     "source",
     "structure",

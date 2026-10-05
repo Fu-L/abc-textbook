@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-count-through-cyclic-exponents-shard-001",
+  "shardSubjectDigest": "3e0d7784edb57de8ae5927ef914797e848a45dc7985db9b2811d463adbfec79d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "2fd3ff1a35aa198f0463e00bd4c66a7d9f59a57b54e6c11294ff48f4dcd2d61a",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc212-g",
+      "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d",
+      "learningOutcomeIds": ["outcome-count-through-cyclic-exponents"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc335-g",
+      "documentDigest": "cc8d0fee2da88c065d40a88db3d953bff7b48e98ae3ea66f4c6fb3cd740b47d3",
+      "learningOutcomeIds": [
+        "outcome-count-through-cyclic-exponents",
+        "outcome-find-period-by-multiplicative-order"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "90ad63ca88a8ed42d3ae7b59e02b7c2fd7bd4aadfcfd8f26870fe2f3dac3c955"
+}

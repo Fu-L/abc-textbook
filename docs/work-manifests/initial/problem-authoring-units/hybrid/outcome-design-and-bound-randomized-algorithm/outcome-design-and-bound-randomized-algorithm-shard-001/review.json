@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-design-and-bound-randomized-algorithm-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8a6d5d3122be9010c06a6800b26134b15674ae5d5f144da51ddf89f72596f653",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "937b69327b17e504ab451faf59bb926c886eda26f4e0e13321c7dc1671c6a2ca",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c687bbcee5a415f2465e80866ef9dc06a25ea81f89e5f68f7d2831dce6778837",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "03901bcba787cca1a85dc5bf96369a5f9a931f71ce9c0e7f126e1dcc70364eb8",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

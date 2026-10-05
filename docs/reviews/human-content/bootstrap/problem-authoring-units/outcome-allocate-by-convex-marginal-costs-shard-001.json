@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-allocate-by-convex-marginal-costs-shard-001",
+  "shardSubjectDigest": "492bb4162ae750209cd608bc72fae5b6253606e0fffd0b24b0ded52ed8a3bdf8",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc359-f",
+      "url": "https://atcoder.jp/contests/abc359/editorial/10260",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    },
+    {
+      "problemId": "abc373-f",
+      "url": "https://atcoder.jp/contests/abc373/editorial/11027",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: W以下の容量で負の限界利得を取る義務がないこと、exact重さの初期値・最終maxを原典と照合。"
+    },
+    {
+      "problemId": "abc383-g",
+      "url": "https://atcoder.jp/contests/abc383/editorial/11500",
+      "checkedAt": "2026-10-03T16:26:01.363578Z",
+      "reason": "PR65 review11: 等長barの衝突グラフから全境界状態の凹性を独立に補証。短い基底・中央split・実在係数数の計算量を検算。"
+    }
+  ],
+  "priorReviewInventoryDigest": "8c8b247c1e7e9e614d9eb16c0c2ea501025584c429fae8e8953458b0edacf69c",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc216-e",
+      "documentDigest": "365aea9ec4b06e3faa17ff740644487653349623f2d37355cf2dcf38dd831b3d",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc359-f",
+      "documentDigest": "52adb14a909cfdb662938eaa30ceed75888ccd8153b87d1e30d1f8c0fdfb4d39",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc369-g",
+      "documentDigest": "93a5e00d652ffca3dfe1246f3439778dc64618b98354201696fc003f2381863e",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc373-f",
+      "documentDigest": "0b3cd4bb3114bcc9ebce5ebb99a91cf1f6cc0984405d1581326c251fb15ed8f3",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc383-g",
+      "documentDigest": "17b3a1e5d09bc4c869948a2a9dc8ed1f73a2c3b6405c85ebbee6cdf9b619fc18",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc389-e",
+      "documentDigest": "7b33d39a306df7ce954d5807ec791a7f356b11d785332247bb08ff4506057f52",
+      "learningOutcomeIds": ["outcome-allocate-by-convex-marginal-costs"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b0adda97ccb8b8407d39cb1a07c159f165e50674523119fe9b2d629e7b28b8e0"
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-invert-generating-function-equation-shard-001",
+  "shardSubjectDigest": "3b4c3a08405152fa0a731661b2516a936a9d12047be8354e263f21c536847cdf",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc222-h",
+      "url": "https://atcoder.jp/contests/abc222/editorial/2742",
+      "checkedAt": "2026-10-03T09:27:09.086507+00:00",
+      "reason": "PR65 review 5399563167: 操作と局所条件の両方向、周辺分布、具体的構成、要約・述語と計算量を公式資料へ再照合。公式説明を補う構成・証明と小規模検算は docs/verification/bootstrap/pr65-review6-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "b9e030cbfe87a5802b9fbe5586c3934a1a17fe24841dfce104f740c2c81ec5d4",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc222-h",
+      "documentDigest": "587fe9d7af8fde7761b11e0ec093c8f28eb75d68030f21c0082dc88017d351c8",
+      "learningOutcomeIds": [
+        "outcome-invert-generating-function-equation",
+        "outcome-derive-coefficient-recurrence-by-differentiation"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ff071dbc470311c96d3c33b76edb22ee1ae743dff8164d9ddb23c939d09656db"
+}

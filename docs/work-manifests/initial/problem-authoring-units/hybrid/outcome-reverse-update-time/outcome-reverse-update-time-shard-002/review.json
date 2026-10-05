@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reverse-update-time-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "06c6b514a092c60e33c9a05e1ec8ad5b86cb89b12e87f9b6bbb90fcad888f75c",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f42207b04b6d843cf77bf3d2af3e42fcaee6c5b64dcd63bd125fc0ad2dd7f53a",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

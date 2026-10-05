@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-reorder-counting-contributions-shard-003",
+  "shardSubjectDigest": "23e7fdce71db9ea2f860981ba5f3a08119e9cb556ba391a9832b99e7d4fd0166",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc330-g",
+      "url": "https://atcoder.jp/contests/abc330/editorial/7743",
+      "checkedAt": "2026-10-04T03:27:56.529325Z",
+      "reason": "PR65 review 5404024001: 公式のindicator積をU・Bのmomentsへ再編した説明について、三位置の共分散、条件付き期待値、row/column包除を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review14-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "3a0ddfaf26d13be4b33c47c3b4993861ed2e59d53853e965aabb607c34575bbd",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc324-e",
+      "documentDigest": "d6f658cae1375ba63f6d3d36472ffdeae54434e6a3ed1b93cd689b079ee38d6b",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc330-g",
+      "documentDigest": "faa6e7ec80168612a07004e3fface26ca399768e60626dce7f65f0646a3a03eb",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc334-e",
+      "documentDigest": "5c09aa554d03ec90dd921ede01e213cf8f0846661e36f9bb1f519f75fb06b179",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc347-e",
+      "documentDigest": "63cf2372a7b85c639f8417066db9b14ba029483ff0d8e63493ac3ec223edbd81",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc362-f",
+      "documentDigest": "3bdfa4072774ffe9c790ed788d33e7dd5857c586b14bbbe590323ed28740b488",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc365-e",
+      "documentDigest": "9be1b7d2aee0416900ef83672eada9cb7f895e1ce69ca72b94a6ca7ccf80ba7f",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc371-e",
+      "documentDigest": "fa46fcb0acefc6b6262d4177478c98f4227ee843a685e89474b18f3bebadc99f",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc378-e",
+      "documentDigest": "2a669b05342ffda28617be0e704410faf82dafa350ddcb02074051a5816624c9",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "45452b4b8a153b15ea5838decd113a5802a09ccbdcaad8b499e15dc693f808c0"
+}

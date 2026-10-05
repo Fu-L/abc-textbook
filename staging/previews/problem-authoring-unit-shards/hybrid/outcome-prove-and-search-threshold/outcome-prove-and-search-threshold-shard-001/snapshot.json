@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prove-and-search-threshold-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6aefa748ab0ec1f7f19f3d68e6dede7187c45ea0ad9a61829f831fd36498bf4f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "e03f004afb1059a099019f8a1389648ec35d16b4dc9795b568c18893769d3cc4",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1d4d6e33e3d2ca8c38ab6c4c26a45c73de33ad19c86a1cb553d3f6c07f7562a0",
-  "reviewDigest": "acf844d0b4ad6b4ac0d0eff3f257ef89191d8a2d1bbab6918835aacfb79eee7f",
+  "checksDigest": "cb0cb3abc7ea9958b1af56e2e70cee35e0e7a92c82513126d345f414981eb926",
+  "reviewDigest": "b999c675d3b75357b0e19089fc967537acfd0aaea4afd3941a8c66c44e1b9300",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc215-f.html",
@@ -47,5 +47,5 @@
       "digest": "77b24dafb039c1c90d499b629201ce758c1cd9ce25c569017be707d7e8a93089"
     }
   ],
-  "snapshotDigest": "75b8193a6a1364407edc9768a9cadf841b631f537c76c7735bb5194e791cda53"
+  "snapshotDigest": "c50997f01efaab7a2c938c8adddb53287ad02b5eb6d5f5088938e69aa0cf3540"
 }

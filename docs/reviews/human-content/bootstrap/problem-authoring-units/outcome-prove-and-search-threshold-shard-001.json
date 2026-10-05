@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prove-and-search-threshold-shard-001",
+  "shardSubjectDigest": "e03f004afb1059a099019f8a1389648ec35d16b4dc9795b568c18893769d3cc4",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict", "original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc292-f",
+      "url": "https://atcoder.jp/contests/abc292/editorial/5884",
+      "checkedAt": "2026-10-02",
+      "reason": "公式解説自身が縦幅をl sinθと誤記。二辺の角θ,θ+60°から第三頂点の高さを再導出し、l sin(θ+60°)へ補正。"
+    }
+  ],
+  "priorReviewInventoryDigest": "b999c675d3b75357b0e19089fc967537acfd0aaea4afd3941a8c66c44e1b9300",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc215-f",
+      "documentDigest": "3556b86062b1d0ebfaed0b31337dd660738c3643c0eba44e8209515e2a1c180e",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc229-g",
+      "documentDigest": "c538419c7e02977473515b2d7d8e46e0f8afc5b8209c86d0383aa452f200b583",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc246-g",
+      "documentDigest": "9c1a62f2af1e30cec939455bbecaeb8394cd85953c1e2fa8e6b5574b1b4b6df4",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc263-ex",
+      "documentDigest": "95d1985b9f8779ecac9d2a025b663643952c5b85d8956653fdcbafd3cd7f0978",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc267-e",
+      "documentDigest": "4bb58c7a60e4ed137a885d3377e1677f59a5f33edf95f4bc517a2300e6c32064",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc269-e",
+      "documentDigest": "2a293cf360eabd42020e0dc531c49a11a5c5e767c7dadbc3fc2b92a5080ef7e2",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc270-e",
+      "documentDigest": "62c91cda6b9ed787a7016c7dd00092a653bd802b6708bd7ae4e9993584137845",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc292-f",
+      "documentDigest": "049faae5b71dc9159d120b9369983cf2255339ada044d932cd345ba662a02e45",
+      "learningOutcomeIds": ["outcome-prove-and-search-threshold"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b2b8c7ddf9e42e11f714ea552bf71b437d801ed19d15477cf26ec4ad690e5786"
+}

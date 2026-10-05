@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-dominated-candidates-once-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c662a60a29f382b2c024824c04c74a59cd77ade3bccc5b080d0d0ebaf24fdd40",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9d59aefef7fd09f23a61bcc42c0f95bac50ba3c5b8b8fefa160790ea3d898dc9",
   "requiredChecks": [
     "source",
     "structure",

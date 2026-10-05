@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reconstruct-tree-from-distance-matrix-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5948e86d01bf622062de3b2e3631a55677c41acd7e9a94310a1929b1e8fae9f0",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "17a579ef4d696b0aaa6c23d08a0ec47475e9ab053e974c2d1566ccaf571ffe2b",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

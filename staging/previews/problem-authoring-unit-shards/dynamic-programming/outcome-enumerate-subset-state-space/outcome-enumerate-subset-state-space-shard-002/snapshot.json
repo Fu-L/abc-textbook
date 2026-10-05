@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-subset-state-space-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d403abd65de422d86ac03eb29bf3dab4a736de3b853f0c66eaf9af2e5963b198",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "51f524b9a2d9861219f22cfefed02ca8c2ce1dfa5f8b262a1f90d9704808ed52",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f5ab9c0c71248990efc5b0c49c1cf5d227cb5279d72e3adda08ce5453ddd13eb",
-  "reviewDigest": "a318b9edd1a6f8596687d12dcce7213948a26ccd01085d2a241b65aafa5449b1",
+  "checksDigest": "465afe4ec531dd36ded6ee76120facf2438bd182d63c5b83d699b86c810f00ae",
+  "reviewDigest": "b4e685bd5c3689126aaf69e13827906b046fa882dfd4b72b385f2f687e4f5deb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-enumerate-subset-state-space/outcome-enumerate-subset-state-space-shard-002/abc343-g.html",
@@ -43,5 +43,5 @@
       "digest": "41ac184b9312e7ca39249a0007270556a312fec286fd8526bde708a7dd74cd3c"
     }
   ],
-  "snapshotDigest": "664e09382b79e92b8aa6d1eacf3706441c730a514e8d38194efe5461db2255c5"
+  "snapshotDigest": "4229cb24f670377b5d2028080c98f5c32b8a5455ff666724807cc5677d7067d7"
 }

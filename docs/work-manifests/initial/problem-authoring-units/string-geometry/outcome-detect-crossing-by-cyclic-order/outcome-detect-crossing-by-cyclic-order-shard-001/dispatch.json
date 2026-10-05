@@ -32,7 +32,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "b7271c1fdbb54ea81012994fb4dd83f851d9c5dbcfd7e415495bb3ebe36245b3",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/string-geometry/outcome-detect-crossing-by-cyclic-order/outcome-detect-crossing-by-cyclic-order-shard-001/checks.json",

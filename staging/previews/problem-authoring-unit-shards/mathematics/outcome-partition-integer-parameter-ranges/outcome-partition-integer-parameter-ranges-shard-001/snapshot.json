@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-partition-integer-parameter-ranges-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "acd4ef40bbddf82070eae3dcee11246255c4104924046ac3493909dc7579f841",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "e304fbf9166f061900f48463c6109d3b7845c8aed0f4857069acbcbef9d334cd",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "acc8acd4e36705500ba2084105368bbea84db103cf0e5edbed29c9a2bc6d804c",
-  "reviewDigest": "fa85c7acedd6b41c80cb8e2a912973455f8703eb6492539114558ee296214b20",
+  "checksDigest": "7baadfaae3300516540b64aa1684273bb6c3bc54842c08b1c3221b600210edb5",
+  "reviewDigest": "533f225e8bd9b9beccdb1fac6c15c0662aa943dd9d8ea70c1a5539b74537a26a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-partition-integer-parameter-ranges/outcome-partition-integer-parameter-ranges-shard-001/abc230-e.html",
@@ -39,5 +39,5 @@
       "digest": "bc23b62ae41501a400acee9a6ba4b2ebd9f8e1a81900949f3eaecb997bc3d4aa"
     }
   ],
-  "snapshotDigest": "d18e4a11f0c01e3395c9a6da060eadc998599f02c968eacbfc1ef03e17554039"
+  "snapshotDigest": "982bc08c9821648ab5baf7b8c73e3aa9aad6daa616022a82f29a8caa08d8cba9"
 }

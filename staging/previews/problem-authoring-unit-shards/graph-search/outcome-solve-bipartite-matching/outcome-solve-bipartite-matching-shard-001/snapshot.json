@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-solve-bipartite-matching-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "36e18f90a060a8bac3e43ffec39012952b6f5c3af8f09ebb26530142ae6f0093",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "6bba5bb2238e689d0ff17a26402e22f0484955c805b88cb696b8eaa3c966581a",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "78d09822e33e81b66870398135d97e3d0232f50af9278fb28d5674e6559f33dc",
-  "reviewDigest": "a5f9c91eb491442b2f8f8515a8a28d0b8a2cae63350f383ef78c8200703712b3",
+  "checksDigest": "3297737011f32d1d7742007817b5b277f3a41db453607c8435b3dfc6a56c5458",
+  "reviewDigest": "95b73071ce422dc388c90f2648deafea7d1a52d18f443585a99679da7f1bbc72",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc274-g.html",
@@ -43,5 +43,5 @@
       "digest": "744e08be75735cdbac9c7d6257154fe76208682a471e5b9c76eeab4e002193f8"
     }
   ],
-  "snapshotDigest": "bba7c210b645d5eb7ea8fab8925fce01fddf909353c737c677e94e92c4ba3d66"
+  "snapshotDigest": "62a1812812ed9aa6e763f42b3641e6e2b7aecc052d4f784c7c685984e13ee493"
 }

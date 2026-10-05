@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-path-matching-by-contraction-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "87242ac0dde3bdc4fa077bdf08685e9feabda84ae8539cefd00845a84f91e4d8",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "d34daaaba26690296ecc63f26f373419821eb92e06d1df87ffaec02f218a9b93",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d8a7b6e2766230062278ddf2fba4a49e4d6dbb65adc3dacbb5c523ff98bb5e19",
-  "reviewDigest": "256a6eb429563d2d36cce9771e7c8d8143370bfad2d54656fc14a99a9565c49a",
+  "checksDigest": "bd11bd1c98768c556ec06e624311e74b0576402406f45907faead55632633837",
+  "reviewDigest": "c9a32a6e4f1b32e38fad7177ece2613c37d12c4e498f298fb3730dfa51a45f82",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-optimize-path-matching-by-contraction/outcome-optimize-path-matching-by-contraction-shard-001/abc218-h.html",
@@ -23,5 +23,5 @@
       "digest": "4987d7b05c0a92ee42daa24a035032cc6cb60cc95e3780630ff3e8a6b8355291"
     }
   ],
-  "snapshotDigest": "9c784c92d8b3362fb10b4758deb085609b8d0c6c0ddc73e65c049538a88627b8"
+  "snapshotDigest": "58b7603ff5ff97016b3a38ee600a669efae28a0332958cd72c8719951e267fd3"
 }

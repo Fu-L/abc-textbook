@@ -46,7 +46,7 @@ sidebar:
 
 直接の前提単元: なし。
 
-このUnitを直接前提とする単元: [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)、[乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/)。
+このUnitを直接前提とする単元: [線形matroid交差の乱択rank判定](/learn/combinatorics-algebra/linear-matroid-intersection/)、[一般グラフの最小重み完全matching](/learn/graph/min-weight-general-perfect-matching/)、[乱択代数fingerprint](/learn/modeling/randomized-algebraic-fingerprint/)。
 
 乱数が作る事象と成功条件を分離し、独立試行による誤り確率の減衰や決定的な事後検証まで設計する。
 
@@ -80,4 +80,4 @@ sidebar:
 - [ABC339 F 公式解説](https://atcoder.jp/contests/abc339/editorial/9206)
 - [ABC339 F 公式問題文](https://atcoder.jp/contests/abc339/tasks/abc339_f)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-randomized-algorithms`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-randomized-algorithms`

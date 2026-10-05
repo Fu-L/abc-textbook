@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-online-relaxed-convolution-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "cc9b9d9041ed9d2a30479b44201e96aee7290fa7d341cb545379af96df505ba9",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "d6f9791438bae4a2f2e339a8d24bccaaa8d62dece034033ad80a95f0917233fd",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "283076a8129fec30d96093224b90fd6e3a08671232c7e8855d4326e26bd7c3e5",
-  "reviewDigest": "0e2cc0d04c9ead2f3bac95e1a71250aa6cb15adb6acccf3152645e1be1b8e483",
+  "checksDigest": "7a5aab8b7c4f98cebc5c7c0ad7d68a778ae73b83b93beb48fd1d2a917b8a5fc7",
+  "reviewDigest": "a7a1fa9a9598a9acf9cf00307ba5321357d5ac62fbf7c4df5b350426a07adde8",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-online-relaxed-convolution/outcome-compute-online-relaxed-convolution-shard-001/abc213-h.html",
@@ -23,5 +23,5 @@
       "digest": "0ea2251048a5f52677ed545667aa1d9dec66a51bb3ed86e62d445a07d202169b"
     }
   ],
-  "snapshotDigest": "22ea522bf252adbff1d0bc8052c8e8084282fbfc4bab633e49797a1739316bec"
+  "snapshotDigest": "68b70888be695f7aa4cd4cd44fec7f97a48d21717ea71a51629f55f50db7cfd4"
 }

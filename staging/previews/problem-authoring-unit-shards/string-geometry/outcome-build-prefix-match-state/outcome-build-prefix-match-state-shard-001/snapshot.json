@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-prefix-match-state-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "beaaacdc8d3841c9f0b071f179ce3c88984b23e1775fc1a21f93d088dd2d2fed",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f0c20af8f9c0eb2c39928e3d405551a34cb460049fbee6f06d6054a8bd9bc37d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3b69e02055b2435aba65e2effc186bc3c99c1b44d36e52a9cb66bc4d89b3029e",
-  "reviewDigest": "680d0cee7651ac7ccd1c58c4c92dd77d27b7550ad4e72d39574815aea1ecdc7c",
+  "checksDigest": "913f2db9c24a780afd969dcb09d51869b963566ec65dbc95cb8170e891f1c4e5",
+  "reviewDigest": "251265585e0b61c1b0a4c0407493ed3176fbf1ef31e237f8781d619d264cc445",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-prefix-match-state/outcome-build-prefix-match-state-shard-001/abc257-g.html",
@@ -27,5 +27,5 @@
       "digest": "3faf90d15894931f7928d40de9d8f171a525bd37bcccff78da176d089b96835b"
     }
   ],
-  "snapshotDigest": "4e850538f3d9b6bb1318b2036cee7cf36f40831b09a42c33511e17df26b7e29f"
+  "snapshotDigest": "312bcea1a33697159e44c072e3bf79e308eab3535dd3a903700e1a595f8e7dfe"
 }

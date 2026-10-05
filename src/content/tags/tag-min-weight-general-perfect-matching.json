@@ -4,7 +4,10 @@
   "definition": "奇cycleを含む一般グラフで全頂点をpairにし、weighted blossomまたは重み付きTutte多項式の最小次数からperfect matchingの重みを最小化する。",
   "parentId": "tag-graph-model-structure",
   "prerequisiteTagIds": [
-    "tag-bipartite-matching-hall"
+    "tag-bipartite-matching-hall",
+    "tag-linear-system-rank",
+    "tag-modular-arithmetic",
+    "tag-randomized-algorithm"
   ],
   "semanticSignature": {
     "objectPatterns": [

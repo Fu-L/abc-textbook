@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prove-greedy-order-shard-001",
+  "shardSubjectDigest": "29c548a485e0e50f822c2051712eb827788a01b3008e69b647df6d96e02bb662",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc254-ex",
+      "url": "https://atcoder.jp/contests/abc254/editorial/4053",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 操作列の正規形を確認し、部分木個数差の各辺下界と達成から貪欲を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc214-e",
+      "url": "https://atcoder.jp/contests/abc214/editorial/2431",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both interval assignments after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc226-g",
+      "url": "https://atcoder.jp/contests/abc226/editorial/2893",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Odd residual capacities and size-two capacity optimum derived and checked by exhaustive assignments. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc245-e",
+      "url": "https://atcoder.jp/contests/abc245/editorial/3635",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Both attribute constraints after exchange proved explicitly; exhaustive injections checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    },
+    {
+      "problemId": "abc252-f",
+      "url": "https://atcoder.jp/contests/abc252/editorial/3998",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Deepest sibling exchange, contraction and remainder normalization expanded; exhaustive merges and partitions checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "priorReviewInventoryDigest": "99b1566c10db5ce32c8d0f45dc982ff35aebddb55a4d7cd8f5737e5ff9f5d844",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc214-e",
+      "documentDigest": "f31f263d2c5e58107e413f698c8f3235ee7050a2cedf54521626a24dc6a7b41b",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc225-e",
+      "documentDigest": "e53c521b23f21734543a0c941dfa89a34dfc4d3e6af1f15ddeb00414655ea141",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc225-f",
+      "documentDigest": "d221a99a560842fde1e6b5e6d979957e5dd78bdc409dc8bc1515f2cb7e36d6e2",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc226-g",
+      "documentDigest": "0e781215ab8dde2505fb8323a6f4720ff10a829169c4b63bce7ca259fb8a1d2c",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc245-e",
+      "documentDigest": "bb5f54029518bd5cb91e7d427af5b14e350a6e566bcedb4eeece28c8ae14ba16",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc252-f",
+      "documentDigest": "d35857163ad8aaf71aa1996ebcd8a0db5144510865e8e0a7f47de7921a54fbbd",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc254-ex",
+      "documentDigest": "82e18e2735f29f45ec431cb7143d14b9d70a1721cd4dc540040a9ce9b93a00b7",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc257-e",
+      "documentDigest": "58fae21ffb321a0161e56ef654a294deba2e6f8c5b544460de9a86e84b43a92f",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "dc9d93666f91b557ec53e8b1aabec23b5c0876d6cc82a6b3859ff817f0882aed"
+}

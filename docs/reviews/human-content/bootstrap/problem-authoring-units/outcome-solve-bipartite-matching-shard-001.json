@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-solve-bipartite-matching-shard-001",
+  "shardSubjectDigest": "6bba5bb2238e689d0ff17a26402e22f0484955c805b88cb696b8eaa3c966581a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc461-g",
+      "url": "https://atcoder.jp/contests/abc461/tasks/abc461_g",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    },
+    {
+      "problemId": "abc374-g",
+      "url": "https://atcoder.jp/contests/abc374/editorial/11099",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 元辺path分割と到達鎖を区別し、SCC walkの両方向を再照合。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "95b73071ce422dc388c90f2648deafea7d1a52d18f443585a99679da7f1bbc72",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc274-g",
+      "documentDigest": "f55410fd5fba9e1232ac5aeb5ac794eaae8a794ebfd09ab308f9f5535a0e83f7",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc317-g",
+      "documentDigest": "979d5f0b85c2716fe440964a504e64d5a039e880a754c63a3b26c1d7b095534e",
+      "learningOutcomeIds": [
+        "outcome-solve-bipartite-matching",
+        "outcome-characterize-bipartite-feasibility-by-hall"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc320-g",
+      "documentDigest": "875e5364ce88e7e1b388aff746acd22662388b61dd2e24db5888d30bd37c117d",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc374-g",
+      "documentDigest": "98d6521647d3d4ad3b94ac290f20038c4ebdf3535c02541cbc8fe01b2dd94bd1",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc401-g",
+      "documentDigest": "ab4933f8dbb6e662a46249e433c35b7da31649824c68cf2516c310e2b963dd39",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc445-g",
+      "documentDigest": "e5f6d40f1c7a0854230b77ed07b092bc938ccb84320aa1303d074818b3bc4fa1",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc461-g",
+      "documentDigest": "fd0e9bcec9fd5ddf58aad040b119d99253c69394503f67ad56e57450dae0dd20",
+      "learningOutcomeIds": ["outcome-solve-bipartite-matching"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "6ad30481a5cf9247a771b3b8e50ff9b2c491cb35ecb7d3623948aab00f7f2270"
+}

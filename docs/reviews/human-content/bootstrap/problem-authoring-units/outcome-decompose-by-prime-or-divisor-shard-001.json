@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-decompose-by-prime-or-divisor-shard-001",
+  "shardSubjectDigest": "0fecbc103c5015aaad38f95ec9e0cddb64eedb66fd03d419de7c411a0bc1266d",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "d34e6147223582b3b232f660d105379a5c22d64a52b23769e6ff3fbfe33f2990",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc227-g",
+      "documentDigest": "e6e2b01551eb231c1f986d14b9905994121b3bbda6be93f0168e9fda9fa00c4a",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc259-e",
+      "documentDigest": "c5cd485110fcce057e74153406ee7714d05c3508522630b8b050cba9e5e1b0d2",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc322-g",
+      "documentDigest": "b7e760bf45257e1966e019e7be5d5927e294fc4bdcf70b618015bcd1e7f5fdbb",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc384-f",
+      "documentDigest": "3fd674b72ba1145b6ede69d0eff8a3dbcdea7158e89eb8eb3108e08b71d61d67",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc393-e",
+      "documentDigest": "3b575fd5cabf36547f262f2e04778abc03a1d211dcd9c1af092b237d3cceeb97",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc400-e",
+      "documentDigest": "d007fcfe2a5d3d61cbf43e4aeaa17fc400561930a2f017119a3b4801cc7cd274",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc412-e",
+      "documentDigest": "e1218aae0065d35484a40f74375ad13659a26863cc439827dc74879f2ba7efcd",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc420-g",
+      "documentDigest": "79b16439e7c070a159f6f760f168dc34dcfc8a192ecf5589155b3c4bec74f949",
+      "learningOutcomeIds": ["outcome-decompose-by-prime-or-divisor"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0619a221b8adc5ed728449b03d021e1aa316ca2aceac15f08a7d047fcccc0023"
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
+  "shardSubjectDigest": "2c3b00069ccfa33f965df06a9c119f8945206d6d6580d30dfe2d13e829352f84",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc236-f",
+      "url": "https://atcoder.jp/contests/abc236/editorial/3287",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 最適基底に対する具体的な交換行fを選び、価格比較とrank維持を公式証明から補足。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "2b3b75f38d9638559bf13129ea35f7df5222a3a9283d7a7f89455c8f1016f2bb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc236-f",
+      "documentDigest": "f0f12161f58150310ce658886036c313f0666d0b8d98952e5efc949cdf72c97a",
+      "learningOutcomeIds": ["outcome-optimize-weighted-matroid-basis"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b9d1b2f1bb9949f393d1a5e70e79d87bb69529a3ba77c6704835c23030b188ac"
+}

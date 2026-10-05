@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-sum-multiplicative-function-by-min25-sieve-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "9d9f216649fb7bfc6405bd4f6dd4d1da6c7fa131caf2539da2240fbe9f544b51",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "afe6cb546b2e1a118657fad509f122331d8ace02621d5c04112a00c5f24405e0",
   "requiredChecks": [
     "source",
     "structure",

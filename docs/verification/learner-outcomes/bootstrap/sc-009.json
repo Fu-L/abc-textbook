@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "3.0.0",
+  "criterionId": "SC-009",
+  "status": "not_required_by_owner",
+  "scope": "initial_problem_corpus",
+  "decisionSource": "owner_instruction_issue_48",
+  "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+  "replacementEvidencePaths": [
+    "docs/verification/bootstrap/problem-authoring-units.json",
+    "docs/verification/bootstrap/problem-corpus-check-results.json",
+    "docs/verification/bootstrap/us1.json"
+  ]
+}

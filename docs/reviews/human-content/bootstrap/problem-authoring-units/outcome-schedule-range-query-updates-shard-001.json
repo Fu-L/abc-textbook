@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-schedule-range-query-updates-shard-001",
+  "shardSubjectDigest": "0e7e6ecb509411ce870e28cfdbc56f8b2b5afd0d7e10a980e3d51baea08c5c25",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "70a2a60b1a8e86b7c944a10aa8b5c8e8b9451d9187319dcf07e38aba1b8484b2",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc242-g",
+      "documentDigest": "acb2e8a453eb15abd1aba69657ff34b6a888b24a3d61f55b30576d3f6b24a633",
+      "learningOutcomeIds": ["outcome-schedule-range-query-updates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc293-g",
+      "documentDigest": "718ec4f63011415e2d6eeccfb8270568fca3f68d92b02bd6b548c7a8923ee8e9",
+      "learningOutcomeIds": ["outcome-schedule-range-query-updates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc384-g",
+      "documentDigest": "1e291c7e01b07b75cbf40feb880fc718478dcfcdf9ced96c19dd0c7fb0a24ebc",
+      "learningOutcomeIds": ["outcome-schedule-range-query-updates"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc405-g",
+      "documentDigest": "7e07e8e1da3bdba0323adcbe7160e209cef9d073dbd753fd693de5347349b0c2",
+      "learningOutcomeIds": ["outcome-schedule-range-query-updates"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "71102f42da2772b5e18a82030103240c1ea9dbac7a5371b970d678c2c20ab08d"
+}

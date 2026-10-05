@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-correct-overlap-by-inversion-shard-001",
+  "shardSubjectDigest": "79b845310c48d8a1a31f55c361e09921ea6de9c35da1d507383243af290db561",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc236-ex",
+      "url": "https://atcoder.jp/contests/abc236/editorial/3289",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Signed connected graph coefficient derived from root-component recurrence and checked by complete graph enumeration. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "priorReviewInventoryDigest": "4b81f40c00e14ebce940309c8677b69286ade00b79cded97a9d9d0636ce52cec",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc214-g",
+      "documentDigest": "d5c07d7fd638fa1cf757be2339d6ff6eb493160796c8979f1f7f2a06db1accdc",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc235-g",
+      "documentDigest": "585c25612d8d3d34d2665f3c15748e98cf13cd063ba07b7a2f2bff11c9251087",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc236-ex",
+      "documentDigest": "e25f1c650ad83e9b4914924a15265ddf4e99427274fc725032a88c0314101355",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc242-f",
+      "documentDigest": "16a1ca205310967046299afe4ada8215fab6abee454c1422318eee58c51489d1",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc246-f",
+      "documentDigest": "52f408ffdd5283ca649ca0f600c3b760668de83dd9747532919339425a2727a3",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc280-g",
+      "documentDigest": "fa49bdb521e1db9c2f5bd6bf5322737b1a92572da01171c0b4b876f748db8a79",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-reduce-geometry-to-algebraic-predicates"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc285-ex",
+      "documentDigest": "3471b4f2f5ebe87e7d56ffc3a999dfa651011d702978bf2abd1ec9968dfc3462",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc297-f",
+      "documentDigest": "b8336f23e13621a6b4757ce061c0ce3790e220ae71f181afe9b13c178dc54544",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "ac93ce36d73f68606ebb0cc8495663b6c1f28e31d3beaf4723fde3fd27856277"
+}

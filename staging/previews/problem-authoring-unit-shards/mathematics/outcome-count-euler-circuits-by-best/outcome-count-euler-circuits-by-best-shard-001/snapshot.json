@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-count-euler-circuits-by-best-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ee223ede7266d53a343d4df88d53dec85b41c5f33219a83f5041a400b9a6a102",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "aaeffeb44834ca034ed3d12a4482f36a870a046bdd4c6fc68ee2913df61dec59",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "546f54a6dfa9be639499ba6d6ed8f4d2cb0142f798f16ac14e6feabf332e5b3f",
-  "reviewDigest": "5b458bbd0dbed335e8e391225a031462d12d99f6efd917aaef4592ea83aceee8",
+  "checksDigest": "01692d58ed5ae2ca7390cb58c88ac0ceaf51bfd9bc69b1c8cc3c76f42ccc300c",
+  "reviewDigest": "4f61999eb7776bd765b5b595e7d6f5bfdc188046f5cc0573373aa7e9f6131274",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-count-euler-circuits-by-best/outcome-count-euler-circuits-by-best-shard-001/abc336-g.html",
@@ -19,5 +19,5 @@
       "digest": "165bc7ec3e892d27158e8e16b810efdba5ffce7a84f92e3a0728f55a6f72054e"
     }
   ],
-  "snapshotDigest": "8e276216e250123cec252cea5c3dddb9ba9b62734222cc8a2b2538e1c9f29fd6"
+  "snapshotDigest": "9afc60c3379a97a0af8867a4063fff2361636b740886cec813ca5f006d5b9657"
 }

@@ -77,4 +77,4 @@ M bitの一演算はO(⌈M/w⌉)。bitset操作をO(1)と数えない。shift後
 - [ABC276 H 公式解説](https://atcoder.jp/contests/abc276/editorial/5169)
 - [ABC276 H 公式問題文](https://atcoder.jp/contests/abc276/tasks/abc276_h)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-bitset-word-parallel`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-bitset-word-parallel`

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-find-period-by-multiplicative-order-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7a3d30b64a369035106eea881d1dd65e04d4b662fb15bb3f7d6a3c2dc2544d10",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "14231cfb1a8c96ab87378c81659d8bf25c40550fd804a22f401ff1596a72e07e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ae3a527d3ef7c73ea91cf9a961cebe74dd07a71192c0a72194770f58bd014414",
-  "reviewDigest": "cc6d571f93754f9fa52ad319350db1c676b68588f8b8947c0f647ea5fd1ef2be",
+  "checksDigest": "de09460e8c280ddd9e6770b70556eb32fb9aed34d6e35d70d4f9431abb33818e",
+  "reviewDigest": "ea79bd44524c0c9ed2ffeb3abdbeed0004f32e43f0093192d778077ba367b07f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.html",
@@ -19,5 +19,5 @@
       "digest": "41754bac18dcd2795f0350620a4d5d3b5a3d551cada887f60496c79ed1200f24"
     }
   ],
-  "snapshotDigest": "f9274112b592cf951ddb55bc9029cda6975e9a24db35c6be5c7f74896cff8461"
+  "snapshotDigest": "2fb21afe6099c4ffb41b12d53b82777052b92d669810482bee8392af34dfb49d"
 }

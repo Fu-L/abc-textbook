@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-univariate-convex-function-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "31740366e4c57891d39377da6856d7f0bb1a618d079f7b6287eb454365ed637f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "d753f0a7c28d3f617637c36ca1cf33bf994537a428b98a306219fcad3e31f360",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-query-recursively-defined-string-shard-001",
+  "shardSubjectDigest": "948046e70cfc9516daddcace4c7427ceceb9b46bb561da5bd7705792312765c2",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc450-e",
+      "url": "https://atcoder.jp/contests/abc450/tasks/abc450_e",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: 公式問題のS1=X,S2=YとS_10^18を再照合し、代表K≥2・飽和表の参照を補正。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "6f203352a2ac8887f43912937da3cadeb7dcd3c1c23032a9a0ab6551e7520494",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc346-f",
+      "documentDigest": "6d4661beb86d5c0c833a6511d6700bf866d34298ac4b9ffce91066b0d5fa106a",
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc350-f",
+      "documentDigest": "449c9eec72c3ff774238c77e86fb114213d11e43edc9df24f42c3228e7377026",
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc417-g",
+      "documentDigest": "12ba9063e7668589897018a224c5f858efd5502b5c90f199d22f54e2950ab2bf",
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc450-e",
+      "documentDigest": "9754d3cf7008f258f18a283468e980bac64815da86b7fc6ea89294346b0d68a2",
+      "learningOutcomeIds": ["outcome-query-recursively-defined-string"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "cf7a888af2b467ac039d7defb1a0ef002b2dddea16028f8968bd4514fb6147a2"
+}

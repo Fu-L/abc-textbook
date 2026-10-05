@@ -9,11 +9,16 @@
   "homeUnitId": "unit-min-weight-general-perfect-matching",
   "prerequisiteOutcomeIds": [
     "outcome-characterize-bipartite-feasibility-by-hall",
-    "outcome-solve-bipartite-matching"
+    "outcome-compute-in-modular-arithmetic",
+    "outcome-design-and-bound-randomized-algorithm",
+    "outcome-solve-bipartite-matching",
+    "outcome-solve-linear-system-and-rank"
   ],
   "dependencyShardIds": [
     "outcome-characterize-bipartite-feasibility-by-hall-shard-001",
-    "outcome-solve-bipartite-matching-shard-001"
+    "outcome-design-and-bound-randomized-algorithm-shard-001",
+    "outcome-solve-bipartite-matching-shard-001",
+    "outcome-solve-linear-system-and-rank-shard-001"
   ],
   "documentPaths": [
     "src/content/docs/problems/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/abc412-g.md"
@@ -33,7 +38,7 @@
     "requiredMode": "self",
     "riskReasons": []
   },
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
   "manifestDigest": "fc61db9f8a81b86115171e719322a1fff9c571f4717444091b589bf1e43025e4",
   "evidencePaths": {
     "checks": "docs/work-manifests/initial/problem-authoring-units/graph-search/outcome-solve-min-weight-general-perfect-matching/outcome-solve-min-weight-general-perfect-matching-shard-001/checks.json",

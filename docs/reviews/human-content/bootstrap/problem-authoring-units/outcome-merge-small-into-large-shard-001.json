@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-merge-small-into-large-shard-001",
+  "shardSubjectDigest": "34abae6e7317f459e37db2db583b9d066a6575317634cabcde2529cec0a155dc",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "7f5a51d11bcc86520dcd20967ccefcc4ac51bd16af39ee548e38afba8bb86961",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc324-g",
+      "documentDigest": "4cfebba1ad8ac14d9282c28d750e17281030cf6301dcabd9efd6acbdcbc6d2e8",
+      "learningOutcomeIds": ["outcome-merge-small-into-large"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc329-f",
+      "documentDigest": "303333fd8709a2a9140a6e4bd8a29eefa040cdf6997a8677866bf2f96fc6c7f7",
+      "learningOutcomeIds": ["outcome-merge-small-into-large"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc411-f",
+      "documentDigest": "c784bbd7601194855a548e8c4d50eb7e07fd39c351e8efe9a77093340937a18b",
+      "learningOutcomeIds": ["outcome-merge-small-into-large"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc454-g",
+      "documentDigest": "8e2d8a637b9287955dff6f32ae39cdcff1a8be6b785d57ba75ad3eb9f6f7d20c",
+      "learningOutcomeIds": ["outcome-merge-small-into-large"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "1e0daa3d49f15d173a3c3f31df617c9217110e0b95ecb9b891c3bbae636e3827"
+}

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-evaluate-adversarial-game-value-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "5d2320728df8183e4effdd48c4720f49847988386ff344ce95ab733e167c08b5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "00615def5ecc992036aa22d1f02aaed18604b771883317b763c111a6d63c6cf8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "58a990a54b89848e842a1e62aae5b765d1b5cd268637530232ad439c48f05ffe",
-  "reviewDigest": "7e81d01bef1ab33335268d1d3eacd57bd45352ce699f7fb3f20cce33758dcab6",
+  "checksDigest": "0a63cca49cbf36e8bd4cd62c22489ce668ee0956fa60644a7ebdb379044efcf9",
+  "reviewDigest": "5da0eb3a3938cffd0b03f645c44eabb14a6b7a1259598611f7023bd09d4475db",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-evaluate-adversarial-game-value/outcome-evaluate-adversarial-game-value-shard-001/abc303-g.html",
@@ -23,5 +23,5 @@
       "digest": "cd2fafba31b3737c2b025c059805e5c729d21d3e95dece608bdaf7b3659ea018"
     }
   ],
-  "snapshotDigest": "98a4d242a6fb3f5b1a50504f596f256635aa10b4958b03bdcc7deaaaaa605955"
+  "snapshotDigest": "43dff909bc366515190a4baea1c18de7ad6cdd4fd2a62236de0e624a0dce0c5a"
 }

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-maintain-xor-linear-basis-shard-001",
+  "shardSubjectDigest": "f8591837883a0fbed79ef953994cc458133511cc85d61a7dd8db63991794bd62",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc223-h",
+      "url": "https://atcoder.jp/contests/abc223/editorial/2784",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 添字付きpivotのswapを全左端Lについて場合分けし、suffix spanを保つ代替実装を独立に補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc249-g",
+      "url": "https://atcoder.jp/contests/abc249/editorial/3880",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 接頭辞固定後の代表解・自由基底・矛盾枝と、N−rankによる非空な零表現の判定を具体化。英訳公式解説でも代表Bから最大化する手順を再照合。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "ee9abf8551f075c21ef0cedc991977c81543e31a98d723001a1e3017a1896b47",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc223-h",
+      "documentDigest": "088673c52d14f78ae41a14e93f13064fd84a4c87044e14b276d40212afef0f52",
+      "learningOutcomeIds": ["outcome-maintain-xor-linear-basis"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc249-g",
+      "documentDigest": "b68204db1cd372e7429f7eb70caff4c22fdbe27f96faf9fa3160e0ce1c2f24f2",
+      "learningOutcomeIds": ["outcome-maintain-xor-linear-basis"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc283-g",
+      "documentDigest": "03327c3832636e7430b601a86cfb686f50736cc0e813b495e712924d402dcdb4",
+      "learningOutcomeIds": ["outcome-maintain-xor-linear-basis"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "0bbb38f0b40f6c488253991db22f817feda241f0b1bfe1d047f2eb4a7b9a5ed7"
+}

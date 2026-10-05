@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-weighted-matroid-basis-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2657a145224384ffe5524c47501180e0f350abef5b52b5816c468810dafb83c8",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "2c3b00069ccfa33f965df06a9c119f8945206d6d6580d30dfe2d13e829352f84",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "0bb3750aa6bcf2b3ef382c0ab944fb240f3cfc00cfc5620fc6f1cbfc5e4f0bad",
-  "reviewDigest": "01dd572f0512ac5a8ecc215935e82b20de4ec2ba4ab5748c6511d672392f78f3",
+  "checksDigest": "2ba965a8990a248fdd1960333d92be3eaa11f1412230c6e9967310feb92d98b6",
+  "reviewDigest": "2b3b75f38d9638559bf13129ea35f7df5222a3a9283d7a7f89455c8f1016f2bb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-optimize-weighted-matroid-basis/outcome-optimize-weighted-matroid-basis-shard-001/abc236-f.html",
@@ -19,5 +19,5 @@
       "digest": "432b4ca3272e9e95ec428bb0e1c71d33d9e27ab3976e6bd248545d53a66d7994"
     }
   ],
-  "snapshotDigest": "271533731143c1c09162c416e5e77362658c6fba0f694f76c064874bd9a43326"
+  "snapshotDigest": "0b6126d39baca6a84f2d5905779b136feef370088af2fa770762185ea3801985"
 }

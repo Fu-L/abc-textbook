@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-ordered-interval-partition-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "7b4d2d2b4d23a2128d344e6a9f08a0c61c0aa79ab5e3b2259e05d7d3e9f4e505",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a06cab2bb9f6260e9f6f28838b6a7dcf2eacfe46c00bbbdc815e63b7efa27365",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1fdba37e3f3eed05081ed6623b53efac991aa005b8452e6c5ffc618fedcfd403",
-  "reviewDigest": "65330a5768038a05c6b16e6047ee3388828b16af1520bf0fa048f23f24864c74",
+  "checksDigest": "522d2a43a5030802ef7e5cc0b4a55c862910e564be1cda4a4511906ff12bbb17",
+  "reviewDigest": "257a7a1b9e1686c2eda6beed29f233fd2ef4bf80510b58377a5ad7582e386a14",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-maintain-ordered-interval-partition/outcome-maintain-ordered-interval-partition-shard-001/abc255-ex.html",
@@ -31,5 +31,5 @@
       "digest": "d8bee933e8ace51fa18a0aa8818c7eec2e43a20f6202c5e87c56cae3ad188dcf"
     }
   ],
-  "snapshotDigest": "0c4490611c812881d212180042358f58cca3168d4244739e1a8a5990edfe6814"
+  "snapshotDigest": "8f88b31472e0186b0dc27fb7b77a83e89b6de863962845962fd4d3ab54334b6c"
 }

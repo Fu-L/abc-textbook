@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-compare-sequences-by-rolling-fingerprint-shard-001",
+  "shardSubjectDigest": "721ec14f3d29dcbab9a4eb795effef9945ed3e36806267b0f215992a1415fb14",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc274-ex",
+      "url": "https://atcoder.jp/contests/abc274/editorial/5026",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: mex定義・Nim積の半幅再帰と8bit表を再照合し、traceの既約性証明を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "f2d03a3c4efbd344916db46ca6f7c884cafd39662f13efe6e7f801518fe03ab6",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc274-ex",
+      "documentDigest": "754253d9c3623e69e9d5b42ddaef8392b68f80d41cde6f13e44d268f7eb7b188",
+      "learningOutcomeIds": [
+        "outcome-compare-sequences-by-rolling-fingerprint",
+        "outcome-compute-in-finite-field-extension"
+      ],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "b62e9435af52992222c62a43729e91d6f235600b69000687e05a7165d4020ef6"
+}

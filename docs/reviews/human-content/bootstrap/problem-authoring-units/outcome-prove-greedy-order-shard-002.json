@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-prove-greedy-order-shard-002",
+  "shardSubjectDigest": "3dcd6393a715eb64b6abddab09c72a65ae26e462a4634efa8bcaaa61d9cdb455",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc304-ex",
+      "url": "https://atcoder.jp/contests/abc304/tasks/abc304_h",
+      "checkedAt": "2026-10-03",
+      "reason": "PR65 review 5400120233 の全問題横断点検。元の操作・条件から正当性の両方向、境界と総計算量を再導出し、pr65-review7-mathematical-checks.py の独立モデルと照合する。"
+    },
+    {
+      "problemId": "abc290-g",
+      "url": "https://atcoder.jp/contests/abc290/editorial/5758",
+      "checkedAt": "2026-10-03T17:19:14.589227Z",
+      "reason": "PR65 review 5401737525: 硬貨の正準性を具体的な交換式で独立に補証し、完全部分木の互いに素な配置を深さの帰納法で補証。 本文の一般証明と有限検算は docs/verification/bootstrap/pr65-review12-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "df4c739cb57366d167142a41215be17cf7e503b327567551b9b9b702ef967c4a",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc262-f",
+      "documentDigest": "944311b9c6a898a63e99bbb0e3b8432a0377c87a2891c28a63eeabfdd429266c",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc268-f",
+      "documentDigest": "f88c01535984a403772dc01b7045a4c4a3fca1c2d9002ad698722c47c1994c80",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc290-g",
+      "documentDigest": "0580691c8a13fcfcd24447456034941b8b56de8ddf5d8b24d66c459c3b993e3d",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc290-ex",
+      "documentDigest": "c587634e9840670341c496b50427be2f07d1455ecb45a366e805200633b70091",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc298-f",
+      "documentDigest": "fbdb6281331c4279e4b734a2e38b9c9b3008666bfd8ca7a73e5bf8a8183a7030",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc299-g",
+      "documentDigest": "c9cc398e6609e7b399bfbe7fcf2cbafcbb6a27b67fa78921b4a3a7ef7e60fbb1",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc304-ex",
+      "documentDigest": "73c44c82202c8aed8c2d53d369199c78227ff4fa37f61707a8f897c6b86881cc",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc308-f",
+      "documentDigest": "90f94edfe7ca7a4449d15fe52a0560fc5362533b5a5f1abba9a7ce5c1aaf9488",
+      "learningOutcomeIds": ["outcome-prove-greedy-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "2e34f377c2e04243c0b0328cfe5c0ce9855a4a44f0787209bad14da381a94008"
+}

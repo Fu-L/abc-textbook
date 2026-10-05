@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-merge-small-into-large-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "6923c66a4e1bac1e85e99de01384ec36cc723f02d53177e30425268345061c56",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "34abae6e7317f459e37db2db583b9d066a6575317634cabcde2529cec0a155dc",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

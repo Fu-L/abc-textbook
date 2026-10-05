@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-apply-subset-zeta-mobius-transform-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c687bbcee5a415f2465e80866ef9dc06a25ea81f89e5f68f7d2831dce6778837",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "03901bcba787cca1a85dc5bf96369a5f9a931f71ce9c0e7f126e1dcc70364eb8",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7dac729f8b02ca0eeb80ce1d16f5ef3e7a1ed428b01d22c9a0be800aba5ebf8c",
-  "reviewDigest": "42c44206c2bdcbb1ffd1c5440c843eb421d77f35791d184e8741dc60899c0092",
+  "checksDigest": "d13ea8e71cc6aa08d3aeb03599384fa41e46f1fbd0af0196eda656240da0fd17",
+  "reviewDigest": "17837844cc0340076f8509104e97802593b0e01358864d423d7550302139d4cb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-apply-subset-zeta-mobius-transform/outcome-apply-subset-zeta-mobius-transform-shard-001/abc295-ex.html",
@@ -27,5 +27,5 @@
       "digest": "6b2cfa6f0d2e0d9546250c9706f3b8287e08d3b79b5a8ac1df1f05a5febba879"
     }
   ],
-  "snapshotDigest": "5826376cb0e9a68f30bf4ba8f234991bb760e2b9b545618242483c12c6b16753"
+  "snapshotDigest": "6c9691308bbd402afc6b256dbd58eed6a0c81c53af00370bb9594c5ca2275cca"
 }

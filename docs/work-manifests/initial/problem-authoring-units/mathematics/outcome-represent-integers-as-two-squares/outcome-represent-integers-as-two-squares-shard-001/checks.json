@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-represent-integers-as-two-squares-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "3f07875ce30288fb165ae8578ff9db86f4381ef8d8974a773b1d76cffd2baee5",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0a0d896a30e97bb74d56964a751b9b96513f968652bd4a8dda31c1fee09f20c2",
   "requiredChecks": [
     "source",
     "structure",

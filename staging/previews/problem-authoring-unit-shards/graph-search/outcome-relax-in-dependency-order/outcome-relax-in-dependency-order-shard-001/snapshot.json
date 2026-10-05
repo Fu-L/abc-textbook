@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-relax-in-dependency-order-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4ca1ea5ea063594a4b3b722096b735fa4f963b8d8242365594778608349a1340",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "c5435baf1f5a4ccaa7b803a242b3cec4e6f05283372ba1acafebcd210cfdb637",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "8873820a78aa9eaf3277f18c9d34a902770d70282f349bd66823374487ea3c99",
-  "reviewDigest": "27cae7c099edc0be2f94e453c214f689b955f42db159b355b2b261ddd9ff2c07",
+  "checksDigest": "f6c680f4520a35d32ac9d239d90d27f7dffc3d94bcfcf40ca337805e6f07b4a7",
+  "reviewDigest": "21869d57acb30ec7920720f51cb352b635da3a53a62c6c26a65182950839205f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-relax-in-dependency-order/outcome-relax-in-dependency-order-shard-001/abc271-e.html",
@@ -23,5 +23,5 @@
       "digest": "c981d620a536fe17034031dff2179480ce1cd89c6a57c5cc63d322ce2f61eff7"
     }
   ],
-  "snapshotDigest": "7b3c83d482a8dee05ecc65bfac2f83790c4d0242c08401ce5b2ffa324f96018d"
+  "snapshotDigest": "72dec5fad0f1fba389a73ec5076ffde5054bfe10b33568a49f8891e6a6c34ea7"
 }

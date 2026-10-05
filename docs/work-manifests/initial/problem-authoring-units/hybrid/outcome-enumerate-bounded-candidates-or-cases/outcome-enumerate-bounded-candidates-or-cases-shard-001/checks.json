@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-enumerate-bounded-candidates-or-cases-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "ada5d3162e159679800350eb818564583bacee66a48da3dd8f5007f850154afc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "8b33c93bd201a35ee1d1b95293b689493eecf5b800570ef01d452c48317642db",
   "requiredChecks": [
     "source",
     "structure",

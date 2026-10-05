@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-schedule-range-query-updates-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "efefab1ce41c31c92026dff3ae3835c96ffd3cb61b2687aa4d8d66cbec6b07ed",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0e7e6ecb509411ce870e28cfdbc56f8b2b5afd0d7e10a980e3d51baea08c5c25",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "091164b7eb7a368eafcc4b154199f8f904a3431eb8b1acb9675fe2d09babdfef",
-  "reviewDigest": "3312ff33ea669ad08209a9028e17e48415b62d76f0796eb8c9c2301a6ff63dac",
+  "checksDigest": "f95a1e5603e53c69aeabac11c40e9cca0af52b0655d44b90b111e3a321795d01",
+  "reviewDigest": "70a2a60b1a8e86b7c944a10aa8b5c8e8b9451d9187319dcf07e38aba1b8484b2",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-schedule-range-query-updates/outcome-schedule-range-query-updates-shard-001/abc242-g.html",
@@ -31,5 +31,5 @@
       "digest": "b41973f167333a50f2edb7e1b96ede12adb5442f1cd8f985c414fab656b04287"
     }
   ],
-  "snapshotDigest": "7eb092a6155a00bf6581463425d5483752cef5e0823897ee567813e4fa06f47b"
+  "snapshotDigest": "987ad768f7763ae8eb728a4ba6380c39679433a53752472602b93f263f303432"
 }

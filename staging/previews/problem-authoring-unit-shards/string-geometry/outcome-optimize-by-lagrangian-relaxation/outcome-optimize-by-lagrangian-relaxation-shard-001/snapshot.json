@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-by-lagrangian-relaxation-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "8fb246b1ef7acfd4f2ab40ea65a72b6b9c00f533c8029d0049d800b446266f44",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "0131ba7a3aef10ed17be7111d1dd7ed094a40fe43a5f0b9d37c4152be138a54f",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "2896d3d6f1315eb18c4df779c37401fe3f14e2787757aacb27cbd6af13bd259f",
-  "reviewDigest": "1ec406e4af1099bc0c2f430a271b5587ee7256aad19c8a06d66da671ee769dc2",
+  "checksDigest": "2caf77d0a5aa1894dd9c72ba76840f74cbb6bbcae6a65a282c8f55312120ccf9",
+  "reviewDigest": "98ad9c28800734017704edd7ed6b60c982b0f98a5a1dc1f5638be9dd6dd6b849",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-by-lagrangian-relaxation/outcome-optimize-by-lagrangian-relaxation-shard-001/abc305-ex.html",
@@ -31,5 +31,5 @@
       "digest": "e93510f8a5e7a6510e6cf6a2c982f379a99b6117297a680a1ed81c6b526eb272"
     }
   ],
-  "snapshotDigest": "133c1d79f057457e170301bc42be3b1590d44fab0c9b37b9c6acefe7204aba5d"
+  "snapshotDigest": "0f308ef2774c9f13554e0f4479b1da251fb7116ec3a562576ae1b8a96dd42a08"
 }

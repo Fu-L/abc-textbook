@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-encode-threshold-constraints-as-two-sat-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "43c248e7cdb15a3cb2b1a3656c5f71088c36013fe3130d3a1390c413ba522b6d",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "624ca8d2e52c674876ca6c6c9aa4dda33f0281a2ef2abb3b7685235853fb8ca4",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "f7c67a62bf016cd0cbea2e5102f38c6865e632138e27cffea0193f7388456c99",
-  "reviewDigest": "e6b13451ecb1d9003d04d0cbaf0a9b439aba6234bd1f9f3ae01bb8ae3f47350a",
+  "checksDigest": "4d97cd4d24dc8a28dbdd8ba35c2280ad629a8ea407cd865ac8c43ffc6b1d5107",
+  "reviewDigest": "18a51ac9af3ac8562558096de7cd5093f2f334fb91f45eb180e73d7c18ffbc44",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-encode-threshold-constraints-as-two-sat/outcome-encode-threshold-constraints-as-two-sat-shard-001/abc277-ex.html",
@@ -19,5 +19,5 @@
       "digest": "4ac67be7493589b1f1944edbbd049a0fdec949868272abd16526bfc0cfe2653f"
     }
   ],
-  "snapshotDigest": "d99a5b4574625769b7dbb0d0cd0499188460a1d53de180d23a182b3711872333"
+  "snapshotDigest": "6f22880748917430b67a65a23b9b531f918c908f202c6e3bea090b132ac27522"
 }

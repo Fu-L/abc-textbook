@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-flatten-tree-by-euler-order-shard-001",
+  "shardSubjectDigest": "fe8486fe5991fb3be5cf4ba73ac15024ae9c9cc131dc55870ffcdf72ca5c8aa4",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc337-g",
+      "url": "https://atcoder.jp/contests/abc337/tasks/abc337_g",
+      "checkedAt": "2026-10-02",
+      "reason": "u=w endpointも含まれる条件を確認し、inventoryの削除成分のみの説明に自己root寄与を補った。"
+    }
+  ],
+  "priorReviewInventoryDigest": "87502dcdfffb4b7af790ca9a842de74dab802b67d765318a44538740a14cc935",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc240-e",
+      "documentDigest": "f47a743a7da7665f5c779dba6621764f3707b81477be62a166feee2cc88e2464",
+      "learningOutcomeIds": ["outcome-flatten-tree-by-euler-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc294-g",
+      "documentDigest": "d41a309fefe25680ae21d736fc3a31f149fdecb370c4bcc95cb26c6b06c6ae64",
+      "learningOutcomeIds": [
+        "outcome-flatten-tree-by-euler-order",
+        "outcome-answer-tree-ancestor-queries"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc337-g",
+      "documentDigest": "ec3e2c9925075551d74cfecb12daeb84b187a8cd7d8f12a1d6cacf64ef6ff58d",
+      "learningOutcomeIds": ["outcome-flatten-tree-by-euler-order"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc406-f",
+      "documentDigest": "feb71429f36b42f88081e23acdd2ac1ebb146c1b79a4417c988d5c86e7c350ef",
+      "learningOutcomeIds": ["outcome-flatten-tree-by-euler-order"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "58dccff5e59c354321160901e63c22d93f09bca40a77a9297ff81dee564b151e"
+}

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-pass-resource-dp-through-heavy-recursion-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "72d1c39c0cac8e2e15a350023a8cd6ad85c0875bbb5edf9f1a5a30eec9e43fb7",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "4bffae530dbbc16e774e9944bcb3f55afe5f373a9d3e5189be21c52d98bf0711",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "9b222491d88df522398bee962d0117b44e27bb45ebbf2a3e3024687662723951",
-  "reviewDigest": "c1998fc91898b3e6f138b1abdca037f4a3ce5e96c8251766cd33836be2fafe38",
+  "checksDigest": "0258b38d017b1de1609a7f60831fd4b87f501bf1a04584142ddfbd8bac0875b8",
+  "reviewDigest": "9eb2a76b0d08c5ded5a5db59976b3dcba3399cca067056e056729294b23cc615",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-pass-resource-dp-through-heavy-recursion/outcome-pass-resource-dp-through-heavy-recursion-shard-001/abc311-ex.html",
@@ -19,5 +19,5 @@
       "digest": "db32f1659d6aff6e6df1701d369d1b2f8fdf64f519292468d31edd9cd8ac344f"
     }
   ],
-  "snapshotDigest": "f2cd815fc9cc48d49aac57826ea0172cde7af4360419aa63f2fd3bae4b334dec"
+  "snapshotDigest": "8fcf81c01b48dfa4477aae1586f699a280b3ced93924181ab3bfaec33de271ca"
 }

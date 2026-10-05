@@ -1,0 +1,332 @@
+
+> abc-textbook@0.1.0 verify:fast
+> tsx scripts/verify/fast.ts
+
+
+> abc-textbook@0.1.0 lint
+> eslint .
+
+
+> abc-textbook@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> abc-textbook@0.1.0 check
+> cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && tsc -p tsconfig.json && tsc -p tsconfig.client.json && tsc -p tsconfig.astro.json && tsc -p tsconfig.node.json && tsc -p tsconfig.test.json && tsc -p tsconfig.e2e.json
+
+20:53:22 [content] Syncing content
+20:53:22 [WARN] [glob-loader] No files found matching "**/*.json" in directory "src/content/releases"
+20:53:23 [content] Synced content
+20:53:23 [types] Generated 1.28s
+20:53:23 [check] Getting diagnostics for Astro files in /Users/fuma/Desktop/VSCode/abc-textbook...
+Result (114 files):
+- 0 errors
+- 0 warnings
+- 0 hints
+
+
+> abc-textbook@0.1.0 test
+> vitest run
+
+
+ RUN  v4.1.10 /Users/fuma/Desktop/VSCode/abc-textbook
+
+
+ Test Files  60 passed (60)
+      Tests  511 passed (511)
+   Start at  11:53:34
+   Duration  95.24s (transform 3.78s, setup 543ms, import 10.11s, tests 196.27s, environment 4ms)
+
+
+> abc-textbook@0.1.0 corpus:verify
+> tsx scripts/corpus/verify-inventory.ts --check
+
+{"command":"verify-inventory","mode":"check","status":"passed","evidenceDigest":"809818e8cb74720b2389e61d0a6a72515fe4b98e22e1c894a9f9060e97e1e5c2","corpusDigest":"579775b9383dc470d1ee06ffc100255dafe3a72636f53e3c7860bd39556d6d28","inventoryDigest":"676a1e7c52b120d2b72f34ec60b5823915707a7f87655ebaa79b95cb7e198482","previewComponentDigest":"f64e6962363c5fad3fde86643648bc413dc4a4cef42ad14dc79bc6f1341e784b","resultPath":"docs/verification/bootstrap/technique-inventory.json"}
+
+> abc-textbook@0.1.0 corpus:verify-atcoder-problems-metrics
+> tsx scripts/corpus/verify-atcoder-problems-metrics.ts
+
+{"command":"verify-atcoder-problems-metrics","status":"passed","snapshotPath":"/Users/fuma/Desktop/VSCode/abc-textbook/src/content/problem-metrics/atcoder-problems.json","checkedAt":"2026-09-14T18:34:00+09:00","problemCount":868}
+
+> abc-textbook@0.1.0 corpus:verify-authoring
+> tsx scripts/corpus/verify-inventory-authoring.ts --check
+
+{"command":"verify-inventory-authoring","mode":"check","status":"passed","problemCount":868,"sourceBoundProblemCount":868,"reviewedProblemCount":868,"inventoryDigest":"1b66ec51f649d9de92dec88445b6bf04ed82c65bd03b0a0666035515aa1ea3ed","evidenceDigest":"b30bafee7a83a7693a27ddee56e7eb92ffae98995b7879fb8a9480dd5debbc53","resultPath":"docs/verification/bootstrap/technique-inventory-authoring.json"}
+
+> abc-textbook@0.1.0 preview:taxonomy
+> tsx scripts/corpus/freeze-provisional-taxonomy.ts --check
+
+{"command":"freeze-provisional-taxonomy","mode":"check","status":"passed","problemCount":8,"groupCount":4,"candidateCount":12,"written":0,"verified":8,"taxonomyDigest":"d1d9f4a0fd1818a5a2a47edeeab392490c1ee5cb0ed9a863c5305479e618b576","integrationDigest":"f273e529506a388fd6870e0d6b7304042c05468eb62675964fc8b5813fccc5b7","componentDigest":"bf5fdff8fcf17e7b89bc54d9717189a2d119f20de23620a1a3789c623713d615"}
+
+> abc-textbook@0.1.0 corpus:final-taxonomy
+> tsx scripts/corpus/final-taxonomy.ts --check
+
+{"command":"final-taxonomy","mode":"check","status":"accepted","canonicalMaterializationAllowed":true,"placementCount":868,"sourceRevisionCount":1738,"taxonomySubjectDigest":"023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251","buildDigest":"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe","written":0,"verified":3}
+
+> abc-textbook@0.1.0 corpus:materialize-taxonomy
+> tsx scripts/corpus/materialize-canonical-taxonomy.ts --check
+
+{"command":"materialize-canonical-taxonomy","mode":"check","status":"passed","sourceBuildId":"final-taxonomy-build-initial","sourceBuildDigest":"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe","expected":923,"verified":459,"preserved":464,"written":0,"counts":{"tags":213,"learningOutcomes":242,"learningUnits":232,"learningDocuments":232,"placements":868}}
+
+> abc-textbook@0.1.0 corpus:verify-learning-units
+> tsx scripts/corpus/verify-full-learning-units.ts --check
+
+{"status":"passed","subjectDigest":"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e","chapters":9,"units":232,"ownedOutcomes":242,"reachableProblems":868,"humanAcceptance":"separate_required_review","sc010":"not_required_by_owner"}
+
+> abc-textbook@0.1.0 corpus:verify-problem-shard-index
+> tsx scripts/corpus/freeze-problem-shard-index.ts --check
+
+{"status":"passed","indexDigest":"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873","shards":248,"problems":868,"domains":["graph-search","dynamic-programming","data-structures","mathematics","string-geometry","hybrid"]}
+
+> abc-textbook@0.1.0 corpus:verify-problem-shards
+> tsx scripts/corpus/author-problem-shards.ts --check
+
+{"status":"automated_checks_passed","indexDigest":"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873","shards":248,"problems":868,"authoringHoldCount":0,"humanReview":"pending","scope":"Independent shard authoring checks, not T072–T078 global acceptance."}
+
+> abc-textbook@0.1.0 corpus:verify-problem-corpus
+> tsx scripts/corpus/verify-problem-corpus.ts --check
+
+author-problem-shards: passed
+verify-full-learning-units: passed
+pr65-mathematical-checks.py: passed
+pr65-review2-mathematical-checks.py: passed
+pr65-review3-mathematical-checks.py: passed
+pr65-review4-mathematical-checks.py: passed
+pr65-review5-mathematical-checks.py: passed
+pr65-review6-mathematical-checks.py: passed
+pr65-review7-mathematical-checks.py: passed
+pr65-review8-mathematical-checks.py: passed
+pr65-review9-mathematical-checks.py: passed
+pr65-review10-mathematical-checks.py: passed
+pr65-review11-mathematical-checks.py: passed
+pr65-review12-mathematical-checks.py: passed
+pr65-review13-mathematical-checks.py: passed
+pr65-review14-mathematical-checks.py: passed
+pr65-review15-mathematical-checks.py: passed
+pr65-review16-mathematical-checks.py: passed
+pr65-review17-mathematical-checks.py: passed
+pr65-review18-mathematical-checks.py: passed
+pr65-review19-mathematical-checks.py: passed
+pr65-review20-mathematical-checks.py: passed
+{"status":"accepted","subjectDigest":"d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf","indexDigest":"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873","shards":248,"problems":868,"mathematicalRegressions":20,"reviewMode":"agent_quality_review","publicProjection":"pending_T160"}
+
+> abc-textbook@0.1.0 preview:learning-content
+> tsx scripts/corpus/freeze-preview-learning-content.ts --check
+
+{"command":"freeze-preview-learning-content","mode":"check","status":"passed","domainCount":4,"problemCount":8,"written":0,"verified":12,"componentDigests":["05f0266b3f2e6b1f39189e6ba9077d62eacf4ace9c595bce4a3e5045c9c89fd5","e5b004379a9e1c1384177c934671ae284a7fae64bc9f443dd8afe6be87201cbd","d4e08612961fc784bc0cc6fe75ce6a0ef7fd8804f8d6e2980f4a42c588397d67","4c8ccf4b4da197039cb9ef362944a873805fd2435b61574d89ca95b7887268dd"]}
+
+> abc-textbook@0.1.0 build
+> cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build
+
+20:56:25 [content] Syncing content
+20:56:25 [WARN] [glob-loader] No files found matching "**/*.json" in directory "src/content/releases"
+20:56:25 [content] Synced content
+20:56:25 [types] Generated 1.00s
+20:56:25 [check] Getting diagnostics for Astro files in /Users/fuma/Desktop/VSCode/abc-textbook...
+Result (114 files):
+- 0 errors
+- 0 warnings
+- 0 hints
+
+20:56:30 [content] Syncing content
+20:56:30 [WARN] [glob-loader] No files found matching "**/*.json" in directory "src/content/releases"
+20:56:31 [content] Synced content
+20:56:31 [types] Generated 950ms
+20:56:31 [build] output: "static"
+20:56:31 [build] mode: "static"
+20:56:31 [build] directory: /Users/fuma/Desktop/VSCode/abc-textbook/dist/
+20:56:31 [build] Collecting build info...
+20:56:31 [build] ✓ Completed in 1.05s.
+20:56:31 [build] Building static entrypoints...
+20:56:32 [vite] ✓ built in 1.48s
+20:56:32 [vite] ✓ built in 77ms
+20:56:32 [build] Rearranging server assets...
+
+ generating static routes
+20:56:33 [WARN] [build] Could not render `` from route `/[...slug]` as it conflicts with higher priority route `/`.
+20:56:33   ├─ /404.htmlEntry docs → 404 was not found.
+ (+19ms)
+20:56:33   ├─ /contests/index.html (+3ms)
+20:56:33   ├─ /data/catalog.json (+22ms)
+20:56:33   ├─ /feed.xml (+1ms)
+20:56:33   ├─ /learn/index.html (+1ms)
+20:56:33   ├─ /learn/provisional-unit-shortest-path-structure/index.html (+1ms)
+20:56:33   ├─ /learn/provisional-unit-compressed-dp-state/index.html (+1ms)
+20:56:33   ├─ /learn/provisional-unit-range-aggregate-under-updates/index.html (+1ms)
+20:56:33   ├─ /learn/provisional-unit-multiplicative-order-counting/index.html (+1ms)
+20:56:33   ├─ /problems/abc212-g/index.html (+5ms)
+20:56:33   ├─ /problems/abc215-e/index.html (+1ms)
+20:56:33   ├─ /problems/abc218-f/index.html (+1ms)
+20:56:33   ├─ /problems/abc222-g/index.html (+1ms)
+20:56:33   ├─ /problems/abc223-f/index.html (+1ms)
+20:56:33   ├─ /problems/abc232-e/index.html (+1ms)
+20:56:33   ├─ /problems/abc252-e/index.html (+1ms)
+20:56:33   ├─ /problems/abc256-f/index.html (+1ms)
+20:56:33   ├─ /problems/index.html (+3ms)
+20:56:33   ├─ /review/index.html (+2ms)
+20:56:33   ├─ /settings/learning-records/index.html (+2ms)
+20:56:33   ├─ /sitemap.xml (+1ms)
+20:56:33   ├─ /tags/provisional-tag-shortest-path-structure/index.html (+1ms)
+20:56:33   ├─ /tags/provisional-tag-compressed-dp-state/index.html (+1ms)
+20:56:33   ├─ /tags/provisional-tag-range-aggregate-under-updates/index.html (+1ms)
+20:56:33   ├─ /tags/provisional-tag-multiplicative-order-counting/index.html (+1ms)
+20:56:33   ├─ /tags/index.html (+1ms)
+20:56:33   ├─ /updates/initial-v1/index.html (+1ms)
+20:56:33   ├─ /updates/index.html (+1ms)
+20:56:33   ├─ /index.html (+1ms)
+20:56:33 ✓ Completed in 358ms.
+
+20:56:33 [build] ✓ Completed in 2.01s.
+20:56:33 [starlight:pagefind] Building search index with Pagefind...
+20:56:33 [starlight:pagefind] Found 26 HTML files.
+20:56:33 [starlight:pagefind] Finished building search index in 473ms.
+20:56:33 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+20:56:33 [build] 26 page(s) built in 3.56s
+20:56:33 [build] Complete!
+
+> abc-textbook@0.1.0 link:check:built
+> tsx scripts/validate/links.ts
+
+Checked 70 links with no broken targets.
+
+> abc-textbook@0.1.0 test:e2e:built
+> playwright test
+
+[WebServer] (node:65023) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 99 tests using 5 workers
+
+(node:65034) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65030) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65031) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/e2e/contest-matrix.spec.ts:36:1 › keeps only the two-dimensional table horizontally scrollable at 320 CSS pixels (489ms)
+  ✓   4 [chromium] › tests/e2e/accessibility.spec.ts:22:1 › keeps core content and navigation available without JavaScript (541ms)
+  ✓   3 [chromium] › tests/e2e/contest-matrix.spec.ts:3:1 › renders dynamic columns, explicit states, direct links, and the alternative list (573ms)
+  ✓   1 [chromium] › tests/e2e/contest-matrix.spec.ts:21:1 › the registry accepts a future I column through the same projection (773ms)
+  ✓   6 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 1 uses the shared learning-record contract and persists both actions (612ms)
+  ✓   7 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 2 uses the shared learning-record contract and persists both actions (629ms)
+  ✓   8 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 1 uses the shared learning-record contract and persists both actions (594ms)
+  ✓   9 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 2 uses the shared learning-record contract and persists both actions (710ms)
+  ✓  10 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 1 uses the shared learning-record contract and persists both actions (675ms)
+  ✓  11 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 2 uses the shared learning-record contract and persists both actions (627ms)
+  ✓  12 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 1 uses the shared learning-record contract and persists both actions (677ms)
+  ✓  13 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 2 uses the shared learning-record contract and persists both actions (589ms)
+  ✓  14 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 1 uses the shared learning-record contract and persists both actions (638ms)
+  ✓  16 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 1 uses the shared learning-record contract and persists both actions (579ms)
+  ✓  15 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 2 uses the shared learning-record contract and persists both actions (657ms)
+  ✓  17 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 2 uses the shared learning-record contract and persists both actions (621ms)
+  ✓   5 [chromium] › tests/e2e/accessibility.spec.ts:5:1 › exposes landmarks, headings, table headers, names, text states, and keyboard focus (2.9s)
+  ✓  18 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 1 uses the shared learning-record contract and persists both actions (657ms)
+  ✓  20 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 1 uses the shared learning-record contract and persists both actions (643ms)
+  ✓  19 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 2 uses the shared learning-record contract and persists both actions (720ms)
+  ✓  22 [chromium] › tests/e2e/learning-records.spec.ts:116:1 › storage failure leaves the textbook readable and disables only the controls (338ms)
+  ✓  21 [chromium] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 2 uses the shared learning-record contract and persists both actions (608ms)
+  ✓  23 [chromium] › tests/e2e/learning-records.spec.ts:128:1 › version 1 records migrate atomically (500ms)
+  ✓  24 [chromium] › tests/e2e/learning-records.spec.ts:164:1 › migration failure aborts database open and disables controls (485ms)
+  ✓  25 [chromium] › tests/e2e/learning-records.spec.ts:197:1 › a blocking tab rejects database open with actionable guidance (589ms)
+  ✓  26 [chromium] › tests/e2e/learning-records.spec.ts:233:1 › problem details reach the review page with all extra filters (588ms)
+  ✓  27 [chromium] › tests/e2e/learning-records.spec.ts:246:1 › restore requires an explicit policy after showing component details (514ms)
+  ✓  30 [chromium] › tests/e2e/search.spec.ts:73:1 › keeps canonical LearningUnit skeletons unpublished until the T160 switch (196ms)
+  ✓  31 [chromium] › tests/e2e/setup-smoke.spec.ts:21:1 › uses the deterministic browser clock and Tokyo timezone (239ms)
+  ✓  33 [chromium] › tests/e2e/setup-smoke.spec.ts:95:1 › keeps the mobile textbook navigation stable and CSP-clean (307ms)
+(node:65123) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  29 [chromium] › tests/e2e/search.spec.ts:48:1 › shows zero-result guidance and excludes controls, staging, and local state (1.1s)
+(node:65124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 [chromium] › tests/e2e/search.spec.ts:3:1 › indexes entity kind, aliases, hierarchy, and contest terms on canonical routes (1.4s)
+(node:65126) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  32 [chromium] › tests/e2e/setup-smoke.spec.ts:62:1 › keeps the desktop textbook shell interactive, accessible, and CSP-clean (1.5s)
+(node:65134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  35 [firefox] › tests/e2e/accessibility.spec.ts:22:1 › keeps core content and navigation available without JavaScript (2.0s)
+  ✓  37 [firefox] › tests/e2e/contest-matrix.spec.ts:21:1 › the registry accepts a future I column through the same projection (1.9s)
+  ✓  39 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 1 uses the shared learning-record contract and persists both actions (1.5s)
+  ✓  40 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 2 uses the shared learning-record contract and persists both actions (1.5s)
+  ✓  36 [firefox] › tests/e2e/contest-matrix.spec.ts:3:1 › renders dynamic columns, explicit states, direct links, and the alternative list (2.8s)
+  ✓  38 [firefox] › tests/e2e/contest-matrix.spec.ts:36:1 › keeps only the two-dimensional table horizontally scrollable at 320 CSS pixels (2.3s)
+  ✓  34 [firefox] › tests/e2e/accessibility.spec.ts:5:1 › exposes landmarks, headings, table headers, names, text states, and keyboard focus (5.1s)
+  ✓  41 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 1 uses the shared learning-record contract and persists both actions (1.7s)
+  ✓  42 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 2 uses the shared learning-record contract and persists both actions (1.6s)
+  ✓  43 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 1 uses the shared learning-record contract and persists both actions (1.6s)
+  ✓  44 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 2 uses the shared learning-record contract and persists both actions (1.8s)
+  ✓  45 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 1 uses the shared learning-record contract and persists both actions (1.9s)
+  ✓  46 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 2 uses the shared learning-record contract and persists both actions (1.2s)
+  ✓  47 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 1 uses the shared learning-record contract and persists both actions (1.3s)
+  ✓  48 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 2 uses the shared learning-record contract and persists both actions (1.6s)
+  ✓  49 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 1 uses the shared learning-record contract and persists both actions (1.5s)
+  ✓  50 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 2 uses the shared learning-record contract and persists both actions (1.5s)
+  ✓  51 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 1 uses the shared learning-record contract and persists both actions (1.7s)
+  ✓  52 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 2 uses the shared learning-record contract and persists both actions (1.5s)
+  ✓  53 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 1 uses the shared learning-record contract and persists both actions (1.4s)
+  ✓  54 [firefox] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 2 uses the shared learning-record contract and persists both actions (1.4s)
+  ✓  55 [firefox] › tests/e2e/learning-records.spec.ts:116:1 › storage failure leaves the textbook readable and disables only the controls (1.4s)
+  ✓  57 [firefox] › tests/e2e/learning-records.spec.ts:164:1 › migration failure aborts database open and disables controls (998ms)
+  ✓  56 [firefox] › tests/e2e/learning-records.spec.ts:128:1 › version 1 records migrate atomically (1.4s)
+  ✓  59 [firefox] › tests/e2e/learning-records.spec.ts:233:1 › problem details reach the review page with all extra filters (1.0s)
+  ✓  60 [firefox] › tests/e2e/learning-records.spec.ts:246:1 › restore requires an explicit policy after showing component details (996ms)
+  ✓  58 [firefox] › tests/e2e/learning-records.spec.ts:197:1 › a blocking tab rejects database open with actionable guidance (1.9s)
+  ✓  63 [firefox] › tests/e2e/search.spec.ts:73:1 › keeps canonical LearningUnit skeletons unpublished until the T160 switch (541ms)
+  ✓  64 [firefox] › tests/e2e/setup-smoke.spec.ts:21:1 › uses the deterministic browser clock and Tokyo timezone (589ms)
+  ✓  62 [firefox] › tests/e2e/search.spec.ts:48:1 › shows zero-result guidance and excludes controls, staging, and local state (1.9s)
+  ✓  66 [firefox] › tests/e2e/setup-smoke.spec.ts:95:1 › keeps the mobile textbook navigation stable and CSP-clean (920ms)
+(node:65269) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  61 [firefox] › tests/e2e/search.spec.ts:3:1 › indexes entity kind, aliases, hierarchy, and contest terms on canonical routes (2.8s)
+(node:65292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65293) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65315) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  65 [firefox] › tests/e2e/setup-smoke.spec.ts:62:1 › keeps the desktop textbook shell interactive, accessible, and CSP-clean (2.8s)
+  ✓  69 [webkit] › tests/e2e/contest-matrix.spec.ts:3:1 › renders dynamic columns, explicit states, direct links, and the alternative list (1.4s)
+  ✓  68 [webkit] › tests/e2e/accessibility.spec.ts:22:1 › keeps core content and navigation available without JavaScript (1.6s)
+(node:65342) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  70 [webkit] › tests/e2e/contest-matrix.spec.ts:21:1 › the registry accepts a future I column through the same projection (1.3s)
+  ✓  71 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 1 uses the shared learning-record contract and persists both actions (1.0s)
+  ✓  72 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc212-g run 2 uses the shared learning-record contract and persists both actions (1.2s)
+  ✓  73 [webkit] › tests/e2e/contest-matrix.spec.ts:36:1 › keeps only the two-dimensional table horizontally scrollable at 320 CSS pixels (1.1s)
+  ✓  75 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 2 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  74 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc215-e run 1 uses the shared learning-record contract and persists both actions (1.3s)
+  ✓  76 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 1 uses the shared learning-record contract and persists both actions (1.0s)
+  ✓  67 [webkit] › tests/e2e/accessibility.spec.ts:5:1 › exposes landmarks, headings, table headers, names, text states, and keyboard focus (4.5s)
+  ✓  78 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 1 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  77 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc218-f run 2 uses the shared learning-record contract and persists both actions (1.3s)
+  ✓  79 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc222-g run 2 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  80 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 1 uses the shared learning-record contract and persists both actions (1.0s)
+  ✓  81 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc223-f run 2 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  82 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 1 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  83 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc232-e run 2 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  84 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 1 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  85 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc252-e run 2 uses the shared learning-record contract and persists both actions (1.1s)
+  ✓  86 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 1 uses the shared learning-record contract and persists both actions (990ms)
+  ✓  88 [webkit] › tests/e2e/learning-records.spec.ts:116:1 › storage failure leaves the textbook readable and disables only the controls (729ms)
+  ✓  89 [webkit] › tests/e2e/learning-records.spec.ts:128:1 › version 1 records migrate atomically (826ms)
+  ✓  90 [webkit] › tests/e2e/learning-records.spec.ts:164:1 › migration failure aborts database open and disables controls (834ms)
+  ✓  87 [webkit] › tests/e2e/learning-records.spec.ts:16:5 › abc256-f run 2 uses the shared learning-record contract and persists both actions (1.0s)
+  ✓  91 [webkit] › tests/e2e/learning-records.spec.ts:197:1 › a blocking tab rejects database open with actionable guidance (1.2s)
+  ✓  93 [webkit] › tests/e2e/learning-records.spec.ts:246:1 › restore requires an explicit policy after showing component details (1.0s)
+  ✓  92 [webkit] › tests/e2e/learning-records.spec.ts:233:1 › problem details reach the review page with all extra filters (1.1s)
+  ✓  96 [webkit] › tests/e2e/search.spec.ts:73:1 › keeps canonical LearningUnit skeletons unpublished until the T160 switch (535ms)
+  ✓  97 [webkit] › tests/e2e/setup-smoke.spec.ts:21:1 › uses the deterministic browser clock and Tokyo timezone (559ms)
+  ✓  99 [webkit] › tests/e2e/setup-smoke.spec.ts:95:1 › keeps the mobile textbook navigation stable and CSP-clean (587ms)
+  ✓  95 [webkit] › tests/e2e/search.spec.ts:48:1 › shows zero-result guidance and excludes controls, staging, and local state (1.7s)
+  ✓  94 [webkit] › tests/e2e/search.spec.ts:3:1 › indexes entity kind, aliases, hierarchy, and contest terms on canonical routes (2.0s)
+  ✓  98 [webkit] › tests/e2e/setup-smoke.spec.ts:62:1 › keeps the desktop textbook shell interactive, accessible, and CSP-clean (2.0s)
+
+  99 passed (30.1s)

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-in-finite-field-extension-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "555a85af688ed612c419e7388913500639c2a7f3ff3e6ad3934151034713eb03",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "bdd607886b4b80df08ebebe2f119c0b94e6ef28f31e852f5b202a7bb3ac65323",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "7645326f2c8adff3f4f168100ee8eff5ca8bf2e07ec8f66d9e8ee338506f9c5c",
-  "reviewDigest": "fd771e4fdbbb8a7886a731ff4d9b4233fffaba93fd9167973e9fb0694b3cddfe",
+  "checksDigest": "ca0bb72c011820ae51e31de1f46ad8b7acfcaa583ff415b436ada05455c19efb",
+  "reviewDigest": "21d6c4f20791c4aa3c39c31452b415a5df729a14cc4df1cffce2a62612701c64",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-compute-in-finite-field-extension/outcome-compute-in-finite-field-extension-shard-001/abc381-g.html",
@@ -19,5 +19,5 @@
       "digest": "66fda91cd48f640e30abeb2f08ea6ea0eb3660af7f79ac0fb63b94374b0de21e"
     }
   ],
-  "snapshotDigest": "79f34b04ab9f5ae7b0dacf0944808fb1bed135178e75ce621cc35ad2f467e071"
+  "snapshotDigest": "12b740d6f14fbfd38a4603555ff4e39713c79f316d704bbf611219ba62441b60"
 }

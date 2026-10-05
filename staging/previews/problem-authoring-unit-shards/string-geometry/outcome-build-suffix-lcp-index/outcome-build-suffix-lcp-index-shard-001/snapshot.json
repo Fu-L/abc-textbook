@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-build-suffix-lcp-index-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "1fd55b7d562691e016a8484819f67e7ecc14845fb76846e641bc88c6f842c60a",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "06bf379bd3a082de116ffefb3023794ba688d03a36a3c5646b241f2e1217befe",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "fbc42b7ff3f445680a0ed52a11264a81f3552058c55a630315d4ce6f5a526653",
-  "reviewDigest": "d47f8b2fa02da80ebfc893be344c24da6cd66c2824d49d972e78eae7dfd74a1f",
+  "checksDigest": "c30f5cf075a7a414de8525747cb76a3e5441010b045c1965f7994d8a1c2ce102",
+  "reviewDigest": "78e8289e9d2b107186828158e80e31bba376b7a3a5004ac2b0edacb1f3a6e19e",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-build-suffix-lcp-index/outcome-build-suffix-lcp-index-shard-001/abc213-f.html",
@@ -39,5 +39,5 @@
       "digest": "ad1b05e4470cffb189b06940769620f8e58f62d5eac15b3a2cd16319ad521224"
     }
   ],
-  "snapshotDigest": "b2f4dfbacca931dff3dcf32ce7e748ffe99e432fc5cd16e6a3cb7fd21cfb44d9"
+  "snapshotDigest": "a207ac2872322f5a87e668adc47e65dbbebc75671382109b19a25d89a3d6b369"
 }

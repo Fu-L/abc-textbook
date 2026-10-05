@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-build-balanced-separator-decomposition-shard-001",
+  "shardSubjectDigest": "b1b0331f741ccc7daf30d47a660bd8303958744c3d58947b7f38d26f1fd8ded3",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc291-ex",
+      "url": "https://atcoder.jp/contests/abc291/editorial/5840",
+      "checkedAt": "2026-10-04T02:45:17.945603Z",
+      "reason": "PR65 review 5403918168: Sufficiency of centroid construction and all LCA cases proved; non-centroid valid output and all small trees checked. General proofs and finite checks are recorded separately in docs/verification/bootstrap/pr65-review13-corrections.md."
+    }
+  ],
+  "priorReviewInventoryDigest": "39367c630a55b842469c73dd4431e574fafc6aac3157c5f20aad2c1ce43e4f4b",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc291-ex",
+      "documentDigest": "045d6ce1668aad9e9ffd42ab3410891de281d1fbe8ba9f13490e539dee361eea",
+      "learningOutcomeIds": ["outcome-build-balanced-separator-decomposition"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc359-g",
+      "documentDigest": "915fd9397d0bee65cd2d777fa3421d64571d78b449c8cbd4494802c7b3fc1a49",
+      "learningOutcomeIds": ["outcome-build-balanced-separator-decomposition"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "72f6978c3617312646150cf2018588f4f4945d8b981132bc5fea682295fbee76"
+}

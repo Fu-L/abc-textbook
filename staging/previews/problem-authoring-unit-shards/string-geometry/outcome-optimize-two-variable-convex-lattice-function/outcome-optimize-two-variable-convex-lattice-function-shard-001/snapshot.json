@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "962eadccc7e5cfc0ae842244d9255ce71066fbc6eb8bb719fda278c9940e5fc3",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "866ddf161ba30671c75ed0b7643d8a6377a11fbd947d71332786a8b103c29a35",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "1d438d132a8e564e823835528f9f4785fbd216ade032246f7c6c867b90cf6426",
-  "reviewDigest": "79b28821abad2cbbbde49c4db41cbcab41702fa816856106e919c64b2cdaba9b",
+  "checksDigest": "e9fefccb97e70a040bdf49f5e20026fc3ae74b76294fc0cdb31070b9b4fe7087",
+  "reviewDigest": "4b95683a7a7a44d4f6b6c41d35bfc0dfb19452ebe7dd2306b3b745f374326197",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-two-variable-convex-lattice-function/outcome-optimize-two-variable-convex-lattice-function-shard-001/abc459-g.html",
@@ -19,5 +19,5 @@
       "digest": "7c07c246125511f3bea1f98b71680dba860af403235ab2aa4b65e634199840c5"
     }
   ],
-  "snapshotDigest": "301820a360afcb4eaffe6f995fe42608055e7a0084a6687d7ca8b95eb7e279e2"
+  "snapshotDigest": "2bc0629511111e3d4bc34c23f7f00096685a5ff06b368b1a1f39d9dd98865de5"
 }

@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-connectivity-components-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "4ccc16f6a22345d2f9f6acda0b70990038993eddf38eb9eeb1bba9e393efb9fc",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "2a465512c4e58454f3cd81f46982804948291062a7eaffd4c6d81f910b5b247d",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "3735e476ddd0d1e312021d53f22eb26bfa6f8d080a1e2953e9dc0388cd53414a",
-  "reviewDigest": "992c491cf77fbedcfe0e7a7360ea94d955f75ad3b41912d95e5234b43387033c",
+  "checksDigest": "7e7a96c7f294e5ea76f8f669708c1e5a550430b3b5c2c222db33f6faa415d08c",
+  "reviewDigest": "22ddaab604a37bebee1467b90f86fa27281404e3d831ee4c0dd7392cea74a128",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-maintain-connectivity-components/outcome-maintain-connectivity-components-shard-001/abc238-e.html",
@@ -31,5 +31,5 @@
       "digest": "f6842cb4a34987d268b2297d8c3cb91d698e76429e777a9627d1f7f0a57ba4b8"
     }
   ],
-  "snapshotDigest": "876e0368c65d1842a6ac0ba9da7987f5c4802e87802ad8dda65c3f5d3e1913d0"
+  "snapshotDigest": "0097c90ccf7e0c87ff01a65818d38a6a16985708b62c335ba4cd7db2b93e54d7"
 }

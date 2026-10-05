@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-recover-valid-witness-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "83daf40f4796bedb2cbc857d65b56a5d61383854f6af3a069b53192fd161c497",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "7cb9d5a69767df2ecdec264abffa3ba83071b2c648a6347ddd7e50a1092d3faf",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "78d309f1e3b37b7759b2794251127e200cdc85ba8aa4206498049825c364c0d0",
-  "reviewDigest": "6d33f2b0be68049d49d28fdc118744cc950f682aafd696f54d5e0fed4767bf52",
+  "checksDigest": "f40aa50222572d9a735637d869009602fd0cd29a47bca983ffd6c6c2a0ae31fe",
+  "reviewDigest": "2aec817d60a4b0c66acd91756832a80e704bf2127d7c297e889223300d6aead6",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/hybrid/outcome-recover-valid-witness/outcome-recover-valid-witness-shard-002/abc333-e.html",
@@ -43,5 +43,5 @@
       "digest": "ae8e77b47ed3fd55efa80f9b1b03355072896a44c6d14c59c39e1b45ca8d2690"
     }
   ],
-  "snapshotDigest": "61da7fcc7bfc50f5e0713e15b418da9b9393470d3d656ab87ec9698e584d2202"
+  "snapshotDigest": "a2ecb8df8d8ea5c0862dedf30193de8b43223eff0df9aa96d7d5378cce5b291f"
 }

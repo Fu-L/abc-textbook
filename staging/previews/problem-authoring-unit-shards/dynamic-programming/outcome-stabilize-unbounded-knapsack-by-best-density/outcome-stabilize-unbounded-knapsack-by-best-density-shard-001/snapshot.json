@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-stabilize-unbounded-knapsack-by-best-density-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "93984146a50d41f0516e93b54950141d43c13524ea66c44b719bc84408f4706f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9da229b1410a249e16e99b51005181df2198e33d87633e9783be94356b2adbda",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "373b2f884ce598679160054089ea0330c5a574c9f887fa339e717269985f861e",
-  "reviewDigest": "be379d64e2a7f3f8c961cc80ede39eaf9a5701e37d245651e2193d59f48b40e6",
+  "checksDigest": "b127fc2eb4ae0ef3636198a6d72e876685427c90ff71ac7724d5cc35df9bbfe0",
+  "reviewDigest": "9e96012b7caae283f7baa94aa6e5a4af0b8b068f0b4f2be83127197fe2fe2bdb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/dynamic-programming/outcome-stabilize-unbounded-knapsack-by-best-density/outcome-stabilize-unbounded-knapsack-by-best-density-shard-001/abc310-ex.html",
@@ -23,5 +23,5 @@
       "digest": "d5ef37c791c337ce23c35f9fa913f8e8f28f4080469fa46a3d758266747bf7a1"
     }
   ],
-  "snapshotDigest": "0301b13f940e194434f8f49e6154508cad1215dc2511cbb05ed23fcdd3cfada5"
+  "snapshotDigest": "db4c2ca625f92b831b7ade91b4e7f93f33ead627ca95d52a27f075d41d88c394"
 }

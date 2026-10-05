@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-factor-and-accelerate-transitions-shard-001",
+  "shardSubjectDigest": "5ef354bedbc2c1d3125ffcae4f331d64758e6ed8bfe3e3db76d2e460c14f7314",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "b9d655a73284f1f6d86f736db314d9f5e2d74ea26d0eeb9f706adbafce7e683f",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc221-h",
+      "documentDigest": "013835afe06b5b22fc1d8aed92205735c3a90a4af53a8399de50d5350bb756a1",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc249-e",
+      "documentDigest": "c52c60c53ff451b061ee824dbc220af62d6aba6aaebbd1d27dcafd3401aac117",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc253-e",
+      "documentDigest": "c1e56cfcf9468c18a69fe5e3a08b477a99730fa985eac2640568020ca43a906b",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc265-f",
+      "documentDigest": "12c9cfc33b11a61500f48b55f7aa8688b63b244523143b527f0b5a5d41564bc1",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc282-g",
+      "documentDigest": "273d11ce367505213697c4da7f2bc7b08e8f741c66a3f1c48646154548be75b9",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc334-f",
+      "documentDigest": "7a378b6b00a6c9b80bc55c1dccee3b73ac26dea5fc98fdaf830473468be904d5",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc353-g",
+      "documentDigest": "c74ca5f91d91acd1db74b103254c86f5bcf36ad2340f5a9f3b9a93e17c7c046f",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc408-f",
+      "documentDigest": "c48327e15e2b3d30f0ff021339f89e89cab94f16df0bbbb7dfa8a94de973cff0",
+      "learningOutcomeIds": ["outcome-factor-and-accelerate-transitions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "de5485ecdce8e18f05ee94f468a899f13d2108e0c8b32b22cfe526bd11aa8a45"
+}

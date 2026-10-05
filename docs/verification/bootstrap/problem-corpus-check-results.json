@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "status": "passed",
+  "runtime": { "node": "v24.18.0", "pythonMinimum": "3.9" },
+  "commands": [
+    {
+      "command": "node --import tsx scripts/corpus/author-problem-shards.ts --check",
+      "exitCode": 0,
+      "observed": "{\"status\":\"automated_checks_passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}",
+      "digest": "53650af5ea905281586ab22ca64363d732563e0b97f62d4adf09ad5d5a9f9268"
+    },
+    {
+      "command": "node --import tsx scripts/corpus/verify-full-learning-units.ts --check",
+      "exitCode": 0,
+      "observed": "{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}",
+      "digest": "93ee23724af36c61bf54f9dd8ea13857014b99eb9d34148e240426d2ffeb4697"
+    }
+  ],
+  "mathematicalChecks": [
+    {
+      "path": "docs/verification/bootstrap/pr65-mathematical-checks.py",
+      "scriptDigest": "7effe913665539bb8679c7c3d08e921f5508270751f1e0cb5a0c34783d8b1370",
+      "exitCode": 0,
+      "observed": "ABC464 F: subset expectation vs all permutations: 3645\nABC456 G: inclusion-exclusion vs all binary words: 91\nABC357 G: signed walls vs cell DP: 36\nABC398 G: classification vs full game tree: 5604\nmedian exhaustive operation comparisons 1767 counterexample 1\nseparator exact subset comparisons 342\nABC251 Ex: compressed-scale windows vs binomial coefficients: 4095",
+      "stderr": "",
+      "resultDigest": "18217cc2d7ae760c581be9a168039b306433777666d8ee982463990ff5b44086"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review2-mathematical-checks.py",
+      "scriptDigest": "21e6d6f49e16f5a9c96029a2876dd070bbd0cc5f9730591dbdff9ea1b3a25310",
+      "exitCode": 0,
+      "observed": "Actual textbook correctness Claim/body consistency: 868\nABC272 Ex: permutations, DP, FPS and even flip counts: 175\nABC232 H: all endpoints in rectangles up to 15x15: 13965\nABC466 F: weighted prefixes vs all starting integers: 18648\nABC245 Ex: fixed-residue states vs full residue DP: 828\nABC230 H: two-unknown CDQ vs direct multiset counting: 63\nABC278 Ex: rank convolution and Stirling inversion vs vector tuples: 15\nABC317 Ex: polynomial transfer and return denominator vs graph walks: 4368\nABC315 Ex: shifted CDQ pairs vs quadratic recurrence: 192\nABC214 F: first-completion DP vs all nonadjacent subsequences: 2046\nABC214 G: cycle rook polynomial vs all permutations: 501\nABC295 Ex: frontier sweep vs deduplicated row/column prefix constructions: 1350\nABC258 Ex: relative-parity matrices vs odd-step compositions: 8191\nABC300 Ex: submask Bostan-Mori vs direct K-bonacci sequence: 1024\nABC313 Ex: ordered fragment coefficients vs front-row permutations: 72\nABC273 G: transition table vs all matrices up to 3x3: 819\nABC252 G: forest interval recurrence vs all rooted labelled trees: 153\nABC292 G: digit/block bases and recurrence vs explicit completions: 100",
+      "stderr": "",
+      "resultDigest": "40edae02c803c92ac3c06ad6779ef28397772a72f712d6d63e3594959aecacf0"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review3-mathematical-checks.py",
+      "scriptDigest": "94cf91d43132e713b2a3048df4cdf91d43a1bc1f85b03065cf7e985c0acd64bc",
+      "exitCode": 0,
+      "observed": "ABC298 Ex: all endpoints including equality and different roots: 80847\nABC359 G: centroid path contributions versus pair distances: 3144\nABC281 Ex: coefficient slices versus sequential whole-polynomial updates: 672\nABC290 Ex: all parity cases, empty reduced DP, versus permutations: 144\nABC299 Ex: six boundary equations versus full periodic Markov system: 675\nABC299 Ex: matrix powers and nonzero pivots at the actual 10^9 period: OK\nABC371 G: residues versus orbit enumeration / big-integer CRT: 976\nABC235 Ex: same-weight/multiedge/disconnected painting versus set unions: 840\nABC235 Ex: truncated convolution work, chain/balanced/random merges: 90\nABC255 G: sparse absent-frequency mex versus all legal moves: 1598\nABC260 G: four imos marks versus direct geometric inequality: 200\nABC268 E: affine half-open intervals versus circular distances: 9450\nABC430 G: set mapping and maximum/count versus explicit leaves: 13824\nABC382 G: finite tables and coordinate normalization versus tile BFS: 83529\nABC219 H: remaining-count interval DP versus all visit orders: 150\nABC270 Ex: affine jumps with repeated breakpoints versus full Markov system: 296\nABC265 F: both diagonal sums and coincident centers versus lattice enumeration: 270\nABC299 F: canonical boundary DP versus distinct binary subsequences: 1022\nABC387 G: rooted EGF conversion versus all graphs and edge-simple circuits: 1099\nABC389 G: layer-state coefficients versus all labelled graphs and BFS: 32834\nActual textbook correctness Claim/body consistency: 868",
+      "stderr": "",
+      "resultDigest": "4506be714f404059fbb848a672a302683d33eb773a69047de76c017f791eed7f"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review4-mathematical-checks.py",
+      "scriptDigest": "8503224df920084e53d81ee13443aeb8b752b3a04ec60b758e18a3de183d3d63",
+      "exitCode": 0,
+      "observed": "ABC381 G: restored factors, block/chirp evaluation, cycles versus recurrence: 9471\nABC308 Ex: root/non-tree oracle and full Q cost versus simple-cycle enumeration: 1620\nABC444 G: nonunit preperiod/both ends and conjugate counts versus all exponents: 1968\nABC355 G: causal rectangle DP, end costs, penalty/ties versus all facilities: 504\nABC393 G: scaled circulation, residual potentials, rational budget interpolation versus LP envelope: 433\nABC402 G: closed Euclidean moments versus direct signed floors: 11830\nABC436 G: shifted narrow coefficient bands versus unbounded knapsack: 200\nABC217 H: hard origin via finite anchors versus reachable-coordinate DP: 480\nABC454 F: decrease-side selection versus all interval operations modulo M: 295\nABC305 Ex: bounded edges, fixed A=1, both outputs and ties versus every partition: 540\nABC454 F: central-crossing normalization versus original interval +1 and all palindromes: 430\nABC228 H: addition-cost hull DP versus all admissible final heights: 225\nABC219 G: sparse/isolated heavy-light timestamps and final resolution versus direct updates: 405",
+      "stderr": "",
+      "resultDigest": "44bc45024c5aa8b1717725028bc066d7e3ab4d4340730b79a346c2d1fb4d8811"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review5-mathematical-checks.py",
+      "scriptDigest": "d6c9641b7cf300dc8d4cc28f3875148808e3c91f9cc33472a4767e47eeba3071",
+      "exitCode": 0,
+      "observed": "ABC447 G sweep / sextuple enumeration / top4 associativity: 4696\nABC378 G direct LIS/LDS, insertion equivalence, hook and ideal DP: 50646\nABC311 Ex all retained subsets, every root, zero weights and save flag: 601\nABC365 F block merge and query range versus grid BFS: 15249\nABC418 F all endpoint matrices / dynamic prefix constraints: 3120\nABC399 F rolling label DP versus direct interval powers: 1452\nABC431 G lexicographic multiplicities and recovered exchange indices: 13936\nABC425 G all nonempty 3-bit sets and prefixes / unary recursion count: 2296\nABC449 G low-degree differential recurrence / distinct repunit sums: 96\nABC434 F three-block Z comparator / all concatenation permutations: 1250\nABC439 G geometric coefficients with zero denominators and last turn: 1365\nABC406 G original coordinate DP / slope clipping / recovered path cost: 450",
+      "stderr": "",
+      "resultDigest": "f3592310118a45479329d2f2d0a2841b3705f5e09684782a8fd09ec2b8950955"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review6-mathematical-checks.py",
+      "scriptDigest": "7a889ba231a937b34150faf47537c3eea97a53a28e3f49bf90ee385379af65a5",
+      "exitCode": 0,
+      "observed": "ABC249 Ex: exact marginal distributions and full-process Bellman equations agree for N=2..5\nABC440 F: feasible subsets and explicit construction agree for N=2..6 (1148 subsets)\nABC222 H: local condition agrees with exhaustive operation search through 5 vertices (567 labelled trees)\nABC222 F: diameter exception vs all destinations (145 trees)\nABC290 F / ABC359 F: all labelled trees N=2..6, degree realization, diameters, binomial sum and 150 convex allocations\nABC288 E: all 5913 insertion ranks and 120 purchase-order/selection DPs\nABC297 G: direct mex vs periodic expression (48750 states)\nABC429 F: column matrices vs unrestricted four-direction BFS (9360 boards)\nABC213 E: full persistent-wall state vs compressed static graph (148 boards)\nABC388 G: offset predicate vs exhaustive matching (27027 intervals)\nABC347 F: six partitions / central incremental maximum vs all square triples (135 boards)",
+      "stderr": "",
+      "resultDigest": "60bc241bdbb272d2b304838c45400a055aa53c329c64b190c32b32edba92c91f"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review7-mathematical-checks.py",
+      "scriptDigest": "6da9c295f1cf8e516d06fb43445d0668dd1a1b91fe7b7968b90eb603733008b6",
+      "exitCode": 0,
+      "observed": "ABC318 Ex: 617 individual AC/WA classifications and EGF totals agree\nABC461 G: every simple graph on at most five vertices, including isolated vertices\nABC304 Ex: 1,500 release/deadline DAGs against every permutation\nABC301 Ex: 350 multigraphs, every edge and endpoint pair; same-weight and parallel edges\nABC231 H: exhaustive weighted edge covers versus all differential matchings\nABC263 G: 350 multisets against individual pairing; every intermediate capacity checked\nABC302 Ex: 500 value multigraphs against all endpoint selections\nABC311 F: every forced grid through 2x3 and 3x2, including one-row/column boundaries\nABC354 G: 350 substring posets against every antichain\nABC361 G: 700 sparse boards against full-grid flood fill\nABC388 F: 1,800 obstacle/step instances against all-position DP\nABC390 E: 900 nondecreasing budget frontiers, including ties and plateaus\nABC431 E: every initial and final mirror placement through 2x3 and 3x2\nABC435 F: all height permutations through N=6 against every removal operation\nABC453 F: 1,000 sampled trees/capacity lists; every constructed edge cut checked",
+      "stderr": "",
+      "resultDigest": "3283b83a9bffe2279e5343ea666aeb0267414864a3da0eb97da32f1414148aa0"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review8-mathematical-checks.py",
+      "scriptDigest": "f965d071a8c5cff160e2fd1fc7247cc1c2a5bd259a985a92e2931e25cd13c1a0",
+      "exitCode": 0,
+      "observed": "ABC225 H: 2251 seat/fixed-seat configurations through N=8; K=0 and M=N included\nABC323 G: 600 matrices / 3,000 evaluations, including zero pivots and paired swaps\nABC323 G: every permutation through N=5; full inversion-count distribution against Prufer trees\nABC347 G: all 25 label pairs and 120 fixed/variable grids against all fillings\nABC452 E: 700 unequal-length arrays against every ordered pair, including quotient zero\nABC216 H: all robot moves for K=2,3, N<=3 and every start subset in 0..4\nABC463 G: every directional update through N=25,M=30 and all walks through N=10\nABC234 G: every ternary-valued array through N=6 against every partition\nABC450 F: 500 graphs against all candidate-edge subsets, including duplicate edges\nABC465 E: 503 bounds against integer enumeration; zero, real zero digits, exactly-one condition\nABC466 E: all two-valued card faces through N=5 against up to two original interval flips\nABC260 Ex: every three-color frequency vector through N=6 against all labeled permutations\nABC412 G: 180 degree/parity instances against every original subgraph and Tutte interpolation\nABC447 E: every connected simple graph through N=5 with shuffled edge numbers against all deletions",
+      "stderr": "",
+      "resultDigest": "4b0849fd979d788e2980927c925577eb395efc213f3bcec0296435e93f128d81"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review9-mathematical-checks.py",
+      "scriptDigest": "9814bde9e9da53a3bddab60a4d0f1c93264567789229cd251ee014f9b1f57c1b",
+      "exitCode": 0,
+      "observed": "PR65 review9 independent finite checks passed\n  DAG covers: 1024\n  DFS/BFS graphs: 728\n  hull supports: 12775\n  Nim mex products: 256\n  Nim field identities: 200\n  edited LIS arrays: 3279\n  tree mex sums: 1441\n  multiset arrangements: 836\n  functional graph inequalities: 864\n  recursive string prefixes: 11760\n  zero-sum subset partitions: 500\n  interval harvests: 3000\n  distance colourings: 500\n  monotone operation dominance: 500\n  ABC-increase DP states: 1809\n  ABC-increase outside alphabet: 40\n  palindrome antichains: 510\n  Nim virtual sequence comparisons: 500\n  multiset insertion witnesses: 166\n  digit occurrence prefixes: 109109\n  palindrome repair sums: 3279\n  order statistic expectations: 1776",
+      "stderr": "",
+      "resultDigest": "c536a2a3e1831f166dbc1cea6f3499877a14cb6f362c66e7a63777244eb2dbf3"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review10-mathematical-checks.py",
+      "scriptDigest": "5d77b9e96dbad0963ef3e7e78747587edbc0d9abcd25fb93e4a18d735dc64b3b",
+      "exitCode": 0,
+      "observed": "ABC214 H nonnegative network vs K-path enumeration: 3072 passed\nABC224 H fixed-flow shift vs all camera assignments and dual flows: 500 passed\nABC229 H column addition vs whole-board minimax: 400 passed\nABC229 H exact dyadics vs single-column minimax: 120 passed\nABC264 Ex root-only prefix answers vs induced-subset enumeration: 500 passed\nABC267 Ex product-tree layer accounting: 3 passed\nABC267 Ex subset enumeration: 4368 passed\nABC269 Ex weighted affine path merge vs antichain enumeration: 500 passed\nABC271 Ex all direction masks and bounded BFS: 20736 passed\nABC275 Ex weighted events vs original interval attacks: 500 passed\nABC406 G weighted coefficients and reconstruction vs coordinate DP: 1000 passed\nABC408 G strict Stern-Brocot vs denominator enumeration: 946 passed",
+      "stderr": "",
+      "resultDigest": "0ad02c07c852e9fe94b837f0e032d5c07680e9f591039bfd9a60aa6f75e3269d"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review11-mathematical-checks.py",
+      "scriptDigest": "6335aae492f5e54398557ac7e67620b8fd87ddba9fa4985edd152ba894ed4de0",
+      "exitCode": 0,
+      "observed": "ABC242 Ex duplicate-interval regression: 1 passed\nABC242 Ex subset counts and original expectation: 600 passed\nABC250 G every holding state vs original trading DP: 3279 passed\nABC265 Ex original two-turn minimax and mixed distribution: 2592 passed\nABC288 Ex digit DP, distinct correction and original sorted enumeration: 280 passed\nABC288 Ex unlabeled parity partitions vs restricted growth enumeration: 9 passed\nABC373 F signed marginal tails vs original multiplicity enumeration: 500 passed\nABC383 G every recursive boundary state vs direct DP: 9782 passed\nABC400 G matching enumeration, parity DP and penalty reconstruction: 350 passed\nABC400 G zero and scaled integer boundaries: 2 passed\nConcavity is not closed under pointwise max: 1 passed\nMatching exchange concavity with signed edge weights: 150 passed\nTotal: 17546 independent finite checks passed",
+      "stderr": "",
+      "resultDigest": "a5c6775f12b899dfb291f04e3b693d72acefdfe8aaf353f731bd30dde2f87401"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review12-mathematical-checks.py",
+      "scriptDigest": "d209fd8e8c837a35941efddf5dd29b15257ececfbdf4536d760c26ae5c4ecad3",
+      "exitCode": 0,
+      "observed": "{\"223 all suffix spans\": 4187, \"223 pivot queries\": 62805, \"236 optimal basis\": 280, \"249 30-bit representative\": 1, \"249 affine set\": 1157, \"249 nonempty subsets\": 506, \"254 original moves and assignments\": 1696, \"290 coin DP\": 18991, \"290 disjoint placement\": 42, \"290 original cuts\": 42, \"301 camera objective\": 354, \"301 coincident xy projections\": 1, \"301 projected false intersection\": 1, \"301 ray contributions\": 273, \"301 true 3D crossings\": 354, \"442 billion copies\": 1, \"442 bounded knapsack\": 500, \"442 run boundaries\": 5255, \"442 selected sum bound\": 1, \"442 unavailable residues\": 1, \"451 linear normal form\": 64000, \"451 original xor walks\": 3334, \"451 trie and equality\": 4000, \"868 prose and Claim\": 868}\nPassed 168650 independent finite comparisons.",
+      "stderr": "",
+      "resultDigest": "f085a7e86f0c041250ba52881e941a12e7c8abbae25cd13515d3893072d2c850"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review13-mathematical-checks.py",
+      "scriptDigest": "8b239f77606376fd02fd26015c1fd9d5f3054e32cac9cdbc135e2309be4b4e10",
+      "exitCode": 0,
+      "observed": "{\n  \"checks\": {\n    \"214 interval injections\": 3002,\n    \"214 sparse jump and inclusive endpoint\": 1,\n    \"226 all assignments\": 31375,\n    \"226 multiple twos on same person\": 1,\n    \"226 prefer five over four for three\": 1,\n    \"226 total capacity is insufficient criterion\": 1,\n    \"236 all graph cancellation\": 6,\n    \"236 connected coefficient\": 6,\n    \"236 distinct assignments\": 634,\n    \"236 huge LCM saturation\": 1,\n    \"245 larger injections\": 300,\n    \"245 rectangle injections\": 9936,\n    \"252 all merge choices\": 125,\n    \"252 arbitrary remainder splitting\": 186,\n    \"252 optimal contraction\": 121,\n    \"291 LCA on original path\": 20802,\n    \"291 one root\": 1443,\n    \"291 subtree halves\": 7038,\n    \"373 64bit aggregation\": 18,\n    \"373 allocation predicate\": 5355,\n    \"373 binary answer\": 1785,\n    \"373 equal budget is unsafe\": 1,\n    \"373 monotonicity\": 1785,\n    \"373 original strict boundary fails\": 1,\n    \"373 tied zero remaining\": 1,\n    \"384 all absorption orders\": 4096,\n    \"384 equality cannot absorb\": 1,\n    \"384 exact integer division\": 36,\n    \"384 reconsider after strengthening\": 1,\n    \"all correctness claim synchronization\": 868,\n    \"all document count\": 1\n  },\n  \"total\": 88928\n}",
+      "stderr": "",
+      "resultDigest": "d3b38de6923bf6dbb7488eaa095357663932a812c258572e4a1327bcc0d62fb6"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review14-mathematical-checks.py",
+      "scriptDigest": "cba6c7286a3a5abd5e48d6db22324ff140e780ec18c6a0e99c97977e23fdd029",
+      "exitCode": 0,
+      "observed": "257 64bit objective: 1\n257 collinear and duplicate blocks: 12\n257 final modular scale: 96\n257 maintained sums: 7814\n257 mapping versus all dice outcomes: 179\n257 simultaneous event order: 7814\n257 sweep versus all subsets: 550\n289 absolute offset and odd parity: 64\n289 compressed convolution versus original walks: 64\n289 renewal versus absorbing walks: 64\n289 unreachable time range: 1\n289 zero time initial meeting: 1\n294 all ranks and all masks: 280\n294 coefficient recurrence: 1050\n294 core versus all colorings: 3300\n294 deletion contraction versus all colorings: 3300\n294 larger hybrid graphs: 72\n295 ancestor root differs from DSU root: 1\n295 full SCC partition: 21368\n295 reachable minima: 21368\n295 root attributes after branch merges: 1\n295 successful union bound: 21368\n330 moments versus all completions: 15125\n330 restore factorial and modular answer: 15125\n344 heap versus original point inequalities: 164\n344 one swap per pair: 164\n344 sorted scores after tied events: 7083\n450 modular expectation: 329\n450 pair recurrence versus original subtractions: 329\ncorrectness Claim synchronization: 868\ndocument count: 1\nFinite mathematical comparisons: 127087\nDocument synchronization comparisons: 868",
+      "stderr": "",
+      "resultDigest": "caefceb095c0b2d2a4cbd9e7fd6ea8625c573593e98befad46c4f01fa2286d99"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review15-mathematical-checks.py",
+      "scriptDigest": "76f6f7460609247c756c2112cb3631736a3dd144eae2fbd38f93ebf94c9e0bed",
+      "exitCode": 0,
+      "observed": "check_merge passed\ncheck_palindrome passed\ncheck_magic passed\ncheck_circle passed\ncheck_maze passed\ncheck_runs passed\ncheck_suffix passed\ncheck_walls passed\ncheck_documents passed\n{\n  \"272 rotations including padding extremes\": 1364,\n  \"273 item-mask shortest paths\": 2000,\n  \"310 decomposition multiset\": 29233,\n  \"310 original unbounded magic\": 6408,\n  \"313 explicit original operations\": 336,\n  \"313 large integer lifetime\": 100,\n  \"313 modular lifetime\": 336,\n  \"313 persistent forbidden pair\": 2940,\n  \"349 feasibility and lexical minimum\": 3656,\n  \"349 work bound including invalid input\": 3656,\n  \"358 length\": 1295,\n  \"358 necessary and sufficient lengths\": 12,\n  \"358 rendered passage\": 1295,\n  \"400 original circular painting\": 726,\n  \"427 all-input action\": 69450,\n  \"427 binary blocks\": 12000,\n  \"427 cursor count\": 6582,\n  \"427 local versus bulk\": 4,\n  \"427 quadratic counterexample\": 4,\n  \"427 threshold equality\": 69450,\n  \"document proof and claim agree\": 868,\n  \"full audit domains\": 1,\n  \"full audit membership\": 1\n}",
+      "stderr": "",
+      "resultDigest": "54db672f49127587d60ffcbd57d1532f0c8806c5193d2abc8302cdf51e5dce29"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review16-mathematical-checks.py",
+      "scriptDigest": "372bdb987d3afc912e4f04f66d33e0f747a9414b35a5b9e28ee71522161e6e51",
+      "exitCode": 0,
+      "observed": "check_446 passed\ncheck_302 passed\ncheck_399 passed\ncheck_261 passed\ncheck_462 passed\ncheck_452 passed\ncheck_380 passed\ncheck_435 passed\ncheck_documents passed\n{\n  \"261 original weighted adjacent swaps\": 9330,\n  \"302 balanced edge equations\": 11230,\n  \"302 constructed sorted array\": 21840,\n  \"302 construction meets lower bound\": 21840,\n  \"302 one swap lower bound\": 256,\n  \"302 original arbitrary swap BFS\": 21840,\n  \"380 inverse four and window normalization\": 719,\n  \"380 original window and permutation mean\": 719,\n  \"399 constructed final word\": 667,\n  \"399 incoming cycle example\": 1,\n  \"399 original global replace BFS\": 695,\n  \"435 generated intervals bound total visits\": 41640,\n  \"435 original per-cell repaint\": 41640,\n  \"435 white count\": 41640,\n  \"446 minimum\": 1,\n  \"446 old sentinel exposes regression\": 1,\n  \"446 original subsequences\": 3272,\n  \"446 repeated one\": 1,\n  \"446 sample one trace\": 1,\n  \"446 sample three\": 1,\n  \"446 sample two\": 1,\n  \"452 original continuous substrings\": 9840,\n  \"452 positions are not types\": 1,\n  \"452 types preserved by both directions\": 9840,\n  \"462 even larger K parity counterexample\": 1,\n  \"462 negative predecessor is necessary\": 1,\n  \"462 original phase and direction Dijkstra\": 6084,\n  \"868 claim source binding\": 868,\n  \"868 document proof and claim agreement\": 868,\n  \"868 domains\": 1,\n  \"868 membership\": 1\n}",
+      "stderr": "",
+      "resultDigest": "c144b36b38826be16aaf2274c256743db147336a1f7f22bf4cf25a113be1f4fe"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review17-mathematical-checks.py",
+      "scriptDigest": "b96c64358c4eb8c817a378a45a55939bfe162cfc2c78311ef1fd91b550c68c1c",
+      "exitCode": 0,
+      "observed": "ABC441 G: 318860 interval summaries after all <=3 updates\nABC453 G: 115500 version/range sums, unequal N/M and M=1\nABC458 G: 85590 daily states vs integer DP and actual distributions\nABC394 E: 19767 all <=3 vertex two-letter directed graphs\nABC397 F: 3267 arrays, every cut state and final three-way split\nABC372 G: 6072 strict integer lattice counts vs original inequalities\nABC459 F: 3245 integer block solutions vs original BFS/unit stabilization\nABC415 F: 7422 string partitions vs direct runs, empty identity/associativity\nABC383 E: 9644 legal disjoint token matchings vs minimax Floyd/permutations\nABC356 G: 6375 rate/query configurations vs all pairs of original styles\nPR65 review17 mathematical checks passed",
+      "stderr": "",
+      "resultDigest": "456c1b49053eb9f3e44d2f0ffa60f654aad7b33ea2da60cda3a7d9f5f71afccf"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review18-mathematical-checks.py",
+      "scriptDigest": "94ac1c532a26b71b9d316fb537c8283b5639d1d860802b9f57520e5f77b47a34",
+      "exitCode": 0,
+      "observed": "ABC249 E: run-length DP matches exhaustive strings through length 6\nABC254 E: BFS keeps the shortest arrival; bounded DFS can miss a vertex\nABC281 E: K=1 sliding update inserts before erasing and returns 1, 2\nABC343 E: pair/triple inclusion counts recover exact coverage volumes\nABC387 E: every prefix row has range, digit-sum, and divisibility guarantees\nABC392 E: global cycle-edge pool supplies C-1 component merges\nABC424 E: exact dyadic batching matches literal greedy on 588 cases\nABC427 E: forbidden wind is detected by T's reverse preimage\nABC434 E: a surplus edge covers the root chosen at its endpoint\nABC449 E: zero-frequency values participate in value-ordered ties\nABC454 E: exact strip construction visits every legal cell in 110 cases\nABC459 E: falling-product binomials and strict true-ancestor selection\nAll review 18 finite checks passed.",
+      "stderr": "",
+      "resultDigest": "0ff64cc10c52aab21de73ceb57047636e343da19860136cce371d5d75a1c5ee3"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review19-mathematical-checks.py",
+      "scriptDigest": "41d0e300c758acb2ff61adc1e4e539fd8a767025e26e14c1eaf0aad4c243974b",
+      "exitCode": 0,
+      "observed": "ABC254 G: normalized time vs original shortest paths: 22032\nABC466 G: negative targets and carry counts vs nonnegative enumeration: 64\nABC464 G: all budget answers vs literal flips: 508\nABC386 G: connected recurrence and correction vs Kruskal: 9\nABC238 Ex: last-pair sum vs forward rational expectation: 124\nABC399 G: latest-position basis vs fresh elimination for every suffix: 65610\nABC448 G: triangular nested maximum vs exact game vertices, incl. sample: 6\nABC252 Ex: per-left prefix nodes vs explicit XOR-pair ranking: 5184\nABC280 Ex: stack prefix tree incl. identical/terminal leaves vs all occurrences: 930\nABC296 Ex: initial/cost/final frontier states vs full grid fillings: 590\nABC273 Ex: direct quotient skips and operation count vs explicit ancestors: 2145\nABC397 G cut directions, ABC281 Ex 0/1 materials, ABC365 G clock: passed\nAll review 19 finite checks passed.",
+      "stderr": "",
+      "resultDigest": "a54b747e0febe6aad8bcd7c134c6282ef4eb9fc94c82466b4ba4aff1913dfc6b"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review20-mathematical-checks.py",
+      "scriptDigest": "eba922dc9e4592f3e587e2683afc7f44d9ce1b8218b618c9f0aa91674cd38feb",
+      "exitCode": 0,
+      "observed": "ABC317 F: lower-prefix comparisons: 12288 ; positive triples: 432\nABC429 F: leaf matrices and full answer vs unrestricted BFS: 1168\nABC434 F: Z comparator: 3844 ; second concatenation: 455\nABC456 F: both initial states, daily matrix and terminal holiday vs subsets: 1538\nABC457 F: all constrained gap arrays (including impossible arrays) vs permutation counts and lazy updates: 873\nABC374 F: prefix event DP vs arbitrary batch subsets: 315\nABC268 E: even/odd half-open affine pieces: 501\nABC443 F: suffix break vs full-edge BFS, moduli 1..1000\nABC448 F: coordinate bounds with skipped/empty strips: 3002",
+      "stderr": "",
+      "resultDigest": "ab7149f7d9aea4232b856aa32dc6223e634702e69f5cfd566628cb4e8b2f0743"
+    }
+  ],
+  "proseReviews": [
+    {
+      "path": "docs/verification/bootstrap/pr65-review-corrections.md",
+      "digest": "ffa0437ddcf4ea56bd814a0f45f73988a76e3663e630012c205caf96c631f74a"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review10-corrections.md",
+      "digest": "adb6c81dc497b55810930ebe497434a8fd2badd519eea1df9ce710a27bf2391e"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review11-corrections.md",
+      "digest": "54fa16971af915bb793c127311282fd32fa0f9b60429b330d9be091249ecaea9"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review12-corrections.md",
+      "digest": "c3aef082fea64eb76607b63401c56b51e081232f3890072d5e25fd832ec707c2"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review13-corrections.md",
+      "digest": "d5d9290f31db5bf081e440ae5925580fb83ddeff82a036008745eb5b2688d651"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review14-corrections.md",
+      "digest": "ad416396f2ba658d568dec53e8cdc4e2123870f5900845c3f0fbc6ff11350938"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review15-corrections.md",
+      "digest": "e1b47818cdc584634c2be36223261f8a997938ecd7ca71938d58db065810cb48"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review16-corrections.md",
+      "digest": "ef04606720b6ae7b5fe7a25bf3989452f570fed96dc5a3b65ea984e1989bec6b"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review17-corrections.md",
+      "digest": "822cca5b14229f0b584dc5f461df2842f6c04b24eaa5d3dfe0466b61e0415c87"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review18-corrections.md",
+      "digest": "94fb1e7ee5c5fbd5bf7e8f609e80665fcce75442d1fd6277ac9edb52ffb34c84"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review19-corrections.md",
+      "digest": "c36835c73b65ec55476ae0c88e9fcbb1587b935f56414965a5b15a57aaac0968"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review2-corrections.md",
+      "digest": "1ef0214f30b7a1754f8f69d4d04575c3aed0edd9eea9d772021afb38fd1c3c99"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review20-corrections.md",
+      "digest": "e56391cddefb5ea54988ed605e92c4d6df0bdae5342c21bcabf1adb31571913e"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review21-corrections.md",
+      "digest": "2b970b3ba93e19bde16a5d8d3282597280bd4259ca87755862a191bf06f36ea5"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review3-corrections.md",
+      "digest": "1996235269f1e4361a48c2a08f86123fa2fb4ce12293fd80f5c2628be28bf542"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review4-corrections.md",
+      "digest": "c0941b5f781d8107f1edea7db54265f01a7d32573e5740cc4e3da4efa4f61830"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review5-corrections.md",
+      "digest": "316ad3da83f046831842fa21f5ef5ff1492dad412916d1badc5a328d47b00e60"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review6-corrections.md",
+      "digest": "c7d0b3ee1b9edf5a75840461337773a44d90208a05fc362be3b09ad73ef7f64b"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review7-corrections.md",
+      "digest": "8fb38e780085f11c9054d89dc089fa1636a4685f88a5b495c67c227648bf1bf1"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review8-corrections.md",
+      "digest": "595566145d5d0051ed84afd1dbc42403e611c8daf88e661dee4d37dc3ec6ff87"
+    },
+    {
+      "path": "docs/verification/bootstrap/pr65-review9-corrections.md",
+      "digest": "b9d1aa6d54433b71935743581c719916e07dc2c82364a8961e109c9204ed28c6"
+    }
+  ],
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "qualityReviewPath": "docs/reviews/agent-content/bootstrap/problem-corpus-quality.json",
+  "qualityReviewDigest": "2111aed251e7f1d2046dff2e0bc738ba12c75cd09514c7eb461adf13ad61c734",
+  "limitations": "Finite regression checks do not prove arbitrary-input correctness. General arguments remain in the source-bound Problem prose and the tracked full-corpus prose reviews.",
+  "evidenceDigest": "f781c4abf3143cebb755040e6aeb5524d401feda62916b2915f420a03a18ff48"
+}

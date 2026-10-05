@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-reorder-counting-contributions-shard-001",
+  "shardSubjectDigest": "81460f05511d728909f2889089a67c363b0153fe549f9e87172655d1a4499bce",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [
+    {
+      "problemId": "abc261-f",
+      "url": "https://atcoder.jp/contests/abc261/editorial/4484",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 異色逆転の下界と隣接逆転解消による達成を再照合し、無料交換時の不変量・停止量と木の初期化費用を具体化。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "a0fbf82085c22919fc1d531337462cf91892dc4ba7ce939e596d651f90bf52f2",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc215-g",
+      "documentDigest": "fe5ed9dddd16fb6c56da3ec6f608c80e194135bd4afefdfdac594a8648eb03e1",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc220-e",
+      "documentDigest": "3da928d8baefab16cbb963d53747c1be2c131d4d9cea076062117ac100eff342",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc231-g",
+      "documentDigest": "03f0075887a7a8228a4006a8febd5a2e56e2f2b67aabfc3ad9aa46865406761e",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc233-e",
+      "documentDigest": "b6699396bdd2ffcf80f703057c0b408acba513538f7cfee9e12bee0a4383d728",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc247-e",
+      "documentDigest": "c0118cee1fd661411db89fbaf234264f89977e247bfd4fab59b172cc300e06c8",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc255-e",
+      "documentDigest": "a182d55046b30f1bbb6b72936f8a0e74049f1a6b87e89b21888339eb6316ef18",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc261-f",
+      "documentDigest": "9a1f4087744cee839145a3df6788d6c4b9f4a7e3c951077409113c3df40067e8",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc268-g",
+      "documentDigest": "322382561813c0dc38ae6c9bfdcedf8c946d50b5dd5fb8ef839b4764cae6a292",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "50a3566e6c478acef1944396e394fd629855c70973cf222ca71c0e28c4658ec0"
+}

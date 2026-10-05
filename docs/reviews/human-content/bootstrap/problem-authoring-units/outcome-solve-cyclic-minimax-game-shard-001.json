@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-solve-cyclic-minimax-game-shard-001",
+  "shardSubjectDigest": "4c5a7cdc8cf7a5e59ffc8379811ad2c115a818c3e6ecae34a379966ed34d3a0f",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "ff2933cca277c7a3bb141be11be2cc5e2030f47ee1bc8b029907d26bafead9be",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc261-ex",
+      "documentDigest": "6066592f90536b2d01a446ee19aac1a68b22cb42b2ee29a624c9be8f2c4327f6",
+      "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc413-f",
+      "documentDigest": "5dd621f0495e8c617cd8b947677d53a6e4db8c0da0f92435be14c5442f364d65",
+      "learningOutcomeIds": ["outcome-solve-cyclic-minimax-game"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "732038a34c363acc2baf5a97a5cd4b7577f5eea5b0ac13516a63c612c9f13d1e"
+}

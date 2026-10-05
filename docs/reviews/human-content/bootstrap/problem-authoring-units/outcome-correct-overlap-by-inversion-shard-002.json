@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-correct-overlap-by-inversion-shard-002",
+  "shardSubjectDigest": "4aa407cda08c2eb109ecee9699b3d9a4e7275fff95c523b8dfaa1b48775a0e12",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": [],
+  "sourceVerifications": [],
+  "priorReviewInventoryDigest": "bfa9a6350ac35df83380dd07d2690e35b4ed9040674b481e3887e6cd2d545da3",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc306-ex",
+      "documentDigest": "4456d73163c91aa71658ed9f8ad17b628e325aa943a4ba391dbbbfda2b2cb4fa",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc309-g",
+      "documentDigest": "059f8847492497fa9237e81ccbf77d6c6b4b8ea59a532decc559e2f2be1f25c5",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc331-g",
+      "documentDigest": "91b82cb81c6ae95ddab6aab01809c16873627071ebc5f4f809c41f648c12d30a",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-encode-counting-by-generating-function"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc357-g",
+      "documentDigest": "e5c0d674a312626e92b627cdc4b3871ce963a7ccbb2ed71a45388659126ca077",
+      "learningOutcomeIds": [
+        "outcome-correct-overlap-by-inversion",
+        "outcome-compute-online-relaxed-convolution"
+      ],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc455-e",
+      "documentDigest": "588056032dc5e41219b3c8ac827d236248fcd6ff3c3e4d82795f75fb79a63ad3",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc456-g",
+      "documentDigest": "9bf5643121b96a711bd8eb17b9773809a6242327088cd7f0fdfab57041caf853",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc462-g",
+      "documentDigest": "4761cf80a01e149749aae3dfbc9fc0f532f6997b2236efd55d47e5a1c45462df",
+      "learningOutcomeIds": ["outcome-correct-overlap-by-inversion"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "3282477f3c1d2feee9ac1372ac4e163e59d0e3323ebe0579896c2a55a2dfb1d3"
+}

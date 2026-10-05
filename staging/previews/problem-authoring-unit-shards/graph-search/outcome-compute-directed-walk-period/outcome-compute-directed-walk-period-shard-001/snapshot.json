@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-compute-directed-walk-period-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "289f4355aaee0b6b45e37de69b5d976ee4f737a79a71022d10a15a2acf369837",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "37c697961d98590fc490f00cbb3eb6b4c393e39aa2a88d67424aeea11be65a8c",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "b2389eb0451c550a41c5be08c020a9a8f6f715e3570d2a4cfb0b9c87b6be7065",
-  "reviewDigest": "2a221e3d905e09822c860236f05358d0edba45e01f6eb7b93282cc7ce22b483a",
+  "checksDigest": "49dfe51eeea4f93896ecbfbb548d8c5aa9dbbba1264459b3e6e990c8ebdcafea",
+  "reviewDigest": "807b799aa7a23c5716742c8a5afaee413113f918d57799e20864d89070d26e58",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-compute-directed-walk-period/outcome-compute-directed-walk-period-shard-001/abc306-g.html",
@@ -19,5 +19,5 @@
       "digest": "b757d04fc0a924abf5b98fa6b0e9db73b03a74a49c2fa117714526c8e12e036f"
     }
   ],
-  "snapshotDigest": "8939e1ba667dcad93f61279001600b1278719c5775d12d421657a2c800aa3220"
+  "snapshotDigest": "7d5093a17305aac1a87552458280b6074547c2c594bcc09a07d06fcb3a9f43f3"
 }

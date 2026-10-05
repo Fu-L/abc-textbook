@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-compose-dynamic-tree-clusters-shard-001",
+  "shardSubjectDigest": "b16d4301cc94bfef6ecf4fab8c313f8ec3fe30d81d5733c4cab5aef58b340b9a",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["official_source_conflict"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc351-g",
+      "url": "https://atcoder.jp/contests/abc351/tasks/abc351_g",
+      "checkedAt": "2026-10-02",
+      "reason": "葉baseと非葉漸化式を公式問題文で再確認した。"
+    },
+    {
+      "problemId": "abc460-g",
+      "url": "https://atcoder.jp/contests/abc460/editorial/21012",
+      "checkedAt": "2026-10-02",
+      "reason": "任意root取得と両向きclusterの必要性、O(N+Q log N)を公式で確認。"
+    }
+  ],
+  "priorReviewInventoryDigest": "cbb616a7ab7cde1c338299910ecfb39777903501691bb755c51b18201300bccb",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc351-g",
+      "documentDigest": "8cfc58f94eaa27953367c160ceac2aa34ae5abc2d46afeea8712a2ef8ea8b425",
+      "learningOutcomeIds": ["outcome-compose-dynamic-tree-clusters"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc460-g",
+      "documentDigest": "42b05f99009bc517f1d832ec3d4ffb0bc8d6808bfbe3afb180df4f50acca582a",
+      "learningOutcomeIds": ["outcome-compose-dynamic-tree-clusters"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "300b8f89dcdc6db8bf56d80876dacac0d3574408556b52c6f0d0fe393fd4d0d3"
+}

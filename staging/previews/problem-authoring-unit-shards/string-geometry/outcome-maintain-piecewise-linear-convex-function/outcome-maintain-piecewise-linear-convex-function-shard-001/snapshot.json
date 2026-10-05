@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-maintain-piecewise-linear-convex-function-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2dc1ea45976c62a425e8f56299ef5ca9fc72c872ae08e4d314e4eac15ff74e31",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "80f7148b71fdcac77880b877e6c99df1ec586f60401a71a63689a6819121ca7b",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ed59098f157eb43089def3fe9a5925de32983add46c1c7cd621bf73d86598e73",
-  "reviewDigest": "7e1be6bf9ff7f9e5d3c52582107cc8335c8fa44be9678338ae8481728d4713f6",
+  "checksDigest": "c23325d27231cfe8ae3ad520465538fbcf9ff0f3dd4b08672b46c8abe1c933d0",
+  "reviewDigest": "fc0e84176bbcec7c7f4c786978996237a56626fd6d5839694ad410fe6844e0fb",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-maintain-piecewise-linear-convex-function/outcome-maintain-piecewise-linear-convex-function-shard-001/abc217-h.html",
@@ -35,5 +35,5 @@
       "digest": "076bb35df800326983cc0a878735a08558bebfa5945156f25704a89c3762d0d1"
     }
   ],
-  "snapshotDigest": "57bc48e821865342feeaecbc7cdcddce67ee34b0a513bea30760565f259d257f"
+  "snapshotDigest": "f4cfe519fe220efb6b6d07569f60c176576f89f83272f0d2b1aa5abd2c57cbfc"
 }

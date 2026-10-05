@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-use-tree-diameter-extrema-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "d9fcf2e3c7ae28e32bdd4bd247a33a9e742313ad19a1913f8c3c957450ee5c5b",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "f0a7bf23444aae340ddf21ccbfd705176ddb020339902c8bb6df5b71c3f0999b",
   "requiredChecks": [
     "source",
     "structure",

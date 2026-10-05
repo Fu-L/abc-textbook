@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-factor-separable-linear-transform-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c243e82ae9cc37ab8021dd2e310d8d09e1ae546c56900a30c68431b63b671e38",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "064cf781330086aaff6aee04def9862cecde9e52a5af6c1c5b9bd3a918960b08",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "085f152ff25a6044368164f62a034592ae1c8a660a771fe3f6891e30258210f3",
-  "reviewDigest": "d71f381573a83ee84620ef8391d5a772a9daa78ee7f6d2a6a0db383a0a2d0f8d",
+  "checksDigest": "6b634bb9977686d28b2a93b57ebd8d49f318615df1bf19266681011f137df74f",
+  "reviewDigest": "ef88b227e78c7815db6cf6ded2f77b57fc27d872d56614e70e739453ecacc40b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/mathematics/outcome-factor-separable-linear-transform/outcome-factor-separable-linear-transform-shard-001/abc212-h.html",
@@ -27,5 +27,5 @@
       "digest": "cd145b06d3c3817e3417fa9c503ffe7d45e3e939c8794570cd79385e554a86ee"
     }
   ],
-  "snapshotDigest": "f176819b09619a826d94badce574fac7a89f46e83d35ef8117d2ae7c476d22f1"
+  "snapshotDigest": "6a0fe282758b1a3784c835a8a064c5369f46b31faef4f0c49ee8a019775d8d0b"
 }

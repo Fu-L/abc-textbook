@@ -103,4 +103,4 @@ Euclid互除法の商列を連分数・Stern–Brocot区間として読み替え
 - [ABC408 G 公式解説](https://atcoder.jp/contests/abc408/editorial/13160)
 - [ABC408 G 公式問題文](https://atcoder.jp/contests/abc408/tasks/abc408_g)
 
-Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `b1c5eef8e8146547bd47783d8ef584ffcc7a4fa4a698b623b4c72c12862827d5` / LearningUnit `unit-rational-approximation`
+Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-rational-approximation`

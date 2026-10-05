@@ -25,6 +25,7 @@ export interface VerificationStep {
     | 'full-learning-content'
     | 'problem-shard-index'
     | 'problem-shards'
+    | 'problem-corpus'
     | 'build'
     | 'links'
     | 'e2e';
@@ -45,6 +46,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'full-learning-content', script: 'corpus:verify-learning-units' },
   { id: 'problem-shard-index', script: 'corpus:verify-problem-shard-index' },
   { id: 'problem-shards', script: 'corpus:verify-problem-shards' },
+  { id: 'problem-corpus', script: 'corpus:verify-problem-corpus' },
   { id: 'learning-content', script: 'preview:learning-content' },
   { id: 'build', script: 'build' },
   { id: 'links', script: 'link:check:built' },

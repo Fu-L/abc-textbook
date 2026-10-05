@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-univariate-convex-function-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "31740366e4c57891d39377da6856d7f0bb1a618d079f7b6287eb454365ed637f",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "d753f0a7c28d3f617637c36ca1cf33bf994537a428b98a306219fcad3e31f360",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "4ff16620a40cdff106d151f2ea359c0618e9acc1e32d703ca6a59351fe5ed147",
-  "reviewDigest": "cade172781c214f297c61591d4f0da1f5f0e386afc758dd0a6eb9e48145e8428",
+  "checksDigest": "10cf69887dec9fb01cda8dcad767d2ebf2c4b97cdda214157f0791ca7bca67ac",
+  "reviewDigest": "dee2c3b6dceca4ec24e8c7922d39b0196666970e206550abad132ec1aaf3fc51",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-optimize-univariate-convex-function/outcome-optimize-univariate-convex-function-shard-001/abc224-g.html",
@@ -23,5 +23,5 @@
       "digest": "a987af1228937e53915f3a25eb44a0a90492b142b462fad0fb76764c6f4cf066"
     }
   ],
-  "snapshotDigest": "5f1b23f08c994192082101fd9757ce5a5962dff513c9eb51b8381e59b8a66687"
+  "snapshotDigest": "eaa88a401558848f187c3eaf73e494d19b558856c08c9e79f9b99dc5a4a76022"
 }

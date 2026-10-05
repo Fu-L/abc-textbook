@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-reduce-geometry-to-algebraic-predicates-shard-002",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "0a58142c0505f77cbcf0913202fe2a7324c07b20eea1e64669f75f0f4a0eb08e",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "bd0ad7629e2aea338cd8795ac224d8ee53269a3b5c8bb0e31484a93c6ce290d6",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "88ad1cc6218eaf61b553fbdf86721586c586f40fdb0373756c5568a1303ad4ba",
-  "reviewDigest": "eb5a2561c44602f80fff389616a34147477c91b3a5056b2d9e4a1a77fd4dda66",
+  "checksDigest": "32384223377918367c04a10e9784129ac0a998679d772b06de97db574c6aee41",
+  "reviewDigest": "d46f7fe83ee264eaa107722c791dae240957d97fa5971e05e12190177c870d2f",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/string-geometry/outcome-reduce-geometry-to-algebraic-predicates/outcome-reduce-geometry-to-algebraic-predicates-shard-002/abc353-f.html",
@@ -43,5 +43,5 @@
       "digest": "75dc9bccbe9d66a8e2b748ec103fdcd37bb4487aa3b2273bd49129752d2b57ad"
     }
   ],
-  "snapshotDigest": "2a5bde3408fb575e8e0ba1b901488b0b7c4f9d18a7e7ab54569ad633ed7ffbda"
+  "snapshotDigest": "5afb3db865e8d06cd2f5f88dd9626a6bcf4d4c70749180dcca8748a9f1297de1"
 }

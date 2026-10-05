@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-construct-optimal-spanning-tree-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "b23dacc41f4d0de589954a7e8a522bea87853877262819b16aa8bf38af6b93c2",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "3387848c2d59f9afc108c66f0f24a25599ba8f38f0e45a4817de80af9ffdf63e",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "ebc9c3a6dafcd1317f715edfd86e5aa19e1bb8f3339ae79c3d1f48a8963f725e",
-  "reviewDigest": "27c3e6de5a68026727669fb00e9a7a85ee33761a8815ae7546137e60ec605a6e",
+  "checksDigest": "f9a428e70039c1e4f5158722a6c91962015fec8c898f166b54d2b896340ac1b7",
+  "reviewDigest": "338081d546660a3b54bf142258678a863df8b0d8af4c6b875291f2dc0a7a9b5a",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/graph-search/outcome-construct-optimal-spanning-tree/outcome-construct-optimal-spanning-tree-shard-001/abc218-e.html",
@@ -35,5 +35,5 @@
       "digest": "aefb6edff35b16c7ffa7f5bad42eb1a5d3b5960e86ec55fc3256e427d53bd31e"
     }
   ],
-  "snapshotDigest": "771517f9713def54b5460327d3d9c5fda08b3c7ed713054c51ab067a169dafd0"
+  "snapshotDigest": "79d1dd87cd3e583863deb58199710e808a5c7fce85e3756e6181a4cabff1c6bf"
 }

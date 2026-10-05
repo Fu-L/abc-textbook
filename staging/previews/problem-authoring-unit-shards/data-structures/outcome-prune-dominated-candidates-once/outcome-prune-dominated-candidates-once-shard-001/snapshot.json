@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-prune-dominated-candidates-once-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "c662a60a29f382b2c024824c04c74a59cd77ade3bccc5b080d0d0ebaf24fdd40",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "9d59aefef7fd09f23a61bcc42c0f95bac50ba3c5b8b8fefa160790ea3d898dc9",
   "status": "on_hold",
   "holdReasons": [
     "THIRD_PARTY_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "d6452c14f9b55446ed54fc84610ee500bca3713a6c4f7ed5e39778aa1709a0c1",
-  "reviewDigest": "44aeb0da858b6129ca39b98fdb6811c5669e4068f04fd9d38720b4226e2cbf4e",
+  "checksDigest": "8c26e970b841207f17d50083cc1aab778e2a5d57eab7a86473f4399a784a3d75",
+  "reviewDigest": "25da90a8b1d127e5efa00e385932ff05572deb4a53ed0b7c97c0bdf895e45636",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-prune-dominated-candidates-once/outcome-prune-dominated-candidates-once-shard-001/abc228-f.html",
@@ -35,5 +35,5 @@
       "digest": "de5d24dd83b9aca15bf49f06e04813e90226942921c327178dfbd9a205a2ca04"
     }
   ],
-  "snapshotDigest": "c0a581184334bf7f0b5c8d45d42a3b739ac07e3d050fb9f98390516dec1b1bbe"
+  "snapshotDigest": "58c1fa4fa5f5a937bda8877b010ffbfc375bae106966efa25978d6c994c5b73b"
 }

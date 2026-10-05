@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-close-eventual-dp-tail-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "2f76bd8e5ece9e65af638482561a673458e80cd45a53bc5510519924cb1ee376",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "a85e4645db28753d36e842a8a5bde583340fad46b0eced381d5e8c1c6b685679",
   "reviewPolicy": {
     "requiredMode": "self",
     "riskReasons": []

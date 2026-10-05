@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-answer-idempotent-range-query-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "e44d07df1cd019ed8f46869a905330faff63c40ab33ae03d2ae7bd4d839adf65",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "022cf3e15a9967480743969513b48b7715845d17912e837da3f828bf98fdd69a",
   "status": "on_hold",
   "holdReasons": [
     "SELF_REVIEW_REQUIRED: Policy-selected human review is pending; T074/T078 acceptance is separate."
   ],
-  "checksDigest": "211fa121fe328b72fbfd0ad8b6b9a018c439f21ba540fb55e955e3f7751a1f74",
-  "reviewDigest": "f40f6a023df6791d6d3850e0aeacaf2bd0b9bd3df1d0fa5df0212fd29f417012",
+  "checksDigest": "8b2f84626b224be4291aee4fbb970957d36636af29f6420390d7c176b8c0ebd0",
+  "reviewDigest": "16bfc3864ec356ead33a05fcdb3d2d602b7be4319d63171a992a2d2d02eea69b",
   "htmlFiles": [
     {
       "path": "staging/previews/problem-authoring-unit-shards/data-structures/outcome-answer-idempotent-range-query/outcome-answer-idempotent-range-query-shard-001/abc282-f.html",
@@ -19,5 +19,5 @@
       "digest": "794a65b3545e6d0775ae5797bd1c969e1165471b0e6a4a726a5b2c6864bb9b12"
     }
   ],
-  "snapshotDigest": "4cfed93b8ca80dc4d677d59d463faab452ff67ee3a688c72847c32391950e81b"
+  "snapshotDigest": "76133ada6b967f4f2d657ff0847c8c3c03b55570a61ec1b4ec23250c52c99762"
 }

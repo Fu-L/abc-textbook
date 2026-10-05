@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-reorder-counting-contributions-shard-005",
+  "shardSubjectDigest": "232ba9001a8b1248bd376f604e124d779f77b3c45f48009ea1d00e0e7ab8dc49",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc438-f",
+      "url": "https://atcoder.jp/contests/abc438/editorial/14945",
+      "checkedAt": "2026-10-03T14:28:55.960337+00:00",
+      "reason": "PR65 review 5400631527: mex tailとpath端点を再照合し、距離等式と外側成分・同端点の導出を補足。具体的な補修と有限検算は docs/verification/bootstrap/pr65-review9-corrections.md に記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "0dae7e57b3d72b13a99e6e0979d687201160c62f2cc3c661efb28286600b6cbf",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc436-f",
+      "documentDigest": "827a92a13a76de15e22ba1f4ea099c72395c7a14f914041d3af26d78c5a9436a",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc438-f",
+      "documentDigest": "2fce4d599bf905f70cae0be6a79274e577f799ae3e61ea8cada76bd20daae54e",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc439-f",
+      "documentDigest": "5f1ee1dd25e1d9820316368959ba6339382c506b07d98d6f2a0ae5798dc4fe81",
+      "learningOutcomeIds": ["outcome-reorder-counting-contributions"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "fb6991451769e559ca4b1b31fa699b37cc17539cf44ccc5b44807b90aed1a6c5"
+}

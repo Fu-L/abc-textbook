@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "subjectDigest": "d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "shardId": "outcome-normalize-equivalent-states-shard-001",
+  "shardSubjectDigest": "1921163fbfdc8d90705d038d4f5961433b7f0c7fd6efdbffab818deadc9fc381",
+  "status": "accepted",
+  "policy": {
+    "decisionSource": "owner_instruction_issue_48",
+    "reviewMode": "agent_quality_review",
+    "humanApproval": false,
+    "humanReviewRequired": false,
+    "sc009Required": false,
+    "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
+    "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
+  },
+  "riskReasons": ["original_proof"],
+  "sourceVerifications": [
+    {
+      "problemId": "abc427-g",
+      "url": "https://atcoder.jp/contests/abc427/editorial/14187",
+      "checkedAt": "2026-10-04T04:13:59.253518Z",
+      "reason": "PR65 review 5404148632: 公式のl/rマージを再照合。作用保存・未処理Pの実効値不変量・cursor回数を独立に補証し、二乗挿入と区別。 一般証明と有限検算を docs/verification/bootstrap/pr65-review15-corrections.md に区別して記録。"
+    },
+    {
+      "problemId": "abc302-g",
+      "url": "https://atcoder.jp/contests/abc302/editorial/6393",
+      "checkedAt": "2026-10-04T07:37:13.029330Z",
+      "reason": "PR65 review 5404336223: 全順序potentialの変化、逆pair相殺、重み0の補完、4頂点の分類と具体的cycle交換列を再照合。SCCから補完する説明は独立に補証。 一般証明と有限照合を docs/verification/bootstrap/pr65-review16-corrections.md に区別して記録。"
+    }
+  ],
+  "priorReviewInventoryDigest": "afa27678099520a54db784468a6366caf3e0c33e6b8ed78ae1a303e3399ebd2f",
+  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "basis": [
+    "current_subject_independent_shard_verification",
+    "tracked_full_corpus_prose_review_and_corrections",
+    "independent_mathematical_regressions",
+    "claim_body_and_source_binding",
+    "primary_outcome_home_coverage_related_reading_order"
+  ],
+  "items": [
+    {
+      "problemId": "abc219-f",
+      "documentDigest": "c44a9224f939a961fbe144604b5337900ea4b1989ef02344c5a74c7a859a88f1",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc250-e",
+      "documentDigest": "ed5aa38ce509cd944fab65261f77a00298febbc815eaf3035902dc5692fd973f",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc296-f",
+      "documentDigest": "229457624da3f1cf760d1f1aef3e0d5edd88af6084d7b59cc28a7690881be499",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc302-g",
+      "documentDigest": "9b09364578c78af10c431fa650ff74fcfc4948120c7b9127afda214cddda8fea",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc313-g",
+      "documentDigest": "498c58b3c565f4118d1629bd34c0a7bf182e3a1e6fb4b26edadb5b359fe96589",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc323-f",
+      "documentDigest": "6d6f79cc9805e528fcfc75c013a846f43a3454e37f0437918bd383c9ee8804b5",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc382-g",
+      "documentDigest": "9d499f7bb43b5b457d572c8e234f230a32366a16ec73864c63b37fba0334009c",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    },
+    {
+      "problemId": "abc427-g",
+      "documentDigest": "5528c531c73823aa468176e4bb9abf644fa3dc13d78106a842a5c0dbd94b2b29",
+      "learningOutcomeIds": ["outcome-normalize-equivalent-states"],
+      "status": "accepted"
+    }
+  ],
+  "unresolvedFindingCount": 0,
+  "evidenceDigest": "70d5638d5a0fd91ac30b8cebb803ec4edf34c8e5daa51c99a8e1e312e6e55a8a"
+}

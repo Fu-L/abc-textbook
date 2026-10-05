@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "shardId": "outcome-optimize-two-variable-convex-lattice-function-shard-001",
-  "indexDigest": "cfdf39fb4f010fe65e8f2a66f2f33a3a692f637a04689e68cbf1386098283335",
-  "subjectDigest": "962eadccc7e5cfc0ae842244d9255ce71066fbc6eb8bb719fda278c9940e5fc3",
+  "indexDigest": "617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873",
+  "subjectDigest": "866ddf161ba30671c75ed0b7643d8a6377a11fbd947d71332786a8b103c29a35",
   "requiredChecks": [
     "source",
     "structure",
