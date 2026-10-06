@@ -94,7 +94,11 @@ export default function LearningRecordControl({ problemId }: Props) {
   };
 
   return (
-    <section aria-labelledby="learning-record-heading" data-learning-record-control={problemId}>
+    <section
+      data-pagefind-ignore
+      aria-labelledby="learning-record-heading"
+      data-learning-record-control={problemId}
+    >
       <h2 id="learning-record-heading">学習記録</h2>
       <p>Problem ID（{problemId}）をキーに、この端末へ保存します。</p>
       <label>

@@ -1,27 +1,73 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import {
-  previewCatalog,
+  publicCatalog,
+  requireCatalogEntity,
+  publicProjection,
   withBase,
-  type PreviewUiCatalog,
-} from '../../lib/catalog/preview-ui-catalog.js';
+  type UiCatalog,
+} from '../../lib/catalog/public-catalog.js';
 
 interface Props {
-  tag: PreviewUiCatalog['tags'][number];
+  tag: UiCatalog['tags'][number];
 }
 export function getStaticPaths() {
-  return previewCatalog.tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
+  return publicCatalog.tags.map((tag) => ({ params: { slug: tag.id }, props: { tag } }));
 }
 const { tag } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const unit = previewCatalog.learningUnits.find((item) =>
-  item.problemIds.some((id) => tag.problemIds.includes(id)),
+const canonicalTag = requireCatalogEntity(
+  publicProjection.catalog.tags.find((item) => item.id === tag.id),
+  tag.id,
 );
+const base = import.meta.env.BASE_URL;
+const unit = publicCatalog.learningUnits.find((item) => item.ownedTagIds.includes(tag.id));
+const problemGroups = [
+  {
+    title: '代表問題',
+    description: 'この典型の考え方を具体的な問題で確かめるための入口です。',
+    ids: tag.representativeProblemIds,
+  },
+  {
+    title: '関連問題',
+    description: 'この典型が主タグまたは補助タグとして付いている問題です。',
+    ids: tag.problemIds,
+  },
+];
+const recallDimensions = [
+  { label: '扱う対象', patterns: canonicalTag.semanticSignature.objectPatterns },
+  { label: '使う手掛かり', patterns: canonicalTag.semanticSignature.triggerPatterns },
+  { label: '保つ不変量', patterns: canonicalTag.semanticSignature.invariantPatterns },
+  { label: '求めるもの', patterns: canonicalTag.semanticSignature.goalPatterns },
+  { label: '適用しない条件', patterns: canonicalTag.semanticSignature.excludedPatterns },
+];
+const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
+  const outcome = requireCatalogEntity(
+    publicProjection.catalog.learningOutcomes.find((item) => item.id === id),
+    id,
+  );
+  const owner = requireCatalogEntity(
+    publicProjection.catalog.learningUnits.find((item) =>
+      item.ownedLearningOutcomeIds?.includes(id),
+    ),
+    id,
+  );
+  return {
+    outcome,
+    owner: requireCatalogEntity(
+      publicCatalog.learningUnits.find((item) => item.id === owner.id),
+      owner.id,
+    ),
+  };
+});
 ---
 
 <TextbookLayout
   title={tag.name}
   description={tag.definition}
+  searchTerms={[
+    ...recallDimensions.flatMap(({ patterns }) => patterns),
+    ...outcomes.map(({ outcome }) => outcome.statement),
+  ]}
   breadcrumbs={[{ href: '/tags/', label: '典型タグ' }, { label: tag.name }]}
 >
   <span data-pagefind-meta="entity-kind">典型タグ</span>
@@ -29,30 +75,109 @@ const unit = previewCatalog.learningUnits.find((item) =>
   <p>{tag.definition}</p>
   <p>検索別名: {tag.aliases.join('、')}</p>
   <section>
-    <h2>学習成果と学習単位</h2>{
+    <h2>未知問からこの典型を見つける手掛かり</h2>
+    <dl>
+      {
+        recallDimensions.map(({ label, patterns }) => (
+          <>
+            <dt>{label}</dt>
+            <dd>
+              {patterns.length ? (
+                <ul>
+                  {patterns.map((pattern) => (
+                    <li>{pattern}</li>
+                  ))}
+                </ul>
+              ) : (
+                '個別の除外条件の記載はありません。扱う対象と使う手掛かりから適用を判断してください。'
+              )}
+            </dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
+  <section>
+    <h2>分類と直接の前提</h2>
+    {
+      canonicalTag.parentId && (
+        <p>
+          概念上の親:{' '}
+          <a href={withBase(`/tags/${canonicalTag.parentId}/`, base)}>
+            {publicCatalog.tags.find((item) => item.id === canonicalTag.parentId)?.name}
+          </a>
+        </p>
+      )
+    }
+    <ul>
+      {
+        canonicalTag.prerequisiteTagIds.map((id) => (
+          <li>
+            <a href={withBase(`/tags/${id}/`, base)}>
+              {publicCatalog.tags.find((item) => item.id === id)?.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <h3>関連する典型</h3><ul>
+      {
+        canonicalTag.relatedTags.map((relation) => (
+          <li>
+            <a href={withBase(`/tags/${relation.tagId}/`, base)}>
+              {publicCatalog.tags.find((item) => item.id === relation.tagId)?.name}
+            </a>
+            : {relation.rationale}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <section>
+    <h2>学習成果と学習単位</h2>
+    <ul>
+      {
+        outcomes.map(({ outcome, owner }) => (
+          <li>
+            <p>{outcome.statement}</p>
+            <a href={withBase(owner.route, base)}>{owner.title}で学ぶ</a>
+          </li>
+        ))
+      }
+    </ul>
+    {
       unit && (
         <p>
-          <a href={withBase(unit.route, base)}>{unit.title}</a>: {unit.outcome}
+          この典型を扱う単元: <a href={withBase(unit.route, base)}>{unit.title}</a>
         </p>
       )
     }
   </section>
-  <section>
-    <h2>代表・関連問題</h2><ul>
-      {
-        tag.problemIds.map((id) => {
-          const problem = previewCatalog.problems.find((item) => item.id === id);
-          return (
-            problem && (
-              <li>
-                <a href={withBase(problem.route, base)}>
-                  {problem.id.toUpperCase()} — {problem.title}
-                </a>
-              </li>
-            )
-          );
-        })
-      }
-    </ul>
-  </section>
+  {
+    problemGroups.map(({ title, description, ids }) => (
+      <section>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        {ids.length ? (
+          <ul>
+            {ids.map((id) => {
+              const problem = requireCatalogEntity(
+                publicCatalog.problems.find((item) => item.id === id),
+                id,
+              );
+              return (
+                <li>
+                  <a href={withBase(problem.route, base)}>
+                    {problem.id.toUpperCase()} — {problem.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p>この典型を直接付けた問題はありません。代表問題から考え方を確かめてください。</p>
+        )}
+      </section>
+    ))
+  }
 </TextbookLayout>

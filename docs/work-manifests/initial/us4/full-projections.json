@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "2.0.0",
+  "manifestId": "work-manifest-T160-full-projections",
+  "taskId": "T160",
+  "scopeDigest": "c95592f5ff3e48b0a57ffc7bc282955ca61e8d280634a6a365ead052132bc0c6",
+  "digest": "38e757d6a75384d5a7ce4aee83c6720944a654aeaa103b5ca1e99c38517523ee",
+  "changeKind": "mixed",
+  "requiredRequirementIds": ["FR-014", "FR-015", "FR-016", "FR-029", "SC-005", "SC-011", "SC-020"],
+  "learningOutcomeIds": [
+    "outcome-us4-canonical-navigation",
+    "outcome-us4-dynamic-matrix",
+    "outcome-us4-search-accessibility"
+  ],
+  "outcomeImpact": {
+    "kind": "affects_learning_outcomes",
+    "rationale": "The declared review units change observable learning outcomes."
+  },
+  "reviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": []
+  },
+  "reviewUnits": [
+    {
+      "reviewUnitId": "RU-T160-full-projections",
+      "changeKind": "mixed",
+      "paths": [
+        ".github/workflows/ci.yml",
+        ".prettierignore",
+        "docs/operations/full-public-projection.md",
+        "docs/reviews/agent-content/bootstrap/full-projection-quality.json",
+        "docs/verification/bootstrap/us4",
+        "package.json",
+        "scripts/corpus/verify-full-learning-units.ts",
+        "scripts/corpus/verify-full-projections.ts",
+        "scripts/validate/links.ts",
+        "scripts/verify/runner.ts",
+        "specs/001-build-abc-textbook/contracts/catalog.schema.json",
+        "specs/001-build-abc-textbook/tasks.md",
+        "src/components",
+        "src/content/docs/learn",
+        "src/content/indexes",
+        "src/layouts",
+        "src/lib/catalog",
+        "src/lib/domain/schema-parts/catalog.ts",
+        "src/lib/learning-records/filter.ts",
+        "src/lib/taxonomy/canonical-taxonomy-materialization.ts",
+        "src/pages",
+        "src/styles/accessibility.css",
+        "tests/contract",
+        "tests/e2e",
+        "tests/integration/full-learning-path.test.ts",
+        "tests/integration/full-public-projection.test.ts",
+        "tests/integration/internal-links.test.ts",
+        "tests/unit/public-document.test.ts"
+      ],
+      "itemIds": [
+        "us4.accepted-body-preservation",
+        "us4.canonical-navigation",
+        "us4.correction-index-targets",
+        "us4.dynamic-slots",
+        "us4.search-and-boundary"
+      ],
+      "requirementIds": ["FR-014", "FR-015", "FR-016", "FR-029", "SC-005", "SC-011", "SC-020"],
+      "learningOutcomeIds": [
+        "outcome-us4-canonical-navigation",
+        "outcome-us4-dynamic-matrix",
+        "outcome-us4-search-accessibility"
+      ],
+      "outcomeImpact": {
+        "kind": "affects_learning_outcomes",
+        "rationale": "The declared review units change observable learning outcomes."
+      },
+      "dependencyReviewUnitIds": [],
+      "checkIds": ["check-full-projections", "check-verify-fast"],
+      "evidenceRoles": ["full_projection_verification"],
+      "maintenanceBenefit": "One shared catalog and UI assembly accepts frozen preview or canonical content. Public routes preserve accepted prose, taxonomy, Outcome ownership and reading order; rendering protects mathematical notation, and deterministic generated indexes and artifact evidence support later release validation.",
+      "owner": "person-maintainer",
+      "status": "complete"
+    }
+  ],
+  "maintenanceBenefit": "One shared catalog and UI assembly accepts frozen preview or canonical content. Public routes preserve accepted prose, taxonomy, Outcome ownership and reading order; rendering protects mathematical notation, and deterministic generated indexes and artifact evidence support later release validation.",
+  "state": "complete",
+  "createdAt": "2026-10-05T15:06:30.934Z",
+  "updatedAt": "2026-10-05T15:36:59.802Z"
+}

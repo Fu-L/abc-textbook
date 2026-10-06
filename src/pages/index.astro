@@ -1,33 +1,31 @@
 ---
 import TextbookLayout from '../layouts/TextbookLayout.astro';
-import { previewCatalog, withBase } from '../lib/catalog/preview-ui-catalog.js';
-
+import { publicCatalog, withBase } from '../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
-<TextbookLayout title="ホーム" description="ABC上級問題を典型と前提関係から学ぶ initial-v1 preview">
-  <span data-pagefind-meta="entity-kind">ホーム</span>
+<TextbookLayout
+  title="ホーム"
+  description="ABCの過去問から難関コンテストへ進むための典型知識を体系的に学ぶ教科書"
+>
   <h1>ABC上級問題体系化教科書</h1>
   <p>
-    <strong>initial-v1 preview</strong> は、4分野・{previewCatalog.problems.length}問を同じ catalog
-    経路で検証する非公開の縦切りです。
+    ABCの過去問を通して、ARC・AGC・CF Div. 1・UCUPへ応用できる典型知識を学びます。
+    状態の定義、発動条件、正当性、計算量を言葉にし、初見問題で手法を選ぶ力を養います。
   </p>
   <p>
-    問題から逆引きする場合はコンテスト表または問題一覧を、順番に学ぶ場合は標準学習経路を使ってください。
+    収録範囲はABC 212〜466の{publicCatalog.contests.length}コンテスト、{
+      publicCatalog.problems.length
+    }問です。 ABC 316は公式に未開催です。Dより後に並ぶ問題を、{
+      publicCatalog.learningUnits.length
+    }単元・9章に整理しています。
   </p>
-  <nav aria-label="ホームの入口" class="card-links">
-    <ul>
-      <li><a href={withBase('/learn/', base)}>標準学習経路を見る</a></li>
-      <li><a href={withBase('/contests/', base)}>コンテストから逆引きする</a></li>
-      <li><a href={withBase('/problems/', base)}>問題を条件で絞り込む</a></li>
-      <li><a href={withBase('/updates/', base)}>preview の固定情報を確認する</a></li>
-    </ul>
-  </nav>
-  <section aria-labelledby="preview-scope">
-    <h2 id="preview-scope">preview 対象</h2>
-    <p>
-      ABC {previewCatalog.contests[0]?.number}〜{previewCatalog.contests.at(-1)?.number} の選定問題を含み、問題記号は
-      {previewCatalog.registry.labels.join('、')} を動的に扱います。
-    </p>
-  </section>
+  <ul>
+    <li>
+      <a href={withBase('/learn/', base)}>分野別の教科書目次</a> — 対象色と前提から読む範囲を選ぶ
+    </li>
+    <li><a href={withBase('/problems/', base)}>問題一覧</a> — 条件を組み合わせて問題を探す</li>
+    <li><a href={withBase('/contests/', base)}>コンテスト索引</a> — 各問題の解説と単元へ進む</li>
+    <li><a href={withBase('/review/', base)}>要復習一覧</a> — 端末に保存した復習対象を読む</li>
+  </ul>
 </TextbookLayout>

@@ -1,6 +1,18 @@
 import { canonicalJson } from '../domain/canonical-json.js';
-import { CatalogSchema } from '../domain/schema-parts/catalog.js';
+import { CatalogSchema, CatalogReleaseSchema } from '../domain/schema-parts/catalog.js';
 import { ReleaseMetadataSchema } from '../domain/schema-parts/release.js';
+
+/** Serialized public history contains only records of actual published commits. */
+export const PublicReleaseHistoryEntrySchema = ReleaseMetadataSchema.unwrap().extend({
+  validatedAt: CatalogReleaseSchema.shape.validatedAt,
+  firstContestId: CatalogReleaseSchema.shape.firstContestId,
+  lastContestId: CatalogReleaseSchema.shape.lastContestId,
+  contestCount: CatalogReleaseSchema.shape.contestCount,
+  problemCount: CatalogReleaseSchema.shape.problemCount,
+  validationSummary: CatalogReleaseSchema.shape.validationSummary,
+  reviewEvidenceRefs: CatalogReleaseSchema.shape.humanContentReviewEvidenceRefs.min(1),
+  changelogPath: CatalogReleaseSchema.shape.changelogPath,
+});
 
 const freeze = <T>(value: T): T => {
   if (value !== null && typeof value === 'object') {
@@ -27,6 +39,7 @@ const projectRelease = (record: { readonly metadata: unknown; readonly catalog: 
   )
     throw new Error('RELEASE_HISTORY_SUMMARY_MISMATCH');
   if (
+    release.publicationStatus === 'prepared' ||
     release.heldProblemIds.length ||
     release.validationSummary.blockingFindingCount ||
     !release.validationSummary.checkCount ||

@@ -1,7 +1,7 @@
 ---
 title: "閉路数・次数構造からgraph coreを調べる"
 description: "「閉路数・次数構造からgraph coreを調べる」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 117
 ---

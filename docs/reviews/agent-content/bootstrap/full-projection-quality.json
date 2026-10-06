@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T160",
+  "reviewMode": "agent_quality_review",
+  "humanApproval": false,
+  "status": "passed",
+  "subjectDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
+  "fullProjectionDigest": "587ab1ddd8f5cdde9a8d61d97e0395478f7611536b550d3963f7d773be6deb5e",
+  "unresolvedFindingCount": 0,
+  "inspectionBasis": [
+    "Compared all 232 published Unit documents with their accepted draft bytes after reversing only the draft flag; retained all 868 Problem document digests and accepted metadata/mapping. Rejected draft, skeleton, changed prose and reordered metadata in negative tests.",
+    "Checked independent editorial order, one occurrence of each Unit, target-color reasons, semantic parents/children and later direct prerequisites. Retained accepted Unit-internal Problem order without generating prerequisite-based previous/next links.",
+    "Checked unique primary Outcome ownership independently from ancestor coverage; preserved additional-primary/supporting roles and related references. Same-home Problems are labeled peers rather than claiming similar explanations.",
+    "Reused catalog and UI assembly for frozen preview and canonical inputs. Checked every canonical route and source-only link, full contest registry/slots, generated endpoint, sitemap, actual release history and Pagefind output. Kept local state and staging out of public content.",
+    "Resolved 12 correction impacts against the actual accepted documents, canonical policy and generated taxonomy index. Retired 72 optional preview locators only with the T078 not_applicable receipt and confirmed absence.",
+    "Preserved the Lagrange coefficient expression and derivative apostrophe in rendered output without editing accepted prose. Rechecked missing-page and missing-anchor failures after adding retries for local connection resets.",
+    "Reran the complete verify:fast inventory: 551 tests, 20 inherited finite-model mathematical regressions, 4647 internal links and 105 browser tests. Build artifacts reproduced the frozen full-projection digest."
+  ],
+  "evidencePaths": [
+    "docs/verification/bootstrap/us4/full-projections.json",
+    "docs/verification/bootstrap/us4/check-results.json",
+    "docs/verification/bootstrap/us4/verify-fast.txt"
+  ],
+  "limitations": "This checks the T160 projection and inherited accepted content. It does not renew mathematical prose acceptance, assert human self-study or third-party approval, or complete T138/T140/T145/T146 production release validation. The prepared catalog is explicitly rejected by production release validation; actual public release history is empty."
+}

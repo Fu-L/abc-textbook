@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T160",
+  "status": "passed",
+  "command": "npm run verify:fast",
+  "exitCode": 0,
+  "completedAt": "2026-10-05T15:36:59.646297+00:00",
+  "runtime": {
+    "node": "24.18.0",
+    "npm": "11.16.0"
+  },
+  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
+  "fullProjectionDigest": "587ab1ddd8f5cdde9a8d61d97e0395478f7611536b550d3963f7d773be6deb5e",
+  "rawResultPath": "docs/verification/bootstrap/us4/verify-fast.txt",
+  "rawResultDigest": "727f37bae2cdea9ebec651e06d9ec1d155af3016fa7058e80d737ac6ebbf7b2c",
+  "results": {
+    "testFiles": 67,
+    "tests": 551,
+    "internalLinks": 4647,
+    "e2eTests": 105,
+    "browsers": ["chromium", "firefox", "webkit"],
+    "mathematicalRegressions": 20,
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "astroHints": 0
+  }
+}

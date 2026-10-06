@@ -1,31 +1,57 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { previewCatalog, withBase } from '../../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog, requireCatalogEntity, withBase } from '../../lib/catalog/public-catalog.js';
+import { TEXTBOOK_CHAPTERS } from '../../lib/taxonomy/textbook-order.js';
+import { unitLearningTarget } from '../../lib/taxonomy/unit-learning-targets.js';
 const base = import.meta.env.BASE_URL;
+const byId = new Map(publicCatalog.learningUnits.map((unit) => [unit.id, unit]));
 ---
 
 <TextbookLayout
-  title="標準学習経路"
-  description="initial-v1 の学習単位を順番にたどる"
-  breadcrumbs={[{ label: '標準学習経路' }]}
+  title="分野別目次"
+  description="9章の掲載順、概念上の親、対象色とその理由から読む単元を選ぶ"
+  breadcrumbs={[{ label: '分野別目次' }]}
 >
-  <span data-pagefind-meta="entity-kind">学習経路</span>
-  <h1>標準学習経路</h1>
+  <h1>分野別目次</h1>
   <p>
-    各学習単位は、到達目標、関連する典型タグ、preview 問題へ結び付きます。現在の provisional
-    taxonomy は公開正本ではありません。
+    掲載順は読書の案内です。直接の前提は各単元で確認し、必要なら後の節や章へ進んでください。
+    対象色は基本形を学ぶ目安で、各問題の難易度や公式の履修基準とは別です。
   </p>
-  <ol>
-    {
-      previewCatalog.learningUnits.map((unit) => (
-        <li>
+  {
+    TEXTBOOK_CHAPTERS.map((chapter) => {
+      const root = requireCatalogEntity(byId.get(chapter.id), chapter.id);
+      return (
+        <section>
           <h2>
-            <a href={withBase(unit.route, base)}>{unit.title}</a>
+            <a href={withBase(root.route, base)}>{root.title}</a>
           </h2>
-          <p>{unit.outcome}</p>
-          <p>対象問題: {unit.problemIds.map((id) => id.toUpperCase()).join('、')}</p>
-        </li>
-      ))
-    }
-  </ol>
+          <>
+            <p>
+              導入対象の目安: {unitLearningTarget(chapter.id).color}（
+              {unitLearningTarget(chapter.id).rating}）。{unitLearningTarget(chapter.id).reason}
+            </p>
+            <p>{chapter.introduction}</p>
+            <ol>
+              {chapter.unitIds.map((id) => {
+                const unit = requireCatalogEntity(byId.get(id), id);
+                const target = unitLearningTarget(id);
+                const parent = unit.parentId ? byId.get(unit.parentId) : undefined;
+                return (
+                  <li>
+                    <a href={withBase(unit.route, base)}>{unit.title}</a> — {target.color}（
+                    {target.rating}）<p>{target.reason}</p>
+                    {parent && parent.id !== chapter.id && (
+                      <p>
+                        概念上の親: <a href={withBase(parent.route, base)}>{parent.title}</a>
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </>
+        </section>
+      );
+    })
+  }
 </TextbookLayout>

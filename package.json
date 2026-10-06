@@ -85,7 +85,9 @@
     "corpus:verify-problem-shards": "tsx scripts/corpus/author-problem-shards.ts --check",
     "corpus:verify-problem-corpus": "tsx scripts/corpus/verify-problem-corpus.ts --check",
     "corpus:verify-problem-corpus:write": "tsx scripts/corpus/verify-problem-corpus.ts --write",
-    "release:history": "tsx scripts/release/build-history.ts"
+    "release:history": "tsx scripts/release/build-history.ts",
+    "corpus:verify-full-projections": "tsx scripts/corpus/verify-full-projections.ts --check",
+    "corpus:verify-full-projections:write": "tsx scripts/corpus/verify-full-projections.ts --write"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",

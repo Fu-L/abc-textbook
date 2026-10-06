@@ -1,7 +1,7 @@
 ---
 title: "構造を共有して過去の版を保存・復元する"
 description: "「構造を共有して過去の版を保存・復元する」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 55
 ---

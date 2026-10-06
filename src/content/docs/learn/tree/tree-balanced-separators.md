@@ -1,7 +1,7 @@
 ---
 title: "木の均衡分離点から重心分解へ進む"
 description: "「木の均衡分離点から重心分解へ進む」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 142
 ---

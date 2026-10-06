@@ -1,7 +1,7 @@
 ---
 title: "基準点からの木距離・剰余類・直径・中心"
 description: "「基準点からの木距離・剰余類・直径・中心」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 130
 ---

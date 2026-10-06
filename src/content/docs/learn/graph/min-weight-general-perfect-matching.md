@@ -1,7 +1,7 @@
 ---
 title: "一般グラフの最小重み完全matching"
 description: "「一般グラフの最小重み完全matching」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 128
 ---

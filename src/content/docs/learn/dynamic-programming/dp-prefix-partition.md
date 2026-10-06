@@ -1,7 +1,7 @@
 ---
 title: "prefix分割DP"
 description: "「prefix分割DP」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 67
 ---

@@ -1,7 +1,7 @@
 ---
 title: "データ構造と問い合わせ"
 description: "「データ構造と問い合わせ」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 29
 ---

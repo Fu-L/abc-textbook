@@ -3,23 +3,32 @@ import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import LearningRecordControl from '../../components/LearningRecordControl.tsx';
 import LearningRecordTimestamp from '../../components/LearningRecordTimestamp.astro';
 import {
-  getProblemGroup,
-  previewCatalog,
+  publicCatalog,
+  requireCatalogEntity,
+  publicProjection,
   withBase,
-  type PreviewProblem,
-} from '../../lib/catalog/preview-ui-catalog.js';
+  type UiProblem,
+} from '../../lib/catalog/public-catalog.js';
+
+import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
 
 interface Props {
-  problem: PreviewProblem;
+  problem: UiProblem;
 }
 export function getStaticPaths() {
-  return previewCatalog.problems.map((problem) => ({
+  return publicCatalog.problems.map((problem) => ({
     params: { problemId: problem.id },
     props: { problem },
   }));
 }
 const { problem } = Astro.props;
-const group = getProblemGroup(problem.id);
+const group = {
+  unit: publicCatalog.learningUnits.find((unit) => unit.id === problem.learningUnitId),
+  tag: publicCatalog.tags.find((tag) => tag.id === problem.primaryTagId),
+};
+const document = publicProjection.problemDocuments.get(problem.id);
+if (!document) throw new Error(`Missing accepted explanation: ${problem.id}`);
+const body = await renderPublicDocument(document.text, import.meta.env.BASE_URL);
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -31,37 +40,102 @@ const base = import.meta.env.BASE_URL;
   <span data-pagefind-meta="entity-kind">問題</span>
   <span hidden data-pagefind-meta="contest">ABC {problem.contestNumber}</span>
   <h1>ABC {problem.contestNumber} {problem.label} — {problem.title}</h1>
-  <p><strong>掲載状態: 収録済み（initial-v1 preview）</strong></p>
+  <p><strong>掲載状態: 収録済み</strong></p>
   <p>
     <a href={problem.officialUrl} rel="external">{problem.title} の公式問題ページ（外部リンク）</a>
   </p>
   <p>最終確認: <time datetime={problem.checkedAt}>{problem.checkedAt}（Asia/Tokyo）</time></p>
   <section>
-    <h2>学習上の位置付け</h2>{
-      group?.unit && (
+    <h2>学習上の位置付け</h2>
+    {
+      group.unit && (
         <p>
-          学習単位: <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
+          主題の単元: <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
         </p>
       )
-    }{
-      group?.tag && (
+    }
+    <dl>
+      {
+        (
+          [
+            ['主題', [problem.learningOutcomeId]],
+            ['追加で学ぶ技能', problem.additionalPrimaryOutcomeIds],
+            ['既習技能', problem.supportingOutcomeIds],
+          ] as const
+        ).map(([role, ids]) => (
+          <>
+            <>
+              <dt>{role}</dt>
+              <dd>
+                <ul>
+                  {ids.map((id) => {
+                    const outcome = requireCatalogEntity(
+                      publicProjection.catalog.learningOutcomes.find((item) => item.id === id),
+                      id,
+                    );
+                    const owner = requireCatalogEntity(
+                      publicProjection.catalog.learningUnits.find((item) =>
+                        item.ownedLearningOutcomeIds?.includes(id),
+                      ),
+                      id,
+                    );
+                    const unit = requireCatalogEntity(
+                      publicCatalog.learningUnits.find((item) => item.id === owner.id),
+                      owner.id,
+                    );
+                    return (
+                      <li>
+                        <a href={withBase(unit.route, base)}>{unit.title}</a>: {outcome.statement}
+                      </li>
+                    );
+                  })}
+                </ul>
+                {!ids.length && 'なし'}
+              </dd>
+            </>
+          </>
+        ))
+      }
+    </dl>
+    <p>
+      主タグ: {
+        problem.primaryTagIds.map((id) => {
+          const tag = requireCatalogEntity(
+            publicCatalog.tags.find((item) => item.id === id),
+            id,
+          );
+          return <a href={withBase(tag.route, base)}>{tag.name} </a>;
+        })
+      }
+    </p>
+    {
+      problem.supportingTagIds.length > 0 && (
         <p>
-          主タグ: <a href={withBase(group.tag.route, base)}>{group.tag.name}</a>
+          補助タグ:{' '}
+          {problem.supportingTagIds.map((id) => {
+            const tag = requireCatalogEntity(
+              publicCatalog.tags.find((item) => item.id === id),
+              id,
+            );
+            return <a href={withBase(tag.route, base)}>{tag.name} </a>;
+          })}
         </p>
       )
     }
   </section>
+  <p>
+    執筆: {document.unit.skill.name}
+    {document.unit.skill.version} / revision {document.unit.revision}
+  </p>
   <section id="explanation">
-    <h2>解説</h2><p>{problem.explanationSummary}</p><p>
-      この preview では分類根拠と学習経路の接続を検証します。完全な問題別解説は Outcome/Problem
-      shard の受理後に同じ安定 ID へ投影します。
-    </p><h3>制約との整合</h3><p>{problem.constraintsSummary}</p>
+    <h2>解説</h2>
+    <div class="authored-content" set:html={body} />
   </section>
   <section>
-    <h2>類題</h2><ul>
+    <h2>同じ単元の問題</h2><ul>
       {
-        problem.similarProblemIds.map((id) => {
-          const similar = previewCatalog.problems.find((item) => item.id === id);
+        problem.relatedProblemIds.map((id) => {
+          const similar = publicCatalog.problems.find((item) => item.id === id);
           return (
             similar && (
               <li>
@@ -75,7 +149,7 @@ const base = import.meta.env.BASE_URL;
       }
     </ul>
   </section>
-  <noscript>
+  <noscript data-pagefind-ignore>
     <p>学習状況の保存にはJavaScriptが必要です。教材本文はそのまま読めます。</p>
     <p><LearningRecordTimestamp value={null} label="状況更新" /></p>
     <p><LearningRecordTimestamp value={null} label="復習設定更新" /></p>

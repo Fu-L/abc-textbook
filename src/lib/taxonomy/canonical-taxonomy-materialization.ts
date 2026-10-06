@@ -970,7 +970,11 @@ export const validateCanonicalMaterialization = (
     }
     if (
       REQUIRED_DOCUMENT_SECTIONS.some((section) => !output.document.includes(section)) ||
-      !output.document.includes('\ndraft: true\n') ||
+      !(
+        output.document.includes('\ndraft: true\n') ||
+        (output.value.contentPhase === 'full_authoring' &&
+          output.document.includes('\ndraft: false\n'))
+      ) ||
       output.document.includes('objectPatterns') ||
       output.document.includes('triggerPatterns')
     ) {

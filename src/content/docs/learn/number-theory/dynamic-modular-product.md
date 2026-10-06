@@ -1,7 +1,7 @@
 ---
 title: "可逆な非零剰余と剰余 0 因子を含む法上の動的積"
 description: "「可逆な非零剰余と剰余 0 因子を含む法上の動的積」で学ぶ概念と、基礎から応用へ進む問題一覧。"
-draft: true
+draft: false
 sidebar:
   order: 168
 ---

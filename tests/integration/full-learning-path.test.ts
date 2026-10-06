@@ -40,7 +40,10 @@ describe('full authored LearningUnit navigation', () => {
           value: LearningUnitSchema.parse(
             JSON.parse(await readFile(output.relativePath, 'utf8')) as unknown,
           ),
-          document: await readFile(output.documentPath, 'utf8'),
+          document: (await readFile(output.documentPath, 'utf8')).replace(
+            '\ndraft: false\n',
+            '\ndraft: true\n',
+          ),
         })),
       ),
     };

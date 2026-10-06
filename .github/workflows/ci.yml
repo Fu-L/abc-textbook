@@ -108,5 +108,5 @@ jobs:
           if test -f docs/verification/releases/catalog.json; then
             npm run verify:release -- --commit "$GITHUB_SHA"
           else
-            echo 'Implementation checks passed; no full public catalog exists yet (T160). This is not production release validation.'
+            echo 'Implementation checks passed; no production release catalog has been supplied. The prepared T160 projection is verified separately and does not authorize production publication.'
           fi

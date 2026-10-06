@@ -1,20 +1,20 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { previewCatalog, withBase } from '../../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog, withBase } from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
 <TextbookLayout
   title="典型タグ"
-  description="initial-v1 の典型タグ索引"
+  description="全コーパスの典型タグ索引"
   breadcrumbs={[{ label: '典型タグ' }]}
 >
   <span data-pagefind-meta="entity-kind">典型タグ索引</span>
   <h1>典型タグ</h1>
-  <p>preview 用の provisional tag です。T159 の全コーパス統合までは公開正本に昇格しません。</p>
+  <p>発動条件・対象・不変量から典型を探し、対応する単元と問題へ進めます。</p>
   <ul>
     {
-      previewCatalog.tags.map((tag) => (
+      publicCatalog.tags.map((tag) => (
         <li>
           <>
             <h2>

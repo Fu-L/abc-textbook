@@ -84,7 +84,7 @@ export default function LearningRecordSettings({ catalogProblemIds, catalogVersi
   };
 
   return (
-    <section>
+    <section data-pagefind-ignore>
       <p role="status" aria-live="polite">
         {status}
       </p>

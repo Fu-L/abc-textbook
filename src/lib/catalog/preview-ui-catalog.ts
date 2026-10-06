@@ -21,12 +21,7 @@ import dataStructures from '../../../staging/previews/initial-v1/taxonomy/groups
 import dynamicProgramming from '../../../staging/previews/initial-v1/taxonomy/groups/dynamic-programming.json';
 import graphSearch from '../../../staging/previews/initial-v1/taxonomy/groups/graph-search.json';
 import mathematics from '../../../staging/previews/initial-v1/taxonomy/groups/mathematics-combinatorics.json';
-import {
-  buildAdvancedSlotRegistry,
-  materializeContestSlotStates,
-} from './advanced-slot-registry.js';
 
-const routeSchema = z.string().regex(/^\/(?:[a-z0-9-]+\/)*(?:[a-z0-9-]+\/)?$/u);
 const contestSchema = z
   .object({
     id: z.string().regex(/^abc\d{3,}$/u),
@@ -99,92 +94,14 @@ const groupSchema = z
   })
   .loose();
 
-const previewProblemSchema = z.strictObject({
-  id: z.string().min(1),
-  contestId: z.string().min(1),
-  contestNumber: z.number().int(),
-  label: z.string().min(1),
-  title: z.string().min(1),
-  officialUrl: z.url(),
-  checkedAt: z.string().min(1),
-  constraintsSummary: z.string().min(1),
-  publicationState: z.enum(['preview', 'published']),
-  route: routeSchema,
-  explanationAnchor: z.string().startsWith('#'),
-  tagIds: z.array(z.string().min(1)).min(1),
-  primaryTagId: z.string().min(1),
-  supportingTagIds: z.array(z.string().min(1)),
-  learningUnitId: z.string().min(1),
-  learningOutcomeId: z.string().min(1),
-  similarProblemIds: z.array(z.string().min(1)),
-  explanationSummary: z.string().min(1),
-  sourceRevisionIds: z.array(z.string().min(1)).min(1),
-});
-
-export const PreviewUiCatalogSchema = z.strictObject({
-  schemaVersion: z.literal('1.0.0'),
-  previewId: z.string().min(1),
-  subjectDigest: z.string().regex(/^[a-f0-9]{64}$/u),
-  publicationBoundary: z.enum(['private-preview', 'public']),
-  registry: z.strictObject({
-    labels: z.array(z.string().min(1)).min(1),
-    digest: z.string().regex(/^[a-f0-9]{64}$/u),
-  }),
-  contests: z.array(
-    z.strictObject({
-      id: z.string().min(1),
-      number: z.number().int(),
-      title: z.string().min(1),
-      officialUrl: z.url(),
-      route: routeSchema,
-    }),
-  ),
-  cells: z.array(
-    z.strictObject({
-      contestId: z.string().min(1),
-      label: z.string().min(1),
-      state: z.enum(['preview', 'unpublished', 'official_absent', 'unknown', 'withdrawn']),
-      stateLabel: z.string().min(1),
-      problemId: z.string().nullable(),
-      officialTaskId: z.string().nullable(),
-    }),
-  ),
-  problems: z.array(previewProblemSchema),
-  tags: z.array(
-    z.strictObject({
-      id: z.string().min(1),
-      name: z.string().min(1),
-      definition: z.string().min(1),
-      aliases: z.array(z.string()),
-      route: routeSchema,
-      problemIds: z.array(z.string().min(1)),
-    }),
-  ),
-  learningUnits: z.array(
-    z.strictObject({
-      id: z.string().min(1),
-      title: z.string().min(1),
-      outcome: z.string().min(1),
-      parentTitles: z.array(z.string().min(1)),
-      prerequisiteUnitIds: z.array(z.string()),
-      route: routeSchema,
-      problemIds: z.array(z.string().min(1)),
-    }),
-  ),
-  releaseHistory: z.array(
-    z.strictObject({
-      version: z.string().min(1),
-      state: z.enum(['private-preview', 'public']),
-      route: routeSchema,
-      subjectDigest: z.string().regex(/^[a-f0-9]{64}$/u),
-      problemCount: z.number().int().nonnegative(),
-      evidencePaths: z.array(z.string().min(1)).min(1),
-    }),
-  ),
-});
-
-export type PreviewUiCatalog = z.infer<typeof PreviewUiCatalogSchema>;
-export type PreviewProblem = z.infer<typeof previewProblemSchema>;
+export {
+  withBase,
+  canonicalUiRoutes as canonicalPreviewRoutes,
+  UiCatalogSchema as PreviewUiCatalogSchema,
+} from './ui-catalog.js';
+import { buildUiCatalog, type UiCatalog, type UiProblem } from './ui-catalog.js';
+export type PreviewUiCatalog = UiCatalog;
+export type PreviewProblem = UiProblem;
 type SourceContest = z.infer<typeof contestSchema>;
 type SourceProblem = z.infer<typeof problemSourceSchema>;
 type SourceGroup = z.infer<typeof groupSchema>;
@@ -237,129 +154,36 @@ export const frozenPreviewUiCatalogSource: PreviewUiCatalogSource = {
   groups,
 };
 
-const stateLabel = {
-  official_absent: '公式問題なし',
-  preview: '収録済み',
-  unpublished: '未収録',
-  unknown: '確認不能',
-  withdrawn: '公式取り下げ',
-} as const;
-
-export const withBase = (pathname: string, base: string): string => {
-  const normalizedBase = base === '/' ? '' : `/${base.replace(/^\/+|\/+$/gu, '')}`;
-  const normalizedPath = `/${pathname.replace(/^\/+|\/+$/gu, '')}`;
-  const isFile = /\/[^/]+\.[a-z0-9]+$/iu.test(normalizedPath);
-  return `${normalizedBase}${normalizedPath === '/' || isFile ? normalizedPath : `${normalizedPath}/`}`;
-};
-
 export const buildPreviewUiCatalog = (
   source: PreviewUiCatalogSource = frozenPreviewUiCatalogSource,
 ): PreviewUiCatalog => {
-  const manifestProblemIds = new Set(source.selectedProblemIds);
-  if (
-    source.problems.length !== manifestProblemIds.size ||
-    source.problems.some(({ id }) => !manifestProblemIds.has(id))
-  ) {
-    throw new Error('The UI projection does not match the frozen initial-v1 problem cohort.');
-  }
-
-  const registry = buildAdvancedSlotRegistry({
-    contests: source.contests.map((contest) => ({
-      contestId: contest.id,
-      advancedLabels: contest.officialTaskOrder.slice(contest.officialTaskOrder.indexOf('D') + 1),
-      sourceRevisionId: contest.taskOrderSourceRevisionId,
-    })),
-  });
-  const groupsByProblem = new Map<string, SourceGroup[]>();
-  for (const group of source.groups) {
-    for (const problemId of group.problemIds) {
-      groupsByProblem.set(problemId, [...(groupsByProblem.get(problemId) ?? []), group]);
-    }
-  }
-  const problems = source.problems
-    .map((problem): PreviewProblem => {
-      const contest = source.contests.find(({ id }) => id === problem.contestId);
-      const problemGroups = groupsByProblem.get(problem.id) ?? [];
-      const [primaryGroup, ...supportingGroups] = problemGroups;
-      const placement = primaryGroup?.placements.find(({ problemId }) => problemId === problem.id);
-      if (!contest || !primaryGroup || !placement)
-        throw new Error(`Incomplete preview mapping: ${problem.id}`);
-      return {
-        id: problem.id,
-        contestId: problem.contestId,
-        contestNumber: contest.number,
-        label: problem.slotLabel,
-        title: problem.title,
-        officialUrl: problem.officialUrl,
-        checkedAt: problem.checkedAt,
-        constraintsSummary: problem.constraintsSummary,
-        publicationState: source.problemPublicationState,
-        route: `/problems/${problem.id}/`,
-        explanationAnchor: '#explanation',
-        tagIds: problemGroups.map(({ tag }) => tag.id),
-        primaryTagId: primaryGroup.tag.id,
-        supportingTagIds: supportingGroups.map(({ tag }) => tag.id),
-        learningUnitId: primaryGroup.unit.id,
-        learningOutcomeId: primaryGroup.outcome.id,
-        similarProblemIds: primaryGroup.problemIds.filter((id) => id !== problem.id),
-        explanationSummary: placement.classificationRationale,
-        sourceRevisionIds: problem.sourceRevisionIds,
-      };
-    })
-    .sort(
-      (left, right) =>
-        left.contestNumber - right.contestNumber || left.label.localeCompare(right.label),
-    );
-
-  const cells = source.contests.flatMap((contest) =>
-    materializeContestSlotStates(
-      registry.labels,
-      {
-        contestId: contest.id,
-        advancedLabels: contest.officialTaskOrder.slice(contest.officialTaskOrder.indexOf('D') + 1),
-        sourceRevisionId: contest.taskOrderSourceRevisionId,
-        officialTaskOrder: contest.officialTaskOrder,
-        officialTaskIds: contest.officialTaskIds,
-      },
-      contest.slotStateOverrides,
-    ).map((slot) => {
-      const previewProblem = problems.find(
-        (problem) => problem.contestId === contest.id && problem.label === slot.label,
-      );
-      const state =
-        slot.availability === 'unknown' || slot.availability === 'withdrawn'
-          ? slot.availability
-          : previewProblem
-            ? 'preview'
-            : slot.availability === 'exists'
-              ? 'unpublished'
-              : slot.availability;
-      return {
-        contestId: contest.id,
-        label: slot.label,
-        state,
-        stateLabel: stateLabel[state],
-        problemId: state === 'preview' ? (previewProblem?.id ?? null) : null,
-        officialTaskId: slot.officialTaskId,
-      } as const;
-    }),
-  );
-
-  return PreviewUiCatalogSchema.parse({
-    schemaVersion: '1.0.0',
-    previewId: source.previewId,
+  const tagFor = (id: string) => source.groups.filter((group) => group.problemIds.includes(id));
+  return buildUiCatalog({
+    scopeId: source.previewId,
     subjectDigest: source.subjectDigest,
     publicationBoundary: source.publicationBoundary,
-    registry: { labels: registry.labels, digest: registry.digest },
-    contests: source.contests.map((contest) => ({
-      id: contest.id,
-      number: contest.number,
-      title: contest.title,
-      officialUrl: contest.officialUrl,
-      route: '/contests/',
+    selectedProblemIds: source.selectedProblemIds,
+    contests: source.contests.map((contest) => ({ ...contest, route: '/contests/' })),
+    problems: source.problems.map((problem) => ({
+      ...problem,
+      publicationState: source.problemPublicationState,
     })),
-    cells,
-    problems,
+    placements: source.problems.map((problem) => {
+      const [primary, ...supporting] = tagFor(problem.id);
+      const placement = primary?.placements.find((item) => item.problemId === problem.id);
+      if (!primary || !placement) throw new Error(`Incomplete preview mapping: ${problem.id}`);
+      return {
+        problemId: problem.id,
+        homeUnitId: primary.unit.id,
+        primaryTagId: primary.tag.id,
+        supportingTagIds: supporting.map((group) => group.tag.id),
+        primaryOutcomeId: primary.outcome.id,
+        additionalPrimaryOutcomeIds: [],
+        supportingOutcomeIds: supporting.map((group) => group.outcome.id),
+        explanationSummary: placement.classificationRationale,
+        similarProblemIds: primary.problemIds.filter((id) => id !== problem.id),
+      };
+    }),
     tags: source.groups.map((group) => ({
       id: group.tag.id,
       name: group.tag.name,
@@ -367,6 +191,7 @@ export const buildPreviewUiCatalog = (
       aliases: [group.domain],
       route: `/tags/${group.tag.id}/`,
       problemIds: group.problemIds,
+      representativeProblemIds: group.tag.representativeProblemIds,
     })),
     learningUnits: source.groups.map((group) => ({
       id: group.unit.id,
@@ -376,6 +201,11 @@ export const buildPreviewUiCatalog = (
       prerequisiteUnitIds: group.unit.prerequisiteUnitIds,
       route: `/learn/${group.unit.id}/`,
       problemIds: group.unit.problemIds,
+      parentId: null,
+      childUnitIds: [],
+      relatedProblemIds: [],
+      coverageProblemIds: group.unit.problemIds,
+      ownedTagIds: [group.tag.id],
     })),
     releaseHistory: [
       {
@@ -383,7 +213,7 @@ export const buildPreviewUiCatalog = (
         state: source.publicationBoundary,
         route: `/updates/${source.releaseVersion}/`,
         subjectDigest: source.subjectDigest,
-        problemCount: problems.length,
+        problemCount: source.problems.length,
         evidencePaths: [
           'docs/verification/previews/initial-v1/cohort-selection.json',
           'docs/verification/previews/initial-v1/components/metadata-inventory-taxonomy.json',
@@ -392,22 +222,6 @@ export const buildPreviewUiCatalog = (
     ],
   });
 };
-
-export const canonicalPreviewRoutes = (catalog: PreviewUiCatalog): string[] => [
-  '/',
-  '/learn/',
-  ...catalog.learningUnits.map(({ route }) => route),
-  '/tags/',
-  ...catalog.tags.map(({ route }) => route),
-  '/problems/',
-  ...catalog.problems.map(({ route }) => route),
-  '/contests/',
-  '/updates/',
-  ...catalog.releaseHistory.map(({ route }) => route),
-  '/data/catalog.json',
-  '/sitemap.xml',
-  '/feed.xml',
-];
 
 export const previewCatalog = buildPreviewUiCatalog();
 

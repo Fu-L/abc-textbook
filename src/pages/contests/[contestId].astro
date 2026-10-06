@@ -1,0 +1,38 @@
+---
+import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import ContestMatrixView from '../../components/ContestMatrixView.astro';
+import { publicCatalog, type UiCatalog } from '../../lib/catalog/public-catalog.js';
+interface Props {
+  contest: UiCatalog['contests'][number];
+}
+export function getStaticPaths() {
+  return publicCatalog.contests.map((contest) => ({
+    params: { contestId: contest.id },
+    props: { contest },
+  }));
+}
+const { contest } = Astro.props;
+const catalog = {
+  ...publicCatalog,
+  contests: [contest],
+  cells: publicCatalog.cells.filter((cell) => cell.contestId === contest.id),
+};
+---
+
+<TextbookLayout
+  title={`ABC ${String(contest.number)}`}
+  description={`${contest.title}の上級問題と解説`}
+  breadcrumbs={[
+    { href: '/contests/', label: 'コンテスト索引' },
+    { label: `ABC ${String(contest.number)}` },
+  ]}
+>
+  <span data-pagefind-meta="entity-kind">コンテスト</span><h1>ABC {contest.number}</h1>
+  <ContestMatrixView
+    base={import.meta.env.BASE_URL}
+    catalog={catalog}
+    heading="上級問題"
+    headingId="contest-problems"
+    indexContent={true}
+  />
+</TextbookLayout>

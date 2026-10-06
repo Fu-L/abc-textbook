@@ -1,10 +1,10 @@
 ---
-import type { PreviewUiCatalog } from '../lib/catalog/preview-ui-catalog.js';
+import type { UiCatalog } from '../lib/catalog/public-catalog.js';
 import ContestProblemCell from './ContestProblemCell.astro';
 
 interface Props {
   base: string;
-  catalog: PreviewUiCatalog;
+  catalog: UiCatalog;
   heading: string;
   headingId: string;
   showAlternative?: boolean;

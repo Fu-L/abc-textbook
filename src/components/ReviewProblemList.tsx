@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import type { PreviewProblem } from '../lib/catalog/preview-ui-catalog.js';
+import type { UiProblem } from '../lib/catalog/ui-catalog.js';
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
-import { joinAndFilterLearningRecords } from '../lib/learning-records/filter.js';
+import {
+  joinAndFilterLearningRecords,
+  type FilterLearningUnit,
+} from '../lib/learning-records/filter.js';
 import { listLearningRecords } from '../lib/learning-records/store.js';
 import type { LearningStatus } from '../lib/learning-records/types.js';
 
 interface Props {
   readonly base: string;
-  readonly learningUnits: readonly { readonly id: string; readonly title: string }[];
-  readonly problems: readonly PreviewProblem[];
+  readonly learningUnits: readonly FilterLearningUnit[];
+  readonly problems: readonly UiProblem[];
   readonly tags: readonly { readonly id: string; readonly name: string }[];
 }
 
@@ -31,14 +34,19 @@ export default function ReviewProblemList({ base, learningUnits, problems, tags 
         const records = await listLearningRecords(opened);
         if (active) {
           setItems(
-            joinAndFilterLearningRecords(problems, records, {
-              contest,
-              slot,
-              tag,
-              unit,
-              status,
-              needsReview: true,
-            }),
+            joinAndFilterLearningRecords(
+              problems,
+              records,
+              {
+                contest,
+                slot,
+                tag,
+                unit,
+                status,
+                needsReview: true,
+              },
+              learningUnits,
+            ),
           );
           setMessage('復習対象は端末内の記録だけから表示しています。');
         }
@@ -50,11 +58,11 @@ export default function ReviewProblemList({ base, learningUnits, problems, tags 
       active = false;
       database?.close();
     };
-  }, [contest, problems, slot, status, tag, unit]);
+  }, [contest, problems, slot, status, tag, unit, learningUnits]);
 
   const prefix = base === '/' ? '' : base.replace(/\/$/u, '');
   return (
-    <section>
+    <section data-pagefind-ignore>
       <p role="status">{message}</p>
       <label>
         コンテスト

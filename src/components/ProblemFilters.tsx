@@ -1,19 +1,22 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import type { PreviewProblem } from '../lib/catalog/preview-ui-catalog.js';
+import type { UiProblem } from '../lib/catalog/ui-catalog.js';
 import { openLearningRecordDatabase } from '../lib/learning-records/database.js';
-import { joinAndFilterLearningRecords } from '../lib/learning-records/filter.js';
+import {
+  joinAndFilterLearningRecords,
+  type FilterLearningUnit,
+} from '../lib/learning-records/filter.js';
 import { listLearningRecords } from '../lib/learning-records/store.js';
 import type { LearningRecord, LearningStatus } from '../lib/learning-records/types.js';
 
 interface Props {
   readonly base: string;
-  readonly problems: readonly PreviewProblem[];
+  readonly problems: readonly UiProblem[];
   readonly tagNames: Readonly<Record<string, string>>;
-  readonly unitTitles: Readonly<Record<string, string>>;
+  readonly learningUnits: readonly FilterLearningUnit[];
 }
 
-export default function ProblemFilters({ base, problems, tagNames, unitTitles }: Props) {
+export default function ProblemFilters({ base, problems, tagNames, learningUnits }: Props) {
   const [name, setName] = useState('');
   const [contest, setContest] = useState('');
   const [slot, setSlot] = useState('');
@@ -85,14 +88,19 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
   }, []);
   const filtered = useMemo(
     () =>
-      joinAndFilterLearningRecords(problems, records, {
-        contest: applied.contest,
-        slot: applied.slot,
-        tag: applied.tag,
-        unit: applied.unit,
-        status: applied.status,
-        needsReview: applied.needsReview === '' ? null : applied.needsReview === 'yes',
-      })
+      joinAndFilterLearningRecords(
+        problems,
+        records,
+        {
+          contest: applied.contest,
+          slot: applied.slot,
+          tag: applied.tag,
+          unit: applied.unit,
+          status: applied.status,
+          needsReview: applied.needsReview === '' ? null : applied.needsReview === 'yes',
+        },
+        learningUnits,
+      )
         .map(({ problem }) => problem)
         .filter(
           (problem) =>
@@ -101,7 +109,7 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
               .toLocaleLowerCase('ja')
               .includes(applied.name.toLocaleLowerCase('ja')),
         ),
-    [applied, problems, records],
+    [applied, problems, records, learningUnits],
   );
 
   const apply = () => {
@@ -132,6 +140,7 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
   return (
     <section>
       <form
+        data-pagefind-ignore
         role="search"
         aria-label="問題を絞り込む"
         onSubmit={(event) => {
@@ -201,7 +210,7 @@ export default function ProblemFilters({ base, problems, tagNames, unitTitles }:
             }}
           >
             <option value="">すべて</option>
-            {Object.entries(unitTitles).map(([id, title]) => (
+            {learningUnits.map(({ id, title }) => (
               <option key={id} value={id}>
                 {title}
               </option>

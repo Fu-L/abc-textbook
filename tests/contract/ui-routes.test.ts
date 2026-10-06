@@ -5,6 +5,7 @@ import workManifest from '../../docs/work-manifests/initial/us4/manifest.json';
 import componentEvidence from '../../docs/verification/previews/initial-v1/components/ui-search.json';
 import {
   buildPreviewUiCatalog,
+  previewCatalog,
   canonicalPreviewRoutes,
   frozenPreviewUiCatalogSource,
   futureCompatibilityCatalog,
@@ -152,7 +153,7 @@ describe('initial-v1 UI route contract', () => {
   });
 
   it('projects searchable entity kinds and terms without private state', () => {
-    const documents = buildSearchDocuments();
+    const documents = buildSearchDocuments(previewCatalog);
     const serialized = JSON.stringify(documents);
 
     expect(new Set(documents.map(({ entityKind }) => entityKind))).toEqual(

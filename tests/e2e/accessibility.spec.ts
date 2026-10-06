@@ -5,7 +5,9 @@ import { expect, test } from './fixtures.js';
 test('exposes landmarks, headings, table headers, names, text states, and keyboard focus', async ({
   page,
 }) => {
-  await page.goto('./contests/');
+  // The full matrix's 868 cells are covered by the structural/route checks.
+  // Audit the same shared table and cell components on a representative contest.
+  await page.goto('./contests/abc212/');
 
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'パンくず' })).toBeVisible();

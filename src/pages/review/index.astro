@@ -1,7 +1,7 @@
 ---
 import ReviewProblemList from '../../components/ReviewProblemList.tsx';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { previewCatalog } from '../../lib/catalog/preview-ui-catalog.js';
+import { publicCatalog } from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -21,8 +21,8 @@ const base = import.meta.env.BASE_URL;
   <ReviewProblemList
     client:load
     {base}
-    problems={previewCatalog.problems}
-    tags={previewCatalog.tags}
-    learningUnits={previewCatalog.learningUnits}
+    problems={publicCatalog.problems}
+    tags={publicCatalog.tags}
+    learningUnits={publicCatalog.learningUnits}
   />
 </TextbookLayout>
