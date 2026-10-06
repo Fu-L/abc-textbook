@@ -1,0 +1,20 @@
+{
+  "id": "abc477-g",
+  "contestId": "abc477",
+  "slotLabel": "G",
+  "officialTaskId": "abc477_g",
+  "title": "Frequency Query on Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i \\lt v_i \\leq N; The given graph is a tree.; 1 \\leq x_i \\leq N; 1 \\leq s \\lt t \\leq N; 1 \\leq a \\leq b \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+    "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+  ],
+  "checkedAt": "2026-10-06T11:32:14.894Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

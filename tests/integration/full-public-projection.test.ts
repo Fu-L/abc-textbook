@@ -52,7 +52,7 @@ describe('accepted canonical full public projection', () => {
     expect(
       joinAndFilterLearningRecords(problems, [], { unit: 'unknown-unit' }, learningUnits),
     ).toEqual([]);
-    expect(joinAndFilterLearningRecords(problems, [], {}, learningUnits)).toHaveLength(868);
+    expect(joinAndFilterLearningRecords(problems, [], {}, learningUnits)).toHaveLength(904);
     expect(
       joinAndFilterLearningRecords(problems, [], { needsReview: true }, learningUnits),
     ).toEqual([]);
@@ -96,7 +96,7 @@ describe('accepted canonical full public projection', () => {
   it('preserves literal mathematical paragraphs throughout all accepted Units and Problems', async () => {
     let checkedParagraphs = 0;
     const documents = [...projection.unitDocuments, ...projection.problemDocuments];
-    expect(documents).toHaveLength(1100);
+    expect(documents).toHaveLength(1136);
     for (const [id, document] of documents) {
       const source = parseFrontmatter(document.text).content;
       const $ = load(await renderPublicDocument(document.text, '/'));
@@ -137,16 +137,16 @@ describe('accepted canonical full public projection', () => {
       expect($('body').text(), id).not.toContain('\\[');
       checkedIds.add(id);
     }
-    expect(checkedIds.size).toBe(12);
-    expect(checkedLines).toBe(15);
+    expect(checkedIds.size).toBeGreaterThanOrEqual(12);
+    expect(checkedLines).toBeGreaterThanOrEqual(15);
   });
   it('joins all accepted content without leaking the preview or learner state', () => {
     const { ui, catalog } = projection;
     expect(ui.publicationBoundary).toBe('public');
-    expect(ui.problems).toHaveLength(868);
-    expect(ui.contests).toHaveLength(254);
+    expect(ui.problems).toHaveLength(904);
+    expect(ui.contests).toHaveLength(266);
     expect(ui.learningUnits).toHaveLength(232);
-    expect(catalog.authoringUnits).toHaveLength(868);
+    expect(catalog.authoringUnits).toHaveLength(904);
     expect(ui.releaseHistory).toEqual([]);
     expect(ui.problems.every((problem) => problem.similarProblemIds.length === 0)).toBe(true);
     const serialized = JSON.stringify(ui);

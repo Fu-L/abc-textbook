@@ -1,0 +1,1502 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc467",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc467-e",
+        "learningOutcomeIds": [
+          "outcome-partition-at-critical-integer-boundaries"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-integer-boundary-blocks"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 3 \\leq M \\leq 10^9; 0 \\leq A_i \\leq M-1; 0 \\leq B_i \\leq M-1; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "合同条件の再帰により任意の実現可能列はsで表せる。各項の最小増分は非負剰余であり、それを各要素へ独立に加えれば合同条件を満たす。Fはイベント間で線形なので、その区間の整数端点のいずれかが最小となる。イベント前後と全域の両端を評価する掃引は全候補を覆う。",
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+            "path": "src/content/sources/updates/source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc467_e",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7",
+            "path": "src/content/sources/updates/source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc467_e",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc467-e",
+        "sourceRevisionIds": [
+          "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+          "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc467-e-solution",
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "最初の値を一つ決めれば、隣接和の合同条件から残りの値の剰余はすべて決まる。C_1=0、C_{i+1}=B_i−C_i とすると、完成列の第i項は C_i+(-1)^{i+1}s (mod M)。増加だけが許されるので、この剰余へ到達する最小操作数は (C_i+(-1)^{i+1}s−A_i) mod M である。従って一変数 s∈[0,M−1] の関数 F(s) の最小化へ縮む。",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。",
+              "decision": "adopted",
+              "decisionReason": "合同条件の再帰により任意の実現可能列はsで表せる。各項の最小増分は非負剰余であり、それを各要素へ独立に加えれば合同条件を満たす。Fはイベント間で線形なので、その区間の整数端点のいずれかが最小となる。イベント前後と全域の両端を評価する掃引は全候補を覆う。",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "最初の値を一つ決めれば、隣接和の合同条件から残りの値の剰余はすべて決まる。C_1=0、C_{i+1}=B_i−C_i とすると、完成列の第i項は C_i+(-1)^{i+1}s (mod M)。増加だけが許されるので、この剰余へ到達する最小操作数は (C_i+(-1)^{i+1}s−A_i) mod M である。従って一変数 s∈[0,M−1] の関数 F(s) の最小化へ縮む。\n\nM≤10^9 なので s の全探索はできない。各項は傾き+1または−1の鋸歯状関数で、剰余が折り返す時だけ差分が変わる。0-basedでD_i=(C_i−A_i) mod M、偶数iの項は (D_i+s) mod M、奇数iの項は (D_i−s) mod M。初期 F(0)=ΣD_i、通常の傾きは偶数iの個数−奇数iの個数。+項は s=M−D_i で−Mの補正（D_i=0なら区間外）、−項は s=D_i+1 で+Mの補正を入れる。\n\nイベントの座標を昇順に掃引する。前イベントの値から傾き×距離だけ進め、補正前の s−1 と補正後の s を評価する。0とM−1も含めれば、各線形区間の両端がすべて候補になる。最小値を与える点を『いずれかの項が0になる点』に絞る証明もあるが、ここではイベント前後の端点を取ることで負の傾きにも同じ実装で対応する。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "整数境界と同値区間を正確に分ける",
+            "trigger": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。",
+            "application": "最初の値を一つ決めれば、隣接和の合同条件から残りの値の剰余はすべて決まる。C_1=0、C_{i+1}=B_i−C_i とすると、完成列の第i項は C_i+(-1)^{i+1}s (mod M)。増加だけが許されるので、この剰余へ到達する最小操作数は (C_i+(-1)^{i+1}s−A_i) mod M である。従って一変数 s∈[0,M−1] の関数 F(s) の最小化へ縮む。\n\nM≤10^9 なので s の全探索はできない。各項は傾き+1または−1の鋸歯状関数で、剰余が折り返す時だけ差分が変わる。0-basedでD_i=(C_i−A_i) mod M、偶数iの項は (D_i+s) mod M、奇数iの項は (D_i−s) mod M。初期 F(0)=ΣD_i、通常の傾きは偶数iの個数−奇数iの個数。+項は s=M−D_i で−Mの補正（D_i=0なら区間外）、−項は s=D_i+1 で+Mの補正を入れる。\n\nイベントの座標を昇順に掃引する。前イベントの値から傾き×距離だけ進め、補正前の s−1 と補正後の s を評価する。0とM−1も含めれば、各線形区間の両端がすべて候補になる。最小値を与える点を『いずれかの項が0になる点』に絞る証明もあるが、ここではイベント前後の端点を取ることで負の傾きにも同じ実装で対応する。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。",
+            "reusablePerspective": "巨大な一変数探索では、値を列挙する前に『差分が変化する座標』を求める。補正前と補正後を混同しない。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "イベント高々N個のソートと掃引で O(N log N)。",
+          "space": "C,Dとイベント列に O(N)。",
+          "evidenceIds": [
+            "evidence-abc467-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "剰余を[0,M)へ正規化する。同座標の補正はまとめる。総操作数はN(M−1)まであるので64 bit整数を使う。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "巨大な一変数探索では、値を列挙する前に『差分が変化する座標』を求める。補正前と補正後を混同しない。",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc467-e",
+        "problemId": "abc467-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。",
+          "proof": "合同条件の再帰により任意の実現可能列はsで表せる。各項の最小増分は非負剰余であり、それを各要素へ独立に加えれば合同条件を満たす。Fはイベント間で線形なので、その区間の整数端点のいずれかが最小となる。イベント前後と全域の両端を評価する掃引は全候補を覆う。",
+          "complexity": "イベント高々N個のソートと掃引で O(N log N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 3 \\leq M \\leq 10^9; 0 \\leq A_i \\leq M-1; 0 \\leq B_i \\leq M-1; All input values are integers.",
+          "prerequisites": "整数境界と同値区間を正確に分ける",
+          "implementation": "剰余を[0,M)へ正規化する。同座標の補正はまとめる。総操作数はN(M−1)まであるので64 bit整数を使う。"
+        },
+        "additionalElement": null,
+        "rationale": "巨大な一変数探索では、値を列挙する前に『差分が変化する座標』を求める。補正前と補正後を混同しない。 主たる学習成果を「整数境界と同値区間を正確に分ける」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc467-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-integer-boundary-blocks"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-partition-at-critical-integer-boundaries",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-integer-boundary-blocks"
+            ],
+            "rationale": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-integer-boundary-blocks"
+            ],
+            "rationale": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-integer-boundary-blocks"
+            ],
+            "rationale": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-integer-boundary-blocks"
+            ],
+            "rationale": "合同条件で自由度を一つに落とした後、剰余・床関数の不連続点だけを列挙する。候補値域が巨大でも、式の形が変わる場所が少ないときに使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc467-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+                "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "隣接和の等式が値の符号を交互に反転させる。正の傾きの折返しと負の傾きの折返しでは補正の座標が1ずれる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          },
+          {
+            "problemId": "abc467-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc467-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+              "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc467-e.md",
+      "documentDigest": "6081aaf596576b9c927481adffbf6879fdaf3d9daa16d2ab411f1daa85b850b1",
+      "review": {
+        "mode": "third_party",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [
+          "independent_proof"
+        ],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 巨大な一変数探索では、値を列挙する前に『差分が変化する座標』を求める。補正前と補正後を混同しない。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc467-f",
+        "learningOutcomeIds": [
+          "outcome-design-associative-range-summary",
+          "outcome-prove-greedy-order"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-range-monoid-aggregation",
+          "tag-greedy-exchange-order"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_j,B_j \\leq 10^9; In each query, 1 \\leq i \\leq N.; In each query, 1 \\leq x \\leq 10^9.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "隣接するBの逆転を交換しても最大返信時刻は増えず、後続会社の開始時刻も変わらない。従ってソート順で最適解が存在する。ブロック要約の連結は右側の返信全体を左側の筆記時間だけ遅らせる式そのものであり、Segment Treeの根は全会社の最大返信時刻を表す。",
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+            "path": "src/content/sources/updates/source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc467_f",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3",
+            "path": "src/content/sources/updates/source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc467_f",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc467-f",
+        "sourceRevisionIds": [
+          "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+          "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc467-f-solution",
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "返信を待つ時間Bが長い会社を先に処理したいが、筆記時間Aの大小も絡むので交換で確かめる。B_u<B_vでu,vを続けて書くと、二社の最大返信時刻は開始時刻+ A_u+A_v+B_v。順序をv,uに変えた後の二つの返信は、いずれもこの値以下になる。よってB降順が最適で、同じBの順序は任意。",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。",
+              "decision": "adopted",
+              "decisionReason": "隣接するBの逆転を交換しても最大返信時刻は増えず、後続会社の開始時刻も変わらない。従ってソート順で最適解が存在する。ブロック要約の連結は右側の返信全体を左側の筆記時間だけ遅らせる式そのものであり、Segment Treeの根は全会社の最大返信時刻を表す。",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "返信を待つ時間Bが長い会社を先に処理したいが、筆記時間Aの大小も絡むので交換で確かめる。B_u<B_vでu,vを続けて書くと、二社の最大返信時刻は開始時刻+ A_u+A_v+B_v。順序をv,uに変えた後の二つの返信は、いずれもこの値以下になる。よってB降順が最適で、同じBの順序は任意。\n\nこの順序を各更新のたびに走査すると O(NQ)。一つの連続ブロックについて、筆記時間の総和sと、時刻0から始めた最大返信時刻tだけを持つ。左ブロックLの後にRを書くと、要約は (s_L+s_R, max(t_L,s_L+t_R)) になる。ブロックの連結に対応するので結合則が成り立ち、Segment Treeに載せられる。\n\n全クエリを先読みし、B更新後も含む各会社の状態に (−B,会社ID) のキーを与えて座標圧縮する。同じ会社の同じBは同じ葉を再利用してよく、同じBの別会社には別の葉を与える。現状態だけ (A,A+B)、他の葉は空要約 (0,−∞)。A更新は一葉の変更、B更新は旧葉を消して新葉を設定する。根のtが答えである。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "区間monoid要約",
+            "trigger": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。",
+            "application": "返信を待つ時間Bが長い会社を先に処理したいが、筆記時間Aの大小も絡むので交換で確かめる。B_u<B_vでu,vを続けて書くと、二社の最大返信時刻は開始時刻+ A_u+A_v+B_v。順序をv,uに変えた後の二つの返信は、いずれもこの値以下になる。よってB降順が最適で、同じBの順序は任意。\n\nこの順序を各更新のたびに走査すると O(NQ)。一つの連続ブロックについて、筆記時間の総和sと、時刻0から始めた最大返信時刻tだけを持つ。左ブロックLの後にRを書くと、要約は (s_L+s_R, max(t_L,s_L+t_R)) になる。ブロックの連結に対応するので結合則が成り立ち、Segment Treeに載せられる。\n\n全クエリを先読みし、B更新後も含む各会社の状態に (−B,会社ID) のキーを与えて座標圧縮する。同じ会社の同じBは同じ葉を再利用してよく、同じBの別会社には別の葉を与える。現状態だけ (A,A+B)、他の葉は空要約 (0,−∞)。A更新は一葉の変更、B更新は旧葉を消して新葉を設定する。根のtが答えである。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。",
+            "reusablePerspective": "局所交換で最適順を作り、その順で連結できる最小要約を探す。交換論とデータ構造は別の役割を担う。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "キーの前処理とN+Q回の更新で O((N+Q) log(N+Q))。",
+          "space": "圧縮キーとSegment Treeに O(N+Q)。",
+          "evidenceIds": [
+            "evidence-abc467-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "空要約のtを0とするとA=B=0以外の一般化で誤るので−∞を使う。最大返信時刻は64 bit整数。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "局所交換で最適順を作り、その順で連結できる最小要約を探す。交換論とデータ構造は別の役割を担う。",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc467-f",
+        "problemId": "abc467-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。",
+          "proof": "隣接するBの逆転を交換しても最大返信時刻は増えず、後続会社の開始時刻も変わらない。従ってソート順で最適解が存在する。ブロック要約の連結は右側の返信全体を左側の筆記時間だけ遅らせる式そのものであり、Segment Treeの根は全会社の最大返信時刻を表す。",
+          "complexity": "キーの前処理とN+Q回の更新で O((N+Q) log(N+Q))。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_j,B_j \\leq 10^9; In each query, 1 \\leq i \\leq N.; In each query, 1 \\leq x \\leq 10^9.; All input values are integers.",
+          "prerequisites": "区間monoid要約",
+          "implementation": "空要約のtを0とするとA=B=0以外の一般化で誤るので−∞を使う。最大返信時刻は64 bit整数。"
+        },
+        "additionalElement": null,
+        "rationale": "局所交換で最適順を作り、その順で連結できる最小要約を探す。交換論とデータ構造は別の役割を担う。 主たる学習成果を「区間monoid要約」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc467-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-range-monoid-aggregation"
+        ],
+        "supportingTagIds": [
+          "tag-greedy-exchange-order"
+        ],
+        "primaryOutcomeId": "outcome-design-associative-range-summary",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-prove-greedy-order"
+        ],
+        "adHocElements": [
+          "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "順序付きブロックを『総所要時間と最悪完了時刻』で要約する。貪欲順を証明してから、その順序の連結演算をmonoidとして保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc467-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+                "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "待ち時間Bの降順が更新で変わるため、会社番号順の木では要約を結合できない。キー空間には将来のBも含める。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          },
+          {
+            "problemId": "abc467-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc467-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+              "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc467-f.md",
+      "documentDigest": "ed442f2ca8d6faf3a1fec8d99690bf2000b11dd8b422a319016bf237a6b86236",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 局所交換で最適順を作り、その順で連結できる最小要約を探す。交換論とデータ構造は別の役割を担う。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc467-g",
+        "learningOutcomeIds": [
+          "outcome-aggregate-value-prefix-by-buckets"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-value-bucket-aggregation"
+        ],
+        "constraints": [
+          "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq c \\leq N; 1 \\leq x \\leq 10^9; 1 \\leq l \\leq r \\leq N; 1 \\leq k \\leq 10^{15}; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "美味しさの小さい要素を大きい未採用要素と交換すれば、個数を変えず総和は減らない。従って最適解は値降順のprefixである。下降はより大きい値の全採用が必要な場合だけその個数と和を確定し、残りの同じ問題を一方の子へ渡す。葉で同じ値の必要最小個数を計算するため、全体の個数も最小になる。",
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+            "path": "src/content/sources/updates/source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc467_g",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf",
+            "path": "src/content/sources/updates/source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc467_g",
+            "checkedAt": "2026-10-06T11:30:25.006Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc467-g",
+        "sourceRevisionIds": [
+          "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+          "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc467-g-solution",
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "正の美味しさで必要個数を最小化するなら、区間内の値を大きい順に食べる。上位m個の和はmについて単調だが、その和を毎回ソートすると遅い。値を閾値として二分探索し、二次元範囲集約で和を調べる方針も外側の二分探索が余分なlogを生む。",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。",
+              "decision": "adopted",
+              "decisionReason": "美味しさの小さい要素を大きい未採用要素と交換すれば、個数を変えず総和は減らない。従って最適解は値降順のprefixである。下降はより大きい値の全採用が必要な場合だけその個数と和を確定し、残りの同じ問題を一方の子へ渡す。葉で同じ値の必要最小個数を計算するため、全体の個数も最小になる。",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "正の美味しさで必要個数を最小化するなら、区間内の値を大きい順に食べる。上位m個の和はmについて単調だが、その和を毎回ソートすると遅い。値を閾値として二分探索し、二次元範囲集約で和を調べる方針も外側の二分探索が余分なlogを生む。\n\n全更新を先読みして値を圧縮し、値軸のSegment Treeを作る。各ノードには、その値範囲へ入る可能性のある配列位置を昇順に持ち、位置ごとの個数と総和をFenwick Treeで管理する。値変更では旧値の祖先から−1,−旧値、新値の祖先へ+1,+新値を加える。\n\n問い合わせはまず全値ノードの位置区間[l,r]の総和を確認し、k未満なら−1。そうでなければ根から値が大きい側を先に見る。右子の区間和sが残り目標k以上なら右へ降りる。s<kなら右子をすべて採用し、その区間個数を答えへ加え、kをk−sとして左へ降りる。葉の値vに着いたら追加個数は ceil(k/v)。これで値の二分探索を木の下降そのものに置き換える。\n\n候補として登録する位置は重複を消す。C=N+Qを状態の総数とすると、一つの候補は O(log C) ノードへ入り、位置二分探索とFenwick集約が各深さで O(log C)。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "値軸のbucket分割と区間集約",
+            "trigger": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。",
+            "application": "正の美味しさで必要個数を最小化するなら、区間内の値を大きい順に食べる。上位m個の和はmについて単調だが、その和を毎回ソートすると遅い。値を閾値として二分探索し、二次元範囲集約で和を調べる方針も外側の二分探索が余分なlogを生む。\n\n全更新を先読みして値を圧縮し、値軸のSegment Treeを作る。各ノードには、その値範囲へ入る可能性のある配列位置を昇順に持ち、位置ごとの個数と総和をFenwick Treeで管理する。値変更では旧値の祖先から−1,−旧値、新値の祖先へ+1,+新値を加える。\n\n問い合わせはまず全値ノードの位置区間[l,r]の総和を確認し、k未満なら−1。そうでなければ根から値が大きい側を先に見る。右子の区間和sが残り目標k以上なら右へ降りる。s<kなら右子をすべて採用し、その区間個数を答えへ加え、kをk−sとして左へ降りる。葉の値vに着いたら追加個数は ceil(k/v)。これで値の二分探索を木の下降そのものに置き換える。\n\n候補として登録する位置は重複を消す。C=N+Qを状態の総数とすると、一つの候補は O(log C) ノードへ入り、位置二分探索とFenwick集約が各深さで O(log C)。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。",
+            "reusablePerspective": "何を木の上位に置くかでlogを一つ減らせる。位置で分割する木と値で分割する木を比較する。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "候補登録を含め O((N+Q) log²(N+Q))。各更新・問い合わせ O(log²(N+Q))。",
+          "space": "位置候補とFenwick配列に O((N+Q) log(N+Q))。",
+          "evidenceIds": [
+            "evidence-abc467-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "位置区間はlower_bound(l),upper_bound(r)で半開区間にする。総和とkは64 bit整数。将来値の登録漏れを避ける。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "何を木の上位に置くかでlogを一つ減らせる。位置で分割する木と値で分割する木を比較する。",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc467-g",
+        "problemId": "abc467-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。",
+          "proof": "美味しさの小さい要素を大きい未採用要素と交換すれば、個数を変えず総和は減らない。従って最適解は値降順のprefixである。下降はより大きい値の全採用が必要な場合だけその個数と和を確定し、残りの同じ問題を一方の子へ渡す。葉で同じ値の必要最小個数を計算するため、全体の個数も最小になる。",
+          "complexity": "候補登録を含め O((N+Q) log²(N+Q))。各更新・問い合わせ O(log²(N+Q))。",
+          "constraints": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq c \\leq N; 1 \\leq x \\leq 10^9; 1 \\leq l \\leq r \\leq N; 1 \\leq k \\leq 10^{15}; All input values are integers.",
+          "prerequisites": "値軸のbucket分割と区間集約",
+          "implementation": "位置区間はlower_bound(l),upper_bound(r)で半開区間にする。総和とkは64 bit整数。将来値の登録漏れを避ける。"
+        },
+        "additionalElement": null,
+        "rationale": "何を木の上位に置くかでlogを一つ減らせる。位置で分割する木と値で分割する木を比較する。 主たる学習成果を「値軸のbucket分割と区間集約」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc467-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-value-bucket-aggregation"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-aggregate-value-prefix-by-buckets",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-value-bucket-aggregation"
+            ],
+            "rationale": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-value-bucket-aggregation"
+            ],
+            "rationale": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-value-bucket-aggregation"
+            ],
+            "rationale": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-value-bucket-aggregation"
+            ],
+            "rationale": "二次元の区間集約で順序統計を求めるとき、答えの閾値に二分探索を重ねず、値軸の木を和・個数で直接下降する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc467-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc467-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+                "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最小個数は上位値の和で決まり、葉ではceil(k/v)まで部分採用できる。正値制約がこの単調性を保証する。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          },
+          {
+            "problemId": "abc467-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc467-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+              "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc467-g.md",
+      "documentDigest": "bf1c8ce47836ef283969546f5d861a14d9569af093b5998c06f0766619c30f5b",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 何を木の上位に置くかでlogを一つ減らせる。位置で分割する木と値で分割する木を比較する。"
+      }
+    }
+  ]
+}

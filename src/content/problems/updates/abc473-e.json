@@ -1,0 +1,20 @@
+{
+  "id": "abc473-e",
+  "contestId": "abc473",
+  "slotLabel": "E",
+  "officialTaskId": "abc473_e",
+  "title": "K-Divisible Subarrays",
+  "officialUrl": "https://atcoder.jp/contests/abc473/tasks/abc473_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le K\\le10 ^ 9; 0\\le A _ i\\lt K; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc473-e-problem-808f7da61d8e7a2dc4ecc6f28c1f43e1276daa8fb5c5dc4ad004d7ed86a6a29a",
+    "source-abc473-editorial-24877-41ab4e8d258ec7729e7085eb9b4573f127e5e1b3092781e268ca2d336d64e7f0"
+  ],
+  "checkedAt": "2026-10-06T11:31:30.851Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

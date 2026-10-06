@@ -1,0 +1,1512 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc476",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc476-e",
+        "learningOutcomeIds": [
+          "outcome-design-associative-range-summary"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-range-monoid-aggregation"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 1\\le M\\le 2\\times 10^5; P is a permutation of (1,2,\\ldots,N).; 1\\le L_i < R_i\\le N; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "各ノードの極値は子区間の極値の小さい方・大きい方で決まるので、木は常に現在配列の正しい区間極値を返す。更新前の二極値を読み、その値を交換する二点更新は指定操作そのもの。操作回数に関する帰納で最終配列が一致する。",
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+            "path": "src/content/sources/updates/source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc476_e",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82",
+            "path": "src/content/sources/updates/source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc476_e",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc476-e",
+        "sourceRevisionIds": [
+          "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+          "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc476-e-solution",
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "各区間の最小・最大を入れ替える操作は、一度順序が変わると次の区間極値も変わるので、更新後の配列をそのまま保守する。一ノードの情報を『最小値と位置、最大値と位置』の組にする。二つの子を結合するとき、それぞれの極値を比較して位置を引き継げばよい。",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。",
+              "decision": "adopted",
+              "decisionReason": "各ノードの極値は子区間の極値の小さい方・大きい方で決まるので、木は常に現在配列の正しい区間極値を返す。更新前の二極値を読み、その値を交換する二点更新は指定操作そのもの。操作回数に関する帰納で最終配列が一致する。",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "各区間の最小・最大を入れ替える操作は、一度順序が変わると次の区間極値も変わるので、更新後の配列をそのまま保守する。一ノードの情報を『最小値と位置、最大値と位置』の組にする。二つの子を結合するとき、それぞれの極値を比較して位置を引き継げばよい。\n\nSegment Treeを線形時間で構築し、各操作の区間[L,R]をqueryして位置u,vと旧値a,bを同時に読み取る。その後uへb、vへaを一点更新する。queryを二回に分ける場合も、どちらも更新前の木から読む。順列なので最小と最大の位置は一意。\n\n全操作後の葉を走査して出力する。一回ごとに範囲を直接なめる O(NM) を、結合可能な極値要約による O(log N) のqueryと二点更新へ変えられる。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "区間monoid要約",
+            "trigger": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。",
+            "application": "各区間の最小・最大を入れ替える操作は、一度順序が変わると次の区間極値も変わるので、更新後の配列をそのまま保守する。一ノードの情報を『最小値と位置、最大値と位置』の組にする。二つの子を結合するとき、それぞれの極値を比較して位置を引き継げばよい。\n\nSegment Treeを線形時間で構築し、各操作の区間[L,R]をqueryして位置u,vと旧値a,bを同時に読み取る。その後uへb、vへaを一点更新する。queryを二回に分ける場合も、どちらも更新前の木から読む。順列なので最小と最大の位置は一意。\n\n全操作後の葉を走査して出力する。一回ごとに範囲を直接なめる O(NM) を、結合可能な極値要約による O(log N) のqueryと二点更新へ変えられる。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。",
+            "reusablePerspective": "答えの値を知るだけで操作できるか、それを取る場所も必要か確認する。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "構築 O(N)、操作 O(M log N)、最終出力 O(N)。",
+          "space": "Segment Treeと配列 O(N)。",
+          "evidenceIds": [
+            "evidence-abc476-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "二つの旧値を読み終えてから更新する。閉区間から半開区間へ変換するとき右端を含める。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "答えの値を知るだけで操作できるか、それを取る場所も必要か確認する。",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc476-e",
+        "problemId": "abc476-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。",
+          "proof": "各ノードの極値は子区間の極値の小さい方・大きい方で決まるので、木は常に現在配列の正しい区間極値を返す。更新前の二極値を読み、その値を交換する二点更新は指定操作そのもの。操作回数に関する帰納で最終配列が一致する。",
+          "complexity": "構築 O(N)、操作 O(M log N)、最終出力 O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 1\\le M\\le 2\\times 10^5; P is a permutation of (1,2,\\ldots,N).; 1\\le L_i < R_i\\le N; All input values are integers.",
+          "prerequisites": "区間monoid要約",
+          "implementation": "二つの旧値を読み終えてから更新する。閉区間から半開区間へ変換するとき右端を含める。"
+        },
+        "additionalElement": null,
+        "rationale": "答えの値を知るだけで操作できるか、それを取る場所も必要か確認する。 主たる学習成果を「区間monoid要約」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc476-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-range-monoid-aggregation"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-design-associative-range-summary",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-range-monoid-aggregation"
+            ],
+            "rationale": "集約値だけでなく、その値を取る位置も要約へ持たせる。queryで特定した少数位置を更新すれば操作の影響を局所化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc476-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+                "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "値が全て異なるのでargmin/argmaxの同点規約は不要だが、一般化するなら位置のtie-breakを固定する。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          },
+          {
+            "problemId": "abc476-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc476-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+              "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc476-e.md",
+      "documentDigest": "42d4034f47560a2c956dfb24a004799ff481e03e00505cffb6951735b2c6868c",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 答えの値を知るだけで操作できるか、それを取る場所も必要か確認する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc476-f",
+        "learningOutcomeIds": [
+          "outcome-reduce-geometry-to-algebraic-predicates",
+          "outcome-reorder-counting-contributions"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-geometry-orientation-transform",
+          "tag-contribution-reordering"
+        ],
+        "constraints": [
+          "Time limit: 3 sec; Memory limit: 2048 MiB; Constraints: 1 \\leq N \\leq 1500; 2 \\leq M \\leq 2 \\times 10^6; 1 \\leq A_i \\leq M-1 (1 \\leq i \\leq N); 1 \\leq B_j \\leq M-1 (1 \\leq j \\leq N); All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "実数a,bに対する |a+b|+|a−b|=2max(|a|,|b|) の恒等式で距離が二軸へ分離する。線形性から同じ軸座標の重みをまとめても各カフェへの寄与は変わらない。prefix重みと一次モーメントの式は絶対値の符号別展開なので、全人数の距離和を正確に計算できる。",
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+            "path": "src/content/sources/updates/source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc476_f",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538",
+            "path": "src/content/sources/updates/source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc476_f",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc476-f",
+        "sourceRevisionIds": [
+          "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+          "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc476-f-solution",
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "Chebyshev距離を全点から全候補へ足すと O(N⁴)。45度座標変換u=i+j、v=i−jを使うと max(|Δi|,|Δj|)=(|Δu|+|Δv|)/2 になる。人数C_ij=(A_iB_j) mod Mを、uごとの重みU[u]とvごとの重みV[v]へ集約する。",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。",
+              "decision": "adopted",
+              "decisionReason": "実数a,bに対する |a+b|+|a−b|=2max(|a|,|b|) の恒等式で距離が二軸へ分離する。線形性から同じ軸座標の重みをまとめても各カフェへの寄与は変わらない。prefix重みと一次モーメントの式は絶対値の符号別展開なので、全人数の距離和を正確に計算できる。",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "Chebyshev距離を全点から全候補へ足すと O(N⁴)。45度座標変換u=i+j、v=i−jを使うと max(|Δi|,|Δj|)=(|Δu|+|Δv|)/2 になる。人数C_ij=(A_iB_j) mod Mを、uごとの重みU[u]とvごとの重みV[v]へ集約する。\n\n各軸では全位置xの重み付き絶対距離 F(x)=Σ_t w_t|x−t| を求めればよい。xの左側と右側に分け、prefix重み和P(x)とprefix一次モーメントQ(x)を使うと、左寄与はxP−Q、右寄与は(Q_total−Q)−x(P_total−P)。u,vとも整数範囲の長さ O(N) なので全軸位置のFを O(N) で前計算できる。\n\n各カフェ(i,j)の答えは (F_U(i+j)+F_V(i−j))/2。格子点由来のu,vの差には同じ偶奇があるため、分子は必ず偶数で整数になる。この値へ(i−1)N+(j−1)を足してXORする。入力人数の計算と出力候補走査はいずれも O(N²) なので全体 O(N²) に落ちる。\n\n元の幾何では斜めimosでも解けるが、ここでは距離の座標変換により二つの一次元絶対値和へ分離する。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "幾何の基本判定と座標変換",
+            "trigger": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。",
+            "application": "Chebyshev距離を全点から全候補へ足すと O(N⁴)。45度座標変換u=i+j、v=i−jを使うと max(|Δi|,|Δj|)=(|Δu|+|Δv|)/2 になる。人数C_ij=(A_iB_j) mod Mを、uごとの重みU[u]とvごとの重みV[v]へ集約する。\n\n各軸では全位置xの重み付き絶対距離 F(x)=Σ_t w_t|x−t| を求めればよい。xの左側と右側に分け、prefix重み和P(x)とprefix一次モーメントQ(x)を使うと、左寄与はxP−Q、右寄与は(Q_total−Q)−x(P_total−P)。u,vとも整数範囲の長さ O(N) なので全軸位置のFを O(N) で前計算できる。\n\n各カフェ(i,j)の答えは (F_U(i+j)+F_V(i−j))/2。格子点由来のu,vの差には同じ偶奇があるため、分子は必ず偶数で整数になる。この値へ(i−1)N+(j−1)を足してXORする。入力人数の計算と出力候補走査はいずれも O(N²) なので全体 O(N²) に落ちる。\n\n元の幾何では斜めimosでも解けるが、ここでは距離の座標変換により二つの一次元絶対値和へ分離する。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。",
+            "reusablePerspective": "二次元の距離和では、何を回転すれば軸別の和になるか試す。重みが分離しなくても、距離が分離すればよい。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "全人数と全カフェを一度走査して O(N²)。軸前計算 O(N)。",
+          "space": "軸重みとモーメント O(N)。人数行列を保存する必要はない。",
+          "evidenceIds": [
+            "evidence-abc476-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "i−jの負添字をずらす。距離総和は64 bit整数、積A_iB_jも先に広い型へ。2で割る前に偶数性を確認する。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "二次元の距離和では、何を回転すれば軸別の和になるか試す。重みが分離しなくても、距離が分離すればよい。",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc476-f",
+        "problemId": "abc476-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。",
+          "proof": "実数a,bに対する |a+b|+|a−b|=2max(|a|,|b|) の恒等式で距離が二軸へ分離する。線形性から同じ軸座標の重みをまとめても各カフェへの寄与は変わらない。prefix重みと一次モーメントの式は絶対値の符号別展開なので、全人数の距離和を正確に計算できる。",
+          "complexity": "全人数と全カフェを一度走査して O(N²)。軸前計算 O(N)。",
+          "constraints": "Time limit: 3 sec; Memory limit: 2048 MiB; Constraints: 1 \\leq N \\leq 1500; 2 \\leq M \\leq 2 \\times 10^6; 1 \\leq A_i \\leq M-1 (1 \\leq i \\leq N); 1 \\leq B_j \\leq M-1 (1 \\leq j \\leq N); All input values are integers.",
+          "prerequisites": "幾何の基本判定と座標変換",
+          "implementation": "i−jの負添字をずらす。距離総和は64 bit整数、積A_iB_jも先に広い型へ。2で割る前に偶数性を確認する。"
+        },
+        "additionalElement": null,
+        "rationale": "二次元の距離和では、何を回転すれば軸別の和になるか試す。重みが分離しなくても、距離が分離すればよい。 主たる学習成果を「幾何の基本判定と座標変換」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc476-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-geometry-orientation-transform"
+        ],
+        "supportingTagIds": [
+          "tag-contribution-reordering"
+        ],
+        "primaryOutcomeId": "outcome-reduce-geometry-to-algebraic-predicates",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-reorder-counting-contributions"
+        ],
+        "adHocElements": [
+          "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "L∞距離を45度変換したL1距離へ分離する。重み付き絶対距離の全評価は個数和と一次モーメントのprefixで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc476-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+                "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "人数の積mod Mは先に各セルで計算してから軸へ集計する。A,Bの積のまま分離してはならない。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          },
+          {
+            "problemId": "abc476-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc476-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-f-problem-75f37bb15b57b68c201ee0f2363e55b7bc240a92f24141d46bcc89dbd01cf6ba",
+              "source-abc476-editorial-25806-522390241fec6c2719f57b3df9a682b0beef2c14850d03a7b220097335195538"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc476-f.md",
+      "documentDigest": "cb191196c677fd616553cca89802522b6063811b49420fbbbb0627aae2a23b39",
+      "review": {
+        "mode": "third_party",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [
+          "independent_proof"
+        ],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 二次元の距離和では、何を回転すれば軸別の和になるか試す。重みが分離しなくても、距離が分離すればよい。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc476-g",
+        "learningOutcomeIds": [
+          "outcome-optimize-poset-antichain-by-dilworth",
+          "outcome-formulate-combinatorial-coefficients"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-poset-dilworth-antichain",
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^4; 1\\le L \\le R\\le 10^{18}; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "ラベルごとの添字列と鎖が一対一であり、Dilworthにより最小ラベル数は最大反鎖長。dyadic blockの低位bit上で非増加popcount列は集合包含の反鎖だからLYMの上限が適用でき、単一層が達成する。旧列の下限uを固定した任意の最適層j≤uに対しD[j]≥D[u]なので、単一層を直接列挙する遷移で上限を達成できる。suffix最大は全許容層を漏れなく集約する。",
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+            "path": "src/content/sources/updates/source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc476_g",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49",
+            "path": "src/content/sources/updates/source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc476_g",
+            "checkedAt": "2026-10-06T11:32:03.885Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc476-g",
+        "sourceRevisionIds": [
+          "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+          "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc476-g-solution",
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "同じラベルを付ける添字列は、添字順かつpopcount狭義増加の鎖である。ラベル数最小化はこの半順序の最小鎖被覆。Dilworthにより最大反鎖、すなわち添字が増える一方でpopcountが非増加となる部分列の最大長へ帰着する。",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。",
+              "decision": "adopted",
+              "decisionReason": "ラベルごとの添字列と鎖が一対一であり、Dilworthにより最小ラベル数は最大反鎖長。dyadic blockの低位bit上で非増加popcount列は集合包含の反鎖だからLYMの上限が適用でき、単一層が達成する。旧列の下限uを固定した任意の最適層j≤uに対しD[j]≥D[u]なので、単一層を直接列挙する遷移で上限を達成できる。suffix最大は全許容層を漏れなく集約する。",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "同じラベルを付ける添字列は、添字順かつpopcount狭義増加の鎖である。ラベル数最小化はこの半順序の最小鎖被覆。Dilworthにより最大反鎖、すなわち添字が増える一方でpopcountが非増加となる部分列の最大長へ帰着する。\n\n[L,R]を、2^b長で開始位置がその倍数であるdyadic blockへ分ける。高位bitが固定される一ブロックでは、popcountは固定分c+低位b bitのpopcount。許容popcount範囲[a,z]の非増加部分列の最大長は max_{a≤c+k≤z}C(b,k)。理由は、その部分列をbit集合にすると反鎖で、LYM不等式Σ1/C(b,k)≤1が上限を与え、最大の一層を全て選べば達するため。\n\nD[z]を処理済みprefix内で全popcountがz以上となる非増加部分列の最大長とする。ブロックの固定高位popcountをcとし、最後をt以上とすると、旧列の最後をu以上（u≥t）へ制限したD[u]に、ブロック内の[t,u]層の最大二項係数を足せる。一見O(B³)だが、この層内最大は少し整理できる。\n\nこのブロック内で選ぶ最適層をjとすれば、旧列の最後≥jであるD[j]にC(b,j−c)を足す。候補E[j]=D[j]+C(b,j−c)を各j=c,…,c+bで作り、next[t]=max(D[t],max_{j≥t}E[j])をsuffix最大で計算する。これは各ブロック O(B)。L,R≤10^18ならB≤60、ブロック数 O(B)で O(B²)。最終D[0]が答え。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "半順序・Dilworth・最大反鎖",
+            "trigger": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。",
+            "application": "同じラベルを付ける添字列は、添字順かつpopcount狭義増加の鎖である。ラベル数最小化はこの半順序の最小鎖被覆。Dilworthにより最大反鎖、すなわち添字が増える一方でpopcountが非増加となる部分列の最大長へ帰着する。\n\n[L,R]を、2^b長で開始位置がその倍数であるdyadic blockへ分ける。高位bitが固定される一ブロックでは、popcountは固定分c+低位b bitのpopcount。許容popcount範囲[a,z]の非増加部分列の最大長は max_{a≤c+k≤z}C(b,k)。理由は、その部分列をbit集合にすると反鎖で、LYM不等式Σ1/C(b,k)≤1が上限を与え、最大の一層を全て選べば達するため。\n\nD[z]を処理済みprefix内で全popcountがz以上となる非増加部分列の最大長とする。ブロックの固定高位popcountをcとし、最後をt以上とすると、旧列の最後をu以上（u≥t）へ制限したD[u]に、ブロック内の[t,u]層の最大二項係数を足せる。一見O(B³)だが、この層内最大は少し整理できる。\n\nこのブロック内で選ぶ最適層をjとすれば、旧列の最後≥jであるD[j]にC(b,j−c)を足す。候補E[j]=D[j]+C(b,j−c)を各j=c,…,c+bで作り、next[t]=max(D[t],max_{j≥t}E[j])をsuffix最大で計算する。これは各ブロック O(B)。L,R≤10^18ならB≤60、ブロック数 O(B)で O(B²)。最終D[0]が答え。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。",
+            "reusablePerspective": "巨大区間を桁DPだけで考えず、規則的な完全blockの答えを数論・組合せの定理で求め、境界だけを連結する。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "B=ceil(log2(R+1))≤60として二項係数前計算 O(B²)、各テスト O(B²)。",
+          "space": "二項係数表 O(B²)、DP配列 O(B)。",
+          "evidenceIds": [
+            "evidence-abc476-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "二項係数・答えはmodを取らない64 bit整数。L=Rのblock長1も処理する。DPは旧配列から新配列へ更新する。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "巨大区間を桁DPだけで考えず、規則的な完全blockの答えを数論・組合せの定理で求め、境界だけを連結する。",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc476-g",
+        "problemId": "abc476-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。",
+          "proof": "ラベルごとの添字列と鎖が一対一であり、Dilworthにより最小ラベル数は最大反鎖長。dyadic blockの低位bit上で非増加popcount列は集合包含の反鎖だからLYMの上限が適用でき、単一層が達成する。旧列の下限uを固定した任意の最適層j≤uに対しD[j]≥D[u]なので、単一層を直接列挙する遷移で上限を達成できる。suffix最大は全許容層を漏れなく集約する。",
+          "complexity": "B=ceil(log2(R+1))≤60として二項係数前計算 O(B²)、各テスト O(B²)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^4; 1\\le L \\le R\\le 10^{18}; All input values are integers.",
+          "prerequisites": "半順序・Dilworth・最大反鎖",
+          "implementation": "二項係数・答えはmodを取らない64 bit整数。L=Rのblock長1も処理する。DPは旧配列から新配列へ更新する。"
+        },
+        "additionalElement": null,
+        "rationale": "巨大区間を桁DPだけで考えず、規則的な完全blockの答えを数論・組合せの定理で求め、境界だけを連結する。 主たる学習成果を「半順序・Dilworth・最大反鎖」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc476-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-poset-dilworth-antichain"
+        ],
+        "supportingTagIds": [
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "primaryOutcomeId": "outcome-optimize-poset-antichain-by-dilworth",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-formulate-combinatorial-coefficients"
+        ],
+        "adHocElements": [
+          "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-poset-dilworth-antichain"
+            ],
+            "rationale": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-poset-dilworth-antichain"
+            ],
+            "rationale": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-poset-dilworth-antichain"
+            ],
+            "rationale": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-poset-dilworth-antichain"
+            ],
+            "rationale": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc476-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc476-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+                "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          },
+          {
+            "problemId": "abc476-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc476-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+              "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc476-g.md",
+      "documentDigest": "aff1bd338fc8cf4318b1d3add05f34b47449c95524301c0afc1b8ecb3f31ce28",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 巨大区間を桁DPだけで考えず、規則的な完全blockの答えを数論・組合せの定理で求め、境界だけを連結する。"
+      }
+    }
+  ]
+}

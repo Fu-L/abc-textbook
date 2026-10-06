@@ -1,0 +1,20 @@
+{
+  "id": "abc468-e",
+  "contestId": "abc468",
+  "slotLabel": "E",
+  "officialTaskId": "abc468_e",
+  "title": "Sum of Average",
+  "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; 0\\le A_i < 998244353; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+    "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+  ],
+  "checkedAt": "2026-10-06T11:30:35.819Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

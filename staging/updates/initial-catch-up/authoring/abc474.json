@@ -1,0 +1,1531 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc474",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc474-e",
+        "learningOutcomeIds": [
+          "outcome-prove-greedy-order"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-greedy-exchange-order"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le N\\le 2\\times 10^5; 1\\le B_i < A_i \\le 10^9; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "クーポン使用k回には、最低でもk枚の供給が必要。通常購入する必要種類N−kだけでは不足する分を余分な通常購入で補い、その一回当たり最小費用はmin A_iである。固定kで節約額上位を選ぶ交換は供給数を変えず費用だけを下げる。全kを列挙し、供給を先に行う構成で下界が達成される。",
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+            "path": "src/content/sources/updates/source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc474_e",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd",
+            "path": "src/content/sources/updates/source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc474_e",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc474-e",
+        "sourceRevisionIds": [
+          "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+          "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc474-e-solution",
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "各種類を一回買う基本コストはΣA_i。クーポンで買う商品iへ変更するとA_i−B_iだけ安くなるが、同時にクーポン供給が一枚減り、消費が一枚増える。",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。",
+              "decision": "adopted",
+              "decisionReason": "クーポン使用k回には、最低でもk枚の供給が必要。通常購入する必要種類N−kだけでは不足する分を余分な通常購入で補い、その一回当たり最小費用はmin A_iである。固定kで節約額上位を選ぶ交換は供給数を変えず費用だけを下げる。全kを列挙し、供給を先に行う構成で下界が達成される。",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "各種類を一回買う基本コストはΣA_i。クーポンで買う商品iへ変更するとA_i−B_iだけ安くなるが、同時にクーポン供給が一枚減り、消費が一枚増える。\n\nクーポン使用種類数をkとすると、通常購入N−k回からN−k枚を供給でき、足りなければ2k−N枚を余分に通常購入する。重複購入は品揃えを増やさずクーポンを作るためだけに使うので、通常価格a=min A_iの商品でよい。固定kでの追加コストは max(0,2k−N)a となる。\n\n節約額D_i=A_i−B_iを降順に並べてprefix和を取る。k=0,…,Nについて ΣA_i−Σ_{j≤k}D_j+max(0,2k−N)a を評価し、最小を返す。N−k個の通常購入と必要な追加購入をすべて先に行えば、残るk個の割引購入に十分なクーポンがあるため、このコストは実現できる。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "交換論から選択順を導く",
+            "trigger": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。",
+            "application": "各種類を一回買う基本コストはΣA_i。クーポンで買う商品iへ変更するとA_i−B_iだけ安くなるが、同時にクーポン供給が一枚減り、消費が一枚増える。\n\nクーポン使用種類数をkとすると、通常購入N−k回からN−k枚を供給でき、足りなければ2k−N枚を余分に通常購入する。重複購入は品揃えを増やさずクーポンを作るためだけに使うので、通常価格a=min A_iの商品でよい。固定kでの追加コストは max(0,2k−N)a となる。\n\n節約額D_i=A_i−B_iを降順に並べてprefix和を取る。k=0,…,Nについて ΣA_i−Σ_{j≤k}D_j+max(0,2k−N)a を評価し、最小を返す。N−k個の通常購入と必要な追加購入をすべて先に行えば、残るk個の割引購入に十分なクーポンがあるため、このコストは実現できる。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。",
+            "reusablePerspective": "貪欲選択の前に、個数を固定すると資源収支が何だけで決まるかを見る。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "節約額ソート O(N log N)、全k走査 O(N)。",
+          "space": "価格とprefix和 O(N)。",
+          "evidenceIds": [
+            "evidence-abc474-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "k=Nも候補。コスト・節約和は64 bit整数。追加購入のaは割引価格ではなく通常価格。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "貪欲選択の前に、個数を固定すると資源収支が何だけで決まるかを見る。",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc474-e",
+        "problemId": "abc474-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。",
+          "proof": "クーポン使用k回には、最低でもk枚の供給が必要。通常購入する必要種類N−kだけでは不足する分を余分な通常購入で補い、その一回当たり最小費用はmin A_iである。固定kで節約額上位を選ぶ交換は供給数を変えず費用だけを下げる。全kを列挙し、供給を先に行う構成で下界が達成される。",
+          "complexity": "節約額ソート O(N log N)、全k走査 O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le N\\le 2\\times 10^5; 1\\le B_i < A_i \\le 10^9; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers.",
+          "prerequisites": "交換論から選択順を導く",
+          "implementation": "k=Nも候補。コスト・節約和は64 bit整数。追加購入のaは割引価格ではなく通常価格。"
+        },
+        "additionalElement": null,
+        "rationale": "貪欲選択の前に、個数を固定すると資源収支が何だけで決まるかを見る。 主たる学習成果を「交換論から選択順を導く」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc474-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-greedy-exchange-order"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-prove-greedy-order",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "資源使用数を固定して交換論を適用する。資源の獲得と消費を同時に変える選択では差分の係数を先に数える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc474-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+                "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "割引購入へ替えるとクーポンの純収支は2枚悪化する。重複購入を許すことが不足分の線形費用を生む。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          },
+          {
+            "problemId": "abc474-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc474-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+              "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc474-e.md",
+      "documentDigest": "1de435b8b556b81ea33c6afbd559001838831d06c068c493af732dfc0c0ad0a0",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 貪欲選択の前に、個数を固定すると資源収支が何だけで決まるかを見る。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc474-f",
+        "learningOutcomeIds": [
+          "outcome-invert-divisor-lattice-by-mobius"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-divisor-mobius-inversion"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "約数への操作寄与は倍数和であり、降順の三角形連立系は各xに対して一意の操作回数を与える。全C_iが非負整数ならそれだけ各操作を行う構成があり、逆に実現可能操作列はこの回数条件を満たす。A_1の増加が総操作数と一致するため最小xが最小回数となる。",
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+            "path": "src/content/sources/updates/source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc474_f",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b",
+            "path": "src/content/sources/updates/source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc474_f",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc474-f",
+        "sourceRevisionIds": [
+          "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+          "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc474-f-solution",
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "共通の最終値をx、操作iの回数をC_iとする。要素jの増加はjの倍数の操作回数の和なので A_j+Σ_{i:j|i}C_i=x。倍数側から解けば C_i=x−A_i−Σ_{k≥2,ki≤N}C_{ki} となり、xの一次式α_i x+β_iで一意に定まる。",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。",
+              "decision": "adopted",
+              "decisionReason": "約数への操作寄与は倍数和であり、降順の三角形連立系は各xに対して一意の操作回数を与える。全C_iが非負整数ならそれだけ各操作を行う構成があり、逆に実現可能操作列はこの回数条件を満たす。A_1の増加が総操作数と一致するため最小xが最小回数となる。",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "共通の最終値をx、操作iの回数をC_iとする。要素jの増加はjの倍数の操作回数の和なので A_j+Σ_{i:j|i}C_i=x。倍数側から解けば C_i=x−A_i−Σ_{k≥2,ki≤N}C_{ki} となり、xの一次式α_i x+β_iで一意に定まる。\n\nNから1へ降順に走査し、α_i=1−Σα_{ki}、β_i=−A_i−Σβ_{ki}を計算する。各C_i≥0という条件でxの許容整数区間を絞る。α_i>0なら x≥ceil(−β_i/α_i)、α_i<0なら x≤floor(β_i/(−α_i))、α_i=0ならβ_i≥0が必要。x≥max A_iも初期下限に置く。\n\n全条件の共通区間が空なら−1。空でなければ最小整数xを選ぶ。どの操作もA_1を一度増やすので、総回数ΣC_i=x−A_1。目的値はxについて増えるから、許容区間の左端が最適になる。一次式の係数を探索してxごとに再計算する必要はない。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "約数格子のzeta・Möbius反転",
+            "trigger": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。",
+            "application": "共通の最終値をx、操作iの回数をC_iとする。要素jの増加はjの倍数の操作回数の和なので A_j+Σ_{i:j|i}C_i=x。倍数側から解けば C_i=x−A_i−Σ_{k≥2,ki≤N}C_{ki} となり、xの一次式α_i x+β_iで一意に定まる。\n\nNから1へ降順に走査し、α_i=1−Σα_{ki}、β_i=−A_i−Σβ_{ki}を計算する。各C_i≥0という条件でxの許容整数区間を絞る。α_i>0なら x≥ceil(−β_i/α_i)、α_i<0なら x≤floor(β_i/(−α_i))、α_i=0ならβ_i≥0が必要。x≥max A_iも初期下限に置く。\n\n全条件の共通区間が空なら−1。空でなければ最小整数xを選ぶ。どの操作もA_1を一度増やすので、総回数ΣC_i=x−A_1。目的値はxについて増えるから、許容区間の左端が最適になる。一次式の係数を探索してxごとに再計算する必要はない。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。",
+            "reusablePerspective": "目的値と操作数が同じ不変量で結ばれているか確認する。未知パラメータを先に消去せず式のまま伝播する。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "倍数和の総項数 O(N log N)、区間交差 O(N)。",
+          "space": "α,βの配列 O(N)。",
+          "evidenceIds": [
+            "evidence-abc474-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "負数を含むceil/floorを言語の切捨て除算と区別する。α=0を別処理する。係数とβの集計は十分広い整数型で保つ。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "目的値と操作数が同じ不変量で結ばれているか確認する。未知パラメータを先に消去せず式のまま伝播する。",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc474-f",
+        "problemId": "abc474-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。",
+          "proof": "約数への操作寄与は倍数和であり、降順の三角形連立系は各xに対して一意の操作回数を与える。全C_iが非負整数ならそれだけ各操作を行う構成があり、逆に実現可能操作列はこの回数条件を満たす。A_1の増加が総操作数と一致するため最小xが最小回数となる。",
+          "complexity": "倍数和の総項数 O(N log N)、区間交差 O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+          "prerequisites": "約数格子のzeta・Möbius反転",
+          "implementation": "負数を含むceil/floorを言語の切捨て除算と区別する。α=0を別処理する。係数とβの集計は十分広い整数型で保つ。"
+        },
+        "additionalElement": null,
+        "rationale": "目的値と操作数が同じ不変量で結ばれているか確認する。未知パラメータを先に消去せず式のまま伝播する。 主たる学習成果を「約数格子のzeta・Möbius反転」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc474-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-divisor-mobius-inversion"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-invert-divisor-lattice-by-mobius",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-divisor-mobius-inversion"
+            ],
+            "rationale": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-divisor-mobius-inversion"
+            ],
+            "rationale": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-divisor-mobius-inversion"
+            ],
+            "rationale": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-divisor-mobius-inversion"
+            ],
+            "rationale": "倍数寄与の連立式を降順に反転する。未知の共通値を一次式で残し、非負条件を整数不等式の共通区間へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc474-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+                "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "全操作が要素1を増やすので、操作回数を別々に最小化せず最終値xだけを最小化できる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          },
+          {
+            "problemId": "abc474-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc474-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+              "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc474-f.md",
+      "documentDigest": "fefe7ec115b1ff63fefe00822204fe636f387884456a842ccf0b0d547afd148e",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 目的値と操作数が同じ不変量で結ばれているか確認する。未知パラメータを先に消去せず式のまま伝播する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc474-g",
+        "learningOutcomeIds": [
+          "outcome-recover-valid-witness"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-constructive-witness"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 5\\times 10^3; 2\\le N\\le 10^3; 0\\le K\\le N^2-1; The sum of N^2 over all test cases is at most 10^6.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "必要な偶奇条件は公式の一つおきの辺のmatchingによる論証を根拠にする。構成では非増加tの各行対が左側の長方形を占め、各列対の未訪問部分は下端から連続した偶数高さとなる。二段目の蛇行はそれを一度ずつ埋め、二段階で全N²マスを覆う。右移動の総数は2s+2M=Kであり、他の条件も成立する。",
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+            "path": "src/content/sources/updates/source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc474_g",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+            "path": "src/content/sources/updates/source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc474_g",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c",
+            "path": "src/content/sources/updates/source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc474_g",
+            "checkedAt": "2026-10-06T11:54:05.312Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc474-g",
+        "sourceRevisionIds": [
+          "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+          "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+          "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc474-g-solution",
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "全マス一度の道は長さN²−1で、始点と終点の市松色が同じなのでNは奇数が必要。移動回数はR−L=D−U=N−1だから N−1≤K≤(N²−1)/2。さらにHamilton道の一つおきの辺をdomino matchingとして見た偶奇条件によりKは偶数となる。ここは端点差だけからK偶数を結論しない。必要性の証明は次のmatchingの偶奇を使う。",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。",
+              "decision": "adopted",
+              "decisionReason": "必要な偶奇条件は公式の一つおきの辺のmatchingによる論証を根拠にする。構成では非増加tの各行対が左側の長方形を占め、各列対の未訪問部分は下端から連続した偶数高さとなる。二段目の蛇行はそれを一度ずつ埋め、二段階で全N²マスを覆う。右移動の総数は2s+2M=Kであり、他の条件も成立する。",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "全マス一度の道は長さN²−1で、始点と終点の市松色が同じなのでNは奇数が必要。移動回数はR−L=D−U=N−1だから N−1≤K≤(N²−1)/2。さらにHamilton道の一つおきの辺をdomino matchingとして見た偶奇条件によりKは偶数となる。ここは端点差だけからK偶数を結論しない。必要性の証明は次のmatchingの偶奇を使う。\n\n奇数番の辺のmatching Mは右下以外を、偶数番のmatching M′は左上以外を覆う。市松色の白・黒をそれぞれ行優先順に番号付けし、matchingが白番号から黒番号へ与える置換の反転偶奇をf、黒から白へ右向きの辺数をgとする。同じ欠損端点のdomino敷詰めで、2×2部分の二辺を回すflipはfとgの両方の偶奇を反転するためf+gの偶奇を保つ。これらの敷詰めはflipで連結できる（dominoのheight functionによる標準補題）。行対を縦dominoで埋め、残る最下行を横dominoで埋める代表配置から、Mではf+g≡(N−1)/2、M′ではf+g≡0となる。Hamilton順の黒・白番号を用いて二matchingの置換を比べるとf(M)=f(M′)。黒頂点数−1=(N²−1)/2が偶数だからである。M′の横辺総数Xは奇数行・偶数行の未対応マス数差からX≡(N−1)/2。従って右移動数K=g(M)+X−g(M′)は偶数となる。この標準補題を含む必要性の詳細は出典の公式補足解説を参照できる。\n\nM=(N−1)/2、s=(K−N+1)/2と置く。M×Mの箱にs個を詰めるFerrers形として、M≥t_1≥…≥t_M≥0、Σt_i=sを作る。具体的にはsをMで割って商h・余りrを得て、先頭r個をh+1、残りをhにすればよい。\n\n上から二行ずつ、Rを2t_i回、D一回、Lを2t_i回、D一回と動き、左端の下隅へ到達する。次に列を二本ずつ処理する。j=1,…,Mで h_j=2(M−#{i:t_i≥j}) とし、R一回、Uをh_j回、R一回、Dをh_j回と進む。これは前半が埋めなかった右側の列対を下から蛇行して埋める。t_iが非増加なので、既訪問領域との境界は階段形になり、各列対で未訪問の高さがちょうどh_jになる。\n\n前半の右移動は2Σt_i=2s、後半は2M=N−1なので合計K。列対と行対が互いに補集合を埋め、右下で終わる。出力長自体がΘ(N²)なので、これ以上の漸近高速化は要らない。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "成立証明から構成解を復元する",
+            "trigger": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。",
+            "application": "全マス一度の道は長さN²−1で、始点と終点の市松色が同じなのでNは奇数が必要。移動回数はR−L=D−U=N−1だから N−1≤K≤(N²−1)/2。さらにHamilton道の一つおきの辺をdomino matchingとして見た偶奇条件によりKは偶数となる。ここは端点差だけからK偶数を結論しない。必要性の証明は次のmatchingの偶奇を使う。\n\n奇数番の辺のmatching Mは右下以外を、偶数番のmatching M′は左上以外を覆う。市松色の白・黒をそれぞれ行優先順に番号付けし、matchingが白番号から黒番号へ与える置換の反転偶奇をf、黒から白へ右向きの辺数をgとする。同じ欠損端点のdomino敷詰めで、2×2部分の二辺を回すflipはfとgの両方の偶奇を反転するためf+gの偶奇を保つ。これらの敷詰めはflipで連結できる（dominoのheight functionによる標準補題）。行対を縦dominoで埋め、残る最下行を横dominoで埋める代表配置から、Mではf+g≡(N−1)/2、M′ではf+g≡0となる。Hamilton順の黒・白番号を用いて二matchingの置換を比べるとf(M)=f(M′)。黒頂点数−1=(N²−1)/2が偶数だからである。M′の横辺総数Xは奇数行・偶数行の未対応マス数差からX≡(N−1)/2。従って右移動数K=g(M)+X−g(M′)は偶数となる。この標準補題を含む必要性の詳細は出典の公式補足解説を参照できる。\n\nM=(N−1)/2、s=(K−N+1)/2と置く。M×Mの箱にs個を詰めるFerrers形として、M≥t_1≥…≥t_M≥0、Σt_i=sを作る。具体的にはsをMで割って商h・余りrを得て、先頭r個をh+1、残りをhにすればよい。\n\n上から二行ずつ、Rを2t_i回、D一回、Lを2t_i回、D一回と動き、左端の下隅へ到達する。次に列を二本ずつ処理する。j=1,…,Mで h_j=2(M−#{i:t_i≥j}) とし、R一回、Uをh_j回、R一回、Dをh_j回と進む。これは前半が埋めなかった右側の列対を下から蛇行して埋める。t_iが非増加なので、既訪問領域との境界は階段形になり、各列対で未訪問の高さがちょうどh_jになる。\n\n前半の右移動は2Σt_i=2s、後半は2M=N−1なので合計K。列対と行対が互いに補集合を埋め、右下で終わる。出力長自体がΘ(N²)なので、これ以上の漸近高速化は要らない。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。",
+            "reusablePerspective": "必要条件と十分な構成を分ける。可変量を階段形にすると、その補集合も単調に走査できる。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "出力と訪問確認を含め O(N²)。全テストのΣN²≤10^6。",
+          "space": "出力文字列 O(N²)、tと高さ O(N)。",
+          "evidenceIds": [
+            "evidence-abc474-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "条件判定前にsを計算しない。tの端が0,Mでも空往復を正しく扱う。出力を独立シミュレーションし重複・範囲外・Kを検査する。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "必要条件と十分な構成を分ける。可変量を階段形にすると、その補集合も単調に走査できる。",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc474-g",
+        "problemId": "abc474-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。",
+          "proof": "必要な偶奇条件は公式の一つおきの辺のmatchingによる論証を根拠にする。構成では非増加tの各行対が左側の長方形を占め、各列対の未訪問部分は下端から連続した偶数高さとなる。二段目の蛇行はそれを一度ずつ埋め、二段階で全N²マスを覆う。右移動の総数は2s+2M=Kであり、他の条件も成立する。",
+          "complexity": "出力と訪問確認を含め O(N²)。全テストのΣN²≤10^6。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 5\\times 10^3; 2\\le N\\le 10^3; 0\\le K\\le N^2-1; The sum of N^2 over all test cases is at most 10^6.; All input values are integers.",
+          "prerequisites": "成立証明から構成解を復元する",
+          "implementation": "条件判定前にsを計算しない。tの端が0,Mでも空往復を正しく扱う。出力を独立シミュレーションし重複・範囲外・Kを検査する。"
+        },
+        "additionalElement": null,
+        "rationale": "必要条件と十分な構成を分ける。可変量を階段形にすると、その補集合も単調に走査できる。 主たる学習成果を「成立証明から構成解を復元する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc474-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-constructive-witness"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-recover-valid-witness",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-constructive-witness"
+            ],
+            "rationale": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-constructive-witness"
+            ],
+            "rationale": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-constructive-witness"
+            ],
+            "rationale": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-constructive-witness"
+            ],
+            "rationale": "実現条件を偶奇・移動差で絞り、自由パラメータを階段形へ符号化して構成する。行側の形と列側の補集合を対応させる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc474-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc474-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+                "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+                "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "二行の折返しは右移動を2単位で増やし、後段の二列蛇行が残領域を埋める。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          },
+          {
+            "problemId": "abc474-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc474-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+              "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+              "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc474-g.md",
+      "documentDigest": "72626e604888e6326ac8453d6a569efb1da61ef85271333d2d79728bc4e7027e",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 必要条件と十分な構成を分ける。可変量を階段形にすると、その補集合も単調に走査できる。"
+      }
+    }
+  ]
+}

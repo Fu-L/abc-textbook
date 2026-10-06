@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "cutoffAt": "2026-10-06T00:00:00+09:00",
+  "discoveryPath": "staging/updates/initial-catch-up/discovery.json",
+  "discoveryDigest": "819e090cb1609df9a4735dc8c05efaeacfa16083da48fb672ee5030468e1f72f",
+  "bootstrapUpdateId": "update-bootstrap-full-corpus",
+  "bootstrapManifestPath": "staging/updates/initial-catch-up/update-bootstrap-full-corpus/manifest.json",
+  "bootstrapManifestDigest": "deb3098112dc894a27a6d48b4fc6b3e5f37a80366d48b805b65a59f7891918d9",
+  "updates": [
+    {
+      "contestId": "abc467",
+      "updateId": "update-606564774ea81e99f8287bac",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc467.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc467.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-606564774ea81e99f8287bac/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc467.json",
+      "receiptDigest": "6a26a4d0a3117305db47fbf8717cf64832a2a4703977222c6d6d96471f52df2f"
+    },
+    {
+      "contestId": "abc468",
+      "updateId": "update-9239d486e013a49844a0fc39",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc468.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc468.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-9239d486e013a49844a0fc39/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc468.json",
+      "receiptDigest": "ebf0430a539f077d9768652367958288d690d4afcfb3bf3363caa17d972f99f9"
+    },
+    {
+      "contestId": "abc469",
+      "updateId": "update-48d7eafc3e54408856a5bcec",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc469.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc469.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-48d7eafc3e54408856a5bcec/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc469.json",
+      "receiptDigest": "95234a403d50e6b4bf69a9f3cbeaaf0fe526ff07bc492b57ffd8747705128266"
+    },
+    {
+      "contestId": "abc470",
+      "updateId": "update-5607c80b8dd2912dc50a541e",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc470.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc470.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-5607c80b8dd2912dc50a541e/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc470.json",
+      "receiptDigest": "81d067b325f3130dbd67442a75274fa81a14ba1a622daea17dd8b398995c0dc8"
+    },
+    {
+      "contestId": "abc471",
+      "updateId": "update-38875409e61f3bfab2e25803",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc471.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc471.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-38875409e61f3bfab2e25803/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc471.json",
+      "receiptDigest": "1632d68ec4070fbce50a48772879483a5fb8ef27920acc43de4f5b7e13263047"
+    },
+    {
+      "contestId": "abc472",
+      "updateId": "update-4b8c3ed6a5d4c339a8212884",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc472.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc472.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-4b8c3ed6a5d4c339a8212884/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc472.json",
+      "receiptDigest": "2e22102b4e6240c72d578b395d71f6f443aeb0c83b1b5d4554b698d19253b385"
+    },
+    {
+      "contestId": "abc473",
+      "updateId": "update-102f618e26bb029532dea1aa",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc473.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc473.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-102f618e26bb029532dea1aa/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc473.json",
+      "receiptDigest": "8f04f799aae766d34a2a822e2c0f23c731f04029f5e95a84494809eea88061f3"
+    },
+    {
+      "contestId": "abc474",
+      "updateId": "update-f06d5c8c39b83d6542703403",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc474.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc474.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-f06d5c8c39b83d6542703403/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc474.json",
+      "receiptDigest": "17c0bf33441183928e02599962a8ccd9f5afd0c926b5892c2e28b8b6f85385d5"
+    },
+    {
+      "contestId": "abc475",
+      "updateId": "update-5c347c2531b95aa653e7c9ec",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc475.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc475.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-5c347c2531b95aa653e7c9ec/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc475.json",
+      "receiptDigest": "2d28c7b38adb912e4f41bab035d9c69278bd382a7c8368b497e0f9d778c8ab85"
+    },
+    {
+      "contestId": "abc476",
+      "updateId": "update-1dfef713eae9b78b69cf8daa",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc476.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc476.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-1dfef713eae9b78b69cf8daa/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc476.json",
+      "receiptDigest": "0cc627ed85c18162afb9c73e52d791e685f40a47104112cc496abe624f1c8804"
+    },
+    {
+      "contestId": "abc477",
+      "updateId": "update-e65de6a7a3b031dee75c7e5f",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc477.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc477.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-e65de6a7a3b031dee75c7e5f/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc477.json",
+      "receiptDigest": "015c9725c9de0e0358c8e39d2656985e6fc909a89edf97c0abbc7bab3bab4de3"
+    },
+    {
+      "contestId": "abc478",
+      "updateId": "update-28e72cc6b8f00648dfa66e9c",
+      "metadataPath": "staging/updates/initial-catch-up/metadata/abc478.json",
+      "authoringPath": "staging/updates/initial-catch-up/authoring/abc478.json",
+      "manifestPath": "staging/updates/initial-catch-up/update-28e72cc6b8f00648dfa66e9c/manifest.json",
+      "receiptPath": "src/content/accepted-updates/abc478.json",
+      "receiptDigest": "7e3a47f9157cfa7a4e6f9101c769bd8177d69c00d043c08ee4b9346ea7476fc1"
+    }
+  ],
+  "digest": "18f2829cf76287349d7dfcc193dd058176944774af059c14498e32e67f7e5270"
+}

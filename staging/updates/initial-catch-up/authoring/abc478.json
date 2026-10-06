@@ -1,0 +1,1498 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc478",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc478-e",
+        "learningOutcomeIds": [
+          "outcome-condense-and-order-directed-graph"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-scc-condensation"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q\\le2\\times10 ^ 5; t _ i\\in\\lbrace0,1\\rbrace\\ (1\\le i\\le Q); 1\\le u _ i\\le N\\ (1\\le i\\le Q); 1\\le v _ i\\le N\\ (1\\le i\\le Q); All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "SCC内部の相互到達性から各変数が互いに≤となり、等値が必要である。内部厳密辺はこの必要条件に反する。逆に内部に厳密辺がなければ成分単位の等値割当は内部条件を満たし、topological番号の狭義増加はすべての成分間条件を満たすため十分である。",
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+            "path": "src/content/sources/updates/source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc478_e",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0",
+            "path": "src/content/sources/updates/source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc478_e",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc478-e",
+        "sourceRevisionIds": [
+          "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+          "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc478-e-solution",
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "各条件はA_u≤A_vまたはA_u<A_vである。いずれもu→vの有向辺にする。閉路上では弱い大小関係を一周するので、同じSCCの全変数は等しくなければならない。従ってSCC内部に厳密不等号の辺が一本でもあれば不可能。",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。",
+              "decision": "adopted",
+              "decisionReason": "SCC内部の相互到達性から各変数が互いに≤となり、等値が必要である。内部厳密辺はこの必要条件に反する。逆に内部に厳密辺がなければ成分単位の等値割当は内部条件を満たし、topological番号の狭義増加はすべての成分間条件を満たすため十分である。",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "各条件はA_u≤A_vまたはA_u<A_vである。いずれもu→vの有向辺にする。閉路上では弱い大小関係を一周するので、同じSCCの全変数は等しくなければならない。従ってSCC内部に厳密不等号の辺が一本でもあれば不可能。\n\nそのような辺がなければ、SCCを縮約したDAGをtopological順に並べ、各成分へ1,2,…,Cを与える。成分間の辺では必ず前から後へ向かうため、弱い条件も厳密な条件も満たす。同じ成分には同じ値を与える。C≤Nなので値域1..Nにも収まる。\n\nより小さな値を求める問題なら、厳密辺を重み1、弱辺を0としてDAG上の最長路にする。しかし今回は任意の実現可能値でよく、異なる成分を全て別の値にする方が構成と証明が短い。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "SCC・縮約DAG・トポロジカル順序",
+            "trigger": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。",
+            "application": "各条件はA_u≤A_vまたはA_u<A_vである。いずれもu→vの有向辺にする。閉路上では弱い大小関係を一周するので、同じSCCの全変数は等しくなければならない。従ってSCC内部に厳密不等号の辺が一本でもあれば不可能。\n\nそのような辺がなければ、SCCを縮約したDAGをtopological順に並べ、各成分へ1,2,…,Cを与える。成分間の辺では必ず前から後へ向かうため、弱い条件も厳密な条件も満たす。同じ成分には同じ値を与える。C≤Nなので値域1..Nにも収まる。\n\nより小さな値を求める問題なら、厳密辺を重み1、弱辺を0としてDAG上の最長路にする。しかし今回は任意の実現可能値でよく、異なる成分を全て別の値にする方が構成と証明が短い。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。",
+            "reusablePerspective": "不等式の閉路が不可能とは限らない。まず等号へ潰せる閉路と、厳密辺を含む矛盾を分ける。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "SCC、内部辺検査、DAGのtopological処理を合わせ O(N+Q)。",
+          "space": "隣接リストとSCC情報に O(N+Q)。",
+          "evidenceIds": [
+            "evidence-abc478-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "SCCライブラリが返すID順を仮定するなら、その仕様を確認する。そうでなければ明示的にtopological sortする。自己辺が厳密なら直ちに不可能。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "不等式の閉路が不可能とは限らない。まず等号へ潰せる閉路と、厳密辺を含む矛盾を分ける。",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc478-e",
+        "problemId": "abc478-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。",
+          "proof": "SCC内部の相互到達性から各変数が互いに≤となり、等値が必要である。内部厳密辺はこの必要条件に反する。逆に内部に厳密辺がなければ成分単位の等値割当は内部条件を満たし、topological番号の狭義増加はすべての成分間条件を満たすため十分である。",
+          "complexity": "SCC、内部辺検査、DAGのtopological処理を合わせ O(N+Q)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q\\le2\\times10 ^ 5; t _ i\\in\\lbrace0,1\\rbrace\\ (1\\le i\\le Q); 1\\le u _ i\\le N\\ (1\\le i\\le Q); 1\\le v _ i\\le N\\ (1\\le i\\le Q); All input values are integers.",
+          "prerequisites": "SCC・縮約DAG・トポロジカル順序",
+          "implementation": "SCCライブラリが返すID順を仮定するなら、その仕様を確認する。そうでなければ明示的にtopological sortする。自己辺が厳密なら直ちに不可能。"
+        },
+        "additionalElement": null,
+        "rationale": "不等式の閉路が不可能とは限らない。まず等号へ潰せる閉路と、厳密辺を含む矛盾を分ける。 主たる学習成果を「SCC・縮約DAG・トポロジカル順序」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc478-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-scc-condensation"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-condense-and-order-directed-graph",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-scc-condensation"
+            ],
+            "rationale": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-scc-condensation"
+            ],
+            "rationale": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-scc-condensation"
+            ],
+            "rationale": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-scc-condensation"
+            ],
+            "rationale": "大小制約の閉路が強制する等値関係をSCCでまとめ、残る依存をDAG上の順序へ変換する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc478-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+                "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同じ成分には弱い条件を許すが厳密条件を許さない。実現値の最小化は要求されないため、成分ごとに異なる番号で足りる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          },
+          {
+            "problemId": "abc478-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc478-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+              "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc478-e.md",
+      "documentDigest": "5c0fe64a11a3c019e9dac98b60550eae3907b870e7fbba441bdcdfc7b769a939",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 不等式の閉路が不可能とは限らない。まず等号へ潰せる閉路と、厳密辺を含む矛盾を分ける。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc478-f",
+        "learningOutcomeIds": [
+          "outcome-prune-dominated-candidates-once"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-monotone-stack-queue"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q _ i\\le N\\ (1\\le i\\le N); Q _ i\\ne Q _ j\\ (1\\le i\\lt j\\le N); Q _ 1=1; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "親が最後の先行大値より前なら最小候補の選択に反するため必要である。逆に全親が許容区間にあれば、最初の探索順逸脱で本来より小さい後続頂点が候補に入ることは上の矛盾により起きない。親位置が狭義に減少するため全選択は根付き木を作り、異なる親選択は異なる木に対応する。従って独立な選択肢数の積が求める木数。",
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+            "path": "src/content/sources/updates/source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc478_f",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23",
+            "path": "src/content/sources/updates/source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc478_f",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc478-f",
+        "sourceRevisionIds": [
+          "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+          "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc478-f-solution",
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "探索順Qの各頂点に、どの先行頂点を親として選べるかを考える。頂点1を根とすると、Q_iの親はQでiより前の位置jにある。もしjより後かつiより前にQ_iより大きい値が選ばれたら、その時点でQ_iは既に候補集合へ入っているため、その大きい値を先に取り出せず矛盾する。",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。",
+              "decision": "adopted",
+              "decisionReason": "親が最後の先行大値より前なら最小候補の選択に反するため必要である。逆に全親が許容区間にあれば、最初の探索順逸脱で本来より小さい後続頂点が候補に入ることは上の矛盾により起きない。親位置が狭義に減少するため全選択は根付き木を作り、異なる親選択は異なる木に対応する。従って独立な選択肢数の積が求める木数。",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "探索順Qの各頂点に、どの先行頂点を親として選べるかを考える。頂点1を根とすると、Q_iの親はQでiより前の位置jにある。もしjより後かつiより前にQ_iより大きい値が選ばれたら、その時点でQ_iは既に候補集合へ入っているため、その大きい値を先に取り出せず矛盾する。\n\nm_iをiより前にあるQ_iより大きい値の最後の位置、存在しなければ0とする。親の位置に必要な条件はmax(1,m_i)≤j<i。m_iそのものを親にする場合は、Q_{m_i}を取り出した後で初めてQ_iが候補へ入るので許される。選択肢数はi−max(1,m_i)である。m_i=0のとき存在しないQ_0を選択肢へ含めてはいけない。\n\nこの条件は十分でもある。探索が初めてQから外れる位置を考えると、本来のQ_iは親が先に処理されているので候補にあり、それより小さい後続Q_kが候補なら、その親位置j_k<iに対してm_k≥iとなり条件j_k≥m_kと矛盾する。よって必ずQ_iが最小候補になる。\n\n各頂点はより早い位置を親に選ぶので閉路はできず、全て最後には位置1へ至って木になる。選択は独立だから答えは上の個数の積。m_iは値が降順になるstackを保ち、Q_i以下をpopして残った末尾から求める。各要素は一度push・一度popされるので線形時間。\n\n公式解説の積の表示には、m_i=0で存在しない添字0を含める境界上の不整合がある。ここでは根の位置1を下限にした式を採用する。N=2,Q=(1,2)で親が1通りであることと、小規模の木の全列挙で境界を独立に確認する。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "支配関係から不要な候補を単調stack・queueで削る",
+            "trigger": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。",
+            "application": "探索順Qの各頂点に、どの先行頂点を親として選べるかを考える。頂点1を根とすると、Q_iの親はQでiより前の位置jにある。もしjより後かつiより前にQ_iより大きい値が選ばれたら、その時点でQ_iは既に候補集合へ入っているため、その大きい値を先に取り出せず矛盾する。\n\nm_iをiより前にあるQ_iより大きい値の最後の位置、存在しなければ0とする。親の位置に必要な条件はmax(1,m_i)≤j<i。m_iそのものを親にする場合は、Q_{m_i}を取り出した後で初めてQ_iが候補へ入るので許される。選択肢数はi−max(1,m_i)である。m_i=0のとき存在しないQ_0を選択肢へ含めてはいけない。\n\nこの条件は十分でもある。探索が初めてQから外れる位置を考えると、本来のQ_iは親が先に処理されているので候補にあり、それより小さい後続Q_kが候補なら、その親位置j_k<iに対してm_k≥iとなり条件j_k≥m_kと矛盾する。よって必ずQ_iが最小候補になる。\n\n各頂点はより早い位置を親に選ぶので閉路はできず、全て最後には位置1へ至って木になる。選択は独立だから答えは上の個数の積。m_iは値が降順になるstackを保ち、Q_i以下をpopして残った末尾から求める。各要素は一度push・一度popされるので線形時間。\n\n公式解説の積の表示には、m_i=0で存在しない添字0を含める境界上の不整合がある。ここでは根の位置1を下限にした式を採用する。N=2,Q=(1,2)で親が1通りであることと、小規模の木の全列挙で境界を独立に確認する。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。",
+            "reusablePerspective": "公式の式でも境界の不存在要素を数えていないか確認する。探索順から構成を数えるときは、親選択の独立性と木になる条件を証明する。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "各頂点のstack操作を合計して O(N)。",
+          "space": "単調stackに O(N)。",
+          "evidenceIds": [
+            "evidence-abc478-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "1-basedならi−max(1,m_i)、0-basedならi−max(0,m_i)とする。入力値は相異なる。積は毎回998244353で剰余を取る。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "公式の式でも境界の不存在要素を数えていないか確認する。探索順から構成を数えるときは、親選択の独立性と木になる条件を証明する。",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc478-f",
+        "problemId": "abc478-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。",
+          "proof": "親が最後の先行大値より前なら最小候補の選択に反するため必要である。逆に全親が許容区間にあれば、最初の探索順逸脱で本来より小さい後続頂点が候補に入ることは上の矛盾により起きない。親位置が狭義に減少するため全選択は根付き木を作り、異なる親選択は異なる木に対応する。従って独立な選択肢数の積が求める木数。",
+          "complexity": "各頂点のstack操作を合計して O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q _ i\\le N\\ (1\\le i\\le N); Q _ i\\ne Q _ j\\ (1\\le i\\lt j\\le N); Q _ 1=1; All input values are integers.",
+          "prerequisites": "支配関係から不要な候補を単調stack・queueで削る",
+          "implementation": "1-basedならi−max(1,m_i)、0-basedならi−max(0,m_i)とする。入力値は相異なる。積は毎回998244353で剰余を取る。"
+        },
+        "additionalElement": null,
+        "rationale": "公式の式でも境界の不存在要素を数えていないか確認する。探索順から構成を数えるときは、親選択の独立性と木になる条件を証明する。 主たる学習成果を「支配関係から不要な候補を単調stack・queueで削る」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc478-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-monotone-stack-queue"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-prune-dominated-candidates-once",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-stack-queue"
+            ],
+            "rationale": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-stack-queue"
+            ],
+            "rationale": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-stack-queue"
+            ],
+            "rationale": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-stack-queue"
+            ],
+            "rationale": "最小値優先の探索順から親の許容区間を逆算する。その左境界を直前の大きい要素として単調stackで求める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc478-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+                "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "親が探索済みであることと、後の小さい頂点が早く公開されないことの両方が必要。不存在の直前大値には根の添字を境界として使う。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          },
+          {
+            "problemId": "abc478-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc478-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+              "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc478-f.md",
+      "documentDigest": "32635a96ec63cd5d78c39b03c0e9dcd69304f2f0e74d2c9391a2f6990d909881",
+      "review": {
+        "mode": "third_party",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [
+          "official_source_conflict"
+        ],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 公式の式でも境界の不存在要素を数えていないか確認する。探索順から構成を数えるときは、親選択の独立性と木になる条件を証明する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc478-g",
+        "learningOutcomeIds": [
+          "outcome-restrict-geometric-candidates-to-boundary"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-convex-boundary-hull"
+        ],
+        "constraints": [
+          "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq p \\lt q \\leq 10; |X_i|\\leq 10^7; |Y_i|\\leq 10^7; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "左右をまたぐ全ペアの凸包は、凸結合の展開により左右の凸包のMinkowski和と一致する。その頂点へ置き換えても全体の凸包は変わらない。各i<jは唯一の分割で処理されるので候補凸包が全ペア凸包に一致する。面積は座標の(p+q)倍により(p+q)²倍となるため最後の換算で元の面積になる。",
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+            "path": "src/content/sources/updates/source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc478_g",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c",
+            "path": "src/content/sources/updates/source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc478_g",
+            "checkedAt": "2026-10-06T11:32:25.890Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc478-g",
+        "sourceRevisionIds": [
+          "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+          "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc478-g-solution",
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "全てのi<jについて内分点を作ると O(N²) 個になる。欲しいのは面積なので、内部点を保存せず凸包だけを扱いたい。ただし係数がi側にq、j側にpと非対称で、元の点集合を勝手に並べ替えることはできない。",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。",
+              "decision": "adopted",
+              "decisionReason": "左右をまたぐ全ペアの凸包は、凸結合の展開により左右の凸包のMinkowski和と一致する。その頂点へ置き換えても全体の凸包は変わらない。各i<jは唯一の分割で処理されるので候補凸包が全ペア凸包に一致する。面積は座標の(p+q)倍により(p+q)²倍となるため最後の換算で元の面積になる。",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "全てのi<jについて内分点を作ると O(N²) 個になる。欲しいのは面積なので、内部点を保存せず凸包だけを扱いたい。ただし係数がi側にq、j側にpと非対称で、元の点集合を勝手に並べ替えることはできない。\n\n添字区間を左右へ分割する。左右をまたぐペアならi<jは自動的に満たされ、(p+q)倍した内分点はqP_i+pP_jになる。この点集合の凸包はq conv(左点集合)+p conv(右点集合)というMinkowski和である。凸包と正の拡大・Minkowski和が交換することを使う。\n\n二つの凸多角形のMinkowski和は、循環する辺ベクトルを偏角順でmergeして求める。同じ方向の辺はまとめるので、頂点数は左右の凸包サイズの和以下。一点の包は平行移動、線分の包は往復二辺として扱うか、退化ケースを分ける。\n\n各分割でこの交差ペア凸包の頂点を候補配列へ追加し、左右でも同様に再帰する。各ペアは二つの添字が初めて別の子へ分かれる唯一の分割に所属する。最終的に候補全部の凸包を一度取れば、全内分点の凸包になる。この実装は途中で内分点包を再帰的にmergeせず、各深さで候補総数が O(N) であることだけを使うため、合計 O(N log N) 個を保存する。\n\n元点の凸包を各分割でsortから作っても、深さを合計した時間は O(N log²N)。候補の最後のsortも O(N log²N) に収まる。整数座標のままshoelaceで二倍面積を求め、最後に2(p+q)²で割る。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "凸包・支持方向・境界候補",
+            "trigger": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。",
+            "application": "全てのi<jについて内分点を作ると O(N²) 個になる。欲しいのは面積なので、内部点を保存せず凸包だけを扱いたい。ただし係数がi側にq、j側にpと非対称で、元の点集合を勝手に並べ替えることはできない。\n\n添字区間を左右へ分割する。左右をまたぐペアならi<jは自動的に満たされ、(p+q)倍した内分点はqP_i+pP_jになる。この点集合の凸包はq conv(左点集合)+p conv(右点集合)というMinkowski和である。凸包と正の拡大・Minkowski和が交換することを使う。\n\n二つの凸多角形のMinkowski和は、循環する辺ベクトルを偏角順でmergeして求める。同じ方向の辺はまとめるので、頂点数は左右の凸包サイズの和以下。一点の包は平行移動、線分の包は往復二辺として扱うか、退化ケースを分ける。\n\n各分割でこの交差ペア凸包の頂点を候補配列へ追加し、左右でも同様に再帰する。各ペアは二つの添字が初めて別の子へ分かれる唯一の分割に所属する。最終的に候補全部の凸包を一度取れば、全内分点の凸包になる。この実装は途中で内分点包を再帰的にmergeせず、各深さで候補総数が O(N) であることだけを使うため、合計 O(N log N) 個を保存する。\n\n元点の凸包を各分割でsortから作っても、深さを合計した時間は O(N log²N)。候補の最後のsortも O(N log²N) に収まる。整数座標のままshoelaceで二倍面積を求め、最後に2(p+q)²で割る。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。",
+            "reusablePerspective": "全ペアの集約で、添字条件を分割して直積を作れるか、求める量が内部点を捨てても変わらないか考える。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "各深さの凸包生成と最後の候補凸包を合わせ O(N log²N)。",
+          "space": "候補 O(N log N)、再帰中の元点と一時包 O(N)、stack O(log N)。",
+          "evidenceIds": [
+            "evidence-abc478-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "重複点・一直線・一点の凸包を扱う。座標は最大約2×10^8、crossの和は64 bit境界を越え得るので128 bit整数を使う。入力添字順を維持する。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "全ペアの集約で、添字条件を分割して直積を作れるか、求める量が内部点を捨てても変わらないか考える。",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc478-g",
+        "problemId": "abc478-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。",
+          "proof": "左右をまたぐ全ペアの凸包は、凸結合の展開により左右の凸包のMinkowski和と一致する。その頂点へ置き換えても全体の凸包は変わらない。各i<jは唯一の分割で処理されるので候補凸包が全ペア凸包に一致する。面積は座標の(p+q)倍により(p+q)²倍となるため最後の換算で元の面積になる。",
+          "complexity": "各深さの凸包生成と最後の候補凸包を合わせ O(N log²N)。",
+          "constraints": "Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 10^5; 1 \\leq p \\lt q \\leq 10; |X_i|\\leq 10^7; |Y_i|\\leq 10^7; All input values are integers.",
+          "prerequisites": "凸包・支持方向・境界候補",
+          "implementation": "重複点・一直線・一点の凸包を扱う。座標は最大約2×10^8、crossの和は64 bit境界を越え得るので128 bit整数を使う。入力添字順を維持する。"
+        },
+        "additionalElement": null,
+        "rationale": "全ペアの集約で、添字条件を分割して直積を作れるか、求める量が内部点を捨てても変わらないか考える。 主たる学習成果を「凸包・支持方向・境界候補」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc478-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-convex-boundary-hull"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-restrict-geometric-candidates-to-boundary",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convex-boundary-hull"
+            ],
+            "rationale": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convex-boundary-hull"
+            ],
+            "rationale": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convex-boundary-hull"
+            ],
+            "rationale": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convex-boundary-hull"
+            ],
+            "rationale": "ペア全体を添字の分割統治で直積へ切り、凸包のMinkowski和で二次個数の点を境界だけへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc478-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc478-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+                "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "順序条件i<jを守る分割が不可欠。候補を全深さ分集めることで、途中の内分点包の頂点数に関する強い補題を不要にする。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          },
+          {
+            "problemId": "abc478-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc478-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc478-g-problem-aeba07c33615b14b7c8163fb621fd5cf36b440d9a6721cee9144dbc3ef80f67d",
+              "source-abc478-editorial-26504-d7397a35197892da6c236aa4b0081aaaab17fd84c7c7aefb891c0a70d9318c2c"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc478-g.md",
+      "documentDigest": "62f936f4336541da8faed7acc34322ee52265057e6b38417af6dcc7feeed6d5a",
+      "review": {
+        "mode": "third_party",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [
+          "independent_proof"
+        ],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 全ペアの集約で、添字条件を分割して直積を作れるか、求める量が内部点を捨てても変わらないか考える。"
+      }
+    }
+  ]
+}

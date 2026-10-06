@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc472",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc472-e",
+        "learningOutcomeIds": [
+          "outcome-color-and-classify-bipartite-components"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-bipartite-structure"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2\\times10^5; 1 \\le N, M \\le 2\\times10^5; The sum of N over all test cases is at most 2\\times10^5.; The sum of M over all test cases is at most 2\\times10^5.; 1 \\le a_i,b_i \\le N; a_i\\ne b_i; The given graph is a simple connected undirected graph.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "木上のパスは単純であり、同色端点間の辺数は偶数。非木辺を一つ加えると単純な奇閉路になる。衝突辺がない場合は全辺が二部彩色を保存するため、元の色に戻る閉路の長さは偶数で、奇閉路の不在も証明できる。",
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+            "path": "src/content/sources/updates/source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc472_e",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec",
+            "path": "src/content/sources/updates/source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc472_e",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc472-e",
+        "sourceRevisionIds": [
+          "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+          "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc472-e-solution",
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "奇閉路の探索は全閉路列挙でなく、二部彩色の失敗を証拠にする。DFSまたはBFSで一つの全域木を作り、根からの深さの偶奇を色とする。全辺を調べ、同色を結ぶ辺(u,v)が見つかれば、木上のu-vパスにこの辺を足す。",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。",
+              "decision": "adopted",
+              "decisionReason": "木上のパスは単純であり、同色端点間の辺数は偶数。非木辺を一つ加えると単純な奇閉路になる。衝突辺がない場合は全辺が二部彩色を保存するため、元の色に戻る閉路の長さは偶数で、奇閉路の不在も証明できる。",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "奇閉路の探索は全閉路列挙でなく、二部彩色の失敗を証拠にする。DFSまたはBFSで一つの全域木を作り、根からの深さの偶奇を色とする。全辺を調べ、同色を結ぶ辺(u,v)が見つかれば、木上のu-vパスにこの辺を足す。\n\n同色なので木上の距離は偶数、追加辺で辺数が奇数になる。復元には親と深さを記録しておく。深い方から親へ上がって深さをそろえ、両端を同時に上げて共通祖先へ達する。u側の列と、v側の列を逆にしたものを連結すれば、重複しないパス頂点列になる。共通祖先は一度だけ含める。\n\n全ての辺が異色を結ぶなら、どの閉路も一歩ごとに色が交互になるので奇閉路はない。復元する閉路は一つだけだから、LCA前処理を追加する必要はない。長い鎖では再帰DFSがスタック上限に達するので反復走査を使える。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "二部彩色と成分構造を扱う",
+            "trigger": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。",
+            "application": "奇閉路の探索は全閉路列挙でなく、二部彩色の失敗を証拠にする。DFSまたはBFSで一つの全域木を作り、根からの深さの偶奇を色とする。全辺を調べ、同色を結ぶ辺(u,v)が見つかれば、木上のu-vパスにこの辺を足す。\n\n同色なので木上の距離は偶数、追加辺で辺数が奇数になる。復元には親と深さを記録しておく。深い方から親へ上がって深さをそろえ、両端を同時に上げて共通祖先へ達する。u側の列と、v側の列を逆にしたものを連結すれば、重複しないパス頂点列になる。共通祖先は一度だけ含める。\n\n全ての辺が異色を結ぶなら、どの閉路も一歩ごとに色が交互になるので奇閉路はない。復元する閉路は一つだけだから、LCA前処理を追加する必要はない。長い鎖では再帰DFSがスタック上限に達するので反復走査を使える。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。",
+            "reusablePerspective": "判定アルゴリズムの失敗位置には、答えの証拠を構成する情報が残る。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "全域木と辺検査 O(N+M)、一回のパス復元 O(N)。全テストの総和も線形。",
+          "space": "グラフ・親・深さ O(N+M)。",
+          "evidenceIds": [
+            "evidence-abc472-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "閉路出力の末尾に始点を重複させない。単純グラフなので衝突辺から長さ1,2の閉路は生じない。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "判定アルゴリズムの失敗位置には、答えの証拠を構成する情報が残る。",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc472-e",
+        "problemId": "abc472-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。",
+          "proof": "木上のパスは単純であり、同色端点間の辺数は偶数。非木辺を一つ加えると単純な奇閉路になる。衝突辺がない場合は全辺が二部彩色を保存するため、元の色に戻る閉路の長さは偶数で、奇閉路の不在も証明できる。",
+          "complexity": "全域木と辺検査 O(N+M)、一回のパス復元 O(N)。全テストの総和も線形。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2\\times10^5; 1 \\le N, M \\le 2\\times10^5; The sum of N over all test cases is at most 2\\times10^5.; The sum of M over all test cases is at most 2\\times10^5.; 1 \\le a_i,b_i \\le N; a_i\\ne b_i; The given graph is a simple connected undirected graph.; All input values are integers.",
+          "prerequisites": "二部彩色と成分構造を扱う",
+          "implementation": "閉路出力の末尾に始点を重複させない。単純グラフなので衝突辺から長さ1,2の閉路は生じない。"
+        },
+        "additionalElement": null,
+        "rationale": "判定アルゴリズムの失敗位置には、答えの証拠を構成する情報が残る。 主たる学習成果を「二部彩色と成分構造を扱う」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc472-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-bipartite-structure"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-color-and-classify-bipartite-components",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-bipartite-structure"
+            ],
+            "rationale": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-bipartite-structure"
+            ],
+            "rationale": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-bipartite-structure"
+            ],
+            "rationale": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-bipartite-structure"
+            ],
+            "rationale": "制約の矛盾を単にNoとせず、探索木のパスと衝突辺から証明書を復元する。二部彩色と奇閉路の同値性を使う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc472-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+                "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "必要なのは一つの奇閉路なので、親上りの線形復元で十分。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          },
+          {
+            "problemId": "abc472-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc472-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+              "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc472-e.md",
+      "documentDigest": "31eb7ea81171a39b055cb957a8ad71f73c7d2ab2a215200c8214d262a4d8b7a2",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 判定アルゴリズムの失敗位置には、答えの証拠を構成する情報が残る。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc472-f",
+        "learningOutcomeIds": [
+          "outcome-reduce-geometry-to-algebraic-predicates"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-geometry-orientation-transform"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 3 \\times 10^4; 1 \\leq Q \\leq 2 \\times 10^5; |x_i|,|y_i| \\leq 5 \\times 10^5; (x_1,y_1),(x_2,y_2),\\dots,(x_N,y_N) form a convex polygon in counterclockwise order.; All interior angles of P are less than 180 degrees.; 1 \\leq u_j,v_j \\leq N; u_j \\neq v_j; Vertices u_j and v_j are not adjacent on the boundary of P.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "符号付き三角形の面積と一次モーメントは加法的で、原点が多角形外でも向き付き分解の相殺により多角形全体の値になる。境界区間と閉鎖弦を足す式は切断多角形の全辺を一度ずつ含む。面積に対するモーメントの比が一様板の重心である。",
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+            "path": "src/content/sources/updates/source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc472_f",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845",
+            "path": "src/content/sources/updates/source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc472_f",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc472-f",
+        "sourceRevisionIds": [
+          "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+          "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc472-f-solution",
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "重心は頂点の座標平均ではない。面積で重みづけした一次モーメントを使う。原点Oと境界辺(P_i,P_{i+1})で作る符号付き三角形について、面積の2倍は cross(P_i,P_{i+1})。重心が(P_i+P_{i+1})/3なので、一次モーメントの6倍は (P_i+P_{i+1})cross(P_i,P_{i+1})。",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。",
+              "decision": "adopted",
+              "decisionReason": "符号付き三角形の面積と一次モーメントは加法的で、原点が多角形外でも向き付き分解の相殺により多角形全体の値になる。境界区間と閉鎖弦を足す式は切断多角形の全辺を一度ずつ含む。面積に対するモーメントの比が一様板の重心である。",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "重心は頂点の座標平均ではない。面積で重みづけした一次モーメントを使う。原点Oと境界辺(P_i,P_{i+1})で作る符号付き三角形について、面積の2倍は cross(P_i,P_{i+1})。重心が(P_i+P_{i+1})/3なので、一次モーメントの6倍は (P_i+P_{i+1})cross(P_i,P_{i+1})。\n\n切断後の多角形は、反時計回り境界の一つの連続区間と、それを閉じる弦からなる。配列を二周分へ伸ばし、境界辺のcrossとx,yモーメントをそれぞれ累積和にする。u→vの右側は、反時計回り境界をuからvへ進む側なので、uを始点にvが後へ来るようvの添字を必要ならN増やす。辺u,…,v−1の和に閉鎖辺v→uの寄与を足す。\n\n得た面積2倍をA2、モーメント6倍をMx6,My6とすると、重心は (Mx6/(3A2),My6/(3A2))。途中を浮動小数点にすると大きな累積量の差で桁落ちしやすいので、crossとモーメントの集計・差分は整数で行い、最後だけ実数へ変える。実装を一般座標へ転用するなら128 bitで中間積を保つと境界評価が単純になる。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "幾何の基本判定と座標変換",
+            "trigger": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。",
+            "application": "重心は頂点の座標平均ではない。面積で重みづけした一次モーメントを使う。原点Oと境界辺(P_i,P_{i+1})で作る符号付き三角形について、面積の2倍は cross(P_i,P_{i+1})。重心が(P_i+P_{i+1})/3なので、一次モーメントの6倍は (P_i+P_{i+1})cross(P_i,P_{i+1})。\n\n切断後の多角形は、反時計回り境界の一つの連続区間と、それを閉じる弦からなる。配列を二周分へ伸ばし、境界辺のcrossとx,yモーメントをそれぞれ累積和にする。u→vの右側は、反時計回り境界をuからvへ進む側なので、uを始点にvが後へ来るようvの添字を必要ならN増やす。辺u,…,v−1の和に閉鎖辺v→uの寄与を足す。\n\n得た面積2倍をA2、モーメント6倍をMx6,My6とすると、重心は (Mx6/(3A2),My6/(3A2))。途中を浮動小数点にすると大きな累積量の差で桁落ちしやすいので、crossとモーメントの集計・差分は整数で行い、最後だけ実数へ変える。実装を一般座標へ転用するなら128 bitで中間積を保つと境界評価が単純になる。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。",
+            "reusablePerspective": "重心は重み付き平均。分子と分母を別々に加法的な量へ変えてから、最後に割る。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "前計算 O(N)、各質問 O(1)、全体 O(N+Q)。",
+          "space": "二周分の三つの累積和 O(N)。",
+          "evidenceIds": [
+            "evidence-abc472-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "厳密凸かつ非隣接頂点なので選ぶ領域の面積は正。整数集計後に除算し、必要な出力精度を確保する。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "重心は重み付き平均。分子と分母を別々に加法的な量へ変えてから、最後に割る。",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc472-f",
+        "problemId": "abc472-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。",
+          "proof": "符号付き三角形の面積と一次モーメントは加法的で、原点が多角形外でも向き付き分解の相殺により多角形全体の値になる。境界区間と閉鎖弦を足す式は切断多角形の全辺を一度ずつ含む。面積に対するモーメントの比が一様板の重心である。",
+          "complexity": "前計算 O(N)、各質問 O(1)、全体 O(N+Q)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 3 \\times 10^4; 1 \\leq Q \\leq 2 \\times 10^5; |x_i|,|y_i| \\leq 5 \\times 10^5; (x_1,y_1),(x_2,y_2),\\dots,(x_N,y_N) form a convex polygon in counterclockwise order.; All interior angles of P are less than 180 degrees.; 1 \\leq u_j,v_j \\leq N; u_j \\neq v_j; Vertices u_j and v_j are not adjacent on the boundary of P.; All input values are integers.",
+          "prerequisites": "幾何の基本判定と座標変換",
+          "implementation": "厳密凸かつ非隣接頂点なので選ぶ領域の面積は正。整数集計後に除算し、必要な出力精度を確保する。"
+        },
+        "additionalElement": null,
+        "rationale": "重心は重み付き平均。分子と分母を別々に加法的な量へ変えてから、最後に割る。 主たる学習成果を「幾何の基本判定と座標変換」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc472-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-geometry-orientation-transform"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-reduce-geometry-to-algebraic-predicates",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-geometry-orientation-transform"
+            ],
+            "rationale": "平均座標ではなく、加法的な面積とモーメントを保つ。多角形の連続境界問い合わせは閉鎖弦の寄与を加えた累積和で処理できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc472-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+                "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "弦の向きで求める側が変わる。境界の選択と閉鎖辺の方向を一組として扱う。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          },
+          {
+            "problemId": "abc472-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc472-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+              "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc472-f.md",
+      "documentDigest": "eedf487fbe0b75822f255e2fef2698cfac33f2d1e4c4a1c3387cb8350c473d0c",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 重心は重み付き平均。分子と分母を別々に加法的な量へ変えてから、最後に割る。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc472-g",
+        "learningOutcomeIds": [
+          "outcome-model-max-flow-min-cut"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-max-flow-min-cut"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le H,W \\le 30; S_i is a string of length W consisting of +, -, #.; H and W are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "操作で実現できる残存集合は示した含意を必ず満たし、含意を満たす任意の集合について消去対象の到達先も消去対象なので実現可能である。INF辺は含意違反を禁止し、各有限辺は得点の損失を一度だけ数える。最大流最小カット定理により最小損失を求めれば最大得点になる。",
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+            "path": "src/content/sources/updates/source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc472_g",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e",
+            "path": "src/content/sources/updates/source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc472_g",
+            "checkedAt": "2026-10-06T11:31:19.840Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc472-g",
+        "sourceRevisionIds": [
+          "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+          "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc472-g-solution",
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "消去操作の順序ではなく、最後に残る集合を考える。横に接する非#セルは相互に到達できるので、残すなら両方残す。縦では下を残すなら上も残す必要がある。逆にこの含意を守る集合なら、消すべきセルを選んで操作しても残す集合には到達しないため、すべての消去を実現できる。",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。",
+              "decision": "adopted",
+              "decisionReason": "操作で実現できる残存集合は示した含意を必ず満たし、含意を満たす任意の集合について消去対象の到達先も消去対象なので実現可能である。INF辺は含意違反を禁止し、各有限辺は得点の損失を一度だけ数える。最大流最小カット定理により最小損失を求めれば最大得点になる。",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "消去操作の順序ではなく、最後に残る集合を考える。横に接する非#セルは相互に到達できるので、残すなら両方残す。縦では下を残すなら上も残す必要がある。逆にこの含意を守る集合なら、消すべきセルを選んで操作しても残す集合には到達しないため、すべての消去を実現できる。\n\n残すセルをsource側に置く最大重み閉包としてモデル化する。横の隣接は両方向へ、縦の隣接は下から上へINF辺を張る。+セルにはsource→セル容量1、−セルにはセル→sink容量1。初期得点を+の総数とすると、+を消す損と−を残す損が有限容量カットに一致する。\n\nINFは全有限容量の総和HWより大きいHW+1でよい。制約違反を含むカットは全セルを消す等の合法カットより大きくなるので選ばれない。最大得点は+の個数−最大流。元の#セルには頂点を作らず、隣接含意も非#間だけに張る。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "最大流・最小カット",
+            "trigger": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。",
+            "application": "消去操作の順序ではなく、最後に残る集合を考える。横に接する非#セルは相互に到達できるので、残すなら両方残す。縦では下を残すなら上も残す必要がある。逆にこの含意を守る集合なら、消すべきセルを選んで操作しても残す集合には到達しないため、すべての消去を実現できる。\n\n残すセルをsource側に置く最大重み閉包としてモデル化する。横の隣接は両方向へ、縦の隣接は下から上へINF辺を張る。+セルにはsource→セル容量1、−セルにはセル→sink容量1。初期得点を+の総数とすると、+を消す損と−を残す損が有限容量カットに一致する。\n\nINFは全有限容量の総和HWより大きいHW+1でよい。制約違反を含むカットは全セルを消す等の合法カットより大きくなるので選ばれない。最大得点は+の個数−最大流。元の#セルには頂点を作らず、隣接含意も非#間だけに張る。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。",
+            "reusablePerspective": "含意の方向は『残したら何を残すか』で確認する。操作方向をそのまま辺方向へ写さない。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "V,E=O(HW)。一般容量Dinicの上界 O(V²E)=O((HW)³)。H,W≤30の小規模ネットワーク。",
+          "space": "残余グラフ O(HW)。",
+          "evidenceIds": [
+            "evidence-abc472-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "横は両方向。INFを無根拠な最大整数にせずHW+1とする。残余辺と逆辺を対で管理する。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "含意の方向は『残したら何を残すか』で確認する。操作方向をそのまま辺方向へ写さない。",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc472-g",
+        "problemId": "abc472-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。",
+          "proof": "操作で実現できる残存集合は示した含意を必ず満たし、含意を満たす任意の集合について消去対象の到達先も消去対象なので実現可能である。INF辺は含意違反を禁止し、各有限辺は得点の損失を一度だけ数える。最大流最小カット定理により最小損失を求めれば最大得点になる。",
+          "complexity": "V,E=O(HW)。一般容量Dinicの上界 O(V²E)=O((HW)³)。H,W≤30の小規模ネットワーク。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le H,W \\le 30; S_i is a string of length W consisting of +, -, #.; H and W are integers.",
+          "prerequisites": "最大流・最小カット",
+          "implementation": "横は両方向。INFを無根拠な最大整数にせずHW+1とする。残余辺と逆辺を対で管理する。"
+        },
+        "additionalElement": null,
+        "rationale": "含意の方向は『残したら何を残すか』で確認する。操作方向をそのまま辺方向へ写さない。 主たる学習成果を「最大流・最小カット」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc472-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-max-flow-min-cut"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-model-max-flow-min-cut",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-max-flow-min-cut"
+            ],
+            "rationale": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-max-flow-min-cut"
+            ],
+            "rationale": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-max-flow-min-cut"
+            ],
+            "rationale": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-max-flow-min-cut"
+            ],
+            "rationale": "操作列の最適化を、最終集合の閉包条件へ移す。利益と損失をsource/sink辺へ、含意を大容量辺へ表現する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc472-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc472-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+                "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "消去は下方向へ伝わるので、残す集合の含意辺は逆に下→上となる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          },
+          {
+            "problemId": "abc472-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc472-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+              "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc472-g.md",
+      "documentDigest": "6caf6b9f4b464cb3a9bcf446b4a214b2ff6588066246f2b6ab683a246a45736c",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 含意の方向は『残したら何を残すか』で確認する。操作方向をそのまま辺方向へ写さない。"
+      }
+    }
+  ]
+}

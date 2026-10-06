@@ -1,0 +1,20 @@
+{
+  "id": "abc468-g",
+  "contestId": "abc468",
+  "slotLabel": "G",
+  "officialTaskId": "abc468_g",
+  "title": "Restricted Permutation",
+  "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2000; S_i is a string of length N consisting of o and x.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+    "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+  ],
+  "checkedAt": "2026-10-06T11:30:35.819Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

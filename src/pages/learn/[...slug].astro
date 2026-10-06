@@ -6,6 +6,7 @@ import {
   type UiCatalog,
 } from '../../lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
+import { withBase } from '../../lib/catalog/ui-catalog.js';
 interface Props {
   unit: UiCatalog['learningUnits'][number];
 }
@@ -34,4 +35,27 @@ const body = await renderPublicDocument(
   <span data-pagefind-meta="entity-kind">学習単位</span>
   <h1>{unit.title}</h1>
   <div class="authored-content" set:html={body} />
+  {
+    unit.problemIds.some((id) => Number(id.slice(3, id.indexOf('-'))) > 466) && (
+      <section aria-labelledby="catch-up-problems">
+        <h2 id="catch-up-problems">追加の収録問題</h2>
+        <ul>
+          {unit.problemIds
+            .filter((id) => Number(id.slice(3, id.indexOf('-'))) > 466)
+            .map((id) => {
+              const problem = publicCatalog.problems.find((item) => item.id === id);
+              return (
+                problem && (
+                  <li>
+                    <a href={withBase(problem.route, import.meta.env.BASE_URL)}>
+                      {problem.id.toUpperCase()} — {problem.title}
+                    </a>
+                  </li>
+                )
+              );
+            })}
+        </ul>
+      </section>
+    )
+  }
 </TextbookLayout>

@@ -1,0 +1,1504 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc470",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc470-e",
+        "learningOutcomeIds": [
+          "outcome-solve-stochastic-recurrence"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-stochastic-expectation-dp"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 1 \\leq L \\leq 200; 1 \\leq A_1 < A_2 < \\dots < A_N \\leq 10^5; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "既知ペアの即回収は得点・ライフ・情報を悪化させず、回収できない時の未知カード選択は既知カード選択より情報を減らさない。残る未知配置は一様で、四つの分岐確率は全事象を排反に覆う。条件付き期待値を状態Fへ戻す式は全期待値の法則で正当化できる。対称性からペアの値の平均を最後に掛けられる。",
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+            "path": "src/content/sources/updates/source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc470_e",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f",
+            "path": "src/content/sources/updates/source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc470_e",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc470-e",
+        "sourceRevisionIds": [
+          "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+          "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc470-e-solution",
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "カード位置を全部状態にすると指数個になるが、未知カードは条件付きで一様な配置なので、既知のペアを回収した後は『完全未知のペア数a、片方だけ既知のペア数b、残りライフl』だけで状況を表せる。ペアを既知にしているなら失敗リスクなしで回収でき、先送りしても情報は増えない。ペアが作れなければ未知カードを選ぶことで新情報を最大化できる。数値A_iを見て特定のペアを優先する必要はない。",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。",
+              "decision": "adopted",
+              "decisionReason": "既知ペアの即回収は得点・ライフ・情報を悪化させず、回収できない時の未知カード選択は既知カード選択より情報を減らさない。残る未知配置は一様で、四つの分岐確率は全事象を排反に覆う。条件付き期待値を状態Fへ戻す式は全期待値の法則で正当化できる。対称性からペアの値の平均を最後に掛けられる。",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "カード位置を全部状態にすると指数個になるが、未知カードは条件付きで一様な配置なので、既知のペアを回収した後は『完全未知のペア数a、片方だけ既知のペア数b、残りライフl』だけで状況を表せる。ペアを既知にしているなら失敗リスクなしで回収でき、先送りしても情報は増えない。ペアが作れなければ未知カードを選ぶことで新情報を最大化できる。数値A_iを見て特定のペアを優先する必要はない。\n\nF(l,a,b)を今後回収するペア数の期待値とする。未知カードはu=2a+b枚。一枚目が片既知ペアの相方である確率はb/uで、その場で回収し 1+F(l,a,b−1)。一枚目が完全未知ペアなら確率2a/uで、その相方を含め二枚目も未知から取る。相方を引く確率1/(u−1)では 1+F(l,a−1,b)。別の完全未知ペアを引く確率2(a−1)/(u−1)では F(l−1,a−2,b+2)。片既知ペアの相方を引く確率b/(u−1)では失敗してライフが減るが、l>1なら次ターンでその既知ペアを回収でき、1+F(l−1,a−1,b)。l=1ならゲームが直ちに終わるので、この枝の値は0。\n\nF(0,a,b)=0、F(l,0,b)=b (l>0)。a=0では未知カードを一枚見れば必ず既知相方と回収できる。各遷移で未知カード数uが減るのでメモ化が停止する。初期の期待ペア数はF(L,N,0)。値に依存しない対称な戦略により各ペアの獲得確率が等しく、期待得点はF(L,N,0)×ΣA_i/Nとなる。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "確率過程・期待値DP",
+            "trigger": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。",
+            "application": "カード位置を全部状態にすると指数個になるが、未知カードは条件付きで一様な配置なので、既知のペアを回収した後は『完全未知のペア数a、片方だけ既知のペア数b、残りライフl』だけで状況を表せる。ペアを既知にしているなら失敗リスクなしで回収でき、先送りしても情報は増えない。ペアが作れなければ未知カードを選ぶことで新情報を最大化できる。数値A_iを見て特定のペアを優先する必要はない。\n\nF(l,a,b)を今後回収するペア数の期待値とする。未知カードはu=2a+b枚。一枚目が片既知ペアの相方である確率はb/uで、その場で回収し 1+F(l,a,b−1)。一枚目が完全未知ペアなら確率2a/uで、その相方を含め二枚目も未知から取る。相方を引く確率1/(u−1)では 1+F(l,a−1,b)。別の完全未知ペアを引く確率2(a−1)/(u−1)では F(l−1,a−2,b+2)。片既知ペアの相方を引く確率b/(u−1)では失敗してライフが減るが、l>1なら次ターンでその既知ペアを回収でき、1+F(l−1,a−1,b)。l=1ならゲームが直ちに終わるので、この枝の値は0。\n\nF(0,a,b)=0、F(l,0,b)=b (l>0)。a=0では未知カードを一枚見れば必ず既知相方と回収できる。各遷移で未知カード数uが減るのでメモ化が停止する。初期の期待ペア数はF(L,N,0)。値に依存しない対称な戦略により各ペアの獲得確率が等しく、期待得点はF(L,N,0)×ΣA_i/Nとなる。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。",
+            "reusablePerspective": "確率が計算できるだけでは十分でない。なぜ値を見た別戦略が上回らないかと、ゲーム終了の時点を確かめる。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "ライフLとa,bの O(LN²) 状態、各状態定数遷移で O(LN²)。",
+          "space": "メモ表 O(LN²)。到達しない状態は省ける。",
+          "evidenceIds": [
+            "evidence-abc470-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "u−1で割る枝はa>0の時だけ使う。bの上限とa+b≤Nを守り、浮動小数点で期待値を計算する。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "確率が計算できるだけでは十分でない。なぜ値を見た別戦略が上回らないかと、ゲーム終了の時点を確かめる。",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc470-e",
+        "problemId": "abc470-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。",
+          "proof": "既知ペアの即回収は得点・ライフ・情報を悪化させず、回収できない時の未知カード選択は既知カード選択より情報を減らさない。残る未知配置は一様で、四つの分岐確率は全事象を排反に覆う。条件付き期待値を状態Fへ戻す式は全期待値の法則で正当化できる。対称性からペアの値の平均を最後に掛けられる。",
+          "complexity": "ライフLとa,bの O(LN²) 状態、各状態定数遷移で O(LN²)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 1 \\leq L \\leq 200; 1 \\leq A_1 < A_2 < \\dots < A_N \\leq 10^5; All input values are integers.",
+          "prerequisites": "確率過程・期待値DP",
+          "implementation": "u−1で割る枝はa>0の時だけ使う。bの上限とa+b≤Nを守り、浮動小数点で期待値を計算する。"
+        },
+        "additionalElement": null,
+        "rationale": "確率が計算できるだけでは十分でない。なぜ値を見た別戦略が上回らないかと、ゲーム終了の時点を確かめる。 主たる学習成果を「確率過程・期待値DP」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc470-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-stochastic-expectation-dp"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-solve-stochastic-recurrence",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-stochastic-expectation-dp"
+            ],
+            "rationale": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-stochastic-expectation-dp"
+            ],
+            "rationale": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-stochastic-expectation-dp"
+            ],
+            "rationale": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-stochastic-expectation-dp"
+            ],
+            "rationale": "交換可能な未知要素を個数へ圧縮し、決定的に回収できるものを状態から除く。確率DPは戦略の支配を先に証明してから分岐する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc470-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+                "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "最後のライフを失った直後は、二枚目で既知になったペアを次ターンに回収できない。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          },
+          {
+            "problemId": "abc470-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc470-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+              "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc470-e.md",
+      "documentDigest": "c50b6088b958e48cf024258b83369aa3f216a80cd2df2971f0710be59628a631",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 確率が計算できるだけでは十分でない。なぜ値を見た別戦略が上回らないかと、ゲーム終了の時点を確かめる。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc470-f",
+        "learningOutcomeIds": [
+          "outcome-augment-components-with-metadata",
+          "outcome-formulate-combinatorial-coefficients"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-dsu-components",
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; S is a string of length N consisting of lowercase English letters.; A_i and B_i are integers.; 1 \\leq A_i < B_i \\leq N; (A_1, B_1), \\dots, (A_M, B_M) are pairwise distinct."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "成分を越える移動は不可能で、連結成分内の辺交換は全対称群を生成する。偶数回制約は全体の置換の符号を固定する。成分内同文字の入替えは各文字配置の偶奇を両方実現し、重複がない場合は任意の許可辺の交換が偶配置と奇配置の一対一対応を与える。従って多項係数の積と場合分けが正しい。",
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+            "path": "src/content/sources/updates/source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc470_f",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976",
+            "path": "src/content/sources/updates/source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc470_f",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc470-f",
+        "sourceRevisionIds": [
+          "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+          "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc470-f-solution",
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "交換可能な位置をグラフの辺にする。同じ連結成分の中では、木の葉から目標文字を運び固定することで任意の位置の置換を作れる。しかし操作回数がちょうど10^100、すなわち偶数なので、位置を区別した置換は偶置換に限られる。",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。",
+              "decision": "adopted",
+              "decisionReason": "成分を越える移動は不可能で、連結成分内の辺交換は全対称群を生成する。偶数回制約は全体の置換の符号を固定する。成分内同文字の入替えは各文字配置の偶奇を両方実現し、重複がない場合は任意の許可辺の交換が偶配置と奇配置の一対一対応を与える。従って多項係数の積と場合分けが正しい。",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "交換可能な位置をグラフの辺にする。同じ連結成分の中では、木の葉から目標文字を運び固定することで任意の位置の置換を作れる。しかし操作回数がちょうど10^100、すなわち偶数なので、位置を区別した置換は偶置換に限られる。\n\n各成分内の任意の偶置換は高々N²回で作れる。残りは同じ辺を二回交換する無作用で埋められるため、回数の巨大さは到達性の制約としては偶奇だけを残す。M≥1なのでこの埋め合わせ用の辺が存在する。\n\nここで数える対象は位置の置換ではなく文字列。ある成分に同じ文字が二つある場合、二つの同文字の行き先を交換すると、文字列を変えず置換の偶奇を反転できる。従って全ての文字配置が実現できる。一方、どの成分にも重複文字がなければ配置と成分内置換が一対一で、全体の偶置換はちょうど半分。\n\nDSUで成分を求め、成分サイズnと26文字の個数c_jから n!/Πc_j! を計算して全成分の積を取る。成分内重複が一つでもあればそのまま、なければ2の逆元を掛ける。異なる成分の同文字は偶奇調整に使えない。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "DSUによる連結成分管理・縮約",
+            "trigger": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。",
+            "application": "交換可能な位置をグラフの辺にする。同じ連結成分の中では、木の葉から目標文字を運び固定することで任意の位置の置換を作れる。しかし操作回数がちょうど10^100、すなわち偶数なので、位置を区別した置換は偶置換に限られる。\n\n各成分内の任意の偶置換は高々N²回で作れる。残りは同じ辺を二回交換する無作用で埋められるため、回数の巨大さは到達性の制約としては偶奇だけを残す。M≥1なのでこの埋め合わせ用の辺が存在する。\n\nここで数える対象は位置の置換ではなく文字列。ある成分に同じ文字が二つある場合、二つの同文字の行き先を交換すると、文字列を変えず置換の偶奇を反転できる。従って全ての文字配置が実現できる。一方、どの成分にも重複文字がなければ配置と成分内置換が一対一で、全体の偶置換はちょうど半分。\n\nDSUで成分を求め、成分サイズnと26文字の個数c_jから n!/Πc_j! を計算して全成分の積を取る。成分内重複が一つでもあればそのまま、なければ2の逆元を掛ける。異なる成分の同文字は偶奇調整に使えない。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。",
+            "reusablePerspective": "『位置を区別した操作状態』と『同じ文字を同一視した出力』を分けて不変量を考える。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "DSU O((N+M)α(N))、階乗と文字集計 O(N+26N)。",
+          "space": "DSUと成分別26文字のカウント O(N)。",
+          "evidenceIds": [
+            "evidence-abc470-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "半分にするのは各成分ごとでなく全体の積に一度だけ。N!は法より小さいので逆階乗が使える。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "『位置を区別した操作状態』と『同じ文字を同一視した出力』を分けて不変量を考える。",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc470-f",
+        "problemId": "abc470-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。",
+          "proof": "成分を越える移動は不可能で、連結成分内の辺交換は全対称群を生成する。偶数回制約は全体の置換の符号を固定する。成分内同文字の入替えは各文字配置の偶奇を両方実現し、重複がない場合は任意の許可辺の交換が偶配置と奇配置の一対一対応を与える。従って多項係数の積と場合分けが正しい。",
+          "complexity": "DSU O((N+M)α(N))、階乗と文字集計 O(N+26N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; S is a string of length N consisting of lowercase English letters.; A_i and B_i are integers.; 1 \\leq A_i < B_i \\leq N; (A_1, B_1), \\dots, (A_M, B_M) are pairwise distinct.",
+          "prerequisites": "DSUによる連結成分管理・縮約",
+          "implementation": "半分にするのは各成分ごとでなく全体の積に一度だけ。N!は法より小さいので逆階乗が使える。"
+        },
+        "additionalElement": null,
+        "rationale": "『位置を区別した操作状態』と『同じ文字を同一視した出力』を分けて不変量を考える。 主たる学習成果を「DSUによる連結成分管理・縮約」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc470-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-dsu-components"
+        ],
+        "supportingTagIds": [
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "primaryOutcomeId": "outcome-augment-components-with-metadata",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-formulate-combinatorial-coefficients"
+        ],
+        "adHocElements": [
+          "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-dsu-components"
+            ],
+            "rationale": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-dsu-components"
+            ],
+            "rationale": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-dsu-components"
+            ],
+            "rationale": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-dsu-components"
+            ],
+            "rationale": "局所交換の到達性を連結成分と置換の符号で表す。識別不能な同じ要素があると、位置の不変量が観測対象から消えることがある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc470-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+                "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "巨大な偶数回を二回の無作用で埋められる。重複は同じ成分の内部に必要。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          },
+          {
+            "problemId": "abc470-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc470-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+              "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc470-f.md",
+      "documentDigest": "77c7adc73930889e799bc650985880e14a14b70256a906568d4e827efadbf5b0",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 『位置を区別した操作状態』と『同じ文字を同一視した出力』を分けて不変量を考える。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc470-g",
+        "learningOutcomeIds": [
+          "outcome-design-range-update-action"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-lazy-segment-action"
+        ],
+        "constraints": [
+          "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 0 \\leq A_i \\leq N; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "mexの閾値展開は各区間の値を同じ整数個数の指示関数へ分解する。nextの最大は必要な全値が初めて揃う最小右端であり、右端候補の数がN+1−fに一致する。値追加は区間chmaxそのもの。fの単調性により更新対象のprefixを正確に代入すれば、全kの寄与を漏れなく加算できる。",
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+            "path": "src/content/sources/updates/source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc470_g",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0",
+            "path": "src/content/sources/updates/source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc470_g",
+            "checkedAt": "2026-10-06T11:30:57.841Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc470-g",
+        "sourceRevisionIds": [
+          "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+          "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc470-g-solution",
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "mexを直接各区間へ求めると O(N²)。非負整数mはΣ_{k≥0}[m>k]なので、mex>kを『0,…,kを全て含む』へ言い換えて総和の順を交換する。",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。",
+              "decision": "adopted",
+              "decisionReason": "mexの閾値展開は各区間の値を同じ整数個数の指示関数へ分解する。nextの最大は必要な全値が初めて揃う最小右端であり、右端候補の数がN+1−fに一致する。値追加は区間chmaxそのもの。fの単調性により更新対象のprefixを正確に代入すれば、全kの寄与を漏れなく加算できる。",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "mexを直接各区間へ求めると O(N²)。非負整数mはΣ_{k≥0}[m>k]なので、mex>kを『0,…,kを全て含む』へ言い換えて総和の順を交換する。\n\n左端lから右にある値kの最初の位置をnext_k(l)、なければN+1とし、f_k(l)=max_{0≤v≤k}next_v(l)。必要な全値を含む区間の右端は f_k(l) 以上なので、その個数は N+1−f_k(l)。答えは各k=0,…,N−1の N(N+1)−Σ_l f_k(l) の総和。基底f_{−1}(l)=0を置き、値kの出現をp_1<…<p_c、番兵p_0=0,p_{c+1}=N+1とすると、各l∈(p_{j−1},p_j]にfをchmax(p_j)する。\n\nf_k(l)はlについて非減少。kの出現区間を左から順に更新すると、更新中もこの単調性が維持される。従ってchmaxする区間内で現在値がp_j未満の部分はprefixに限られる。Segment Treeの最大値を使った境界探索でその末尾を見つけ、そこだけp_jへ区間代入する。木には区間和と最大値を持ち、代入lazyを作用させる。\n\n全値の出現数はN、各値に末尾番兵区間を一つ付けるので区間処理は高々2N回。値が存在しないkでは全体がN+1へ上がり、その後の寄与は0である。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "区間更新を要約へ作用させる",
+            "trigger": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。",
+            "application": "mexを直接各区間へ求めると O(N²)。非負整数mはΣ_{k≥0}[m>k]なので、mex>kを『0,…,kを全て含む』へ言い換えて総和の順を交換する。\n\n左端lから右にある値kの最初の位置をnext_k(l)、なければN+1とし、f_k(l)=max_{0≤v≤k}next_v(l)。必要な全値を含む区間の右端は f_k(l) 以上なので、その個数は N+1−f_k(l)。答えは各k=0,…,N−1の N(N+1)−Σ_l f_k(l) の総和。基底f_{−1}(l)=0を置き、値kの出現をp_1<…<p_c、番兵p_0=0,p_{c+1}=N+1とすると、各l∈(p_{j−1},p_j]にfをchmax(p_j)する。\n\nf_k(l)はlについて非減少。kの出現区間を左から順に更新すると、更新中もこの単調性が維持される。従ってchmaxする区間内で現在値がp_j未満の部分はprefixに限られる。Segment Treeの最大値を使った境界探索でその末尾を見つけ、そこだけp_jへ区間代入する。木には区間和と最大値を持ち、代入lazyを作用させる。\n\n全値の出現数はN、各値に末尾番兵区間を一つ付けるので区間処理は高々2N回。値が存在しないkでは全体がN+1へ上がり、その後の寄与は0である。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。",
+            "reusablePerspective": "mexの総和は『全部含む』区間の数へ変える。配列の単調性が汎用chmaxより単純な作用を可能にする。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "高々2N回の境界探索・代入で O(N log N)。",
+          "space": "出現位置リストとlazy Segment Tree O(N)。",
+          "evidenceIds": [
+            "evidence-abc470-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "Σ_l(N+1)はN(N+1)であり(N+1)²ではない。最終答えと区間和は64 bit整数。空区間への更新をしない。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "mexの総和は『全部含む』区間の数へ変える。配列の単調性が汎用chmaxより単純な作用を可能にする。",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc470-g",
+        "problemId": "abc470-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。",
+          "proof": "mexの閾値展開は各区間の値を同じ整数個数の指示関数へ分解する。nextの最大は必要な全値が初めて揃う最小右端であり、右端候補の数がN+1−fに一致する。値追加は区間chmaxそのもの。fの単調性により更新対象のprefixを正確に代入すれば、全kの寄与を漏れなく加算できる。",
+          "complexity": "高々2N回の境界探索・代入で O(N log N)。",
+          "constraints": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 0 \\leq A_i \\leq N; All input values are integers.",
+          "prerequisites": "区間更新を要約へ作用させる",
+          "implementation": "Σ_l(N+1)はN(N+1)であり(N+1)²ではない。最終答えと区間和は64 bit整数。空区間への更新をしない。"
+        },
+        "additionalElement": null,
+        "rationale": "mexの総和は『全部含む』区間の数へ変える。配列の単調性が汎用chmaxより単純な作用を可能にする。 主たる学習成果を「区間更新を要約へ作用させる」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc470-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-lazy-segment-action"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-design-range-update-action",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lazy-segment-action"
+            ],
+            "rationale": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lazy-segment-action"
+            ],
+            "rationale": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lazy-segment-action"
+            ],
+            "rationale": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lazy-segment-action"
+            ],
+            "rationale": "mexを閾値の指示関数へ展開する。単調な配列のchmaxは、境界探索と区間代入へ簡約できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc470-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc470-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+                "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "右端の番兵N+1は『区間が存在しない』を0寄与として表す。値Nはmex閾値として処理しなくてよい。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          },
+          {
+            "problemId": "abc470-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc470-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+              "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc470-g.md",
+      "documentDigest": "2b58c261da60556349bb0f1d6a49c4de64947dc236599ca6cc7a3208ac168596",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. mexの総和は『全部含む』区間の数へ変える。配列の単調性が汎用chmaxより単純な作用を可能にする。"
+      }
+    }
+  ]
+}

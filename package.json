@@ -88,7 +88,12 @@
     "release:history": "tsx scripts/release/build-history.ts",
     "corpus:verify-full-projections": "tsx scripts/corpus/verify-full-projections.ts --check",
     "corpus:verify-full-projections:write": "tsx scripts/corpus/verify-full-projections.ts --write",
-    "verify:initial-release": "tsx scripts/verify/initial-release.ts"
+    "verify:initial-release": "tsx scripts/verify/initial-release.ts",
+    "release:catch-up": "tsx scripts/update-abc/catch-up.ts",
+    "verify:catch-up": "tsx scripts/verify/catch-up.ts",
+    "abc:package-update": "tsx scripts/update-abc/author-update.ts",
+    "verify:catch-up-acceptance": "tsx scripts/verify/catch-up-acceptance.ts",
+    "verify:catch-up-evidence": "tsx scripts/verify/catch-up-evidence.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",

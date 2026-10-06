@@ -249,7 +249,13 @@ try {
         },
       },
       T134: {
-        commands: refs(['corpus', 'problem-metrics', 'problem-corpus', 'full-projections']),
+        commands: refs([
+          'corpus',
+          'problem-metrics',
+          'problem-corpus',
+          'catch-up',
+          'full-projections',
+        ]),
         checks: checks.completeness,
       },
       T135: {
@@ -260,6 +266,7 @@ try {
           'full-learning-content',
           'problem-shard-index',
           'problem-shards',
+          'catch-up',
         ]),
         checks: {
           ...taxonomy,
@@ -272,7 +279,10 @@ try {
             'Preview integration is lineage only; complete canonical inventory, final accepted taxonomy and joined full-authoring owners supply the final completeness boundary.',
         },
       },
-      T136: { commands: refs(['corpus', 'authoring', 'problem-corpus']), checks: checks.sources },
+      T136: {
+        commands: refs(['corpus', 'authoring', 'problem-corpus', 'catch-up']),
+        checks: checks.sources,
+      },
       T137: {
         commands: refs(['full-learning-content', 'problem-corpus']),
         checks: checks.optional,
@@ -374,7 +384,7 @@ try {
         digest: fileSha(await readFile(browserSummary.rawReportPath)),
       },
       productionReleaseApproved: false,
-      nextGate: 'Issue #52 post-catch-up validation',
+      nextGate: 'Issue #53 protected-main and publication acceptance',
     };
     await writeJson(`${AUDIT_ROOT}/matrix.json`, {
       ...matrix,

@@ -1,0 +1,20 @@
+{
+  "id": "abc475-e",
+  "contestId": "abc475",
+  "slotLabel": "E",
+  "officialTaskId": "abc475_e",
+  "title": "Quiz Competition: Qualifiers",
+  "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3\\times 10^4; 1 \\leq K \\leq 200; S_i and T are strings of length K consisting of o and x.; 1 \\leq Q \\leq 5\\times 10^4; For each query, 1\\leq i \\leq N and 1 \\leq j \\leq K.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+    "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+  ],
+  "checkedAt": "2026-10-06T11:31:52.875Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

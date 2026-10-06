@@ -514,30 +514,61 @@ const isMain = (): boolean =>
   process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain()) {
-  const fixture = argument('--fixture');
-  const resumeId = argument('--resume');
-  if (!fixture) {
-    process.stderr.write(
-      'Usage: npm run abc:update -- --fixture initial-v1 [--resume UPDATE_ID]\n',
-    );
-    process.stdout.write(`${JSON.stringify({ command: 'abc:update', exitCode: 64 })}\n`);
-    process.exitCode = 64;
-  } else {
-    let resume: PipelineOptions['resume'];
-    if (resumeId) {
-      const saved = PublicationUpdateSchema.parse(
-        await readJson<unknown>(
-          process.cwd(),
-          `staging/previews/initial-v1/release-simulation/${resumeId}/manifest.json`,
-        ),
+  const contestId = argument('--contest');
+  if (contestId) {
+    try {
+      const { prepareCanonicalUpdate, writeUpdateJson, CATCH_UP_ROOT, INITIAL_CUTOFF } =
+        await import('./catch-up.js');
+      const result = await prepareCanonicalUpdate({
+        contestId,
+        metadataPath: argument('--metadata') ?? `${CATCH_UP_ROOT}/metadata/${contestId}.json`,
+        authoringPath: argument('--authoring') ?? `${CATCH_UP_ROOT}/authoring/${contestId}.json`,
+        cutoffAt: argument('--cutoff') ?? INITIAL_CUTOFF,
+      });
+      await writeUpdateJson(
+        `${CATCH_UP_ROOT}/${result.update.updateId}/manifest.json`,
+        result.update,
       );
-      resume = { updateId: saved.updateId, sourceSetFingerprint: saved.sourceSetFingerprint };
+      console.log(
+        JSON.stringify({
+          command: 'abc:update',
+          state: result.update.state,
+          updateId: result.update.updateId,
+          contestId,
+          targetProblemIds: result.update.targetProblemIds,
+          fixtureMode: false,
+        }),
+      );
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+      process.exitCode = 2;
     }
-    const result = await preparePipeline({ fixture, ...(resume ? { resume } : {}) });
-    await persistPublicationUpdate(result);
-    const { publicationUpdate: _publicationUpdate, ...summary } = result;
-    void _publicationUpdate;
-    process.stdout.write(`${JSON.stringify(summary)}\n`);
-    process.exitCode = result.state === 'ELIGIBLE_FOR_BATCH' ? 0 : 2;
+  } else {
+    const fixture = argument('--fixture');
+    const resumeId = argument('--resume');
+    if (!fixture) {
+      process.stderr.write(
+        'Usage: npm run abc:update -- --fixture initial-v1 [--resume UPDATE_ID]\n',
+      );
+      process.stdout.write(`${JSON.stringify({ command: 'abc:update', exitCode: 64 })}\n`);
+      process.exitCode = 64;
+    } else {
+      let resume: PipelineOptions['resume'];
+      if (resumeId) {
+        const saved = PublicationUpdateSchema.parse(
+          await readJson<unknown>(
+            process.cwd(),
+            `staging/previews/initial-v1/release-simulation/${resumeId}/manifest.json`,
+          ),
+        );
+        resume = { updateId: saved.updateId, sourceSetFingerprint: saved.sourceSetFingerprint };
+      }
+      const result = await preparePipeline({ fixture, ...(resume ? { resume } : {}) });
+      await persistPublicationUpdate(result);
+      const { publicationUpdate: _publicationUpdate, ...summary } = result;
+      void _publicationUpdate;
+      process.stdout.write(`${JSON.stringify(summary)}\n`);
+      process.exitCode = result.state === 'ELIGIBLE_FOR_BATCH' ? 0 : 2;
+    }
   }
 }

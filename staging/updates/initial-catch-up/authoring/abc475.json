@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc475",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc475-e",
+        "learningOutcomeIds": [
+          "outcome-query-bitwise-order-with-trie"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-binary-trie"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3\\times 10^4; 1 \\leq K \\leq 200; S_i and T are strings of length K consisting of o and x.; 1 \\leq Q \\leq 5\\times 10^4; For each query, 1\\leq i \\leq N and 1 \\leq j \\leq K."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "選抜手続きの各段は辞書順の0側集団を先に確定するので、全誤答を除き、同一列以下の累積人数が定員内にある集団に限って合格となる。Trieは現在の多重集合の人数を各prefixへ保持し、0子の加算と同一葉の人数で対象以下の個数を正確に数える。",
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+            "path": "src/content/sources/updates/source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc475_e",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72",
+            "path": "src/content/sources/updates/source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc475_e",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc475-e",
+        "sourceRevisionIds": [
+          "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+          "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc475-e-solution",
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "正答を0、誤答を1としたK bit列X_iへ変える。各設問は未確定者を次のbitで分岐し、0側が定員内なら全員合格にして1側を続け、定員超過なら1側を全員落として0側を続ける。これはX_iの辞書順に順位を付け、定員境界にかかった同一列の集団をまとめて不合格にする手続きである。",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。",
+              "decision": "adopted",
+              "decisionReason": "選抜手続きの各段は辞書順の0側集団を先に確定するので、全誤答を除き、同一列以下の累積人数が定員内にある集団に限って合格となる。Trieは現在の多重集合の人数を各prefixへ保持し、0子の加算と同一葉の人数で対象以下の個数を正確に数える。",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "正答を0、誤答を1としたK bit列X_iへ変える。各設問は未確定者を次のbitで分岐し、0側が定員内なら全員合格にして1側を続け、定員超過なら1側を全員落として0側を続ける。これはX_iの辞書順に順位を付け、定員境界にかかった同一列の集団をまとめて不合格にする手続きである。\n\nX_i以下の列の個数rank_le(X_i)がM以下なら、その集団は境界より前に全部収まるので合格。ただし全誤答の列11…1は、一度も正解による合格確定がなく最後に残るため、常に不合格とする。N=Mのときもこの例外が必要。\n\n参加者の列を二分Trieに入れ、各ノードへ通過人数を持つ。一bit反転では旧列の人数を根から葉まで減らし、変更後の列を増やす。rank_leは、対象bitが1の時に0子の人数を足し、最後に同一葉の人数も足すことで O(K) で求まる。\n\nQ回で新ノードを無制限に増やすと O((N+Q)K) メモリになる。旧列削除時に人数0になった枝を空きノードへ戻して再利用すれば、同時に必要なノード数は O(NK)。あるいは全クエリ先読みで必要列を圧縮する。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "bit列をTrieで索引化する",
+            "trigger": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。",
+            "application": "正答を0、誤答を1としたK bit列X_iへ変える。各設問は未確定者を次のbitで分岐し、0側が定員内なら全員合格にして1側を続け、定員超過なら1側を全員落として0側を続ける。これはX_iの辞書順に順位を付け、定員境界にかかった同一列の集団をまとめて不合格にする手続きである。\n\nX_i以下の列の個数rank_le(X_i)がM以下なら、その集団は境界より前に全部収まるので合格。ただし全誤答の列11…1は、一度も正解による合格確定がなく最後に残るため、常に不合格とする。N=Mのときもこの例外が必要。\n\n参加者の列を二分Trieに入れ、各ノードへ通過人数を持つ。一bit反転では旧列の人数を根から葉まで減らし、変更後の列を増やす。rank_leは、対象bitが1の時に0子の人数を足し、最後に同一葉の人数も足すことで O(K) で求まる。\n\nQ回で新ノードを無制限に増やすと O((N+Q)K) メモリになる。旧列削除時に人数0になった枝を空きノードへ戻して再利用すれば、同時に必要なノード数は O(NK)。あるいは全クエリ先読みで必要列を圧縮する。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。",
+            "reusablePerspective": "手続きがどの比較順を実装しているか見る。等しいキーの扱いと特別な終端状態を確認する。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "初期構築 O(NK)、全クエリ O(QK)。",
+          "space": "ノード再利用付きTrie O(NK)、参加者列 O(NK)。",
+          "evidenceIds": [
+            "evidence-abc475-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "正誤bitはTに対して計算する。削除で空になった枝を再利用し、人数は重複列を含めて数える。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "手続きがどの比較順を実装しているか見る。等しいキーの扱いと特別な終端状態を確認する。",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc475-e",
+        "problemId": "abc475-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。",
+          "proof": "選抜手続きの各段は辞書順の0側集団を先に確定するので、全誤答を除き、同一列以下の累積人数が定員内にある集団に限って合格となる。Trieは現在の多重集合の人数を各prefixへ保持し、0子の加算と同一葉の人数で対象以下の個数を正確に数える。",
+          "complexity": "初期構築 O(NK)、全クエリ O(QK)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3\\times 10^4; 1 \\leq K \\leq 200; S_i and T are strings of length K consisting of o and x.; 1 \\leq Q \\leq 5\\times 10^4; For each query, 1\\leq i \\leq N and 1 \\leq j \\leq K.",
+          "prerequisites": "bit列をTrieで索引化する",
+          "implementation": "正誤bitはTに対して計算する。削除で空になった枝を再利用し、人数は重複列を含めて数える。"
+        },
+        "additionalElement": null,
+        "rationale": "手続きがどの比較順を実装しているか見る。等しいキーの扱いと特別な終端状態を確認する。 主たる学習成果を「bit列をTrieで索引化する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc475-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-binary-trie"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-query-bitwise-order-with-trie",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-binary-trie"
+            ],
+            "rationale": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-binary-trie"
+            ],
+            "rationale": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-binary-trie"
+            ],
+            "rationale": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-binary-trie"
+            ],
+            "rationale": "段階的な選抜を辞書順の順位へ言い換え、prefix Trieで多重集合のrankを数える。更新では旧経路の削除と新経路の追加を対にする。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc475-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+                "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "同点集団を途中まで合格にできないので、rank_ltでなくrank_leを使う。全誤答は順位条件とは別に不合格。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          },
+          {
+            "problemId": "abc475-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc475-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+              "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc475-e.md",
+      "documentDigest": "b2f9b10293d203cc19d324b6adeee6769843112fe7a304c7bd518371164a95b0",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 手続きがどの比較順を実装しているか見る。等しいキーの扱いと特別な終端状態を確認する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc475-f",
+        "learningOutcomeIds": [
+          "outcome-normalize-equivalent-states"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-state-normalization"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 2 \\times 10^5; H and W are integers.; S_i is a string of length W consisting of . and #."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "非空の変化白マス集合は一意なbounding boxを持つ。その箱の各境界には変化白マスがあり、逆に四辺に白を持つ矩形を塗った状態ではその矩形がbounding boxとなるため一対一である。左右端固定後のactiveとg条件は四辺の必要十分条件を表し、suffix和が全下端を重複なく数える。",
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+            "path": "src/content/sources/updates/source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc475_f",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915",
+            "path": "src/content/sources/updates/source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc475_f",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc475-f",
+        "sourceRevisionIds": [
+          "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+          "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc475-f-solution",
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "矩形の選び方ではなく塗り終えた状態を数えるため、既存黒マスだけを付け足した異なる矩形を重複排除する必要がある。変化した白マスが一つ以上ある状態には、それらのbounding boxを唯一の代表矩形として対応させる。この代表は上下左右の各境界に元の白マスを一つ以上含む。変化なしの状態は最後に1を足す。",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。",
+              "decision": "adopted",
+              "decisionReason": "非空の変化白マス集合は一意なbounding boxを持つ。その箱の各境界には変化白マスがあり、逆に四辺に白を持つ矩形を塗った状態ではその矩形がbounding boxとなるため一対一である。左右端固定後のactiveとg条件は四辺の必要十分条件を表し、suffix和が全下端を重複なく数える。",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "矩形の選び方ではなく塗り終えた状態を数えるため、既存黒マスだけを付け足した異なる矩形を重複排除する必要がある。変化した白マスが一つ以上ある状態には、それらのbounding boxを唯一の代表矩形として対応させる。この代表は上下左右の各境界に元の白マスを一つ以上含む。変化なしの状態は最後に1を足す。\n\nW≤Hとなるよう必要なら転置し、左右端l,rを固定する。各行iで[l,r]内に白マスがあるかをactive_iとする。またg_l(u),g_r(u)を、上端候補u以上でそれぞれ列l,rに白マスが出る最初の行、なければH+1とする。上端uがactiveなら、下端dに求める条件は active_d と d≥max(g_l(u),g_r(u))。これで上・下・左・右の境界が全部白を持つ。\n\nactiveのsuffix和を作れば、各uに対する下端の数はその閾値から下のactive行数。一つの(l,r)は O(H) で数えられる。activeは行内の『l以後の最初の白列』がr以下かで求め、gは下から前計算する。全左右端を列挙するので O(HW²)、転置後は O(HW min(H,W))。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "同値な状態を正規化する",
+            "trigger": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。",
+            "application": "矩形の選び方ではなく塗り終えた状態を数えるため、既存黒マスだけを付け足した異なる矩形を重複排除する必要がある。変化した白マスが一つ以上ある状態には、それらのbounding boxを唯一の代表矩形として対応させる。この代表は上下左右の各境界に元の白マスを一つ以上含む。変化なしの状態は最後に1を足す。\n\nW≤Hとなるよう必要なら転置し、左右端l,rを固定する。各行iで[l,r]内に白マスがあるかをactive_iとする。またg_l(u),g_r(u)を、上端候補u以上でそれぞれ列l,rに白マスが出る最初の行、なければH+1とする。上端uがactiveなら、下端dに求める条件は active_d と d≥max(g_l(u),g_r(u))。これで上・下・左・右の境界が全部白を持つ。\n\nactiveのsuffix和を作れば、各uに対する下端の数はその閾値から下のactive行数。一つの(l,r)は O(H) で数えられる。activeは行内の『l以後の最初の白列』がr以下かで求め、gは下から前計算する。全左右端を列挙するので O(HW²)、転置後は O(HW min(H,W))。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。",
+            "reusablePerspective": "操作の個数を数えない。状態から操作の正規形を一意に復元できる条件を探す。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "O(HW min(H,W))。短辺は√(HW)以下なので最大約9×10^7の基本走査。",
+          "space": "前計算表 O(HW)、activeとsuffix和 O(max(H,W))。",
+          "evidenceIds": [
+            "evidence-abc475-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "幅1・高さ1では左右や上下の境界が一致するが式はそのまま使える。全黒なら答え1。状態数は64 bit整数。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "操作の個数を数えない。状態から操作の正規形を一意に復元できる条件を探す。",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc475-f",
+        "problemId": "abc475-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。",
+          "proof": "非空の変化白マス集合は一意なbounding boxを持つ。その箱の各境界には変化白マスがあり、逆に四辺に白を持つ矩形を塗った状態ではその矩形がbounding boxとなるため一対一である。左右端固定後のactiveとg条件は四辺の必要十分条件を表し、suffix和が全下端を重複なく数える。",
+          "complexity": "O(HW min(H,W))。短辺は√(HW)以下なので最大約9×10^7の基本走査。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 2 \\times 10^5; H and W are integers.; S_i is a string of length W consisting of . and #.",
+          "prerequisites": "同値な状態を正規化する",
+          "implementation": "幅1・高さ1では左右や上下の境界が一致するが式はそのまま使える。全黒なら答え1。状態数は64 bit整数。"
+        },
+        "additionalElement": null,
+        "rationale": "操作の個数を数えない。状態から操作の正規形を一意に復元できる条件を探す。 主たる学習成果を「同値な状態を正規化する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc475-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-state-normalization"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-normalize-equivalent-states",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-state-normalization"
+            ],
+            "rationale": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-state-normalization"
+            ],
+            "rationale": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-state-normalization"
+            ],
+            "rationale": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-state-normalization"
+            ],
+            "rationale": "出力状態へ一意な最小操作領域を対応させて重複を消す。二辺を固定して残り二辺をprefix/suffix条件として集計する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc475-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+                "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "矩形が大きくても元が黒の余白は状態に影響しない。四辺に白という正規形がその余白を除く。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          },
+          {
+            "problemId": "abc475-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc475-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+              "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc475-f.md",
+      "documentDigest": "e34e7c600489be5cef13b1cf2f2b854f1b2f9f257e4b2b74470295a8f6ddd603",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 操作の個数を数えない。状態から操作の正規形を一意に復元できる条件を探す。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc475-g",
+        "learningOutcomeIds": [
+          "outcome-decompose-by-prime-or-divisor"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-prime-divisor-decomposition"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10; 2 \\leq D \\leq N \\leq 10^{18}; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "最小最適解にはDの素数指数が不足するpがある。p以外の指数逆転は小さい素数への交換で約数数と非倍数性を保ったまま数値を下げるので存在しない。pより小さい素数の指数もe_p未満では同じ交換が可能である。この必要な形を全て含む例外一つのDFSに最適解が必ず現れ、候補から制約を満たす最大約数数を選べば正解となる。",
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+            "path": "src/content/sources/updates/source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc475_g",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba",
+            "path": "src/content/sources/updates/source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc475_g",
+            "checkedAt": "2026-10-06T11:31:52.875Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc475-g",
+        "sourceRevisionIds": [
+          "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+          "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc475-g-solution",
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "約数数τ(x)=Π(e_i+1)を最大化する。通常の高度合成数探索は小さい素数ほど指数を大きくするが、Dの倍数禁止があるため単純な非増加指数だけでは不足する。最小の最適解xでは、Dに含まれるある素数pの指数が不足する。そのp以外の素数の指数は非増加にできる。q<r、q,r≠pでe_q<e_rなら指数を交換すれば約数数を保って数値を下げ、p不足も保存できるからである。",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。",
+              "decision": "adopted",
+              "decisionReason": "最小最適解にはDの素数指数が不足するpがある。p以外の指数逆転は小さい素数への交換で約数数と非倍数性を保ったまま数値を下げるので存在しない。pより小さい素数の指数もe_p未満では同じ交換が可能である。この必要な形を全て含む例外一つのDFSに最適解が必ず現れ、候補から制約を満たす最大約数数を選べば正解となる。",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "約数数τ(x)=Π(e_i+1)を最大化する。通常の高度合成数探索は小さい素数ほど指数を大きくするが、Dの倍数禁止があるため単純な非増加指数だけでは不足する。最小の最適解xでは、Dに含まれるある素数pの指数が不足する。そのp以外の素数の指数は非増加にできる。q<r、q,r≠pでe_q<e_rなら指数を交換すれば約数数を保って数値を下げ、p不足も保存できるからである。\n\npを例外として、素数列に沿う指数列が『高々一箇所を取り除けば非増加』になる整数を前計算する。DFS状態は現在の積x、約数数d、通常指数の上限cap、例外を使用済みか。次の素数rについてr^eを掛け、e≤capなら通常枝へ進め上限をeにする。一度だけ、eを以前の指数以下に選びつつcapを更新せず例外枝へ進める。指数0も例外として必要で、小さい素数を飛ばして次の素数を使う候補を落としてはならない。\n\npが入力素数列の外にあるなら、通常の非増加列だけでpの指数不足を満たす。素数は例外を一つ飛ばした最小素数積が10^18を超える深さまで用意すれば十分。積の上限は10^18として候補を重複排除し、各テストでx≤Nかつx mod D≠0を満たす最大dを選ぶ。\n\n約数数の最大化は探索候補数Cに依存する。各掛算を x≤10^18/r で制限し、前計算したCを実測・記録する。N全列挙やDの10^18に対する試し割りは不要。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "素因数分解と約数構造",
+            "trigger": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。",
+            "application": "約数数τ(x)=Π(e_i+1)を最大化する。通常の高度合成数探索は小さい素数ほど指数を大きくするが、Dの倍数禁止があるため単純な非増加指数だけでは不足する。最小の最適解xでは、Dに含まれるある素数pの指数が不足する。そのp以外の素数の指数は非増加にできる。q<r、q,r≠pでe_q<e_rなら指数を交換すれば約数数を保って数値を下げ、p不足も保存できるからである。\n\npを例外として、素数列に沿う指数列が『高々一箇所を取り除けば非増加』になる整数を前計算する。DFS状態は現在の積x、約数数d、通常指数の上限cap、例外を使用済みか。次の素数rについてr^eを掛け、e≤capなら通常枝へ進め上限をeにする。一度だけ、eを以前の指数以下に選びつつcapを更新せず例外枝へ進める。指数0も例外として必要で、小さい素数を飛ばして次の素数を使う候補を落としてはならない。\n\npが入力素数列の外にあるなら、通常の非増加列だけでpの指数不足を満たす。素数は例外を一つ飛ばした最小素数積が10^18を超える深さまで用意すれば十分。積の上限は10^18として候補を重複排除し、各テストでx≤Nかつx mod D≠0を満たす最大dを選ぶ。\n\n約数数の最大化は探索候補数Cに依存する。各掛算を x≤10^18/r で制限し、前計算したCを実測・記録する。N全列挙やDの10^18に対する試し割りは不要。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。",
+            "reusablePerspective": "高度合成数の指数順を丸暗記せず、禁止条件がその交換論のどこを壊すか調べる。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "前計算は候補数Cと素数深さBに対し O(CB)。Tテストの走査 O(TC)。",
+          "space": "候補配列 O(C)、DFS深さ O(B)。",
+          "evidenceIds": [
+            "evidence-abc475-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "乗算前に除算で上限を判定する。x=1は常に候補。指数0の例外を含める。約数数が同じなら小さいxを残せる。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "高度合成数の指数順を丸暗記せず、禁止条件がその交換論のどこを壊すか調べる。",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc475-g",
+        "problemId": "abc475-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。",
+          "proof": "最小最適解にはDの素数指数が不足するpがある。p以外の指数逆転は小さい素数への交換で約数数と非倍数性を保ったまま数値を下げるので存在しない。pより小さい素数の指数もe_p未満では同じ交換が可能である。この必要な形を全て含む例外一つのDFSに最適解が必ず現れ、候補から制約を満たす最大約数数を選べば正解となる。",
+          "complexity": "前計算は候補数Cと素数深さBに対し O(CB)。Tテストの走査 O(TC)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10; 2 \\leq D \\leq N \\leq 10^{18}; All input values are integers.",
+          "prerequisites": "素因数分解と約数構造",
+          "implementation": "乗算前に除算で上限を判定する。x=1は常に候補。指数0の例外を含める。約数数が同じなら小さいxを残せる。"
+        },
+        "additionalElement": null,
+        "rationale": "高度合成数の指数順を丸暗記せず、禁止条件がその交換論のどこを壊すか調べる。 主たる学習成果を「素因数分解と約数構造」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc475-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-prime-divisor-decomposition"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-decompose-by-prime-or-divisor",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-prime-divisor-decomposition"
+            ],
+            "rationale": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-prime-divisor-decomposition"
+            ],
+            "rationale": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-prime-divisor-decomposition"
+            ],
+            "rationale": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-prime-divisor-decomposition"
+            ],
+            "rationale": "極値を取る最小代表を選び、指数交換で探索形を制限する。追加禁止条件が一つの素数指数の例外として表せる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc475-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc475-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+                "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Dの倍数でないことを一つの不足素数で証明するため、その素数だけ指数順の例外を許す。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          },
+          {
+            "problemId": "abc475-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc475-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+              "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc475-g.md",
+      "documentDigest": "ef0b6728353e77a504acc42b149e732a30332e376d348799183d1856e4a62786",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 高度合成数の指数順を丸暗記せず、禁止条件がその交換論のどこを壊すか調べる。"
+      }
+    }
+  ]
+}

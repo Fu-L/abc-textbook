@@ -1,0 +1,20 @@
+{
+  "id": "abc473-f",
+  "contestId": "abc473",
+  "slotLabel": "F",
+  "officialTaskId": "abc473_f",
+  "title": "A/AB Insertion",
+  "officialUrl": "https://atcoder.jp/contests/abc473/tasks/abc473_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N is an integer satisfying 1 \\le N \\le 5 \\times 10^5.; S is a string of length N consisting of A and B.; Q is an integer satisfying 1 \\le Q \\le 2 \\times 10^5.; Each given query is of type 1 or 2.; Queries of type 1 satisfy the following constraints: i is an integer satisfying 1 \\le i \\le N, and c is A or B.; i is an integer satisfying 1 \\le i \\le N, and; c is A or B.; Queries of type 2 satisfy the following constraints: l and r are integers satisfying 1 \\le l \\le r \\le N.; l and r are integers satisfying 1 \\le l \\le r \\le N.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc473-f-problem-6765f26a090a2527805d7a4c8921dcc781d567743353e7734138dced5427bb09",
+    "source-abc473-editorial-24871-584757f1a051e445fdfbf822725aabee827e0dc023eeb9ae75fc3cde9e0ab886"
+  ],
+  "checkedAt": "2026-10-06T11:31:30.851Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

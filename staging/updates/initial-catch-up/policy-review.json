@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "reviewMode": "agent_quality_review",
+  "humanApproval": false,
+  "checkedAt": "2026-10-06T11:30:14.541Z",
+  "source": "https://atcoder.jp/posts/1567",
+  "oldFingerprint": "0e29e2a4278e73aa531ed7aff3019795ef0fdbed163f83106aed43772763c2df",
+  "currentFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+  "basis": "Official current generative-AI rule and its contest-period scope were rechecked. All acquired contests ended before the frozen cutoff. No live contest participation or submission is performed. Robots and terms fingerprints match the bootstrap policy. Official raw prose is kept outside the repository; authored explanations are original with source links."
+}

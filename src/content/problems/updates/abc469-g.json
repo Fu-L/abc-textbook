@@ -1,0 +1,20 @@
+{
+  "id": "abc469-g",
+  "contestId": "abc469",
+  "slotLabel": "G",
+  "officialTaskId": "abc469_g",
+  "title": "K-nacci Operations",
+  "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq 100; K is an integer.; S_i is a non-empty string consisting of a and b. (1 \\leq i \\leq K); The sum of the lengths of S_1, S_2, \\ldots, S_K is at most 2 \\times 10^5.; 1 \\leq N \\leq 10^{18}; N is an integer.; T is a string consisting of lowercase English letters with length between 1 and 2 \\times 10^5, inclusive.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+    "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+  ],
+  "checkedAt": "2026-10-06T11:30:46.832Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

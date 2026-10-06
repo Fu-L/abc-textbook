@@ -1,0 +1,20 @@
+{
+  "id": "abc470-e",
+  "contestId": "abc470",
+  "slotLabel": "E",
+  "officialTaskId": "abc470_e",
+  "title": "Concentration",
+  "officialUrl": "https://atcoder.jp/contests/abc470/tasks/abc470_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 200; 1 \\leq L \\leq 200; 1 \\leq A_1 < A_2 < \\dots < A_N \\leq 10^5; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc470-e-problem-60c7e1932b98b8c399a4f4c5d57d830349dd24ccfb3baa850ef0665985c4c0f0",
+    "source-abc470-editorial-23855-7c036556e435fa680595205a6d49725699d7c1f6c66a9914872c23d19f8cd39f"
+  ],
+  "checkedAt": "2026-10-06T11:30:57.841Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

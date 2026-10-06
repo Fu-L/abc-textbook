@@ -1,0 +1,1500 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc469",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc469-e",
+        "learningOutcomeIds": [
+          "outcome-prove-and-search-threshold"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-monotone-threshold-search"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^6; N and K are integers.; S is a string of length N consisting of o and x.; S contains at least K occurrences of o."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "変換区間和は勝数−p×区間長であり、符号が勝率条件に一致する。累積勝数の単調性からK勝条件を満たす左prefixを全て、かつそれだけ最小値候補へ入れる。最小prefix差が非負なら区間が存在し、なければどの有効左端でも達成できない。成功範囲はpについて下向きに閉じるので二分探索が成立する。",
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+            "path": "src/content/sources/updates/source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc469_e",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457",
+            "path": "src/content/sources/updates/source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc469_e",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc469-e",
+        "sourceRevisionIds": [
+          "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+          "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc469-e-solution",
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "勝率の最大化は区間長も勝数も変化するので、勝数だけを固定する貪欲では決まらない。候補勝率p以上を達成できるかという判定に変える。各勝利を1−p、敗北を−pとすれば、区間和≥0と勝率≥pは同値。",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。",
+              "decision": "adopted",
+              "decisionReason": "変換区間和は勝数−p×区間長であり、符号が勝率条件に一致する。累積勝数の単調性からK勝条件を満たす左prefixを全て、かつそれだけ最小値候補へ入れる。最小prefix差が非負なら区間が存在し、なければどの有効左端でも達成できない。成功範囲はpについて下向きに閉じるので二分探索が成立する。",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "勝率の最大化は区間長も勝数も変化するので、勝数だけを固定する貪欲では決まらない。候補勝率p以上を達成できるかという判定に変える。各勝利を1−p、敗北を−pとすれば、区間和≥0と勝率≥pは同値。\n\n勝数の累積和W_iと変換後の累積和F_i=W_i−piを作る。右端rを固定すると、左prefix t=l−1は W_t≤W_r−K を満たすものだけ選べる。Wは単調なので有効なtは連続したprefix。ポインタを進めて有効になったF_tの最小値を保ち、F_r−min F_t≥0なら成功とする。各rで有効prefixを追加するだけなので一回の判定は O(N)。\n\npを[0,1]で二分探索し、例えば60回判定する。判定成功なら下端をpへ上げ、失敗なら上端を下げる。元の列が少なくともK勝を含むためp=0は成功する。Fを毎回配列に作らず、W_t−ptを有効化時に計算してもよい。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "単調境界を証明して探索する",
+            "trigger": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。",
+            "application": "勝率の最大化は区間長も勝数も変化するので、勝数だけを固定する貪欲では決まらない。候補勝率p以上を達成できるかという判定に変える。各勝利を1−p、敗北を−pとすれば、区間和≥0と勝率≥pは同値。\n\n勝数の累積和W_iと変換後の累積和F_i=W_i−piを作る。右端rを固定すると、左prefix t=l−1は W_t≤W_r−K を満たすものだけ選べる。Wは単調なので有効なtは連続したprefix。ポインタを進めて有効になったF_tの最小値を保ち、F_r−min F_t≥0なら成功とする。各rで有効prefixを追加するだけなので一回の判定は O(N)。\n\npを[0,1]で二分探索し、例えば60回判定する。判定成功なら下端をpへ上げ、失敗なら上端を下げる。元の列が少なくともK勝を含むためp=0は成功する。Fを毎回配列に作らず、W_t−ptを有効化時に計算してもよい。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。",
+            "reusablePerspective": "最大平均では二分探索を思い出すだけでなく、変換後の有効な左prefixをどう管理するかまで導く。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "精度εについて O(N log(1/ε))。60回なら O(60N)。",
+          "space": "累積勝数 O(N)。判定の追加領域 O(1)。",
+          "evidenceIds": [
+            "evidence-abc469-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "t=0を忘れない。浮動小数点誤差と出力桁数を確認する。p=1も判定でき、全勝区間なら上限に近づく。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "最大平均では二分探索を思い出すだけでなく、変換後の有効な左prefixをどう管理するかまで導く。",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc469-e",
+        "problemId": "abc469-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。",
+          "proof": "変換区間和は勝数−p×区間長であり、符号が勝率条件に一致する。累積勝数の単調性からK勝条件を満たす左prefixを全て、かつそれだけ最小値候補へ入れる。最小prefix差が非負なら区間が存在し、なければどの有効左端でも達成できない。成功範囲はpについて下向きに閉じるので二分探索が成立する。",
+          "complexity": "精度εについて O(N log(1/ε))。60回なら O(60N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^6; N and K are integers.; S is a string of length N consisting of o and x.; S contains at least K occurrences of o.",
+          "prerequisites": "単調境界を証明して探索する",
+          "implementation": "t=0を忘れない。浮動小数点誤差と出力桁数を確認する。p=1も判定でき、全勝区間なら上限に近づく。"
+        },
+        "additionalElement": null,
+        "rationale": "最大平均では二分探索を思い出すだけでなく、変換後の有効な左prefixをどう管理するかまで導く。 主たる学習成果を「単調境界を証明して探索する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc469-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-monotone-threshold-search"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-prove-and-search-threshold",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-threshold-search"
+            ],
+            "rationale": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-threshold-search"
+            ],
+            "rationale": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-threshold-search"
+            ],
+            "rationale": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-monotone-threshold-search"
+            ],
+            "rationale": "比率の最適化は分子−候補比率×分母の符号判定へ変える。左端制約がprefix条件になる場合、最小累積値を単調に追加できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc469-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+                "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "長さの下限ではなく勝数Kの下限なので、左端ポインタは累積勝数で進める。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          },
+          {
+            "problemId": "abc469-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc469-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+              "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc469-e.md",
+      "documentDigest": "6721c36bed96fabf896ca3763d38c8c809e82485c678e59587db695ebd72139e",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 最大平均では二分探索を思い出すだけでなく、変換後の有効な左prefixをどう管理するかまで導く。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc469-f",
+        "learningOutcomeIds": [
+          "outcome-construct-optimal-spanning-tree",
+          "outcome-decompose-by-prime-or-divisor"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-spanning-tree-optimization",
+          "tag-prime-divisor-decomposition"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\leq 10^6; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "重みがgより大きい全辺の連結成分は、gの処理前にDSUへ反映されている。gの倍数集合の頂点が異なるDSU成分にある場合、その間の辺重みはg以上で、gより大きい可能性は既処理性により除かれる。従って降順Kruskalと同じ成分併合を安全に行い、最大重み全域木を得る。",
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+            "path": "src/content/sources/updates/source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc469_f",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7",
+            "path": "src/content/sources/updates/source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc469_f",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc469-f",
+        "sourceRevisionIds": [
+          "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+          "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc469-f-solution",
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "完全グラフの辺を全列挙するKruskalは O(N²)。辺重みgcdには『gの倍数同士は少なくともgで結ばれる』という集合構造がある。Aの最大値をVとし、g=V,…,1を降順に走査する。値から頂点への逆引き表を用意し、g,2g,…のうちAにあるものを列挙する。",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。",
+              "decision": "adopted",
+              "decisionReason": "重みがgより大きい全辺の連結成分は、gの処理前にDSUへ反映されている。gの倍数集合の頂点が異なるDSU成分にある場合、その間の辺重みはg以上で、gより大きい可能性は既処理性により除かれる。従って降順Kruskalと同じ成分併合を安全に行い、最大重み全域木を得る。",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "完全グラフの辺を全列挙するKruskalは O(N²)。辺重みgcdには『gの倍数同士は少なくともgで結ばれる』という集合構造がある。Aの最大値をVとし、g=V,…,1を降順に走査する。値から頂点への逆引き表を用意し、g,2g,…のうちAにあるものを列挙する。\n\nその頂点を一つの代表に順に併合し、DSUで異なる成分を結ぶたび答えへgを加える。列挙集合を完全グラフとして辺を作る必要はなく、一つの代表へ星状に結べばその集合の成分を全てつなげられる。\n\n重要なのは、gの倍数同士のgcdが必ずgとは限らない点。もしgcdがgより大きければ、その値の段階で二頂点は既に連結済みである。今新しく併合される二成分を結ぶ辺は、重みgとして扱ってよい。g=1まで進めれば全頂点が結ばれ、成功する併合はちょうどN−1回。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "cut・cycle性質から最適全域木を構成する",
+            "trigger": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。",
+            "application": "完全グラフの辺を全列挙するKruskalは O(N²)。辺重みgcdには『gの倍数同士は少なくともgで結ばれる』という集合構造がある。Aの最大値をVとし、g=V,…,1を降順に走査する。値から頂点への逆引き表を用意し、g,2g,…のうちAにあるものを列挙する。\n\nその頂点を一つの代表に順に併合し、DSUで異なる成分を結ぶたび答えへgを加える。列挙集合を完全グラフとして辺を作る必要はなく、一つの代表へ星状に結べばその集合の成分を全てつなげられる。\n\n重要なのは、gの倍数同士のgcdが必ずgとは限らない点。もしgcdがgより大きければ、その値の段階で二頂点は既に連結済みである。今新しく併合される二成分を結ぶ辺は、重みgとして扱ってよい。g=1まで進めれば全頂点が結ばれ、成功する併合はちょうどN−1回。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。",
+            "reusablePerspective": "『この閾値より重い辺は全て処理済み』をDSUの不変条件として説明する。倍数走査の計算量は調和級数で評価する。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "倍数走査はΣ_{g≤V}floor(V/g)=O(V log V)。DSUを含め O((N+V log V)α(N))。",
+          "space": "逆引き表 O(V)、DSU O(N)。",
+          "evidenceIds": [
+            "evidence-abc469-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "総重みは64 bit整数。各gで最初に見つかった頂点を代表にし、同じ成分への併合は加算しない。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "『この閾値より重い辺は全て処理済み』をDSUの不変条件として説明する。倍数走査の計算量は調和級数で評価する。",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc469-f",
+        "problemId": "abc469-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。",
+          "proof": "重みがgより大きい全辺の連結成分は、gの処理前にDSUへ反映されている。gの倍数集合の頂点が異なるDSU成分にある場合、その間の辺重みはg以上で、gより大きい可能性は既処理性により除かれる。従って降順Kruskalと同じ成分併合を安全に行い、最大重み全域木を得る。",
+          "complexity": "倍数走査はΣ_{g≤V}floor(V/g)=O(V log V)。DSUを含め O((N+V log V)α(N))。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\leq 10^6; All input values are integers.",
+          "prerequisites": "cut・cycle性質から最適全域木を構成する",
+          "implementation": "総重みは64 bit整数。各gで最初に見つかった頂点を代表にし、同じ成分への併合は加算しない。"
+        },
+        "additionalElement": null,
+        "rationale": "『この閾値より重い辺は全て処理済み』をDSUの不変条件として説明する。倍数走査の計算量は調和級数で評価する。 主たる学習成果を「cut・cycle性質から最適全域木を構成する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc469-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-spanning-tree-optimization"
+        ],
+        "supportingTagIds": [
+          "tag-prime-divisor-decomposition"
+        ],
+        "primaryOutcomeId": "outcome-construct-optimal-spanning-tree",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-decompose-by-prime-or-divisor"
+        ],
+        "adHocElements": [
+          "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-spanning-tree-optimization"
+            ],
+            "rationale": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-spanning-tree-optimization"
+            ],
+            "rationale": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-spanning-tree-optimization"
+            ],
+            "rationale": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-spanning-tree-optimization"
+            ],
+            "rationale": "暗黙完全グラフの辺を重みの閾値でまとめる。約数の倍数集合を降順に処理し、辺ではなく連結成分の変化だけを追う。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc469-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+                "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "Aが相異なるので値から頂点を一つへ逆引きできる。gcdがgを超える組は既に併合済みという不変条件が鍵。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          },
+          {
+            "problemId": "abc469-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc469-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+              "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc469-f.md",
+      "documentDigest": "2a255e0f2022aa90dcd2e8f268ca761c4553a51b8938000671a221ce77f950ac",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 『この閾値より重い辺は全て処理済み』をDSUの不変条件として説明する。倍数走査の計算量は調和級数で評価する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc469-g",
+        "learningOutcomeIds": [
+          "outcome-accelerate-fixed-linear-transition"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-linear-recurrence-matrix"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq 100; K is an integer.; S_i is a non-empty string consisting of a and b. (1 \\leq i \\leq K); The sum of the lengths of S_1, S_2, \\ldots, S_K is at most 2 \\times 10^5.; 1 \\leq N \\leq 10^{18}; N is an integer.; T is a string consisting of lowercase English letters with length between 1 and 2 \\times 10^5, inclusive."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "回転と反転の作用は二面体群の合成式で閉じ、要約は連結を完全に保存する。反転bitの隣接漸化式の差から周期が得られ、各回転係数の符号も同周期になる。従って一期ごとに同じ線形写像を適用でき、行列累乗と余り遷移は元の再帰作用と一致する。",
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+            "path": "src/content/sources/updates/source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc469_g",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9",
+            "path": "src/content/sources/updates/source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc469_g",
+            "checkedAt": "2026-10-06T11:30:46.832Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc469-g",
+        "sourceRevisionIds": [
+          "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+          "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc469-g-solution",
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "再帰的に作るS_Nは巨大なので展開できない。操作がTの回転と反転だけなら、作用を回転量a mod |T|と反転bit bで要約できる。作用を『左回転aの後に反転b』と定義すると、Xの後にYを実行した合成は (a_X+(-1)^{b_X}a_Y, b_X xor b_Y)。順序を逆にしてはならない。",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。",
+              "decision": "adopted",
+              "decisionReason": "回転と反転の作用は二面体群の合成式で閉じ、要約は連結を完全に保存する。反転bitの隣接漸化式の差から周期が得られ、各回転係数の符号も同周期になる。従って一期ごとに同じ線形写像を適用でき、行列累乗と余り遷移は元の再帰作用と一致する。",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "再帰的に作るS_Nは巨大なので展開できない。操作がTの回転と反転だけなら、作用を回転量a mod |T|と反転bit bで要約できる。作用を『左回転aの後に反転b』と定義すると、Xの後にYを実行した合成は (a_X+(-1)^{b_X}a_Y, b_X xor b_Y)。順序を逆にしてはならない。\n\n各初期S_iを一文字ずつ合成して(a_i,b_i)を求める。i>Kでは逆順に過去K個を連結するため、b_i=b_{i−1} xor … xor b_{i−K}。連続二式をxorすると b_{i+1}=b_{i−K} となり、i≥K+1から周期K+1がある。b_{K+1}も計算し、周期列の基底を1,…,K+1として固定する。\n\na_iは過去K個のaの符号付き線形結合で、a_{i−j}の符号は先に連結されるj−1個のbのxorで決まる。bが周期的なのでこの遷移係数も周期K+1。一期分のK次元遷移行列Pを作り、初期状態(a_K,…,a_1)からN−Kステップのうち周期数回をPの累乗で進め、余りだけ逐次遷移する。\n\nPを一般行列K+1個の積で作ると余計なKが掛かる。各一ステップは新先頭行を旧行の符号付き和にし、残りの行をずらすだけなので O(K²) で行列を更新できる。一期の構築は O(K³)、累乗 O(K³ log N)。最後はTを一度回転し必要なら反転して出力する。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "固定線形遷移を巨大回数進める",
+            "trigger": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。",
+            "application": "再帰的に作るS_Nは巨大なので展開できない。操作がTの回転と反転だけなら、作用を回転量a mod |T|と反転bit bで要約できる。作用を『左回転aの後に反転b』と定義すると、Xの後にYを実行した合成は (a_X+(-1)^{b_X}a_Y, b_X xor b_Y)。順序を逆にしてはならない。\n\n各初期S_iを一文字ずつ合成して(a_i,b_i)を求める。i>Kでは逆順に過去K個を連結するため、b_i=b_{i−1} xor … xor b_{i−K}。連続二式をxorすると b_{i+1}=b_{i−K} となり、i≥K+1から周期K+1がある。b_{K+1}も計算し、周期列の基底を1,…,K+1として固定する。\n\na_iは過去K個のaの符号付き線形結合で、a_{i−j}の符号は先に連結されるj−1個のbのxorで決まる。bが周期的なのでこの遷移係数も周期K+1。一期分のK次元遷移行列Pを作り、初期状態(a_K,…,a_1)からN−Kステップのうち周期数回をPの累乗で進め、余りだけ逐次遷移する。\n\nPを一般行列K+1個の積で作ると余計なKが掛かる。各一ステップは新先頭行を旧行の符号付き和にし、残りの行をずらすだけなので O(K²) で行列を更新できる。一期の構築は O(K³)、累乗 O(K³ log N)。最後はTを一度回転し必要なら反転して出力する。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。",
+            "reusablePerspective": "文字列の長さではなく作用の情報量を見る。周期遷移の積を作る順と最初の位相を確認する。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "初期入力の総長をS、T長をMとして O(S+K³ log N+M)。",
+          "space": "行列 O(K²)、入力と出力 O(S+M)。",
+          "evidenceIds": [
+            "evidence-abc469-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "N≤Kは初期作用を直接使う。負値をMで正規化する。周期の開始位相をK+1番目の遷移に合わせる。M=1は回転量0。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "文字列の長さではなく作用の情報量を見る。周期遷移の積を作る順と最初の位相を確認する。",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc469-g",
+        "problemId": "abc469-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。",
+          "proof": "回転と反転の作用は二面体群の合成式で閉じ、要約は連結を完全に保存する。反転bitの隣接漸化式の差から周期が得られ、各回転係数の符号も同周期になる。従って一期ごとに同じ線形写像を適用でき、行列累乗と余り遷移は元の再帰作用と一致する。",
+          "complexity": "初期入力の総長をS、T長をMとして O(S+K³ log N+M)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq 100; K is an integer.; S_i is a non-empty string consisting of a and b. (1 \\leq i \\leq K); The sum of the lengths of S_1, S_2, \\ldots, S_K is at most 2 \\times 10^5.; 1 \\leq N \\leq 10^{18}; N is an integer.; T is a string consisting of lowercase English letters with length between 1 and 2 \\times 10^5, inclusive.",
+          "prerequisites": "固定線形遷移を巨大回数進める",
+          "implementation": "N≤Kは初期作用を直接使う。負値をMで正規化する。周期の開始位相をK+1番目の遷移に合わせる。M=1は回転量0。"
+        },
+        "additionalElement": null,
+        "rationale": "文字列の長さではなく作用の情報量を見る。周期遷移の積を作る順と最初の位相を確認する。 主たる学習成果を「固定線形遷移を巨大回数進める」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc469-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-linear-recurrence-matrix"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-accelerate-fixed-linear-transition",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-linear-recurrence-matrix"
+            ],
+            "rationale": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-linear-recurrence-matrix"
+            ],
+            "rationale": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-linear-recurrence-matrix"
+            ],
+            "rationale": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-linear-recurrence-matrix"
+            ],
+            "rationale": "巨大な構文を作らず、それが対象へ与える作用を有限次元へ圧縮する。作用が非可換でも、係数が周期なら一期の線形写像を累乗できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc469-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc469-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+                "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "反転bitのxor漸化式がK+1周期となり、回転量の符号付き漸化式を周期係数系へ変える。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          },
+          {
+            "problemId": "abc469-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc469-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+              "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc469-g.md",
+      "documentDigest": "4c65e83ca2bc23f2e8e9c3682cbad1698155867af03cc526d5741fd389c34ccd",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 文字列の長さではなく作用の情報量を見る。周期遷移の積を作る順と最初の位相を確認する。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1494 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc471",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc471-e",
+        "learningOutcomeIds": [
+          "outcome-reorder-counting-contributions"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-contribution-reordering"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "二乗の対角項と非対角項は全ての選択で同じ形式に展開できる。固定要素または固定二要素を含むK集合の個数は残りから選ぶ二項係数である。S²−Tは非対角の順序付き積を一度ずつ含むため、式は全選択の得点と一致する。",
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+            "path": "src/content/sources/updates/source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc471_e",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922",
+            "path": "src/content/sources/updates/source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc471_e",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc471-e",
+        "sourceRevisionIds": [
+          "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+          "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc471-e-solution",
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "K個の選び方は巨大だが、選ばれた和の二乗を展開すると一項と二項の寄与へ分かれる。各iのA_i²は、iを含む選択 C(N−1,K−1) 回に現れる。各異なるi,jの積は二乗の交差項として二回現れ、その組を含む選択は C(N−2,K−2) 回。",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。",
+              "decision": "adopted",
+              "decisionReason": "二乗の対角項と非対角項は全ての選択で同じ形式に展開できる。固定要素または固定二要素を含むK集合の個数は残りから選ぶ二項係数である。S²−Tは非対角の順序付き積を一度ずつ含むため、式は全選択の得点と一致する。",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "K個の選び方は巨大だが、選ばれた和の二乗を展開すると一項と二項の寄与へ分かれる。各iのA_i²は、iを含む選択 C(N−1,K−1) 回に現れる。各異なるi,jの積は二乗の交差項として二回現れ、その組を含む選択は C(N−2,K−2) 回。\n\nS=ΣA_i、T=ΣA_i² とすると、順序付き異なる二項の積の和は S²−T。従って答えは T·C(N−1,K−1)+(S²−T)·C(N−2,K−2)。組の係数をまとめているので、後半に再び2を掛けない。\n\n階乗・逆階乗をNまで作り、範囲外のC(n,k)は0とする。N=1やK=1では後半は存在しないので0にする。この直接寄与式なら期待値へ変えてN(N−1)で割る場合のN=1特別処理も明確になる。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "局所寄与へ分解して集計順を交換する",
+            "trigger": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。",
+            "application": "K個の選び方は巨大だが、選ばれた和の二乗を展開すると一項と二項の寄与へ分かれる。各iのA_i²は、iを含む選択 C(N−1,K−1) 回に現れる。各異なるi,jの積は二乗の交差項として二回現れ、その組を含む選択は C(N−2,K−2) 回。\n\nS=ΣA_i、T=ΣA_i² とすると、順序付き異なる二項の積の和は S²−T。従って答えは T·C(N−1,K−1)+(S²−T)·C(N−2,K−2)。組の係数をまとめているので、後半に再び2を掛けない。\n\n階乗・逆階乗をNまで作り、範囲外のC(n,k)は0とする。N=1やK=1では後半は存在しないので0にする。この直接寄与式なら期待値へ変えてN(N−1)で割る場合のN=1特別処理も明確になる。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。",
+            "reusablePerspective": "期待値の独立性を仮定しない。固定個数抽出の二要素同時選択数を正しく数える。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "階乗・逆階乗・S,Tの集計 O(N)、逆元用累乗 O(log p)。",
+          "space": "階乗と逆階乗 O(N)。",
+          "evidenceIds": [
+            "evidence-abc471-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "K=1は二項寄与0。N=1で負の階乗添字を参照しない。各積の前に法へ還元する。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "期待値の独立性を仮定しない。固定個数抽出の二要素同時選択数を正しく数える。",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc471-e",
+        "problemId": "abc471-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。",
+          "proof": "二乗の対角項と非対角項は全ての選択で同じ形式に展開できる。固定要素または固定二要素を含むK集合の個数は残りから選ぶ二項係数である。S²−Tは非対角の順序付き積を一度ずつ含むため、式は全選択の得点と一致する。",
+          "complexity": "階乗・逆階乗・S,Tの集計 O(N)、逆元用累乗 O(log p)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+          "prerequisites": "局所寄与へ分解して集計順を交換する",
+          "implementation": "K=1は二項寄与0。N=1で負の階乗添字を参照しない。各積の前に法へ還元する。"
+        },
+        "additionalElement": null,
+        "rationale": "期待値の独立性を仮定しない。固定個数抽出の二要素同時選択数を正しく数える。 主たる学習成果を「局所寄与へ分解して集計順を交換する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc471-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-contribution-reordering"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-reorder-counting-contributions",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "全組合せの多項式得点は展開して少数要素を固定する。二次なら対角と非対角へ分け、Σ_{i≠j}A_iA_jをS²−Tへ圧縮する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc471-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+                "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "選択数Kが固定なので要素と二要素の出現回数はそれぞれ一つの二項係数になる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          },
+          {
+            "problemId": "abc471-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc471-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+              "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc471-e.md",
+      "documentDigest": "8a2788d238860e65e0e717ea1f438cb9c4d23d7eb838769d9f4fcffa66fd4039",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 期待値の独立性を仮定しない。固定個数抽出の二要素同時選択数を正しく数える。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc471-f",
+        "learningOutcomeIds": [
+          "outcome-prove-greedy-order"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-greedy-exchange-order"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^5; S_i is a string of length between 1 and 10 (inclusive) consisting of digits.; N and K are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "同一集合では桁数が一定なので、隣接二文字列の交換による辞書順比較で最適連結順を証明できる。先頭Xが非零なら残りTの桁数を優先し、同桁数では各要素の値順による交換が最適性を保つ。Xの順位がK以内か外かで残りの最適集合が二種類に固定され、外の場合の共通Tに対してXの数値最大化が最適である。",
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+            "path": "src/content/sources/updates/source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc471_f",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52",
+            "path": "src/content/sources/updates/source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc471_f",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc471-f",
+        "sourceRevisionIds": [
+          "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+          "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc471-f-solution",
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "連結順と選択集合を同時に探すと難しいので分ける。固定集合の最適順はABとBAを比べ、大きい方を前に置く順である。INT(A)/(10^{|A|}−1)という有理数順と同値なので比較に推移律があり、隣接交換によってこの順へ直せる。",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。",
+              "decision": "adopted",
+              "decisionReason": "同一集合では桁数が一定なので、隣接二文字列の交換による辞書順比較で最適連結順を証明できる。先頭Xが非零なら残りTの桁数を優先し、同桁数では各要素の値順による交換が最適性を保つ。Xの順位がK以内か外かで残りの最適集合が二種類に固定され、外の場合の共通Tに対してXの数値最大化が最適である。",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "連結順と選択集合を同時に探すと難しいので分ける。固定集合の最適順はABとBAを比べ、大きい方を前に置く順である。INT(A)/(10^{|A|}−1)という有理数順と同値なので比較に推移律があり、隣接交換によってこの順へ直せる。\n\n選択集合は長さ、整数値の順に降順ソートしてS_1,…,S_Nとする。先頭として使う一文字列Xを固定し、その整数値が非零なら、残りの連結Tではまず桁数を最大化し、同じ桁数なら整数値を最大化したい。従ってX以外のK−1文字列はこのキー順の先頭から取れる。Xが先頭K個の中にあれば選択集合は上位K個。Xが外なら残りは上位K−1個に固定され、Xは残りの中で整数値が最大のものを選べばよい。\n\nよって上位K個を選ぶ集合と、上位K−1個+残りの整数値最大の集合の二通りだけを作り、それぞれAB≥BA順に連結する。完成文字列の先頭0を落とし、桁数、辞書順の順に二候補を比較する。全て0の場合は0。先頭が0しか選べない場合も、この場合分けで最大値0が得られる。\n\n選択用の長さ順と連結用のAB順は目的が異なるため、一つのソート順に統合しない。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "交換論から選択順を導く",
+            "trigger": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。",
+            "application": "連結順と選択集合を同時に探すと難しいので分ける。固定集合の最適順はABとBAを比べ、大きい方を前に置く順である。INT(A)/(10^{|A|}−1)という有理数順と同値なので比較に推移律があり、隣接交換によってこの順へ直せる。\n\n選択集合は長さ、整数値の順に降順ソートしてS_1,…,S_Nとする。先頭として使う一文字列Xを固定し、その整数値が非零なら、残りの連結Tではまず桁数を最大化し、同じ桁数なら整数値を最大化したい。従ってX以外のK−1文字列はこのキー順の先頭から取れる。Xが先頭K個の中にあれば選択集合は上位K個。Xが外なら残りは上位K−1個に固定され、Xは残りの中で整数値が最大のものを選べばよい。\n\nよって上位K個を選ぶ集合と、上位K−1個+残りの整数値最大の集合の二通りだけを作り、それぞれAB≥BA順に連結する。完成文字列の先頭0を落とし、桁数、辞書順の順に二候補を比較する。全て0の場合は0。先頭が0しか選べない場合も、この場合分けで最大値0が得られる。\n\n選択用の長さ順と連結用のAB順は目的が異なるため、一つのソート順に統合しない。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。",
+            "reusablePerspective": "『長い方が大きい』は先頭が非零のときだけ。選択基準と配置基準をそれぞれ証明する。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "最大文字列長をL≤10として O(NL log N+KL log K)。",
+          "space": "入力 O(NL)、二候補の出力 O(KL)。",
+          "evidenceIds": [
+            "evidence-abc471-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "INTは10桁までなので64 bit整数。連結比較は文字列で行う。K=1も二候補の式で扱い、全0を空出力にしない。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "『長い方が大きい』は先頭が非零のときだけ。選択基準と配置基準をそれぞれ証明する。",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc471-f",
+        "problemId": "abc471-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。",
+          "proof": "同一集合では桁数が一定なので、隣接二文字列の交換による辞書順比較で最適連結順を証明できる。先頭Xが非零なら残りTの桁数を優先し、同桁数では各要素の値順による交換が最適性を保つ。Xの順位がK以内か外かで残りの最適集合が二種類に固定され、外の場合の共通Tに対してXの数値最大化が最適である。",
+          "complexity": "最大文字列長をL≤10として O(NL log N+KL log K)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^5; S_i is a string of length between 1 and 10 (inclusive) consisting of digits.; N and K are integers.",
+          "prerequisites": "交換論から選択順を導く",
+          "implementation": "INTは10桁までなので64 bit整数。連結比較は文字列で行う。K=1も二候補の式で扱い、全0を空出力にしない。"
+        },
+        "additionalElement": null,
+        "rationale": "『長い方が大きい』は先頭が非零のときだけ。選択基準と配置基準をそれぞれ証明する。 主たる学習成果を「交換論から選択順を導く」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc471-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-greedy-exchange-order"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-prove-greedy-order",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-greedy-exchange-order"
+            ],
+            "rationale": "選択と配置を分け、先頭の一要素を条件づけて候補集合を縮める。連結比較ABとBAは比率順で推移律を確認できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc471-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+                "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "先頭0があるため最長文字列をK個選ぶだけでは足りず、短くても先頭へ大きい整数値を置く候補が必要。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          },
+          {
+            "problemId": "abc471-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc471-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+              "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc471-f.md",
+      "documentDigest": "93aec1999355740fc116fa49b5c53e4b1ab108a5b26e477f82fd2958f68e8abf",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 『長い方が大きい』は先頭が非零のときだけ。選択基準と配置基準をそれぞれ証明する。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc471-g",
+        "learningOutcomeIds": [
+          "outcome-compute-convolution-or-correlation"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-convolution"
+        ],
+        "constraints": [
+          "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 7 \\times 10^6; 1 \\leq K \\leq 2300; 0 \\leq A_i \\leq K-1 (1 \\leq i \\leq N); V_j \\in \\{0,1\\} (0 \\leq j \\leq K-1); 0 \\leq \\mathrm{seed} \\leq 2^{60} - 1; 1 \\leq M \\leq \\min(N, 10^5); 0 \\leq b_i \\leq K-1 (1 \\leq i \\leq M); All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "各母音runには開始位置が一つあり、先頭または非母音→母音の隣接対に一対一対応する。記号対頻度でまとめても各位置の寄与は同じであり、反転添字の巡回畳み込みはシフト後の分類条件を正確に集計する。求める同じシフトは二軸結果の対角成分に一致する。",
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+            "path": "src/content/sources/updates/source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc471_g",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02",
+            "path": "src/content/sources/updates/source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc471_g",
+            "checkedAt": "2026-10-06T11:31:08.833Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc471-g",
+        "sourceRevisionIds": [
+          "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+          "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc471-g-solution",
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "母音runの個数は、先頭が母音なら1、以後は『非母音から母音へ変わる隣接対』の個数である。N個の列をK回走査するとNKが大きすぎるため、隣接記号対(a,b)の頻度C[a,b]だけを一度集計する。",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。",
+              "decision": "adopted",
+              "decisionReason": "各母音runには開始位置が一つあり、先頭または非母音→母音の隣接対に一対一対応する。記号対頻度でまとめても各位置の寄与は同じであり、反転添字の巡回畳み込みはシフト後の分類条件を正確に集計する。求める同じシフトは二軸結果の対角成分に一致する。",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "母音runの個数は、先頭が母音なら1、以後は『非母音から母音へ変わる隣接対』の個数である。N個の列をK回走査するとNKが大きすぎるため、隣接記号対(a,b)の頻度C[a,b]だけを一度集計する。\n\nVの母音集合を使い、巡回畳み込みを二軸で行う。F[s,t]=Σ_{a,b}C[a,b](1−V_{a+s mod K})V_{b+t mod K} とすると求める隣接run数はF[k,k]。入力頻度の添字を反転したD[−a mod K,−b mod K]=C[a,b]を作れば、Dと非母音指示U、母音指示Vの二軸巡回畳み込みになる。\n\nまず各b列でa方向にUを畳み込み、次に各s行でb方向にVを畳み込む。巡回畳み込みは長さKの通常の線形畳み込みをNTTで求め、次数zとz+Kを足して折り返せばよい。各段はK本の長さ O(K) の畳み込みなので O(K² log K)。最後にF[k,k]+V_{A_1+k mod K}を出力する。\n\nK≤2300なら線形畳み込みの長さは2K−1、変換長は高々8192。998244353を使え、各集計値はN以下でN<法なので整数値をそのまま復元できる。全列Aを保持せず、公式の64 bit生成器を走らせながら前記号との対を加算すればよい。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "NTT・FFTで畳み込みと相互相関を求める",
+            "trigger": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。",
+            "application": "母音runの個数は、先頭が母音なら1、以後は『非母音から母音へ変わる隣接対』の個数である。N個の列をK回走査するとNKが大きすぎるため、隣接記号対(a,b)の頻度C[a,b]だけを一度集計する。\n\nVの母音集合を使い、巡回畳み込みを二軸で行う。F[s,t]=Σ_{a,b}C[a,b](1−V_{a+s mod K})V_{b+t mod K} とすると求める隣接run数はF[k,k]。入力頻度の添字を反転したD[−a mod K,−b mod K]=C[a,b]を作れば、Dと非母音指示U、母音指示Vの二軸巡回畳み込みになる。\n\nまず各b列でa方向にUを畳み込み、次に各s行でb方向にVを畳み込む。巡回畳み込みは長さKの通常の線形畳み込みをNTTで求め、次数zとz+Kを足して折り返せばよい。各段はK本の長さ O(K) の畳み込みなので O(K² log K)。最後にF[k,k]+V_{A_1+k mod K}を出力する。\n\nK≤2300なら線形畳み込みの長さは2K−1、変換長は高々8192。998244353を使え、各集計値はN以下でN<法なので整数値をそのまま復元できる。全列Aを保持せず、公式の64 bit生成器を走らせながら前記号との対を加算すればよい。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。",
+            "reusablePerspective": "runは境界で数える。全シフトへ同じ計算をする問題では、頻度化した後に相関へ変換できないか考える。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "入力生成・頻度集計 O(N)、二軸畳み込み O(K² log K)。",
+          "space": "頻度行列と畳み込み結果 O(K²)、一変換 O(K)。",
+          "evidenceIds": [
+            "evidence-abc471-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "生成器はunsigned 64 bitの巻戻りと32 bit回転を厳密に再現する。相関の符号と巡回折返しを小例で確認する。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "runは境界で数える。全シフトへ同じ計算をする問題では、頻度化した後に相関へ変換できないか考える。",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc471-g",
+        "problemId": "abc471-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。",
+          "proof": "各母音runには開始位置が一つあり、先頭または非母音→母音の隣接対に一対一対応する。記号対頻度でまとめても各位置の寄与は同じであり、反転添字の巡回畳み込みはシフト後の分類条件を正確に集計する。求める同じシフトは二軸結果の対角成分に一致する。",
+          "complexity": "入力生成・頻度集計 O(N)、二軸畳み込み O(K² log K)。",
+          "constraints": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 7 \\times 10^6; 1 \\leq K \\leq 2300; 0 \\leq A_i \\leq K-1 (1 \\leq i \\leq N); V_j \\in \\{0,1\\} (0 \\leq j \\leq K-1); 0 \\leq \\mathrm{seed} \\leq 2^{60} - 1; 1 \\leq M \\leq \\min(N, 10^5); 0 \\leq b_i \\leq K-1 (1 \\leq i \\leq M); All input values are integers.",
+          "prerequisites": "NTT・FFTで畳み込みと相互相関を求める",
+          "implementation": "生成器はunsigned 64 bitの巻戻りと32 bit回転を厳密に再現する。相関の符号と巡回折返しを小例で確認する。"
+        },
+        "additionalElement": null,
+        "rationale": "runは境界で数える。全シフトへ同じ計算をする問題では、頻度化した後に相関へ変換できないか考える。 主たる学習成果を「NTT・FFTで畳み込みと相互相関を求める」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc471-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-convolution"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-compute-convolution-or-correlation",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convolution"
+            ],
+            "rationale": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convolution"
+            ],
+            "rationale": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convolution"
+            ],
+            "rationale": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-convolution"
+            ],
+            "rationale": "列の長さに依存する全シフト計算を、局所隣接対の頻度と巡回相関へ変える。二変数の分離した指示関数なら一次元畳み込みを行・列ごとに適用できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc471-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc471-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+                "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "求めるシフトが両記号で共通なので、二軸の畳み込み全体の対角だけを読む。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          },
+          {
+            "problemId": "abc471-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc471-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+              "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc471-g.md",
+      "documentDigest": "3c362fd534226637fc28ba3e628366efca6b37949f750b4de18471407e885e21",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. runは境界で数える。全シフトへ同じ計算をする問題では、頻度化した後に相関へ変換できないか考える。"
+      }
+    }
+  ]
+}

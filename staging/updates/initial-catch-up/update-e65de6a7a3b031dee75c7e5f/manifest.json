@@ -1,0 +1,520 @@
+{
+  "schemaVersion": "2.0.0",
+  "updateId": "update-e65de6a7a3b031dee75c7e5f",
+  "kind": "contest_addition",
+  "baseReleaseVersion": null,
+  "contestId": "abc477",
+  "sourceSetFingerprint": "a390b806b16b9ad33ac8d76331c1f9402c563346dcaf37e36bcdf7a7c7ee0938",
+  "advancedSlotLabels": [
+    "E",
+    "F",
+    "G"
+  ],
+  "targetProblemIds": [
+    "abc477-e",
+    "abc477-f",
+    "abc477-g"
+  ],
+  "operations": [
+    {
+      "operationId": "operation-cb353f9b8d34a067c71e44a9",
+      "entityType": "authoring_unit",
+      "entityId": "abc477-e",
+      "action": "add",
+      "path": "src/content/docs/problems/updates/abc477-e.md",
+      "beforeDigest": null,
+      "afterDigest": "804ca44995292652fe1f65a196db994c868f51439dcc7cb0ef3e490a4b9e64af",
+      "affectedEntities": [
+        {
+          "entityType": "authoring_unit",
+          "entityId": "abc477-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e"
+      ]
+    },
+    {
+      "operationId": "operation-6f0ef4377464f6c4e0582a02",
+      "entityType": "authoring_unit",
+      "entityId": "abc477-f",
+      "action": "add",
+      "path": "src/content/docs/problems/updates/abc477-f.md",
+      "beforeDigest": null,
+      "afterDigest": "8010e87b0c5e14f6d201c28cd51a6c8c484b8ef1f0f916cf04ce918a5ed5cc3e",
+      "affectedEntities": [
+        {
+          "entityType": "authoring_unit",
+          "entityId": "abc477-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-f"
+      ]
+    },
+    {
+      "operationId": "operation-1d4829fe507ef5a9b65f2f2c",
+      "entityType": "authoring_unit",
+      "entityId": "abc477-g",
+      "action": "add",
+      "path": "src/content/docs/problems/updates/abc477-g.md",
+      "beforeDigest": null,
+      "afterDigest": "51f671f2830acfdf68b62ea91c620acf79212a7e5415b26d20bd11dc18db0a14",
+      "affectedEntities": [
+        {
+          "entityType": "authoring_unit",
+          "entityId": "abc477-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-3848e898445a2cf767f2cb29",
+      "entityType": "contest",
+      "entityId": "abc477",
+      "action": "add",
+      "path": "src/content/contests/updates/abc477.json",
+      "beforeDigest": null,
+      "afterDigest": "f3b224afe2d6a85f2d9f06af1572c539abf10fa9843105fcf2946ab6369ca340",
+      "affectedEntities": [
+        {
+          "entityType": "contest",
+          "entityId": "abc477",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-4db4b2ed73372bd589c893d5",
+      "entityType": "problem",
+      "entityId": "abc477-e",
+      "action": "add",
+      "path": "src/content/problems/updates/abc477-e.json",
+      "beforeDigest": null,
+      "afterDigest": "031f7e340a92a5cbf06b1ba6ac6dd39911bd7488cce8347be0df54bbbfb1d815",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc477-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e"
+      ]
+    },
+    {
+      "operationId": "operation-4030c51c15acdc7f3dda5085",
+      "entityType": "problem",
+      "entityId": "abc477-f",
+      "action": "add",
+      "path": "src/content/problems/updates/abc477-f.json",
+      "beforeDigest": null,
+      "afterDigest": "6e43b743a5ce2445d0fe41a678b1fbf9af6128be85a8ec53b8c381d01d3fc2e7",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc477-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-f"
+      ]
+    },
+    {
+      "operationId": "operation-04af451162e17d38e6d1129f",
+      "entityType": "problem",
+      "entityId": "abc477-g",
+      "action": "add",
+      "path": "src/content/problems/updates/abc477-g.json",
+      "beforeDigest": null,
+      "afterDigest": "83194a104b534ab7dba1e993c36a8e5a1ff1a899a29cfca9c0510c4935bbba28",
+      "affectedEntities": [
+        {
+          "entityType": "problem",
+          "entityId": "abc477-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-4bfea35ba3170b790304d53d",
+      "entityType": "source",
+      "entityId": "source-abc477-task-list-92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-task-list-92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4.json",
+      "beforeDigest": null,
+      "afterDigest": "cbf45dee5fe759034117eeddec28334ed0b54114723a084cbe25cf76e28cfd58",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-task-list-92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-ea085f53a089ad0c859323b3",
+      "entityType": "source",
+      "entityId": "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696.json",
+      "beforeDigest": null,
+      "afterDigest": "16d2ff9bb054225a4d47a4ce7eba749dc73d1ae194065c21db724019cf9fd793",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-4baf6e4019a0ae6add2d2c17",
+      "entityType": "source",
+      "entityId": "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e.json",
+      "beforeDigest": null,
+      "afterDigest": "8e839a0e3ae786cee53960e48c3b65b368a571de32a2e93f7b951a13e79a8a16",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-1547e26839eafa08d55c29f3",
+      "entityType": "source",
+      "entityId": "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e.json",
+      "beforeDigest": null,
+      "afterDigest": "31295658a79849aafa06c3d75ea689a9d9d175345c1227fcb2c7c6515483fd5b",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-29c28b984619f636a647da30",
+      "entityType": "source",
+      "entityId": "source-abc477-editorial-index-28b4fe0ccf05ae6f964b46cfbb915361c6f28a4c70ec376763663ad631db00f9",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-editorial-index-28b4fe0ccf05ae6f964b46cfbb915361c6f28a4c70ec376763663ad631db00f9.json",
+      "beforeDigest": null,
+      "afterDigest": "c61740ae2a7570cc8562bd4ddd3246c4399477d8618fd24d1f4a57c91a37f680",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-editorial-index-28b4fe0ccf05ae6f964b46cfbb915361c6f28a4c70ec376763663ad631db00f9",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-144d46dc4bdfb73e2e9ce775",
+      "entityType": "source",
+      "entityId": "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d.json",
+      "beforeDigest": null,
+      "afterDigest": "978dff3da5406d2d3365cd02779da5ac3cac5303d0b087058f34b6551d0fd510",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-8a5ab880119d91611ea2ed84",
+      "entityType": "source",
+      "entityId": "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae.json",
+      "beforeDigest": null,
+      "afterDigest": "828b3284af09e415feb6f3dd47c41f20e3b78eb9ff993b6904fb2590d51b0f2a",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-3a005dda6b23cf82c9ae6177",
+      "entityType": "source",
+      "entityId": "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8",
+      "action": "add",
+      "path": "src/content/sources/updates/source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8.json",
+      "beforeDigest": null,
+      "afterDigest": "d4f54255ee8329d1862b53ff54e8528cce7c284fe5bbf129f6b816bb301c7fa0",
+      "affectedEntities": [
+        {
+          "entityType": "source",
+          "entityId": "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-5d48a67518f72041df05b506",
+      "entityType": "contest_slot",
+      "entityId": "slot-abc477-e",
+      "action": "add",
+      "path": "src/content/problem-slots/updates/slot-abc477-e.json",
+      "beforeDigest": null,
+      "afterDigest": "812bd80d31c6f3a8deab5043f6a3d9751b267c13fb75e6d55ee2b00518dbb02b",
+      "affectedEntities": [
+        {
+          "entityType": "contest_slot",
+          "entityId": "slot-abc477-e",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-a1b144a22a018879f39c12d9",
+      "entityType": "contest_slot",
+      "entityId": "slot-abc477-f",
+      "action": "add",
+      "path": "src/content/problem-slots/updates/slot-abc477-f.json",
+      "beforeDigest": null,
+      "afterDigest": "8a5a9aa934ac3089c3744efb9a4d70a25dec8d7d96bbf0921b21be6e5a924c57",
+      "affectedEntities": [
+        {
+          "entityType": "contest_slot",
+          "entityId": "slot-abc477-f",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-af26fcef8a240b304c3f6d43",
+      "entityType": "contest_slot",
+      "entityId": "slot-abc477-g",
+      "action": "add",
+      "path": "src/content/problem-slots/updates/slot-abc477-g.json",
+      "beforeDigest": null,
+      "afterDigest": "200b3c5e0ff1a04e9bfdbfbdb51fc005398320473159513b02d40f4fffd54a0e",
+      "affectedEntities": [
+        {
+          "entityType": "contest_slot",
+          "entityId": "slot-abc477-g",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-46a3e1f5f6cd19da4f46f7c8",
+      "entityType": "contest_slot",
+      "entityId": "slot-abc477-ex",
+      "action": "add",
+      "path": "src/content/problem-slots/updates/slot-abc477-ex.json",
+      "beforeDigest": null,
+      "afterDigest": "bb5c7197be6f399e9000c6108aebe9bce2a7fa8198a336d56834dfa51d66b38d",
+      "affectedEntities": [
+        {
+          "entityType": "contest_slot",
+          "entityId": "slot-abc477-ex",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-85ffe35a95d77ed8c6cd068a",
+      "entityType": "contest_slot",
+      "entityId": "slot-abc477-h",
+      "action": "add",
+      "path": "src/content/problem-slots/updates/slot-abc477-h.json",
+      "beforeDigest": null,
+      "afterDigest": "753697598f4a75d977f79ab00a7243ace69683a1dc41a2e34808604753bef73a",
+      "affectedEntities": [
+        {
+          "entityType": "contest_slot",
+          "entityId": "slot-abc477-h",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    },
+    {
+      "operationId": "operation-4ff22e3a2c22d99c782a8245",
+      "entityType": "placement",
+      "entityId": "placement-update-abc477",
+      "action": "add",
+      "path": "src/content/accepted-updates/abc477.json",
+      "beforeDigest": null,
+      "afterDigest": "047e8db8f75ceb28d5fc84dd96638fe56e98d7b2cdd4d29c0477c6b0f89e44a6",
+      "affectedEntities": [
+        {
+          "entityType": "placement",
+          "entityId": "placement-update-abc477",
+          "action": "add"
+        }
+      ],
+      "affectedProblemIds": [
+        "abc477-e",
+        "abc477-f",
+        "abc477-g"
+      ]
+    }
+  ],
+  "authoringResults": [
+    {
+      "problemId": "abc477-e",
+      "slotLabel": "E",
+      "resultType": "authoring_unit_draft",
+      "draftPath": "src/content/docs/problems/updates/abc477-e.md",
+      "packetPath": "staging/updates/initial-catch-up/authoring/abc477.json",
+      "templatePath": null,
+      "reasonCode": null,
+      "reason": null,
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc477-f",
+      "slotLabel": "F",
+      "resultType": "authoring_unit_draft",
+      "draftPath": "src/content/docs/problems/updates/abc477-f.md",
+      "packetPath": "staging/updates/initial-catch-up/authoring/abc477.json",
+      "templatePath": null,
+      "reasonCode": null,
+      "reason": null,
+      "retryCondition": null
+    },
+    {
+      "problemId": "abc477-g",
+      "slotLabel": "G",
+      "resultType": "authoring_unit_draft",
+      "draftPath": "src/content/docs/problems/updates/abc477-g.md",
+      "packetPath": "staging/updates/initial-catch-up/authoring/abc477.json",
+      "templatePath": null,
+      "reasonCode": null,
+      "reason": null,
+      "retryCondition": null
+    }
+  ],
+  "correctionImpactIds": [],
+  "validationSummary": {
+    "checkIds": [
+      "check-official-metadata",
+      "check-authoring-subject",
+      "check-inventory-placement",
+      "check-review-policy"
+    ],
+    "problemResults": [
+      {
+        "problemId": "abc477-e",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc477-f",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      },
+      {
+        "problemId": "abc477-g",
+        "passed": true,
+        "findingCodes": [],
+        "remediation": null
+      }
+    ],
+    "blockingFindingCount": 0,
+    "aggregatePassed": true,
+    "resultDigest": "f86a1471509a400a3b77a8fb17eef53804e06842baf8170bed1358561afe96a3"
+  },
+  "state": "ELIGIBLE_FOR_BATCH",
+  "createdAt": "2026-10-06T11:32:14.894Z",
+  "updatedAt": "2026-10-06T11:32:14.894Z",
+  "fixtureMode": false
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc471-e",
+  "contestId": "abc471",
+  "slotLabel": "E",
+  "officialTaskId": "abc471_e",
+  "title": "Sum of Square of Sum",
+  "officialUrl": "https://atcoder.jp/contests/abc471/tasks/abc471_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 2\\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc471-e-problem-546ffa3ec66efe17523a293a454de78dd65662269660a0d7ba83ff604862eb4c",
+    "source-abc471-editorial-23910-0ce59372f46952e66dc4a3e5484633db975b33af9943769a72145858fff0a922"
+  ],
+  "checkedAt": "2026-10-06T11:31:08.833Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

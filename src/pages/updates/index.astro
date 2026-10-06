@@ -1,6 +1,6 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { publicCatalog, withBase } from '../../lib/catalog/public-catalog.js';
+import { publicCatalog, publicProjection, withBase } from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -10,6 +10,25 @@ const base = import.meta.env.BASE_URL;
   breadcrumbs={[{ label: '更新履歴' }]}
 >
   <span data-pagefind-meta="entity-kind">更新履歴</span><h1>更新履歴</h1>
+  {
+    publicProjection.catalog.release.publicationStatus === 'prepared' && (
+      <section aria-labelledby="initial-summary">
+        <h2 id="initial-summary">初回版の収録内容</h2>
+        <p>
+          {publicProjection.catalog.release.firstContestId.toUpperCase()}〜
+          {publicProjection.catalog.release.lastContestId.toUpperCase()}、上級問題
+          {publicCatalog.problems.length}
+          問。初回の一括収録と、締切までに終了したコンテストの追加収録をまとめています。
+        </p>
+        <p>
+          収録締切:{' '}
+          <time datetime={publicProjection.catalog.release.cutoffAt}>
+            {publicProjection.catalog.release.cutoffAt}
+          </time>
+        </p>
+      </section>
+    )
+  }
   {
     publicCatalog.releaseHistory.length === 0 ? (
       <p>公開済みReleaseは0件です。</p>

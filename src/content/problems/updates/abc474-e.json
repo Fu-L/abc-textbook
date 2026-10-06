@@ -1,0 +1,20 @@
+{
+  "id": "abc474-e",
+  "contestId": "abc474",
+  "slotLabel": "E",
+  "officialTaskId": "abc474_e",
+  "title": "One Time Coupon",
+  "officialUrl": "https://atcoder.jp/contests/abc474/tasks/abc474_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 2\\times 10^5; 1\\le N\\le 2\\times 10^5; 1\\le B_i < A_i \\le 10^9; The sum of N over all test cases is at most 2\\times 10^5.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc474-e-problem-6917879ae8fbda6c5c2601451055e47350c2664bf0e81ab4ec540869f94418da",
+    "source-abc474-editorial-25442-a00af220ae77a0f39f7ff3cedcfef0f5cdcd9e195c1cde82a6c3e6cab2730fdd"
+  ],
+  "checkedAt": "2026-10-06T11:54:05.312Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

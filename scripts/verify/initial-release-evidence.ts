@@ -30,6 +30,7 @@ export const auditInputSubject = async () => {
     'docs/verification/bootstrap',
     'docs/verification/authoring-skill',
     'staging/taxonomy',
+    'staging/updates/initial-catch-up',
     '.agents/skills/abc-explanation-author',
   ];
   const files = [
@@ -49,8 +50,11 @@ export const auditInputSubject = async () => {
       if (
         file.isFile() &&
         /\.(?:[cm]?js|tsx?|astro|json|md|py|txt|ya?ml|svg|css|sh)$/u.test(file.name)
-      )
-        files.push(`${file.parentPath}/${file.name}`.replace(`${process.cwd()}/`, ''));
+      ) {
+        const name = `${file.parentPath}/${file.name}`.replace(`${process.cwd()}/`, '');
+        // Exact-commit review reports are audit outputs, not their own input subject.
+        if (!name.startsWith('docs/reviews/human-content/initial-release/')) files.push(name);
+      }
   }
   const inventory = await Promise.all(
     files.sort().map(async (path) => ({ path, digest: fileSha(await readFile(path)) })),

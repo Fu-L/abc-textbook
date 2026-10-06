@@ -1,0 +1,20 @@
+{
+  "id": "abc471-g",
+  "contestId": "abc471",
+  "slotLabel": "G",
+  "officialTaskId": "abc471_g",
+  "title": "Caeser Syllables",
+  "officialUrl": "https://atcoder.jp/contests/abc471/tasks/abc471_g",
+  "constraintsSummary": "Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 7 \\times 10^6; 1 \\leq K \\leq 2300; 0 \\leq A_i \\leq K-1 (1 \\leq i \\leq N); V_j \\in \\{0,1\\} (0 \\leq j \\leq K-1); 0 \\leq \\mathrm{seed} \\leq 2^{60} - 1; 1 \\leq M \\leq \\min(N, 10^5); 0 \\leq b_i \\leq K-1 (1 \\leq i \\leq M); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc471-g-problem-4fd12b99389cc79a8f46878f70b5369d265b587ea77e4139578ff55308688744",
+    "source-abc471-editorial-24208-e5329f62b49434bd86ae80921e88d51251a1bc043331f32e55d34004698b4e02"
+  ],
+  "checkedAt": "2026-10-06T11:31:08.833Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

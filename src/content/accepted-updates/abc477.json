@@ -1,0 +1,1510 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc477",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc477-e",
+        "learningOutcomeIds": [
+          "outcome-model-and-compute-shortest-path"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-shortest-path"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^9; 1 \\leq S \\lt T \\leq N+1; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "最短単純経路が中心を避けるなら輪の二方向の一方であり、含むなら中心の前後の距離はD_s,D_t以上である。従って真の最短距離は三候補の最小以上。逆に三候補はいずれも経路またはwalkの長さで、閉路を除去して得る経路以上だから真の最短距離以下にはならない。両向きの評価が一致する。",
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+            "path": "src/content/sources/updates/source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc477_e",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d",
+            "path": "src/content/sources/updates/source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc477_e",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc477-e",
+        "sourceRevisionIds": [
+          "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+          "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc477-e-solution",
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "全点間最短路を求めるには頂点数が大きすぎる。一方、中心を除いたグラフは一本の輪である。中心を通らない単純経路は時計回りと反時計回りの二つしかない。輪の辺長の累積和Pを作れば、外周頂点s,t間の二つの距離はd=|P_{s−1}−P_{t−1}|とP_N−dになる。",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。",
+              "decision": "adopted",
+              "decisionReason": "最短単純経路が中心を避けるなら輪の二方向の一方であり、含むなら中心の前後の距離はD_s,D_t以上である。従って真の最短距離は三候補の最小以上。逆に三候補はいずれも経路またはwalkの長さで、閉路を除去して得る経路以上だから真の最短距離以下にはならない。両向きの評価が一致する。",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "全点間最短路を求めるには頂点数が大きすぎる。一方、中心を除いたグラフは一本の輪である。中心を通らない単純経路は時計回りと反時計回りの二つしかない。輪の辺長の累積和Pを作れば、外周頂点s,t間の二つの距離はd=|P_{s−1}−P_{t−1}|とP_N−dになる。\n\n中心を通る場合は、中心から全頂点への最短距離Dを一度Dijkstraで求める。ここでD_vは放射状の辺B_vだけではない。隣の頂点の安い放射辺と外周の移動を組み合わせた方が短いことがあるから、外周辺も含むグラフで計算する。中心を経由する候補はD_s+D_t。中心を端点に含むクエリではD_{N+1}=0として、この候補だけを答える。\n\n外周同士ならmin(d,P_N−d,D_s+D_t)。D_sとD_tの最短路が重なることはあるが、それらをつないだものは有効なwalkであり、正の辺長の閉路を除けばそれ以下の単純経路になる。この候補を他の二候補と比較することで答えの正しさを保てる。『中心を通る最短単純経路が必ず二つの独立最短路の連結になる』とまで主張する必要はない。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "最短路モデル",
+            "trigger": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。",
+            "application": "全点間最短路を求めるには頂点数が大きすぎる。一方、中心を除いたグラフは一本の輪である。中心を通らない単純経路は時計回りと反時計回りの二つしかない。輪の辺長の累積和Pを作れば、外周頂点s,t間の二つの距離はd=|P_{s−1}−P_{t−1}|とP_N−dになる。\n\n中心を通る場合は、中心から全頂点への最短距離Dを一度Dijkstraで求める。ここでD_vは放射状の辺B_vだけではない。隣の頂点の安い放射辺と外周の移動を組み合わせた方が短いことがあるから、外周辺も含むグラフで計算する。中心を経由する候補はD_s+D_t。中心を端点に含むクエリではD_{N+1}=0として、この候補だけを答える。\n\n外周同士ならmin(d,P_N−d,D_s+D_t)。D_sとD_tの最短路が重なることはあるが、それらをつないだものは有効なwalkであり、正の辺長の閉路を除けばそれ以下の単純経路になる。この候補を他の二候補と比較することで答えの正しさを保てる。『中心を通る最短単純経路が必ず二つの独立最短路の連結になる』とまで主張する必要はない。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。",
+            "reusablePerspective": "一般のグラフアルゴリズムを繰り返す前に、特殊な頂点を除いた構造が単純になるか考える。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "Dijkstraと累積和に O(N log N)、Q問の回答に O(Q)。",
+          "space": "グラフ・距離・累積和に O(N)。",
+          "evidenceIds": [
+            "evidence-abc477-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "距離は最大約N×10^9なので64 bit。Dijkstraの古いheap entryを捨てる。Bの配列をDと同一視しない。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "一般のグラフアルゴリズムを繰り返す前に、特殊な頂点を除いた構造が単純になるか考える。",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc477-e",
+        "problemId": "abc477-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。",
+          "proof": "最短単純経路が中心を避けるなら輪の二方向の一方であり、含むなら中心の前後の距離はD_s,D_t以上である。従って真の最短距離は三候補の最小以上。逆に三候補はいずれも経路またはwalkの長さで、閉路を除去して得る経路以上だから真の最短距離以下にはならない。両向きの評価が一致する。",
+          "complexity": "Dijkstraと累積和に O(N log N)、Q問の回答に O(Q)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^9; 1 \\leq S \\lt T \\leq N+1; All input values are integers.",
+          "prerequisites": "最短路モデル",
+          "implementation": "距離は最大約N×10^9なので64 bit。Dijkstraの古いheap entryを捨てる。Bの配列をDと同一視しない。"
+        },
+        "additionalElement": null,
+        "rationale": "一般のグラフアルゴリズムを繰り返す前に、特殊な頂点を除いた構造が単純になるか考える。 主たる学習成果を「最短路モデル」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc477-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-shortest-path"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-model-and-compute-shortest-path",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-shortest-path"
+            ],
+            "rationale": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-shortest-path"
+            ],
+            "rationale": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-shortest-path"
+            ],
+            "rationale": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-shortest-path"
+            ],
+            "rationale": "多数の距離クエリを、必ず通る候補の少ない中継点と、それを避ける単純な残余構造へ分解する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc477-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+                "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "輪と共通中心という構造が、クエリごとの最短路計算を三候補へ縮める。中心が端点の場合は輪の累積和を参照しない。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          },
+          {
+            "problemId": "abc477-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc477-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+              "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc477-e.md",
+      "documentDigest": "804ca44995292652fe1f65a196db994c868f51439dcc7cb0ef3e490a4b9e64af",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 一般のグラフアルゴリズムを繰り返す前に、特殊な頂点を除いた構造が単純になるか考える。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc477-f",
+        "learningOutcomeIds": [
+          "outcome-linearize-events",
+          "outcome-design-range-update-action"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-event-sweep",
+          "tag-lazy-segment-action"
+        ],
+        "constraints": [
+          "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M,Q \\le 2\\times10^5; 1 \\le L_i \\le R_i \\le M; For each query, 1 \\le A \\le B \\le N.; For each query, 1 \\le C \\le D \\le M.; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "掃引境界xで各葉の値は行[0,x)にある、その列の黒マス数に等しい。初期は全て0であり、一行の区間加算がこの不変条件を保つ。従って列区間和はF(x,l,r)と一致し、二つの行prefixの差は目的矩形だけを数える。",
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+            "path": "src/content/sources/updates/source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc477_f",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae",
+            "path": "src/content/sources/updates/source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc477_f",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc477-f",
+        "sourceRevisionIds": [
+          "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+          "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc477-f-solution",
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "各行の黒マスは一区間だが、質問矩形と重なる黒マス数を行ごとに足すと O(NQ)。二次元累積和を全セルに作ることも O(NM) で大きすぎる。ここでは行のprefixを一つずつ伸ばすとき、変わる列が一区間であることを使う。",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。",
+              "decision": "adopted",
+              "decisionReason": "掃引境界xで各葉の値は行[0,x)にある、その列の黒マス数に等しい。初期は全て0であり、一行の区間加算がこの不変条件を保つ。従って列区間和はF(x,l,r)と一致し、二つの行prefixの差は目的矩形だけを数える。",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "各行の黒マスは一区間だが、質問矩形と重なる黒マス数を行ごとに足すと O(NQ)。二次元累積和を全セルに作ることも O(NM) で大きすぎる。ここでは行のprefixを一つずつ伸ばすとき、変わる列が一区間であることを使う。\n\n半開区間へ変換し、F(x,l,r)を行[0,x)、列[l,r)内の黒マス数とする。質問[A,B)×[C,D)の答えはF(B,C,D)−F(A,C,D)。各質問を行境界Bに符号+1、Aに−1を付けた二つのイベントへ分ける。境界が0..Nなので、ソートをせず行ごとの配列へイベントを置いてもよい。\n\n現在までに取り込んだ黒マス数を列ごとに保持する。行xを取り込む操作は列[L_x,R_x)の各値へ1を加えるだけである。列区間和を答えられるLazy Segment Treeを使い、各ノードの要約を(和s,長さlen)、加算aの作用を(s+a len,len)にする。行境界xでは先にF(x,…)のイベントに答え、その後で行xを追加する。この順序にすれば上下端の扱いが明瞭になる。\n\n入力は行・列とも1-based閉区間なので、[L,R]は0-basedの[L−1,R)へ変換する。イベントには質問IDと符号を保存して、二回の区間和を同じ回答へ蓄積する。二次元の巨大な面を保存せず、掃引済み行の列別集約だけを残す。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "event順にactive集合を更新する",
+            "trigger": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。",
+            "application": "各行の黒マスは一区間だが、質問矩形と重なる黒マス数を行ごとに足すと O(NQ)。二次元累積和を全セルに作ることも O(NM) で大きすぎる。ここでは行のprefixを一つずつ伸ばすとき、変わる列が一区間であることを使う。\n\n半開区間へ変換し、F(x,l,r)を行[0,x)、列[l,r)内の黒マス数とする。質問[A,B)×[C,D)の答えはF(B,C,D)−F(A,C,D)。各質問を行境界Bに符号+1、Aに−1を付けた二つのイベントへ分ける。境界が0..Nなので、ソートをせず行ごとの配列へイベントを置いてもよい。\n\n現在までに取り込んだ黒マス数を列ごとに保持する。行xを取り込む操作は列[L_x,R_x)の各値へ1を加えるだけである。列区間和を答えられるLazy Segment Treeを使い、各ノードの要約を(和s,長さlen)、加算aの作用を(s+a len,len)にする。行境界xでは先にF(x,…)のイベントに答え、その後で行xを追加する。この順序にすれば上下端の扱いが明瞭になる。\n\n入力は行・列とも1-based閉区間なので、[L,R]は0-basedの[L−1,R)へ変換する。イベントには質問IDと符号を保存して、二回の区間和を同じ回答へ蓄積する。二次元の巨大な面を保存せず、掃引済み行の列別集約だけを残す。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。",
+            "reusablePerspective": "平面走査では『次の行を取り込む差分』を先に書く。その差分に合う区間データ構造を選ぶ。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "行境界にイベントを配置すれば O((N+Q) log M)。イベントをソートする実装なら追加で O(Q log Q)。",
+          "space": "列の木 O(M)、境界イベント O(N+Q)。",
+          "evidenceIds": [
+            "evidence-abc477-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "行を加える前にその境界の質問へ答える。答えはNMまであるので64 bit整数。木の単位元の長さは0、各実葉の長さは1とする。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "平面走査では『次の行を取り込む差分』を先に書く。その差分に合う区間データ構造を選ぶ。",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc477-f",
+        "problemId": "abc477-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。",
+          "proof": "掃引境界xで各葉の値は行[0,x)にある、その列の黒マス数に等しい。初期は全て0であり、一行の区間加算がこの不変条件を保つ。従って列区間和はF(x,l,r)と一致し、二つの行prefixの差は目的矩形だけを数える。",
+          "complexity": "行境界にイベントを配置すれば O((N+Q) log M)。イベントをソートする実装なら追加で O(Q log Q)。",
+          "constraints": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M,Q \\le 2\\times10^5; 1 \\le L_i \\le R_i \\le M; For each query, 1 \\le A \\le B \\le N.; For each query, 1 \\le C \\le D \\le M.; All input values are integers.",
+          "prerequisites": "event順にactive集合を更新する",
+          "implementation": "行を加える前にその境界の質問へ答える。答えはNMまであるので64 bit整数。木の単位元の長さは0、各実葉の長さは1とする。"
+        },
+        "additionalElement": null,
+        "rationale": "平面走査では『次の行を取り込む差分』を先に書く。その差分に合う区間データ構造を選ぶ。 主たる学習成果を「event順にactive集合を更新する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc477-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-event-sweep"
+        ],
+        "supportingTagIds": [
+          "tag-lazy-segment-action"
+        ],
+        "primaryOutcomeId": "outcome-linearize-events",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-design-range-update-action"
+        ],
+        "adHocElements": [
+          "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-event-sweep"
+            ],
+            "rationale": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-event-sweep"
+            ],
+            "rationale": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-event-sweep"
+            ],
+            "rationale": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-event-sweep"
+            ],
+            "rationale": "二次元の静的矩形クエリを一軸のprefixの差にし、一軸を伸ばす差分を残る軸の区間更新で保守する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc477-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+                "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "一行にある黒マスが連続することから、行の追加が一回のrange addになる。一般の矩形更新を扱う追加構造は要らない。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          },
+          {
+            "problemId": "abc477-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc477-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+              "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc477-f.md",
+      "documentDigest": "8010e87b0c5e14f6d201c28cd51a6c8c484b8ef1f0f916cf04ce918a5ed5cc3e",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 平面走査では『次の行を取り込む差分』を先に書く。その差分に合う区間データ構造を選ぶ。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc477-g",
+        "learningOutcomeIds": [
+          "outcome-schedule-range-query-updates",
+          "outcome-flatten-tree-by-euler-order",
+          "outcome-answer-tree-ancestor-queries"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-mo-offline-range",
+          "tag-tree-euler-flattening",
+          "tag-tree-ancestor-lca"
+        ],
+        "constraints": [
+          "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i \\lt v_i \\leq N; The given graph is a tree.; 1 \\leq x_i \\leq N; 1 \\leq s \\lt t \\leq N; 1 \\leq a \\leq b \\leq N; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "Euler prefixの奇数出現集合は根から現在頂点までのパスである。二prefixの対称差は二頂点間パスからLCAだけを除くため、区間と一時的なLCA追加が目的集合に一致する。頻度を一段変えるとき閾値を横切るgの添字は一つだけであり、g[a]−g[b+1]はちょうど指定頻度帯の色を数える。",
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+            "path": "src/content/sources/updates/source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc477_g",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8",
+            "path": "src/content/sources/updates/source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc477_g",
+            "checkedAt": "2026-10-06T11:32:14.894Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc477-g",
+        "sourceRevisionIds": [
+          "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+          "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc477-g-solution",
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "パス上の色の頻度を、頻度区間[a,b]で集計する。root-to-vertexのprefixを単に差し引く方法では、各色の頻度が変わるたびにその頻度帯への所属も変わるため、パス和のような線形集約が使えない。ここではクエリを並べ替えて現在のパスに少しずつ頂点を足し引きする。",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。",
+              "decision": "adopted",
+              "decisionReason": "Euler prefixの奇数出現集合は根から現在頂点までのパスである。二prefixの対称差は二頂点間パスからLCAだけを除くため、区間と一時的なLCA追加が目的集合に一致する。頻度を一段変えるとき閾値を横切るgの添字は一つだけであり、g[a]−g[b+1]はちょうど指定頻度帯の色を数える。",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "パス上の色の頻度を、頻度区間[a,b]で集計する。root-to-vertexのprefixを単に差し引く方法では、各色の頻度が変わるたびにその頻度帯への所属も変わるため、パス和のような線形集約が使えない。ここではクエリを並べ替えて現在のパスに少しずつ頂点を足し引きする。\n\nDFSの入場・退場で各頂点を一度ずつ記録した長さ2NのEuler列を作る。tin(s)≤tin(t)となるよう端点を交換すると、区間[tin(s)+1,tin(t)]に奇数回現れる頂点は、s-tパスからLCA(s,t)を除いた集合になる。根からsとtへの頂点集合の対称差を考えると、この形が見える。祖先が端点の場合も同じ式で扱える。\n\nこれをMo法で処理し、Euler列の位置を追加・削除するたびに頂点の採用フラグをtoggleする。採用頂点の色頻度f[c]を管理し、さらにg[k]=頻度がk以上の色数を持つ。f[c]がd→d+1ならg[d+1]だけ+1、d→d−1ならg[d]だけ−1。よって頂点のtoggleは O(1)、答えもg[a]−g[b+1]で O(1)。各質問の直前だけLCAを足し、回答後に元へ戻す。\n\nEuler区間長2N、クエリ数Qに対してブロック幅を概ね2N/√Qにする。左右端の総移動は O(N√Q)。LCAを別途binary liftingなどで前計算する。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "Moの順序で区間問い合わせの差分を更新する",
+            "trigger": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。",
+            "application": "パス上の色の頻度を、頻度区間[a,b]で集計する。root-to-vertexのprefixを単に差し引く方法では、各色の頻度が変わるたびにその頻度帯への所属も変わるため、パス和のような線形集約が使えない。ここではクエリを並べ替えて現在のパスに少しずつ頂点を足し引きする。\n\nDFSの入場・退場で各頂点を一度ずつ記録した長さ2NのEuler列を作る。tin(s)≤tin(t)となるよう端点を交換すると、区間[tin(s)+1,tin(t)]に奇数回現れる頂点は、s-tパスからLCA(s,t)を除いた集合になる。根からsとtへの頂点集合の対称差を考えると、この形が見える。祖先が端点の場合も同じ式で扱える。\n\nこれをMo法で処理し、Euler列の位置を追加・削除するたびに頂点の採用フラグをtoggleする。採用頂点の色頻度f[c]を管理し、さらにg[k]=頻度がk以上の色数を持つ。f[c]がd→d+1ならg[d+1]だけ+1、d→d−1ならg[d]だけ−1。よって頂点のtoggleは O(1)、答えもg[a]−g[b+1]で O(1)。各質問の直前だけLCAを足し、回答後に元へ戻す。\n\nEuler区間長2N、クエリ数Qに対してブロック幅を概ね2N/√Qにする。左右端の総移動は O(N√Q)。LCAを別途binary liftingなどで前計算する。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。",
+            "reusablePerspective": "非線形のパス集計では、区間への写像と、要素一つの増減コストを別々に設計する。累積頻度の更新差分も見る。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "Moの移動 O(N√Q)、LCA前処理・照会 O((N+Q) log N)。",
+          "space": "Euler・頻度に O(N)、クエリ O(Q)、binary liftingに O(N log N)。",
+          "evidenceIds": [
+            "evidence-abc477-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "LCAはEuler区間の奇数集合に含まれない。質問ごとの追加を必ず戻す。a≥1なので未出現色は回答に影響しない。深い木のDFSではstack深度に注意。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "非線形のパス集計では、区間への写像と、要素一つの増減コストを別々に設計する。累積頻度の更新差分も見る。",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc477-g",
+        "problemId": "abc477-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。",
+          "proof": "Euler prefixの奇数出現集合は根から現在頂点までのパスである。二prefixの対称差は二頂点間パスからLCAだけを除くため、区間と一時的なLCA追加が目的集合に一致する。頻度を一段変えるとき閾値を横切るgの添字は一つだけであり、g[a]−g[b+1]はちょうど指定頻度帯の色を数える。",
+          "complexity": "Moの移動 O(N√Q)、LCA前処理・照会 O((N+Q) log N)。",
+          "constraints": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i \\lt v_i \\leq N; The given graph is a tree.; 1 \\leq x_i \\leq N; 1 \\leq s \\lt t \\leq N; 1 \\leq a \\leq b \\leq N; All input values are integers.",
+          "prerequisites": "Moの順序で区間問い合わせの差分を更新する",
+          "implementation": "LCAはEuler区間の奇数集合に含まれない。質問ごとの追加を必ず戻す。a≥1なので未出現色は回答に影響しない。深い木のDFSではstack深度に注意。"
+        },
+        "additionalElement": null,
+        "rationale": "非線形のパス集計では、区間への写像と、要素一つの増減コストを別々に設計する。累積頻度の更新差分も見る。 主たる学習成果を「Moの順序で区間問い合わせの差分を更新する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc477-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-mo-offline-range"
+        ],
+        "supportingTagIds": [
+          "tag-tree-euler-flattening",
+          "tag-tree-ancestor-lca"
+        ],
+        "primaryOutcomeId": "outcome-schedule-range-query-updates",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [
+          "outcome-flatten-tree-by-euler-order",
+          "outcome-answer-tree-ancestor-queries"
+        ],
+        "adHocElements": [
+          "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-mo-offline-range"
+            ],
+            "rationale": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-mo-offline-range"
+            ],
+            "rationale": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-mo-offline-range"
+            ],
+            "rationale": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-mo-offline-range"
+            ],
+            "rationale": "パス集合をEuler列の出現偶奇へ変換してMo法を適用する。頻度の頻度を累積閾値で持つと、一増減が一地点の変更になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc477-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc477-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+                "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "数えたいのは頂点数ではなく指定頻度帯の色数。gをFenwick Treeに載せる必要はなく、全移動を O(1) で更新できる。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          },
+          {
+            "problemId": "abc477-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc477-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+              "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc477-g.md",
+      "documentDigest": "51f671f2830acfdf68b62ea91c620acf79212a7e5415b26d20bd11dc18db0a14",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 非線形のパス集計では、区間への写像と、要素一つの増減コストを別々に設計する。累積頻度の更新差分も見る。"
+      }
+    }
+  ]
+}
