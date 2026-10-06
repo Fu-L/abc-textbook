@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { cp, readFile, symlink } from 'node:fs/promises';
+import { cp, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { withReleaseCommit } from '../release/commit-snapshot.js';
 import { parseKeyValueArguments, requiredArgument } from '../corpus/cli-support.js';
@@ -11,11 +11,12 @@ try {
   const commit = requiredArgument(args, '--commit');
   const root = process.cwd();
   await withReleaseCommit({ repositoryRoot: root, commit }, async (snapshot) => {
-    await symlink(
-      path.join(root, 'node_modules'),
-      path.join(snapshot.repositoryRoot, 'node_modules'),
-      'dir',
-    );
+    // Astro's virtual style modules require dependencies to resolve inside this
+    // checkout. Preserve relative .bin links rather than sharing realpaths.
+    await cp(path.join(root, 'node_modules'), path.join(snapshot.repositoryRoot, 'node_modules'), {
+      recursive: true,
+      verbatimSymlinks: true,
+    });
     const run = async (script: string, args: string[]) =>
       new Promise<void>((resolve, reject) => {
         const child = spawn(process.execPath, ['--import', 'tsx', script, ...args], {
