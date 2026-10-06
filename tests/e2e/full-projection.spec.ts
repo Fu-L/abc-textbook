@@ -20,7 +20,7 @@ test('connects the parent DP concept to its representative problems without clai
 for (const { unit, problemId, count } of [
   { unit: 'unit-change-impact-localization', problemId: 'abc218-f', count: 2 },
   { unit: 'unit-persistence-rollback', problemId: 'abc218-g', count: 5 },
-  { unit: 'unit-chapter-graph', problemId: 'abc218-e', count: 127 },
+  { unit: 'unit-chapter-graph', problemId: 'abc218-e', count: 133 },
 ]) {
   test(`keeps covered problems and review records when filtering by ${unit}`, async ({ page }) => {
     await page.goto(`./problems/${problemId}/`);
