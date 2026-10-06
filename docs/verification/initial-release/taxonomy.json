@@ -1,0 +1,1863 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T135",
+  "status": "passed",
+  "scope": "canonical-full-corpus",
+  "inputSubject": {
+    "digest": "ed0ccd4c8606bb2547592dc14de29e28ff1852b4c5bd5ef1b9f293f23dadf3e7",
+    "fileCount": 9487
+  },
+  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
+  "generatedAt": "2026-10-06T08:48:35.124Z",
+  "commands": [
+    {
+      "command": "npm run corpus:verify-authoring",
+      "exitCode": 0,
+      "durationMs": 758.9598750000005,
+      "outputDigest": "5185a8711115bcdf586f045f1fa571cc2eb47148c5f4b238b8579ab79c194d1b",
+      "outputBytes": 503,
+      "observed": "> abc-textbook@0.1.0 corpus:verify-authoring\n> tsx scripts/corpus/verify-inventory-authoring.ts --check\n\n{\"command\":\"verify-inventory-authoring\",\"mode\":\"check\",\"status\":\"passed\",\"problemCount\":868,\"sourceBoundProblemCount\":868,\"reviewedProblemCount\":868,\"inventoryDigest\":\"1b66ec51f649d9de92dec88445b6bf04ed82c65bd03b0a0666035515aa1ea3ed\",\"evidenceDigest\":\"b30bafee7a83a7693a27ddee56e7eb92ffae98995b7879fb8a9480dd5debbc53\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory-authoring.json\"}"
+    },
+    {
+      "command": "npm run corpus:final-taxonomy",
+      "exitCode": 0,
+      "durationMs": 8094.114541999996,
+      "outputDigest": "f222d86b04626215039537851ee6766ef7fb185483b087a32f6a8c4af1a809b9",
+      "outputBytes": 440,
+      "observed": "> abc-textbook@0.1.0 corpus:final-taxonomy\n> tsx scripts/corpus/final-taxonomy.ts --check\n\n{\"command\":\"final-taxonomy\",\"mode\":\"check\",\"status\":\"accepted\",\"canonicalMaterializationAllowed\":true,\"placementCount\":868,\"sourceRevisionCount\":1738,\"taxonomySubjectDigest\":\"023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251\",\"buildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"written\":0,\"verified\":3}"
+    },
+    {
+      "command": "npm run corpus:materialize-taxonomy",
+      "exitCode": 0,
+      "durationMs": 4643.909667,
+      "outputDigest": "7c81dff473d9ab1f55841932de550326a5be62609b433fc19f26161aba1983bf",
+      "outputBytes": 490,
+      "observed": "> abc-textbook@0.1.0 corpus:materialize-taxonomy\n> tsx scripts/corpus/materialize-canonical-taxonomy.ts --check\n\n{\"command\":\"materialize-canonical-taxonomy\",\"mode\":\"check\",\"status\":\"passed\",\"sourceBuildId\":\"final-taxonomy-build-initial\",\"sourceBuildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"expected\":923,\"verified\":459,\"preserved\":464,\"written\":0,\"counts\":{\"tags\":213,\"learningOutcomes\":242,\"learningUnits\":232,\"learningDocuments\":232,\"placements\":868}}"
+    },
+    {
+      "command": "npm run corpus:verify-learning-units",
+      "exitCode": 0,
+      "durationMs": 2886.301542000001,
+      "outputDigest": "ad80a0669e69e15438280da6cf1d4319f2ab3f035c0160e7c80094c450de4204",
+      "outputBytes": 360,
+      "observed": "> abc-textbook@0.1.0 corpus:verify-learning-units\n> tsx scripts/corpus/verify-full-learning-units.ts --check\n\n{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}"
+    },
+    {
+      "command": "npm run corpus:verify-problem-shard-index",
+      "exitCode": 0,
+      "durationMs": 3965.56912499998,
+      "outputDigest": "68e7e0cac833f4601e4d2358800d4a24b6b1b8caa7152063044c11bf9fb5e9c0",
+      "outputBytes": 353,
+      "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shard-index\n> tsx scripts/corpus/freeze-problem-shard-index.ts --check\n\n{\"status\":\"passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"domains\":[\"graph-search\",\"dynamic-programming\",\"data-structures\",\"mathematics\",\"string-geometry\",\"hybrid\"]}"
+    },
+    {
+      "command": "npm run corpus:verify-problem-shards",
+      "exitCode": 0,
+      "durationMs": 6671.233500000002,
+      "outputDigest": "a260d3b2179947f000dbbc4e7154866f5040e57a7feef1666a0fb3f0c08e5b8f",
+      "outputBytes": 380,
+      "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shards\n> tsx scripts/corpus/author-problem-shards.ts --check\n\n{\"status\":\"automated_checks_passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}"
+    }
+  ],
+  "checks": {
+    "tags": 213,
+    "outcomes": 242,
+    "units": 232,
+    "tagEdges": 146,
+    "outcomeEdges": 198,
+    "unitEdges": 149,
+    "laterPrerequisites": 6,
+    "acceptedReadingOrderDigest": "5a15baf6649cfe309f1f7b27b4afc6b9cff89a7fdf72dffc9b5bb6526e4e362d",
+    "editorialOrderDigest": "516c1484ccbe9a09ec05f2585c2677affa6ced7d0522a561178a001243c3ef41",
+    "mappingDigest": "ee401d3374d20bc3620056162a2343089ca1b59ea849c877cf9da5600d9ad5dc",
+    "correctionImpacts": [
+      {
+        "correctionImpactId": "impact-outcome-provisional-compressed-dp-state",
+        "sourceRevisionIds": [
+          "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+          "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+          "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+          "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc215-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.md",
+            "digest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc215-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc232-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md",
+            "digest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc232-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-dynamic-programming",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/dynamic-programming/index.md",
+            "digest": "ab1ba0d473bc4a671e0178859a69bc89084b4e1581a0b356cf07c8cd5f4a1674"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-dp-state-design",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
+            "digest": "6839551f2c16f26f31095da6f837938f6557678a63523a56358b0719314b55b5"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "sourceRevisionIds": [
+          "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+          "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+          "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+          "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+          "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+          "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc212-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+            "digest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc212-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc222-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.md",
+            "digest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc222-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-number-theory",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/index.md",
+            "digest": "c8cb906f80360d4c4e2d40dc8e552e6ecac50be6c49ca2e1454dc5416ce59400"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-cyclic-group-exponent-counting",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+            "digest": "c19d21e2ec35b302bbb922c33f1f4eb146d2b955bf822e1ecb9ceabf1ca74e8b"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-multiplicative-order-periods",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+            "digest": "cbfe765e0e246284e2e462d10b7d5e0c09e1c47ef3cc352e3531a63107876f07"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "sourceRevisionIds": [
+          "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+          "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+          "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+          "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc223-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.md",
+            "digest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc223-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc256-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.md",
+            "digest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc256-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-query",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/query/index.md",
+            "digest": "c859404ddbb641d802a08d846d4800a4aee2321e7365639a5400fded679a4e3f"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-outcome-provisional-shortest-path-structure",
+        "sourceRevisionIds": [
+          "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+          "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+          "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+          "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+          "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+          "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b",
+          "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+          "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc218-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+            "digest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc218-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc252-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md",
+            "digest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc252-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-change-impact-localization",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/modeling/change-impact-localization.md",
+            "digest": "34dd820b7c43a35429d46872da2804abe99e6cd539642ee01ff11c14e5239d91"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-graph",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/index.md",
+            "digest": "db9a62bdfe85267919abe273b14a0f1eac7aa11485f52eb5b8fd429fa0d72280"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-modeling",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/modeling/index.md",
+            "digest": "b2048075dc6a69834365d206d1bcc01d94859a83870ba971b5c56b15a4a52350"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-shortest-path-certificates",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/shortest-path-certificates.md",
+            "digest": "bc04af9ad6161504857d2b6870273c704c12adf07d312f3da1f67708c224a170"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-shortest-path-reconstruction",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
+            "digest": "0cc59f0367f4852477c89ed62b7a192567a40836a3fdb47230f7f4fb36522af2"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-tag-compressed-dp-state",
+        "sourceRevisionIds": [
+          "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+          "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+          "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+          "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc215-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.md",
+            "digest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc215-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc232-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md",
+            "digest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc232-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-dynamic-programming",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/dynamic-programming/index.md",
+            "digest": "ab1ba0d473bc4a671e0178859a69bc89084b4e1581a0b356cf07c8cd5f4a1674"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-dp-state-design",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
+            "digest": "6839551f2c16f26f31095da6f837938f6557678a63523a56358b0719314b55b5"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-tag-multiplicative-order-counting",
+        "sourceRevisionIds": [
+          "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+          "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+          "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+          "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+          "source-abc230-editorial-3020-ec517a24bce91d242fbba4dc1bd314898db627e75b53e4c2944927428ba3bbfd",
+          "source-abc230-g-problem-9175b9a0825f6ecfa8907cce11e41b2f669f7a733b383504f6992705fa48edae",
+          "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+          "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc212-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+            "digest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc212-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc222-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.md",
+            "digest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc222-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-combinatorics-algebra",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/combinatorics-algebra/index.md",
+            "digest": "6a90aab7b12cf6d57a4cedc6ad6e9e22db94dbda4af6c8208051f3672ca631b1"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-number-theory",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/index.md",
+            "digest": "c8cb906f80360d4c4e2d40dc8e552e6ecac50be6c49ca2e1454dc5416ce59400"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-cyclic-group-exponent-counting",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+            "digest": "c19d21e2ec35b302bbb922c33f1f4eb146d2b955bf822e1ecb9ceabf1ca74e8b"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-divisor-mobius-inversion",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/combinatorics-algebra/divisor-mobius-inversion.md",
+            "digest": "d5987c4fc2be6818a5e548d16cabedd248b674775a3029697687c84081911739"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-inclusion-exclusion",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md",
+            "digest": "880d3a5af4ba77128f219e8ea02aaa2a9a7cc8f53ea3b5eef707af3d6a8f1871"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-multiplicative-order-periods",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+            "digest": "cbfe765e0e246284e2e462d10b7d5e0c09e1c47ef3cc352e3531a63107876f07"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-prime-divisor",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/prime-divisor.md",
+            "digest": "d4177b10db393a83a4fad792691b63819746911c214ddacf11f6d4f914e513b0"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "sourceRevisionIds": [
+          "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+          "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+          "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+          "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc223-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.md",
+            "digest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc223-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc256-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.md",
+            "digest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc256-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-query",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/query/index.md",
+            "digest": "c859404ddbb641d802a08d846d4800a4aee2321e7365639a5400fded679a4e3f"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-tag-shortest-path-structure",
+        "sourceRevisionIds": [
+          "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+          "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+          "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+          "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+          "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+          "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b",
+          "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+          "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc218-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+            "digest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc218-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc252-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md",
+            "digest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc252-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-change-impact-localization",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/modeling/change-impact-localization.md",
+            "digest": "34dd820b7c43a35429d46872da2804abe99e6cd539642ee01ff11c14e5239d91"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-graph",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/index.md",
+            "digest": "db9a62bdfe85267919abe273b14a0f1eac7aa11485f52eb5b8fd429fa0d72280"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-chapter-modeling",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/modeling/index.md",
+            "digest": "b2048075dc6a69834365d206d1bcc01d94859a83870ba971b5c56b15a4a52350"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-shortest-path-certificates",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/shortest-path-certificates.md",
+            "digest": "bc04af9ad6161504857d2b6870273c704c12adf07d312f3da1f67708c224a170"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-shortest-path-reconstruction",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
+            "digest": "0cc59f0367f4852477c89ed62b7a192567a40836a3fdb47230f7f4fb36522af2"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-unit-compressed-dp-state",
+        "sourceRevisionIds": [
+          "source-abc215-e-problem-96f062cfec5946b78dd41ee4c2681e26e1476389181caf11f5d188001673c846",
+          "source-abc215-editorial-2483-c429bea82317400c8c7e593c7250a9b04e85f398216f3065c5677b299a812f2f",
+          "source-abc232-e-problem-b3df9d137295d16f98ee6f59073e45ed18b647cf2dbdf82a892ff22347388b46",
+          "source-abc232-editorial-3148-7f04beda538197092502af948e67959fcd409b195b755f175d65a00bb8b05c5d"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc215-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc215-e.md",
+            "digest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc215-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc232-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-001/abc232-e.md",
+            "digest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc232-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-dp-state-design",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/dynamic-programming/dp-state-design.md",
+            "digest": "6839551f2c16f26f31095da6f837938f6557678a63523a56358b0719314b55b5"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-unit-multiplicative-order-counting",
+        "sourceRevisionIds": [
+          "source-abc212-editorial-2289-49aaac05cb6d52e864368fbc58b708e72c1fec51fdad952bf09ce972fe3c3e05",
+          "source-abc212-g-problem-f65fb746f6879413a4cd941249813537299f67580d7a2dabd97fb9216f17b9d5",
+          "source-abc222-editorial-2750-60abea0942d6c1328f4e76175c2005c04c77516b4f4d3adc5d5fd5c231b76b95",
+          "source-abc222-g-problem-a78282cf6ac558c99da4c78599cb6984de0a1728896449b0230ae3d6c5299378",
+          "source-abc335-editorial-9017-e3ef8c4a9693dbb99548ccbcd4ff92ba7339cda1ec9fbc2891082c6d23f2a1e4",
+          "source-abc335-g-problem-80a8cbbb0788612c44a20ee53443f692ee15c96b6b90d1bae1a89f10950e3f65"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc212-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-count-through-cyclic-exponents/outcome-count-through-cyclic-exponents-shard-001/abc212-g.md",
+            "digest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc212-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc222-g",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/mathematics/outcome-find-period-by-multiplicative-order/outcome-find-period-by-multiplicative-order-shard-001/abc222-g.md",
+            "digest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc222-g",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-cyclic-group-exponent-counting",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md",
+            "digest": "c19d21e2ec35b302bbb922c33f1f4eb146d2b955bf822e1ecb9ceabf1ca74e8b"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-multiplicative-order-periods",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/number-theory/multiplicative-order-periods.md",
+            "digest": "cbfe765e0e246284e2e462d10b7d5e0c09e1c47ef3cc352e3531a63107876f07"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "sourceRevisionIds": [
+          "source-abc223-editorial-2774-57fa3ac279d6ed720ff418a408c5d27d679d0411709c1c7735ab8789873242cf",
+          "source-abc223-f-problem-d35abb95952d72d51f6ffe64103b56bae74b48c76d5e57b753f14fd130d6c306",
+          "source-abc256-editorial-4131-5a56cfc1385cccb66caaa609b059936e87f87c1a1fe818c7857a8646d481623a",
+          "source-abc256-f-problem-77ec1c7e89587cdf14d63e8c6c0c4f679708532e7f2da582ab635b6814a88965"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc223-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-001/abc223-f.md",
+            "digest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc223-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc256-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/data-structures/outcome-maintain-weighted-prefix-statistics/outcome-maintain-weighted-prefix-statistics-shard-001/abc256-f.md",
+            "digest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc256-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-range-monoid-aggregation",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/query/range-monoid-aggregation.md",
+            "digest": "725d815123e1d42464449b606d7f2396416c16fab0355f2566543c170142a5cb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-weighted-prefix-fenwick",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/query/weighted-prefix-fenwick.md",
+            "digest": "553b44283dd59a0d90c17567f2800d13dc8f2dde7bb45e1a0f4993cc8fee8101"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      },
+      {
+        "correctionImpactId": "impact-provisional-unit-shortest-path-structure",
+        "sourceRevisionIds": [
+          "source-abc218-editorial-2606-0f610bb19c682291d44c618748722f77899130ec877784b55292cb9792c0a339",
+          "source-abc218-f-problem-be66936a54f85eaa88784247c9a88327726ff2db043b75ad04519be620931023",
+          "source-abc252-e-problem-66a6922aa6112c57b3273f081ee76d23a0be0bff39be72e343c3adf26edb445a",
+          "source-abc252-editorial-3980-86c3bf6be5d27aff2257287ab1f785e6f0321716a66591195820175c4ab1a0e2",
+          "source-abc279-e-problem-331a193e2ed100b176928fd48364f433619e490d75fbcffb84e141d17c8fc390",
+          "source-abc279-editorial-5289-8faa4f66138e5b0e2e9cde2740f1c56d269463ace6cbcddedfa9a5b7c4dcf65b",
+          "source-abc308-editorial-6709-2c67b0a55940a814375986537bb36bec6a17cf8be1df7d462270bb76ada5ad60",
+          "source-abc308-ex-problem-2caebe996c7978f9549dc514be071ce9e0f3dfb6b41e899d8f90fc9626c9d6e8"
+        ],
+        "verificationStatus": "verified",
+        "targets": [
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc218-f",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/hybrid/outcome-localize-change-impact-by-witness/outcome-localize-change-impact-by-witness-shard-001/abc218-f.md",
+            "digest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc218-f",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "problem",
+              "problemId": "abc252-e",
+              "path": "sections.reasoning"
+            },
+            "documentPath": "src/content/docs/problems/graph-search/outcome-build-shortest-path-certificate/outcome-build-shortest-path-certificate-shard-001/abc252-e.md",
+            "digest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+          },
+          {
+            "locator": {
+              "ownerType": "problem_placement",
+              "problemId": "abc252-e",
+              "path": "src/content/policies/problem-placements.json"
+            },
+            "documentPath": "src/content/policies/problem-placements.json",
+            "digest": "8d28b773064e0260cf9452167b8f10206c741cd1ebfaa2691510d65cac4b9dba"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-change-impact-localization",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/modeling/change-impact-localization.md",
+            "digest": "34dd820b7c43a35429d46872da2804abe99e6cd539642ee01ff11c14e5239d91"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_prerequisites",
+              "path": "src/content/policies/learning-prerequisites.json"
+            },
+            "documentPath": "src/content/policies/learning-prerequisites.json",
+            "digest": "3186e848350dbcdf7e80a15fd0b53d5f5fba0fd9fe08455af816ea7210392beb"
+          },
+          {
+            "locator": {
+              "ownerType": "learning_unit",
+              "learningUnitId": "unit-shortest-path-reconstruction",
+              "path": "content"
+            },
+            "documentPath": "src/content/docs/learn/graph/shortest-path-reconstruction.md",
+            "digest": "0cc59f0367f4852477c89ed62b7a192567a40836a3fdb47230f7f4fb36522af2"
+          }
+        ],
+        "derivedIndexes": [
+          {
+            "path": "src/content/indexes/taxonomy.json",
+            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+          }
+        ]
+      }
+    ],
+    "retiredOptionalTargets": [
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-outcome-provisional-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-outcome-provisional-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-outcome-provisional-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-outcome-provisional-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-tag-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-tag-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-tag-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-tag-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc215-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "17a5e0a1d66bf3a881e439c4c06aeeb77e6e3aeaa764a0aa87cbf375124d3d0f"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-unit-compressed-dp-state",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc232-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "e52b0f7817edb42057eb4f7330bbf807bbfc84dbc9b0082a7ee8e0820a4fbf48"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc212-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "0effcf85457fc2fd994c7725f2aa2fee6ef77362dd5e18e7786eaf3d8aa84a3d"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-unit-multiplicative-order-counting",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc222-g",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "f64d8d0c63ab4ce9c1b2a7f44ea4da8b1a5474535a1291b928a19fac0c691cc1"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc223-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "351c2e768a9ca6a8229518c1bdca8a49cbba0f7db4d8b58ce3e35c913182ccee"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-unit-range-aggregate-under-updates",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc256-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "804c019e08be2c1ef600742f96fdf060ecf4b4520c92658e46f273ef2a11b9fe"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc218-f",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "c7d9c753ae773a87be2ba83f5c12e87f882440a21d2d6c40c4878a2501dd037d"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration.answer"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "examples.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      },
+      {
+        "impactId": "impact-provisional-unit-shortest-path-structure",
+        "locator": {
+          "ownerType": "problem",
+          "problemId": "abc252-e",
+          "path": "exercises.taxonomy-integration"
+        },
+        "status": "not_applicable",
+        "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
+      }
+    ],
+    "integrationEvidencePath": "docs/verification/previews/initial-v1/taxonomy-integration.json",
+    "integrationEvidenceDigest": "b7318abf0880987db4e1777f4609962de9eb5747e9f3e90e8cb70160612766c8",
+    "basis": "Preview integration is lineage only; complete canonical inventory, final accepted taxonomy and joined full-authoring owners supply the final completeness boundary."
+  },
+  "evidenceDigest": "840ea471cf86fcde701d5cda49a8efa0874710bedb01b51943dd345d296a25cf"
+}
