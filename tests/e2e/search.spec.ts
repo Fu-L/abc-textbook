@@ -1,5 +1,35 @@
 import { expect, test } from './fixtures.js';
 
+test('keeps search metadata out of the visible tag introduction and in the Pagefind index', async ({
+  page,
+}) => {
+  await page.goto('./tags/tag-slope-trick/');
+  const metadata = page.locator('[data-search-projection]');
+  await expect(metadata).toContainText('絶対値costを順次追加');
+  await expect(metadata).toHaveAttribute('data-pagefind-meta', 'search-terms');
+  // A clipped element still has a bounding box, so visibility alone cannot
+  // distinguish it from the regression where this text filled several lines.
+  const style = await metadata.evaluate((element) => {
+    const computed = getComputedStyle(element);
+    return {
+      position: computed.position,
+      clipPath: computed.clipPath,
+      width: element.getBoundingClientRect().width,
+      height: element.getBoundingClientRect().height,
+    };
+  });
+  expect(style).toEqual({ position: 'absolute', clipPath: 'inset(50%)', width: 1, height: 1 });
+  await expect(page.getByRole('heading', { level: 1, name: 'slope trick' })).toBeVisible();
+  await expect(page.locator('dd').getByText('絶対値costを順次追加', { exact: true })).toBeVisible();
+
+  await page.getByRole('button', { name: '検索' }).click();
+  const dialog = page.getByRole('dialog', { name: '検索' });
+  await dialog.locator('.pagefind-ui__search-input').fill('piecewise-linear convex DP');
+  await expect(
+    dialog.locator('.pagefind-ui__result-link[href$="/tags/tag-slope-trick/"]').first(),
+  ).toBeVisible();
+});
+
 test('indexes entity kind, aliases, hierarchy, and contest terms on canonical routes', async ({
   page,
 }) => {

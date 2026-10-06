@@ -5,8 +5,11 @@ import { withBase } from './ui-catalog.js';
 
 interface DocumentNode extends Node {
   value?: string;
+  lang?: string | null | undefined;
   children?: DocumentNode[];
 }
+
+const mathematicalLinkEscape = /(?<!\\)\\(?=\[[^\]\n]+(?<!\\)\]\((?!https?:|src\/|#))/gu;
 
 /**
  * Accepted prose uses single * for products/optima, _ for subscripts, and
@@ -15,14 +18,27 @@ interface DocumentNode extends Node {
  */
 const remarkPreserveNotation = () => (tree: DocumentNode, file: { value: unknown }) => {
   const source = String(file.value);
+  // Match against the full source: Markdown can split a formula into several
+  // text nodes (e.g. dp[N]\[L](N−L)!), separating the escape from its context.
+  const linkEscapeOffsets = new Set(
+    [...source.matchAll(mathematicalLinkEscape)].map((match) => match.index),
+  );
   const rewrite = (node: DocumentNode): DocumentNode[] => {
     if (node.children) node.children = node.children.flatMap(rewrite);
     const start = node.position?.start.offset;
     const end = node.position?.end.offset;
     const original = start === undefined || end === undefined ? '' : source.slice(start, end);
-    // A backslash can denote set difference (S\{i}) or literal TeX syntax.
-    // CommonMark's punctuation escapes would silently remove it.
-    if (node.type === 'text' && original.includes('\\')) node.value = original;
+    // Restore set difference (S\{i}) and literal TeX syntax that CommonMark
+    // unescapes, except the \[ added by protectMathematicalLinks to prevent
+    // array indexing/coefficient extraction followed by (...) becoming a URL.
+    if (node.type === 'text' && original.includes('\\'))
+      node.value = original.replace(/\\\[/gu, (escape, offset: number) =>
+        linkEscapeOffsets.has((start ?? 0) + offset) ? '[' : escape,
+      );
+    // The authoring protection also covered fenced text formulas, where the
+    // Markdown parser keeps the escape verbatim. Leave programming code alone.
+    if (node.type === 'code' && node.lang === 'text' && node.value !== undefined)
+      node.value = node.value.replace(mathematicalLinkEscape, '');
     if (node.type === 'emphasis' || (node.type === 'strong' && original.startsWith('_'))) {
       const delimiter = original.slice(0, node.type === 'strong' ? 2 : 1);
       return [

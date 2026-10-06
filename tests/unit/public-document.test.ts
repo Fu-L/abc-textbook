@@ -36,6 +36,22 @@ describe('accepted document rendering', () => {
     const $ = load(await renderPublicDocument(source, '/'));
     expect($('p').text()).toBe(source);
   });
+  it('removes authoring link escapes while preserving mathematical backslashes in the same text', async () => {
+    const source =
+      'dp\\[m](m+c)、dp[N]\\[L](N−L)!、[x^k](F)、\\[x^k](F)、dp\\[mask\\s](−1)^c、S\\{i}、\\[x^2\\]、\\(x\\)、\\{1,2\\}';
+    const $ = load(await renderPublicDocument(source, '/'));
+    expect($('p').text()).toBe(
+      'dp[m](m+c)、dp[N][L](N−L)!、[x^k](F)、[x^k](F)、dp[mask\\s](−1)^c、S\\{i}、\\[x^2\\]、\\(x\\)、\\{1,2\\}',
+    );
+    expect($('a')).toHaveLength(0);
+  });
+  it('removes authoring escapes in fenced text formulas and preserves programming code', async () => {
+    const formula = 'G(L) = dp[N]\\[L](N−L)!';
+    const source = `\`\`\`text\n${formula}\n\`\`\`\n\n\`\`\`js\nconst regex = /\\[x](f)/;\n\`\`\``;
+    const $ = load(await renderPublicDocument(source, '/'));
+    expect($('pre code').first().text()).toBe('G(L) = dp[N][L](N−L)!\n');
+    expect($('pre code').last().text()).toBe('const regex = /\\[x](f)/;\n');
+  });
   it('rewrites reading-list links while preserving official source attribution', async () => {
     const official = 'https://atcoder.jp/contests/abc212/tasks/abc212_g';
     const source = `[ABC212 G「Power Pair」](${official})\n\n[公式問題](${official})\n\n[単元](src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md)`;

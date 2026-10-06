@@ -121,6 +121,25 @@ describe('accepted canonical full public projection', () => {
     }
     expect(checkedParagraphs).toBeGreaterThan(1000);
   }, 30_000);
+  it('displays all accepted authoring bracket escapes without losing set differences', async () => {
+    const checkedIds = new Set<string>();
+    let checkedLines = 0;
+    for (const [id, document] of [...projection.unitDocuments, ...projection.problemDocuments]) {
+      const lines = parseFrontmatter(document.text)
+        .content.split('\n')
+        .filter((line) => line.includes('\\['));
+      if (!lines.length) continue;
+      const $ = load(await renderPublicDocument(document.text, '/'));
+      for (const line of lines) {
+        expect($('body').text(), id).toContain(line.replaceAll('\\[', '['));
+        checkedLines++;
+      }
+      expect($('body').text(), id).not.toContain('\\[');
+      checkedIds.add(id);
+    }
+    expect(checkedIds.size).toBe(12);
+    expect(checkedLines).toBe(15);
+  });
   it('joins all accepted content without leaking the preview or learner state', () => {
     const { ui, catalog } = projection;
     expect(ui.publicationBoundary).toBe('public');

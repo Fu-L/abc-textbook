@@ -65,6 +65,11 @@ test('keeps the mathematical and grammar notation readable in published explanat
     ['abc236-g', '(P⊗Q)_{ij}=min_k max(P_{ik},Q_{kj})'],
     ['abc403-f', '最短の任意の <expr> と最短の乗算可能な <term> を別状態にする'],
     ['abc363-f', 'x*middle*rev(x)'],
+    ['abc267-g', 'newdp[m]+=dp[m](m+c)'],
+    ['abc298-ex', 'F_L=H[M]+sz[M](dep[L]−2dep[C])'],
+    ['abc272-ex', 'G(L) = dp[N][L](N−L)!'],
+    ['abc306-ex', 'dp[mask]=Σ_{∅≠s⊆mask}dp[mask\\s](−1)^(c(s)+1)'],
+    ['abc222-h', '(1/N)[x^(N-1)](1+3x+x^2)^(2N)'],
   ] as const) {
     await page.goto(`./problems/${id}/`);
     await expect(
