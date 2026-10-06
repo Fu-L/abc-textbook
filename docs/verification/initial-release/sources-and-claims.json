@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "ed0ccd4c8606bb2547592dc14de29e28ff1852b4c5bd5ef1b9f293f23dadf3e7",
-    "fileCount": 9487
+    "digest": "deb366cb38810768b43299a9caa2867172a35c7c2dfec5dec2851d0ce929ce4d",
+    "fileCount": 9830
   },
-  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
-  "generatedAt": "2026-10-06T08:48:35.124Z",
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "generatedAt": "2026-10-06T13:17:30.814Z",
   "commands": [
     {
       "command": "npm run corpus:verify",
       "exitCode": 0,
-      "durationMs": 774.8948750000127,
+      "durationMs": 1117.5556250000081,
       "outputDigest": "21b8a49ca2a7ee5d3c1f7b39a8a682f4f811d6d9aa16231cbf92c410411818f7",
       "outputBytes": 561,
       "observed": "> abc-textbook@0.1.0 corpus:verify\n> tsx scripts/corpus/verify-inventory.ts --check\n\n{\"command\":\"verify-inventory\",\"mode\":\"check\",\"status\":\"passed\",\"evidenceDigest\":\"809818e8cb74720b2389e61d0a6a72515fe4b98e22e1c894a9f9060e97e1e5c2\",\"corpusDigest\":\"579775b9383dc470d1ee06ffc100255dafe3a72636f53e3c7860bd39556d6d28\",\"inventoryDigest\":\"676a1e7c52b120d2b72f34ec60b5823915707a7f87655ebaa79b95cb7e198482\",\"previewComponentDigest\":\"f64e6962363c5fad3fde86643648bc413dc4a4cef42ad14dc79bc6f1341e784b\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory.json\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:verify-authoring",
       "exitCode": 0,
-      "durationMs": 758.9598750000005,
+      "durationMs": 932.0652920000139,
       "outputDigest": "5185a8711115bcdf586f045f1fa571cc2eb47148c5f4b238b8579ab79c194d1b",
       "outputBytes": 503,
       "observed": "> abc-textbook@0.1.0 corpus:verify-authoring\n> tsx scripts/corpus/verify-inventory-authoring.ts --check\n\n{\"command\":\"verify-inventory-authoring\",\"mode\":\"check\",\"status\":\"passed\",\"problemCount\":868,\"sourceBoundProblemCount\":868,\"reviewedProblemCount\":868,\"inventoryDigest\":\"1b66ec51f649d9de92dec88445b6bf04ed82c65bd03b0a0666035515aa1ea3ed\",\"evidenceDigest\":\"b30bafee7a83a7693a27ddee56e7eb92ffae98995b7879fb8a9480dd5debbc53\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory-authoring.json\"}"
@@ -29,22 +29,30 @@
     {
       "command": "npm run corpus:verify-problem-corpus",
       "exitCode": 0,
-      "durationMs": 41121.21091700002,
+      "durationMs": 48647.990500000014,
       "outputDigest": "93e12ddd3594b709e87b074fa01fc65ebc12db06e2fae4b746fb3c3af86eea06",
       "outputBytes": 1367,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-corpus\n> tsx scripts/corpus/verify-problem-corpus.ts --check\n\n{\"status\":\"accepted\",\"subjectDigest\":\"d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"mathematicalRegressions\":20,\"reviewMode\":\"agent_quality_review\",\"publicProjection\":\"pending_T160\"}\nauthor-problem-shards: passed\nverify-full-learning-units: passed\npr65-mathematical-checks.py: passed\npr65-review2-mathematical-checks.py: passed\npr65-review3-mathematical-checks.py: passed\npr65-review4-mathematical-checks.py: passed\npr65-review5-mathematical-checks.py: passed\npr65-review6-mathematical-checks.py: passed\npr65-review7-mathematical-checks.py: passed\npr65-review8-mathematical-checks.py: passed\npr65-review9-mathematical-checks.py: passed\npr65-review10-mathematical-checks.py: passed\npr65-review11-mathematical-checks.py: passed\npr65-review12-mathematical-checks.py: passed\npr65-review13-mathematical-checks.py: passed\npr65-review14-mathematical-checks.py: passed\npr65-review15-mathematical-checks.py: passed\npr65-review16-mathematical-checks.py: passed\npr65-review17-mathematical-checks.py: passed\npr65-review18-mathematical-checks.py: passed\npr65-review19-mathematical-checks.py: passed\npr65-review20-mathematical-checks.py: passed"
+    },
+    {
+      "command": "npm run verify:catch-up",
+      "exitCode": 0,
+      "durationMs": 6184.492083999998,
+      "outputDigest": "d57978c549e1199fd98c2b5a1430e27095f6466ffac067eba130cb93f8b7756a",
+      "outputBytes": 2272,
+      "observed": "0fc39\",\"update-48d7eafc3e54408856a5bcec\",\"update-5607c80b8dd2912dc50a541e\",\"update-38875409e61f3bfab2e25803\",\"update-4b8c3ed6a5d4c339a8212884\",\"update-102f618e26bb029532dea1aa\",\"update-f06d5c8c39b83d6542703403\",\"update-5c347c2531b95aa653e7c9ec\",\"update-1dfef713eae9b78b69cf8daa\",\"update-e65de6a7a3b031dee75c7e5f\",\"update-28e72cc6b8f00648dfa66e9c\"],\"completeness\":{\"firstContestId\":\"abc212\",\"lastContestId\":\"abc478\",\"cutoffAt\":\"2026-10-06T00:00:00+09:00\",\"contestNumberCount\":267,\"heldContests\":266,\"officialGaps\":[{\"number\":316,\"evidenceUrl\":\"https://atcoder.jp/contests/abc350/tasks/abc350_a\",\"fingerprint\":\"9d49649208a11fb1cea424d1057b1f9e06942db647c7a30a4e97926a87083e6b\"}],\"problems\":904,\"expectedProblems\":904,\"coveragePercent\":100,\"labels\":[\"E\",\"F\",\"G\",\"Ex\",\"H\"],\"problemSetDigest\":\"31814ec9fd56d5f52f53d79b91cd3ffb13cce80d859f033cc556349beaa4bebb\"},\"sources\":{\"sourceCount\":2343,\"claimCount\":904,\"sourceInventoryDigest\":\"46017e6477b76ae92e9c2176796f39df61291612ceaa55dd13615652f150a8c4\",\"earliestConfirmation\":\"2026-07-24T23:59:30+09:00\",\"latestConfirmation\":\"2026-10-06T11:54:05.312Z\",\"allowedUsePolicy\":\".agents/skills/abc-explanation-author/references/source-policy.md\",\"quotationCount\":0,\"sourceReacquisition\":false,\"basis\":\"Recorded official revision identities, confirmation/terms dates and claim-to-owner bindings are checked. This audit does not claim live re-fetch or a new mathematical proof.\"},\"optional\":{\"owners\":1136,\"executableCount\":0,\"exerciseCount\":0,\"fixedOutcomeBlocksRequired\":false,\"basis\":\"All current owner inventories and prose fences inspected. Text fences are pseudocode; optional runnable/answer additions block until executed and verified.\"},\"reviewCount\":36,\"reviewDigest\":\"a5e6e14a7029b78c776edef5c81134e552c6bf7e910a24114cb9903a534ca1e7\",\"humanApproval\":false}"
     }
   ],
   "checks": {
-    "sourceCount": 2246,
-    "claimCount": 868,
-    "sourceInventoryDigest": "28bc7e5fe846d96842feb7c0893dd725f1bdf0e9e18034fdb65280b4da878be9",
+    "sourceCount": 2343,
+    "claimCount": 904,
+    "sourceInventoryDigest": "46017e6477b76ae92e9c2176796f39df61291612ceaa55dd13615652f150a8c4",
     "earliestConfirmation": "2026-07-24T23:59:30+09:00",
-    "latestConfirmation": "2026-07-24T23:59:30+09:00",
+    "latestConfirmation": "2026-10-06T11:54:05.312Z",
     "allowedUsePolicy": ".agents/skills/abc-explanation-author/references/source-policy.md",
     "quotationCount": 0,
     "sourceReacquisition": false,
     "basis": "Recorded official revision identities, confirmation/terms dates and claim-to-owner bindings are checked. This audit does not claim live re-fetch or a new mathematical proof."
   },
-  "evidenceDigest": "4607784042610530b8967f8002f5f1b59a8f8aee45134306fd773bb32a396ebe"
+  "evidenceDigest": "806f55d904eb5798452b0a06125418f8ffde00a888f37f42eaadd8c0c014ce62"
 }

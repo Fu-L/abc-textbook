@@ -4,155 +4,155 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "ed0ccd4c8606bb2547592dc14de29e28ff1852b4c5bd5ef1b9f293f23dadf3e7",
-    "fileCount": 9487
+    "digest": "deb366cb38810768b43299a9caa2867172a35c7c2dfec5dec2851d0ce929ce4d",
+    "fileCount": 9830
   },
-  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
-  "generatedAt": "2026-10-06T08:48:35.124Z",
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "generatedAt": "2026-10-06T13:17:30.814Z",
   "commands": [
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 4575.1872079999885,
-      "outputDigest": "67daae8ce92566cfb80150cad0b98d6af4b2fb419d5f0dc2356eb1a93b1ec612",
-      "outputBytes": 95417,
-      "observed": "html (+0ms) \n17:46:59   ├─ /contests/abc435/index.html (+0ms) \n17:46:59   ├─ /contests/abc436/index.html (+0ms) \n17:46:59   ├─ /contests/abc437/index.html (+0ms) \n17:46:59   ├─ /contests/abc438/index.html (+0ms) \n17:46:59   ├─ /contests/abc439/index.html (+0ms) \n17:46:59   ├─ /contests/abc440/index.html (+0ms) \n17:46:59   ├─ /contests/abc441/index.html (+0ms) \n17:46:59   ├─ /contests/abc442/index.html (+0ms) \n17:46:59   ├─ /contests/abc443/index.html (+0ms) \n17:46:59   ├─ /contests/abc444/index.html (+0ms) \n17:46:59   ├─ /contests/abc445/index.html (+0ms) \n17:46:59   ├─ /contests/abc446/index.html (+0ms) \n17:46:59   ├─ /contests/abc447/index.html (+0ms) \n17:46:59   ├─ /contests/abc448/index.html (+0ms) \n17:46:59   ├─ /contests/abc449/index.html (+0ms) \n17:46:59   ├─ /contests/abc450/index.html (+0ms) \n17:46:59   ├─ /contests/abc451/index.html (+0ms) \n17:46:59   ├─ /contests/abc452/index.html (+0ms) \n17:46:59   ├─ /contests/abc453/index.html (+0ms) \n17:46:59   ├─ /contests/abc454/index.html (+0ms) \n17:46:59   ├─ /contests/abc455/index.html (+0ms) \n17:46:59   ├─ /contests/abc456/index.html (+0ms) \n17:46:59   ├─ /contests/abc457/index.html (+0ms) \n17:46:59   ├─ /contests/abc458/index.html (+0ms) \n17:46:59   ├─ /contests/abc459/index.html (+0ms) \n17:46:59   ├─ /contests/abc460/index.html (+0ms) \n17:46:59   ├─ /contests/abc461/index.html (+0ms) \n17:46:59   ├─ /contests/abc462/index.html (+0ms) \n17:46:59   ├─ /contests/abc463/index.html (+0ms) \n17:46:59   ├─ /contests/abc464/index.html (+0ms) \n17:46:59   ├─ /contests/abc465/index.html (+0ms) \n17:46:59   ├─ /contests/abc466/index.html (+0ms) \n17:46:59   ├─ /problems/index.html (+49ms) \n17:46:59 ✓ Completed in 3.60s.\n\n17:46:59 [build] ✓ Completed in 4.04s.\n17:46:59 [build] 1568 page(s) built in 4.13s\n17:46:59 [build] Complete!"
+      "durationMs": 4297.072916000034,
+      "outputDigest": "d300a484418832c7aaaf7bf272de4bf20b22737446d79103c74c8a8977b29b7b",
+      "outputBytes": 95473,
+      "observed": "html (+0ms) \n22:15:59   ├─ /contests/abc435/index.html (+0ms) \n22:15:59   ├─ /contests/abc436/index.html (+0ms) \n22:15:59   ├─ /contests/abc437/index.html (+0ms) \n22:15:59   ├─ /contests/abc438/index.html (+0ms) \n22:15:59   ├─ /contests/abc439/index.html (+0ms) \n22:15:59   ├─ /contests/abc440/index.html (+0ms) \n22:15:59   ├─ /contests/abc441/index.html (+0ms) \n22:15:59   ├─ /contests/abc442/index.html (+0ms) \n22:15:59   ├─ /contests/abc443/index.html (+0ms) \n22:15:59   ├─ /contests/abc444/index.html (+0ms) \n22:15:59   ├─ /contests/abc445/index.html (+0ms) \n22:15:59   ├─ /contests/abc446/index.html (+0ms) \n22:15:59   ├─ /contests/abc447/index.html (+0ms) \n22:15:59   ├─ /contests/abc448/index.html (+0ms) \n22:15:59   ├─ /contests/abc449/index.html (+0ms) \n22:15:59   ├─ /contests/abc450/index.html (+0ms) \n22:15:59   ├─ /contests/abc451/index.html (+0ms) \n22:15:59   ├─ /contests/abc452/index.html (+0ms) \n22:15:59   ├─ /contests/abc453/index.html (+0ms) \n22:15:59   ├─ /contests/abc454/index.html (+0ms) \n22:15:59   ├─ /contests/abc455/index.html (+0ms) \n22:15:59   ├─ /contests/abc456/index.html (+0ms) \n22:15:59   ├─ /contests/abc457/index.html (+0ms) \n22:15:59   ├─ /contests/abc458/index.html (+0ms) \n22:15:59   ├─ /contests/abc459/index.html (+0ms) \n22:15:59   ├─ /contests/abc460/index.html (+0ms) \n22:15:59   ├─ /contests/abc461/index.html (+0ms) \n22:15:59   ├─ /contests/abc462/index.html (+0ms) \n22:15:59   ├─ /contests/abc463/index.html (+0ms) \n22:15:59   ├─ /contests/abc464/index.html (+0ms) \n22:15:59   ├─ /contests/abc465/index.html (+0ms) \n22:15:59   ├─ /contests/abc466/index.html (+0ms) \n22:15:59   ├─ /problems/index.html (+49ms) \n22:15:59 ✓ Completed in 3.31s.\n\n22:15:59 [build] ✓ Completed in 3.73s.\n22:15:59 [build] 1568 page(s) built in 3.83s\n22:15:59 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2738.926458000031,
-      "outputDigest": "600f8d513a7020d6f9692adc4a20c11f5a47c3ae620c766c125d4d13e03b2d09",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.665 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2596.4605830000364,
+      "outputDigest": "bcebc630c78b8ef4384feead0f38750db5d2bfec30638ce437a88a951ddf7eb7",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.526 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 5145.404250000021,
-      "outputDigest": "d4497aa01826e2279c5aef9c772d1d04a6fd222daffa42b8489e094f8178dd8e",
-      "outputBytes": 95422,
-      "observed": "html (+0ms) \n17:47:07   ├─ /contests/abc435/index.html (+1ms) \n17:47:07   ├─ /contests/abc436/index.html (+0ms) \n17:47:07   ├─ /contests/abc437/index.html (+0ms) \n17:47:07   ├─ /contests/abc438/index.html (+0ms) \n17:47:07   ├─ /contests/abc439/index.html (+0ms) \n17:47:07   ├─ /contests/abc440/index.html (+0ms) \n17:47:07   ├─ /contests/abc441/index.html (+0ms) \n17:47:07   ├─ /contests/abc442/index.html (+0ms) \n17:47:07   ├─ /contests/abc443/index.html (+0ms) \n17:47:07   ├─ /contests/abc444/index.html (+0ms) \n17:47:07   ├─ /contests/abc445/index.html (+0ms) \n17:47:07   ├─ /contests/abc446/index.html (+0ms) \n17:47:07   ├─ /contests/abc447/index.html (+0ms) \n17:47:07   ├─ /contests/abc448/index.html (+0ms) \n17:47:07   ├─ /contests/abc449/index.html (+0ms) \n17:47:07   ├─ /contests/abc450/index.html (+0ms) \n17:47:07   ├─ /contests/abc451/index.html (+0ms) \n17:47:07   ├─ /contests/abc452/index.html (+0ms) \n17:47:07   ├─ /contests/abc453/index.html (+0ms) \n17:47:07   ├─ /contests/abc454/index.html (+0ms) \n17:47:07   ├─ /contests/abc455/index.html (+0ms) \n17:47:07   ├─ /contests/abc456/index.html (+0ms) \n17:47:07   ├─ /contests/abc457/index.html (+0ms) \n17:47:07   ├─ /contests/abc458/index.html (+0ms) \n17:47:07   ├─ /contests/abc459/index.html (+0ms) \n17:47:07   ├─ /contests/abc460/index.html (+0ms) \n17:47:07   ├─ /contests/abc461/index.html (+0ms) \n17:47:07   ├─ /contests/abc462/index.html (+1ms) \n17:47:07   ├─ /contests/abc463/index.html (+0ms) \n17:47:07   ├─ /contests/abc464/index.html (+0ms) \n17:47:07   ├─ /contests/abc465/index.html (+0ms) \n17:47:07   ├─ /contests/abc466/index.html (+0ms) \n17:47:07   ├─ /problems/index.html (+53ms) \n17:47:07 ✓ Completed in 3.70s.\n\n17:47:07 [build] ✓ Completed in 4.31s.\n17:47:07 [build] 1568 page(s) built in 4.76s\n17:47:07 [build] Complete!"
+      "durationMs": 4226.043333000038,
+      "outputDigest": "d554dd0bb52996bc91519dd060d851de52ab906eedfdac0461ec72ebe879f670",
+      "outputBytes": 95470,
+      "observed": "html (+0ms) \n22:16:06   ├─ /contests/abc435/index.html (+0ms) \n22:16:06   ├─ /contests/abc436/index.html (+0ms) \n22:16:06   ├─ /contests/abc437/index.html (+0ms) \n22:16:06   ├─ /contests/abc438/index.html (+0ms) \n22:16:06   ├─ /contests/abc439/index.html (+0ms) \n22:16:06   ├─ /contests/abc440/index.html (+0ms) \n22:16:06   ├─ /contests/abc441/index.html (+0ms) \n22:16:06   ├─ /contests/abc442/index.html (+0ms) \n22:16:06   ├─ /contests/abc443/index.html (+0ms) \n22:16:06   ├─ /contests/abc444/index.html (+0ms) \n22:16:06   ├─ /contests/abc445/index.html (+0ms) \n22:16:06   ├─ /contests/abc446/index.html (+0ms) \n22:16:06   ├─ /contests/abc447/index.html (+0ms) \n22:16:06   ├─ /contests/abc448/index.html (+0ms) \n22:16:06   ├─ /contests/abc449/index.html (+0ms) \n22:16:06   ├─ /contests/abc450/index.html (+0ms) \n22:16:06   ├─ /contests/abc451/index.html (+0ms) \n22:16:06   ├─ /contests/abc452/index.html (+0ms) \n22:16:06   ├─ /contests/abc453/index.html (+0ms) \n22:16:06   ├─ /contests/abc454/index.html (+0ms) \n22:16:06   ├─ /contests/abc455/index.html (+0ms) \n22:16:06   ├─ /contests/abc456/index.html (+0ms) \n22:16:06   ├─ /contests/abc457/index.html (+0ms) \n22:16:06   ├─ /contests/abc458/index.html (+0ms) \n22:16:06   ├─ /contests/abc459/index.html (+0ms) \n22:16:06   ├─ /contests/abc460/index.html (+0ms) \n22:16:06   ├─ /contests/abc461/index.html (+0ms) \n22:16:06   ├─ /contests/abc462/index.html (+0ms) \n22:16:06   ├─ /contests/abc463/index.html (+0ms) \n22:16:06   ├─ /contests/abc464/index.html (+0ms) \n22:16:06   ├─ /contests/abc465/index.html (+0ms) \n22:16:06   ├─ /contests/abc466/index.html (+0ms) \n22:16:06   ├─ /problems/index.html (+48ms) \n22:16:06 ✓ Completed in 3.25s.\n\n22:16:06 [build] ✓ Completed in 3.64s.\n22:16:06 [build] 1568 page(s) built in 3.92s\n22:16:06 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2479.870125000016,
-      "outputDigest": "624274bce55b1253df2309c631d08de5bbda8d342f044ddada8b6d6e14de9da0",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.414 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2688.425042000017,
+      "outputDigest": "e7926dcc1911823e40542332ef958507bf5e3175145f537886d312bd5ee2ff44",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.622 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 4724.017749999999,
-      "outputDigest": "65bd837088c2611dd4d0dd41224b9f7b26123a85b9c5a0a1a15e9b1e4e3eba31",
-      "outputBytes": 95416,
-      "observed": "html (+0ms) \n17:47:14   ├─ /contests/abc435/index.html (+0ms) \n17:47:14   ├─ /contests/abc436/index.html (+0ms) \n17:47:14   ├─ /contests/abc437/index.html (+0ms) \n17:47:14   ├─ /contests/abc438/index.html (+0ms) \n17:47:14   ├─ /contests/abc439/index.html (+0ms) \n17:47:14   ├─ /contests/abc440/index.html (+0ms) \n17:47:14   ├─ /contests/abc441/index.html (+0ms) \n17:47:14   ├─ /contests/abc442/index.html (+0ms) \n17:47:14   ├─ /contests/abc443/index.html (+0ms) \n17:47:14   ├─ /contests/abc444/index.html (+0ms) \n17:47:14   ├─ /contests/abc445/index.html (+0ms) \n17:47:14   ├─ /contests/abc446/index.html (+0ms) \n17:47:14   ├─ /contests/abc447/index.html (+0ms) \n17:47:14   ├─ /contests/abc448/index.html (+0ms) \n17:47:14   ├─ /contests/abc449/index.html (+0ms) \n17:47:14   ├─ /contests/abc450/index.html (+0ms) \n17:47:14   ├─ /contests/abc451/index.html (+0ms) \n17:47:14   ├─ /contests/abc452/index.html (+0ms) \n17:47:14   ├─ /contests/abc453/index.html (+0ms) \n17:47:14   ├─ /contests/abc454/index.html (+0ms) \n17:47:14   ├─ /contests/abc455/index.html (+0ms) \n17:47:14   ├─ /contests/abc456/index.html (+0ms) \n17:47:14   ├─ /contests/abc457/index.html (+0ms) \n17:47:14   ├─ /contests/abc458/index.html (+0ms) \n17:47:14   ├─ /contests/abc459/index.html (+0ms) \n17:47:14   ├─ /contests/abc460/index.html (+0ms) \n17:47:14   ├─ /contests/abc461/index.html (+0ms) \n17:47:14   ├─ /contests/abc462/index.html (+0ms) \n17:47:14   ├─ /contests/abc463/index.html (+0ms) \n17:47:14   ├─ /contests/abc464/index.html (+0ms) \n17:47:14   ├─ /contests/abc465/index.html (+0ms) \n17:47:14   ├─ /contests/abc466/index.html (+0ms) \n17:47:14   ├─ /problems/index.html (+50ms) \n17:47:14 ✓ Completed in 3.55s.\n\n17:47:14 [build] ✓ Completed in 4.10s.\n17:47:14 [build] 1568 page(s) built in 4.43s\n17:47:14 [build] Complete!"
+      "durationMs": 4377.978499999968,
+      "outputDigest": "a7e3952e3cdde2343268ef7c84aab99297dacbd74260a390a372c73ed1506710",
+      "outputBytes": 95472,
+      "observed": "html (+0ms) \n22:16:13   ├─ /contests/abc435/index.html (+0ms) \n22:16:13   ├─ /contests/abc436/index.html (+0ms) \n22:16:13   ├─ /contests/abc437/index.html (+0ms) \n22:16:13   ├─ /contests/abc438/index.html (+0ms) \n22:16:13   ├─ /contests/abc439/index.html (+0ms) \n22:16:13   ├─ /contests/abc440/index.html (+0ms) \n22:16:13   ├─ /contests/abc441/index.html (+0ms) \n22:16:13   ├─ /contests/abc442/index.html (+0ms) \n22:16:13   ├─ /contests/abc443/index.html (+0ms) \n22:16:13   ├─ /contests/abc444/index.html (+0ms) \n22:16:13   ├─ /contests/abc445/index.html (+0ms) \n22:16:13   ├─ /contests/abc446/index.html (+0ms) \n22:16:13   ├─ /contests/abc447/index.html (+0ms) \n22:16:13   ├─ /contests/abc448/index.html (+0ms) \n22:16:13   ├─ /contests/abc449/index.html (+0ms) \n22:16:13   ├─ /contests/abc450/index.html (+0ms) \n22:16:13   ├─ /contests/abc451/index.html (+0ms) \n22:16:13   ├─ /contests/abc452/index.html (+0ms) \n22:16:13   ├─ /contests/abc453/index.html (+0ms) \n22:16:13   ├─ /contests/abc454/index.html (+0ms) \n22:16:13   ├─ /contests/abc455/index.html (+0ms) \n22:16:13   ├─ /contests/abc456/index.html (+0ms) \n22:16:13   ├─ /contests/abc457/index.html (+0ms) \n22:16:13   ├─ /contests/abc458/index.html (+0ms) \n22:16:13   ├─ /contests/abc459/index.html (+0ms) \n22:16:13   ├─ /contests/abc460/index.html (+0ms) \n22:16:13   ├─ /contests/abc461/index.html (+0ms) \n22:16:13   ├─ /contests/abc462/index.html (+0ms) \n22:16:13   ├─ /contests/abc463/index.html (+0ms) \n22:16:13   ├─ /contests/abc464/index.html (+0ms) \n22:16:13   ├─ /contests/abc465/index.html (+0ms) \n22:16:13   ├─ /contests/abc466/index.html (+0ms) \n22:16:13   ├─ /problems/index.html (+46ms) \n22:16:13 ✓ Completed in 3.39s.\n\n22:16:13 [build] ✓ Completed in 3.79s.\n22:16:13 [build] 1568 page(s) built in 4.07s\n22:16:13 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2545.764334000007,
-      "outputDigest": "72851424e5ec911e0e0f85f1c3be900010a73d78e158c840711869b2a1b508d8",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.486 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2566.6653749999823,
+      "outputDigest": "62d9b33e86a0fc4ed1475968a668e982ea76284ed17c7766fa6a9e13a8af2f42",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.503 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 4998.189249999996,
-      "outputDigest": "2e6aadc4f463ba6bf5150e2524433815b91f52522e7c4f98eb2728ac10db60af",
-      "outputBytes": 95424,
-      "observed": "html (+1ms) \n17:47:22   ├─ /contests/abc435/index.html (+0ms) \n17:47:22   ├─ /contests/abc436/index.html (+0ms) \n17:47:22   ├─ /contests/abc437/index.html (+0ms) \n17:47:22   ├─ /contests/abc438/index.html (+0ms) \n17:47:22   ├─ /contests/abc439/index.html (+0ms) \n17:47:22   ├─ /contests/abc440/index.html (+0ms) \n17:47:22   ├─ /contests/abc441/index.html (+0ms) \n17:47:22   ├─ /contests/abc442/index.html (+0ms) \n17:47:22   ├─ /contests/abc443/index.html (+0ms) \n17:47:22   ├─ /contests/abc444/index.html (+0ms) \n17:47:22   ├─ /contests/abc445/index.html (+0ms) \n17:47:22   ├─ /contests/abc446/index.html (+0ms) \n17:47:22   ├─ /contests/abc447/index.html (+0ms) \n17:47:22   ├─ /contests/abc448/index.html (+0ms) \n17:47:22   ├─ /contests/abc449/index.html (+0ms) \n17:47:22   ├─ /contests/abc450/index.html (+0ms) \n17:47:22   ├─ /contests/abc451/index.html (+1ms) \n17:47:22   ├─ /contests/abc452/index.html (+0ms) \n17:47:22   ├─ /contests/abc453/index.html (+0ms) \n17:47:22   ├─ /contests/abc454/index.html (+0ms) \n17:47:22   ├─ /contests/abc455/index.html (+0ms) \n17:47:22   ├─ /contests/abc456/index.html (+0ms) \n17:47:22   ├─ /contests/abc457/index.html (+0ms) \n17:47:22   ├─ /contests/abc458/index.html (+0ms) \n17:47:22   ├─ /contests/abc459/index.html (+0ms) \n17:47:22   ├─ /contests/abc460/index.html (+0ms) \n17:47:22   ├─ /contests/abc461/index.html (+0ms) \n17:47:22   ├─ /contests/abc462/index.html (+0ms) \n17:47:22   ├─ /contests/abc463/index.html (+0ms) \n17:47:22   ├─ /contests/abc464/index.html (+0ms) \n17:47:22   ├─ /contests/abc465/index.html (+0ms) \n17:47:22   ├─ /contests/abc466/index.html (+0ms) \n17:47:22   ├─ /problems/index.html (+55ms) \n17:47:22 ✓ Completed in 3.77s.\n\n17:47:22 [build] ✓ Completed in 4.30s.\n17:47:22 [build] 1568 page(s) built in 4.67s\n17:47:22 [build] Complete!"
+      "durationMs": 4307.277915999992,
+      "outputDigest": "7d904ac9e9f3d95e91e65f8dfad9479ce520794f159950eb719a17f64f729709",
+      "outputBytes": 98133,
+      "observed": "html (+0ms) \n22:16:20   ├─ /contests/abc447/index.html (+0ms) \n22:16:20   ├─ /contests/abc448/index.html (+0ms) \n22:16:20   ├─ /contests/abc449/index.html (+0ms) \n22:16:20   ├─ /contests/abc450/index.html (+0ms) \n22:16:20   ├─ /contests/abc451/index.html (+0ms) \n22:16:20   ├─ /contests/abc452/index.html (+0ms) \n22:16:20   ├─ /contests/abc453/index.html (+0ms) \n22:16:20   ├─ /contests/abc454/index.html (+0ms) \n22:16:20   ├─ /contests/abc455/index.html (+0ms) \n22:16:20   ├─ /contests/abc456/index.html (+0ms) \n22:16:20   ├─ /contests/abc457/index.html (+0ms) \n22:16:20   ├─ /contests/abc458/index.html (+0ms) \n22:16:20   ├─ /contests/abc459/index.html (+0ms) \n22:16:20   ├─ /contests/abc460/index.html (+0ms) \n22:16:20   ├─ /contests/abc461/index.html (+0ms) \n22:16:20   ├─ /contests/abc462/index.html (+0ms) \n22:16:20   ├─ /contests/abc463/index.html (+0ms) \n22:16:20   ├─ /contests/abc464/index.html (+0ms) \n22:16:20   ├─ /contests/abc465/index.html (+0ms) \n22:16:20   ├─ /contests/abc466/index.html (+0ms) \n22:16:20   ├─ /contests/abc467/index.html (+0ms) \n22:16:20   ├─ /contests/abc468/index.html (+0ms) \n22:16:20   ├─ /contests/abc469/index.html (+0ms) \n22:16:20   ├─ /contests/abc470/index.html (+0ms) \n22:16:20   ├─ /contests/abc471/index.html (+0ms) \n22:16:20   ├─ /contests/abc472/index.html (+0ms) \n22:16:20   ├─ /contests/abc473/index.html (+0ms) \n22:16:20   ├─ /contests/abc474/index.html (+0ms) \n22:16:20   ├─ /contests/abc475/index.html (+0ms) \n22:16:20   ├─ /contests/abc476/index.html (+0ms) \n22:16:20   ├─ /contests/abc477/index.html (+0ms) \n22:16:20   ├─ /contests/abc478/index.html (+0ms) \n22:16:20   ├─ /problems/index.html (+49ms) \n22:16:20 ✓ Completed in 3.33s.\n\n22:16:20 [build] ✓ Completed in 3.73s.\n22:16:20 [build] 1616 page(s) built in 4.01s\n22:16:20 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2504.3728330000304,
-      "outputDigest": "aa4a221d0436f491a73a1958dbd79d0d0dbcc686cc18054afd283a8c3e42b73b",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.437 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2575.408916000044,
+      "outputDigest": "a85331f0cfb3be92f576276c284e286d5d4c4306951403451679204f50a716dd",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1616 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1616 pages\n  Indexed 15486 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.513 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 4822.356499999994,
-      "outputDigest": "db58b4853a544bd1b55221491d198838156597ac49e80b237a16098f0567c25b",
-      "outputBytes": 95417,
-      "observed": "html (+0ms) \n17:47:29   ├─ /contests/abc435/index.html (+0ms) \n17:47:29   ├─ /contests/abc436/index.html (+0ms) \n17:47:29   ├─ /contests/abc437/index.html (+1ms) \n17:47:29   ├─ /contests/abc438/index.html (+0ms) \n17:47:29   ├─ /contests/abc439/index.html (+0ms) \n17:47:29   ├─ /contests/abc440/index.html (+0ms) \n17:47:29   ├─ /contests/abc441/index.html (+0ms) \n17:47:29   ├─ /contests/abc442/index.html (+0ms) \n17:47:29   ├─ /contests/abc443/index.html (+0ms) \n17:47:29   ├─ /contests/abc444/index.html (+0ms) \n17:47:29   ├─ /contests/abc445/index.html (+0ms) \n17:47:29   ├─ /contests/abc446/index.html (+0ms) \n17:47:29   ├─ /contests/abc447/index.html (+0ms) \n17:47:29   ├─ /contests/abc448/index.html (+0ms) \n17:47:29   ├─ /contests/abc449/index.html (+0ms) \n17:47:29   ├─ /contests/abc450/index.html (+0ms) \n17:47:29   ├─ /contests/abc451/index.html (+0ms) \n17:47:29   ├─ /contests/abc452/index.html (+0ms) \n17:47:29   ├─ /contests/abc453/index.html (+0ms) \n17:47:29   ├─ /contests/abc454/index.html (+0ms) \n17:47:29   ├─ /contests/abc455/index.html (+0ms) \n17:47:29   ├─ /contests/abc456/index.html (+0ms) \n17:47:29   ├─ /contests/abc457/index.html (+0ms) \n17:47:29   ├─ /contests/abc458/index.html (+0ms) \n17:47:29   ├─ /contests/abc459/index.html (+0ms) \n17:47:29   ├─ /contests/abc460/index.html (+0ms) \n17:47:29   ├─ /contests/abc461/index.html (+0ms) \n17:47:29   ├─ /contests/abc462/index.html (+0ms) \n17:47:29   ├─ /contests/abc463/index.html (+0ms) \n17:47:29   ├─ /contests/abc464/index.html (+0ms) \n17:47:29   ├─ /contests/abc465/index.html (+0ms) \n17:47:29   ├─ /contests/abc466/index.html (+0ms) \n17:47:29   ├─ /problems/index.html (+54ms) \n17:47:29 ✓ Completed in 3.71s.\n\n17:47:29 [build] ✓ Completed in 4.20s.\n17:47:29 [build] 1568 page(s) built in 4.51s\n17:47:29 [build] Complete!"
+      "durationMs": 4348.292290999962,
+      "outputDigest": "3b3945cba1eac01821089d5cc5c841f1e84e1999c07c52da703a105bdbef6de2",
+      "outputBytes": 98135,
+      "observed": "html (+0ms) \n22:16:27   ├─ /contests/abc447/index.html (+0ms) \n22:16:27   ├─ /contests/abc448/index.html (+0ms) \n22:16:27   ├─ /contests/abc449/index.html (+0ms) \n22:16:27   ├─ /contests/abc450/index.html (+0ms) \n22:16:27   ├─ /contests/abc451/index.html (+0ms) \n22:16:27   ├─ /contests/abc452/index.html (+0ms) \n22:16:27   ├─ /contests/abc453/index.html (+0ms) \n22:16:27   ├─ /contests/abc454/index.html (+0ms) \n22:16:27   ├─ /contests/abc455/index.html (+0ms) \n22:16:27   ├─ /contests/abc456/index.html (+0ms) \n22:16:27   ├─ /contests/abc457/index.html (+0ms) \n22:16:27   ├─ /contests/abc458/index.html (+0ms) \n22:16:27   ├─ /contests/abc459/index.html (+0ms) \n22:16:27   ├─ /contests/abc460/index.html (+0ms) \n22:16:27   ├─ /contests/abc461/index.html (+0ms) \n22:16:27   ├─ /contests/abc462/index.html (+0ms) \n22:16:27   ├─ /contests/abc463/index.html (+0ms) \n22:16:27   ├─ /contests/abc464/index.html (+0ms) \n22:16:27   ├─ /contests/abc465/index.html (+0ms) \n22:16:27   ├─ /contests/abc466/index.html (+0ms) \n22:16:27   ├─ /contests/abc467/index.html (+0ms) \n22:16:27   ├─ /contests/abc468/index.html (+0ms) \n22:16:27   ├─ /contests/abc469/index.html (+0ms) \n22:16:27   ├─ /contests/abc470/index.html (+0ms) \n22:16:27   ├─ /contests/abc471/index.html (+0ms) \n22:16:27   ├─ /contests/abc472/index.html (+0ms) \n22:16:27   ├─ /contests/abc473/index.html (+0ms) \n22:16:27   ├─ /contests/abc474/index.html (+0ms) \n22:16:27   ├─ /contests/abc475/index.html (+0ms) \n22:16:27   ├─ /contests/abc476/index.html (+0ms) \n22:16:27   ├─ /contests/abc477/index.html (+0ms) \n22:16:27   ├─ /contests/abc478/index.html (+0ms) \n22:16:27   ├─ /problems/index.html (+52ms) \n22:16:27 ✓ Completed in 3.30s.\n\n22:16:27 [build] ✓ Completed in 3.71s.\n22:16:27 [build] 1616 page(s) built in 4.01s\n22:16:27 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2453.522082999989,
-      "outputDigest": "611913dfd8fa7351092f431f54e8068bb4df09ca9e37af3f3c5fdff99cf94674",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.388 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2577.1518750000396,
+      "outputDigest": "74b859686c4f718793bbd445728983438b95886bfd0f4a27d1fdf0dc1f9af545",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1616 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1616 pages\n  Indexed 15486 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.510 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 4779.058207999973,
-      "outputDigest": "de3abdb567fda75e2219dd490a1e298646ecc8eb916e3d8adbd44cb8e1609cd4",
-      "outputBytes": 95417,
-      "observed": "html (+0ms) \n17:47:36   ├─ /contests/abc435/index.html (+0ms) \n17:47:36   ├─ /contests/abc436/index.html (+0ms) \n17:47:36   ├─ /contests/abc437/index.html (+0ms) \n17:47:36   ├─ /contests/abc438/index.html (+0ms) \n17:47:36   ├─ /contests/abc439/index.html (+0ms) \n17:47:36   ├─ /contests/abc440/index.html (+0ms) \n17:47:36   ├─ /contests/abc441/index.html (+0ms) \n17:47:36   ├─ /contests/abc442/index.html (+0ms) \n17:47:36   ├─ /contests/abc443/index.html (+0ms) \n17:47:36   ├─ /contests/abc444/index.html (+0ms) \n17:47:36   ├─ /contests/abc445/index.html (+0ms) \n17:47:36   ├─ /contests/abc446/index.html (+0ms) \n17:47:36   ├─ /contests/abc447/index.html (+0ms) \n17:47:36   ├─ /contests/abc448/index.html (+0ms) \n17:47:36   ├─ /contests/abc449/index.html (+0ms) \n17:47:36   ├─ /contests/abc450/index.html (+0ms) \n17:47:36   ├─ /contests/abc451/index.html (+0ms) \n17:47:36   ├─ /contests/abc452/index.html (+0ms) \n17:47:36   ├─ /contests/abc453/index.html (+0ms) \n17:47:36   ├─ /contests/abc454/index.html (+0ms) \n17:47:36   ├─ /contests/abc455/index.html (+0ms) \n17:47:36   ├─ /contests/abc456/index.html (+0ms) \n17:47:36   ├─ /contests/abc457/index.html (+0ms) \n17:47:36   ├─ /contests/abc458/index.html (+0ms) \n17:47:36   ├─ /contests/abc459/index.html (+0ms) \n17:47:36   ├─ /contests/abc460/index.html (+0ms) \n17:47:36   ├─ /contests/abc461/index.html (+0ms) \n17:47:36   ├─ /contests/abc462/index.html (+0ms) \n17:47:36   ├─ /contests/abc463/index.html (+0ms) \n17:47:36   ├─ /contests/abc464/index.html (+0ms) \n17:47:36   ├─ /contests/abc465/index.html (+0ms) \n17:47:36   ├─ /contests/abc466/index.html (+0ms) \n17:47:36   ├─ /problems/index.html (+49ms) \n17:47:37 ✓ Completed in 3.55s.\n\n17:47:37 [build] ✓ Completed in 4.10s.\n17:47:37 [build] 1568 page(s) built in 4.47s\n17:47:37 [build] Complete!"
+      "durationMs": 4272.206375000009,
+      "outputDigest": "8b2520c0ec6a11bc63e86c570d3a5efc7c6518b042ae632a404439f8e1c63774",
+      "outputBytes": 98135,
+      "observed": "html (+0ms) \n22:16:34   ├─ /contests/abc447/index.html (+0ms) \n22:16:34   ├─ /contests/abc448/index.html (+0ms) \n22:16:34   ├─ /contests/abc449/index.html (+0ms) \n22:16:34   ├─ /contests/abc450/index.html (+0ms) \n22:16:34   ├─ /contests/abc451/index.html (+0ms) \n22:16:34   ├─ /contests/abc452/index.html (+0ms) \n22:16:34   ├─ /contests/abc453/index.html (+0ms) \n22:16:34   ├─ /contests/abc454/index.html (+0ms) \n22:16:34   ├─ /contests/abc455/index.html (+0ms) \n22:16:34   ├─ /contests/abc456/index.html (+0ms) \n22:16:34   ├─ /contests/abc457/index.html (+0ms) \n22:16:34   ├─ /contests/abc458/index.html (+0ms) \n22:16:34   ├─ /contests/abc459/index.html (+0ms) \n22:16:34   ├─ /contests/abc460/index.html (+0ms) \n22:16:34   ├─ /contests/abc461/index.html (+0ms) \n22:16:34   ├─ /contests/abc462/index.html (+0ms) \n22:16:34   ├─ /contests/abc463/index.html (+0ms) \n22:16:34   ├─ /contests/abc464/index.html (+0ms) \n22:16:34   ├─ /contests/abc465/index.html (+0ms) \n22:16:34   ├─ /contests/abc466/index.html (+0ms) \n22:16:34   ├─ /contests/abc467/index.html (+0ms) \n22:16:34   ├─ /contests/abc468/index.html (+0ms) \n22:16:34   ├─ /contests/abc469/index.html (+0ms) \n22:16:34   ├─ /contests/abc470/index.html (+0ms) \n22:16:34   ├─ /contests/abc471/index.html (+0ms) \n22:16:34   ├─ /contests/abc472/index.html (+0ms) \n22:16:34   ├─ /contests/abc473/index.html (+0ms) \n22:16:34   ├─ /contests/abc474/index.html (+0ms) \n22:16:34   ├─ /contests/abc475/index.html (+0ms) \n22:16:34   ├─ /contests/abc476/index.html (+0ms) \n22:16:34   ├─ /contests/abc477/index.html (+0ms) \n22:16:34   ├─ /contests/abc478/index.html (+0ms) \n22:16:34   ├─ /problems/index.html (+49ms) \n22:16:34 ✓ Completed in 3.30s.\n\n22:16:34 [build] ✓ Completed in 3.69s.\n22:16:34 [build] 1616 page(s) built in 3.98s\n22:16:34 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 2499.5617079999647,
-      "outputDigest": "0864d4e7c195b50f1fbd24647ab9d3d9d1a28d9d50e5dc711fa231642b69a159",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1568 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1568 pages\n  Indexed 15350 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.433 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 2643.128166999959,
+      "outputDigest": "a7cfe7a050fde622b9ef1df2ead6562bad72e281b48023755eeb270faf0496fd",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 1616 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 1616 pages\n  Indexed 15486 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 2.578 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 9778.113290999958,
-      "outputDigest": "c99ce1db9362a1ec8b11d67975f97075611528f43a22488e19909bb816303db0",
-      "outputBytes": 192208,
-      "observed": "html (+0ms) \n17:47:49   ├─ /contests/abc843/index.html (+0ms) \n17:47:49   ├─ /contests/abc844/index.html (+0ms) \n17:47:49   ├─ /contests/abc845/index.html (+0ms) \n17:47:49   ├─ /contests/abc846/index.html (+0ms) \n17:47:49   ├─ /contests/abc847/index.html (+0ms) \n17:47:49   ├─ /contests/abc848/index.html (+0ms) \n17:47:49   ├─ /contests/abc849/index.html (+0ms) \n17:47:49   ├─ /contests/abc850/index.html (+0ms) \n17:47:49   ├─ /contests/abc851/index.html (+0ms) \n17:47:49   ├─ /contests/abc852/index.html (+0ms) \n17:47:49   ├─ /contests/abc853/index.html (+0ms) \n17:47:49   ├─ /contests/abc854/index.html (+0ms) \n17:47:49   ├─ /contests/abc855/index.html (+0ms) \n17:47:49   ├─ /contests/abc856/index.html (+0ms) \n17:47:49   ├─ /contests/abc857/index.html (+0ms) \n17:47:49   ├─ /contests/abc858/index.html (+0ms) \n17:47:49   ├─ /contests/abc859/index.html (+0ms) \n17:47:49   ├─ /contests/abc860/index.html (+0ms) \n17:47:49   ├─ /contests/abc861/index.html (+0ms) \n17:47:49   ├─ /contests/abc862/index.html (+0ms) \n17:47:49   ├─ /contests/abc863/index.html (+0ms) \n17:47:49   ├─ /contests/abc864/index.html (+0ms) \n17:47:49   ├─ /contests/abc865/index.html (+0ms) \n17:47:49   ├─ /contests/abc866/index.html (+0ms) \n17:47:49   ├─ /contests/abc867/index.html (+0ms) \n17:47:49   ├─ /contests/abc868/index.html (+0ms) \n17:47:49   ├─ /contests/abc869/index.html (+0ms) \n17:47:49   ├─ /contests/abc870/index.html (+1ms) \n17:47:49   ├─ /contests/abc871/index.html (+0ms) \n17:47:49   ├─ /contests/abc872/index.html (+0ms) \n17:47:49   ├─ /contests/abc873/index.html (+0ms) \n17:47:49   ├─ /contests/abc874/index.html (+0ms) \n17:47:49   ├─ /problems/index.html (+70ms) \n17:47:49 ✓ Completed in 8.13s.\n\n17:47:49 [build] ✓ Completed in 9.14s.\n17:47:49 [build] 3376 page(s) built in 9.44s\n17:47:49 [build] Complete!"
+      "durationMs": 9029.947667000059,
+      "outputDigest": "924977a6d3955e1e597522773eb511a1d2fbb44c6a8c164bb86a02e38e18abc0",
+      "outputBytes": 192258,
+      "observed": "html (+0ms) \n22:16:46   ├─ /contests/abc843/index.html (+0ms) \n22:16:46   ├─ /contests/abc844/index.html (+0ms) \n22:16:46   ├─ /contests/abc845/index.html (+0ms) \n22:16:46   ├─ /contests/abc846/index.html (+0ms) \n22:16:46   ├─ /contests/abc847/index.html (+0ms) \n22:16:46   ├─ /contests/abc848/index.html (+0ms) \n22:16:46   ├─ /contests/abc849/index.html (+0ms) \n22:16:46   ├─ /contests/abc850/index.html (+0ms) \n22:16:46   ├─ /contests/abc851/index.html (+0ms) \n22:16:46   ├─ /contests/abc852/index.html (+0ms) \n22:16:46   ├─ /contests/abc853/index.html (+0ms) \n22:16:46   ├─ /contests/abc854/index.html (+0ms) \n22:16:46   ├─ /contests/abc855/index.html (+0ms) \n22:16:46   ├─ /contests/abc856/index.html (+0ms) \n22:16:46   ├─ /contests/abc857/index.html (+0ms) \n22:16:46   ├─ /contests/abc858/index.html (+0ms) \n22:16:46   ├─ /contests/abc859/index.html (+0ms) \n22:16:46   ├─ /contests/abc860/index.html (+0ms) \n22:16:46   ├─ /contests/abc861/index.html (+0ms) \n22:16:46   ├─ /contests/abc862/index.html (+0ms) \n22:16:46   ├─ /contests/abc863/index.html (+0ms) \n22:16:46   ├─ /contests/abc864/index.html (+0ms) \n22:16:46   ├─ /contests/abc865/index.html (+0ms) \n22:16:46   ├─ /contests/abc866/index.html (+0ms) \n22:16:46   ├─ /contests/abc867/index.html (+0ms) \n22:16:46   ├─ /contests/abc868/index.html (+0ms) \n22:16:46   ├─ /contests/abc869/index.html (+0ms) \n22:16:46   ├─ /contests/abc870/index.html (+0ms) \n22:16:46   ├─ /contests/abc871/index.html (+1ms) \n22:16:46   ├─ /contests/abc872/index.html (+0ms) \n22:16:46   ├─ /contests/abc873/index.html (+0ms) \n22:16:46   ├─ /contests/abc874/index.html (+0ms) \n22:16:46   ├─ /problems/index.html (+74ms) \n22:16:46 ✓ Completed in 7.67s.\n\n22:16:46 [build] ✓ Completed in 8.44s.\n22:16:46 [build] 3376 page(s) built in 8.72s\n22:16:46 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 5680.357040999981,
-      "outputDigest": "cdfd42dae0e2e1eeaf5bc90d3336c9c23d7bbe76e61a1923d139f03837eeb34f",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16126 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.577 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 5747.540666999994,
+      "outputDigest": "02c567f09d73d65481083bae69ccb37a4ffd0c3ad61f9fb788c5f5b4c3b02f0a",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16210 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.627 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 10899.103249999986,
-      "outputDigest": "c3078c40dd66451b58ee31ff8ca4cba681043b62c09348da076dad94e677f4ac",
-      "outputBytes": 192213,
-      "observed": "tml (+0ms) \n17:48:06   ├─ /contests/abc843/index.html (+0ms) \n17:48:06   ├─ /contests/abc844/index.html (+0ms) \n17:48:06   ├─ /contests/abc845/index.html (+0ms) \n17:48:06   ├─ /contests/abc846/index.html (+0ms) \n17:48:06   ├─ /contests/abc847/index.html (+0ms) \n17:48:06   ├─ /contests/abc848/index.html (+0ms) \n17:48:06   ├─ /contests/abc849/index.html (+0ms) \n17:48:06   ├─ /contests/abc850/index.html (+0ms) \n17:48:06   ├─ /contests/abc851/index.html (+0ms) \n17:48:06   ├─ /contests/abc852/index.html (+0ms) \n17:48:06   ├─ /contests/abc853/index.html (+0ms) \n17:48:06   ├─ /contests/abc854/index.html (+0ms) \n17:48:06   ├─ /contests/abc855/index.html (+0ms) \n17:48:06   ├─ /contests/abc856/index.html (+0ms) \n17:48:06   ├─ /contests/abc857/index.html (+0ms) \n17:48:06   ├─ /contests/abc858/index.html (+0ms) \n17:48:06   ├─ /contests/abc859/index.html (+0ms) \n17:48:06   ├─ /contests/abc860/index.html (+0ms) \n17:48:06   ├─ /contests/abc861/index.html (+0ms) \n17:48:06   ├─ /contests/abc862/index.html (+0ms) \n17:48:06   ├─ /contests/abc863/index.html (+0ms) \n17:48:06   ├─ /contests/abc864/index.html (+0ms) \n17:48:06   ├─ /contests/abc865/index.html (+0ms) \n17:48:06   ├─ /contests/abc866/index.html (+0ms) \n17:48:06   ├─ /contests/abc867/index.html (+0ms) \n17:48:06   ├─ /contests/abc868/index.html (+0ms) \n17:48:06   ├─ /contests/abc869/index.html (+0ms) \n17:48:06   ├─ /contests/abc870/index.html (+0ms) \n17:48:06   ├─ /contests/abc871/index.html (+1ms) \n17:48:06   ├─ /contests/abc872/index.html (+0ms) \n17:48:06   ├─ /contests/abc873/index.html (+0ms) \n17:48:06   ├─ /contests/abc874/index.html (+0ms) \n17:48:06   ├─ /problems/index.html (+77ms) \n17:48:06 ✓ Completed in 8.28s.\n\n17:48:06 [build] ✓ Completed in 9.44s.\n17:48:06 [build] 3376 page(s) built in 10.50s\n17:48:06 [build] Complete!"
+      "durationMs": 9426.49762499996,
+      "outputDigest": "5e063ac41c18ee33ee92eca7776862d685c0d464905f5efcd61b81370b540f95",
+      "outputBytes": 192255,
+      "observed": "html (+0ms) \n22:17:01   ├─ /contests/abc843/index.html (+0ms) \n22:17:01   ├─ /contests/abc844/index.html (+0ms) \n22:17:01   ├─ /contests/abc845/index.html (+0ms) \n22:17:01   ├─ /contests/abc846/index.html (+0ms) \n22:17:01   ├─ /contests/abc847/index.html (+0ms) \n22:17:01   ├─ /contests/abc848/index.html (+0ms) \n22:17:01   ├─ /contests/abc849/index.html (+0ms) \n22:17:01   ├─ /contests/abc850/index.html (+0ms) \n22:17:01   ├─ /contests/abc851/index.html (+0ms) \n22:17:01   ├─ /contests/abc852/index.html (+0ms) \n22:17:01   ├─ /contests/abc853/index.html (+0ms) \n22:17:01   ├─ /contests/abc854/index.html (+0ms) \n22:17:01   ├─ /contests/abc855/index.html (+0ms) \n22:17:01   ├─ /contests/abc856/index.html (+0ms) \n22:17:01   ├─ /contests/abc857/index.html (+0ms) \n22:17:01   ├─ /contests/abc858/index.html (+0ms) \n22:17:01   ├─ /contests/abc859/index.html (+0ms) \n22:17:01   ├─ /contests/abc860/index.html (+0ms) \n22:17:01   ├─ /contests/abc861/index.html (+0ms) \n22:17:01   ├─ /contests/abc862/index.html (+0ms) \n22:17:01   ├─ /contests/abc863/index.html (+0ms) \n22:17:01   ├─ /contests/abc864/index.html (+0ms) \n22:17:01   ├─ /contests/abc865/index.html (+0ms) \n22:17:01   ├─ /contests/abc866/index.html (+0ms) \n22:17:01   ├─ /contests/abc867/index.html (+0ms) \n22:17:01   ├─ /contests/abc868/index.html (+0ms) \n22:17:01   ├─ /contests/abc869/index.html (+0ms) \n22:17:01   ├─ /contests/abc870/index.html (+0ms) \n22:17:01   ├─ /contests/abc871/index.html (+1ms) \n22:17:01   ├─ /contests/abc872/index.html (+0ms) \n22:17:01   ├─ /contests/abc873/index.html (+0ms) \n22:17:01   ├─ /contests/abc874/index.html (+0ms) \n22:17:01   ├─ /problems/index.html (+66ms) \n22:17:01 ✓ Completed in 7.54s.\n\n22:17:01 [build] ✓ Completed in 8.52s.\n22:17:01 [build] 3376 page(s) built in 9.13s\n22:17:01 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 5343.617499999993,
-      "outputDigest": "545b43b42e1509fd39aab428688dbf273c06fd3dac9e25b2127b5a43e9ba7efc",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16126 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.238 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 5607.615083999932,
+      "outputDigest": "817781ed18b9106cefd7c9355e78ae8af2fcdb37f55dd63782027a2c5e780201",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16210 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.515 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     },
     {
       "command": "node node_modules/astro/bin/astro.mjs build --root build/initial-release-performance",
       "exitCode": 0,
-      "durationMs": 10509.413374999946,
-      "outputDigest": "0363827da79f999fdff4cb2f44cbf7be032ac2f88a2748c25f1dfa98de9e332b",
-      "outputBytes": 192211,
-      "observed": "tml (+0ms) \n17:48:22   ├─ /contests/abc843/index.html (+0ms) \n17:48:22   ├─ /contests/abc844/index.html (+0ms) \n17:48:22   ├─ /contests/abc845/index.html (+0ms) \n17:48:22   ├─ /contests/abc846/index.html (+0ms) \n17:48:22   ├─ /contests/abc847/index.html (+0ms) \n17:48:22   ├─ /contests/abc848/index.html (+0ms) \n17:48:22   ├─ /contests/abc849/index.html (+0ms) \n17:48:22   ├─ /contests/abc850/index.html (+0ms) \n17:48:22   ├─ /contests/abc851/index.html (+0ms) \n17:48:22   ├─ /contests/abc852/index.html (+0ms) \n17:48:22   ├─ /contests/abc853/index.html (+0ms) \n17:48:22   ├─ /contests/abc854/index.html (+0ms) \n17:48:22   ├─ /contests/abc855/index.html (+0ms) \n17:48:22   ├─ /contests/abc856/index.html (+0ms) \n17:48:22   ├─ /contests/abc857/index.html (+0ms) \n17:48:22   ├─ /contests/abc858/index.html (+0ms) \n17:48:22   ├─ /contests/abc859/index.html (+0ms) \n17:48:22   ├─ /contests/abc860/index.html (+0ms) \n17:48:22   ├─ /contests/abc861/index.html (+0ms) \n17:48:22   ├─ /contests/abc862/index.html (+0ms) \n17:48:22   ├─ /contests/abc863/index.html (+0ms) \n17:48:22   ├─ /contests/abc864/index.html (+0ms) \n17:48:22   ├─ /contests/abc865/index.html (+0ms) \n17:48:22   ├─ /contests/abc866/index.html (+0ms) \n17:48:22   ├─ /contests/abc867/index.html (+0ms) \n17:48:22   ├─ /contests/abc868/index.html (+0ms) \n17:48:22   ├─ /contests/abc869/index.html (+1ms) \n17:48:22   ├─ /contests/abc870/index.html (+0ms) \n17:48:22   ├─ /contests/abc871/index.html (+1ms) \n17:48:22   ├─ /contests/abc872/index.html (+0ms) \n17:48:22   ├─ /contests/abc873/index.html (+0ms) \n17:48:22   ├─ /contests/abc874/index.html (+0ms) \n17:48:22   ├─ /problems/index.html (+83ms) \n17:48:22 ✓ Completed in 8.15s.\n\n17:48:22 [build] ✓ Completed in 9.30s.\n17:48:22 [build] 3376 page(s) built in 10.15s\n17:48:22 [build] Complete!"
+      "durationMs": 9518.590957999928,
+      "outputDigest": "d8fe2f1e8a673fd8061b4873c0bd83c90b7944482e5050ad8c029fb97d34aff1",
+      "outputBytes": 192255,
+      "observed": "html (+0ms) \n22:17:17   ├─ /contests/abc843/index.html (+0ms) \n22:17:17   ├─ /contests/abc844/index.html (+0ms) \n22:17:17   ├─ /contests/abc845/index.html (+0ms) \n22:17:17   ├─ /contests/abc846/index.html (+0ms) \n22:17:17   ├─ /contests/abc847/index.html (+0ms) \n22:17:17   ├─ /contests/abc848/index.html (+0ms) \n22:17:17   ├─ /contests/abc849/index.html (+0ms) \n22:17:17   ├─ /contests/abc850/index.html (+0ms) \n22:17:17   ├─ /contests/abc851/index.html (+0ms) \n22:17:17   ├─ /contests/abc852/index.html (+0ms) \n22:17:17   ├─ /contests/abc853/index.html (+0ms) \n22:17:17   ├─ /contests/abc854/index.html (+0ms) \n22:17:17   ├─ /contests/abc855/index.html (+0ms) \n22:17:17   ├─ /contests/abc856/index.html (+0ms) \n22:17:17   ├─ /contests/abc857/index.html (+0ms) \n22:17:17   ├─ /contests/abc858/index.html (+0ms) \n22:17:17   ├─ /contests/abc859/index.html (+0ms) \n22:17:17   ├─ /contests/abc860/index.html (+0ms) \n22:17:17   ├─ /contests/abc861/index.html (+0ms) \n22:17:17   ├─ /contests/abc862/index.html (+0ms) \n22:17:17   ├─ /contests/abc863/index.html (+0ms) \n22:17:17   ├─ /contests/abc864/index.html (+0ms) \n22:17:17   ├─ /contests/abc865/index.html (+0ms) \n22:17:17   ├─ /contests/abc866/index.html (+0ms) \n22:17:17   ├─ /contests/abc867/index.html (+0ms) \n22:17:17   ├─ /contests/abc868/index.html (+0ms) \n22:17:17   ├─ /contests/abc869/index.html (+0ms) \n22:17:17   ├─ /contests/abc870/index.html (+0ms) \n22:17:17   ├─ /contests/abc871/index.html (+0ms) \n22:17:17   ├─ /contests/abc872/index.html (+0ms) \n22:17:17   ├─ /contests/abc873/index.html (+0ms) \n22:17:17   ├─ /contests/abc874/index.html (+0ms) \n22:17:17   ├─ /problems/index.html (+74ms) \n22:17:17 ✓ Completed in 7.64s.\n\n22:17:17 [build] ✓ Completed in 8.64s.\n22:17:17 [build] 3376 page(s) built in 9.22s\n22:17:17 [build] Complete!"
     },
     {
       "command": "node node_modules/pagefind/lib/runner/bin.cjs --site build/initial-release-performance/dist",
       "exitCode": 0,
-      "durationMs": 5232.549999999988,
-      "outputDigest": "9e13ac6fa075b89e1ae7b6fa59098f2fd8295b57092cd84eba5f06680b8a3e04",
-      "outputBytes": 838,
-      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/Users/fuma/Desktop/VSCode/abc-textbook\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16126 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.128 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
+      "durationMs": 5551.0309170000255,
+      "outputDigest": "e498b3034749e08c4a0cab7bd16ec1fe6c09345d9dbb4cc9dcbd209fcbbb729d",
+      "outputBytes": 894,
+      "observed": "Running Pagefind v1.5.2 (Extended)\nRunning from: \"/private/var/folders/3g/xxn2rkwn6l71f7z8tc1l9hmc0000gn/T/abc-release-snapshot-qQ6t7G/repository\"\nSource:       \"build/initial-release-performance/dist\"\nOutput:       \"build/initial-release-performance/dist/pagefind\"\n\n[Walking source directory]\nFound 3376 files matching **/*.{html}\n\n[Parsing files]\nFound a data-pagefind-body element on the site.\n↳ Ignoring pages without this tag.\n\n[Reading languages]\nDiscovered 1 language: ja\n\n[Building search indexes]\nTotal: \n  Indexed 1 language\n  Indexed 3376 pages\n  Indexed 16210 words\n  Indexed 0 filters\n  Indexed 0 sorts\n\nFinished in 5.455 seconds\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words.\nNote: Pagefind doesn't support stemming for the language ja. \nSearch will still work, but will not match across root words."
     }
   ],
   "checks": {
@@ -160,7 +160,7 @@
       {
         "kind": "seed",
         "generatorVersion": "initial-release-v1",
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
+        "fixtureDigest": "4ee7130c02bbf375b1e20e193db02187a4ea802d1d8cb46eb02ef6c1247bb3e6",
         "contestNumberCount": 255,
         "heldContestCount": 254,
         "problemCount": 868,
@@ -172,19 +172,19 @@
       {
         "kind": "release-cutoff",
         "generatorVersion": "initial-release-v1",
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "contestNumberCount": 255,
-        "heldContestCount": 254,
-        "problemCount": 868,
+        "fixtureDigest": "9cd76d9f613fcf58de872ac933c86e6bc05d10beb0e213836f2c843ae217f8ca",
+        "contestNumberCount": 267,
+        "heldContestCount": 266,
+        "problemCount": 904,
         "tagCount": 213,
         "learningUnitCount": 232,
-        "documentCount": 1568,
-        "cutoffAt": "2026-07-11T22:40:00+09:00"
+        "documentCount": 1616,
+        "cutoffAt": "2026-10-06T00:00:00+09:00"
       },
       {
         "kind": "design-limit",
         "generatorVersion": "initial-release-v1",
-        "fixtureDigest": "b758211266199ce067975a1ddbfd00f64c31b3baddc8102183f646a889088c06",
+        "fixtureDigest": "8f1b91c0960ffe8a003f4dc35f87c4de716c265aa9775e136c104804b8162b89",
         "contestNumberCount": 375,
         "heldContestCount": 375,
         "problemCount": 1500,
@@ -198,96 +198,96 @@
       {
         "kind": "seed",
         "run": 1,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7404.674499999965,
-        "outputDigest": "e795b950ffdcfccc469bb941fbc7ab1b11b8e42892ba74167e9e9c0e443c7547",
+        "fixtureDigest": "4ee7130c02bbf375b1e20e193db02187a4ea802d1d8cb46eb02ef6c1247bb3e6",
+        "durationMs": 6971.279041000002,
+        "outputDigest": "99d94fa1d6a42327153523d33642da9acd6d08d891bc8e17557dd633b18a5454",
         "passed": true
       },
       {
         "kind": "seed",
         "run": 2,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7697.847999999998,
-        "outputDigest": "81406f7fffdfd28ab85992052cd1d951e4fcaad8fe5d3a0bb3c261be36bfa871",
+        "fixtureDigest": "4ee7130c02bbf375b1e20e193db02187a4ea802d1d8cb46eb02ef6c1247bb3e6",
+        "durationMs": 6992.697166999977,
+        "outputDigest": "8629ad7143f0ddd8369f02e6ce3615c3e376f78cc8dd89b938e4f217c92cf57b",
         "passed": true
       },
       {
         "kind": "seed",
         "run": 3,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7362.533709000039,
-        "outputDigest": "95957cbfb2fa335db34f65e58fbf7fc3b4690d67c6ac5fe5ca1eb6a152928e4e",
+        "fixtureDigest": "4ee7130c02bbf375b1e20e193db02187a4ea802d1d8cb46eb02ef6c1247bb3e6",
+        "durationMs": 7040.401792000048,
+        "outputDigest": "babebc53086e4cc0d7817b1408ebafc1a4e2082376c7b8f756f04e64584f197d",
         "passed": true
       },
       {
         "kind": "release-cutoff",
         "run": 1,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7575.395917000016,
-        "outputDigest": "87fa43dc16a8f80b8c58ba1f6355d81cb031cd94bd489061a941b20dff993263",
+        "fixtureDigest": "9cd76d9f613fcf58de872ac933c86e6bc05d10beb0e213836f2c843ae217f8ca",
+        "durationMs": 6961.048332999984,
+        "outputDigest": "262629926604a46a78ac07c4a186c9d98537ccf865d1c69e38869c33e9fc14ad",
         "passed": true
       },
       {
         "kind": "release-cutoff",
         "run": 2,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7366.8203329999815,
-        "outputDigest": "483a3024c0bb436eae70b86937bc052a3a82a64d5ca9bbceec5ffbc0e7499246",
+        "fixtureDigest": "9cd76d9f613fcf58de872ac933c86e6bc05d10beb0e213836f2c843ae217f8ca",
+        "durationMs": 7002.525999999954,
+        "outputDigest": "ed79d2f06e1f8695d6a0c24e39a76f2f8486dedd076edfb0a408dd9ce9d5627f",
         "passed": true
       },
       {
         "kind": "release-cutoff",
         "run": 3,
-        "fixtureDigest": "00e9d9fc1fbcc93df3f3b5ad411bd4e49ed022391c577a61e1528d55e4be678f",
-        "durationMs": 7353.207167000044,
-        "outputDigest": "7a76fda0a93097a9e0c1ed508889c351fc235d3da6a22443ef1388a843456c70",
+        "fixtureDigest": "9cd76d9f613fcf58de872ac933c86e6bc05d10beb0e213836f2c843ae217f8ca",
+        "durationMs": 6993.329958000046,
+        "outputDigest": "1c6f5e16cce888fcbd11252241c662c70db0bd8f70b23ab950b72e82c63ea318",
         "passed": true
       },
       {
         "kind": "design-limit",
         "run": 1,
-        "fixtureDigest": "b758211266199ce067975a1ddbfd00f64c31b3baddc8102183f646a889088c06",
-        "durationMs": 15646.548500000034,
-        "outputDigest": "d2cb90670235164ce9fe40bce2e247eae650627a3a1aaea1b8c47ea8daff49de",
+        "fixtureDigest": "8f1b91c0960ffe8a003f4dc35f87c4de716c265aa9775e136c104804b8162b89",
+        "durationMs": 14939.480083000031,
+        "outputDigest": "68fc349bcd37a95ab304a5d3f5645fefc8a49c3faa7bd989e30e7e53993518ec",
         "passed": true
       },
       {
         "kind": "design-limit",
         "run": 2,
-        "fixtureDigest": "b758211266199ce067975a1ddbfd00f64c31b3baddc8102183f646a889088c06",
-        "durationMs": 16417.336791999987,
-        "outputDigest": "e913bc672c2bbc95fff69001b058b9a3f605a5ca8ccef7a096878f63d33b7ca5",
+        "fixtureDigest": "8f1b91c0960ffe8a003f4dc35f87c4de716c265aa9775e136c104804b8162b89",
+        "durationMs": 15209.362792000058,
+        "outputDigest": "1d7c53dd83fe3ed52ad6ddbfe69890a3142aa806790067861efd1de90e8d1aa4",
         "passed": true
       },
       {
         "kind": "design-limit",
         "run": 3,
-        "fixtureDigest": "b758211266199ce067975a1ddbfd00f64c31b3baddc8102183f646a889088c06",
-        "durationMs": 15907.920125000004,
-        "outputDigest": "a03c1648538e786fc58cedaa31f922d82ba5b3bd5c6ba0eea0c094c3c42c3039",
+        "fixtureDigest": "8f1b91c0960ffe8a003f4dc35f87c4de716c265aa9775e136c104804b8162b89",
+        "durationMs": 15242.126916000037,
+        "outputDigest": "4de148b9c3914cb3562da7e768b2dbab2a7ac0e21604ff54862607bd3aef696b",
         "passed": true
       }
     ],
     "filterMeasurement": {
-      "fixtureDigest": "526047e5670c818cef4cdf80cbf6e570969241d88ec110d9831dd610e4939afd",
+      "fixtureDigest": "a9b5f1f363f96fcca1a28d7742b4d976e946a763fd0fe78b1779048d53a4f7be",
       "startMarker": "before-input-event",
       "endMarker": "count-and-list-dom-committed",
       "warmupCount": 10,
       "sampleCount": 30,
       "samples": [
-        1.300000011920929, 1.4000000059604645, 1.5, 1.4000000059604645, 1.300000011920929, 1.5,
-        1.0999999940395355, 1.199999988079071, 1.199999988079071, 1.199999988079071,
-        1.0999999940395355, 1.2000000178813934, 1.0999999940395355, 1.0999999940395355,
-        1.2000000178813934, 1.0999999940395355, 1.300000011920929, 1.5, 1.2000000178813934,
-        1.100000023841858, 1.300000011920929, 1.0999999940395355, 1, 1.199999988079071,
-        1.199999988079071, 1, 1.0999999940395355, 0.9000000059604645, 1, 1
+        1.300000011920929, 1.199999988079071, 1.300000011920929, 1.5999999940395355,
+        1.4000000059604645, 2.9000000059604645, 1.5999999940395355, 2, 2, 1.9000000059604645,
+        1.699999988079071, 2.100000023841858, 1.699999988079071, 1.7999999821186066,
+        1.9000000059604645, 2.0999999940395355, 1.800000011920929, 2, 2, 2.4000000059604645,
+        1.699999988079071, 2.199999988079071, 1.5999999940395355, 1.5999999940395355, 2,
+        1.5999999940395355, 2.100000023841858, 3, 2.199999988079071, 1.9000000059604645
       ],
-      "p95Ms": 1.5,
+      "p95Ms": 2.9000000059604645,
       "chromiumRevision": "149.0.7827.55",
       "passed": true
     },
     "pipeline": "Isolated Astro static pages using production Markdown renderer, ProblemFilters, search documents, CSS and Pagefind; production shell closure is audited separately.",
-    "seedReleaseBoundary": "ABC212–466, 255 numbered contests including the official ABC316 gap; 254 held contests. Seed and release-cutoff currently contain the same accepted corpus.",
+    "seedReleaseBoundary": "Seed: ABC212–466, 868 Problems. Release cutoff: 2026-10-06T00:00:00+09:00, 904 Problems through abc478. The official ABC316 gap is retained in both boundaries.",
     "environment": {
       "node": "v24.18.0",
       "npm": "11.16.0",
@@ -298,5 +298,5 @@
       "concurrency": "Build repetitions and filter measurements executed sequentially on the same machine."
     }
   },
-  "evidenceDigest": "a7956723d0f78e2ac6fe1e67ec979a09d6532fd0087d64af8f69099d2797eb61"
+  "evidenceDigest": "6f36bf5eaa91a55192197a6f272713f0d63e778f957f30a61dbe4ea4a78cc173"
 }

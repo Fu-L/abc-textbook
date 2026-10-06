@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.2.0",
+  "criterionId": "SC-012",
+  "releaseVersion": "2026.10.06",
+  "releaseDigest": "3ab063329d74111dff9d3c836f31553e97527c07e38963a4dcb4343a6e4e606e",
+  "revision": 1,
+  "actorRole": "automated_browser",
+  "problemId": "abc478-g",
+  "documentKind": "user_timing_protocol",
+  "artifactPath": "docs/verification/learner-outcomes/initial-release/sc012-protocol.json",
+  "routeEquivalence": {
+    "inventoryPath": "docs/verification/learner-outcomes/initial-release/routes.json",
+    "inventoryDigest": "d50e57abfb09f13b20d44ef07b61eacf7e8cb9de506cad2bf8578e3781f24fb5",
+    "inventoryCount": 904,
+    "sharedComponents": [
+      {
+        "path": "src/components/LearningRecordControl.tsx",
+        "digest": "07cf8370e3e4fb1f925a9b5ca34d34158b729155493481975d23f6443e8f25ce",
+        "byteLength": 4485
+      },
+      {
+        "path": "src/lib/learning-records/database.ts",
+        "digest": "e8d3c39f60c426bfc5d939fdafd71ebb05c0c2c731d8ac8b1ca00a050d6d6e0e",
+        "byteLength": 5134
+      },
+      {
+        "path": "src/lib/learning-records/store.ts",
+        "digest": "c9f3e19b23414bc115be9c55ee81eb4dcedf9d42483f3c55b5d6709420bdd375",
+        "byteLength": 2444
+      },
+      {
+        "path": "src/lib/learning-records/types.ts",
+        "digest": "c63d291c1dd9c837bbd0b64321ed9121c8969fec51c801913e6adcbfc6b6d476",
+        "byteLength": 605
+      }
+    ],
+    "sharedComponentSetDigest": "3c008b38718e225dd2e698df75d9fd789004ee7a29238cc197ab2612c3a1b70f",
+    "actionContract": {
+      "contractId": "learning-record-direct-actions",
+      "version": "1.0.0",
+      "path": "src/components/LearningRecordControl.tsx",
+      "digest": "07cf8370e3e4fb1f925a9b5ca34d34158b729155493481975d23f6443e8f25ce",
+      "requiredActions": ["set_status_completed", "set_needs_review_true"]
+    },
+    "representativeProblemId": "abc478-g",
+    "expectedCheckedRouteCount": 904
+  },
+  "fixedAt": "2026-10-06T13:17:42.940Z",
+  "measurementStartsAfter": "2026-10-06T13:17:42.940Z",
+  "startMarker": "problem-detail-render-complete",
+  "endMarker": "both-save-confirmations-visible",
+  "requiredOperations": ["set_status_completed", "set_needs_review_true"],
+  "additionalNavigationAllowed": false,
+  "externalInstructionsAllowed": false,
+  "clockKind": "monotonic",
+  "maximumDurationMs": 30000,
+  "reloadAssertions": [
+    "status_completed",
+    "needs_review_true",
+    "status_updated_at_preserved",
+    "review_updated_at_preserved"
+  ],
+  "protocolDigest": "fb1977b7b2b3a3876289f23258157733766ddec08741092b146101ad90901a33"
+}
