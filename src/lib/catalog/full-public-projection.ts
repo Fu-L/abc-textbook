@@ -368,10 +368,10 @@ export const loadFullPublicProjection = async (
     ? await Promise.all(
         updates.policy.updates.map(async (entry) => ({
           checkId: `check-normal-update-${entry.contestId}`,
-          command: `npm run abc:update -- --contest ${entry.contestId}`,
+          command: 'npm run verify:catch-up',
           subjectDigest: canonicalDigest(await json(entry.authoringPath)),
-          resultPath: entry.manifestPath,
-          resultDigest: canonicalDigest(await json(entry.manifestPath)),
+          resultPath: entry.receiptPath,
+          resultDigest: canonicalDigest(await json(entry.receiptPath)),
           exitCode: 0,
           passed: true,
           completedAt,

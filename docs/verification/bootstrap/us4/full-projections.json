@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "taskId": "T160",
   "status": "passed",
-  "sourceProjectionDigest": "4cecaf033f9d57af2adf5179510c2166443cd926b657a8cd0837eeecb86738fb",
-  "implementationDigest": "7c3edd606adbf9aa8d336d0e7597ebecceeec4b06d8b5b8c3d20596defd4ec07",
-  "fullProjectionDigest": "316aa69492b15baf16e9571c0ed3d15eba6a92c7af6ed3ea4ba395cbeb0643cc",
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "implementationDigest": "dc2843d90a0333e7221a2281989f6322ada0baf4e1758906cfa794b89e4271c8",
+  "fullProjectionDigest": "1008d30df1fc5d132c9b9e699bcee1a372a68f4991400299718b9769ae4507ac",
   "publicationStatus": "prepared",
   "productionReleaseApproved": false,
   "build": {
@@ -3670,7 +3670,7 @@
       "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
     }
   ],
-  "artifactDigest": "c28f7cc8412630e735d6f45b283346097d9b6295462aa3b517ed3ad353bb1b7d",
+  "artifactDigest": "17e76d077c56c45705bba65d98815a345a891e701f0f06fafcf7d51792337e20",
   "artifactInventory": [
     {
       "path": "dist/404.html",
@@ -5119,8 +5119,8 @@
     },
     {
       "path": "dist/data/catalog.json",
-      "digest": "364143a636f4d1b7a010d0d023260ca643aca2ab0caaed0ab8f57641949b26ae",
-      "byteLength": 17156318
+      "digest": "d768eaabb22003264efef157ecc7e1eecbb98a755f50f454c80d23f6a97375ac",
+      "byteLength": 17155682
     },
     {
       "path": "dist/feed.xml",

@@ -16,7 +16,8 @@ import json
 # This checks the actual source documents as well as the independent models.
 # Escaped mathematical brackets are a Markdown rendering detail, not a change
 # to the claim. The second review found a contradictory parity in metadata.
-documents = list(Path('src/content/docs/problems').rglob('*.md'))
+# This historical regression covers the frozen bootstrap; normal updates are joined separately.
+documents = [p for p in Path('src/content/docs/problems').rglob('*.md') if 'updates' not in p.parts]
 for document in documents:
     text = document.read_text(encoding='utf8')
     unit = json.loads(text.split('authoringUnit: ', 1)[1].split('\n', 1)[0])

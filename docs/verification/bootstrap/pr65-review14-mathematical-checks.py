@@ -545,7 +545,7 @@ def check_subtraction():
 
 
 def check_documents():
-    paths = sorted(Path("src/content/docs/problems").rglob("*.md"))
+    paths = sorted(p for p in Path("src/content/docs/problems").rglob("*.md") if "updates" not in p.parts)
     checked("document count", len(paths), 868)
     for p in paths:
         text = p.read_text()

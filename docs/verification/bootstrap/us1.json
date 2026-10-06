@@ -4835,7 +4835,7 @@
     "outcome-use-cycle-space-basis",
     "outcome-use-tree-diameter-extrema"
   ],
-  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "qualityBasisDigest": "be4630b8eab8d587a59a89096c6925e3348fe7b80f0c8ed3ef3ff6232e7a4275",
   "fullVerificationCommand": "npm run verify:fast",
   "fullVerificationEvidencePath": "docs/verification/bootstrap/problem-corpus-verify-fast.json",
   "acceptanceMatrix": [
@@ -4850,5 +4850,5 @@
   "unresolvedFindingCount": 0,
   "publicProjection": "pending_T160",
   "correctionImpactStatus": "pending_T160",
-  "evidenceDigest": "ff560ff1a25120d9801f199baa65d961067b57839e672f4869ea66c00845d2d6"
+  "evidenceDigest": "29f91fa07200a3e6fff2400e569869fca86837afb8eb3e63c7b76d382e6e6389"
 }

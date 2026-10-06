@@ -24,7 +24,7 @@
     }
   ],
   "priorReviewInventoryDigest": "88ab99df831692fc9d7a6aa25a3a95c042862d33b824bb9d2a39af3e494682f7",
-  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "qualityBasisDigest": "be4630b8eab8d587a59a89096c6925e3348fe7b80f0c8ed3ef3ff6232e7a4275",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -41,5 +41,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "ecff747808fb755a6be552908a9fe8cff8f83f7fe81ce39be8b8b96c54b78069"
+  "evidenceDigest": "296e790150438fab0b131f98184f94de07613e9d07f393bcb743f489563f36f5"
 }

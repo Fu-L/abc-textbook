@@ -15,7 +15,7 @@
     "reason": "個人用教材として本人の自己評価・承認ゲートを今回の要件から外し、本文の品質と全件検証で受け入れる。",
     "scope": "T072–T078 initial Problem corpus acceptance. No production merge/deploy approval is asserted."
   },
-  "acceptanceDigest": "ff560ff1a25120d9801f199baa65d961067b57839e672f4869ea66c00845d2d6",
+  "acceptanceDigest": "29f91fa07200a3e6fff2400e569869fca86837afb8eb3e63c7b76d382e6e6389",
   "basis": "Current corpus quality acceptance under the owner instruction; not a HumanContentReviewEvidence/MergeReviewEvidence or a production release approval.",
-  "evidenceDigest": "7b607215a8a488f4a781386a6f841e8722e83a3208efa6742da263f32141e3dd"
+  "evidenceDigest": "9c4df11d9833033ad4d5a51a938437ccb7a3dfaa76896c8d453c3044c9f79d48"
 }
