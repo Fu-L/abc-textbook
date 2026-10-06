@@ -152,7 +152,7 @@ try {
       } catch (error) {
         const failure = error as Error & { stdout?: string; stderr?: string };
         throw new Error(
-          `${command} failed: ${failure.message}\n${failure.stdout?.slice(-3000) ?? ''}\n${failure.stderr?.slice(-3000) ?? ''}`,
+          `${command} failed: ${failure.message}\n${failure.stdout ?? ''}\n${failure.stderr ?? ''}`,
           { cause: error },
         );
       }
@@ -164,6 +164,7 @@ try {
         const result = await run(process.execPath, [
           'node_modules/vitest/vitest.mjs',
           'run',
+          '--maxWorkers=4',
           '--reporter=json',
         ]);
         unitReport = JSON.parse(rawOutputs.get(result.command) ?? '') as unknown;
