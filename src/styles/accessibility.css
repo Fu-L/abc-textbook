@@ -110,6 +110,7 @@ main {
 }
 form[role='search'] {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   max-inline-size: 45rem;
 }
@@ -120,8 +121,14 @@ form[role='search'] label {
 input,
 select,
 button {
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-inline-size: 0;
   min-block-size: 2.75rem;
   font: inherit;
+}
+input[type='file'] {
+  display: block;
 }
 .site-search [data-search-open]:disabled {
   color: ButtonText;

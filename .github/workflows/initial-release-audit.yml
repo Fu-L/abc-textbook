@@ -1,0 +1,23 @@
+name: Initial release audit evidence
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - name: Reject stale or incomplete initial corpus audit evidence
+        run: npm run verify:initial-release -- --check

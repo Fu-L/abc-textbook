@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "passed",
+  "scope": "canonical-full-corpus",
+  "inputSubject": {
+    "digest": "74782ed8d81be7013b126c5e4ea9d4c7e08cebf31f888f5ff99f0448f542723c",
+    "fileCount": 9487
+  },
+  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
+  "generatedAt": "2026-10-06T08:22:06.099Z",
+  "reports": [
+    {
+      "taskId": "T133",
+      "path": "docs/verification/initial-release/schema-contracts.json",
+      "digest": "1ff7bc3f2f742ac40165304c58b1b32fe1aed1b46eb425025f295b24acb31f66"
+    },
+    {
+      "taskId": "T134",
+      "path": "docs/verification/initial-release/corpus-completeness.json",
+      "digest": "a7613b0c5d2c9f890be46bb1729acd3f1c3be22a124f152d4ada43e91ca81207"
+    },
+    {
+      "taskId": "T135",
+      "path": "docs/verification/initial-release/taxonomy.json",
+      "digest": "cf099cfadd5669d8132fb8f65a634531e6c17e6e91bb32425df63060a050324c"
+    },
+    {
+      "taskId": "T136",
+      "path": "docs/verification/initial-release/sources-and-claims.json",
+      "digest": "0200d799866df2e4d50ad820cc061888590c30e3dad3926f5a0c4f6941e2f1a0"
+    },
+    {
+      "taskId": "T137",
+      "path": "docs/verification/initial-release/examples-and-answers.json",
+      "digest": "1bbc95808345417bb4e043ebe62367b29261b7cec61728dc90021188fb225542"
+    },
+    {
+      "taskId": "T138",
+      "path": "docs/verification/initial-release/accessibility-and-links.json",
+      "digest": "591938d2404361cc00205208306d30994d58bb79a28eaaa4bb5fa4d4383740f9"
+    },
+    {
+      "taskId": "T139",
+      "path": "docs/verification/initial-release/learning-records.json",
+      "digest": "675413622b7cd6bacbcb5941f6491aee1a9ef3f59cfc9d3e1818a3f945d14463"
+    },
+    {
+      "taskId": "T140",
+      "path": "docs/verification/initial-release/public-projections.json",
+      "digest": "4b5c66eae8dfcf4e890d3dd27ef851f046698dbd1c1138e008b0cb05a5bfc981"
+    },
+    {
+      "taskId": "T141",
+      "path": "docs/verification/initial-release/performance.json",
+      "digest": "0fb60272a7eca24cfec0c18b22172f35f2abda3e9736c85440b604a14e09780d"
+    },
+    {
+      "taskId": "T142",
+      "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
+      "digest": "a88113d588d40d4957b6b4d3fdadd452406dcfe5c11beff2352fb38c4ce873c7"
+    }
+  ],
+  "testResults": {
+    "path": "docs/verification/initial-release/test-results.json",
+    "digest": "e048cddaff37db975b8e70700a75cc5f0b7043b425e8b045e420095303100ac7"
+  },
+  "browserResults": {
+    "path": "docs/verification/initial-release/browser-results.json",
+    "digest": "1a08f7141e94a2b3e14fee5b9440d45943abd029d8a6e0ccc7517303ac1c1ba7"
+  },
+  "productionReleaseApproved": false,
+  "nextGate": "Issue #52 post-catch-up validation",
+  "evidenceDigest": "ae1ee75dec3f3026674ca7060c4c067ebf96a5724bb5f22388d44655c80702a2"
+}

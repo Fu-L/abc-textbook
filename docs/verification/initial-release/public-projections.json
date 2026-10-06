@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T140",
+  "status": "passed",
+  "scope": "canonical-full-corpus",
+  "inputSubject": {
+    "digest": "74782ed8d81be7013b126c5e4ea9d4c7e08cebf31f888f5ff99f0448f542723c",
+    "fileCount": 9487
+  },
+  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
+  "generatedAt": "2026-10-06T08:22:06.099Z",
+  "commands": [
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "durationMs": 22133.068834000005,
+      "outputDigest": "2151e9d077974458e784d0eb3621d8da7e39a0151e163fb79907de25775e4382",
+      "outputBytes": 136368,
+      "observed": "├─ /tags/tag-tree-balanced-separator/index.html (+0ms) \n17:18:07   ├─ /tags/tag-tree-distance-residue/index.html (+0ms) \n17:18:07   ├─ /tags/tag-tree-euler-flattening/index.html (+1ms) \n17:18:07   ├─ /tags/tag-tree-metric-diameter/index.html (+1ms) \n17:18:07   ├─ /tags/tag-tree-model-structure/index.html (+0ms) \n17:18:07   ├─ /tags/tag-tree-precedence-contraction/index.html (+1ms) \n17:18:07   ├─ /tags/tag-trie-prefix/index.html (+1ms) \n17:18:07   ├─ /tags/tag-two-pointers-window/index.html (+1ms) \n17:18:07   ├─ /tags/tag-two-sat/index.html (+1ms) \n17:18:07   ├─ /tags/tag-two-variable-convex-lattice-optimization/index.html (+0ms) \n17:18:07   ├─ /tags/tag-value-bucket-aggregation/index.html (+0ms) \n17:18:07   ├─ /tags/tag-value-range-dp/index.html (+1ms) \n17:18:07   ├─ /tags/tag-virtual-tree/index.html (+0ms) \n17:18:07   ├─ /tags/tag-weighted-bipartite-matching/index.html (+1ms) \n17:18:07   ├─ /tags/tag-witness-impact-localization/index.html (+0ms) \n17:18:07   ├─ /tags/tag-xor-linear-basis/index.html (+0ms) \n17:18:07   ├─ /tags/tag-xor-threshold-matching/index.html (+0ms) \n17:18:07   ├─ /tags/tag-z-algorithm-prefix-matching/index.html (+0ms) \n17:18:07   ├─ /tags/index.html (+1ms) \n17:18:07   ├─ /updates/index.html (+1ms) \n17:18:07   ├─ /index.html (+1ms) \n17:18:07 ✓ Completed in 9.09s.\n\n17:18:07 [build] ✓ Completed in 11.14s.\n17:18:07 [starlight:pagefind] Building search index with Pagefind...\n17:18:09 [starlight:pagefind] Found 1576 HTML files.\n17:18:10 [build] Waiting for integration \"@astrojs/starlight\", hook \"astro:build:done\"...\n17:18:11 [starlight:pagefind] Finished building search index in 3.11s.\n17:18:11 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n17:18:11 [build] 1576 page(s) built in 15.58s\n17:18:11 [build] Complete!\nEntry docs → 404 was not found."
+    },
+    {
+      "command": "npm run corpus:verify-full-projections",
+      "exitCode": 0,
+      "durationMs": 6101.777292000013,
+      "outputDigest": "eb81e91b57b6a1ecb285a668072b0af531d607dcd822f7c3df479fa45d8f0f37",
+      "outputBytes": 399,
+      "observed": "> abc-textbook@0.1.0 corpus:verify-full-projections\n> tsx scripts/corpus/verify-full-projections.ts --check\n\n{\"status\":\"passed\",\"fullProjectionDigest\":\"4654b1148e0846a8b725d520c363e32159ecf1950b6e0770cb225a2963ea9a4f\",\"contests\":254,\"officialGaps\":1,\"problems\":868,\"tags\":213,\"learningUnits\":232,\"releases\":0,\"routes\":1576,\"searchDocuments\":1567,\"correctionImpacts\":12,\"retiredOptionalTargets\":72}"
+    },
+    {
+      "command": "npm run link:check:built",
+      "exitCode": 0,
+      "durationMs": 4489.925374999992,
+      "outputDigest": "3a34d95f5f6636a08e73385d6a66f380ab9bfc083341177548e2c009494af597",
+      "outputBytes": 115,
+      "observed": "> abc-textbook@0.1.0 link:check:built\n> tsx scripts/validate/links.ts\n\nChecked 4648 links with no broken targets."
+    },
+    {
+      "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
+      "exitCode": 0,
+      "durationMs": 120695.40912499998,
+      "outputDigest": "534aa1c80ae8e8cfb841a2b6915117480555697b50b063602eb1a3260dcffef7",
+      "outputBytes": 262153,
+      "observed": "\"duration\": 1878,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-06T08:20:20.446Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 7,\n                  \"parallelIndex\": 1,\n                  \"status\": \"passed\",\n                  \"duration\": 449,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-06T08:20:20.648Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-06T08:18:21.913Z\",\n    \"duration\": 120480.24799999999,\n    \"expected\": 213,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
+    }
+  ],
+  "checks": {
+    "routeCount": 1576,
+    "searchDocumentCount": 1567,
+    "problemRouteCount": 868,
+    "sharedControlCount": 868,
+    "imageCount": 0,
+    "artifactDigest": "996f436b405dd6bdd094b13421781ea705bb4cd0752a6dc119bc9ea2fd24a42f",
+    "artifactCount": 3306,
+    "searchDocumentsDigest": "d7a759b03f3d58e1b57e13a1113ad17fd4ca42cd10f2455d2da6f5771da3f729",
+    "stagingAndLocalStateExcluded": true,
+    "preparedProjection": true,
+    "productionReleaseApproved": false
+  },
+  "evidenceDigest": "2a3483d0f56427ac7805d4589e23339b6c3035a7ecf89352400d693504cf84dc"
+}

@@ -20,8 +20,8 @@ import {
 
 const mode = process.argv[2] ?? '--check';
 try {
-  if (process.argv.length > 3 || !['--check', '--write'].includes(mode))
-    throw new Error('Usage: verify-full-projections [--check | --write]');
+  if (process.argv.length > 3 || !['--check', '--write', '--write-evidence'].includes(mode))
+    throw new Error('Usage: verify-full-projections [--check | --write | --write-evidence]');
   if (mode === '--write') {
     const prepared = await loadFullPublicProjection({ verifyDerivedFiles: false });
     await mkdir(path.dirname(TAXONOMY_INDEX_PATH), { recursive: true });
@@ -211,7 +211,7 @@ try {
     artifactDigest,
     artifactInventory,
   };
-  if (mode === '--write') {
+  if (mode === '--write' || mode === '--write-evidence') {
     await mkdir(path.dirname(FULL_PROJECTION_PATH), { recursive: true });
     await writeFile(FULL_PROJECTION_PATH, `${JSON.stringify(report, null, 2)}\n`);
   } else {

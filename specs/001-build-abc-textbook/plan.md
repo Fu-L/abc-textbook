@@ -170,6 +170,8 @@ docs/
 
 ## Phase 1: Design & Contracts
 
+Issue #51のT133–T142は`verify:initial-release`で受理済みcanonical full corpusを読み取り検証する。全入力・実装・テストのdigestを10件の独立証跡へ固定し、previewは移行lineageとしてのみ参照する。性能fixtureは本番のrenderer/filter/searchとPagefindを使う隔離Astro build、52週更新は一時Gitとlocal static targetで測定する。本文・taxonomyの自動補修、catch-up、production review/merge/deployはこの検証の対象外。運用手順は`docs/operations/initial-release-verification.md`。
+
 Issue #48のT072–T078では運用者が本人self-study・承認ゲートの除外を明示した。既存コーパスは、current subjectへ固定した`agent_quality_review`、全shard/Unit検証、追跡可能な本文補修記録、独立数学回帰、成果被覆で受け入れる。人間approvalを作らず、SC-009を廃止記録として保存する。この初期本文受入はT160の公開投影とproduction merge/deployを完了したことを意味しない。
 
 Issue #49のT131は、運用者の明示指示によりagent品質レビューと全自動検証で実装を受け入れる。通常・高リスクのproduction review policyの回帰を含め、exact Git commit検証、全件成果被覆、訂正target、履歴分離、冪等性、失敗注入、deploy simulationを確認する。productionの人間reviewやmerge/deploy承認は生成しない。
