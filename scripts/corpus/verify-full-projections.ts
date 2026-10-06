@@ -12,6 +12,11 @@ import {
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
 import { canonicalUiRoutes, withBase } from '../../src/lib/catalog/ui-catalog.js';
 import { normalizeBasePath, resolveSite } from '../config/publication.js';
+import {
+  projectionBuildDigest,
+  projectionImplementationDigest,
+  verifyProjectionEvidence,
+} from '../verify/full-projection-evidence.js';
 
 const mode = process.argv[2] ?? '--check';
 try {
@@ -180,10 +185,8 @@ try {
     taskId: 'T160',
     status: 'passed',
     sourceProjectionDigest: projection.digest,
-    fullProjectionDigest: canonicalDigest({
-      sourceProjectionDigest: projection.digest,
-      artifactDigest,
-    }),
+    implementationDigest: await projectionImplementationDigest(),
+    fullProjectionDigest: projectionBuildDigest(projection.digest, artifactDigest),
     publicationStatus: 'prepared',
     productionReleaseApproved: false,
     build: { base, site },
@@ -213,8 +216,15 @@ try {
     await writeFile(FULL_PROJECTION_PATH, `${JSON.stringify(report, null, 2)}\n`);
   } else {
     const previous: unknown = JSON.parse(await readFile(FULL_PROJECTION_PATH, 'utf8')) as unknown;
-    if (canonicalJson(previous) !== canonicalJson(report))
-      throw new Error('FULL_PROJECTION_EVIDENCE_STALE');
+    const comparison = verifyProjectionEvidence(previous, report);
+    if (comparison.changedArtifacts.length)
+      console.log(
+        JSON.stringify({
+          frozenBuildDigest: comparison.frozenBuildDigest,
+          changedArtifactCount: comparison.changedArtifacts.length,
+          changedArtifactSample: comparison.changedArtifacts.slice(0, 10),
+        }),
+      );
   }
   console.log(
     JSON.stringify({

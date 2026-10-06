@@ -26,6 +26,12 @@ npm run verify:fast
 通常の検証は書き込みを行わない。`--write` は受理済み正本からtaxonomy
 indexを生成し、実際の生成済みHTML、catalog、Pagefind、sitemap、feedのinventoryとdigestを固定する。本文、taxonomy、Outcome、ProblemAuthoringUnitを再生成しない。BASE_PATH/SITE_URLを変えて確認する場合は、その出力専用の証跡を用意し、基準の投影証跡を上書きしない。
 
+固定したartifact inventoryは証跡を作成したビルドの記録であり、別OSのビルドにbyte一致を要求しない。
+`--check` は固定inventoryとfull-projection
+digestの内部整合性を検証し、受理済み正本、描画実装・CSS・設定・lockfileの
+`implementationDigest`、公開先、route、検索文書、件数、CorrectionImpactが現在の入力と一致することを要求する。入力が変われば明示的な証跡更新が必要となる。毎回のビルドについてもHTML構造・非公開情報の除外・タグの手掛かりと学習成果・問題リンク・マトリクス全件・catalog・sitemap・feed・Pagefindの検査を実行し、そのビルドのdigestを出力する。固定ビルドとのartifact差分は件数と先頭10件をログへ出す。`verify:fast`
+はさらに内部リンクと3ブラウザーの検索・表示・操作を検証する。
+
 12件のCorrectionImpactは受理済み本文・canonical policy・生成済みtaxonomy
 indexへ解決する。T049のpreview専用の例・演習・解答の72
 locatorは、T078で廃止が受理された記録と実際の不在を照合し、対象外として文書digest付きで記録する。受理記録のない欠落や未知locatorを対象外へ変換しない。canonical
