@@ -163,7 +163,10 @@
     },
     "__schema1": {
       "type": "string",
-      "const": "1.1.0"
+      "enum": [
+        "1.1.0",
+        "1.2.0"
+      ]
     },
     "__schema2": {
       "type": "string",
@@ -184,7 +187,11 @@
     },
     "__schema6": {
       "type": "string",
-      "const": "sole_operator_learner"
+      "enum": [
+        "sole_operator_learner",
+        "automated_browser"
+      ],
+      "description": "Automated browser timing measures UI and persistence behavior; it does not assert human reading or decision speed."
     },
     "__schema7": {
       "type": "string",

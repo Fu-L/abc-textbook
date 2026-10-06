@@ -1,0 +1,20 @@
+{
+  "id": "abc469-f",
+  "contestId": "abc469",
+  "slotLabel": "F",
+  "officialTaskId": "abc469_f",
+  "title": "GCD Maximum Spanning Tree",
+  "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\leq 10^6; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+    "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+  ],
+  "checkedAt": "2026-10-06T11:30:46.832Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

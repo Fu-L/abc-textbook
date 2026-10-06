@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskIds": ["T143", "T144", "T145", "T146", "T147"],
+  "releaseCommit": "08dd3b015447d26089ba195c05dd88fb3a48a0ae",
+  "status": "passed",
+  "publicationStatus": "prepared",
+  "productionReleaseApproved": false,
+  "inputSubject": {
+    "digest": "deb366cb38810768b43299a9caa2867172a35c7c2dfec5dec2851d0ce929ce4d",
+    "fileCount": 9830
+  },
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "cutoffAt": "2026-10-06T00:00:00+09:00",
+  "bootstrapProblemCount": 868,
+  "catchUpContestCount": 12,
+  "catchUpProblemCount": 36,
+  "totalProblemCount": 904,
+  "totalContestCount": 266,
+  "updateIds": [
+    "update-bootstrap-full-corpus",
+    "update-606564774ea81e99f8287bac",
+    "update-9239d486e013a49844a0fc39",
+    "update-48d7eafc3e54408856a5bcec",
+    "update-5607c80b8dd2912dc50a541e",
+    "update-38875409e61f3bfab2e25803",
+    "update-4b8c3ed6a5d4c339a8212884",
+    "update-102f618e26bb029532dea1aa",
+    "update-f06d5c8c39b83d6542703403",
+    "update-5c347c2531b95aa653e7c9ec",
+    "update-1dfef713eae9b78b69cf8daa",
+    "update-e65de6a7a3b031dee75c7e5f",
+    "update-28e72cc6b8f00648dfa66e9c"
+  ],
+  "checks": [
+    {
+      "taskId": "T133",
+      "path": "docs/verification/initial-release/schema-contracts.json",
+      "digest": "249289df47931f725fc3d79f4837e24c19520985bc6d36aba496f3277a967e19"
+    },
+    {
+      "taskId": "T134",
+      "path": "docs/verification/initial-release/corpus-completeness.json",
+      "digest": "2c8ef7bffdb2cd7dbf2602ffbf57aeadd2641bb4efd303e053af78d5610fbb14"
+    },
+    {
+      "taskId": "T135",
+      "path": "docs/verification/initial-release/taxonomy.json",
+      "digest": "05d14498605a4d619db8896a54a45a01dd2173ec0161f0d6e611ee5635932774"
+    },
+    {
+      "taskId": "T136",
+      "path": "docs/verification/initial-release/sources-and-claims.json",
+      "digest": "33459b2cd9814300790ba21560165a6099fdb804ec9e4782db5dda25540f3224"
+    },
+    {
+      "taskId": "T137",
+      "path": "docs/verification/initial-release/examples-and-answers.json",
+      "digest": "f560a391ceccf7d7310e9d7f274211ba58f2811563e389ff0c31250f2eb7435c"
+    },
+    {
+      "taskId": "T138",
+      "path": "docs/verification/initial-release/accessibility-and-links.json",
+      "digest": "c9a2c7a8395c5b032263ae12b9ae37242c610ab17621ea827f66fcc18db1b587"
+    },
+    {
+      "taskId": "T139",
+      "path": "docs/verification/initial-release/learning-records.json",
+      "digest": "f5d7e1c9394e086230770afd7064ae047cd3e23e23403f3de4347c76de94d2da"
+    },
+    {
+      "taskId": "T140",
+      "path": "docs/verification/initial-release/public-projections.json",
+      "digest": "73046aab4bf34d2206b94a206bec13ed09e7453bb39bc78bd784e44055424d9a"
+    },
+    {
+      "taskId": "T141",
+      "path": "docs/verification/initial-release/performance.json",
+      "digest": "e958d42c01bbaa1f96e761ef62870c23fd41d55273d1d35238ec68001a8c4260"
+    },
+    {
+      "taskId": "T142",
+      "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
+      "digest": "23c9f9de0aa79e188962d9013ce8aaba3891cfcce40d1d18941f6c6c61ecfe7c"
+    }
+  ],
+  "metrics": {
+    "path": "src/content/problem-metrics/atcoder-problems.json",
+    "digest": "61c67c291078b0b0a6a3de9dc25cef25840cd267617f418c87d2ea0ad641805b",
+    "identityCount": 904
+  },
+  "reviewInventory": {
+    "path": "docs/reviews/human-content/initial-release/check-inventory.json",
+    "digest": "847757a8c8a2512d13438cceef7470ee75cf30e0ceda021faa35750e6c894b47"
+  },
+  "changeSummary": {
+    "path": "docs/verification/initial-release/change-summary.json",
+    "digest": "67f83f2b00dfac32bed8970a3f4c3c5e959230c88c9b88cdaec652fbbfdf731b"
+  },
+  "sc012": {
+    "protocolPath": "docs/verification/learner-outcomes/initial-release/sc012-protocol.json",
+    "inventoryDigest": "d50e57abfb09f13b20d44ef07b61eacf7e8cb9de506cad2bf8578e3781f24fb5",
+    "checkedRoutes": 904,
+    "results": [
+      {
+        "engine": "chromium",
+        "durationMs": 90.39999997615814,
+        "path": "docs/verification/learner-outcomes/initial-release/sc012-chromium.json",
+        "digest": "8d5ce2409b5675e0d2ce376a78a9d57c2a26780a714fc5583d48d83f508d6297"
+      },
+      {
+        "engine": "firefox",
+        "durationMs": 137,
+        "path": "docs/verification/learner-outcomes/initial-release/sc012-firefox.json",
+        "digest": "c772b9aaac5d6246eced7c43fb03c847f2287e10411b9bcd09f1a03444622186"
+      },
+      {
+        "engine": "webkit",
+        "durationMs": 49,
+        "path": "docs/verification/learner-outcomes/initial-release/sc012-webkit.json",
+        "digest": "0f8b5a8969951db44755356db07603f3195f67700526fd16c1bd9caa1d564f4d"
+      }
+    ],
+    "measurementKind": "automated_browser",
+    "humanTimingClaimed": false
+  },
+  "sc009": "not_required_by_owner",
+  "sc010": "not_required_by_owner",
+  "learnerRecordPreservation": {
+    "databaseAccess": "fresh_test_contexts_only",
+    "automatedEvidence": "T139: independent timestamps, 120-record backup/restore, migration, expanded-catalog preservation; no operator database accessed"
+  },
+  "generatedAt": "2026-10-06T13:17:46.994Z",
+  "evidenceDigest": "4aadf58777daef7826182f8781c1d04f687efaecda97a9a5a3e2654af11e532e"
+}

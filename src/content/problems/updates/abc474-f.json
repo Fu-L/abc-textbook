@@ -1,0 +1,20 @@
+{
+  "id": "abc474-f",
+  "contestId": "abc474",
+  "slotLabel": "F",
+  "officialTaskId": "abc474_f",
+  "title": "Increment All Divisors",
+  "officialUrl": "https://atcoder.jp/contests/abc474/tasks/abc474_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_i \\leq 10^9; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc474-f-problem-3af2a255399efa7eaa49f908a253a3bc2f9d2d78a27a3b6541d243a663241bbc",
+    "source-abc474-editorial-25392-f074fa894b01973a6c924296ab85d73196242a4db0377e84336d15c6d0db6d0b"
+  ],
+  "checkedAt": "2026-10-06T11:54:05.312Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

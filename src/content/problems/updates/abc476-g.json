@@ -1,0 +1,20 @@
+{
+  "id": "abc476-g",
+  "contestId": "abc476",
+  "slotLabel": "G",
+  "officialTaskId": "abc476_g",
+  "title": "Increasing Popcount",
+  "officialUrl": "https://atcoder.jp/contests/abc476/tasks/abc476_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 10^4; 1\\le L \\le R\\le 10^{18}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc476-g-problem-47e7b472df7860935b28151e54b7997d1f8e5fabe8677c854b8d190efec9369c",
+    "source-abc476-editorial-25751-e2ecd4cd1b0f5951f2d5cc7eaa26812f714ae7b1aaab5d2cd9a3e7a5192b3d49"
+  ],
+  "checkedAt": "2026-10-06T11:32:03.885Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

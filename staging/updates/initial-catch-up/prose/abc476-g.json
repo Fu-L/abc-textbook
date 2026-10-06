@@ -1,0 +1,12 @@
+{
+  "problemId": "abc476-g",
+  "homeUnitId": "unit-poset-dilworth-antichain",
+  "reasoning": "同じラベルを付ける添字列は、添字順かつpopcount狭義増加の鎖である。ラベル数最小化はこの半順序の最小鎖被覆。Dilworthにより最大反鎖、すなわち添字が増える一方でpopcountが非増加となる部分列の最大長へ帰着する。\n\n[L,R]を、2^b長で開始位置がその倍数であるdyadic blockへ分ける。高位bitが固定される一ブロックでは、popcountは固定分c+低位b bitのpopcount。許容popcount範囲[a,z]の非増加部分列の最大長は max_{a≤c+k≤z}C(b,k)。理由は、その部分列をbit集合にすると反鎖で、LYM不等式Σ1/C(b,k)≤1が上限を与え、最大の一層を全て選べば達するため。\n\nD[z]を処理済みprefix内で全popcountがz以上となる非増加部分列の最大長とする。ブロックの固定高位popcountをcとし、最後をt以上とすると、旧列の最後をu以上（u≥t）へ制限したD[u]に、ブロック内の[t,u]層の最大二項係数を足せる。一見O(B³)だが、この層内最大は少し整理できる。\n\nこのブロック内で選ぶ最適層をjとすれば、旧列の最後≥jであるD[j]にC(b,j−c)を足す。候補E[j]=D[j]+C(b,j−c)を各j=c,…,c+bで作り、next[t]=max(D[t],max_{j≥t}E[j])をsuffix最大で計算する。これは各ブロック O(B)。L,R≤10^18ならB≤60、ブロック数 O(B)で O(B²)。最終D[0]が答え。",
+  "correctness": "ラベルごとの添字列と鎖が一対一であり、Dilworthにより最小ラベル数は最大反鎖長。dyadic blockの低位bit上で非増加popcount列は集合包含の反鎖だからLYMの上限が適用でき、単一層が達成する。旧列の下限uを固定した任意の最適層j≤uに対しD[j]≥D[u]なので、単一層を直接列挙する遷移で上限を達成できる。suffix最大は全許容層を漏れなく集約する。",
+  "time": "B=ceil(log2(R+1))≤60として二項係数前計算 O(B²)、各テスト O(B²)。",
+  "space": "二項係数表 O(B²)、DP配列 O(B)。",
+  "technique": "最小鎖被覆を最大反鎖へ変え、巨大整数区間を高位bit固定のblockへ分割する。各blockの極値を層の二項係数へ圧縮してDPでつなぐ。",
+  "problemSpecificElements": "popcountが非増加なら包含関係が生じないため、Boolean格子のLYM不等式を使える。単なるpopcount頻度最大だけでは一般区間の境界を扱えない。",
+  "implementationNotes": "二項係数・答えはmodを取らない64 bit整数。L=Rのblock長1も処理する。DPは旧配列から新配列へ更新する。",
+  "reviewAdvice": "巨大区間を桁DPだけで考えず、規則的な完全blockの答えを数論・組合せの定理で求め、境界だけを連結する。"
+}

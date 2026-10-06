@@ -17,6 +17,7 @@ export interface VerificationStep {
     | 'test'
     | 'corpus'
     | 'problem-metrics'
+    | 'catch-up'
     | 'authoring'
     | 'taxonomy'
     | 'final-taxonomy'
@@ -40,6 +41,7 @@ export const VERIFICATION_STEPS: readonly VerificationStep[] = [
   { id: 'test', script: 'test' },
   { id: 'corpus', script: 'corpus:verify' },
   { id: 'problem-metrics', script: 'corpus:verify-atcoder-problems-metrics' },
+  { id: 'catch-up', script: 'verify:catch-up' },
   { id: 'authoring', script: 'corpus:verify-authoring' },
   { id: 'taxonomy', script: 'preview:taxonomy' },
   { id: 'final-taxonomy', script: 'corpus:final-taxonomy' },

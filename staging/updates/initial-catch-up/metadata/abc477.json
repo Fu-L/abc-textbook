@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc477",
+  "firstContestNumber": 477,
+  "lastContestNumber": 477,
+  "checkedAt": "2026-10-06T11:32:14.894Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc477",
+      "number": 477,
+      "title": "UNICORNProgramming Contest2026(AtCoder Beginner Contest 477)",
+      "startedAt": "2026-09-26T21:00:00+09:00",
+      "endedAt": "2026-09-26T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc477",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc477/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc477_a",
+          "title": "Traffic Light",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc477_b",
+          "title": "Standing Outliers",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc477_c",
+          "title": "Range Search Query",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc477_d",
+          "title": "Masking Tape",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc477_e",
+          "title": "Wheel Distance",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc477_f",
+          "title": "Count Cells in a Window",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_f",
+          "timeLimit": "3 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc477_g",
+          "title": "Frequency Query on Tree",
+          "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_g",
+          "timeLimit": "3 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc477-task-list-92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4",
+      "checkedAt": "2026-10-06T11:32:14.894Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc477-e",
+      "contestId": "abc477",
+      "slotLabel": "E",
+      "officialTaskId": "abc477_e",
+      "officialOrder": 4,
+      "title": "Wheel Distance",
+      "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^9; 1 \\leq S \\lt T \\leq N+1; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+        "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+      ],
+      "checkedAt": "2026-10-06T11:32:14.894Z"
+    },
+    {
+      "id": "abc477-f",
+      "contestId": "abc477",
+      "slotLabel": "F",
+      "officialTaskId": "abc477_f",
+      "officialOrder": 5,
+      "title": "Count Cells in a Window",
+      "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_f",
+      "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M,Q \\le 2\\times10^5; 1 \\le L_i \\le R_i \\le M; For each query, 1 \\le A \\le B \\le N.; For each query, 1 \\le C \\le D \\le M.; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+        "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+      ],
+      "checkedAt": "2026-10-06T11:32:14.894Z"
+    },
+    {
+      "id": "abc477-g",
+      "contestId": "abc477",
+      "slotLabel": "G",
+      "officialTaskId": "abc477_g",
+      "officialOrder": 6,
+      "title": "Frequency Query on Tree",
+      "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_g",
+      "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq u_i \\lt v_i \\leq N; The given graph is a tree.; 1 \\leq x_i \\leq N; 1 \\leq s \\lt t \\leq N; 1 \\leq a \\leq b \\leq N; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+        "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8"
+      ],
+      "checkedAt": "2026-10-06T11:32:14.894Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc477-task-list-92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4",
+      "url": "https://atcoder.jp/contests/abc477/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc477",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "92303b38c7431fbd011d4d4e1f3bdea7184c33d5e070508c500ab939ed7193c4",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+      "url": "https://atcoder.jp/contests/abc477/tasks/abc477_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_e",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+      "url": "https://atcoder.jp/contests/abc477/tasks/abc477_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_f",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-g-problem-afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+      "url": "https://atcoder.jp/contests/abc477/tasks/abc477_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_g",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "afe2b3b15c965cebee78dc66a3bbde1e59e5c498fb87227cace22a6e3554649e",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-editorial-index-28b4fe0ccf05ae6f964b46cfbb915361c6f28a4c70ec376763663ad631db00f9",
+      "url": "https://atcoder.jp/contests/abc477/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc477",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "28b4fe0ccf05ae6f964b46cfbb915361c6f28a4c70ec376763663ad631db00f9",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d",
+      "url": "https://atcoder.jp/contests/abc477/editorial/25884",
+      "sourceKind": "official_editorial",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_e",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae",
+      "url": "https://atcoder.jp/contests/abc477/editorial/26406",
+      "sourceKind": "official_editorial",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_f",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc477-editorial-25886-020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8",
+      "url": "https://atcoder.jp/contests/abc477/editorial/25886",
+      "sourceKind": "official_editorial",
+      "contestId": "abc477",
+      "officialTaskId": "abc477_g",
+      "checkedAt": "2026-10-06T11:32:14.894Z",
+      "fingerprint": "020273374dcfcfeb234034ab36428ea8236631c8a70360d1bd630fc1ae13c5e8",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "821fcd3dead8796334a972346ef40abe3be430718f7405397a32a31906e861c0",
+  "digest": "a390b806b16b9ad33ac8d76331c1f9402c563346dcaf37e36bcdf7a7c7ee0938"
+}

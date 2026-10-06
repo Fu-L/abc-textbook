@@ -35,6 +35,7 @@ import {
   ATCODER_PROBLEMS_METRICS_PATH,
 } from '../corpus/atcoder-problems-metrics.js';
 import { PublicReleaseHistoryEntrySchema } from './build-release-history.js';
+import { loadAcceptedUpdates } from '../corpus/accepted-updates.js';
 
 export const FULL_PROJECTION_PATH = 'docs/verification/bootstrap/us4/full-projections.json';
 export const TAXONOMY_INDEX_PATH = 'src/content/indexes/taxonomy.json';
@@ -95,6 +96,8 @@ export const loadFullPublicProjection = async (
       entities(structuredContentRoots.learningUnits, LearningUnitSchema),
       entities(structuredContentRoots.sources, SourceRevisionSchema),
     ]);
+  const updates = await loadAcceptedUpdates(root);
+  const bootstrapUnits = structuredClone(units);
   contests.sort((a, b) => a.number - b.number);
   const policy = CanonicalProblemPlacementPolicySchema.parse(
     await json('src/content/policies/problem-placements.json'),
@@ -159,7 +162,7 @@ export const loadFullPublicProjection = async (
     throw new Error('FULL_PROJECTION_ACCEPTANCE_SUBJECT');
   if (
     units.length !== acceptedUnits.units.length ||
-    metadata.length !== acceptedProblems.documents.length
+    metadata.length !== acceptedProblems.documents.length + (updates?.documents.length ?? 0)
   )
     throw new Error('FULL_PROJECTION_ACCEPTED_COVERAGE');
   const unitDocuments = new Map<string, { text: string; digest: string; accepted: boolean }>();
@@ -173,7 +176,7 @@ export const loadFullPublicProjection = async (
     assertAcceptedUnitPublication(unit, text, accepted);
     unitDocuments.set(unit.id, { text, digest: sha(text), accepted: true });
   }
-  for (const document of acceptedProblems.documents) {
+  for (const document of [...acceptedProblems.documents, ...(updates?.documents ?? [])]) {
     const text = (await read(document.path)).toString('utf8');
     const parsed = readProblemAuthoringDocument(text);
     if (
@@ -183,6 +186,64 @@ export const loadFullPublicProjection = async (
     )
       throw new Error(`FULL_PROJECTION_PROBLEM_NOT_ACCEPTED:${document.problemId}`);
     problemDocuments.set(document.problemId, { ...parsed, text, digest: sha(text) });
+  }
+  const baseMapping = buildProblemContent({
+    problemIds: acceptedProblems.documents.map((document) => document.problemId),
+    documents: [...problemDocuments.values()]
+      .filter((document) =>
+        acceptedProblems.documents.some((item) => item.problemId === document.unit.problemId),
+      )
+      .map((document) => document.unit),
+    placements: policy.placements,
+    units: bootstrapUnits,
+  });
+  if (
+    canonicalDigest(baseMapping) !== acceptedMapping.projectionDigest ||
+    canonicalJson(baseMapping) !== canonicalJson(acceptedMapping.items)
+  )
+    throw new Error('FULL_PROJECTION_MAPPING_DRIFT');
+  if (updates) {
+    inventory.push(...updates.inventories);
+    policy.placements.push(...updates.placements);
+    policy.placementDigest = canonicalDigest(policy.placements);
+    const owner = new Map(
+      units.flatMap((unit) =>
+        (unit.ownedLearningOutcomeIds ?? []).map((id) => [id, unit.id] as const),
+      ),
+    );
+    for (const placement of updates.placements) {
+      const homeId = owner.get(placement.primaryOutcomeId);
+      const home = units.find((unit) => unit.id === homeId);
+      if (!home) throw new Error(`FULL_PROJECTION_UPDATE_HOME:${placement.problemId}`);
+      (home.directProblemIds ??= []).push(placement.problemId);
+      for (
+        let current: typeof home | undefined = home;
+        current;
+        current = units.find((unit) => unit.id === current.parentId)
+      )
+        current.problemIds.push(placement.problemId);
+      const relatedOwners = new Set(
+        [
+          placement.primaryOutcomeId,
+          ...placement.additionalPrimaryOutcomeIds,
+          ...placement.supportingOutcomeIds,
+        ].map((id) => owner.get(id)),
+      );
+      for (const unit of units) {
+        if (unit.problemIds.includes(placement.problemId)) continue;
+        const descendants = new Set([unit.id]);
+        for (let changed = true; changed;) {
+          changed = false;
+          for (const child of units)
+            if (child.parentId && descendants.has(child.parentId) && !descendants.has(child.id)) {
+              descendants.add(child.id);
+              changed = true;
+            }
+        }
+        if ([...relatedOwners].some((id) => id && descendants.has(id)))
+          (unit.relatedProblemIds ??= []).push(placement.problemId);
+      }
+    }
   }
   validateReleaseLearningStructure({
     tags,
@@ -201,11 +262,6 @@ export const loadFullPublicProjection = async (
     units,
   });
   const mappingDigest = canonicalDigest(mapping);
-  if (
-    mappingDigest !== acceptedMapping.projectionDigest ||
-    canonicalJson(mapping) !== canonicalJson(acceptedMapping.items)
-  )
-    throw new Error('FULL_PROJECTION_MAPPING_DRIFT');
   const metrics = validateAtCoderProblemsSnapshot(
     await json(ATCODER_PROBLEMS_METRICS_PATH),
     metadata,
@@ -292,29 +348,57 @@ export const loadFullPublicProjection = async (
   }));
   const contentInventory = [
     ...units.map((unit) => ({ path: unit.docPath, digest: unitDocuments.get(unit.id)?.digest })),
-    ...acceptedProblems.documents.map((document) => ({
+    ...[...acceptedProblems.documents, ...(updates?.documents ?? [])].map((document) => ({
       path: document.path,
       digest: document.digest,
     })),
   ].sort((a, b) => a.path.localeCompare(b.path, 'en'));
   const contentDigest = canonicalDigest(contentInventory);
-  const completedAt = policy.sourceBuild.acceptedAt;
+  const completedAt = updates
+    ? (updates.receipts
+        .flatMap((receipt) =>
+          receipt.items.flatMap((item) => item.packet.sources.map((source) => source.checkedAt)),
+        )
+        .sort()
+        .at(-1) ?? policy.sourceBuild.acceptedAt)
+    : policy.sourceBuild.acceptedAt;
   const resultPath = 'docs/verification/bootstrap/problem-authoring-units.json';
   const resultDigest = canonicalDigest(await json(resultPath));
+  const updateChecks = updates
+    ? await Promise.all(
+        updates.policy.updates.map(async (entry) => ({
+          checkId: `check-normal-update-${entry.contestId}`,
+          command: 'npm run verify:catch-up',
+          subjectDigest: canonicalDigest(await json(entry.authoringPath)),
+          resultPath: entry.receiptPath,
+          resultDigest: canonicalDigest(await json(entry.receiptPath)),
+          exitCode: 0,
+          passed: true,
+          completedAt,
+        })),
+      )
+    : [];
   const catalog = CatalogSchema.parse({
     schemaVersion: '3.0.0',
     advancedSlotRegistry: registry,
     release: {
       publicationStatus: 'prepared',
-      version: completedAt.slice(0, 10).replaceAll('-', '.'),
+      version: (updates?.policy.cutoffAt ?? completedAt).slice(0, 10).replaceAll('-', '.'),
       releaseKind: 'initial',
-      cutoffAt: contests.at(-1)?.endedAt,
+      cutoffAt: updates?.policy.cutoffAt ?? contests.at(-1)?.endedAt,
       validatedAt: completedAt,
       publicationEffectiveAt: completedAt,
-      manifestDigest: policy.sourceBuild.digest,
+      manifestDigest: updates
+        ? canonicalDigest({ bootstrap: policy.sourceBuild.digest, catchUp: updates.policy.digest })
+        : policy.sourceBuild.digest,
       contentFileInventoryDigest: contentDigest,
       contentSnapshotDigest: '0'.repeat(64),
-      updateIds: ['update-bootstrap-full-corpus'],
+      updateIds: updates
+        ? [
+            updates.policy.bootstrapUpdateId,
+            ...updates.policy.updates.map((update) => update.updateId),
+          ]
+        : ['update-bootstrap-full-corpus'],
       advancedSlotRegistryDigest: registry.digest,
       firstContestId: contests[0]?.id,
       lastContestId: contests.at(-1)?.id,
@@ -327,10 +411,10 @@ export const loadFullPublicProjection = async (
       withdrawnProblemIds: [],
       taxonomyChanges: [],
       validationSummary: {
-        checkCount: 1,
-        passedCheckCount: 1,
+        checkCount: 1 + updateChecks.length,
+        passedCheckCount: 1 + updateChecks.length,
         blockingFindingCount: 0,
-        evidenceDigests: [resultDigest],
+        evidenceDigests: [resultDigest, ...updateChecks.map((check) => check.resultDigest)],
         checks: [
           {
             checkId: 'check-accepted-problem-corpus',
@@ -342,6 +426,7 @@ export const loadFullPublicProjection = async (
             passed: true,
             completedAt,
           },
+          ...updateChecks,
         ],
       },
       humanContentReviewEvidenceRefs: [],

@@ -1,0 +1,20 @@
+{
+  "id": "abc478-f",
+  "contestId": "abc478",
+  "slotLabel": "F",
+  "officialTaskId": "abc478_f",
+  "title": "Min-First Search",
+  "officialUrl": "https://atcoder.jp/contests/abc478/tasks/abc478_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q _ i\\le N\\ (1\\le i\\le N); Q _ i\\ne Q _ j\\ (1\\le i\\lt j\\le N); Q _ 1=1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc478-f-problem-bdf75970cbf3991d2648af45f0486a7f36e17d437084e35d2614fa5746f1a44e",
+    "source-abc478-editorial-26540-e79777ceb79ee0b436192fab3946c2681caef0fae3002826a1343c47ca364b23"
+  ],
+  "checkedAt": "2026-10-06T11:32:25.890Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -29,7 +29,7 @@
     },
     {
       "path": "docs/verification/bootstrap/pr65-review2-mathematical-checks.py",
-      "scriptDigest": "21e6d6f49e16f5a9c96029a2876dd070bbd0cc5f9730591dbdff9ea1b3a25310",
+      "scriptDigest": "21cbe638edfb899e4545fb642ed32e4f693374e53dcf3bd58ecc245b04e4b035",
       "exitCode": 0,
       "observed": "Actual textbook correctness Claim/body consistency: 868\nABC272 Ex: permutations, DP, FPS and even flip counts: 175\nABC232 H: all endpoints in rectangles up to 15x15: 13965\nABC466 F: weighted prefixes vs all starting integers: 18648\nABC245 Ex: fixed-residue states vs full residue DP: 828\nABC230 H: two-unknown CDQ vs direct multiset counting: 63\nABC278 Ex: rank convolution and Stirling inversion vs vector tuples: 15\nABC317 Ex: polynomial transfer and return denominator vs graph walks: 4368\nABC315 Ex: shifted CDQ pairs vs quadratic recurrence: 192\nABC214 F: first-completion DP vs all nonadjacent subsequences: 2046\nABC214 G: cycle rook polynomial vs all permutations: 501\nABC295 Ex: frontier sweep vs deduplicated row/column prefix constructions: 1350\nABC258 Ex: relative-parity matrices vs odd-step compositions: 8191\nABC300 Ex: submask Bostan-Mori vs direct K-bonacci sequence: 1024\nABC313 Ex: ordered fragment coefficients vs front-row permutations: 72\nABC273 G: transition table vs all matrices up to 3x3: 819\nABC252 G: forest interval recurrence vs all rooted labelled trees: 153\nABC292 G: digit/block bases and recurrence vs explicit completions: 100",
       "stderr": "",
@@ -37,7 +37,7 @@
     },
     {
       "path": "docs/verification/bootstrap/pr65-review3-mathematical-checks.py",
-      "scriptDigest": "94cf91d43132e713b2a3048df4cdf91d43a1bc1f85b03065cf7e985c0acd64bc",
+      "scriptDigest": "77b94dbf7262d592da81ada2b7836a0ee53784c3884d9dd41a6646e201cac3ce",
       "exitCode": 0,
       "observed": "ABC298 Ex: all endpoints including equality and different roots: 80847\nABC359 G: centroid path contributions versus pair distances: 3144\nABC281 Ex: coefficient slices versus sequential whole-polynomial updates: 672\nABC290 Ex: all parity cases, empty reduced DP, versus permutations: 144\nABC299 Ex: six boundary equations versus full periodic Markov system: 675\nABC299 Ex: matrix powers and nonzero pivots at the actual 10^9 period: OK\nABC371 G: residues versus orbit enumeration / big-integer CRT: 976\nABC235 Ex: same-weight/multiedge/disconnected painting versus set unions: 840\nABC235 Ex: truncated convolution work, chain/balanced/random merges: 90\nABC255 G: sparse absent-frequency mex versus all legal moves: 1598\nABC260 G: four imos marks versus direct geometric inequality: 200\nABC268 E: affine half-open intervals versus circular distances: 9450\nABC430 G: set mapping and maximum/count versus explicit leaves: 13824\nABC382 G: finite tables and coordinate normalization versus tile BFS: 83529\nABC219 H: remaining-count interval DP versus all visit orders: 150\nABC270 Ex: affine jumps with repeated breakpoints versus full Markov system: 296\nABC265 F: both diagonal sums and coincident centers versus lattice enumeration: 270\nABC299 F: canonical boundary DP versus distinct binary subsequences: 1022\nABC387 G: rooted EGF conversion versus all graphs and edge-simple circuits: 1099\nABC389 G: layer-state coefficients versus all labelled graphs and BFS: 32834\nActual textbook correctness Claim/body consistency: 868",
       "stderr": "",
@@ -109,7 +109,7 @@
     },
     {
       "path": "docs/verification/bootstrap/pr65-review12-mathematical-checks.py",
-      "scriptDigest": "d209fd8e8c837a35941efddf5dd29b15257ececfbdf4536d760c26ae5c4ecad3",
+      "scriptDigest": "dce8a38bf4e8badbce445043b4bcec7e4a6639ea7fd2518aa592cc4d4b9416f8",
       "exitCode": 0,
       "observed": "{\"223 all suffix spans\": 4187, \"223 pivot queries\": 62805, \"236 optimal basis\": 280, \"249 30-bit representative\": 1, \"249 affine set\": 1157, \"249 nonempty subsets\": 506, \"254 original moves and assignments\": 1696, \"290 coin DP\": 18991, \"290 disjoint placement\": 42, \"290 original cuts\": 42, \"301 camera objective\": 354, \"301 coincident xy projections\": 1, \"301 projected false intersection\": 1, \"301 ray contributions\": 273, \"301 true 3D crossings\": 354, \"442 billion copies\": 1, \"442 bounded knapsack\": 500, \"442 run boundaries\": 5255, \"442 selected sum bound\": 1, \"442 unavailable residues\": 1, \"451 linear normal form\": 64000, \"451 original xor walks\": 3334, \"451 trie and equality\": 4000, \"868 prose and Claim\": 868}\nPassed 168650 independent finite comparisons.",
       "stderr": "",
@@ -125,7 +125,7 @@
     },
     {
       "path": "docs/verification/bootstrap/pr65-review14-mathematical-checks.py",
-      "scriptDigest": "cba6c7286a3a5abd5e48d6db22324ff140e780ec18c6a0e99c97977e23fdd029",
+      "scriptDigest": "653ca55a65681f29aade30f684ab40d7674864d838f471308949daf6786ce5c9",
       "exitCode": 0,
       "observed": "257 64bit objective: 1\n257 collinear and duplicate blocks: 12\n257 final modular scale: 96\n257 maintained sums: 7814\n257 mapping versus all dice outcomes: 179\n257 simultaneous event order: 7814\n257 sweep versus all subsets: 550\n289 absolute offset and odd parity: 64\n289 compressed convolution versus original walks: 64\n289 renewal versus absorbing walks: 64\n289 unreachable time range: 1\n289 zero time initial meeting: 1\n294 all ranks and all masks: 280\n294 coefficient recurrence: 1050\n294 core versus all colorings: 3300\n294 deletion contraction versus all colorings: 3300\n294 larger hybrid graphs: 72\n295 ancestor root differs from DSU root: 1\n295 full SCC partition: 21368\n295 reachable minima: 21368\n295 root attributes after branch merges: 1\n295 successful union bound: 21368\n330 moments versus all completions: 15125\n330 restore factorial and modular answer: 15125\n344 heap versus original point inequalities: 164\n344 one swap per pair: 164\n344 sorted scores after tied events: 7083\n450 modular expectation: 329\n450 pair recurrence versus original subtractions: 329\ncorrectness Claim synchronization: 868\ndocument count: 1\nFinite mathematical comparisons: 127087\nDocument synchronization comparisons: 868",
       "stderr": "",
@@ -266,9 +266,9 @@
       "digest": "b9d1aa6d54433b71935743581c719916e07dc2c82364a8961e109c9204ed28c6"
     }
   ],
-  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "qualityBasisDigest": "be4630b8eab8d587a59a89096c6925e3348fe7b80f0c8ed3ef3ff6232e7a4275",
   "qualityReviewPath": "docs/reviews/agent-content/bootstrap/problem-corpus-quality.json",
   "qualityReviewDigest": "2111aed251e7f1d2046dff2e0bc738ba12c75cd09514c7eb461adf13ad61c734",
   "limitations": "Finite regression checks do not prove arbitrary-input correctness. General arguments remain in the source-bound Problem prose and the tracked full-corpus prose reviews.",
-  "evidenceDigest": "f781c4abf3143cebb755040e6aeb5524d401feda62916b2915f420a03a18ff48"
+  "evidenceDigest": "dd1adb849809c75c5336d6009d0e0ee1b09674355ea53af70b70b4613be305e9"
 }

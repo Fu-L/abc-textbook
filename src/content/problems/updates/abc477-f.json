@@ -1,0 +1,20 @@
+{
+  "id": "abc477-f",
+  "contestId": "abc477",
+  "slotLabel": "F",
+  "officialTaskId": "abc477_f",
+  "title": "Count Cells in a Window",
+  "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_f",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\le N,M,Q \\le 2\\times10^5; 1 \\le L_i \\le R_i \\le M; For each query, 1 \\le A \\le B \\le N.; For each query, 1 \\le C \\le D \\le M.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc477-f-problem-32551768cb7a990424f9a1bc33ef93ac02eb27a0082a0b7d78eb8b4581aae77e",
+    "source-abc477-editorial-26406-3d9dfe3ad111763a28ecfba66e219662eb99ca92d66ee12ea1daed99026fddae"
+  ],
+  "checkedAt": "2026-10-06T11:32:14.894Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

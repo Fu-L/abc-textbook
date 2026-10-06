@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0.0",
+  "releaseCommit": "08dd3b015447d26089ba195c05dd88fb3a48a0ae",
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "criterionId": "SC-009",
+  "status": "not_required_by_owner",
+  "decisionSource": "owner_instruction_issue_48",
+  "sc010Status": "not_required_by_owner_issue_46",
+  "manualAnswersGenerated": false,
+  "alternativeEvidence": "docs/verification/initial-release/matrix.json"
+}

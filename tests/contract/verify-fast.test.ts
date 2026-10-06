@@ -17,7 +17,8 @@ describe('verify:fast exit code contract', () => {
   it('checks canonical materialization after final taxonomy and before learning content', () => {
     const ids = VERIFICATION_STEPS.map(({ id }) => id);
     expect(ids.indexOf('problem-metrics')).toBe(ids.indexOf('corpus') + 1);
-    expect(ids.indexOf('authoring')).toBe(ids.indexOf('problem-metrics') + 1);
+    expect(ids.indexOf('catch-up')).toBe(ids.indexOf('problem-metrics') + 1);
+    expect(ids.indexOf('authoring')).toBe(ids.indexOf('catch-up') + 1);
     expect(ids.indexOf('final-taxonomy')).toBe(ids.indexOf('taxonomy') + 1);
     expect(ids.indexOf('canonical-taxonomy')).toBe(ids.indexOf('final-taxonomy') + 1);
     expect(ids.indexOf('full-learning-content')).toBe(ids.indexOf('canonical-taxonomy') + 1);

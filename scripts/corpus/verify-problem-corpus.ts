@@ -131,6 +131,8 @@ if (process.argv.length > 3 || !['--check', '--write'].includes(mode)) {
     }
     const discoveredPaths = (await readdir('src/content/docs/problems', { recursive: true }))
       .filter((p) => p.endsWith('.md'))
+      // Normal updates have a separate source-bound join, checked by verify:catch-up.
+      .filter((p) => !p.startsWith('updates/'))
       .map((p) => `src/content/docs/problems/${p}`)
       .sort();
     validateJoinedProblemDocuments({

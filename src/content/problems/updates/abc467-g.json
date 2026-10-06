@@ -1,0 +1,20 @@
+{
+  "id": "abc467-g",
+  "contestId": "abc467",
+  "slotLabel": "G",
+  "officialTaskId": "abc467_g",
+  "title": "Many Sweets Problem",
+  "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq c \\leq N; 1 \\leq x \\leq 10^9; 1 \\leq l \\leq r \\leq N; 1 \\leq k \\leq 10^{15}; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+    "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+  ],
+  "checkedAt": "2026-10-06T11:30:25.006Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,1506 @@
+{
+  "schemaVersion": "1.0.0",
+  "contestId": "abc468",
+  "items": [
+    {
+      "packet": {
+        "problemId": "abc468-e",
+        "learningOutcomeIds": [
+          "outcome-reorder-counting-contributions"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-contribution-reordering"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; 0\\le A_i < 998244353; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "各区間の平均を二つの累積和項に分けて有限和の順序を交換すると、B_iの正係数はH_i、負係数はH_{N−i}になる。従って各区間の寄与が一度ずつ同じ値で加算される。非零分母の逆元で割り算を表すことは有限体上でも成立する。",
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+            "path": "src/content/sources/updates/source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc468_e",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491",
+            "path": "src/content/sources/updates/source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc468_e",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc468-e",
+        "sourceRevisionIds": [
+          "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+          "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc468-e-solution",
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "全区間の平均を足すので、区間和は累積和B_i=Σ_{j≤i}A_jで O(1) にできる。ただし区間数は O(N²) で、分母の長さが違うから普通の区間和の総和にはならない。ここで平均を (B_r−B_{l−1})/(r−l+1) と分け、Bの各項の係数を集める。",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。",
+              "decision": "adopted",
+              "decisionReason": "各区間の平均を二つの累積和項に分けて有限和の順序を交換すると、B_iの正係数はH_i、負係数はH_{N−i}になる。従って各区間の寄与が一度ずつ同じ値で加算される。非零分母の逆元で割り算を表すことは有限体上でも成立する。",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "全区間の平均を足すので、区間和は累積和B_i=Σ_{j≤i}A_jで O(1) にできる。ただし区間数は O(N²) で、分母の長さが違うから普通の区間和の総和にはならない。ここで平均を (B_r−B_{l−1})/(r−l+1) と分け、Bの各項の係数を集める。\n\nH_0=0、H_i=Σ_{d=1}^i inv(d) と置く。右端がrの正の項はB_r H_r。左端がlの負の項はB_{l−1} H_{N−l+1}。添字をそろえると答えは Σ_{i=0}^N B_i(H_i−H_{N−i})。これなら線形個数の加算で済む。\n\n法p=998244353は素数でN<pなので、1からNまでの逆元がすべて存在する。inv(1)=1、inv(i)=−floor(p/i) inv(p mod i) mod p の漸化式で全逆元を O(N) で作り、B,Hを前計算して最後に一度走査する。各分母へ個別に高速累乗すると O(N log p) となるので、ここでは逆元表を使う。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "局所寄与へ分解して集計順を交換する",
+            "trigger": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。",
+            "application": "全区間の平均を足すので、区間和は累積和B_i=Σ_{j≤i}A_jで O(1) にできる。ただし区間数は O(N²) で、分母の長さが違うから普通の区間和の総和にはならない。ここで平均を (B_r−B_{l−1})/(r−l+1) と分け、Bの各項の係数を集める。\n\nH_0=0、H_i=Σ_{d=1}^i inv(d) と置く。右端がrの正の項はB_r H_r。左端がlの負の項はB_{l−1} H_{N−l+1}。添字をそろえると答えは Σ_{i=0}^N B_i(H_i−H_{N−i})。これなら線形個数の加算で済む。\n\n法p=998244353は素数でN<pなので、1からNまでの逆元がすべて存在する。inv(1)=1、inv(i)=−floor(p/i) inv(p mod i) mod p の漸化式で全逆元を O(N) で作り、B,Hを前計算して最後に一度走査する。各分母へ個別に高速累乗すると O(N log p) となるので、ここでは逆元表を使う。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。",
+            "reusablePerspective": "区間の平均を直接集めず、どの累積和が何回どの重みで現れるかを見る。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "逆元・累積和・係数和を各一度計算して O(N)。",
+          "space": "逆元と累積和表に O(N)。",
+          "evidenceIds": [
+            "evidence-abc468-e-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "負の係数をmodで正規化する。i=0,Nの端点も式に含め、H_0=B_0=0とする。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "区間の平均を直接集めず、どの累積和が何回どの重みで現れるかを見る。",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc468-e",
+        "problemId": "abc468-e",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。",
+          "proof": "各区間の平均を二つの累積和項に分けて有限和の順序を交換すると、B_iの正係数はH_i、負係数はH_{N−i}になる。従って各区間の寄与が一度ずつ同じ値で加算される。非零分母の逆元で割り算を表すことは有限体上でも成立する。",
+          "complexity": "逆元・累積和・係数和を各一度計算して O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; 0\\le A_i < 998244353; All input values are integers.",
+          "prerequisites": "局所寄与へ分解して集計順を交換する",
+          "implementation": "負の係数をmodで正規化する。i=0,Nの端点も式に含め、H_0=B_0=0とする。"
+        },
+        "additionalElement": null,
+        "rationale": "区間の平均を直接集めず、どの累積和が何回どの重みで現れるかを見る。 主たる学習成果を「局所寄与へ分解して集計順を交換する」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc468-e-solution"
+        ],
+        "primaryTagIds": [
+          "tag-contribution-reordering"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-reorder-counting-contributions",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-contribution-reordering"
+            ],
+            "rationale": "総和の中に同じ累積量が繰り返し現れたら、区間側の列挙から累積量側の係数計算へ移す。長さの逆数は調和数の累積和になる。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-e",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc468-e-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+                "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "平均の分母は区間長なので、累積和を引いた後に長さ別の係数を整理する必要がある。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          },
+          {
+            "problemId": "abc468-e",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc468-e-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+              "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc468-e.md",
+      "documentDigest": "d13524d0b17f7bf93a1766494532ce5ef93197c975476a11e3488a1046d146c8",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 区間の平均を直接集めず、どの累積和が何回どの重みで現れるかを見る。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc468-f",
+        "learningOutcomeIds": [
+          "outcome-design-lis-frontier"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-lis-state"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; P is a permutation of (1,2,\\ldots,N).; All input values are integers."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "prefix最大値を大きい箱に置く操作は、同じ得点を保ちながら小さい最大値をそれ以下に保つので、任意の将来操作を不利にしない。その正規形では非prefix最大値から得る加点列は狭義増加であり、上限はLIS長。LISを小さい箱へ割り当てる構成がその上限に達する。",
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+            "path": "src/content/sources/updates/source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc468_f",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e",
+            "path": "src/content/sources/updates/source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc468_f",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc468-f",
+        "sourceRevisionIds": [
+          "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+          "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc468-f-solution",
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "二つの箱へ値を割り当て、各箱の最大値が増えた回数を最大化する。状態(x,y)を全て持つと大きいが、処理済みprefixの最大値は必ずmax(x,y)と一致する。未来へ影響する自由な値は小さい方だけである。",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。",
+              "decision": "adopted",
+              "decisionReason": "prefix最大値を大きい箱に置く操作は、同じ得点を保ちながら小さい最大値をそれ以下に保つので、任意の将来操作を不利にしない。その正規形では非prefix最大値から得る加点列は狭義増加であり、上限はLIS長。LISを小さい箱へ割り当てる構成がその上限に達する。",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "二つの箱へ値を割り当て、各箱の最大値が増えた回数を最大化する。状態(x,y)を全て持つと大きいが、処理済みprefixの最大値は必ずmax(x,y)と一致する。未来へ影響する自由な値は小さい方だけである。\n\n新しいprefix最大値vは必ずどちらかの箱を更新して1点を得る。大きい方へ入れれば小さい方を残せる。小さい方へ入れると小さい最大値まで大きくなり、以後に更新できる候補が減るだけなので、大きい方へ入れる戦略が支配する。\n\nprefix最大値ではないvは大きい箱を更新できない。点を得るには小さい箱の現在値より大きくする必要があり、点を得たこれらの値は入力順で狭義増加になる。逆にprefix最大値をすべて大きい箱へ入れ、残りの列Qの任意の増加部分列だけを小さい箱へ入れれば、その長さだけ加点できる。答えはprefix最大値の個数+LIS(Q)。\n\nQに対して、長さjの増加部分列の最小末尾をtails[j]に保つ。各vをlower_boundで置き換える。順列なので重複はないが、定義は狭義増加としておく。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "LIS・末尾の支配関係",
+            "trigger": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。",
+            "application": "二つの箱へ値を割り当て、各箱の最大値が増えた回数を最大化する。状態(x,y)を全て持つと大きいが、処理済みprefixの最大値は必ずmax(x,y)と一致する。未来へ影響する自由な値は小さい方だけである。\n\n新しいprefix最大値vは必ずどちらかの箱を更新して1点を得る。大きい方へ入れれば小さい方を残せる。小さい方へ入れると小さい最大値まで大きくなり、以後に更新できる候補が減るだけなので、大きい方へ入れる戦略が支配する。\n\nprefix最大値ではないvは大きい箱を更新できない。点を得るには小さい箱の現在値より大きくする必要があり、点を得たこれらの値は入力順で狭義増加になる。逆にprefix最大値をすべて大きい箱へ入れ、残りの列Qの任意の増加部分列だけを小さい箱へ入れれば、その長さだけ加点できる。答えはprefix最大値の個数+LIS(Q)。\n\nQに対して、長さjの増加部分列の最小末尾をtails[j]に保つ。各vをlower_boundで置き換える。順列なので重複はないが、定義は狭義増加としておく。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。",
+            "reusablePerspective": "状態変数の一部が入力prefixだけで決まるか調べる。その後も自由な状態を、同得点なら小さい方がよいという支配で削る。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "prefix最大値抽出 O(N)、LIS O(N log N)。",
+          "space": "tailsに O(N)。",
+          "evidenceIds": [
+            "evidence-abc468-f-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "prefix最大値は読み込む前の最大値と比較して判定する。N=1はprefix最大値だけで答え1。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "状態変数の一部が入力prefixだけで決まるか調べる。その後も自由な状態を、同得点なら小さい方がよいという支配で削る。",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc468-f",
+        "problemId": "abc468-f",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。",
+          "proof": "prefix最大値を大きい箱に置く操作は、同じ得点を保ちながら小さい最大値をそれ以下に保つので、任意の将来操作を不利にしない。その正規形では非prefix最大値から得る加点列は狭義増加であり、上限はLIS長。LISを小さい箱へ割り当てる構成がその上限に達する。",
+          "complexity": "prefix最大値抽出 O(N)、LIS O(N log N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; P is a permutation of (1,2,\\ldots,N).; All input values are integers.",
+          "prerequisites": "LIS・末尾の支配関係",
+          "implementation": "prefix最大値は読み込む前の最大値と比較して判定する。N=1はprefix最大値だけで答え1。"
+        },
+        "additionalElement": null,
+        "rationale": "状態変数の一部が入力prefixだけで決まるか調べる。その後も自由な状態を、同得点なら小さい方がよいという支配で削る。 主たる学習成果を「LIS・末尾の支配関係」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc468-f-solution"
+        ],
+        "primaryTagIds": [
+          "tag-lis-state"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-design-lis-frontier",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lis-state"
+            ],
+            "rationale": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lis-state"
+            ],
+            "rationale": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lis-state"
+            ],
+            "rationale": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-lis-state"
+            ],
+            "rationale": "二つの最大値のうち一つがprefix全体から決まるなら状態を一つ消せる。支配関係で確定できる操作を取り除き、残る増加列をLISへ帰着する。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-f",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc468-f-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+                "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "自由に二列へ分ける問題だが、二列のLIS長の和ではない。大きい箱の値は毎prefixで固定される。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          },
+          {
+            "problemId": "abc468-f",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc468-f-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+              "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc468-f.md",
+      "documentDigest": "5bbfb8ea1d9eee49cc377c93b52f88d45aa33266530ff471eae7070baf062b9f",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 状態変数の一部が入力prefixだけで決まるか調べる。その後も自由な状態を、同得点なら小さい方がよいという支配で削る。"
+      }
+    },
+    {
+      "packet": {
+        "problemId": "abc468-g",
+        "learningOutcomeIds": [
+          "outcome-formulate-combinatorial-coefficients"
+        ],
+        "baseline": {
+          "id": "prereq-abc-advanced-v1",
+          "version": "1.0.0"
+        },
+        "additionalPrerequisiteUnitIds": [],
+        "excludedTopics": [],
+        "tagIds": [
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "constraints": [
+          "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2000; S_i is a string of length N consisting of o and x."
+        ],
+        "placementCandidate": {
+          "primaryProblemId": null,
+          "comparison": null,
+          "additionalElement": null
+        },
+        "technicalClaims": [
+          {
+            "text": "最初に連続ブロックとなるkは各順列について一意で、その内部順と圧縮後の順列も一意に復元できるので漸化式に重複がない。指定された連続ブロックの間では圧縮した旧ブロックを最小要素として同じ局所問題が現れ、相互に独立な挿入が一意に復元できるため積で数えられる。",
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "sourceRevisionId": "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+            "path": "src/content/sources/updates/source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde.json",
+            "sourceKind": "official_problem",
+            "officialTaskId": "abc468_g",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          },
+          {
+            "sourceRevisionId": "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2",
+            "path": "src/content/sources/updates/source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2.json",
+            "sourceKind": "official_editorial",
+            "officialTaskId": "abc468_g",
+            "checkedAt": "2026-10-06T11:30:35.819Z",
+            "termsCheckedAt": "2026-10-06T11:30:14.541Z",
+            "allowedUses": [
+              "constraint_reference",
+              "technical_claim",
+              "example_verification",
+              "answer_verification"
+            ]
+          }
+        ],
+        "skill": {
+          "name": "abc-explanation-author",
+          "version": "1.1.1",
+          "digest": "6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"
+        }
+      },
+      "inventory": {
+        "problemId": "abc468-g",
+        "sourceRevisionIds": [
+          "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+          "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+        ],
+        "evidence": [
+          {
+            "id": "evidence-abc468-g-solution",
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ],
+            "rationale": "公式制約と解法の根拠を照合し、oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          }
+        ],
+        "reasoningPath": {
+          "observations": [
+            {
+              "text": "小さい値1,…,kが連続ブロックになるかを指定して順列を数える。最小値1は常に一頂点ブロックで、全N値も必ず一ブロックなので、S_1またはS_Nがxなら0。",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ]
+            }
+          ],
+          "candidateApproaches": [
+            {
+              "approach": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。",
+              "decision": "adopted",
+              "decisionReason": "最初に連続ブロックとなるkは各順列について一意で、その内部順と圧縮後の順列も一意に復元できるので漸化式に重複がない。指定された連続ブロックの間では圧縮した旧ブロックを最小要素として同じ局所問題が現れ、相互に独立な挿入が一意に復元できるため積で数えられる。",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ]
+            }
+          ],
+          "keyInsights": [
+            {
+              "text": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ]
+            }
+          ],
+          "algorithmConnection": {
+            "text": "小さい値1,…,kが連続ブロックになるかを指定して順列を数える。最小値1は常に一頂点ブロックで、全N値も必ず一ブロックなので、S_1またはS_Nがxなら0。\n\n指定のoの位置を1=a_1<…<a_m=Nとする。値の小さい順に挿入して順列を作ると、直前のo位置までの値は一つの連続ブロックとして扱える。次のo位置までの間は、そのブロックを一要素へ圧縮し、新しく挿入する値を相対順位で付け直す。途中で小さい値全体がブロックになることを禁じ、最後にだけなる局所順列をd_nとすれば、区間ごとの選択は独立で答えは Π d_{a_{j+1}−a_j+1}。ブロックの内部順序は前段で既に選んでおり、ここで重ねて数えない。\n\nd_nを求める。任意のn要素順列で、1,…,kが連続になる最初のk≥2を分類キーにする。このkの内部順はd_k通り。そのブロックを一要素と残りn−k要素を並べる順序は(n−k+1)!通り。従って n!=Σ_{k=2}^n d_k(n−k+1)!。\n\nd_1=1として、n≥2では d_n=n!−Σ_{k=2}^{n−1}d_k(n−k+1)! を昇順に計算する。N≤2000なのでこの O(N²) 漸化式で十分であり、FPSで加速する必要はない。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        },
+        "typicalTechniques": [
+          {
+            "name": "組合せ係数と対称性で数える",
+            "trigger": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。",
+            "application": "小さい値1,…,kが連続ブロックになるかを指定して順列を数える。最小値1は常に一頂点ブロックで、全N値も必ず一ブロックなので、S_1またはS_Nがxなら0。\n\n指定のoの位置を1=a_1<…<a_m=Nとする。値の小さい順に挿入して順列を作ると、直前のo位置までの値は一つの連続ブロックとして扱える。次のo位置までの間は、そのブロックを一要素へ圧縮し、新しく挿入する値を相対順位で付け直す。途中で小さい値全体がブロックになることを禁じ、最後にだけなる局所順列をd_nとすれば、区間ごとの選択は独立で答えは Π d_{a_{j+1}−a_j+1}。ブロックの内部順序は前段で既に選んでおり、ここで重ねて数えない。\n\nd_nを求める。任意のn要素順列で、1,…,kが連続になる最初のk≥2を分類キーにする。このkの内部順はd_k通り。そのブロックを一要素と残りn−k要素を並べる順序は(n−k+1)!通り。従って n!=Σ_{k=2}^n d_k(n−k+1)!。\n\nd_1=1として、n≥2では d_n=n!−Σ_{k=2}^{n−1}d_k(n−k+1)! を昇順に計算する。N≤2000なのでこの O(N²) 漸化式で十分であり、FPSで加速する必要はない。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        ],
+        "problemSpecificInsights": [
+          {
+            "insight": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。",
+            "reusablePerspective": "『最初に成立する場所』を分類キーにすれば排反になる。圧縮したブロックを内部で再び数えない。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        ],
+        "asymptoticComplexity": {
+          "time": "階乗 O(N)、dの二重和 O(N²)、最後の積 O(N)。",
+          "space": "階乗とdの表 O(N)。",
+          "evidenceIds": [
+            "evidence-abc468-g-solution"
+          ]
+        },
+        "prerequisiteCandidates": [],
+        "implementationConcerns": [
+          {
+            "text": "N=1でS=oなら空積1。dの和はk=2から始め、d_1を混ぜない。引き算はmod正規化。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        ],
+        "outcomeCandidates": [
+          {
+            "text": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        ],
+        "reviewAdvice": [
+          {
+            "text": "『最初に成立する場所』を分類キーにすれば排反になる。圧縮したブロックを内部で再び数えない。",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ]
+          }
+        ],
+        "authorId": "person-codex",
+        "reviewStatus": "reviewed",
+        "reviewFindings": []
+      },
+      "placement": {
+        "id": "placement-abc468-g",
+        "problemId": "abc468-g",
+        "policyVersion": "1.0.0",
+        "kind": "full",
+        "primaryProblemId": null,
+        "sharedOutcomeIds": [],
+        "comparison": {
+          "method": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。",
+          "proof": "最初に連続ブロックとなるkは各順列について一意で、その内部順と圧縮後の順列も一意に復元できるので漸化式に重複がない。指定された連続ブロックの間では圧縮した旧ブロックを最小要素として同じ局所問題が現れ、相互に独立な挿入が一意に復元できるため積で数えられる。",
+          "complexity": "階乗 O(N)、dの二重和 O(N²)、最後の積 O(N)。",
+          "constraints": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2000; S_i is a string of length N consisting of o and x.",
+          "prerequisites": "組合せ係数と対称性で数える",
+          "implementation": "N=1でS=oなら空積1。dの和はk=2から始め、d_1を混ぜない。引き算はmod正規化。"
+        },
+        "additionalElement": null,
+        "rationale": "『最初に成立する場所』を分類キーにすれば排反になる。圧縮したブロックを内部で再び数えない。 主たる学習成果を「組合せ係数と対称性で数える」に置き、この問題の導出と正当性を独立した全文解説として残す。",
+        "evidenceIds": [
+          "evidence-abc468-g-solution"
+        ],
+        "primaryTagIds": [
+          "tag-combinatorial-coefficients",
+          "tag-finite-field-subspace-counting",
+          "tag-stirling-transform"
+        ],
+        "supportingTagIds": [],
+        "primaryOutcomeId": "outcome-formulate-combinatorial-coefficients",
+        "additionalPrimaryOutcomeIds": [],
+        "supportingOutcomeIds": [],
+        "adHocElements": [
+          "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+        ],
+        "claimDispositions": [
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/reasoningPath/keyInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-combinatorial-coefficients",
+              "tag-finite-field-subspace-counting",
+              "tag-stirling-transform"
+            ],
+            "rationale": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/reasoningPath/algorithmConnection",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-combinatorial-coefficients",
+              "tag-finite-field-subspace-counting",
+              "tag-stirling-transform"
+            ],
+            "rationale": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/typicalTechniques/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-combinatorial-coefficients",
+              "tag-finite-field-subspace-counting",
+              "tag-stirling-transform"
+            ],
+            "rationale": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/outcomeCandidates/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "primary",
+            "tagIds": [
+              "tag-combinatorial-coefficients",
+              "tag-finite-field-subspace-counting",
+              "tag-stirling-transform"
+            ],
+            "rationale": "全体を最初の構造完成位置で一意に分類し、完成した構造を一要素へ圧縮する。既知の全数から早く完成する場合を引く漸化式が使える。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/reasoningPath/observations/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/reasoningPath/candidateApproaches/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/problemSpecificInsights/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/asymptoticComplexity",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/implementationConcerns/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          },
+          {
+            "claimRef": {
+              "problemId": "abc468-g",
+              "claimPath": "/reviewAdvice/0",
+              "evidenceIds": [
+                "evidence-abc468-g-solution"
+              ],
+              "sourceRevisionIds": [
+                "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+                "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+              ]
+            },
+            "kind": "problem_specific",
+            "tagIds": [],
+            "rationale": "oの位置でだけ小さい値が一ブロックになるため、隣接o間で同じ局所問題が繰り返される。"
+          }
+        ],
+        "analysisEvidenceRefs": [
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/reasoningPath/keyInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/reasoningPath/algorithmConnection",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/typicalTechniques/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/outcomeCandidates/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/reasoningPath/observations/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/reasoningPath/candidateApproaches/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/problemSpecificInsights/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/asymptoticComplexity",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/implementationConcerns/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          },
+          {
+            "problemId": "abc468-g",
+            "claimPath": "/reviewAdvice/0",
+            "evidenceIds": [
+              "evidence-abc468-g-solution"
+            ],
+            "sourceRevisionIds": [
+              "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+              "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+            ]
+          }
+        ]
+      },
+      "documentPath": "src/content/docs/problems/updates/abc468-g.md",
+      "documentDigest": "c71abf24a5c0a8c5d92f2a6488adfec7e09314016bd40ec73f7bac2631b26a5d",
+      "review": {
+        "mode": "self",
+        "reviewMode": "agent_quality_review",
+        "humanApproval": false,
+        "riskReasons": [],
+        "basis": "owner_instruction_issue_48: agent quality review; original derivation, constraint/complexity/source consistency and boundary checks. 『最初に成立する場所』を分類キーにすれば排反になる。圧縮したブロックを内部で再び数えない。"
+      }
+    }
+  ]
+}

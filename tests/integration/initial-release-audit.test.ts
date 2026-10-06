@@ -25,8 +25,8 @@ describe('independent initial-release audit', () => {
   });
   it('covers every official D-after task and documented contest gap', () => {
     expect(auditCompleteness(projection.catalog)).toMatchObject({
-      problems: 868,
-      expectedProblems: 868,
+      problems: 904,
+      expectedProblems: 904,
       coveragePercent: 100,
     });
   });
@@ -53,7 +53,7 @@ describe('independent initial-release audit', () => {
 
   it('does not require fixed Outcome guides, exercises, or answers', () => {
     expect(auditOptionalBlocks(projection)).toMatchObject({
-      owners: 1100,
+      owners: 1136,
       executableCount: 0,
       exerciseCount: 0,
     });

@@ -98,8 +98,34 @@ export const benchmarkInitialRelease = async (projection: FullProjection, run: A
   const buildRuns = [];
   const commands: AuditCommand[] = [];
   const limit = designLimitCatalog(projection.ui);
+  const seedIds = new Set(
+    projection.ui.problems
+      .filter((problem) => problem.contestNumber <= 466)
+      .map((problem) => problem.id),
+  );
+  const seed = UiCatalogSchema.parse({
+    ...projection.ui,
+    problems: projection.ui.problems
+      .filter((problem) => seedIds.has(problem.id))
+      .map((problem) => ({
+        ...problem,
+        relatedProblemIds: problem.relatedProblemIds.filter((id) => seedIds.has(id)),
+      })),
+    contests: projection.ui.contests.filter((contest) => contest.number <= 466),
+    cells: projection.ui.cells.filter((cell) => Number(cell.contestId.slice(3)) <= 466),
+    tags: projection.ui.tags.map((tag) => ({
+      ...tag,
+      problemIds: tag.problemIds.filter((id) => seedIds.has(id)),
+    })),
+    learningUnits: projection.ui.learningUnits.map((unit) => ({
+      ...unit,
+      problemIds: unit.problemIds.filter((id) => seedIds.has(id)),
+      coverageProblemIds: unit.coverageProblemIds.filter((id) => seedIds.has(id)),
+      relatedProblemIds: unit.relatedProblemIds.filter((id) => seedIds.has(id)),
+    })),
+  });
   for (const [kind, ui] of [
-    ['seed', projection.ui],
+    ['seed', seed],
     ['release-cutoff', projection.ui],
     ['design-limit', limit],
   ] as const) {
@@ -137,9 +163,7 @@ export const benchmarkInitialRelease = async (projection: FullProjection, run: A
       generatorVersion: 'initial-release-v1',
       fixtureDigest,
       contestNumberCount:
-        kind === 'design-limit'
-          ? 375
-          : projection.catalog.contests.length + projection.catalog.contestGaps.length,
+        kind === 'design-limit' ? 375 : ui.contests.length + projection.catalog.contestGaps.length,
       heldContestCount: ui.contests.length,
       problemCount: ui.problems.length,
       tagCount: ui.tags.length,
@@ -309,8 +333,7 @@ const tags = Object.fromEntries(fixture.ui.tags.map(tag => [tag.id, tag.name]));
       },
       pipeline:
         'Isolated Astro static pages using production Markdown renderer, ProblemFilters, search documents, CSS and Pagefind; production shell closure is audited separately.',
-      seedReleaseBoundary:
-        'ABC212–466, 255 numbered contests including the official ABC316 gap; 254 held contests. Seed and release-cutoff currently contain the same accepted corpus.',
+      seedReleaseBoundary: `Seed: ABC212–466, ${String(seed.problems.length)} Problems. Release cutoff: ${projection.catalog.release.cutoffAt}, ${String(projection.ui.problems.length)} Problems through ${projection.catalog.release.lastContestId}. The official ABC316 gap is retained in both boundaries.`,
     };
   } finally {
     await browser.close();

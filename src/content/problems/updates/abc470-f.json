@@ -1,0 +1,20 @@
+{
+  "id": "abc470-f",
+  "contestId": "abc470",
+  "slotLabel": "F",
+  "officialTaskId": "abc470_f",
+  "title": "Googol Swaps",
+  "officialUrl": "https://atcoder.jp/contests/abc470/tasks/abc470_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: N and M are integers.; 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq M \\leq 2 \\times 10^5; S is a string of length N consisting of lowercase English letters.; A_i and B_i are integers.; 1 \\leq A_i < B_i \\leq N; (A_1, B_1), \\dots, (A_M, B_M) are pairwise distinct.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc470-f-problem-03e3571da5c865ce303b47eb3aa7e6e3916b40bcb13102011740feb9c9a34f1b",
+    "source-abc470-editorial-23854-8f5e3a822ade8391f08cf5ec305085ad554e757f95e8436b90d9fd915480e976"
+  ],
+  "checkedAt": "2026-10-06T11:30:57.841Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

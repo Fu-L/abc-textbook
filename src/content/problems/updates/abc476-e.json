@@ -1,0 +1,20 @@
+{
+  "id": "abc476-e",
+  "contestId": "abc476",
+  "slotLabel": "E",
+  "officialTaskId": "abc476_e",
+  "title": "Min-Max Swap",
+  "officialUrl": "https://atcoder.jp/contests/abc476/tasks/abc476_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\\le N\\le 2\\times 10^5; 1\\le M\\le 2\\times 10^5; P is a permutation of (1,2,\\ldots,N).; 1\\le L_i < R_i\\le N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc476-e-problem-8d26392bf541c3a33bb998797f4e7748ffcfbead158a9928d0d5ece62311ff2d",
+    "source-abc476-editorial-25802-1e8d1f17374198fbfbce0c86576a6ff79089bf489aed43460a4dd11613d34a82"
+  ],
+  "checkedAt": "2026-10-06T11:32:03.885Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

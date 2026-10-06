@@ -1,0 +1,20 @@
+{
+  "id": "abc467-f",
+  "contestId": "abc467",
+  "slotLabel": "F",
+  "officialTaskId": "abc467_f",
+  "title": "Email Scheduling Optimization",
+  "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_j,B_j \\leq 10^9; In each query, 1 \\leq i \\leq N.; In each query, 1 \\leq x \\leq 10^9.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+    "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+  ],
+  "checkedAt": "2026-10-06T11:30:25.006Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

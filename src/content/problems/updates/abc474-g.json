@@ -1,0 +1,21 @@
+{
+  "id": "abc474-g",
+  "contestId": "abc474",
+  "slotLabel": "G",
+  "officialTaskId": "abc474_g",
+  "title": "LRUD Moving 2",
+  "officialUrl": "https://atcoder.jp/contests/abc474/tasks/abc474_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le T\\le 5\\times 10^3; 2\\le N\\le 10^3; 0\\le K\\le N^2-1; The sum of N^2 over all test cases is at most 10^6.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc474-g-problem-4807fa6da40cdea3224e468b23de6a4916bfe64047762055ff2fc522448056cc",
+    "source-abc474-editorial-25439-07425691ca644cc1872536248507a7591951754f6486c797db69712366ee6024",
+    "source-abc474-editorial-25467-3849704de58b8512d870103dfb05000de64809df6d4f2c8d470a8774718cc20c"
+  ],
+  "checkedAt": "2026-10-06T11:54:05.312Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -560,12 +560,16 @@ const routeEquivalenceResult = strictObject({
   failureReasons: unique(text),
 });
 const timingBase = {
-  schemaVersion: z.literal('1.1.0'),
+  schemaVersion: z.enum(['1.1.0', '1.2.0']),
   criterionId: z.literal('SC-012'),
   releaseVersion: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
   releaseDigest: Sha256Schema,
   revision: z.number().int().positive(),
-  actorRole: z.literal('sole_operator_learner'),
+  actorRole: z
+    .enum(['sole_operator_learner', 'automated_browser'])
+    .describe(
+      'Automated browser timing measures UI and persistence behavior; it does not assert human reading or decision speed.',
+    ),
   problemId: ProblemIdSchema,
 };
 const timingProtocol = strictObject({

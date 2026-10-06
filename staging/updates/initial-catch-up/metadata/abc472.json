@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc472",
+  "firstContestNumber": 472,
+  "lastContestNumber": 472,
+  "checkedAt": "2026-10-06T11:31:19.840Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc472",
+      "number": 472,
+      "title": "AtCoder Beginner Contest 472",
+      "startedAt": "2026-08-22T21:00:00+09:00",
+      "endedAt": "2026-08-22T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc472",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc472/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc472_a",
+          "title": "A",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc472_b",
+          "title": "Break a Stick",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc472_c",
+          "title": "On a Diet",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc472_d",
+          "title": "Bomber Mad",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc472_e",
+          "title": "Odd Cycle",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc472_f",
+          "title": "Centroid of a Slice",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_f",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc472_g",
+          "title": "Cascading Grid",
+          "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_g",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc472-task-list-e907d7676887982d72994ce5c71430e88a4953a2c22814458e80fdd878bf4d0b",
+      "checkedAt": "2026-10-06T11:31:19.840Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc472-e",
+      "contestId": "abc472",
+      "slotLabel": "E",
+      "officialTaskId": "abc472_e",
+      "officialOrder": 4,
+      "title": "Odd Cycle",
+      "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2\\times10^5; 1 \\le N, M \\le 2\\times10^5; The sum of N over all test cases is at most 2\\times10^5.; The sum of M over all test cases is at most 2\\times10^5.; 1 \\le a_i,b_i \\le N; a_i\\ne b_i; The given graph is a simple connected undirected graph.; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+        "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+      ],
+      "checkedAt": "2026-10-06T11:31:19.840Z"
+    },
+    {
+      "id": "abc472-f",
+      "contestId": "abc472",
+      "slotLabel": "F",
+      "officialTaskId": "abc472_f",
+      "officialOrder": 5,
+      "title": "Centroid of a Slice",
+      "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 3 \\times 10^4; 1 \\leq Q \\leq 2 \\times 10^5; |x_i|,|y_i| \\leq 5 \\times 10^5; (x_1,y_1),(x_2,y_2),\\dots,(x_N,y_N) form a convex polygon in counterclockwise order.; All interior angles of P are less than 180 degrees.; 1 \\leq u_j,v_j \\leq N; u_j \\neq v_j; Vertices u_j and v_j are not adjacent on the boundary of P.; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+        "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+      ],
+      "checkedAt": "2026-10-06T11:31:19.840Z"
+    },
+    {
+      "id": "abc472-g",
+      "contestId": "abc472",
+      "slotLabel": "G",
+      "officialTaskId": "abc472_g",
+      "officialOrder": 6,
+      "title": "Cascading Grid",
+      "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le H,W \\le 30; S_i is a string of length W consisting of +, -, #.; H and W are integers.",
+      "sourceRevisionIds": [
+        "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+        "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+      ],
+      "checkedAt": "2026-10-06T11:31:19.840Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc472-task-list-e907d7676887982d72994ce5c71430e88a4953a2c22814458e80fdd878bf4d0b",
+      "url": "https://atcoder.jp/contests/abc472/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc472",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "e907d7676887982d72994ce5c71430e88a4953a2c22814458e80fdd878bf4d0b",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+      "url": "https://atcoder.jp/contests/abc472/tasks/abc472_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_e",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+      "url": "https://atcoder.jp/contests/abc472/tasks/abc472_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_f",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+      "url": "https://atcoder.jp/contests/abc472/tasks/abc472_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_g",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-editorial-index-07219b024e4212aae0bf86fd333fc991ad15f0fcc5d755f421c8e1edce7da430",
+      "url": "https://atcoder.jp/contests/abc472/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc472",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "07219b024e4212aae0bf86fd333fc991ad15f0fcc5d755f421c8e1edce7da430",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec",
+      "url": "https://atcoder.jp/contests/abc472/editorial/24429",
+      "sourceKind": "official_editorial",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_e",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845",
+      "url": "https://atcoder.jp/contests/abc472/editorial/24789",
+      "sourceKind": "official_editorial",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_f",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e",
+      "url": "https://atcoder.jp/contests/abc472/editorial/24419",
+      "sourceKind": "official_editorial",
+      "contestId": "abc472",
+      "officialTaskId": "abc472_g",
+      "checkedAt": "2026-10-06T11:31:19.840Z",
+      "fingerprint": "33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "e0b59176be48aca0fc1f1dcca379b9b5daaec57ddcfec8a421e69fa6d6b8cfc5",
+  "digest": "71658b86b32d1bfc23f17eaf30eafb3f07d702a362cc9bdb10dd3281d2e50066"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc478-e",
+  "contestId": "abc478",
+  "slotLabel": "E",
+  "officialTaskId": "abc478_e",
+  "title": "lt and le",
+  "officialUrl": "https://atcoder.jp/contests/abc478/tasks/abc478_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le2\\times10 ^ 5; 1\\le Q\\le2\\times10 ^ 5; t _ i\\in\\lbrace0,1\\rbrace\\ (1\\le i\\le Q); 1\\le u _ i\\le N\\ (1\\le i\\le Q); 1\\le v _ i\\le N\\ (1\\le i\\le Q); All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc478-e-problem-9beb6651f02ed2cc586317436261fb95e8d95608ac9df1e1ce609d97f5b38407",
+    "source-abc478-editorial-26539-137ab1c0cbb63b96bb0be2a2eb597ac35ac6c90587527152ab0f9d20393941e0"
+  ],
+  "checkedAt": "2026-10-06T11:32:25.890Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

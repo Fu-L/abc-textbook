@@ -1,0 +1,20 @@
+{
+  "id": "abc472-f",
+  "contestId": "abc472",
+  "slotLabel": "F",
+  "officialTaskId": "abc472_f",
+  "title": "Centroid of a Slice",
+  "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 4 \\leq N \\leq 3 \\times 10^4; 1 \\leq Q \\leq 2 \\times 10^5; |x_i|,|y_i| \\leq 5 \\times 10^5; (x_1,y_1),(x_2,y_2),\\dots,(x_N,y_N) form a convex polygon in counterclockwise order.; All interior angles of P are less than 180 degrees.; 1 \\leq u_j,v_j \\leq N; u_j \\neq v_j; Vertices u_j and v_j are not adjacent on the boundary of P.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc472-f-problem-7e31dbedfaf6d1a51ca2f83122e25b610b523e8575a5abfa7d1cf400193b5ba2",
+    "source-abc472-editorial-24789-eabfdcdba235c31591c4711eecff145d778964b5f996445b024391bb139d4845"
+  ],
+  "checkedAt": "2026-10-06T11:31:19.840Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

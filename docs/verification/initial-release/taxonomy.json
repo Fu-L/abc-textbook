@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "ed0ccd4c8606bb2547592dc14de29e28ff1852b4c5bd5ef1b9f293f23dadf3e7",
-    "fileCount": 9487
+    "digest": "deb366cb38810768b43299a9caa2867172a35c7c2dfec5dec2851d0ce929ce4d",
+    "fileCount": 9830
   },
-  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
-  "generatedAt": "2026-10-06T08:48:35.124Z",
+  "sourceProjectionDigest": "a65b41d5caf655308e8d91fe2a127d96c191b7ce308e213120c7f991fda65214",
+  "generatedAt": "2026-10-06T13:17:30.814Z",
   "commands": [
     {
       "command": "npm run corpus:verify-authoring",
       "exitCode": 0,
-      "durationMs": 758.9598750000005,
+      "durationMs": 932.0652920000139,
       "outputDigest": "5185a8711115bcdf586f045f1fa571cc2eb47148c5f4b238b8579ab79c194d1b",
       "outputBytes": 503,
       "observed": "> abc-textbook@0.1.0 corpus:verify-authoring\n> tsx scripts/corpus/verify-inventory-authoring.ts --check\n\n{\"command\":\"verify-inventory-authoring\",\"mode\":\"check\",\"status\":\"passed\",\"problemCount\":868,\"sourceBoundProblemCount\":868,\"reviewedProblemCount\":868,\"inventoryDigest\":\"1b66ec51f649d9de92dec88445b6bf04ed82c65bd03b0a0666035515aa1ea3ed\",\"evidenceDigest\":\"b30bafee7a83a7693a27ddee56e7eb92ffae98995b7879fb8a9480dd5debbc53\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory-authoring.json\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:final-taxonomy",
       "exitCode": 0,
-      "durationMs": 8094.114541999996,
+      "durationMs": 10210.680792,
       "outputDigest": "f222d86b04626215039537851ee6766ef7fb185483b087a32f6a8c4af1a809b9",
       "outputBytes": 440,
       "observed": "> abc-textbook@0.1.0 corpus:final-taxonomy\n> tsx scripts/corpus/final-taxonomy.ts --check\n\n{\"command\":\"final-taxonomy\",\"mode\":\"check\",\"status\":\"accepted\",\"canonicalMaterializationAllowed\":true,\"placementCount\":868,\"sourceRevisionCount\":1738,\"taxonomySubjectDigest\":\"023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251\",\"buildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"written\":0,\"verified\":3}"
@@ -29,7 +29,7 @@
     {
       "command": "npm run corpus:materialize-taxonomy",
       "exitCode": 0,
-      "durationMs": 4643.909667,
+      "durationMs": 5711.469291999994,
       "outputDigest": "7c81dff473d9ab1f55841932de550326a5be62609b433fc19f26161aba1983bf",
       "outputBytes": 490,
       "observed": "> abc-textbook@0.1.0 corpus:materialize-taxonomy\n> tsx scripts/corpus/materialize-canonical-taxonomy.ts --check\n\n{\"command\":\"materialize-canonical-taxonomy\",\"mode\":\"check\",\"status\":\"passed\",\"sourceBuildId\":\"final-taxonomy-build-initial\",\"sourceBuildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"expected\":923,\"verified\":459,\"preserved\":464,\"written\":0,\"counts\":{\"tags\":213,\"learningOutcomes\":242,\"learningUnits\":232,\"learningDocuments\":232,\"placements\":868}}"
@@ -37,7 +37,7 @@
     {
       "command": "npm run corpus:verify-learning-units",
       "exitCode": 0,
-      "durationMs": 2886.301542000001,
+      "durationMs": 3773.437292000017,
       "outputDigest": "ad80a0669e69e15438280da6cf1d4319f2ab3f035c0160e7c80094c450de4204",
       "outputBytes": 360,
       "observed": "> abc-textbook@0.1.0 corpus:verify-learning-units\n> tsx scripts/corpus/verify-full-learning-units.ts --check\n\n{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}"
@@ -45,7 +45,7 @@
     {
       "command": "npm run corpus:verify-problem-shard-index",
       "exitCode": 0,
-      "durationMs": 3965.56912499998,
+      "durationMs": 4953.7944580000185,
       "outputDigest": "68e7e0cac833f4601e4d2358800d4a24b6b1b8caa7152063044c11bf9fb5e9c0",
       "outputBytes": 353,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shard-index\n> tsx scripts/corpus/freeze-problem-shard-index.ts --check\n\n{\"status\":\"passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"domains\":[\"graph-search\",\"dynamic-programming\",\"data-structures\",\"mathematics\",\"string-geometry\",\"hybrid\"]}"
@@ -53,10 +53,18 @@
     {
       "command": "npm run corpus:verify-problem-shards",
       "exitCode": 0,
-      "durationMs": 6671.233500000002,
+      "durationMs": 8463.613124999974,
       "outputDigest": "a260d3b2179947f000dbbc4e7154866f5040e57a7feef1666a0fb3f0c08e5b8f",
       "outputBytes": 380,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shards\n> tsx scripts/corpus/author-problem-shards.ts --check\n\n{\"status\":\"automated_checks_passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}"
+    },
+    {
+      "command": "npm run verify:catch-up",
+      "exitCode": 0,
+      "durationMs": 6184.492083999998,
+      "outputDigest": "d57978c549e1199fd98c2b5a1430e27095f6466ffac067eba130cb93f8b7756a",
+      "outputBytes": 2272,
+      "observed": "0fc39\",\"update-48d7eafc3e54408856a5bcec\",\"update-5607c80b8dd2912dc50a541e\",\"update-38875409e61f3bfab2e25803\",\"update-4b8c3ed6a5d4c339a8212884\",\"update-102f618e26bb029532dea1aa\",\"update-f06d5c8c39b83d6542703403\",\"update-5c347c2531b95aa653e7c9ec\",\"update-1dfef713eae9b78b69cf8daa\",\"update-e65de6a7a3b031dee75c7e5f\",\"update-28e72cc6b8f00648dfa66e9c\"],\"completeness\":{\"firstContestId\":\"abc212\",\"lastContestId\":\"abc478\",\"cutoffAt\":\"2026-10-06T00:00:00+09:00\",\"contestNumberCount\":267,\"heldContests\":266,\"officialGaps\":[{\"number\":316,\"evidenceUrl\":\"https://atcoder.jp/contests/abc350/tasks/abc350_a\",\"fingerprint\":\"9d49649208a11fb1cea424d1057b1f9e06942db647c7a30a4e97926a87083e6b\"}],\"problems\":904,\"expectedProblems\":904,\"coveragePercent\":100,\"labels\":[\"E\",\"F\",\"G\",\"Ex\",\"H\"],\"problemSetDigest\":\"31814ec9fd56d5f52f53d79b91cd3ffb13cce80d859f033cc556349beaa4bebb\"},\"sources\":{\"sourceCount\":2343,\"claimCount\":904,\"sourceInventoryDigest\":\"46017e6477b76ae92e9c2176796f39df61291612ceaa55dd13615652f150a8c4\",\"earliestConfirmation\":\"2026-07-24T23:59:30+09:00\",\"latestConfirmation\":\"2026-10-06T11:54:05.312Z\",\"allowedUsePolicy\":\".agents/skills/abc-explanation-author/references/source-policy.md\",\"quotationCount\":0,\"sourceReacquisition\":false,\"basis\":\"Recorded official revision identities, confirmation/terms dates and claim-to-owner bindings are checked. This audit does not claim live re-fetch or a new mathematical proof.\"},\"optional\":{\"owners\":1136,\"executableCount\":0,\"exerciseCount\":0,\"fixedOutcomeBlocksRequired\":false,\"basis\":\"All current owner inventories and prose fences inspected. Text fences are pseudocode; optional runnable/answer additions block until executed and verified.\"},\"reviewCount\":36,\"reviewDigest\":\"a5e6e14a7029b78c776edef5c81134e552c6bf7e910a24114cb9903a534ca1e7\",\"humanApproval\":false}"
     }
   ],
   "checks": {
@@ -67,9 +75,9 @@
     "outcomeEdges": 198,
     "unitEdges": 149,
     "laterPrerequisites": 6,
-    "acceptedReadingOrderDigest": "5a15baf6649cfe309f1f7b27b4afc6b9cff89a7fdf72dffc9b5bb6526e4e362d",
+    "acceptedReadingOrderDigest": "5570da35cc6cc83f93efcbb2852ba5deb73a5340fe589fbe84c8897f0124f072",
     "editorialOrderDigest": "516c1484ccbe9a09ec05f2585c2677affa6ced7d0522a561178a001243c3ef41",
-    "mappingDigest": "ee401d3374d20bc3620056162a2343089ca1b59ea849c877cf9da5600d9ad5dc",
+    "mappingDigest": "422505692553d68ed055c7b38727e9ecf4c4f734a0db340da0fcb8ba7721fb3a",
     "correctionImpacts": [
       {
         "correctionImpactId": "impact-outcome-provisional-compressed-dp-state",
@@ -147,7 +155,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -238,7 +246,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -309,7 +317,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -420,7 +428,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -500,7 +508,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -629,7 +637,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -700,7 +708,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -811,7 +819,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -882,7 +890,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -964,7 +972,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -1044,7 +1052,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       },
@@ -1128,7 +1136,7 @@
         "derivedIndexes": [
           {
             "path": "src/content/indexes/taxonomy.json",
-            "digest": "1d4667221e928b36904bd426bdd470543ca388dac2e1f0a66dbb8905a3ced4ac"
+            "digest": "46d423874ea733bc0cc21d48a2ed45ab8bc4407d4989edad3a47a58acac5974c"
           }
         ]
       }
@@ -1859,5 +1867,5 @@
     "integrationEvidenceDigest": "b7318abf0880987db4e1777f4609962de9eb5747e9f3e90e8cb70160612766c8",
     "basis": "Preview integration is lineage only; complete canonical inventory, final accepted taxonomy and joined full-authoring owners supply the final completeness boundary."
   },
-  "evidenceDigest": "840ea471cf86fcde701d5cda49a8efa0874710bedb01b51943dd345d296a25cf"
+  "evidenceDigest": "9c915447bbfb63852a503a288045c34807b9b3091155785ceac9f5af29db79c7"
 }

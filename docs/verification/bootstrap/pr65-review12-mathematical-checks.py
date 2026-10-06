@@ -582,7 +582,7 @@ def check_451():
 
 
 def check_claims():
-    paths = sorted(Path("src/content/docs/problems").rglob("*.md"))
+    paths = sorted(p for p in Path("src/content/docs/problems").rglob("*.md") if "updates" not in p.parts)
     assert len(paths) == 868
     for path in paths:
         text = path.read_text()

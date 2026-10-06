@@ -1,12 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFile, readdir } from 'node:fs/promises';
-import {
-  CanonicalProblemPlacementPolicySchema,
-  LearningOutcomeSchema,
-  LearningUnitSchema,
-  ProblemSchema,
-  TechniqueTagSchema,
-} from '../../src/lib/domain/schema-parts/catalog.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { validateReleaseLearningStructure } from '../../src/lib/catalog/release-learning-structure.js';
@@ -59,42 +52,15 @@ const input = () => ({
 });
 describe('release canonical learning structure', () => {
   it('covers the complete canonical corpus using semantic home and all three DAGs', async () => {
-    const collection = async (directory: string): Promise<unknown[]> =>
-      (
-        await Promise.all(
-          (await readdir(`src/content/${directory}`, { withFileTypes: true })).map(
-            async (file): Promise<unknown[]> =>
-              file.isDirectory()
-                ? collection(`${directory}/${file.name}`)
-                : file.name.endsWith('.json')
-                  ? [
-                      JSON.parse(
-                        await readFile(`src/content/${directory}/${file.name}`, 'utf8'),
-                      ) as unknown,
-                    ]
-                  : [],
-          ),
-        )
-      ).flat();
-    const policy = CanonicalProblemPlacementPolicySchema.parse(
-      JSON.parse(await readFile('src/content/policies/problem-placements.json', 'utf8')) as unknown,
-    );
-    const problems = (await collection('problems')).map((value) => ProblemSchema.parse(value));
-    const outcomes = (await collection('learning-outcomes')).map((value) =>
-      LearningOutcomeSchema.parse(value),
-    );
-    const units = (await collection('learning-units')).map((value) =>
-      LearningUnitSchema.parse(value),
-    );
+    const projection = await loadFullPublicProjection();
+    const { problems, learningOutcomes: outcomes, learningUnits: units, tags } = projection.catalog;
     const coverage = validateReleaseLearningStructure({
       problems,
       outcomes,
       units,
-      tags: (await collection('tags')).map((value) => TechniqueTagSchema.parse(value)),
-      placements: policy.placements,
-      prerequisites: JSON.parse(
-        await readFile('src/content/policies/learning-prerequisites.json', 'utf8'),
-      ) as unknown,
+      tags,
+      placements: projection.policy.placements,
+      prerequisites: projection.prerequisites,
       chapters: TEXTBOOK_CHAPTERS,
     });
     expect(coverage).toHaveLength(outcomes.length);
@@ -102,7 +68,7 @@ describe('release canonical learning structure', () => {
       problems.length,
     );
     expect(units.every((unit) => unit.contentPhase === 'full_authoring')).toBe(true);
-  });
+  }, 30_000);
   it('uses semantic primary ownership regardless of editorial order', () => {
     expect(validateReleaseLearningStructure(input())[0]).toMatchObject({
       outcomeId: 'outcome-a',

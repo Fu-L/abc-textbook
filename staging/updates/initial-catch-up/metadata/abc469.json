@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc469",
+  "firstContestNumber": 469,
+  "lastContestNumber": 469,
+  "checkedAt": "2026-10-06T11:30:46.832Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc469",
+      "number": 469,
+      "title": "AtCoder Beginner Contest 469",
+      "startedAt": "2026-08-01T21:00:00+09:00",
+      "endedAt": "2026-08-01T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc469",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc469/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc469_a",
+          "title": "Train Car",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc469_b",
+          "title": "Isolated Seats",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc469_c",
+          "title": "Cantrip",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc469_d",
+          "title": "The Big Two",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc469_e",
+          "title": "Pro Exam Eligibility",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc469_f",
+          "title": "GCD Maximum Spanning Tree",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_f",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc469_g",
+          "title": "K-nacci Operations",
+          "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_g",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc469-task-list-ff911b91b8c03841f80409d0618d2cd365b5cf6608e1ff89db75ad2a0e75c495",
+      "checkedAt": "2026-10-06T11:30:46.832Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc469-e",
+      "contestId": "abc469",
+      "slotLabel": "E",
+      "officialTaskId": "abc469_e",
+      "officialOrder": 4,
+      "title": "Pro Exam Eligibility",
+      "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^6; N and K are integers.; S is a string of length N consisting of o and x.; S contains at least K occurrences of o.",
+      "sourceRevisionIds": [
+        "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+        "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457"
+      ],
+      "checkedAt": "2026-10-06T11:30:46.832Z"
+    },
+    {
+      "id": "abc469-f",
+      "contestId": "abc469",
+      "slotLabel": "F",
+      "officialTaskId": "abc469_f",
+      "officialOrder": 5,
+      "title": "GCD Maximum Spanning Tree",
+      "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 1 \\leq A_1 \\lt A_2 \\lt \\dots \\lt A_N \\leq 10^6; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+        "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7"
+      ],
+      "checkedAt": "2026-10-06T11:30:46.832Z"
+    },
+    {
+      "id": "abc469-g",
+      "contestId": "abc469",
+      "slotLabel": "G",
+      "officialTaskId": "abc469_g",
+      "officialOrder": 6,
+      "title": "K-nacci Operations",
+      "officialUrl": "https://atcoder.jp/contests/abc469/tasks/abc469_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq K \\leq 100; K is an integer.; S_i is a non-empty string consisting of a and b. (1 \\leq i \\leq K); The sum of the lengths of S_1, S_2, \\ldots, S_K is at most 2 \\times 10^5.; 1 \\leq N \\leq 10^{18}; N is an integer.; T is a string consisting of lowercase English letters with length between 1 and 2 \\times 10^5, inclusive.",
+      "sourceRevisionIds": [
+        "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+        "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9"
+      ],
+      "checkedAt": "2026-10-06T11:30:46.832Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc469-task-list-ff911b91b8c03841f80409d0618d2cd365b5cf6608e1ff89db75ad2a0e75c495",
+      "url": "https://atcoder.jp/contests/abc469/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc469",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "ff911b91b8c03841f80409d0618d2cd365b5cf6608e1ff89db75ad2a0e75c495",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-e-problem-bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+      "url": "https://atcoder.jp/contests/abc469/tasks/abc469_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_e",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "bc0cab83f5f11882ae37b6c655e649977ef7b6ceda31199addbc7c34cf896bfa",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-f-problem-8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+      "url": "https://atcoder.jp/contests/abc469/tasks/abc469_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_f",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "8a1921fe308d2127bb288d93ec5581f351870427d841174dd497dba7781d935d",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-g-problem-c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+      "url": "https://atcoder.jp/contests/abc469/tasks/abc469_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_g",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "c736a519c81389ff355c63bd25653eb283e4254cb50122cf5f9dc33c6976895b",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-editorial-index-a04f54551165cf041f8568bdcf2cd351417e00b92238ed0782ae54cfacfa935e",
+      "url": "https://atcoder.jp/contests/abc469/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc469",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "a04f54551165cf041f8568bdcf2cd351417e00b92238ed0782ae54cfacfa935e",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-editorial-23760-5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457",
+      "url": "https://atcoder.jp/contests/abc469/editorial/23760",
+      "sourceKind": "official_editorial",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_e",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "5ff1e2b805e0a31637ddf439c7b003f3f9e5631c0b35d8d88547749e7e265457",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-editorial-23761-2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7",
+      "url": "https://atcoder.jp/contests/abc469/editorial/23761",
+      "sourceKind": "official_editorial",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_f",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "2d75eb28b42ad51f716796342df54f9ea49c2dcb94a081b25821ddd8d3e931d7",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc469-editorial-23809-bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9",
+      "url": "https://atcoder.jp/contests/abc469/editorial/23809",
+      "sourceKind": "official_editorial",
+      "contestId": "abc469",
+      "officialTaskId": "abc469_g",
+      "checkedAt": "2026-10-06T11:30:46.832Z",
+      "fingerprint": "bc7ff2617413dea273d7fcb9ee247ac48599adf9511729e62b2e7e443c8631f9",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "81ef11bdcbb6eef5b191e7aa000242282b81a2552db882a2cb29658c9ae5396f",
+  "digest": "7f601f2c43af6485e0571752b872785decba549efab6ee83c69c5ea0f5102185"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc475-f",
+  "contestId": "abc475",
+  "slotLabel": "F",
+  "officialTaskId": "abc475_f",
+  "title": "Rectangle Filling",
+  "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 2 \\times 10^5; H and W are integers.; S_i is a string of length W consisting of . and #.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+    "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+  ],
+  "checkedAt": "2026-10-06T11:31:52.875Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

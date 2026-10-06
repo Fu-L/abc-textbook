@@ -1,0 +1,20 @@
+{
+  "id": "abc471-f",
+  "contestId": "abc471",
+  "slotLabel": "F",
+  "officialTaskId": "abc471_f",
+  "title": "Concat (maximize)",
+  "officialUrl": "https://atcoder.jp/contests/abc471/tasks/abc471_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq K \\leq N \\leq 10^5; S_i is a string of length between 1 and 10 (inclusive) consisting of digits.; N and K are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc471-f-problem-cbcda46a031d8fea3d3fcc425063cf664edda26186042687351e5db5b1b4a357",
+    "source-abc471-editorial-23914-8d29d914015637b09c93f8f3c24769fc614eea176d06872d7043983c8a478d52"
+  ],
+  "checkedAt": "2026-10-06T11:31:08.833Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

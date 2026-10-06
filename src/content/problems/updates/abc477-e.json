@@ -1,0 +1,20 @@
+{
+  "id": "abc477-e",
+  "contestId": "abc477",
+  "slotLabel": "E",
+  "officialTaskId": "abc477_e",
+  "title": "Wheel Distance",
+  "officialUrl": "https://atcoder.jp/contests/abc477/tasks/abc477_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3 \\leq N \\leq 2 \\times 10^5; 1 \\leq Q \\leq 2 \\times 10^5; 1 \\leq A_i, B_i \\leq 10^9; 1 \\leq S \\lt T \\leq N+1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc477-e-problem-001e5584c10cf580dca7f73b2c98b5da6f16f952f68c8ea01750e8463c705696",
+    "source-abc477-editorial-25884-e8f46d5ca6014e0fda37909200bc5c26582f83116b17c4b397ca591580032c2d"
+  ],
+  "checkedAt": "2026-10-06T11:32:14.894Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

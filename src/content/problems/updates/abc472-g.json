@@ -1,0 +1,20 @@
+{
+  "id": "abc472-g",
+  "contestId": "abc472",
+  "slotLabel": "G",
+  "officialTaskId": "abc472_g",
+  "title": "Cascading Grid",
+  "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_g",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le H,W \\le 30; S_i is a string of length W consisting of +, -, #.; H and W are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc472-g-problem-c9aa3c7ae920e1c458e4782d37c1774c4f6226fb339c3041a7d9b83b64f1152b",
+    "source-abc472-editorial-24419-33d5600731ab36aac72a4fdb5832a0884b496efbe27384208e53d7ba2e6c5d2e"
+  ],
+  "checkedAt": "2026-10-06T11:31:19.840Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc475",
+  "firstContestNumber": 475,
+  "lastContestNumber": 475,
+  "checkedAt": "2026-10-06T11:31:52.875Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc475",
+      "number": 475,
+      "title": "AtCoder Beginner Contest 475",
+      "startedAt": "2026-09-12T21:00:00+09:00",
+      "endedAt": "2026-09-12T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc475",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc475/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc475_a",
+          "title": "mnclr",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc475_b",
+          "title": "Change",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc475_c",
+          "title": "Walk the Line",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc475_d",
+          "title": "Alphametic Prime",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc475_e",
+          "title": "Quiz Competition: Qualifiers",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc475_f",
+          "title": "Rectangle Filling",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_f",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc475_g",
+          "title": "Has Many Divisors",
+          "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_g",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc475-task-list-21446f7817f15f056ce006b7e0d4ee19a285ab200d646b974f9da172c3479078",
+      "checkedAt": "2026-10-06T11:31:52.875Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc475-e",
+      "contestId": "abc475",
+      "slotLabel": "E",
+      "officialTaskId": "abc475_e",
+      "officialOrder": 4,
+      "title": "Quiz Competition: Qualifiers",
+      "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq M \\leq N \\leq 3\\times 10^4; 1 \\leq K \\leq 200; S_i and T are strings of length K consisting of o and x.; 1 \\leq Q \\leq 5\\times 10^4; For each query, 1\\leq i \\leq N and 1 \\leq j \\leq K.",
+      "sourceRevisionIds": [
+        "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+        "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72"
+      ],
+      "checkedAt": "2026-10-06T11:31:52.875Z"
+    },
+    {
+      "id": "abc475-f",
+      "contestId": "abc475",
+      "slotLabel": "F",
+      "officialTaskId": "abc475_f",
+      "officialOrder": 5,
+      "title": "Rectangle Filling",
+      "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq H, W; H \\times W \\leq 2 \\times 10^5; H and W are integers.; S_i is a string of length W consisting of . and #.",
+      "sourceRevisionIds": [
+        "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+        "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915"
+      ],
+      "checkedAt": "2026-10-06T11:31:52.875Z"
+    },
+    {
+      "id": "abc475-g",
+      "contestId": "abc475",
+      "slotLabel": "G",
+      "officialTaskId": "abc475_g",
+      "officialOrder": 6,
+      "title": "Has Many Divisors",
+      "officialUrl": "https://atcoder.jp/contests/abc475/tasks/abc475_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq T \\leq 10; 2 \\leq D \\leq N \\leq 10^{18}; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+        "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba"
+      ],
+      "checkedAt": "2026-10-06T11:31:52.875Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc475-task-list-21446f7817f15f056ce006b7e0d4ee19a285ab200d646b974f9da172c3479078",
+      "url": "https://atcoder.jp/contests/abc475/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc475",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "21446f7817f15f056ce006b7e0d4ee19a285ab200d646b974f9da172c3479078",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-e-problem-d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+      "url": "https://atcoder.jp/contests/abc475/tasks/abc475_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_e",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "d322c0887c46c31e249092fac615c6fa8555ab1312042849a0149af486adad92",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-f-problem-6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+      "url": "https://atcoder.jp/contests/abc475/tasks/abc475_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_f",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "6380d7c99e9f6617f24de46ca5fa7c920ad7e9d907bd9b2fb1d81fce8238130a",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-g-problem-c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+      "url": "https://atcoder.jp/contests/abc475/tasks/abc475_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_g",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "c90a2a62cba5145b3dc48735c8e4dcd6735155e9bbea41e641280632eea9ac93",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-editorial-index-e1bd0bb187ff74687440e65ecb5352452253943bf69a1776ad50b9eed1622eaf",
+      "url": "https://atcoder.jp/contests/abc475/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc475",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "e1bd0bb187ff74687440e65ecb5352452253943bf69a1776ad50b9eed1622eaf",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-editorial-25493-169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72",
+      "url": "https://atcoder.jp/contests/abc475/editorial/25493",
+      "sourceKind": "official_editorial",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_e",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "169fe389ca09ead5866b84e5cc08893ad21b0e46aa2160004b3e6cf922300a72",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-editorial-25541-dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915",
+      "url": "https://atcoder.jp/contests/abc475/editorial/25541",
+      "sourceKind": "official_editorial",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_f",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "dbce3d6c2d571dd08401368fce4f6de17bf83325d30444d992c2fce0282c2915",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc475-editorial-25542-e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba",
+      "url": "https://atcoder.jp/contests/abc475/editorial/25542",
+      "sourceKind": "official_editorial",
+      "contestId": "abc475",
+      "officialTaskId": "abc475_g",
+      "checkedAt": "2026-10-06T11:31:52.875Z",
+      "fingerprint": "e94ba01f77a4d7104c74746c7021a9a897b9b576f6ec5dedc94e14eba310d8ba",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "5190557c1b55ba9052f08c8ab7d2d48d75d14f1f7fb8063f221949cf1d9d7fff",
+  "digest": "cddd5fff612ecc07b44ea9011c44fbb50cf615353ca359b640f7aa7ed5b232b8"
+}

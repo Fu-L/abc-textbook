@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "provider": "atcoder-problems",
-  "checkedAt": "2026-09-14T18:34:00+09:00",
+  "checkedAt": "2026-10-06T12:11:40Z",
   "sources": {
     "problemModels": "https://kenkoooo.com/atcoder/resources/problem-models.json",
     "mergedProblems": "https://kenkoooo.com/atcoder/resources/merged-problems.json"
@@ -5214,6 +5214,222 @@
       "difficulty": 3347,
       "difficultyExperimental": false,
       "point": 600
+    },
+    "abc467-e": {
+      "officialTaskId": "abc467_e",
+      "difficulty": 1694,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc467-f": {
+      "officialTaskId": "abc467_f",
+      "difficulty": 2052,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc467-g": {
+      "officialTaskId": "abc467_g",
+      "difficulty": 2544,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc468-e": {
+      "officialTaskId": "abc468_e",
+      "difficulty": 1038,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc468-f": {
+      "officialTaskId": "abc468_f",
+      "difficulty": 1693,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc468-g": {
+      "officialTaskId": "abc468_g",
+      "difficulty": 1975,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc469-e": {
+      "officialTaskId": "abc469_e",
+      "difficulty": 1566,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc469-f": {
+      "officialTaskId": "abc469_f",
+      "difficulty": 1567,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc469-g": {
+      "officialTaskId": "abc469_g",
+      "difficulty": 2804,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc470-e": {
+      "officialTaskId": "abc470_e",
+      "difficulty": 2096,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc470-f": {
+      "officialTaskId": "abc470_f",
+      "difficulty": 1604,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc470-g": {
+      "officialTaskId": "abc470_g",
+      "difficulty": 2097,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc471-e": {
+      "officialTaskId": "abc471_e",
+      "difficulty": 990,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc471-f": {
+      "officialTaskId": "abc471_f",
+      "difficulty": 1895,
+      "difficultyExperimental": false,
+      "point": 550
+    },
+    "abc471-g": {
+      "officialTaskId": "abc471_g",
+      "difficulty": 2464,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc472-e": {
+      "officialTaskId": "abc472_e",
+      "difficulty": 1029,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc472-f": {
+      "officialTaskId": "abc472_f",
+      "difficulty": 1707,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc472-g": {
+      "officialTaskId": "abc472_g",
+      "difficulty": 2018,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc473-e": {
+      "officialTaskId": "abc473_e",
+      "difficulty": 966,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc473-f": {
+      "officialTaskId": "abc473_f",
+      "difficulty": 1303,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc473-g": {
+      "officialTaskId": "abc473_g",
+      "difficulty": 1974,
+      "difficultyExperimental": false,
+      "point": 600
+    },
+    "abc474-e": {
+      "officialTaskId": "abc474_e",
+      "difficulty": 1153,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc474-f": {
+      "officialTaskId": "abc474_f",
+      "difficulty": 1911,
+      "difficultyExperimental": false,
+      "point": 500
+    },
+    "abc474-g": {
+      "officialTaskId": "abc474_g",
+      "difficulty": 2280,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc475-e": {
+      "officialTaskId": "abc475_e",
+      "difficulty": 1737,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc475-f": {
+      "officialTaskId": "abc475_f",
+      "difficulty": 1916,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc475-g": {
+      "officialTaskId": "abc475_g",
+      "difficulty": 2360,
+      "difficultyExperimental": false,
+      "point": 575
+    },
+    "abc476-e": {
+      "officialTaskId": "abc476_e",
+      "difficulty": 964,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc476-f": {
+      "officialTaskId": "abc476_f",
+      "difficulty": 1728,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc476-g": {
+      "officialTaskId": "abc476_g",
+      "difficulty": 2477,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc477-e": {
+      "officialTaskId": "abc477_e",
+      "difficulty": 1235,
+      "difficultyExperimental": false,
+      "point": 450
+    },
+    "abc477-f": {
+      "officialTaskId": "abc477_f",
+      "difficulty": 1629,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc477-g": {
+      "officialTaskId": "abc477_g",
+      "difficulty": 2226,
+      "difficultyExperimental": false,
+      "point": 625
+    },
+    "abc478-e": {
+      "officialTaskId": "abc478_e",
+      "difficulty": 1376,
+      "difficultyExperimental": false,
+      "point": 475
+    },
+    "abc478-f": {
+      "officialTaskId": "abc478_f",
+      "difficulty": 1588,
+      "difficultyExperimental": false,
+      "point": 525
+    },
+    "abc478-g": {
+      "officialTaskId": "abc478_g",
+      "difficulty": 2582,
+      "difficultyExperimental": false,
+      "point": 625
     }
   }
 }

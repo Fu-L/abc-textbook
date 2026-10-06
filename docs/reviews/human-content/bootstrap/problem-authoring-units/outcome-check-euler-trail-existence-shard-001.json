@@ -17,7 +17,7 @@
   "riskReasons": [],
   "sourceVerifications": [],
   "priorReviewInventoryDigest": "91280d3bca1fcfce59f2d439142e7e299ee5bd5f5e02a3c7121d46cc9ada7ad5",
-  "qualityBasisDigest": "84d4c0466c3adf8d493537f10d67d808321002c55be7f7eb506dffa3570a440d",
+  "qualityBasisDigest": "be4630b8eab8d587a59a89096c6925e3348fe7b80f0c8ed3ef3ff6232e7a4275",
   "basis": [
     "current_subject_independent_shard_verification",
     "tracked_full_corpus_prose_review_and_corrections",
@@ -34,5 +34,5 @@
     }
   ],
   "unresolvedFindingCount": 0,
-  "evidenceDigest": "139197a8e70b4982a26a62c7cec56e005b883808cb945a22dbd7a7a3012da6ab"
+  "evidenceDigest": "3e31f51f762157fd4f97eeab78888726b9614f340c66030b3cdfc71d81870176"
 }

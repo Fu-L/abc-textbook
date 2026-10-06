@@ -1,0 +1,20 @@
+{
+  "id": "abc468-f",
+  "contestId": "abc468",
+  "slotLabel": "F",
+  "officialTaskId": "abc468_f",
+  "title": "Chmax",
+  "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_f",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; P is a permutation of (1,2,\\ldots,N).; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+    "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+  ],
+  "checkedAt": "2026-10-06T11:30:35.819Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

@@ -1,0 +1,20 @@
+{
+  "id": "abc472-e",
+  "contestId": "abc472",
+  "slotLabel": "E",
+  "officialTaskId": "abc472_e",
+  "title": "Odd Cycle",
+  "officialUrl": "https://atcoder.jp/contests/abc472/tasks/abc472_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\le T \\le 2\\times10^5; 1 \\le N, M \\le 2\\times10^5; The sum of N over all test cases is at most 2\\times10^5.; The sum of M over all test cases is at most 2\\times10^5.; 1 \\le a_i,b_i \\le N; a_i\\ne b_i; The given graph is a simple connected undirected graph.; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc472-e-problem-05eb35bf6478e538a0151656909bf6d93fcc8b853f404ef33ad9a9948d4573ae",
+    "source-abc472-editorial-24429-139e78bd1bf32ab8c9e2407ccb00b319412ae992acd7db2923d54a00f91a71ec"
+  ],
+  "checkedAt": "2026-10-06T11:31:19.840Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

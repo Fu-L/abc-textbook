@@ -958,7 +958,8 @@ print('ABC389 G: layer-state coefficients versus all labelled graphs and BFS:', 
 
 
 # Actual document/Claim consistency for all problems, after all rewrites.
-documents = list(Path('src/content/docs/problems').rglob('*.md'))
+# This historical regression covers the frozen bootstrap; normal updates are joined separately.
+documents = [p for p in Path('src/content/docs/problems').rglob('*.md') if 'updates' not in p.parts]
 for document in documents:
     text = document.read_text(encoding='utf8')
     unit = json.loads(text.split('authoringUnit: ', 1)[1].split('\n', 1)[0])

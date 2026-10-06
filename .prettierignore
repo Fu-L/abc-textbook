@@ -63,3 +63,12 @@ staging/previews/problem-authoring-unit-shards/
 # T160 canonical projections are byte-checked by their deterministic generator.
 src/content/indexes/taxonomy.json
 docs/verification/bootstrap/us4/full-projections.json
+
+# Catch-up transitions bind exact bytes produced by the update packager.
+staging/updates/initial-catch-up/
+src/content/accepted-updates/
+src/content/contests/updates/
+src/content/problems/updates/
+src/content/problem-slots/updates/
+src/content/sources/updates/
+src/content/policies/catch-up.json

@@ -1,0 +1,20 @@
+{
+  "id": "abc470-g",
+  "contestId": "abc470",
+  "slotLabel": "G",
+  "officialTaskId": "abc470_g",
+  "title": "ΣШX",
+  "officialUrl": "https://atcoder.jp/contests/abc470/tasks/abc470_g",
+  "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 3 \\times 10^5; 0 \\leq A_i \\leq N; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc470-g-problem-58d1c97145a77978ac7655245e8f8e658c60fedad4b85a21a96d863d45c1be02",
+    "source-abc470-editorial-23879-4ac53a0ec1d4126c7b1a00644e677461d34a433b67c1bf0609837e84a5d04ed0"
+  ],
+  "checkedAt": "2026-10-06T11:30:57.841Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

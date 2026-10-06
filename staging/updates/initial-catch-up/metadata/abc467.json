@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc467",
+  "firstContestNumber": 467,
+  "lastContestNumber": 467,
+  "checkedAt": "2026-10-06T11:30:25.006Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc467",
+      "number": 467,
+      "title": "AtCoder Beginner Contest 467",
+      "startedAt": "2026-07-18T21:00:00+09:00",
+      "endedAt": "2026-07-18T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc467",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc467/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc467_a",
+          "title": "Obesity",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc467_b",
+          "title": "Keep the Change",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc467_c",
+          "title": "Adjacent Sums (easy)",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc467_d",
+          "title": "Concentric Circles",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc467_e",
+          "title": "Adjacent Sums (hard)",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc467_f",
+          "title": "Email Scheduling Optimization",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_f",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc467_g",
+          "title": "Many Sweets Problem",
+          "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_g",
+          "timeLimit": "3 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc467-task-list-8c5e013a922f8995b40801cab833610fc4c063fe9a509dee09bc51ee76a81423",
+      "checkedAt": "2026-10-06T11:30:25.006Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc467-e",
+      "contestId": "abc467",
+      "slotLabel": "E",
+      "officialTaskId": "abc467_e",
+      "officialOrder": 4,
+      "title": "Adjacent Sums (hard)",
+      "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 3 \\leq M \\leq 10^9; 0 \\leq A_i \\leq M-1; 0 \\leq B_i \\leq M-1; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+        "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+      ],
+      "checkedAt": "2026-10-06T11:30:25.006Z"
+    },
+    {
+      "id": "abc467-f",
+      "contestId": "abc467",
+      "slotLabel": "F",
+      "officialTaskId": "abc467_f",
+      "officialOrder": 5,
+      "title": "Email Scheduling Optimization",
+      "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_j,B_j \\leq 10^9; In each query, 1 \\leq i \\leq N.; In each query, 1 \\leq x \\leq 10^9.; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+        "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3"
+      ],
+      "checkedAt": "2026-10-06T11:30:25.006Z"
+    },
+    {
+      "id": "abc467-g",
+      "contestId": "abc467",
+      "slotLabel": "G",
+      "officialTaskId": "abc467_g",
+      "officialOrder": 6,
+      "title": "Many Sweets Problem",
+      "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_g",
+      "constraintsSummary": "Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \\leq N \\leq 10^5; 1 \\leq Q \\leq 10^5; 1 \\leq A_i \\leq 10^9; 1 \\leq c \\leq N; 1 \\leq x \\leq 10^9; 1 \\leq l \\leq r \\leq N; 1 \\leq k \\leq 10^{15}; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+        "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf"
+      ],
+      "checkedAt": "2026-10-06T11:30:25.006Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc467-task-list-8c5e013a922f8995b40801cab833610fc4c063fe9a509dee09bc51ee76a81423",
+      "url": "https://atcoder.jp/contests/abc467/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc467",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "8c5e013a922f8995b40801cab833610fc4c063fe9a509dee09bc51ee76a81423",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+      "url": "https://atcoder.jp/contests/abc467/tasks/abc467_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_e",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-f-problem-e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+      "url": "https://atcoder.jp/contests/abc467/tasks/abc467_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_f",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "e472ff52dad07a04e9e23553076bbfb0c0aa1c37fd489ffd92ce1ca7c2951645",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-g-problem-99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+      "url": "https://atcoder.jp/contests/abc467/tasks/abc467_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_g",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "99f7dad5915fd9876a271f5605313bdae97f2a392297ca0ba5669ec66bd2ac02",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-editorial-index-101dcdc56ac73422ccad54ac45171083be5ba6dca23ef2ac9d6797713391c094",
+      "url": "https://atcoder.jp/contests/abc467/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc467",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "101dcdc56ac73422ccad54ac45171083be5ba6dca23ef2ac9d6797713391c094",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7",
+      "url": "https://atcoder.jp/contests/abc467/editorial/22785",
+      "sourceKind": "official_editorial",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_e",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-editorial-23181-84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3",
+      "url": "https://atcoder.jp/contests/abc467/editorial/23181",
+      "sourceKind": "official_editorial",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_f",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "84f8d864317f3bfeff965c128e7e622f8280f19e82635482ff820229ad4158e3",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc467-editorial-23435-a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf",
+      "url": "https://atcoder.jp/contests/abc467/editorial/23435",
+      "sourceKind": "official_editorial",
+      "contestId": "abc467",
+      "officialTaskId": "abc467_g",
+      "checkedAt": "2026-10-06T11:30:25.006Z",
+      "fingerprint": "a4c559428e8ea79e8ed1684e0470fb68d6c6e3f872fe971dc1ffd10812a78bcf",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "b2f282fad4c18337935e70b284ff72858a36bb47244313d9184fbdd4d878d1cf",
+  "digest": "01510686bd163df95a4313bd7c1f51057e19f0a92a2ba98bfe56d9ab60af908c"
+}

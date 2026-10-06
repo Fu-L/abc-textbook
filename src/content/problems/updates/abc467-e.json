@@ -1,0 +1,20 @@
+{
+  "id": "abc467-e",
+  "contestId": "abc467",
+  "slotLabel": "E",
+  "officialTaskId": "abc467_e",
+  "title": "Adjacent Sums (hard)",
+  "officialUrl": "https://atcoder.jp/contests/abc467/tasks/abc467_e",
+  "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \\leq N \\leq 2 \\times 10^5; 3 \\leq M \\leq 10^9; 0 \\leq A_i \\leq M-1; 0 \\leq B_i \\leq M-1; All input values are integers.",
+  "difficultyEvidence": null,
+  "sourceRevisionIds": [
+    "source-abc467-e-problem-a4ab2e28020a416cd5bd9b49a94ab4a81a017d852fd5b7ee71f3bcbb439ff90c",
+    "source-abc467-editorial-22785-d9a0b82dbdf41fe1dd2fd217152f7a2f6fc44943068a2f56b0754a50a080d5b7"
+  ],
+  "checkedAt": "2026-10-06T11:30:25.006Z",
+  "publicationStatus": "uncollected",
+  "primaryTagIds": [],
+  "secondaryTagIds": [],
+  "adHocElements": [],
+  "placementId": null
+}

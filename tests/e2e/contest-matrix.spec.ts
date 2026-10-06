@@ -46,7 +46,7 @@ test('projects every canonical contest and excludes private compatibility fixtur
   expect(labels?.split(',')).toEqual(['E', 'F', 'G', 'Ex', 'H']);
   await expect(
     page.getByRole('table', { name: /上級問題マトリクス/u }).getByRole('row'),
-  ).toHaveCount(255);
+  ).toHaveCount(267);
   await expect(page.getByText('future I compatibility fixture')).toHaveCount(0);
 });
 

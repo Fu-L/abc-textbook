@@ -132,7 +132,7 @@ describe('AtCoder Problems metric snapshot', () => {
     });
 
     expect(Object.keys(snapshot.problems)).toEqual(identities.map(({ id }) => id));
-    expect(Object.keys(snapshot.problems)).toHaveLength(868);
+    expect(Object.keys(snapshot.problems)).toHaveLength(904);
   });
 
   it('fetches each upstream resource exactly once', async () => {

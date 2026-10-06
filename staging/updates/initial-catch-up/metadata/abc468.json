@@ -1,0 +1,253 @@
+{
+  "schemaVersion": "1.0.0",
+  "batchId": "abc468",
+  "firstContestNumber": 468,
+  "lastContestNumber": 468,
+  "checkedAt": "2026-10-06T11:30:35.819Z",
+  "policy": {
+    "checkedAt": "2026-10-06T11:30:14.541Z",
+    "documents": [
+      {
+        "id": "atcoder-robots",
+        "kind": "robots",
+        "url": "https://atcoder.jp/robots.txt",
+        "fingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1",
+        "approvedFingerprint": "c6f8f81008451df6ad031220a481de99aa77ebbb46e6485e0609e917a82a69b1"
+      },
+      {
+        "id": "atcoder-terms",
+        "kind": "terms",
+        "url": "https://atcoder.jp/tos",
+        "fingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf",
+        "approvedFingerprint": "2fd28ffb1c5be470d059c3d2ffc947032cdf3a90f66e1f3feac8235c99b07abf"
+      },
+      {
+        "id": "atcoder-generative-ai",
+        "kind": "generative-ai",
+        "url": "https://atcoder.jp/posts/1567",
+        "fingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53",
+        "approvedFingerprint": "75d5075024691a6f98e2b752440d6a2f59ff52cfe14fb94b02b4d18964963d53"
+      }
+    ],
+    "digest": "d1a57e6341d62b3493a2af2a3a361ca4284be4dfca8c342360b786ba933a3d22"
+  },
+  "contests": [
+    {
+      "id": "abc468",
+      "number": 468,
+      "title": "AtCoder Beginner Contest 468",
+      "startedAt": "2026-07-25T21:00:00+09:00",
+      "endedAt": "2026-07-25T22:40:00+09:00",
+      "officialUrl": "https://atcoder.jp/contests/abc468",
+      "officialTaskListUrl": "https://atcoder.jp/contests/abc468/tasks",
+      "officialTaskOrder": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ],
+      "tasks": [
+        {
+          "label": "A",
+          "officialOrder": 0,
+          "officialTaskId": "abc468_a",
+          "title": "Maximal Value",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_a",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "B",
+          "officialOrder": 1,
+          "officialTaskId": "abc468_b",
+          "title": "Corridor Watch",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_b",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "C",
+          "officialOrder": 2,
+          "officialTaskId": "abc468_c",
+          "title": "Between P and Q",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_c",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "D",
+          "officialOrder": 3,
+          "officialTaskId": "abc468_d",
+          "title": "Pre-Palindrome",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_d",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "E",
+          "officialOrder": 4,
+          "officialTaskId": "abc468_e",
+          "title": "Sum of Average",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_e",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "F",
+          "officialOrder": 5,
+          "officialTaskId": "abc468_f",
+          "title": "Chmax",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_f",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        },
+        {
+          "label": "G",
+          "officialOrder": 6,
+          "officialTaskId": "abc468_g",
+          "title": "Restricted Permutation",
+          "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_g",
+          "timeLimit": "2 sec",
+          "memoryLimit": "1024 MiB"
+        }
+      ],
+      "taskOrderSourceRevisionId": "source-abc468-task-list-fd29fcb6c34389f9aee0a6f8ae9617d3dcc6e2a14fba29a17cdc7cfe1f9fb975",
+      "checkedAt": "2026-10-06T11:30:35.819Z"
+    }
+  ],
+  "contestGaps": [],
+  "problems": [
+    {
+      "id": "abc468-e",
+      "contestId": "abc468",
+      "slotLabel": "E",
+      "officialTaskId": "abc468_e",
+      "officialOrder": 4,
+      "title": "Sum of Average",
+      "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_e",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; 0\\le A_i < 998244353; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+        "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491"
+      ],
+      "checkedAt": "2026-10-06T11:30:35.819Z"
+    },
+    {
+      "id": "abc468-f",
+      "contestId": "abc468",
+      "slotLabel": "F",
+      "officialTaskId": "abc468_f",
+      "officialOrder": 5,
+      "title": "Chmax",
+      "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_f",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 5\\times 10^5; P is a permutation of (1,2,\\ldots,N).; All input values are integers.",
+      "sourceRevisionIds": [
+        "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+        "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e"
+      ],
+      "checkedAt": "2026-10-06T11:30:35.819Z"
+    },
+    {
+      "id": "abc468-g",
+      "contestId": "abc468",
+      "slotLabel": "G",
+      "officialTaskId": "abc468_g",
+      "officialOrder": 6,
+      "title": "Restricted Permutation",
+      "officialUrl": "https://atcoder.jp/contests/abc468/tasks/abc468_g",
+      "constraintsSummary": "Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\\le N\\le 2000; S_i is a string of length N consisting of o and x.",
+      "sourceRevisionIds": [
+        "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+        "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2"
+      ],
+      "checkedAt": "2026-10-06T11:30:35.819Z"
+    }
+  ],
+  "sourceRevisions": [
+    {
+      "id": "source-abc468-task-list-fd29fcb6c34389f9aee0a6f8ae9617d3dcc6e2a14fba29a17cdc7cfe1f9fb975",
+      "url": "https://atcoder.jp/contests/abc468/tasks",
+      "sourceKind": "official_contest",
+      "contestId": "abc468",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "fd29fcb6c34389f9aee0a6f8ae9617d3dcc6e2a14fba29a17cdc7cfe1f9fb975",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-e-problem-c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+      "url": "https://atcoder.jp/contests/abc468/tasks/abc468_e",
+      "sourceKind": "official_problem",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_e",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "c7d6ff7764a3cb6b75f92bcefca91966433a27e702433f69ca97bbde743d855a",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-f-problem-81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+      "url": "https://atcoder.jp/contests/abc468/tasks/abc468_f",
+      "sourceKind": "official_problem",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_f",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "81895e0547e879214a14bee6f17d451498539ebaef9fd42e14b83c02c30d4dbe",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-g-problem-2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+      "url": "https://atcoder.jp/contests/abc468/tasks/abc468_g",
+      "sourceKind": "official_problem",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_g",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "2c78561debee8e6b9757a4a7d8176d2357558d04fca83af875e6dd94ca454bde",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-editorial-index-b9735815b21ad0680d2901292cfbd1c7892839de9bf559049bbc27b77f03242d",
+      "url": "https://atcoder.jp/contests/abc468/editorial",
+      "sourceKind": "official_editorial",
+      "contestId": "abc468",
+      "officialTaskId": null,
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "b9735815b21ad0680d2901292cfbd1c7892839de9bf559049bbc27b77f03242d",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-editorial-23476-32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491",
+      "url": "https://atcoder.jp/contests/abc468/editorial/23476",
+      "sourceKind": "official_editorial",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_e",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "32566941db6b816bb4cf5b70028f0ae488dec2cc2be57c29c483e77207a2b491",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-editorial-23738-5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e",
+      "url": "https://atcoder.jp/contests/abc468/editorial/23738",
+      "sourceKind": "official_editorial",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_f",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "5e139065258f1b30a36be01029a54705a79c0df96aa548309c35039d069aac2e",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    },
+    {
+      "id": "source-abc468-editorial-23741-288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2",
+      "url": "https://atcoder.jp/contests/abc468/editorial/23741",
+      "sourceKind": "official_editorial",
+      "contestId": "abc468",
+      "officialTaskId": "abc468_g",
+      "checkedAt": "2026-10-06T11:30:35.819Z",
+      "fingerprint": "288f32350099a2a87fbc290f5f2cea27b0433bd5f2fbfc48064129a0cfdb55b2",
+      "termsCheckedAt": "2026-10-06T11:30:14.541Z"
+    }
+  ],
+  "metadataBatchDigest": "2a371b5bf83269a1225103e8fe589b65be8355781c995db05a1ae1acfe9d92e4",
+  "digest": "678965f9b5502e1d0c53ee8b7e0eb80360187891fb1024f431ca3e6ca604a9dc"
+}
