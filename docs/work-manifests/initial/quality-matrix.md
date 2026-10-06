@@ -11,3 +11,6 @@ artifact証跡だけを更新する。受理済みsourceProjectionDigest・mappi
 
 新規のaudit出力は`docs/verification/initial-release/`、性能fixtureはignoredな`build/`、52週simulationは一時directoryへ置く。引用・実行例・演習を新設せず、一般証明と既存の有限モデル回帰の役割を区別する。production
 review/merge/deployの承認は作らない。
+
+GitHubのLinux
+CIでは全教材の型付きlintが既定約2GBのheap上限で停止したため、lintコマンドに4GBを明示する。対象除外や規則の無効化をせず、同じ検証を全件へ実行する。

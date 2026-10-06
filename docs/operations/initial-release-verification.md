@@ -20,7 +20,9 @@ node --import tsx scripts/corpus/verify-full-projections.ts --write-evidence
 indexや本文は生成しない。本文・分類自体が受理済みsubjectと一致しなければ失敗する。今回の監査では320pxの長いselect・file
 inputの横はみ出しをCSSで補修した。
 
-Node.js 24、lockfileに従って導入した依存、Playwrightの3ブラウザーを使う。`--write`
+Node.js
+24、lockfileに従って導入した依存、Playwrightの3ブラウザーを使う。全教材を型情報付きで検査するESLintはLinux
+CIの既定約2GBではheap不足になるため、lintコマンドに4GBの上限を指定する。検査対象や規則は減らさない。`--write`
 は自動検査を実行し、全項目が成功した後で `docs/verification/initial-release/`
 に今回の検証証跡を保存する。正本本文・分類・受入証跡の更新は行わない。静的buildと性能fixtureだけは生成し、性能fixtureは
 `build/` に隔離する。取得・更新・配信のsimulationは一時リポジトリ内で完結する。
