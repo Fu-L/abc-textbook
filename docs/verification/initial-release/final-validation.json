@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T149",
+  "status": "preparation_passed_production_on_hold",
+  "generatedAt": "2026-10-07T12:29:21.305116+00:00",
+  "automatedAuditSubject": {
+    "digest": "7c700e3b29fc9ac4558f8687024dc2f8900b3aa6d48c6e9c3911a7745d1363fd",
+    "fileCount": 9497
+  },
+  "sourceProjectionDigest": "069bdceb773b0f1ca77b3697deb1c902c3b23305eaca3bbab577adfaf9d38bcc",
+  "validatedPreparationSnapshot": {
+    "command": "verify:release",
+    "mode": "preparation",
+    "commit": "2348625aed8d4b7b94d6857cc762bd9f211d9b49",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "aggregatePassed": true,
+    "productionReleaseApproved": false,
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "version": "2026.10.07",
+    "problemCount": 868,
+    "pendingGates": [
+      "policy-selected-human-review",
+      "protected-main-required-checks",
+      "host-project-and-origin"
+    ],
+    "checks": [
+      "real-protected-base-diff",
+      "accepted-seed-and-shard-join",
+      "bootstrap-only-summary",
+      "T133-T142-current-subject",
+      "SC-012-automated-controls-and-persistence"
+    ]
+  },
+  "productionValidation": {
+    "requestedCommit": "2348625aed8d4b7b94d6857cc762bd9f211d9b49",
+    "exitCode": 2,
+    "aggregatePassed": false,
+    "observedError": "CANONICAL_PUBLICATION_UPDATE_MISSING: Every ordered update must exist once under staging/updates and be eligible.",
+    "reason": "Bootstrap remains ON_HOLD until genuine policy-selected human review."
+  },
+  "finalCommitBinding": {
+    "source": "PR CI artifact final-validation-<full Git SHA> and read-only CLI output",
+    "note": "This in-tree record cannot embed its own future commit hash. Its validated snapshot is historical; final-head validation is rerun after this evidence-only commit."
+  },
+  "scope": {
+    "problemCount": 868,
+    "learningUnitCount": 232,
+    "tagCount": 213,
+    "learningOutcomeCount": 242,
+    "canonicalContentFileDiffCount": 0,
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "catchUpIncluded": false,
+    "hostPublicationHistory": []
+  },
+  "results": {
+    "tests": 587,
+    "browserTests": 225,
+    "browserEngines": ["chromium", "firefox", "webkit"],
+    "auditTasksPassed": 10,
+    "independentMathematicalRegressionScripts": 20,
+    "staticPages": 1576,
+    "brokenInternalLinks": 0,
+    "checkedLinks": 4648,
+    "SC012Observations": 12,
+    "SC012HumanTimingAccepted": false,
+    "SC012MaximumAutomatedDurationMs": 162.8869169999998,
+    "designLimitFilterP95Ms": 1.300000011920929,
+    "simulationWeeks": 52,
+    "simulationRequiredCostJPY": 0,
+    "actualProductionRollbackClaimed": false
+  },
+  "pendingGates": [
+    "policy-selected-human-review",
+    "protected-main-required-checks",
+    "host-project-and-origin"
+  ],
+  "liveAcceptanceDeferred": {
+    "issue": 52,
+    "startsAfterIssue": 54,
+    "requirements": [
+      "FR-022",
+      "FR-023",
+      "FR-024",
+      "FR-025",
+      "SC-006",
+      "SC-007",
+      "SC-014 live updates"
+    ]
+  },
+  "productionReleaseApproved": false
+}

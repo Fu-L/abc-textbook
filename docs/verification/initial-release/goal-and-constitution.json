@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "taskId": "T151",
   "status": "prepared_scope_audited_production_on_hold",
-  "generatedAt": "2026-10-07T11:48:37.419986+00:00",
+  "generatedAt": "2026-10-07T12:29:21.305116+00:00",
   "goal": "ABCの過去問からARC・AGC・CF Div. 1・UCUPへ進むための典型知識・適用条件・不変量・正当性・計算量と手法選択を学ぶ、一人用の教科書。",
   "scope": {
     "firstContest": "abc212",
@@ -797,5 +797,12 @@
       "path": "docs/verification/initial-release/browser-results.json",
       "digest": "edbcc86d05839887b096b412ce384146d8c2b8cb1a7bfa817ee136878c3c7824"
     }
-  }
+  },
+  "validatedPreparationSnapshot": {
+    "commit": "2348625aed8d4b7b94d6857cc762bd9f211d9b49",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "aggregatePassed": true,
+    "productionReleaseApproved": false
+  },
+  "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference."
 }
