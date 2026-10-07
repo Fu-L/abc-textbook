@@ -11304,7 +11304,7 @@
     "aggregatePassed": true,
     "resultDigest": "08d6e4afc8a0b5f59001e7dcf4092a8a80cb9b1de8c9106509a866e6a77949a5"
   },
-  "state": "ON_HOLD",
+  "state": "ELIGIBLE_FOR_BATCH",
   "createdAt": "2026-10-07T11:28:09.431Z",
   "updatedAt": "2026-10-07T11:28:09.431Z",
   "fixtureMode": false

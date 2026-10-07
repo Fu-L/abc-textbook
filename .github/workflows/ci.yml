@@ -106,7 +106,7 @@ jobs:
         shell: bash
         run: |
           if test -f docs/verification/releases/catalog.json; then
-            if node -e 'const c=JSON.parse(require("fs").readFileSync("docs/verification/releases/catalog.json"));process.exit(c.release.humanContentReviewEvidenceRefs.length ? 1 : 0)'; then
+            if node -e 'const c=JSON.parse(require("fs").readFileSync("docs/verification/releases/catalog.json"));process.exit(c.release.humanContentReviewEvidenceRefs.length || c.release.agentQualityReviewEvidenceRef ? 1 : 0)'; then
               node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" --preparation > /tmp/final-validation.json
             else
               node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" > /tmp/final-validation.json
@@ -136,7 +136,7 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
-      - name: Require genuine policy-selected review of the exact release
+      - name: Require current-subject policy-selected review of the exact release
         run:
           node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" >
           /tmp/production-review.json

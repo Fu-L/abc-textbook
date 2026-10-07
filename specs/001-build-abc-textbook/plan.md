@@ -38,6 +38,8 @@
 
 **Gate status — PASS (Constitution 3.0.0)**: 統治中の正本は`.specify/memory/constitution.md` 3.0.0である。旧`constitution-v2-proposal.md`は履歴上の参考資料であり、本計画の義務を変更しない。
 
+#53初版レビューは2026-10-07 owner指示「人間の了承は不要です。」に従い、`agent_quality_review`と全適用自動検査で受け入れる。憲章に初版限定の例外を記録し、manifestのhigh-risk self-reviewと全risk reasonを保持する。Catalogには独立した`agentQualityReviewEvidenceRef`を持たせ、人間review refsは空にする。後続更新にこの例外を広げない。
+
 - **Learning outcomes — PASS**: 仕様は対象学習者、観察可能な共通前提、6つの学習成果、対象/対象外、SC-001〜SC-020を定義する。コンテンツ制作はコンテストbatchではなく学習成果と典型のreview unitで行い、章・解説・例・演習から成果へ追跡する。
 - **Accuracy and traceability — PASS**: 公式コンテスト情報と公式解説を第一根拠とし、URL、対象コンテスト、確認日時、取得指紋、訂正系列を保持する。通常更新は管理者の明示self-reviewで完結し、高リスク更新は原則third-party reviewへ送る。solo maintainerではrisk reasonと例外理由を保持したhigh-risk self-reviewを許可する。
 - **Progression and accessibility — PASS**: 全コーパス横断のTechnique Inventoryからタグと学習単位を作り、タグDAGと学習単位DAGを別々に検証する。用語初出、見出し、ランドマーク、表caption、代替テキスト、キーボード操作、色に依存しない状態表示、狭い画面での代替一覧を要求する。

@@ -15,6 +15,7 @@ import {
   OffsetDateTimeSchema,
   SafePathSchema,
   Sha256Schema,
+  SeedAgentQualityReviewReferenceSchema,
 } from '../domain/schema-parts/catalog.js';
 import {
   ExecutableExampleEvidenceSchema,
@@ -53,6 +54,10 @@ import {
   TrustedCatalogDiffError,
 } from './trusted-diff.js';
 import { loadFullPublicProjection } from './full-public-projection.js';
+import {
+  validateSeedAgentQualityReview,
+  SEED_AGENT_OWNER_INSTRUCTION,
+} from '../validation/seed-agent-review.js';
 import {
   assertSeedRelease,
   createSeedReleaseManifest,
@@ -808,9 +813,22 @@ export const deriveCatalogEvidenceTrustContext = (
 export const CatalogReleaseEvidenceInventorySchema = strictObject({
   subjectDigest: Sha256Schema,
   checks: z.array(CatalogCheckReferenceSchema).min(1),
-  reviews: z.array(CatalogReviewReferenceSchema).min(1),
+  reviews: z.array(CatalogReviewReferenceSchema),
+  agentQualityReview: SeedAgentQualityReviewReferenceSchema.optional(),
   executableExampleEvidence: CatalogExecutableExampleEvidenceReferenceSchema.optional(),
 }).superRefine((inventory, context) => {
+  if (!inventory.reviews.length && !inventory.agentQualityReview)
+    context.addIssue({
+      code: 'custom',
+      path: ['reviews'],
+      message: 'Review evidence is required.',
+    });
+  if (inventory.agentQualityReview && inventory.reviews.length)
+    context.addIssue({
+      code: 'custom',
+      path: ['reviews'],
+      message: 'Agent acceptance is not human approval.',
+    });
   const checkIds = inventory.checks.map(({ checkId }) => checkId);
   const resultPaths = inventory.checks.map(({ resultPath }) => resultPath);
   const evidenceIds = inventory.reviews.map(({ evidenceId }) => evidenceId);
@@ -1252,7 +1270,81 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     ),
   );
   const release = CatalogSchema.parse(canonicalSources.catalog).release;
+  const agentQualityReview = parsed.data.agentQualityReview;
+  if (agentQualityReview) {
+    const file = await readPublicEvidenceFile(agentQualityReview.path, repositoryRoot);
+    if (file.digest !== agentQualityReview.digest) throw new Error('INITIAL_AGENT_REVIEW_DIGEST');
+    const agent = validateSeedAgentQualityReview(file.value, {
+      catalog: catalogResult.data,
+      manifest: ContentWorkManifestSchema.parse(canonicalSources.workManifest),
+      inventory: trustedContext,
+      checks,
+    });
+    if (agentQualityReview.subjectDigest !== agent.subjectDigest)
+      throw new Error('INITIAL_AGENT_REVIEW_SUBJECT');
+    for (const ref of [
+      agent.auditMatrix,
+      agent.constitution,
+      agent.mathematicalRegressions,
+      ...agent.dependentTemplates,
+      ...agent.lineage,
+      ...agent.checkResultRefs,
+    ]) {
+      const sourcePath = ref.path.startsWith('.specify/')
+        ? await resolvePublicCatalogInput(ref.path, repositoryRoot)
+        : await resolvePublicEvidencePath(ref.path, repositoryRoot);
+      const bytes = await readFile(sourcePath);
+      if (digestBytes(bytes) !== ref.digest)
+        throw new Error(`INITIAL_AGENT_REVIEW_STALE:${ref.path}`);
+    }
+    const constitution = await readFile(path.join(repositoryRoot, agent.constitution.path), 'utf8');
+    if (!constitution.includes(SEED_AGENT_OWNER_INSTRUCTION))
+      throw new Error('INITIAL_AGENT_REVIEW_OWNER_INSTRUCTION');
+    const matrix = JSON.parse(
+      await readFile(path.join(repositoryRoot, agent.auditMatrix.path), 'utf8'),
+    ) as {
+      status: string;
+      inputSubject: { digest: string };
+      sourceProjectionDigest: string;
+    };
+    if (
+      matrix.status !== 'passed' ||
+      matrix.inputSubject.digest !== agent.auditInputSubjectDigest ||
+      matrix.sourceProjectionDigest !== agent.sourceProjectionDigest
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_AUDIT');
+    const templateFiles = (
+      await readdir(path.join(repositoryRoot, '.specify/templates'), {
+        recursive: true,
+        withFileTypes: true,
+      })
+    )
+      .filter((entry) => entry.isFile())
+      .map((entry) => path.relative(repositoryRoot, path.join(entry.parentPath, entry.name)));
+    if (
+      !sameStringSet(
+        templateFiles,
+        agent.dependentTemplates.map((ref) => ref.path),
+      )
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_TEMPLATES');
+    const mathematical = await readFile(
+      path.join(repositoryRoot, agent.mathematicalRegressions.path),
+      'utf8',
+    );
+    if (
+      (
+        mathematical.match(
+          /^Running docs\/verification\/bootstrap\/pr65.*-mathematical-checks\.py$/gmu,
+        ) ?? []
+      ).length !== 20 ||
+      !mathematical.endsWith('All independent mathematical regressions passed\n')
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_MATHEMATICAL_REGRESSIONS');
+  }
   if (
+    canonicalDigest(release.agentQualityReviewEvidenceRef ?? null) !==
+      canonicalDigest(agentQualityReview ?? null) ||
     release.validationSummary.checks.length !== checks.length ||
     release.validationSummary.checks.some((reference) => {
       const check = checks.find(({ checkId }) => checkId === reference.checkId);
@@ -1285,6 +1377,7 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
   const subjectDigests = [
     ...checks.map(({ subjectDigest }) => subjectDigest),
     ...reviews.map(({ subjectDigest }) => subjectDigest),
+    ...(agentQualityReview ? [agentQualityReview.subjectDigest] : []),
   ];
   const subjectDigest = subjectDigests[0];
   if (
@@ -1302,6 +1395,7 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     subjectDigest,
     checks,
     reviews,
+    ...(agentQualityReview ? { agentQualityReview } : {}),
     ...(executableExampleEvidence ? { executableExampleEvidence } : {}),
   };
 };

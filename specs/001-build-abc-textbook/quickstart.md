@@ -264,3 +264,7 @@ npm run corpus:verify-problem-corpus
 ### Problem本文の品質確認
 
 完全解説では、アルゴリズム名だけでなく状態・遷移・境界条件・正当性・計算量の導出を読む。具体例・確認問題・確認する観点・解答と理由の独立節は使わない。必要な追跡は考察へ含める。例・演習がないProblemのexamples/exercisesは空配列、対応checkはnot_applicableでよい。本文を修正したら所有shardの証跡を再生成し、corpus:verify-problem-shardsとverify:fastを実行する。
+
+## #53 fixed-seed release acceptance
+
+初版公開準備は `docs/operations/initial-release-runbook.md` に従う。ownerが人間承認を不要としたため、bootstrapのinputs/evidence両方へ`--review-policy solo-maintainer --acceptance agent-quality-review`を付ける。current-subject全監査の成功後、agent品質受入を生成し、commit済みsnapshotへの通常の`verify:release -- --commit HEAD`を通す。232 itemの根拠と242 Outcome、全risk reason、全checkが揃わなければ公開検証は失敗する。人間reviewや実published履歴は作らない。

@@ -896,34 +896,42 @@
       "passedCheckCount": 2,
       "blockingFindingCount": 0,
       "evidenceDigests": [
-        "0d4c245130ddb8ee46be571450c24dd08205bf1e156f5cc54889be323c973c7a",
-        "0f218e0f91b8b23c982e70b929d11a4d722151469c3d004f4c9da1059c4b9f96"
+        "0a7cfc6565b1fcea79ad55e59d6f05075c0ced7a6ab7eb18de3f223053076c1c",
+        "9949e4bbfd2e56373100be17e5f2dcc62db8dd10072c89c4c5a2884bdac9c678"
       ],
       "checks": [
         {
           "checkId": "check-initial-corpus",
           "command": "npm run verify:initial-release -- --check",
           "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+          "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
+          "resultDigest": "0a7cfc6565b1fcea79ad55e59d6f05075c0ced7a6ab7eb18de3f223053076c1c",
           "exitCode": 0,
           "passed": true,
-          "completedAt": "2026-10-07T13:52:49.486Z",
-          "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
-          "resultDigest": "0d4c245130ddb8ee46be571450c24dd08205bf1e156f5cc54889be323c973c7a"
+          "completedAt": "2026-10-07T15:52:45.515Z"
         },
         {
           "checkId": "check-initial-sc012",
           "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
           "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+          "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
+          "resultDigest": "9949e4bbfd2e56373100be17e5f2dcc62db8dd10072c89c4c5a2884bdac9c678",
           "exitCode": 0,
           "passed": true,
-          "completedAt": "2026-10-07T13:50:36.566Z",
-          "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
-          "resultDigest": "0f218e0f91b8b23c982e70b929d11a4d722151469c3d004f4c9da1059c4b9f96"
+          "completedAt": "2026-10-07T15:49:02.272Z"
         }
       ]
     },
     "humanContentReviewEvidenceRefs": [],
-    "changelogPath": "docs/verification/releases/change-summary.json"
+    "changelogPath": "docs/verification/releases/change-summary.json",
+    "agentQualityReviewEvidenceRef": {
+      "evidenceId": "agent-content-review-initial-release",
+      "path": "docs/reviews/agent-content/initial-release/release-review.json",
+      "digest": "ecdaacd8a0cd333b9e48ee4a8a3903229f0e7fc1f83e8ca01a039c0d014aa583",
+      "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+      "acceptanceMode": "agent_quality_review",
+      "aggregatePassed": true
+    }
   },
   "advancedSlotRegistry": {
     "version": "1.0.0",

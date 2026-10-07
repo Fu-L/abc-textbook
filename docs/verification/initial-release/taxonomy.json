@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "50e934e1bfd52101fb7256cc38725f30e736274370178ee3558f7254f7deefbc",
-    "fileCount": 9497
+    "digest": "6e9f4142906be3a0be4153801dee5c58d8cdfa1703445ec6bcfb94bbe2d1e241",
+    "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-07T13:51:59.739Z",
+  "generatedAt": "2026-10-07T15:50:42.740Z",
   "commands": [
     {
       "command": "npm run corpus:verify-authoring",
       "exitCode": 0,
-      "durationMs": 784.7394579999964,
+      "durationMs": 849.8574999999837,
       "outputDigest": "5185a8711115bcdf586f045f1fa571cc2eb47148c5f4b238b8579ab79c194d1b",
       "outputBytes": 503,
       "observed": "> abc-textbook@0.1.0 corpus:verify-authoring\n> tsx scripts/corpus/verify-inventory-authoring.ts --check\n\n{\"command\":\"verify-inventory-authoring\",\"mode\":\"check\",\"status\":\"passed\",\"problemCount\":868,\"sourceBoundProblemCount\":868,\"reviewedProblemCount\":868,\"inventoryDigest\":\"1b66ec51f649d9de92dec88445b6bf04ed82c65bd03b0a0666035515aa1ea3ed\",\"evidenceDigest\":\"b30bafee7a83a7693a27ddee56e7eb92ffae98995b7879fb8a9480dd5debbc53\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory-authoring.json\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:final-taxonomy",
       "exitCode": 0,
-      "durationMs": 8034.242332999973,
+      "durationMs": 8893.369417000009,
       "outputDigest": "f222d86b04626215039537851ee6766ef7fb185483b087a32f6a8c4af1a809b9",
       "outputBytes": 440,
       "observed": "> abc-textbook@0.1.0 corpus:final-taxonomy\n> tsx scripts/corpus/final-taxonomy.ts --check\n\n{\"command\":\"final-taxonomy\",\"mode\":\"check\",\"status\":\"accepted\",\"canonicalMaterializationAllowed\":true,\"placementCount\":868,\"sourceRevisionCount\":1738,\"taxonomySubjectDigest\":\"023d3d68f01991eb16c00f1ba27534e645b807a2766ac58a3158a718af6e9251\",\"buildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"written\":0,\"verified\":3}"
@@ -29,7 +29,7 @@
     {
       "command": "npm run corpus:materialize-taxonomy",
       "exitCode": 0,
-      "durationMs": 4602.572791000013,
+      "durationMs": 5035.983666999993,
       "outputDigest": "7c81dff473d9ab1f55841932de550326a5be62609b433fc19f26161aba1983bf",
       "outputBytes": 490,
       "observed": "> abc-textbook@0.1.0 corpus:materialize-taxonomy\n> tsx scripts/corpus/materialize-canonical-taxonomy.ts --check\n\n{\"command\":\"materialize-canonical-taxonomy\",\"mode\":\"check\",\"status\":\"passed\",\"sourceBuildId\":\"final-taxonomy-build-initial\",\"sourceBuildDigest\":\"f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe\",\"expected\":923,\"verified\":459,\"preserved\":464,\"written\":0,\"counts\":{\"tags\":213,\"learningOutcomes\":242,\"learningUnits\":232,\"learningDocuments\":232,\"placements\":868}}"
@@ -37,7 +37,7 @@
     {
       "command": "npm run corpus:verify-learning-units",
       "exitCode": 0,
-      "durationMs": 2955.614709000016,
+      "durationMs": 3253.4424999999756,
       "outputDigest": "ad80a0669e69e15438280da6cf1d4319f2ab3f035c0160e7c80094c450de4204",
       "outputBytes": 360,
       "observed": "> abc-textbook@0.1.0 corpus:verify-learning-units\n> tsx scripts/corpus/verify-full-learning-units.ts --check\n\n{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}"
@@ -45,7 +45,7 @@
     {
       "command": "npm run corpus:verify-problem-shard-index",
       "exitCode": 0,
-      "durationMs": 3955.8834999999963,
+      "durationMs": 4331.828249999991,
       "outputDigest": "68e7e0cac833f4601e4d2358800d4a24b6b1b8caa7152063044c11bf9fb5e9c0",
       "outputBytes": 353,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shard-index\n> tsx scripts/corpus/freeze-problem-shard-index.ts --check\n\n{\"status\":\"passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"domains\":[\"graph-search\",\"dynamic-programming\",\"data-structures\",\"mathematics\",\"string-geometry\",\"hybrid\"]}"
@@ -53,7 +53,7 @@
     {
       "command": "npm run corpus:verify-problem-shards",
       "exitCode": 0,
-      "durationMs": 6716.565624999988,
+      "durationMs": 7461.742458000022,
       "outputDigest": "a260d3b2179947f000dbbc4e7154866f5040e57a7feef1666a0fb3f0c08e5b8f",
       "outputBytes": 380,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-shards\n> tsx scripts/corpus/author-problem-shards.ts --check\n\n{\"status\":\"automated_checks_passed\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"authoringHoldCount\":0,\"humanReview\":\"pending\",\"scope\":\"Independent shard authoring checks, not T072–T078 global acceptance.\"}"
@@ -1859,5 +1859,5 @@
     "integrationEvidenceDigest": "b7318abf0880987db4e1777f4609962de9eb5747e9f3e90e8cb70160612766c8",
     "basis": "Preview integration is lineage only; complete canonical inventory, final accepted taxonomy and joined full-authoring owners supply the final completeness boundary."
   },
-  "evidenceDigest": "deed56e0b6e583751e0be12b066480974103cb0621855a54a25110719e731b28"
+  "evidenceDigest": "42bb65c54a49c988e1fafd56284027570782ce2ee1598758c29f4d5295babb72"
 }

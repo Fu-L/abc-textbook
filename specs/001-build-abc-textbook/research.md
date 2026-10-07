@@ -180,3 +180,7 @@ deploy adapterは20,000ファイル・25 MiB/fileのFree制限を確認し、有
 GitHub branch protectionも現private repositoryの実APIで403となったため、設定済みとは扱わない。
 追加費用0円の経路を守り、有料upgradeやrepository公開範囲変更を無断では実行しない。
 設定payloadと必要checkは用意し、production workflowは実保護がなければ停止する。
+
+## #53 owner-authorized initial release review
+
+2026-10-07、ownerはhigh-risk self-reviewを選び、その後「人間の了承は不要です。」と明示した。初版だけをagent_quality_reviewで受け入れるowner例外を憲章・仕様へ記録し、通常/catch-upの人間レビュー契約は保持する。Catalogの独立agent refは固定scopeとsource/manifest/check/item coverageへbindingし、人間refsは空にする。既存schemaのself/third-party enumをagent modeへ読み替える方法は、人間証跡の意味を失うため採らない。

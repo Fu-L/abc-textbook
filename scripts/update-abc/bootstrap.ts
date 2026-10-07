@@ -3,6 +3,7 @@ import { persistPublicationUpdate, runUpdatePipeline } from './index.js';
 import { pathToFileURL } from 'node:url';
 import { prepareSeedRelease } from '../release/prepare-seed.js';
 import { parseKeyValueArguments } from '../corpus/cli-support.js';
+import { acceptSeedAgentReview } from '../release/accept-seed-agent-review.js';
 
 export const bootstrapPreviewSeed = (input: {
   readonly previewId: string;
@@ -46,6 +47,7 @@ if (isMain()) {
         '--mode',
         '--version',
         '--review-policy',
+        '--acceptance',
       ]);
       if (args.get('--first') !== '212' || args.get('--last') !== '466')
         throw new Error('INITIAL_RELEASE_RANGE: --first 212 --last 466 is required.');
@@ -54,8 +56,18 @@ if (isMain()) {
       const policy = args.get('--review-policy') ?? 'third-party';
       if (!['third-party', 'solo-maintainer'].includes(policy))
         throw new Error('INITIAL_REVIEW_POLICY');
+      const acceptance = args.get('--acceptance');
+      if (acceptance && (acceptance !== 'agent-quality-review' || policy !== 'solo-maintainer'))
+        throw new Error('INITIAL_ACCEPTANCE_POLICY');
+      const result = await prepareSeedRelease(
+        mode,
+        args.get('--version'),
+        policy === 'solo-maintainer',
+      );
+      if (mode === 'evidence' && acceptance === 'agent-quality-review')
+        await acceptSeedAgentReview();
       process.stdout.write(
-        `${JSON.stringify(await prepareSeedRelease(mode, args.get('--version'), policy === 'solo-maintainer'))}\n`,
+        `${JSON.stringify({ ...result, ...(acceptance ? { acceptanceMode: 'agent_quality_review' } : {}) })}\n`,
       );
     } catch (error) {
       console.error(error instanceof Error ? error.message : String(error));

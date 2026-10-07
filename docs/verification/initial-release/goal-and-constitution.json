@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "taskId": "T151",
-  "status": "prepared_scope_audited_production_on_hold",
-  "generatedAt": "2026-10-07T13:53:08.580230+00:00",
+  "status": "agent_review_accepted_exact_commit_validation_pending",
+  "generatedAt": "2026-10-07T15:55:01.385952+00:00",
   "goal": "ABCの過去問からARC・AGC・CF Div. 1・UCUPへ進むための典型知識・適用条件・不変量・正当性・計算量と手法選択を学ぶ、一人用の教科書。",
   "scope": {
     "firstContest": "abc212",
@@ -19,8 +19,8 @@
   "constitution": {
     "version": "3.0.0",
     "path": ".specify/memory/constitution.md",
-    "sha256": "c0dd602490a0812d8f83bd0fa1a1f81e7e435cf1b558e0488e9ef24aa1f51749",
-    "reviewPolicy": "self / third_party / explicit solo_maintainer; never reinterpret agent_quality_review as human approval",
+    "sha256": "828171b531ac70bf5c53eab6fb7cd82ea9d15372b15ab7f8c365b4b7dad2a6e4",
+    "reviewPolicy": "self / third_party / solo_maintainer; Issue #53 fixed initial release accepts agent_quality_review without human approval",
     "principleEvidence": {
       "I": "242 Outcomes uniquely owned; 232 Unit / 868 Problem packet; current-subject coverage verification",
       "II": "Official revisions and allowed-use claims; accepted source lineage and 20 independent mathematical regressions",
@@ -32,7 +32,8 @@
       "requiredMode": "self",
       "riskReasons": ["original_proof", "major_classification_change"],
       "highRiskSelfReviewReason": "solo_maintainer",
-      "ownerInstruction": "2026-10-07: high-risk self-reviewで進めてください"
+      "acceptanceMode": "agent_quality_review",
+      "ownerInstruction": "人間の了承は不要です。"
     }
   },
   "privacyBoundary": {
@@ -347,10 +348,15 @@
     },
     {
       "requirementId": "FR-026",
-      "status": "pending_policy_selected_human_review",
-      "evidencePaths": ["docs/reviews/human-content/initial-release/inventory.json"],
-      "limitation": "Owner explicitly selected high-risk self-review. Agent quality lineage remains distinct from human decisions and reviewer-run check evidence.",
-      "requirementText": "mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。"
+      "status": "owner_authorized_initial_agent_review_and_all_checks_passed",
+      "evidencePaths": [
+        "docs/reviews/agent-content/initial-release/release-review.json",
+        "docs/verification/initial-release/matrix.json",
+        ".specify/memory/constitution.md"
+      ],
+      "limitation": "Fixed ABC212–466 initial-release owner exception. Human approval is not required or claimed; later updates retain the existing review policy.",
+      "requirementText": "mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。",
+      "ownerDisposition": "2026-10-07: 人間の了承は不要です。 Agent item decisions/bases, all Outcomes, source lineage, mathematics and successful current-subject checks are required."
     },
     {
       "requirementId": "FR-027",
@@ -382,7 +388,7 @@
       ],
       "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
       "requirementText": "公開版は壊れた内部参照、未説明の検証失敗、未定義の必須用語、必要な代替テキストの欠落、再現不能な例を含んではならない。",
-      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with production human review pending."
+      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with current-subject initial agent quality review."
     },
     {
       "requirementId": "FR-030",
@@ -475,7 +481,7 @@
       ],
       "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
       "requirementText": "新しい専門用語は初出で定義し、図、表、色、配置に依存する必須情報には同等のテキスト説明を付けなければならない。",
-      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with production human review pending."
+      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with current-subject initial agent quality review."
     },
     {
       "requirementId": "CQ-005",
@@ -591,13 +597,15 @@
     },
     {
       "requirementId": "SC-008",
-      "status": "automated_checks_passed_production_review_pending",
+      "status": "owner_authorized_initial_agent_review_and_all_checks_passed",
       "evidencePaths": [
+        "docs/reviews/agent-content/initial-release/release-review.json",
         "docs/verification/initial-release/matrix.json",
-        "docs/reviews/human-content/initial-release/inventory.json"
+        ".specify/memory/constitution.md"
       ],
-      "limitation": "No automated failure is accepted. This criterion is not declared production-complete before genuine human approval.",
-      "requirementText": "各公開版で、壊れた内部参照、未解決の検証失敗、未確認の技術的主張、含まれる例の再現不能、検証されていない解答資料がいずれも0件である。"
+      "limitation": "Fixed ABC212–466 initial-release owner exception. Human approval is not required or claimed; later updates retain the existing review policy.",
+      "requirementText": "各公開版で、壊れた内部参照、未解決の検証失敗、未確認の技術的主張、含まれる例の再現不能、検証されていない解答資料がいずれも0件である。",
+      "ownerDisposition": "2026-10-07: 人間の了承は不要です。 Agent item decisions/bases, all Outcomes, source lineage, mathematics and successful current-subject checks are required."
     },
     {
       "requirementId": "SC-009",
@@ -727,87 +735,88 @@
       "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
     }
   ],
-  "productionReleaseApproved": false,
-  "blockingGates": [
-    "Human review with current-subject checks, item decisions and basis",
-    "Create Free static-host project and confirm persistent HTTPS origin/credentials in #54"
-  ],
+  "blockingGates": ["Exact-commit normal release validation"],
   "exactCommitEvidence": "Read-only verify:release output binds the final prepared Git SHA in CI; in-tree records never embed their own future commit hash.",
   "automatedAuditSubject": {
-    "digest": "50e934e1bfd52101fb7256cc38725f30e736274370178ee3558f7254f7deefbc",
-    "fileCount": 9497
+    "digest": "6e9f4142906be3a0be4153801dee5c58d8cdfa1703445ec6bcfb94bbe2d1e241",
+    "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
   "contentFileInventoryDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
   "automatedEvidence": {
     "matrixPath": "docs/verification/initial-release/matrix.json",
-    "matrixEvidenceDigest": "8553897c9430612089801efd1f5574be6d8ba1fc463452d337782c01a294be82",
+    "matrixEvidenceDigest": "069f2ffbfbb3e3a20b0c094ba4d8253b5d36f3fe74229b543c8367ed6b049b85",
     "reports": [
       {
         "taskId": "T133",
         "path": "docs/verification/initial-release/schema-contracts.json",
-        "digest": "614894495046e5f9224bb26da989b6ab70869ca6166145a316a2b3c7d2be53de"
+        "digest": "1cbcd325ea6695433377742088f948688ea8cde84a9500c3102b216a47221720"
       },
       {
         "taskId": "T134",
         "path": "docs/verification/initial-release/corpus-completeness.json",
-        "digest": "8fa4d67998b12a0818239cdc3d8bd381b0c8a1b58e20e12cfdd9aa693d468ff7"
+        "digest": "d0a1fb345e0329016258cbc74e47034c441dfaeb21193c72b507528eb3d3e581"
       },
       {
         "taskId": "T135",
         "path": "docs/verification/initial-release/taxonomy.json",
-        "digest": "1a0ec147afe5485f3b003e739b87845513351908094663b965c0cfbd9ec11de4"
+        "digest": "055a72531c3b4d9d9302fc2fce719549941fe6cae5f10d417a936acd437713a6"
       },
       {
         "taskId": "T136",
         "path": "docs/verification/initial-release/sources-and-claims.json",
-        "digest": "8d7df2b150bfeff505be0d30761640ef810d4d741a48a2fb3fc2c384729de0ad"
+        "digest": "e91f377c0d0f6956c5b1958f6bb1495936396ebae6d8731f96bd6d1799cd7620"
       },
       {
         "taskId": "T137",
         "path": "docs/verification/initial-release/examples-and-answers.json",
-        "digest": "61a93d538f1e5c5f6f8886ded3f3a6bcdc1ea4f9d5afff5d0669563e4db81253"
+        "digest": "cfead65ed00b51299db30ed687c37a29f5848c3417162bf2cd4c18958d51cb34"
       },
       {
         "taskId": "T138",
         "path": "docs/verification/initial-release/accessibility-and-links.json",
-        "digest": "c7f56570a5f7520249122152194b9cfd44eca51efe50069b9bf8d2d6ca3c783c"
+        "digest": "1be19afd1b7250be2d1ec802a6576a507806e8469a4a05c7c1cdadececc8ea8b"
       },
       {
         "taskId": "T139",
         "path": "docs/verification/initial-release/learning-records.json",
-        "digest": "7355cd835e77ef93837db6dc09a1dfe9c22ec764a7c9d0659c4eabc97efc29c3"
+        "digest": "c50a88f95e91f02064a1d38fc12b0b34b67f8f62cfafc371b1a23b15a5c56159"
       },
       {
         "taskId": "T140",
         "path": "docs/verification/initial-release/public-projections.json",
-        "digest": "8094400b032f61a58250ac0547b30989d5587a1babdf2f04dca70e0500f6a6c9"
+        "digest": "37173e8aa2c078dcf4d2307197cdcc73ba6e013aa56d6fc017063e650b3f477d"
       },
       {
         "taskId": "T141",
         "path": "docs/verification/initial-release/performance.json",
-        "digest": "9bd431a9fddf4dcce265e9438d832a162f26a103299e49378a8cfdb291991ff9"
+        "digest": "33a240cfc30f51c8b991252742103f138f0129ba4accdb48e6ace0ea76e6e1a7"
       },
       {
         "taskId": "T142",
         "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
-        "digest": "642aa3a6745802d5893d02db70f4079008bb580c85c4af6ecff58aaef5ffa5de"
+        "digest": "fedb0235d1fb7b1df64685df869d82dd91d6002f7e17c26b8fdb5f661d620209"
       }
     ],
     "testResults": {
       "path": "docs/verification/initial-release/test-results.json",
-      "digest": "7047eb17c116cbcfbbbbec96f88e195af07cc46dc9d550da206680dda4444c75"
+      "digest": "a813608d1bcd650835ed66325f29058e6a8f504d25ed1a45af56fd5c77acc158"
     },
     "browserResults": {
       "path": "docs/verification/initial-release/browser-results.json",
-      "digest": "b58b75a4a856247897ff57b48257fc0fb164305f07002a15a2f75e7e89c121d1"
+      "digest": "656594d380fb1bd0f7d401f20878cd9ab6395ad7d93e78193b2d845bdf739dad"
     }
   },
-  "validatedPreparationSnapshot": {
-    "commit": "3d19b1a1ced667474f374ce8b9145a75f8f25bfd",
-    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
-    "aggregatePassed": true,
-    "productionReleaseApproved": false
-  },
-  "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference."
+  "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference.",
+  "releaseGatePassed": false,
+  "productionPublished": false,
+  "humanApprovalClaimed": false,
+  "deploymentPrerequisites": {
+    "issue": 54,
+    "steps": [
+      "Configure Free Cloudflare project / persistent HTTPS origin / credentials",
+      "Merge to protected main after all required CI succeeds",
+      "Deploy and verify that exact merged SHA"
+    ]
+  }
 }

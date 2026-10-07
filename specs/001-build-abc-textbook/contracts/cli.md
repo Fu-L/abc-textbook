@@ -178,3 +178,7 @@ npm run verify:merge -- --evidence PATH
 - `catalog:build`は確定Releaseまたはfixtureから派生indexを指定outputへ生成し、公開正本を変更しない。
 - 両CLIは任意のmanifestを引数で信頼しない。Catalogのrelease recordから`docs/work-manifests/`と`staging/updates/`の正規recordを一意に解決し、CIが提供する保護済みremote-tracking base ref（`GITHUB_BASE_REF`、ローカル既定は`origin/main`）からwork manifest、Catalog、content treeの基準を読み、`src/content/`の実ファイルinventoryをmerge前に再構築する。base refはCLI引数から選択できず、任意SHAの指定、`HEAD`自身、baseからの更新を含む未固定manifest、base/current Catalogで再現できないoperationやCorrection Impactは拒否する。
 - `verify:merge`はWork Manifest、logical subject、review modeに応じた同一reviewerのcheck実行、必要時のみauthor外review、Constitution Check、finding 0を検証する。
+
+### #53 initial-release owner exception
+
+`release:bootstrap -- --first 212 --last 466 --mode inputs|evidence --review-policy solo-maintainer --acceptance agent-quality-review`は明示owner例外を記録した初版だけの入口である。evidence modeは全current-subject監査成功後、agent品質受入を生成しbootstrapをELIGIBLE_FOR_BATCHとする。通常の`verify:release -- --commit FULL_SHA`がそのagent refを実byte・全item・全Outcome・risk policy・全checkと照合する。人間承認は要求・生成しない。後続更新は従来の人間review契約を使う。

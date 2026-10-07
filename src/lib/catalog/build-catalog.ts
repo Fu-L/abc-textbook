@@ -2,6 +2,7 @@ import {
   CatalogContract,
   parseAtCoderContestResourceUrl,
   SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES,
+  type SeedAgentQualityReviewReference,
 } from '../domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../domain/canonical-json.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
@@ -38,6 +39,7 @@ interface Entity {
 }
 
 export interface TrustedCatalogReleaseEvidenceInventory {
+  readonly agentQualityReview?: SeedAgentQualityReviewReference | undefined;
   readonly subjectDigest: string;
   readonly checks: readonly {
     readonly checkId: string;
@@ -70,6 +72,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 export interface CatalogLike {
   readonly schemaVersion: '3.0.0';
   readonly release: {
+    readonly agentQualityReviewEvidenceRef?: SeedAgentQualityReviewReference | undefined;
     readonly publicationStatus?: 'prepared' | 'published' | undefined;
     readonly version: string;
     readonly releaseKind: 'initial' | 'incremental';
@@ -905,6 +908,21 @@ export const validateCatalogSemantics = (
   const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
   const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs;
   const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
+  const agentReview = catalog.release.agentQualityReviewEvidenceRef;
+  const trustedAgentReview = trustedEvidence?.agentQualityReview;
+  const agentReviewComplete =
+    agentReview !== undefined &&
+    trustedAgentReview !== undefined &&
+    canonicalDigest(agentReview) === canonicalDigest(trustedAgentReview) &&
+    agentReview.subjectDigest === catalog.release.contentFileInventoryDigest &&
+    catalog.release.releaseKind === 'initial' &&
+    catalog.release.firstContestId === 'abc212' &&
+    catalog.release.lastContestId === 'abc466' &&
+    catalog.release.problemCount === 868 &&
+    catalog.release.cutoffAt === '2026-07-12T00:00:00+09:00' &&
+    catalog.release.updateIds.length === 1 &&
+    catalog.release.updateIds[0] === 'update-bootstrap-full-corpus' &&
+    reviewEvidenceRefs.length === 0;
   const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
     const sortedLeft = [...left].sort();
     const sortedRight = [...right].sort();
@@ -946,7 +964,8 @@ export const validateCatalogSemantics = (
     new Set(releaseCheckIds).size === releaseCheckIds.length &&
     new Set(releaseResultDigests).size === releaseResultDigests.length &&
     sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
-    reviewEvidenceRefs.length > 0 &&
+    (reviewEvidenceRefs.length > 0 || agentReviewComplete) &&
+    (agentReview === undefined ? trustedAgentReview === undefined : agentReviewComplete) &&
     new Set(reviewEvidenceIds).size === reviewEvidenceIds.length &&
     reviewEvidenceRefs.every(
       (review) =>
@@ -993,7 +1012,7 @@ export const validateCatalogSemantics = (
     diagnostics.push({
       code: 'RELEASE_EVIDENCE_INCOMPLETE',
       message:
-        'Every release check and human review must match the trusted current subject before publication.',
+        'Every release check and policy-selected review must match the trusted current subject before publication.',
     });
   }
   for (const inventory of catalog.techniqueInventory) {

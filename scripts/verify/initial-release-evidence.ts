@@ -58,7 +58,8 @@ export const auditInputSubject = async (repositoryRoot = process.cwd()) => {
         // Derived review packets bind this audit's result and are not audit inputs.
         if (
           !relative.startsWith('docs/reviews/human-content/initial-release/') &&
-          !relative.startsWith('docs/reviews/human-content/releases/')
+          !relative.startsWith('docs/reviews/human-content/releases/') &&
+          !relative.startsWith('docs/reviews/agent-content/initial-release/')
         )
           files.push(relative);
       }

@@ -29,6 +29,7 @@ const isWithin = (root: string, candidate: string): boolean => {
 export const publicEvidenceRoots = [
   'docs/verification',
   'docs/reviews/human-content',
+  'docs/reviews/agent-content/initial-release',
   // Keep the path used by the phase-two fixtures while the review tree migrates to its final name.
   'docs/judgments',
 ] as const;

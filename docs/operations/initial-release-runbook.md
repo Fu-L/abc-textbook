@@ -10,12 +10,12 @@ Node 24.18.0 / npm 11.16.0とlockfileの依存を使う。
 
 ```sh
 npm ci
-npm run release:bootstrap -- --first 212 --last 466 --mode inputs --review-policy solo-maintainer
+npm run release:bootstrap -- --first 212 --last 466 --mode inputs --review-policy solo-maintainer --acceptance agent-quality-review
 npm run build
 node --import tsx scripts/corpus/verify-full-projections.ts --write-evidence
 npm run verify:initial-release -- --write
 npm run verify:initial-release -- --check
-npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-policy solo-maintainer
+npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-policy solo-maintainer --acceptance agent-quality-review
 ```
 
 bootstrapはproduction用のcanonical入力を読む。previewは明示した
@@ -34,41 +34,32 @@ npm run verify:release -- --commit HEAD --preparation
 
 ## 現行subjectのレビュー
 
-`docs/reviews/human-content/initial-release/inventory.json`には232 Unitと868
-Problemの全本文、全Outcome、必要check、content file
-inventoryのdigest、既存agent品質受入のlineageがある。
-`docs/reviews/human-content/releases/merge-review.json`は未承認packetである。未承認状態のproduction
-`verify:release`は終了2となり、`Production review` checkは通らない。
+2026-10-07、ownerはhigh-risk
+self-reviewを指定し、その後「人間の了承は不要です。」と明示した。この固定868問の初版は、Constitutionに記録したowner例外に従い`agent_quality_review`と全適用自動検査で受け入れる。manifestの`self`、`solo_maintainer`、original
+proofとmajor classificationの両risk reasonは保持する。
 
-2026-10-07のowner指示により、この初版は`self`と`solo_maintainer`を選択する。original proofとmajor
-classificationのrisk reasonを残し、bootstrapの`--mode inputs`と`--mode evidence`の両方へ
-`--review-policy solo-maintainer`を付ける。変更したmanifestで検査を再実行する。これはConstitution
-3.0.0のhigh-risk
-self-reviewであり、リスク理由の除去やagent品質受入から人間approvalへの読み替えではない。
+`--mode evidence --acceptance agent-quality-review`は全監査のcurrent-subject一致をread-onlyで確認した後、232
+itemのagent decision/basisと242
+Outcome被覆を`docs/reviews/agent-content/initial-release/release-review.json`へ保存する。本文品質受入lineage、公式Source
+Revision、独立数学回帰、check生結果、憲章とdependent templatesのdigestを結び付ける。人間review
+refsは空で、旧人間review packetはowner例外によりnot
+applicableと記録する。人間がcheckを実行した、itemを承認したという証跡は作らない。
 
-reviewerは実際に適用checkを実行し、各inventory itemへreview basisと明示approval、Outcome
-coverage確認を記録する。正本schemaは
-`human-content-review-evidence.schema.json`と`merge-review.schema.json`。checkの生結果、current-subjectの全content
-file、憲章とdependent templatesをmerge
-evidenceへ結び付ける。完成済みの人間証跡だけを次でimportする。入力JSONやperson
-IDをagentが捏造してはならない。
-
-```sh
-npm run release:accept-review -- --human /tmp/signed-human-review.json --merge /tmp/signed-merge-review.json
-```
-
-human evidenceの保存先は `docs/reviews/human-content/releases/human-review.json`。署名済みmerge
-evidenceも同pathとhumanの実byte
-digestを指す必要がある。importは証跡bytesをそのまま保存する。commit後に通常のexact-commit検査を実行する。
+commit後、通常のexact-commit検査を実行する。
 
 ```sh
 npm run verify:release -- --commit HEAD
 ```
 
+公開検証は、全checkの成功、232 itemの根拠付きagent
+decision、全Outcome・全本文のcoverage、受理済みcontentとの実差分0件、全リスク理由、現行subjectに結び付いた証跡を要求する。欠落・失敗・stale
+evidenceは`Production review`を通らない。初版以外の更新は従来のFR-026 self/third-party
+policyを維持し、今回の例外を使えない。
+
 ## protected main
 
 build、link、schema、content
-completenessは二環境の`Verify`と`Initial corpus audit`が検査し、実差分・公開scopeは`Release validation`、人間reviewは`Production review`が検査する。設定payloadは[protected-main.json](protected-main.json)。strict
+completenessは二環境の`Verify`と`Initial corpus audit`が検査し、実差分・公開scopeは`Release validation`、policyに従ったreviewは`Production review`が検査する。設定payloadは[protected-main.json](protected-main.json)。strict
 checksとadminを含む保護を要求する。
 
 2026-10-07、ownerがrepositoryをpublicに変更した後、上記payloadをAPIで設定した。GETで5つのrequired

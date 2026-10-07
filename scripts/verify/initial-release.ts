@@ -157,15 +157,28 @@ try {
             const report = JSON.parse(failure.stdout) as {
               testResults?: {
                 name: string;
+                status: string;
+                message?: string;
                 assertionResults: { fullName: string; status: string; failureMessages: string[] }[];
               }[];
             };
             failedTests = JSON.stringify(
-              report.testResults?.flatMap((file) =>
-                file.assertionResults
+              report.testResults?.flatMap<unknown>((file) => {
+                const assertions = file.assertionResults
                   .filter((test) => test.status === 'failed')
-                  .map((test) => ({ file: file.name, ...test })),
-              ),
+                  .map((test) => ({ file: file.name, ...test }));
+                return assertions.length || file.status !== 'failed'
+                  ? assertions
+                  : [
+                      {
+                        file: file.name,
+                        suiteFailure: true,
+                        message:
+                          file.message ??
+                          'Suite failed before individual assertions; check setup hooks.',
+                      },
+                    ];
+              }),
             );
           } catch {
             // Keep native output when the failed command did not finish its JSON report.

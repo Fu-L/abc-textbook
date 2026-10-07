@@ -3,7 +3,7 @@
   "taskId": "T160",
   "status": "passed",
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "implementationDigest": "c3675887e3ed492c36c371df73364a1a0d11937f0ad89a7e59d2b0140ecb0751",
+  "implementationDigest": "bc8ed17ec6025511ceeba8a846833bb8190724aa81f82d56f4789fa15e98a956",
   "fullProjectionDigest": "02efb8193d075893d7a617ea52213421fc58e0a04b6743a35f9817ad96e600fb",
   "publicationStatus": "prepared",
   "productionReleaseApproved": false,
