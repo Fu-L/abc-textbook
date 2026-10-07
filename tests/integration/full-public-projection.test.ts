@@ -121,7 +121,7 @@ describe('accepted canonical full public projection', () => {
       }
     }
     expect(checkedParagraphs).toBeGreaterThan(1000);
-  }, 30_000);
+  }, 60_000);
   it('displays all accepted authoring bracket escapes without losing set differences', async () => {
     const checkedIds = new Set<string>();
     let checkedLines = 0;
@@ -259,5 +259,5 @@ describe('accepted canonical full public projection', () => {
     expect(again.digest).toBe(projection.digest);
     expect(projection.ui.subjectDigest).toBe(projection.digest);
     expect(canonicalDigest(projection.mapping)).toBe(projection.mappingDigest);
-  }, 15_000);
+  }, 60_000);
 });

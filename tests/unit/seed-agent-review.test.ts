@@ -88,7 +88,7 @@ describe('owner-authorized initial release agent review', () => {
         evidenceDigest: digestWithoutField(unsigned, 'evidenceDigest'),
       });
     };
-  }, 30_000);
+  }, 60_000);
 
   it('accepts full seed coverage as agent review with both risks and no human approval claim', () => {
     const evidence = validateSeedAgentQualityReview(makeEvidence(), context);

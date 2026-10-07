@@ -4,24 +4,24 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "afc68a921c6d6b3cc7f371bfaa0d987b8d721b2e3276534aff45da8c38dc4771",
+    "digest": "7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e",
     "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-07T16:53:56.924Z",
+  "generatedAt": "2026-10-07T17:20:21.432Z",
   "commands": [
     {
       "command": "npm run build",
       "exitCode": 0,
-      "durationMs": 18788.648000000016,
-      "outputDigest": "6bd8e96312cd014585c56fcee5eb491acc7a9e6d105e01c5d4c1177ab231933d",
-      "outputBytes": 136257,
-      "observed": "index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-ancestor-lca/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-balanced-separator/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-distance-residue/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-euler-flattening/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-metric-diameter/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-model-structure/index.html (+0ms) \n01:51:03   ├─ /tags/tag-tree-precedence-contraction/index.html (+0ms) \n01:51:03   ├─ /tags/tag-trie-prefix/index.html (+0ms) \n01:51:03   ├─ /tags/tag-two-pointers-window/index.html (+0ms) \n01:51:03   ├─ /tags/tag-two-sat/index.html (+0ms) \n01:51:03   ├─ /tags/tag-two-variable-convex-lattice-optimization/index.html (+0ms) \n01:51:03   ├─ /tags/tag-value-bucket-aggregation/index.html (+0ms) \n01:51:03   ├─ /tags/tag-value-range-dp/index.html (+0ms) \n01:51:03   ├─ /tags/tag-virtual-tree/index.html (+0ms) \n01:51:03   ├─ /tags/tag-weighted-bipartite-matching/index.html (+0ms) \n01:51:03   ├─ /tags/tag-witness-impact-localization/index.html (+0ms) \n01:51:03   ├─ /tags/tag-xor-linear-basis/index.html (+0ms) \n01:51:03   ├─ /tags/tag-xor-threshold-matching/index.html (+0ms) \n01:51:03   ├─ /tags/tag-z-algorithm-prefix-matching/index.html (+0ms) \n01:51:03   ├─ /tags/index.html (+1ms) \n01:51:03   ├─ /updates/index.html (+1ms) \n01:51:03   ├─ /index.html (+1ms) \n01:51:03 ✓ Completed in 7.33s.\n\n01:51:03 [build] ✓ Completed in 8.86s.\n01:51:03 [starlight:pagefind] Building search index with Pagefind...\n01:51:04 [starlight:pagefind] Found 1576 HTML files.\n01:51:06 [starlight:pagefind] Finished building search index in 2.38s.\n01:51:06 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n01:51:06 [build] 1576 page(s) built in 12.51s\n01:51:06 [build] Complete!\nEntry docs → 404 was not found."
+      "durationMs": 18614.65525000001,
+      "outputDigest": "4e649f4b373cf50b5de187d0f256b40a345925fa0c35b7d388357e85cfd183c6",
+      "outputBytes": 136256,
+      "observed": "index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-ancestor-lca/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-balanced-separator/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-distance-residue/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-euler-flattening/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-metric-diameter/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-model-structure/index.html (+0ms) \n02:17:27   ├─ /tags/tag-tree-precedence-contraction/index.html (+0ms) \n02:17:27   ├─ /tags/tag-trie-prefix/index.html (+1ms) \n02:17:27   ├─ /tags/tag-two-pointers-window/index.html (+0ms) \n02:17:27   ├─ /tags/tag-two-sat/index.html (+1ms) \n02:17:27   ├─ /tags/tag-two-variable-convex-lattice-optimization/index.html (+1ms) \n02:17:27   ├─ /tags/tag-value-bucket-aggregation/index.html (+1ms) \n02:17:27   ├─ /tags/tag-value-range-dp/index.html (+1ms) \n02:17:27   ├─ /tags/tag-virtual-tree/index.html (+1ms) \n02:17:27   ├─ /tags/tag-weighted-bipartite-matching/index.html (+1ms) \n02:17:27   ├─ /tags/tag-witness-impact-localization/index.html (+1ms) \n02:17:27   ├─ /tags/tag-xor-linear-basis/index.html (+0ms) \n02:17:27   ├─ /tags/tag-xor-threshold-matching/index.html (+0ms) \n02:17:27   ├─ /tags/tag-z-algorithm-prefix-matching/index.html (+0ms) \n02:17:27   ├─ /tags/index.html (+1ms) \n02:17:27   ├─ /updates/index.html (+1ms) \n02:17:27   ├─ /index.html (+1ms) \n02:17:27 ✓ Completed in 7.32s.\n\n02:17:27 [build] ✓ Completed in 8.86s.\n02:17:27 [starlight:pagefind] Building search index with Pagefind...\n02:17:27 [starlight:pagefind] Found 1576 HTML files.\n02:17:29 [starlight:pagefind] Finished building search index in 2.30s.\n02:17:29 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n02:17:29 [build] 1576 page(s) built in 12.40s\n02:17:29 [build] Complete!\nEntry docs → 404 was not found."
     },
     {
       "command": "npm run corpus:verify-full-projections",
       "exitCode": 0,
-      "durationMs": 5082.1691669999855,
+      "durationMs": 5036.170167000004,
       "outputDigest": "b4da39f70bd27575f805494e9bb581d6737f7ac4251a343d3e4e70a659ee89b8",
       "outputBytes": 399,
       "observed": "> abc-textbook@0.1.0 corpus:verify-full-projections\n> tsx scripts/corpus/verify-full-projections.ts --check\n\n{\"status\":\"passed\",\"fullProjectionDigest\":\"02efb8193d075893d7a617ea52213421fc58e0a04b6743a35f9817ad96e600fb\",\"contests\":254,\"officialGaps\":1,\"problems\":868,\"tags\":213,\"learningUnits\":232,\"releases\":0,\"routes\":1576,\"searchDocuments\":1567,\"correctionImpacts\":12,\"retiredOptionalTargets\":72}"
@@ -29,7 +29,7 @@
     {
       "command": "npm run link:check:built",
       "exitCode": 0,
-      "durationMs": 4424.292750000022,
+      "durationMs": 4349.2407079999975,
       "outputDigest": "3a34d95f5f6636a08e73385d6a66f380ab9bfc083341177548e2c009494af597",
       "outputBytes": 115,
       "observed": "> abc-textbook@0.1.0 link:check:built\n> tsx scripts/validate/links.ts\n\nChecked 4648 links with no broken targets."
@@ -37,10 +37,10 @@
     {
       "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
       "exitCode": 0,
-      "durationMs": 83074.47750000001,
-      "outputDigest": "9577c7644552ce56fe095352e7f15fc7d7975dc61348e8152df94dde057d3d8b",
-      "outputBytes": 278383,
-      "observed": "\"duration\": 1599,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-07T16:52:37.121Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 8,\n                  \"parallelIndex\": 0,\n                  \"status\": \"passed\",\n                  \"duration\": 326,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-07T16:52:37.154Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-07T16:51:15.936Z\",\n    \"duration\": 82854.381,\n    \"expected\": 225,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
+      "durationMs": 82896.35212500003,
+      "outputDigest": "4be8ff16a61316e8e942c0a6bd01d7c92c5bc262cf427691be86ee76172734f0",
+      "outputBytes": 278407,
+      "observed": "\"duration\": 1643,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-07T17:18:59.972Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 7,\n                  \"parallelIndex\": 2,\n                  \"status\": \"passed\",\n                  \"duration\": 334,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-07T17:18:59.976Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-07T17:17:39.012Z\",\n    \"duration\": 82670.76999999999,\n    \"expected\": 225,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
     }
   ],
   "checks": {
@@ -56,5 +56,5 @@
     "preparedProjection": true,
     "productionReleaseApproved": false
   },
-  "evidenceDigest": "3cfd97b6cb8798d5771f777f42356f6a164527f361327b1f754ccc624c2c846e"
+  "evidenceDigest": "d425d8d4e86e44b8765124b7969ce63f543122ba4f41557e75b2b658b3dc229a"
 }
