@@ -52,6 +52,14 @@ import {
   parseTrustedCatalog,
   TrustedCatalogDiffError,
 } from './trusted-diff.js';
+import { loadFullPublicProjection } from './full-public-projection.js';
+import {
+  assertSeedRelease,
+  createSeedReleaseManifest,
+  INITIAL_RELEASE_MANIFEST,
+  INITIAL_BOOTSTRAP_ID,
+} from './seed-release.js';
+import { canonicalJson } from '../domain/canonical-json.js';
 
 const text = z.string().trim().min(1);
 
@@ -126,6 +134,8 @@ const execFileAsync = promisify(execFile);
 export interface CatalogEvidenceTrustOptions {
   /** The public catalog file whose current bytes are being validated. */
   readonly catalogPath: string;
+  /** Preparation inspection only; never supplied by production validation. */
+  readonly allowHeldBootstrap?: boolean;
 }
 
 interface ContentFileInventoryEntry {
@@ -374,28 +384,33 @@ const calculateBaseContentFileInventory = async (
     .split('\n')
     .map((value) => value.trim())
     .filter(Boolean);
-  return Promise.all(
-    relativePaths.map(async (relativePath) => {
-      let raw: string | Buffer;
-      try {
-        raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
-      } catch {
-        throw new CatalogEvidenceInventoryError(
-          'TRUSTED_BASE_CONTENT_UNREADABLE',
-          `Cannot read ${relativePath} from the protected base commit.`,
-        );
-      }
-      const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
-      return {
-        path: relativePath,
-        sha256: createHash('sha256').update(bytes).digest('hex'),
-        byteLength: bytes.byteLength,
-      };
-    }),
-  );
+  const files: ContentFileInventoryEntry[] = [];
+  for (let offset = 0; offset < relativePaths.length; offset += 32)
+    files.push(
+      ...(await Promise.all(
+        relativePaths.slice(offset, offset + 32).map(async (relativePath) => {
+          let raw: string | Buffer;
+          try {
+            raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
+          } catch {
+            throw new CatalogEvidenceInventoryError(
+              'TRUSTED_BASE_CONTENT_UNREADABLE',
+              `Cannot read ${relativePath} from the protected base commit.`,
+            );
+          }
+          const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
+          return {
+            path: relativePath,
+            sha256: createHash('sha256').update(bytes).digest('hex'),
+            byteLength: bytes.byteLength,
+          };
+        }),
+      )),
+    );
+  return files;
 };
 
-const calculateActualContentFileInventory = async (
+export const calculateActualContentFileInventory = async (
   repositoryRoot: string,
 ): Promise<ContentFileInventoryEntry[]> =>
   Promise.all(
@@ -486,11 +501,50 @@ export const loadCatalogEvidenceCanonicalSources = async (
   if (!manifestMatch) {
     throw new CatalogEvidenceInventoryError('CANONICAL_WORK_MANIFEST_NOT_UNIQUE', 'No manifest.');
   }
-  const committedScope = await readCommittedManifestScope(
-    manifestMatch.path,
-    repositoryRoot,
-    baseCommit,
-  );
+  const isSeedBootstrap =
+    !baseCatalog &&
+    release.releaseKind === 'initial' &&
+    release.updateIds.length === 1 &&
+    release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
+  let initialBaseCatalog;
+  let initialProjectionDigest: string | undefined;
+  if (isSeedBootstrap) {
+    assertSeedRelease(currentCatalog);
+    await runGit(['diff', '--exit-code', baseCommit, 'HEAD', '--', 'src/content'], repositoryRoot);
+    const projection = await loadFullPublicProjection({
+      repositoryRoot,
+      usePreparedRelease: false,
+    });
+    initialBaseCatalog = projection.catalog;
+    initialProjectionDigest = projection.digest;
+    for (const key of [
+      'contests',
+      'contestGaps',
+      'contestSlots',
+      'problems',
+      'techniqueInventory',
+      'tags',
+      'learningOutcomes',
+      'learningUnits',
+      'placements',
+      'authoringUnits',
+      'sources',
+      'correctionImpacts',
+    ] as const)
+      if (canonicalJson(currentCatalog[key]) !== canonicalJson(projection.catalog[key]))
+        throw new CatalogEvidenceInventoryError('INITIAL_CANONICAL_DRIFT', key);
+    if (path.relative(repositoryRoot, manifestMatch.path) !== INITIAL_RELEASE_MANIFEST)
+      throw new CatalogEvidenceInventoryError('INITIAL_MANIFEST_PATH', manifestMatch.path);
+  }
+  const committedScope = isSeedBootstrap
+    ? ContentWorkManifestSchema.parse(
+        createSeedReleaseManifest(
+          currentCatalog,
+          manifestMatch.value.createdAt,
+          manifestMatch.value.reviewPolicy.highRiskSelfReviewReason === 'solo_maintainer',
+        ),
+      )
+    : await readCommittedManifestScope(manifestMatch.path, repositoryRoot, baseCommit);
   try {
     validateContentWorkManifest(manifestMatch.value, committedScope);
   } catch (error) {
@@ -518,7 +572,11 @@ export const loadCatalogEvidenceCanonicalSources = async (
   }
   if (
     updates.size !== release.updateIds.length ||
-    release.updateIds.some((id) => updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH')
+    release.updateIds.some(
+      (id) =>
+        updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH' &&
+        !(isSeedBootstrap && options.allowHeldBootstrap && updates.get(id)?.state === 'ON_HOLD'),
+    )
   ) {
     throw new CatalogEvidenceInventoryError(
       'CANONICAL_PUBLICATION_UPDATE_MISSING',
@@ -532,6 +590,25 @@ export const loadCatalogEvidenceCanonicalSources = async (
     }
     return update;
   });
+  if (isSeedBootstrap) {
+    const bootstrap = orderedUpdates[0];
+    if (
+      bootstrap?.kind !== 'bootstrap' ||
+      bootstrap.fixtureMode ||
+      bootstrap.operations.length ||
+      bootstrap.sourceSetFingerprint !== initialProjectionDigest ||
+      canonicalJson(
+        bootstrap.authoringResults.map((result) => [result.problemId, result.draftPath]).sort(),
+      ) !==
+        canonicalJson(
+          currentCatalog.authoringUnits.map((unit) => [unit.problemId, unit.docPath]).sort(),
+        )
+    )
+      throw new CatalogEvidenceInventoryError(
+        'INITIAL_BOOTSTRAP_BINDING',
+        'Bootstrap must bind the unchanged accepted seed and every authored document.',
+      );
+  }
   const expectedBaseReleaseVersion =
     release.releaseKind === 'initial' ? null : (baseCatalog?.release.version ?? null);
   if (orderedUpdates.some((update) => update.baseReleaseVersion !== expectedBaseReleaseVersion)) {
@@ -552,10 +629,15 @@ export const loadCatalogEvidenceCanonicalSources = async (
   const operationIds = new Set<string>();
   let trustedDiff: ReturnType<typeof buildTrustedPublicationDiff>;
   try {
-    trustedDiff = buildTrustedPublicationDiff(orderedUpdates, baseCatalog, currentCatalog, {
-      baseFiles: baseContentFiles,
-      currentFiles: actualContentFiles,
-    });
+    trustedDiff = buildTrustedPublicationDiff(
+      orderedUpdates,
+      initialBaseCatalog ?? baseCatalog,
+      currentCatalog,
+      {
+        baseFiles: baseContentFiles,
+        currentFiles: actualContentFiles,
+      },
+    );
   } catch (error) {
     if (error instanceof TrustedCatalogDiffError) {
       throw new CatalogEvidenceInventoryError(error.code, error.message);
@@ -577,6 +659,9 @@ export const loadCatalogEvidenceCanonicalSources = async (
         correctionImpacts: trustedUpdate.correctionImpacts,
         baseFiles: baseContentFiles,
         currentFiles: actualContentFiles,
+        ...(isSeedBootstrap
+          ? { initialPublicationProblemIds: currentCatalog.problems.map((problem) => problem.id) }
+          : {}),
       });
     } catch (error) {
       if (error instanceof PublicationUpdateError) {

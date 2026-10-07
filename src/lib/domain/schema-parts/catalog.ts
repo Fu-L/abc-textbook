@@ -1096,7 +1096,7 @@ const ReleaseValidationSummarySchema = strictObject({
   passedCheckCount: z.number().int().nonnegative(),
   blockingFindingCount: z.number().int().nonnegative(),
   evidenceDigests: uniqueArray(Sha256Schema),
-  checks: z.array(ReleaseCheckSchema).min(1),
+  checks: z.array(ReleaseCheckSchema),
 }).superRefine((summary, context) => {
   const checkIds = summary.checks.map(({ checkId }) => checkId);
   const resultDigests = summary.checks.map(({ resultDigest }) => resultDigest);
@@ -1180,6 +1180,12 @@ export const CatalogReleaseSchema = strictObject({
   changelogPath: SafePathSchema,
 })
   .superRefine((release, context) => {
+    if (release.publicationStatus !== 'prepared' && !release.validationSummary.checks.length)
+      context.addIssue({
+        code: 'custom',
+        path: ['validationSummary', 'checks'],
+        message: 'Published releases require validation checks.',
+      });
     if (release.publicationStatus !== 'prepared' && !release.humanContentReviewEvidenceRefs.length)
       context.addIssue({
         code: 'custom',
@@ -1196,7 +1202,12 @@ export const CatalogReleaseSchema = strictObject({
             required: ['publicationStatus'],
           },
         },
-        then: { properties: { humanContentReviewEvidenceRefs: { minItems: 1 } } },
+        then: {
+          properties: {
+            humanContentReviewEvidenceRefs: { minItems: 1 },
+            validationSummary: { properties: { checks: { minItems: 1 } } },
+          },
+        },
       },
     ],
   });

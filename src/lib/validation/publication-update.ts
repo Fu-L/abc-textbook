@@ -45,6 +45,8 @@ export interface TrustedPublicationUpdateContext {
     readonly sha256: string;
     readonly byteLength: number;
   }[];
+  /** Independently verified initial publication scope; file operations remain the real Git diff. */
+  readonly initialPublicationProblemIds?: readonly string[];
 }
 
 const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
@@ -200,7 +202,11 @@ export const validatePublicationUpdate = (
   const trustedAffectedProblemIds = trusted.operationOwnership.flatMap(
     (operation) => operation.affectedProblemIds,
   );
-  if (!sameStringSet([...new Set(trustedAffectedProblemIds)], update.targetProblemIds)) {
+  const expectedTargets =
+    update.kind === 'bootstrap' && trusted.initialPublicationProblemIds
+      ? trusted.initialPublicationProblemIds
+      : [...new Set(trustedAffectedProblemIds)];
+  if (!sameStringSet(expectedTargets, update.targetProblemIds)) {
     throw new PublicationUpdateError(
       'PUBLICATION_UPDATE_OWNERSHIP_INVALID',
       'Trusted operation ownership does not exactly match targetProblemIds.',

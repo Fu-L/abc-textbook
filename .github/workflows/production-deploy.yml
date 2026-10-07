@@ -1,0 +1,93 @@
+name: Production deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Full validated protected-main commit SHA
+        required: true
+      rollback:
+        description: Redeploy a commit from successful production history
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  checks: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      GH_TOKEN: ${{ github.token }}
+      RELEASE_COMMIT: ${{ inputs.commit }}
+      SITE_URL: ${{ vars.SITE_URL }}
+      BASE_PATH: /
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+          fetch-depth: 0
+      - name: Enforce protected-main membership and required successful checks
+        shell: bash
+        run: |
+          test "${#RELEASE_COMMIT}" = 40
+          test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
+          git fetch origin main
+          git merge-base --is-ancestor "$RELEASE_COMMIT" origin/main
+          gh api "repos/$GITHUB_REPOSITORY/branches/main/protection" > /tmp/main-protection.json
+          gh api --paginate "repos/$GITHUB_REPOSITORY/commits/$RELEASE_COMMIT/check-runs?per_page=100" --jq '.check_runs[] | {name, conclusion, status}' > /tmp/check-runs.jsonl
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const protection = JSON.parse(fs.readFileSync('/tmp/main-protection.json'));
+          const required = ['Verify (release baseline)', 'Verify (supported range)', 'Initial corpus audit', 'Release validation', 'Production review'];
+          if (!protection.enforce_admins?.enabled || !protection.required_status_checks?.strict ||
+              required.some(name => !protection.required_status_checks.contexts.includes(name))) throw Error('Protected-main configuration is incomplete');
+          const checks = fs.readFileSync('/tmp/check-runs.jsonl', 'utf8').trim().split('\n').map(JSON.parse);
+          for (const name of required) {
+            const check = checks.find(check => check.name === name);
+            if (check?.status !== 'completed' || check.conclusion !== 'success') throw Error(`Required check not successful: ${name}`);
+          }
+          JS
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - name: Read-only final validation
+        run: GITHUB_SHA="$RELEASE_COMMIT" npm run verify:release -- --commit "$RELEASE_COMMIT"
+      - name: Generate exact-commit deployment input
+        if: ${{ !inputs.rollback }}
+        env:
+          VALIDATION_RESULTS_URL:
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const { release } = JSON.parse(fs.readFileSync('docs/verification/releases/catalog.json'));
+          const metadata = { schemaVersion: '1.0.0', version: release.version, cutoffAt: release.cutoffAt,
+            commit: process.env.RELEASE_COMMIT, validationResultsUrl: process.env.VALIDATION_RESULTS_URL,
+            changeSummary: { updateIds: release.updateIds, addedProblemIds: release.addedProblemIds,
+              changedProblemIds: release.changedProblemIds, withdrawnProblemIds: release.withdrawnProblemIds,
+              taxonomyChanges: release.taxonomyChanges.map(change => change.summary) } };
+          fs.writeFileSync('/tmp/release-metadata.json', JSON.stringify(metadata, null, 2));
+          JS
+      - name: Deploy or restore the known production commit
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          ROLLBACK: ${{ inputs.rollback }}
+        shell: bash
+        run: |
+          if test "$ROLLBACK" = true; then
+            npm run abc:deploy -- --rollback-to "$RELEASE_COMMIT"
+          else
+            npm run abc:deploy -- --metadata /tmp/release-metadata.json
+          fi

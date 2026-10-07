@@ -42,8 +42,10 @@ export const withReleaseCommit = async <Result>(
   let baseCommit: string;
   try {
     baseCommit = await git('rev-parse', '--verify', `refs/remotes/origin/${baseRef}^{commit}`);
-    if (baseCommit === commit && input.mergedMainCommit === commit && baseRef === 'main')
+    if (input.mergedMainCommit === commit && baseRef === 'main') {
+      await git('merge-base', '--is-ancestor', commit, baseCommit);
       baseCommit = await git('rev-parse', `${commit}^1`);
+    }
     if (baseCommit === commit) throw new Error('base is current commit');
     await git('merge-base', '--is-ancestor', baseCommit, commit);
   } catch {

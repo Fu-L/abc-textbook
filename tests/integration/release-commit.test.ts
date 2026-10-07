@@ -9,6 +9,7 @@ import { withReleaseCommit } from '../../scripts/release/commit-snapshot.js';
 import { loadGitReleaseHistory } from '../../scripts/release/build-history.js';
 import { verifyPreviewReleaseSimulation } from '../../scripts/verify-release.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 import { makeFullReleaseFixture } from '../fixtures/full-release.js';
 import {
@@ -199,6 +200,42 @@ describe('read-only exact release commit', () => {
         previous: first,
       }),
     ).rejects.toThrow('RELEASE_HISTORY_REWRITE');
+  });
+  it('requires actual host confirmation before projecting a prepared catalog as published history', async () => {
+    const catalog = CatalogSchema.parse(makeTrustedCatalog({}));
+    catalog.release.publicationStatus = 'prepared';
+    await writeFile(path.join(root, 'catalog.json'), JSON.stringify(catalog));
+    await git('add', '.');
+    await git('commit', '-qm', 'prepared catalog');
+    const preparedCommit = await git('rev-parse', 'HEAD');
+    const metadata = {
+      schemaVersion: '1.0.0',
+      version: catalog.release.version,
+      cutoffAt: catalog.release.cutoffAt,
+      commit: preparedCommit,
+      changeSummary: {
+        updateIds: catalog.release.updateIds,
+        addedProblemIds: catalog.release.addedProblemIds,
+        changedProblemIds: [],
+        withdrawnProblemIds: [],
+        taxonomyChanges: [],
+      },
+      validationResultsUrl: 'https://github.com/Fu-L/abc-textbook/actions/runs/1',
+    };
+    const input = { repositoryRoot: root, catalogPath: 'catalog.json', metadata: [metadata] };
+    await expect(loadGitReleaseHistory(input)).rejects.toThrow('RELEASE_HISTORY_INCOMPLETE');
+    await expect(
+      loadGitReleaseHistory({ ...input, confirmHostPublication: () => Promise.resolve(undefined) }),
+    ).rejects.toThrow('HOST_NOT_CONFIRMED');
+    const history = await loadGitReleaseHistory({
+      ...input,
+      confirmHostPublication: () => Promise.resolve(metadata),
+    });
+    expect(history[0]?.commit).toBe(preparedCommit);
+    const original = JSON.parse(await git('show', `${preparedCommit}:catalog.json`)) as {
+      release: { publicationStatus: string };
+    };
+    expect(original.release.publicationStatus).toBe('prepared');
   });
   it('validates a weekly release from a published base catalog larger than the full authoring corpus', async () => {
     const fixture = await makeFullReleaseFixture(root);

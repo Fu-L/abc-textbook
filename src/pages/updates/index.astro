@@ -12,7 +12,10 @@ const base = import.meta.env.BASE_URL;
   <span data-pagefind-meta="entity-kind">更新履歴</span><h1>更新履歴</h1>
   {
     publicCatalog.releaseHistory.length === 0 ? (
-      <p>公開済みReleaseは0件です。</p>
+      <p>
+        初版はABC212〜466の868問を収録しています。収録基準日時は2026年7月12日0時（日本時間）です。
+        初版配信後の更新履歴はここに追加します。
+      </p>
     ) : (
       <ul>
         {publicCatalog.releaseHistory.map((release) => (

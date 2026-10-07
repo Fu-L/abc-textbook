@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T150",
+  "status": "adapter_and_runbook_prepared_host_not_created",
+  "host": "Cloudflare Pages",
+  "plan": "Free",
+  "mode": "Direct Upload",
+  "wranglerVersion": "4.148.0",
+  "intendedProject": "fu-l-abc-textbook",
+  "intendedOrigin": "https://fu-l-abc-textbook.pages.dev",
+  "originConfirmed": false,
+  "basePath": "/",
+  "accountAuthenticationConfigured": false,
+  "productionDeployed": false,
+  "successfulHostHistory": [],
+  "runbookPath": "docs/operations/initial-release-runbook.md",
+  "readerAccountRequired": false,
+  "backendRequired": false,
+  "additionalRequiredCost": 0,
+  "costBasis": "Free static-host limits; actual account/project/origin setup and quota recheck belong to #54. No subscription was opened."
+}

@@ -374,7 +374,7 @@ try {
         digest: fileSha(await readFile(browserSummary.rawReportPath)),
       },
       productionReleaseApproved: false,
-      nextGate: 'Issue #52 post-catch-up validation',
+      nextGate: 'Issue #53 seed release gate, then Issue #54 deployment',
     };
     await writeJson(`${AUDIT_ROOT}/matrix.json`, {
       ...matrix,

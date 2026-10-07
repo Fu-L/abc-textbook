@@ -176,12 +176,13 @@ if (isMain()) {
   const manifestPath = argument('--manifest');
   if (commit && !manifestPath && !process.argv.includes('--simulation-only')) {
     try {
-      parseKeyValueArguments(process.argv.slice(2), [
-        '--commit',
-        '--catalog',
-        '--evidence-inventory',
-        '--merge-review',
-      ]);
+      const preparation = process.argv.includes('--preparation');
+      if (process.argv.filter((arg) => arg === '--preparation').length > 1)
+        throw new CorpusCliError('ARGUMENTS_INVALID', 'Duplicated --preparation');
+      parseKeyValueArguments(
+        process.argv.slice(2).filter((arg) => arg !== '--preparation'),
+        ['--commit', '--catalog', '--evidence-inventory', '--merge-review'],
+      );
       const mergedMainCommit =
         process.env.GITHUB_REF === 'refs/heads/main' ? process.env.GITHUB_SHA : undefined;
       const catalogPath = argument('--catalog');
@@ -189,6 +190,7 @@ if (isMain()) {
       const mergeReviewPath = argument('--merge-review');
       const result = await verifyFullReleaseCommit({
         commit,
+        preparation,
         ...(catalogPath ? { catalogPath } : {}),
         ...(evidencePath ? { evidencePath } : {}),
         ...(mergeReviewPath ? { mergeReviewPath } : {}),

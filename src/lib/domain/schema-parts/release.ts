@@ -198,7 +198,8 @@ export const PublicationUpdateSchema = strictObject({
       new Set(problemOperationIds).size !== problemOperationIds.length ||
       problemOperationIds.some((problemId) => !targetSet.has(problemId)) ||
       operationAffectedProblemIds.some((problemId) => !targetSet.has(problemId)) ||
-      !sameIdSet(uniqueOperationAffectedProblemIds, targetProblemIds)
+      (update.kind !== 'bootstrap' &&
+        !sameIdSet(uniqueOperationAffectedProblemIds, targetProblemIds))
     ) {
       context.addIssue({
         code: 'custom',

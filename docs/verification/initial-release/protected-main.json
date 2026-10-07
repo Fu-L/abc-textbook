@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T148",
+  "status": "blocked_by_repository_plan",
+  "checkedAt": "2026-10-07T11:45:47.932201+00:00",
+  "repository": "Fu-L/abc-textbook",
+  "visibility": "private",
+  "operation": "PUT /repos/Fu-L/abc-textbook/branches/main/protection",
+  "httpStatus": 403,
+  "observedMessage": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+  "configurationPath": "docs/operations/protected-main.json",
+  "configurationDigest": "04fae11034dd6f5e976fb5598ec8b1faaa0bb4db0cb7467518ecc6bb6f9d3005",
+  "requiredChecks": [
+    "Verify (release baseline)",
+    "Verify (supported range)",
+    "Initial corpus audit",
+    "Release validation",
+    "Production review"
+  ],
+  "configured": false,
+  "bypass": false,
+  "requiredOwnerDecision": "Choose a repository visibility/plan that supports protected main without introducing required paid cost."
+}

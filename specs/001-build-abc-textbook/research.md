@@ -158,3 +158,25 @@
 - 実データ一回だけの測定: 回帰と設計上限を示せないため不採用。
 - 無料tierのhost/APIを必須にする: 料金改定やquotaで必須経路が壊れるため不採用。
 - 3 OSのnative publish証跡を毎release必須にする: 個人所有の実行機器というscopeを越えるため不採用。
+
+## 13. 初版のhostと未達gate（Issue #53）
+
+**Decision**: Cloudflare Pages FreeのDirect Uploadを使い、Wrangler 4.148.0で隔離したexact Git checkoutの
+静的成果物を配信する。base pathは`/`、実HTTPS originはproject作成時の返却値を固定する。
+管理者の無料host認証と、アカウント不要の一人用教材・端末内学習記録を区別する。
+host APIのproduction / deploy-success / exact commitと配信metadataが一致した履歴だけを採用する。
+prepared CatalogをGit内でpublishedへ変更せず、最小Release Metadataはmerge後CIで生成する。
+
+**Rationale**: private repositoryの正本をhostへ公開せず、静的成果物と実公開履歴を扱える。
+deploy adapterは20,000ファイル・25 MiB/fileのFree制限を確認し、有料API・backend・telemetryを追加しない。
+料金やquotaを保証するsimulationにはせず、公開時の実host設定・利用条件も再確認する。
+
+**Verification basis**: 2026-10-07に[Cloudflare公式Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)、
+[Pages Freeの制限](https://developers.cloudflare.com/pages/platform/limits/)、
+[deployments API](https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/list/)を確認。
+公式npm registryはWrangler 4.148.0を返した。host project・実origin・tokenは未設定で、実配信は#54の対象。
+
+**Alternatives considered**: GitHub Pages Freeはprivate repositoryでは使えない。
+GitHub branch protectionも現private repositoryの実APIで403となったため、設定済みとは扱わない。
+追加費用0円の経路を守り、有料upgradeやrepository公開範囲変更を無断では実行しない。
+設定payloadと必要checkは用意し、production workflowは実保護がなければ停止する。

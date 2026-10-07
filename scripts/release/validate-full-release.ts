@@ -33,6 +33,9 @@ import {
 } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { validateMergeReviewEvidence } from '../../src/lib/validation/human-content-review.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
+import { assertSeedRelease, INITIAL_BOOTSTRAP_ID } from '../../src/lib/catalog/seed-release.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import { verifySeedPreparation } from './verify-seed-preparation.js';
 
 export const FULL_RELEASE_CATALOG_PATH = 'docs/verification/releases/catalog.json';
 export const FULL_RELEASE_EVIDENCE_PATH = 'docs/verification/releases/evidence-inventory.json';
@@ -64,6 +67,7 @@ export const verifyFullReleaseCommit = async (input: {
   readonly evidencePath?: string;
   readonly mergeReviewPath?: string;
   readonly mergedMainCommit?: string;
+  readonly preparation?: boolean;
 }) =>
   withReleaseCommit(
     {
@@ -80,6 +84,15 @@ export const verifyFullReleaseCommit = async (input: {
       const catalog = CatalogSchema.parse(
         JSON.parse(await readFile(resolvedCatalog, 'utf8')) as unknown,
       );
+      if (input.preparation) return verifySeedPreparation(context, catalog, resolvedCatalog);
+      const seed =
+        catalog.release.releaseKind === 'initial' &&
+        catalog.release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
+      if (seed) {
+        assertSeedRelease(catalog);
+        if (catalog.release.publicationStatus === 'prepared')
+          await verifySeedPreparation(context, catalog, resolvedCatalog);
+      }
       const sources = await loadCatalogEvidenceCanonicalSources(catalog, root, {
         catalogPath: resolvedCatalog,
       });
@@ -98,7 +111,7 @@ export const verifyFullReleaseCommit = async (input: {
         sources,
         root,
       );
-      buildCatalog(catalog, [], evidence);
+      buildCatalog(catalog, [], evidence, { allowPreparedRelease: true });
 
       // Match serialized projections to their real canonical entities, not just to
       // another declared digest. Source packets are inputs, not SourceRevision entities.
@@ -111,6 +124,9 @@ export const verifyFullReleaseCommit = async (input: {
         ['techniqueInventory', 'technique-inventory', 'problemId'],
         ['sources', 'sources', 'id'],
       ] as const) {
+        // Seed metadata deliberately remains uncollected; the accepted projection
+        // supplies publication state, placement and metrics without rewriting it.
+        if (seed && collection === 'problems') continue;
         const actual = [];
         for (const file of await filesUnder(root, `src/content/${directory}`)) {
           if (file.startsWith('src/content/sources/authoring/')) continue;
@@ -179,10 +195,12 @@ export const verifyFullReleaseCommit = async (input: {
       // Canonical impacts remain pending until their real targets are checked.
       // The public catalog records the verified projection; the checks below
       // must still resolve every target and recompute every index from bytes.
-      const publicImpacts = policy.correctionImpacts.map((impact) => ({
-        ...impact,
-        verificationStatus: 'verified' as const,
-      }));
+      const publicImpacts = seed
+        ? (await loadFullPublicProjection({ repositoryRoot: root })).catalog.correctionImpacts
+        : policy.correctionImpacts.map((impact) => ({
+            ...impact,
+            verificationStatus: 'verified' as const,
+          }));
       if (canonicalJson(catalog.correctionImpacts) !== canonicalJson(publicImpacts))
         throw new Error('RELEASE_CORRECTION_INVENTORY_MISMATCH');
       const corrections = await Promise.all(

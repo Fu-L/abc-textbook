@@ -489,6 +489,7 @@ export const buildCatalog = (
   input: unknown,
   sourcePaths: readonly string[] = [],
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
 ): CatalogLike => {
   const stagingPath = sourcePaths.find(hasStagingPathSegment);
   if (stagingPath) {
@@ -500,7 +501,7 @@ export const buildCatalog = (
     ]);
   }
   const catalog = assembleCatalog(input);
-  const diagnostics = validateCatalogSemantics(catalog, trustedEvidence);
+  const diagnostics = validateCatalogSemantics(catalog, trustedEvidence, options);
   if (diagnostics.length > 0) throw new CatalogBuildError(diagnostics);
   return Object.freeze(catalog);
 };
@@ -508,9 +509,10 @@ export const buildCatalog = (
 export const validateCatalogSemantics = (
   catalog: CatalogLike,
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
 ): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
-  if (catalog.release.publicationStatus === 'prepared')
+  if (catalog.release.publicationStatus === 'prepared' && !options.allowPreparedRelease)
     diagnostics.push({
       code: 'PUBLIC_PROJECTION_NOT_RELEASE',
       message:

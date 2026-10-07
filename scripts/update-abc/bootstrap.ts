@@ -1,6 +1,8 @@
 import { stagePublicationUpdate } from './stage.js';
 import { persistPublicationUpdate, runUpdatePipeline } from './index.js';
 import { pathToFileURL } from 'node:url';
+import { prepareSeedRelease } from '../release/prepare-seed.js';
+import { parseKeyValueArguments } from '../corpus/cli-support.js';
 
 export const bootstrapPreviewSeed = (input: {
   readonly previewId: string;
@@ -36,11 +38,38 @@ const isMain = (): boolean =>
   process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 
 if (isMain()) {
-  const result = await runUpdatePipeline({ fixture: 'initial-v1' });
-  await persistPublicationUpdate(result);
-  const { publicationUpdate: _publicationUpdate, command: _command, ...summary } = result;
-  void _publicationUpdate;
-  void _command;
-  process.stdout.write(`${JSON.stringify({ command: 'release:bootstrap', ...summary })}\n`);
-  process.exitCode = result.state === 'ELIGIBLE_FOR_BATCH' ? 0 : 2;
+  if (!process.argv.includes('--fixture')) {
+    try {
+      const args = parseKeyValueArguments(process.argv.slice(2), [
+        '--first',
+        '--last',
+        '--mode',
+        '--version',
+        '--review-policy',
+      ]);
+      if (args.get('--first') !== '212' || args.get('--last') !== '466')
+        throw new Error('INITIAL_RELEASE_RANGE: --first 212 --last 466 is required.');
+      const mode = args.get('--mode') ?? 'inputs';
+      if (mode !== 'inputs' && mode !== 'evidence') throw new Error('INITIAL_RELEASE_MODE');
+      const policy = args.get('--review-policy') ?? 'third-party';
+      if (!['third-party', 'solo-maintainer'].includes(policy))
+        throw new Error('INITIAL_REVIEW_POLICY');
+      process.stdout.write(
+        `${JSON.stringify(await prepareSeedRelease(mode, args.get('--version'), policy === 'solo-maintainer'))}\n`,
+      );
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : String(error));
+      process.exitCode = 2;
+    }
+  } else {
+    const args = parseKeyValueArguments(process.argv.slice(2), ['--fixture']);
+    if (args.get('--fixture') !== 'initial-v1') throw new Error('BOOTSTRAP_FIXTURE_INVALID');
+    const result = await runUpdatePipeline({ fixture: 'initial-v1' });
+    await persistPublicationUpdate(result);
+    const { publicationUpdate: _publicationUpdate, command: _command, ...summary } = result;
+    void _publicationUpdate;
+    void _command;
+    process.stdout.write(`${JSON.stringify({ command: 'release:bootstrap', ...summary })}\n`);
+    process.exitCode = result.state === 'ELIGIBLE_FOR_BATCH' ? 0 : 2;
+  }
 }
