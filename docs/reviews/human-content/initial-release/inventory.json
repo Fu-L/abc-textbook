@@ -6148,7 +6148,7 @@
   "agentQualityReview": {
     "evidenceId": "agent-content-review-initial-release",
     "path": "docs/reviews/agent-content/initial-release/release-review.json",
-    "digest": "ecdaacd8a0cd333b9e48ee4a8a3903229f0e7fc1f83e8ca01a039c0d014aa583",
+    "digest": "a7420c53f7fd6625fe44201ed4343b1914037e4dad4051ac8aa27c60973c52fe",
     "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
     "acceptanceMode": "agent_quality_review",
     "aggregatePassed": true

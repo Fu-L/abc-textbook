@@ -1184,16 +1184,6 @@ export const validateCatalogSemantics = (
     }
   }
   for (const tag of catalog.tags) {
-    const normalizedTerms = [tag.name, ...tag.aliases, ...tag.formerNames].map((term) =>
-      term.normalize('NFKC').trim().toLocaleLowerCase('en-US'),
-    );
-    if (new Set(normalizedTerms).size !== normalizedTerms.length) {
-      diagnostics.push({
-        code: 'TAG_TERM_DUPLICATE',
-        entityId: tag.id,
-        message: 'A tag name, alias, or former name is duplicated within the tag.',
-      });
-    }
     if (tag.parentId) requireRefs(tag.id, 'parentId', [tag.parentId], tagIds);
     requireRefs(tag.id, 'prerequisiteTagIds', tag.prerequisiteTagIds, tagIds);
     requireRefs(
@@ -1247,6 +1237,8 @@ export const validateCatalogSemantics = (
   }
   const tagTermOwners = new Map<string, string>();
   for (const tag of catalog.tags) {
+    // Accepted aliases may include the canonical name or spelling variants.
+    // They identify one concept; only ownership by different Tags is ambiguous.
     for (const term of [tag.name, ...tag.aliases, ...tag.formerNames]) {
       const normalized = term.normalize('NFKC').trim().toLocaleLowerCase('en-US');
       const existingOwner = tagTermOwners.get(normalized);
