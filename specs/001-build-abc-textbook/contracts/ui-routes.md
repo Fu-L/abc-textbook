@@ -97,7 +97,7 @@ merge前のfinal validationはRelease、catalog、Pagefind、sitemap、feed、as
 - column は `AdvancedSlotRegistry.labels` を公式順で使い、`E,F,G,H` の固定 enum や固定4列を持たない。
 - registry は対象 Contest の `officialTaskOrder` で D より後にある記号の順序付き和集合であり、将来 `I`, `Ex` その他の記号が現れても同じ導出規則へ含める。
 - `<table>`、説明的 `<caption>`、`<thead>`、ABC 行の `<th scope="row">`、動的問題記号列の `<th scope="col">` を使う。
-- ABC 212 から release の `cutoffAt` 時点の最新終了済み ABC までの連続行を表示する。
+- ABC212からreleaseが宣言した収録上限までの連続行を表示し、`cutoffAt`との一致を確認する。初版はABC466まで・2026-07-12T00:00:00+09:00に固定し、公開日現在の最新回まで収録したと表示しない。
 - Contest に当該記号がない cell も `公式問題なし` と理由を明示し、空欄にしない。
 - 各 cell は問題識別子・名前、解答状況、要復習、掲載状態を示す。
 - 収録済み cell には問題詳細、解説 anchor、対応 LearningUnit、主・各補助 TechniqueTag、各類題への区別可能な直接 link を置き、各 destination へ一回の操作で移動できるようにする。

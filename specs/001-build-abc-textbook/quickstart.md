@@ -2,6 +2,12 @@
 
 **Purpose**: 実装後に、元目的である全対象問題の体系化、逆引き、簡易学習管理、週次更新をoffline fixture中心で検証する。
 
+## 公開順（2026-10-07更新）
+
+初版はABC212〜466の検証済み868問・213タグ・232 Unit、cutoff `2026-07-12T00:00:00+09:00`で先に公開する。#53がT162/T145〜T151、#54がT152〜T153を担当し、#52/T163/T143/T144/T164のlive catch-upは実公開・事後検証後に実施する。開始branch・必要な公開入力・実装不足は[先行公開の引継ぎ](../../docs/operations/deploy-before-catch-up.md)を参照する。
+
+以下のfixtureとsimulationは既存機能の回帰検査として維持する。Scenario Iとlive-sourceのproduction受入は公開後の段階であり、fixture合格をlive機能完成へ読み替えない。初版の公開前検証は既存US1〜US4の全件検査とScenario L/M、current-subject review、host/runbookを対象とする。初版範囲内の品質要件は縮小しない。
+
 ## Prerequisites
 
 - 対応範囲（Node.js `>=24.18.0 <25.0.0`、npm `>=11.16.0 <12.0.0`）内のNode.js/npm
@@ -154,11 +160,13 @@ npm run test:integration -- learning-record-backup
 - status組とneedsReview組を独立比較する。
 - 成功時は値・日時が100%一致し、失敗注入時は部分反映0件になる。
 
-## Scenario I — 一操作の週次更新
+## Scenario I — 一操作の週次更新（live受入は公開後）
 
 ```bash
 npm run abc:update -- --fixture tests/fixtures/updates/dynamic-slot-contest
 ```
+
+上記は設計契約のfixture例であり、現在の実装済み入口は`abc:update --fixture initial-v1`のpreview simulation。任意のfixture pathや公開後baseのlive処理が使えるとは案内せず、T163で確定した入口に合わせてこの例を更新する。
 
 期待結果:
 
@@ -210,7 +218,7 @@ npm run abc:deploy -- --rollback-to KNOWN_RELEASE_COMMIT
 
 期待結果:
 
-- ABC 212からcutoffまでの連続性、Dより後の全Problem 100% coverage、AdvancedSlotRegistry、final Technique Inventory、到達可能性をpreviewとは独立したmerge対象treeから再計算する。
+- ABC212から宣言した収録上限までの連続性、Dより後の全Problem 100% coverage、AdvancedSlotRegistry、final Technique Inventory、到達可能性をpreviewとは独立したmerge対象treeから再計算する。初版はABC466までの868問で、公開日の最新回まで収録する条件はない。
 - preview artifact、仮taxonomy、未結合shard、未解決holdがrelease commitへ混入していないことを確認する。
 - 自動checkとcurrent HumanContentReviewEvidence（selfまたはrisk policyに応じたthird-party）が揃うまでprotected mainへmergeできない。
 - Release Metadataがversion、cutoff、full commit、更新概要、検証結果URL以外のtransaction stateを持たない。
@@ -238,13 +246,9 @@ npm run corpus:verify-problem-corpus
 
 全248 shardと232 Unitを独立検証し、868本文とindexをjoinする。20本の独立数学回帰、Claim/本文、出典・skill・任意block inventory、唯一のhome・coverage/related・読む順、訂正targetを再検査する。T074/T078は運用者指示に基づく`agent_quality_review`、SC-009は`not_required_by_owner`。公開切替・派生index・CorrectionImpactはT160までpending。手順と証跡は`docs/operations/problem-corpus-acceptance.md`に記載する。
 
-## Optional live-source check
+## Optional live-source check（公開後の実装で入口を確定）
 
-offlineの全Scenario成功後だけ、AtCoder公式hostへの限定確認を行う。
-
-```bash
-npm run abc:update -- --contest abcNNN --dry-run
-```
+初版公開・事後検証とT163のlive入力実装後、offline Scenarioの成功を確認してAtCoder公式hostへの限定確認を行う。実commandは`docs/operations/initial-catch-up.md`に確定した入口を使う。現在の初回専用`abc:update --contest`を任意のlive取得や未実装の`--dry-run`として案内しない。
 
 期待結果:
 

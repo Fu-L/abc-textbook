@@ -12,12 +12,13 @@
 
 ## 1. 公開範囲と実行環境
 
-**Decision**: 2026-07-12時点で終了済みのABC 212〜466を初期制作seedにし、初版直前に`cutoffAt`を固定してその時点の最新終了済みABCまで追随する。実行環境はNode.js 24 LTS（`>=24.18.0 <25.0.0`）とnpm 11（`>=11.16.0 <12.0.0`）を対応範囲とする。`.nvmrc`と`packageManager`にはリリース基準版のNode.js 24.18.0/npm 11.16.0を残し、TypeScript 6.xと全依存はlockfileで完全版を固定する。
+**Decision**: 2026-10-07のowner方針により、検証済みのABC212〜466を初版の固定公開範囲とし、`cutoffAt=2026-07-12T00:00:00+09:00`で先にデプロイする。キャッチアップ機能とABC467以降の収録は実公開・事後検証後に実装する。各更新版は宣言した連続範囲の100%収録を満たせば公開でき、最新回までの一括追随を中間版の条件にしない。実行環境はNode.js 24 LTS（`>=24.18.0 <25.0.0`）とnpm 11（`>=11.16.0 <12.0.0`）を対応範囲とする。`.nvmrc`と`packageManager`にはリリース基準版のNode.js 24.18.0/npm 11.16.0を残し、TypeScript 6.xと全依存はlockfileで完全版を固定する。
 
-**Rationale**: [ABC 466公式ページ](https://atcoder.jp/contests/abc466?lang=ja)は2026-07-11に終了しており、調査時点の最新終了済みABCである。公開までに新しいABCが終了し得るため、制作seedと公開上限を分ける必要がある。[Node.js release一覧](https://nodejs.org/en/about/previous-releases)ではNode 24がLTSであり、長期保守に適する。patch完全一致を`npm run`の条件にすると、同じLTS major内の更新で通常開発が止まるため、対応範囲内のpatch更新を許可する。一方、依存木とリリース証跡の再現性は、基準版CIと`npm ci`によるlockfile検査で維持する。
+**Rationale**: [ABC466公式ページ](https://atcoder.jp/contests/abc466?lang=ja)は2026-07-11に終了している。PR #69までの868問の検証成果を公開できるようにし、新しいContestの増加やcatch-up実装の難航で初版の完成点を動かさない。静的教材とProblem IDをキーにする端末内記録は、公開後の小さな更新に適する。[Node.js release一覧](https://nodejs.org/en/about/previous-releases)ではNode 24がLTSであり、長期保守に適する。patch完全一致を`npm run`の条件にすると、同じLTS major内の更新で通常開発が止まるため、対応範囲内のpatch更新を許可する。一方、依存木とリリース証跡の再現性は、基準版CIと`npm ci`によるlockfile検査で維持する。
 
 **Alternatives considered**:
 
+- 初版前に最新終了済みABCまでcatch-upを完了する: 旧方針。キャッチアップ機能の難航が検証済み教材の公開を遅らせるため、2026-10-07のowner指示で公開後の小batch更新へ変更した。
 - ABC 466を恒久的な公開上限にする: 「ABC212以降」の継続範囲を満たさないため不採用。
 - Current版Nodeを基準にする: 更新頻度が高く再現性が落ちるため不採用。Node 24 LTSの対応範囲を明示し、CIでは基準版とローリング版を分ける。
 - 開発環境もpatch完全一致にする: 同じLTS major内のセキュリティ・保守更新を妨げるため不採用。リリース基準版と対応範囲を別々に記録する。

@@ -289,7 +289,11 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 
 ## Phase 8: Polish & Cross-Cutting Initial Release
 
-**Purpose**: T154のpreview PASS後に全storyのfull-corpus成果を初版release commitへ統合し、目的・憲章・品質・費用・性能を最終確認してから初めて実公開する。preview component evidence、仮taxonomy、未結合shard、未検証updateはこのphaseへ直接持ち込まない。
+**Purpose**: ABC212〜466の検証済み868問・213タグ・232 UnitとUS1〜US4を初版として先に実公開する。2026-10-07のowner方針によりlive catch-upはPhase 9へ移し、#52/PR #70の完成を待たない。初版cutoffは2026-07-12T00:00:00+09:00。手順は`docs/operations/deploy-before-catch-up.md`。
+
+T133〜T142のチェック済み状態はPR #69までの検証実装・868問の受入実績を示す。公開準備で変わるsubjectの検査・証跡はT149で更新する。T143〜T147はPR #70で旧方針の受入が行われたが、新しい公開範囲・実公開後baseの受入ではないため未完了へ戻す。証跡や作業を削除せず、T143/T144はPhase 9、T145〜T147は#53へ再配置する。
+
+- [ ] T162 Prepare the seed-only initial release from a separate branch based on PR #69 integrated `main`, preserving PR #70 and all uncommitted work; bind the 868-Problem bootstrap, prepared Catalog, cutoff 2026-07-12T00:00:00+09:00, real protected-base diff and applicable evidence inventory without regenerating accepted prose/taxonomy or importing catch-up candidates in `src/lib/catalog/full-public-projection.ts`, `scripts/update-abc/bootstrap.ts`, `docs/verification/releases/`, and `docs/operations/deploy-before-catch-up.md`; port only necessary existing helpers if required
 
 - [X] T133 [P] Run Zod/JSON Schema parity, contract schema validation, unknown-field rejection, and generated-file drift checks in `docs/verification/initial-release/schema-contracts.json`
 - [X] T134 [P] Recompute the authoritative final-release gate independently of preview artifacts: ABC continuity, official D-after slots, dynamic registry, public Problem coverage, classification, reachability, and direct-link coverage must prove FR-001/SC-001 100% coverage in `docs/verification/initial-release/corpus-completeness.json`
@@ -301,17 +305,24 @@ T065はfinal taxonomy/placementとT154の`passed` snapshotを入力に、`docs/w
 - [X] T140 [P] After T160, run public search/index/catalog/sitemap/feed closure checks and prove staging and local state exclusion in `docs/verification/initial-release/public-projections.json`
 - [X] T141 [P] Benchmark seed, release-cutoff, and 1,500-Problem/500-Tag/1,000-Unit fixtures plus filter p95 against SC-019 in `docs/verification/initial-release/performance.json`
 - [X] T142 [P] Audit client bundles, external dependencies, telemetry, accounts, paid services, and a deterministic 52-week update simulation for zero additional required cost in `docs/verification/initial-release/zero-cost-52-weeks.json`
-- [ ] T143 Freeze an offset-qualified initial `cutoffAt`, discover all ended ABCs after 466, and process every missing Contest through normal updates in `staging/updates/initial-catch-up/`; update canonical metadata, placements, authoring units, Unit navigation and auxiliary metrics snapshot identities for the expanded corpus while preserving accepted ownership and authored Unit content
-- [ ] T144 Re-run all T133–T142 validators and the AtCoder Problems metrics snapshot validator against the expanded corpus after catch-up, and reject any unresolved Problem, temporary/provisional taxonomy, unjoined Outcome/Problem shard, missing review, preview artifact leakage, stale metrics Problem/task identities, or changed learner record in `docs/verification/initial-release/post-catch-up.json`; bootstrap counts are not the final-release coverage boundary
-- [ ] T145 After T160, assemble the initial release change summary from bootstrap and all catch-up update IDs in the Catalog release history
-- [ ] T146 After T160, complete the policy-selected review check inventory for the exact release commit subject (`self` for normal changes, `third_party` instead of `self` for every fixed high-risk claim/example scope) in `docs/reviews/human-content/initial-release/`
-- [ ] T147 Re-run SC-012 representative timing against the exact release commit in `docs/verification/learner-outcomes/initial-release/` and retain the owner-retired SC-009 disposition; no manual SC-009 answers or scores are required
+- [ ] T145 After T162, assemble the initial 868-Problem release change summary from the bootstrap update only, with no unpublished catch-up IDs or fabricated host publication history, in `src/lib/catalog/full-public-projection.ts` and `docs/verification/releases/catalog.json`
+- [ ] T146 Complete the policy-selected review inventory for the exact seed-only release subject in `docs/reviews/human-content/initial-release/` and `docs/reviews/human-content/releases/`; use the current FR-026/Constitution 3.0.0 self/third-party/explicit solo-maintainer policy, preserve agent-quality-review lineage, and do not synthesize human approval
+- [ ] T147 Validate SC-012 against the seed-only release subject in `docs/verification/learner-outcomes/initial-release/`, retaining the retired SC-009/SC-010 owner dispositions; do not reuse expanded-corpus evidence without matching the current subject or claim automated timing measures human reading
 - [ ] T148 Configure build, link, schema, content-completeness, and policy-selected review checks as protected-main merge requirements
-- [ ] T149 Execute read-only final validation, dependency-closure comparison, deploy simulation, and known-commit rollback rehearsal without regenerating content in `docs/verification/initial-release/final-validation.json`
+- [ ] T149 Refresh changed-subject T133–T142 evidence and execute read-only exact-commit final validation for ABC212–466/868 Problems, dependency closure, deploy simulation and known-commit rollback rehearsal in `docs/verification/initial-release/final-validation.json`; declare live US5 criteria deferred to Phase 9 while keeping existing regression/simulation checks and all applicable release checks, and never regenerate accepted content during validation
 - [ ] T150 Finalize the exact production deploy adapter, static-host history, retry, rollback, and verification steps in `docs/operations/initial-release-runbook.md`
 - [ ] T151 Audit the final release commit against the original goal, all FR/CQ/SC requirements including FR-001/SC-001, the private-preview exclusion, Outcome/Problem shard join evidence, Constitution 3.0.0, self/third-party review policy, one-user scope, and zero-cost boundary in `docs/verification/initial-release/goal-and-constitution.json`
 - [ ] T152 Merge the fully validated tree to protected main and deploy that exact full commit hash without content changes by following `docs/operations/initial-release-runbook.md`
 - [ ] T153 Verify static-host deployment history, immutable Git Release history, route/search availability, known-commit rollback, and learning-record compatibility in `docs/verification/deployments/initial-release.json`
+
+## Phase 9: Post-Deployment Catch-up (Issue #52)
+
+**Purpose**: Start only after T152/T153 (#54) have deployed and verified the 868-Problem initial release. Reuse PR #70 as unpublished implementation/authoring material, rebase it onto the actually published base, and implement incremental catch-up without delaying or rewriting the initial release.
+
+- [ ] T163 Generalize `scripts/update-abc/index.ts`, `scripts/update-abc/catch-up.ts`, `src/lib/corpus/accepted-updates.ts`, and `src/lib/catalog/full-public-projection.ts` from initial-only assumptions to an actual published Catalog/Release Metadata/host-history base; bind `baseReleaseVersion`, use `releaseKind=incremental`, separate initial bootstrap from updates, remove mandatory fixed initial-catch-up paths/cutoffs and rediscovery of already collected Contests, and document the implemented acquisition/authoring/review/apply commands in `docs/operations/initial-catch-up.md`
+- [ ] T143 [US5] After T163, freeze an offset-qualified cutoff for one Contest or a small independent contiguous batch after the published upper bound, discover and process all D-after Problems in that batch through normal updates in `staging/updates/`; preserve existing prose/ownership/DAG/order/Problem IDs and update Source Revisions, Inventory, placements, authoring receipts, Unit navigation and metrics identities together; ABC467 is the first seed-successor candidate, while old PR #70 inputs require current-source/current-subject revalidation
+- [ ] T144 [US5] Re-run applicable T133–T142 validators and metrics validation against each expanded release scope and record exact-commit evidence in `docs/verification/releases/`; reject unresolved Problems/reviews, provisional taxonomy, stale joins/metrics, preview leakage and learner-record changes inside the selected batch, keep held later candidates in staging, and preserve old `docs/verification/initial-release/post-catch-up.json` as unpublished historical evidence
+- [ ] T164 [US5] Prepare and publish each incremental release through the existing protected-main/host path, recording only its new update IDs and actual difference from the published base in `scripts/release/build-history.ts` and `docs/verification/deployments/`; verify current-subject review/SC-012, unchanged learner values/timestamps, actual host history, search/routes and known-commit rollback without rewriting the initial release or requiring the newest-ended Contest to be included in every intermediate release
 
 ---
 
@@ -340,8 +351,9 @@ T154 is defined after the original task list so task IDs remain sequential, but 
 - **US1 (Phase 4, P1)**: depends on the accepted final US2 taxonomy/placements, T064, and T154. T065 freezes the shard index, then T066–T071 generate and execute six independent Outcome/Problem shard work streams; no per-contest temporary taxonomy is permitted. T065 owns the shared index and no domain task may generate or mutate it.
 - **US3 (Phase 5, P1)**: starts after Phase 2 with the preview fixture and completes T094's component evidence before T154; full-corpus learning-record validation is performed by T139/T146 after stable public Problem IDs are available.
 - **US4 (Phase 6, P2)**: starts with the preview fixture and completes T111's component evidence before T154; T160 is the post-preview implementation that binds canonical full content to routes, indexes, search, catalog, sitemap, and feed, and T138/T140/T146 validate that fixed projection.
-- **US5 (Phase 7, P2)**: starts with the T112 manifest and completes the fixture-only T116–T126 update simulation before T154; protected-main validation and the initial release metadata/deploy tasks are post-T154 full-catalog work.
-- **Initial Release (Phase 8)**: depends on all user stories. T152 is forbidden until T145–T151 are complete in order.
+- **US5 (Phase 7, P2)**: completed preview and offline update/release infrastructure remain available; live catch-up and new Contest acceptance are Phase 9 work after the initial deployment, rather than dependencies of Phase 8.
+- **Initial Release (Phase 8 / #53 → #54)**: depends on accepted US1–US4 seed content/projection and #51's verification infrastructure. Execute T162, T145–T147, T148–T151, then T152–T153. T152 requires every applicable initial-release check/review; #52/T143/T144/T163/T164 are not initial-release dependencies.
+- **Post-deployment catch-up (Phase 9 / #52)**: depends on completed #54/T153 plus existing #49/#50/#51 contracts. Execute T163 → T143 → T144 → T164 for each selected contiguous batch. Held future batches never invalidate an already published release.
 
 ### User Story Dependency Graph
 
@@ -349,8 +361,8 @@ T154 is defined after the original task list so task IDs remain sequential, but 
 Setup → Foundational ─┬→ candidate pool/cohort ─→ preview components ─→ T154 preview PASS ─→ T159 final taxonomy ─→ T047–T050 materialize ─┬→ full content ─→ T065 index ─→ T066–T071 shards ─┐
                       ├→ full US2 inventory ──────────────────────────────────────────────┘                                             │                  ├→ T160 full routes/index/search ───┤
                       ├→ US3 preview → T154 → full learning records ───────────────────────────────────────────────────────────────────┤                  │
-                      ├→ US4 preview → T154 ────────────────────────────────────────────────────────────────────────────────────────────┘                  │→ Initial release
-                      └→ US5 preview simulation → T154 → review/merge/deploy ─────────────────────────────────────────────────────────────────────────────┘
+                      ├→ US4 preview → T154 ────────────────────────────────────────────────────────────────────────────────────────────┘                  │→ #53 seed release preparation → #54 deploy/verify → #52 live catch-up
+                      └→ US5 preview simulation → T154 → existing offline validation/deploy infrastructure ──────────────────────────────────────────────┘
 ```
 
 - **Preview** is independently testable as a private, digest-bound vertical slice; it cannot be promoted or counted as final coverage. Its canonical snapshot lives only under staging; the verification tree contains a recoverable reference.
@@ -415,7 +427,7 @@ Each T066–T071 task owns disjoint ProblemAuthoringUnit paths and records the `
 5. Generate and review the Outcome/Problem shards, join the explanations, and run T160 to switch the shared public projections from preview to canonical full-corpus content.
 6. Validate the final projections, shard join, and final US1/US2 independently before the initial release commit.
 
-The private preview is an early feedback milestone, not a reduced public MVP. The public MVP remains subject to the full-corpus FR-001/SC-001 gate.
+The private preview remains unpublished. The public MVP is the complete verified ABC212–466 corpus (868 Problems), subject to FR-001/SC-001 for that declared scope. Latest-ended catch-up is a subsequent feature, not a moving initial-release gate.
 
 ### Incremental Delivery
 
@@ -424,8 +436,8 @@ The private preview is an early feedback milestone, not a reduced public MVP. Th
 3. Generated Outcome/Problem shards → independently validate each explanation unit, then run the all-shard join.
 4. Local learning records → validate progress tracking and backup against stable Problem IDs.
 5. T160 preview-to-canonical route/search projection switch → validate one-operation reachability and dynamic labels against the full corpus.
-6. Weekly update pipeline → validate idempotent maintenance and correction handling.
-7. Integrate, review, final-validate, merge, runbook-audit, and deploy only after the independent final coverage gate passes.
+6. Integrate the seed-only release on a separate branch, review, refresh current-subject evidence, finalize the host/runbook and deploy the validated initial commit through #53 → #54.
+7. After actual deployment verification, implement and accept live catch-up through #52 in small contiguous batches; reuse weekly infrastructure and PR #70 material after revalidation, keeping history and learner records intact.
 
 ## Notes
 

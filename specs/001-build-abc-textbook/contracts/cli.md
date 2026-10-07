@@ -2,6 +2,8 @@
 
 **Scope**: PublicationUpdateの準備、merge前検証、人間review取込、Git commit単位の静的デプロイ。
 
+**Delivery boundary（2026-10-07）**: 初版はABC212〜466の868問、`cutoffAt=2026-07-12T00:00:00+09:00`で先に公開する。公開後baseを使うlive `abc:update` / `release:catch-up`は#54完了後の#52/T163で実装する契約であり、初版の必須入口ではない。PR #70の固定初回cutoff/入力directoryを使う経路と区別する。初版bootstrapのproduction接続は#53/T162、実deploy入口はT150で確定する。現在使える検証とsimulationを、存在しないlive commandの成功として案内しない。
+
 ## Common rules
 
 - 必須経路は有料API、常時backend、外部credentialを要求しない。
@@ -91,17 +93,20 @@ npm run release:bootstrap -- --first 212 --last 466
 - ABC 212〜466の全Contestと各D以後Problem、Source、content pathを完全列挙する。
 - 未完成・未分類・未review itemが一件でもあればELIGIBLEにしない。
 - 同じsnapshot digestは同じbootstrap updateを再利用する。
+- 初版だけに使い、summaryにcatch-up IDを含めない。公開後の更新ではbootstrapを再実行・再収録しない。既存のpreview bootstrap CLIをproduction seedの受入として流用せず、T162で実canonical入力との接続を確定する。
 
-## `release:catch-up` — 初版cutoff追随
+## `release:catch-up` — 公開後の宣言範囲への追随（T163で実装）
 
 ```bash
-npm run release:catch-up -- --cutoff 2026-07-14T00:00:00+09:00
+npm run release:catch-up -- --cutoff OFFSET_QUALIFIED_CUTOFF
 ```
 
-- cutoffまでの最新終了済みABCを決め、seed後の未収録Contestを昇順に`abc:update`へ渡す。
+- この例は実装後の契約。現在の初回専用CLIでは任意の公開後cutoffを処理できない。T163で公開済みbaseの解決方法、入力path、batch選択、適用と公開の境界を実装し、運用文書へ実引数を記載する。
+- 実際の公開済みCatalog/Release Metadata/host成功履歴からbase版と既収録Contestを読み、選んだcutoffまでの未収録Contestを昇順に通常`abc:update`へ渡す。base不明や履歴不一致は理由付き保留とする。
 - 各ContestのDより後の全Problemをmanifestへ固定する。
-- 全catch-up updateがELIGIBLEになった場合だけ、bootstrap IDとcatch-up IDsをrelease change summaryとして返す。
-- 一件でもON_HOLDなら終了2で停止し、欠落0件を報告しない。
+- `baseReleaseVersion`は公開済み版、Catalogの`releaseKind`は`incremental`。全選択updateがELIGIBLEになった場合だけ、今回のupdate IDsと差分をsummaryへ束ねる。bootstrapと旧公開済みupdateを新版の追加分へ含めない。
+- cutoffは小batchの最終Contest終了後、次の未収録Contest終了前に固定できる。最新回までの全件一括追随を中間版の条件にしない。選択batch内に一件でもON_HOLDがあれば終了2で停止し、そのbatchの欠落0件を報告しない。選択範囲外の候補はstagingへ残す。
+- 同じbase/入力の再実行は冪等。収録済みContestを追加として再適用せず、訂正は通常のCorrectionImpact更新へ分ける。prepared/ELIGIBLEは実公開を意味せず、公開は既存required check/host経路を通す。
 
 ## `verify:release` — merge前のrelease検証
 
@@ -118,7 +123,7 @@ T128の実装では`HEAD`またはfull commit IDを受け取り、一時cloneの
 - Work Manifest、Catalog、PublicationUpdate、実content inventoryを保護済みbaseから再構築した差分へ照合する。
 - 少なくとも次をcommitの正本から検査する。
 
-- ABC 212からcutoffまでのContest連続性。
+- 各版が明示したABC212から収録上限までのContest連続性とcutoffとの一致。初版はABC466までの868問、2026-07-12T00:00:00+09:00であり、公開日現在の最新回までの追随は条件にしない。
 - 各Contestの公式task orderとDより後の全Problem。
 - AdvancedSlotRegistryの完全性・安定順・矛盾0件。
 - Problem集合とTechnique Inventory集合の一致。

@@ -12,3 +12,7 @@ maintainer理由を明示した場合だけrisk reasonを保持したself-review
 - `verification/`: command、fixture digest、raw result、aggregate result
 
 証跡は対象digestと実行時刻を持ち、失敗結果を上書きせず新revisionとして追加します。機密情報、個人情報、生の公式HTMLは保存しません。
+
+2026-10-07以降の実装開始点は[検証済み教材の先行公開](operations/deploy-before-catch-up.md)。ABC212〜466の868問を#53
+→ #54で公開し、#52のcatch-upは公開後に実装します。PR
+#70の904問向けprepared成果は初版の公開前提にしません。
