@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "taskId": "T151",
-  "status": "agent_review_accepted_exact_commit_validation_pending",
-  "generatedAt": "2026-10-07T16:13:36.552196+00:00",
+  "status": "release_gate_passed_agent_quality_review",
+  "generatedAt": "2026-10-07T16:17:16.388651+00:00",
   "goal": "ABCの過去問からARC・AGC・CF Div. 1・UCUPへ進むための典型知識・適用条件・不変量・正当性・計算量と手法選択を学ぶ、一人用の教科書。",
   "scope": {
     "firstContest": "abc212",
@@ -735,7 +735,7 @@
       "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
     }
   ],
-  "blockingGates": ["Exact-commit normal release validation"],
+  "blockingGates": [],
   "exactCommitEvidence": "Read-only verify:release output binds the final prepared Git SHA in CI; in-tree records never embed their own future commit hash.",
   "automatedAuditSubject": {
     "digest": "5d995b89304047faceb4788b0f033658e67a0208e5f79ef48a296aba7f3c2dc4",
@@ -808,7 +808,7 @@
     }
   },
   "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference.",
-  "releaseGatePassed": false,
+  "releaseGatePassed": true,
   "productionPublished": false,
   "humanApprovalClaimed": false,
   "deploymentPrerequisites": {
@@ -817,6 +817,32 @@
       "Configure Free Cloudflare project / persistent HTTPS origin / credentials",
       "Merge to protected main after all required CI succeeds",
       "Deploy and verify that exact merged SHA"
+    ]
+  },
+  "validatedReleaseSnapshot": {
+    "command": "verify:release",
+    "commit": "27fb684602d2f208d55e48de452d80977abfd2bf",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "aggregatePassed": true,
+    "acceptanceMode": "agent_quality_review",
+    "humanApprovalClaimed": false,
+    "problemCount": 868,
+    "outcomeCount": 242,
+    "outcomeCoverageDigest": "dd913c266baed7eb1adea334c2707ed7433cfaf57b25e3f610d63400d566e13d",
+    "correctionCount": 12,
+    "checks": [
+      "protected-base-diff",
+      "current-policy-review",
+      "catalog-coverage",
+      "canonical-entities",
+      "authored-documents",
+      "three-prerequisite-dags",
+      "semantic-primary-home",
+      "independent-editorial-order",
+      "metrics-identities",
+      "correction-targets"
     ]
   }
 }
