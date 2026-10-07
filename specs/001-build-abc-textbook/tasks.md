@@ -319,7 +319,7 @@ T133〜T142のチェック済み状態はPR #69までの検証実装・868問の
 
 T162/T145/T147のseed入力・bootstrap-only summary・SC-012自動観測を用意し、T133〜T142を現在のsubjectで全件再実行した。本文・taxonomy・配置のcanonical file差分は0件。SC-012は3エンジン×4固定Problemの自動操作と再読込保持であり、人間の読解時間を測っていない。
 
-T146は2026-10-07 ownerの「人間の了承は不要です。」指示により、初版限定のagent_quality_reviewと全自動検査へ切り替える。high-risk self-review（self＋solo_maintainer、全risk reason保持）は維持する。T148はownerのpublic変更後、5つのrequired checks・strict・admin適用・force push/削除禁止をAPI PUT/GETで設定確認済み。private時の403は過去の観測として残す。T146の232 item・242 Outcomeのagent品質受入を記録し、T149は変更subjectの全監査と通常のread-only exact-commit公開検証の成功で確定した。受理済み同一Tag内のname/alias/旧名を誤って拒否していたvalidatorを修正し、別Tag間の正規化衝突検査を維持した。T150のCloudflare Pages Free adapter・host成功履歴・retry/rollback手順は実装済みで、実project・origin・認証の設定は#54の開始条件として引き継ぐ。main merge、実配信、published履歴は#53では行わない。
+T146は2026-10-07 ownerの「人間の了承は不要です。」指示により、初版限定のagent_quality_reviewと全自動検査へ切り替える。high-risk self-review（self＋solo_maintainer、全risk reason保持）は維持する。T148はownerのpublic変更後、5つのrequired checks・strict・admin適用・force push/削除禁止をAPI PUT/GETで設定確認済み。private時の403は過去の観測として残す。T146の232 item・242 Outcomeのagent品質受入を記録し、T149は変更subjectの全監査と通常のread-only exact-commit公開検証の成功で確定した。受理済み同一Tag内のname/alias/旧名を誤って拒否していたvalidatorを修正し、別Tag間の正規化衝突検査を維持した。T150のCloudflare Pages Free adapter・host成功履歴・retry/rollback手順は実装済みで、実project・origin・認証の設定は#54の開始条件として引き継ぐ。main merge、実配信、published履歴は#53では行わない。 生成済みrelease受入の有無から未レビュー投影のテストを独立させ、分類テストの868問baselineは独立copyとして再利用する。変更後subjectで全592テスト・3エンジン225テスト・10監査と通常/準備のexact-commit検証を再確認した。
 
 ## Phase 9: Post-Deployment Catch-up (Issue #52)
 

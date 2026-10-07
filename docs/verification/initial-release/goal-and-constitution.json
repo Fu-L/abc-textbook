@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "taskId": "T151",
   "status": "release_gate_passed_agent_quality_review",
-  "generatedAt": "2026-10-07T16:17:16.388651+00:00",
+  "generatedAt": "2026-10-07T16:38:31.649285+00:00",
   "goal": "ABCの過去問からARC・AGC・CF Div. 1・UCUPへ進むための典型知識・適用条件・不変量・正当性・計算量と手法選択を学ぶ、一人用の教科書。",
   "scope": {
     "firstContest": "abc212",
@@ -738,64 +738,64 @@
   "blockingGates": [],
   "exactCommitEvidence": "Read-only verify:release output binds the final prepared Git SHA in CI; in-tree records never embed their own future commit hash.",
   "automatedAuditSubject": {
-    "digest": "5d995b89304047faceb4788b0f033658e67a0208e5f79ef48a296aba7f3c2dc4",
+    "digest": "932546dd9b5e571e45833f94f5a47382545342a79288251f88a526b90a74553b",
     "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
   "contentFileInventoryDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
   "automatedEvidence": {
     "matrixPath": "docs/verification/initial-release/matrix.json",
-    "matrixEvidenceDigest": "b354d0adcefd25cddf6ccf4fcb981ac23d3c9db0f9b1e8074465701ff621637e",
+    "matrixEvidenceDigest": "763b60f754309a138d88cf872bc43cf3dffdfea49dabe3c1395eaa6296ebfb88",
     "reports": [
       {
         "taskId": "T133",
         "path": "docs/verification/initial-release/schema-contracts.json",
-        "digest": "f879dbf8dd15adaf1fb33ab2b6dadf59f41f522166c42aa78bd10bc57dd54ca4"
+        "digest": "19d620c08ed905039f4dd5448042e68e33cfe062e58bba247436f7f5f52a142f"
       },
       {
         "taskId": "T134",
         "path": "docs/verification/initial-release/corpus-completeness.json",
-        "digest": "60360b558e1bf168a2c5cfd16b5424c9b787e3ad6008c042537dbe27b7d90d8f"
+        "digest": "cc80c34208cb65d19ef87a27aa62434214989d03a89186db97a93d2ee573aee0"
       },
       {
         "taskId": "T135",
         "path": "docs/verification/initial-release/taxonomy.json",
-        "digest": "0d76a197f930a7435e9c94f33fc1ca178aa1b0b9bfbb776d4a5b6119bbfe8446"
+        "digest": "e757acd148502114716fec0a66f86b5db27ce3f2d3131375be7d961b48bc39aa"
       },
       {
         "taskId": "T136",
         "path": "docs/verification/initial-release/sources-and-claims.json",
-        "digest": "e78b8b102b9c34e62e88d59dc3cc5dbe65e561199b75596d7fe821ad2f704c06"
+        "digest": "4a827450a0063a49779114aeb6ac0c4227e0437f90d0bf8a18c0ee3f58f95bf2"
       },
       {
         "taskId": "T137",
         "path": "docs/verification/initial-release/examples-and-answers.json",
-        "digest": "23117c87366dcbd4684275cf114853c76bd275424ae6425b60a2aa4985154d1c"
+        "digest": "f1b2ab16b5670b47a36331aa899f91b939e6a034d3d5606de9a89f4b5a314628"
       },
       {
         "taskId": "T138",
         "path": "docs/verification/initial-release/accessibility-and-links.json",
-        "digest": "6266f709ee3352903537fb5f8d0b88d556658ec934f264a3936814d7d980042e"
+        "digest": "6854b6f52bd2cdd44bf1b9703ee44902bd0007d97d537b58fab9fbd3177ae7d2"
       },
       {
         "taskId": "T139",
         "path": "docs/verification/initial-release/learning-records.json",
-        "digest": "b631e0616dcb0e2be172bbabfbdf05e6b57dc93f4f507256f039b4f023836435"
+        "digest": "2e2dc1904c6dc8a3a7a2c5075bf0a76918add5185b7a17134e432916aec9bae3"
       },
       {
         "taskId": "T140",
         "path": "docs/verification/initial-release/public-projections.json",
-        "digest": "c9569b0a7a6e749ff0d1fd7d8a64fa443a62239eba8a56a06f8b3c0a4786b0a1"
+        "digest": "cccec18a4599bfc794dcd995c865c35c789548c150e61961f7280a3146ca0da6"
       },
       {
         "taskId": "T141",
         "path": "docs/verification/initial-release/performance.json",
-        "digest": "dbdb82ec71c73801936ae355183ea0bbbc0730371ffd26a75bbdbadd603afdc9"
+        "digest": "99ada6a407aea8260ad89a19e721407fba0600d2e25475fa6d4964060c1434a6"
       },
       {
         "taskId": "T142",
         "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
-        "digest": "ae80900877f0342362bfa450aadd4c0b4bb26e93c46bdc8ce0812c91757c2d31"
+        "digest": "116ccb715d8ce48a750df503c204b4beca16e3a68505660c8c0780c0e3be0bd1"
       }
     ],
     "testResults": {
@@ -804,7 +804,7 @@
     },
     "browserResults": {
       "path": "docs/verification/initial-release/browser-results.json",
-      "digest": "6304a77400afe49f54b2e577ba6e7433f719e8519f5ed5a611082f7f3722999e"
+      "digest": "fdbd367e8e48201dc2a021d9a2fbb3ec51ff807d4f4c75e9e4eef93dd799deaa"
     }
   },
   "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference.",
@@ -821,7 +821,7 @@
   },
   "validatedReleaseSnapshot": {
     "command": "verify:release",
-    "commit": "27fb684602d2f208d55e48de452d80977abfd2bf",
+    "commit": "484481877fd1e4fb72c3ccd525bd9cebb1e24641",
     "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
     "version": "2026.10.07",
     "cutoffAt": "2026-07-12T00:00:00+09:00",
