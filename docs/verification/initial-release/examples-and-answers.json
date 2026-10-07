@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "0a670c209a42c0e4dd8c97fc9590ee3085ad40dc55994ce6b6d069a0e1542f8a",
-    "fileCount": 9487
+    "digest": "7c700e3b29fc9ac4558f8687024dc2f8900b3aa6d48c6e9c3911a7745d1363fd",
+    "fileCount": 9497
   },
-  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
-  "generatedAt": "2026-10-07T10:47:21.127Z",
+  "sourceProjectionDigest": "069bdceb773b0f1ca77b3697deb1c902c3b23305eaca3bbab577adfaf9d38bcc",
+  "generatedAt": "2026-10-07T12:20:25.784Z",
   "commands": [
     {
       "command": "npm run corpus:verify-learning-units",
       "exitCode": 0,
-      "durationMs": 3054.7952089999744,
+      "durationMs": 2983.068041999999,
       "outputDigest": "ad80a0669e69e15438280da6cf1d4319f2ab3f035c0160e7c80094c450de4204",
       "outputBytes": 360,
       "observed": "> abc-textbook@0.1.0 corpus:verify-learning-units\n> tsx scripts/corpus/verify-full-learning-units.ts --check\n\n{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:verify-problem-corpus",
       "exitCode": 0,
-      "durationMs": 42800.927874999994,
+      "durationMs": 41406.56016699999,
       "outputDigest": "93e12ddd3594b709e87b074fa01fc65ebc12db06e2fae4b746fb3c3af86eea06",
       "outputBytes": 1367,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-corpus\n> tsx scripts/corpus/verify-problem-corpus.ts --check\n\n{\"status\":\"accepted\",\"subjectDigest\":\"d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"mathematicalRegressions\":20,\"reviewMode\":\"agent_quality_review\",\"publicProjection\":\"pending_T160\"}\nauthor-problem-shards: passed\nverify-full-learning-units: passed\npr65-mathematical-checks.py: passed\npr65-review2-mathematical-checks.py: passed\npr65-review3-mathematical-checks.py: passed\npr65-review4-mathematical-checks.py: passed\npr65-review5-mathematical-checks.py: passed\npr65-review6-mathematical-checks.py: passed\npr65-review7-mathematical-checks.py: passed\npr65-review8-mathematical-checks.py: passed\npr65-review9-mathematical-checks.py: passed\npr65-review10-mathematical-checks.py: passed\npr65-review11-mathematical-checks.py: passed\npr65-review12-mathematical-checks.py: passed\npr65-review13-mathematical-checks.py: passed\npr65-review14-mathematical-checks.py: passed\npr65-review15-mathematical-checks.py: passed\npr65-review16-mathematical-checks.py: passed\npr65-review17-mathematical-checks.py: passed\npr65-review18-mathematical-checks.py: passed\npr65-review19-mathematical-checks.py: passed\npr65-review20-mathematical-checks.py: passed"
@@ -34,5 +34,5 @@
     "fixedOutcomeBlocksRequired": false,
     "basis": "All current owner inventories and prose fences inspected. Text fences are pseudocode; optional runnable/answer additions block until executed and verified."
   },
-  "evidenceDigest": "dfc05cffa72eec2076c4de5c570429615786b214a0a24207ea4dca6a69bdcb0b"
+  "evidenceDigest": "8fec3a13d91e389a61eeb7783cce1d2594aab4962340e5076d5590fb77458641"
 }

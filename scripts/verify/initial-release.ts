@@ -151,8 +151,28 @@ try {
         };
       } catch (error) {
         const failure = error as Error & { stdout?: string; stderr?: string };
+        let failedTests: string | undefined;
+        if (args.includes('--reporter=json') && failure.stdout) {
+          try {
+            const report = JSON.parse(failure.stdout) as {
+              testResults?: {
+                name: string;
+                assertionResults: { fullName: string; status: string; failureMessages: string[] }[];
+              }[];
+            };
+            failedTests = JSON.stringify(
+              report.testResults?.flatMap((file) =>
+                file.assertionResults
+                  .filter((test) => test.status === 'failed')
+                  .map((test) => ({ file: file.name, ...test })),
+              ),
+            );
+          } catch {
+            // Keep native output when the failed command did not finish its JSON report.
+          }
+        }
         throw new Error(
-          `${command} failed: ${failure.message}\n${failure.stdout?.slice(-3000) ?? ''}\n${failure.stderr?.slice(-3000) ?? ''}`,
+          `${command} failed: ${failure.message}\n${failedTests ?? failure.stdout?.slice(-3000) ?? ''}\n${failure.stderr?.slice(-3000) ?? ''}`,
           { cause: error },
         );
       }

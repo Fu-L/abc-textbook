@@ -307,13 +307,19 @@ T133〜T142のチェック済み状態はPR #69までの検証実装・868問の
 - [X] T142 [P] Audit client bundles, external dependencies, telemetry, accounts, paid services, and a deterministic 52-week update simulation for zero additional required cost in `docs/verification/initial-release/zero-cost-52-weeks.json`
 - [X] T145 After T162, assemble the initial 868-Problem release change summary from the bootstrap update only, with no unpublished catch-up IDs or fabricated host publication history, in `src/lib/catalog/full-public-projection.ts` and `docs/verification/releases/catalog.json`
 - [ ] T146 Complete the policy-selected review inventory for the exact seed-only release subject in `docs/reviews/human-content/initial-release/` and `docs/reviews/human-content/releases/`; use the current FR-026/Constitution 3.0.0 self/third-party/explicit solo-maintainer policy, preserve agent-quality-review lineage, and do not synthesize human approval
-- [ ] T147 Validate SC-012 against the seed-only release subject in `docs/verification/learner-outcomes/initial-release/`, retaining the retired SC-009/SC-010 owner dispositions; do not reuse expanded-corpus evidence without matching the current subject or claim automated timing measures human reading
+- [X] T147 Validate SC-012 against the seed-only release subject in `docs/verification/learner-outcomes/initial-release/`, retaining the retired SC-009/SC-010 owner dispositions; do not reuse expanded-corpus evidence without matching the current subject or claim automated timing measures human reading
 - [ ] T148 Configure build, link, schema, content-completeness, and policy-selected review checks as protected-main merge requirements
 - [ ] T149 Refresh changed-subject T133–T142 evidence and execute read-only exact-commit final validation for ABC212–466/868 Problems, dependency closure, deploy simulation and known-commit rollback rehearsal in `docs/verification/initial-release/final-validation.json`; declare live US5 criteria deferred to Phase 9 while keeping existing regression/simulation checks and all applicable release checks, and never regenerate accepted content during validation
 - [ ] T150 Finalize the exact production deploy adapter, static-host history, retry, rollback, and verification steps in `docs/operations/initial-release-runbook.md`
 - [ ] T151 Audit the final release commit against the original goal, all FR/CQ/SC requirements including FR-001/SC-001, the private-preview exclusion, Outcome/Problem shard join evidence, Constitution 3.0.0, self/third-party review policy, one-user scope, and zero-cost boundary in `docs/verification/initial-release/goal-and-constitution.json`
 - [ ] T152 Merge the fully validated tree to protected main and deploy that exact full commit hash without content changes by following `docs/operations/initial-release-runbook.md`
 - [ ] T153 Verify static-host deployment history, immutable Git Release history, route/search availability, known-commit rollback, and learning-record compatibility in `docs/verification/deployments/initial-release.json`
+
+### Issue #53 preparation progress (2026-10-07)
+
+T162/T145/T147のseed入力・bootstrap-only summary・SC-012自動観測を用意し、T133〜T142を現在のsubjectで全件再実行した。本文・taxonomy・配置のcanonical file差分は0件。SC-012は3エンジン×4固定Problemの自動操作と再読込保持であり、人間の読解時間を測っていない。
+
+T146は232 Unit / 868 Problem / 242 Outcomeのcurrent-subject inventoryと未承認packetまで準備済みで、実際のpolicy-selected human reviewが残る。T148のrequired-check payloadとCIは用意したが、現private repositoryへの設定PUTはGitHubの契約制限で403となった。T149の自動監査とread-only準備検証を実行し、production validationは人間approval欠落を拒否する。T150のCloudflare Pages Free adapter・host成功履歴・retry/rollback手順は実装済みだが、実project・origin・認証の確定は#54の開始条件として残る。これらの未完了条件を削除せず、productionReleaseApproved=falseを維持する。
 
 ## Phase 9: Post-Deployment Catch-up (Issue #52)
 

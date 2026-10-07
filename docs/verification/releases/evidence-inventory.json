@@ -1,5 +1,26 @@
 {
   "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
-  "checks": [],
+  "checks": [
+    {
+      "checkId": "check-initial-corpus",
+      "command": "npm run verify:initial-release -- --check",
+      "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-10-07T12:22:31.330Z",
+      "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
+      "resultDigest": "9983648cca443a5a8e71777216b1189446ff26fd95cc4a399f8ba54fdd885d9f"
+    },
+    {
+      "checkId": "check-initial-sc012",
+      "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
+      "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-10-07T12:18:52.455Z",
+      "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
+      "resultDigest": "86e58a6904e14ba02913e06fc8657570e6fd5e1b97655be868532012422fa0e9"
+    }
+  ],
   "reviews": []
 }

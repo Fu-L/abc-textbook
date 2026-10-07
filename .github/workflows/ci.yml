@@ -107,13 +107,21 @@ jobs:
         run: |
           if test -f docs/verification/releases/catalog.json; then
             if node -e 'const c=JSON.parse(require("fs").readFileSync("docs/verification/releases/catalog.json"));process.exit(c.release.humanContentReviewEvidenceRefs.length ? 1 : 0)'; then
-              npm run verify:release -- --commit "$GITHUB_SHA" --preparation
+              node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" --preparation > /tmp/final-validation.json
             else
-              npm run verify:release -- --commit "$GITHUB_SHA"
+              node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" > /tmp/final-validation.json
             fi
+            cat /tmp/final-validation.json
           else
             echo 'Implementation checks passed; no production release catalog has been supplied. The prepared T160 projection is verified separately and does not authorize production publication.'
           fi
+      - name: Preserve exact-commit validation result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-validation-${{ github.sha }}
+          path: /tmp/final-validation.json
+          if-no-files-found: ignore
 
   production-review:
     name: Production review
@@ -129,4 +137,13 @@ jobs:
       - run: npm install --global npm@11.16.0
       - run: npm ci
       - name: Require genuine policy-selected review of the exact release
-        run: npm run verify:release -- --commit "$GITHUB_SHA"
+        run:
+          node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" >
+          /tmp/production-review.json
+      - name: Preserve production gate result
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-review-${{ github.sha }}
+          path: /tmp/production-review.json
+          if-no-files-found: ignore

@@ -1,6 +1,74 @@
 {
   "schemaVersion": "1.0.0",
-  "status": "on_hold",
-  "generatedAt": "2026-10-07T12:00:00.033Z",
-  "reason": "npm run link:check:built failed: Command failed: npm run link:check:built"
+  "status": "passed",
+  "scope": "canonical-full-corpus",
+  "inputSubject": {
+    "digest": "7c700e3b29fc9ac4558f8687024dc2f8900b3aa6d48c6e9c3911a7745d1363fd",
+    "fileCount": 9497
+  },
+  "sourceProjectionDigest": "069bdceb773b0f1ca77b3697deb1c902c3b23305eaca3bbab577adfaf9d38bcc",
+  "generatedAt": "2026-10-07T12:20:25.784Z",
+  "reports": [
+    {
+      "taskId": "T133",
+      "path": "docs/verification/initial-release/schema-contracts.json",
+      "digest": "f170932181570995c06b81bbec457c48be5195e7b63f9b756137975dd48f9301"
+    },
+    {
+      "taskId": "T134",
+      "path": "docs/verification/initial-release/corpus-completeness.json",
+      "digest": "5b68d3c3d850451232a58cb46bfb022121fc75e774b86994f20a102b40489463"
+    },
+    {
+      "taskId": "T135",
+      "path": "docs/verification/initial-release/taxonomy.json",
+      "digest": "10f89801e7eb56a46c2e6b301cf8ae05409062759d70cea06f50b2d2fd862e14"
+    },
+    {
+      "taskId": "T136",
+      "path": "docs/verification/initial-release/sources-and-claims.json",
+      "digest": "f3aa532b967a1ee491a91f1c899eb4e305da2d99b7947ed40cdba1a74cd3badf"
+    },
+    {
+      "taskId": "T137",
+      "path": "docs/verification/initial-release/examples-and-answers.json",
+      "digest": "4af506420205c4a0db57f9f13f7914133cee172542924300242c6f6c1fe0d752"
+    },
+    {
+      "taskId": "T138",
+      "path": "docs/verification/initial-release/accessibility-and-links.json",
+      "digest": "ec3d2e1b8513f6829a983d0fea8881b792af1425bdb2c1c974ecc9851a0ef1e7"
+    },
+    {
+      "taskId": "T139",
+      "path": "docs/verification/initial-release/learning-records.json",
+      "digest": "320b39841379fff71c01c76add9d1163958d6c11b0dc91b4fbbaf9081a2e7b8e"
+    },
+    {
+      "taskId": "T140",
+      "path": "docs/verification/initial-release/public-projections.json",
+      "digest": "bb9be472cfe8f691f32e053f6e5d34b562cd2cf0fa2d119e5105f4ca9270ce56"
+    },
+    {
+      "taskId": "T141",
+      "path": "docs/verification/initial-release/performance.json",
+      "digest": "841264b1eac30003a19fb65deb67e4203bd60f4c231049cb46e9b4c9e5b92b56"
+    },
+    {
+      "taskId": "T142",
+      "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
+      "digest": "86be9e9f24c4068ffe7a5985f68133b1ca8a7ff4ab7d9a1bb3cf5c2111d17e51"
+    }
+  ],
+  "testResults": {
+    "path": "docs/verification/initial-release/test-results.json",
+    "digest": "7047eb17c116cbcfbbbbec96f88e195af07cc46dc9d550da206680dda4444c75"
+  },
+  "browserResults": {
+    "path": "docs/verification/initial-release/browser-results.json",
+    "digest": "edbcc86d05839887b096b412ce384146d8c2b8cb1a7bfa817ee136878c3c7824"
+  },
+  "productionReleaseApproved": false,
+  "nextGate": "Issue #53 seed release gate, then Issue #54 deployment",
+  "evidenceDigest": "ee5469f86c7c42c4fef267b3d2e19ec861745e7dd88df218181eed28a94b0055"
 }
