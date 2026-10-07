@@ -34,8 +34,14 @@ jobs:
           ref: ${{ inputs.commit }}
           fetch-depth: 0
       - name: Enforce protected-main membership and required successful checks
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_GATE_TOKEN }}
         shell: bash
         run: |
+          if test -z "$GH_TOKEN"; then
+            echo 'Configure RELEASE_GATE_TOKEN with repository Administration read and Checks read permissions.' >&2
+            exit 1
+          fi
           test "${#RELEASE_COMMIT}" = 40
           test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
           git fetch origin main

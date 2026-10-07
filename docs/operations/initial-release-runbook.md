@@ -106,6 +106,12 @@ npm exec --yes --package=wrangler@4.148.0 -- wrangler pages project list --json
 GitHub Actionsの`production` environmentへaccount IDとPagesの編集が可能なAPI
 tokenをsecretとして設定する。tokenを文書・証跡へ書かない。secret名は`CLOUDFLARE_ACCOUNT_ID`、`CLOUDFLARE_API_TOKEN`。variable名は`CLOUDFLARE_PAGES_PROJECT`、`SITE_URL`。この設定と実originの確認は#54の開始条件である。
 
+同じenvironmentの`RELEASE_GATE_TOKEN`には、このrepositoryのAdministration readとChecks
+readを持つ運用者のfine-grained tokenを設定する。branch protectionのGETはAdministration
+readを要求するため、workflowの`contents: read` / `checks: read`の標準
+`GITHUB_TOKEN`だけでは代用しない。このtokenは保護設定とcheck結果の読み取りstepだけで使い、設定変更やmerge権限は要求しない。
+[GitHubのbranch protection API権限](https://docs.github.com/en/rest/branches/branch-protection#get-branch-protection)
+
 ## exact commitの初回deployとretry
 
 #54で、全required checksが成功したPRをprotected mainへmergeする。merge後のfull SHAに対するrequired
