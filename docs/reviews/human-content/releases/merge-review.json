@@ -36635,11 +36635,12 @@
     }
   ],
   "workManifestPath": "docs/work-manifests/initial/release/manifest.json",
-  "workManifestDigest": "1566a540f1c352f1d4877ccc35435925758ee45c46b425069ae994d8a6b8e393",
+  "workManifestDigest": "af373b4eda34090a30cd9c5701722fa6ff9cf094af0eb2baf3286aa562af95cb",
   "inventoryPath": "docs/reviews/human-content/initial-release/inventory.json",
   "requiredPolicy": {
-    "requiredMode": "third_party",
-    "riskReasons": ["original_proof", "major_classification_change"]
+    "requiredMode": "self",
+    "riskReasons": ["original_proof", "major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer"
   },
   "applicableChecks": [
     {
@@ -36649,11 +36650,11 @@
       "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-10-07T12:22:31.330Z",
+      "completedAt": "2026-10-07T13:52:49.486Z",
       "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
-      "resultDigest": "9983648cca443a5a8e71777216b1189446ff26fd95cc4a399f8ba54fdd885d9f",
+      "resultDigest": "0d4c245130ddb8ee46be571450c24dd08205bf1e156f5cc54889be323c973c7a",
       "rawResultPath": "docs/verification/releases/checks/raw-initial-corpus.txt",
-      "rawResultDigest": "1dc9411cf8fc615ada4faf6000cdc4037285662e6821c0d3d0621ecc9b656658"
+      "rawResultDigest": "5d22cfdc882856d8731c26ded8d5e465ef882f0e0a3bd531009a964233649a7d"
     },
     {
       "schemaVersion": "1.0.0",
@@ -36662,11 +36663,11 @@
       "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-10-07T12:18:52.455Z",
+      "completedAt": "2026-10-07T13:50:36.566Z",
       "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
-      "resultDigest": "86e58a6904e14ba02913e06fc8657570e6fd5e1b97655be868532012422fa0e9",
+      "resultDigest": "0f218e0f91b8b23c982e70b929d11a4d722151469c3d004f4c9da1059c4b9f96",
       "rawResultPath": "docs/verification/initial-release/browser-results.json",
-      "rawResultDigest": "edbcc86d05839887b096b412ce384146d8c2b8cb1a7bfa817ee136878c3c7824"
+      "rawResultDigest": "b58b75a4a856247897ff57b48257fc0fb164305f07002a15a2f75e7e89c121d1"
     }
   ]
 }

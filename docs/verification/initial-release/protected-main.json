@@ -1,13 +1,12 @@
 {
   "schemaVersion": "1.0.0",
   "taskId": "T148",
-  "status": "blocked_by_repository_plan",
-  "checkedAt": "2026-10-07T11:45:47.932201+00:00",
+  "status": "configured",
+  "checkedAt": "2026-10-07T13:44:33.978847+00:00",
   "repository": "Fu-L/abc-textbook",
-  "visibility": "private",
-  "operation": "PUT /repos/Fu-L/abc-textbook/branches/main/protection",
-  "httpStatus": 403,
-  "observedMessage": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+  "visibility": "public",
+  "operation": "PUT and GET /repos/Fu-L/abc-textbook/branches/main/protection",
+  "httpStatus": 200,
   "configurationPath": "docs/operations/protected-main.json",
   "configurationDigest": "04fae11034dd6f5e976fb5598ec8b1faaa0bb4db0cb7467518ecc6bb6f9d3005",
   "requiredChecks": [
@@ -17,7 +16,78 @@
     "Release validation",
     "Production review"
   ],
-  "configured": false,
+  "configured": true,
   "bypass": false,
-  "requiredOwnerDecision": "Choose a repository visibility/plan that supports protected main without introducing required paid cost."
+  "readback": {
+    "url": "https://api.github.com/repos/Fu-L/abc-textbook/branches/main/protection",
+    "required_status_checks": {
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/branches/main/protection/required_status_checks",
+      "strict": true,
+      "contexts": [
+        "Verify (release baseline)",
+        "Verify (supported range)",
+        "Initial corpus audit",
+        "Release validation",
+        "Production review"
+      ],
+      "contexts_url": "https://api.github.com/repos/Fu-L/abc-textbook/branches/main/protection/required_status_checks/contexts",
+      "checks": [
+        {
+          "context": "Verify (release baseline)",
+          "app_id": 15368
+        },
+        {
+          "context": "Verify (supported range)",
+          "app_id": 15368
+        },
+        {
+          "context": "Initial corpus audit",
+          "app_id": 15368
+        },
+        {
+          "context": "Release validation",
+          "app_id": 15368
+        },
+        {
+          "context": "Production review",
+          "app_id": 15368
+        }
+      ]
+    },
+    "required_signatures": {
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/branches/main/protection/required_signatures",
+      "enabled": false
+    },
+    "enforce_admins": {
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/branches/main/protection/enforce_admins",
+      "enabled": true
+    },
+    "required_linear_history": {
+      "enabled": false
+    },
+    "allow_force_pushes": {
+      "enabled": false
+    },
+    "allow_deletions": {
+      "enabled": false
+    },
+    "block_creations": {
+      "enabled": false
+    },
+    "required_conversation_resolution": {
+      "enabled": false
+    },
+    "lock_branch": {
+      "enabled": false
+    },
+    "allow_fork_syncing": {
+      "enabled": false
+    }
+  },
+  "previousObservation": {
+    "visibility": "private",
+    "httpStatus": 403,
+    "checkedAt": "2026-10-07T11:45:47.932201+00:00",
+    "message": "Upgrade to GitHub Pro or make this repository public to enable this feature."
+  }
 }

@@ -150,7 +150,7 @@ export const verifySeedPreparation = async (
     cutoffAt: catalog.release.cutoffAt,
     version: catalog.release.version,
     problemCount: 868,
-    pendingGates: [
+    productionGateRequirements: [
       'policy-selected-human-review',
       'protected-main-required-checks',
       'host-project-and-origin',

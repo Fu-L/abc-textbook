@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "7c700e3b29fc9ac4558f8687024dc2f8900b3aa6d48c6e9c3911a7745d1363fd",
+    "digest": "50e934e1bfd52101fb7256cc38725f30e736274370178ee3558f7254f7deefbc",
     "fileCount": 9497
   },
-  "sourceProjectionDigest": "069bdceb773b0f1ca77b3697deb1c902c3b23305eaca3bbab577adfaf9d38bcc",
-  "generatedAt": "2026-10-07T12:20:25.784Z",
+  "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
+  "generatedAt": "2026-10-07T13:51:59.739Z",
   "commands": [
     {
       "command": "npm run corpus:verify",
       "exitCode": 0,
-      "durationMs": 797.514583000011,
+      "durationMs": 813.8630830000038,
       "outputDigest": "21b8a49ca2a7ee5d3c1f7b39a8a682f4f811d6d9aa16231cbf92c410411818f7",
       "outputBytes": 561,
       "observed": "> abc-textbook@0.1.0 corpus:verify\n> tsx scripts/corpus/verify-inventory.ts --check\n\n{\"command\":\"verify-inventory\",\"mode\":\"check\",\"status\":\"passed\",\"evidenceDigest\":\"809818e8cb74720b2389e61d0a6a72515fe4b98e22e1c894a9f9060e97e1e5c2\",\"corpusDigest\":\"579775b9383dc470d1ee06ffc100255dafe3a72636f53e3c7860bd39556d6d28\",\"inventoryDigest\":\"676a1e7c52b120d2b72f34ec60b5823915707a7f87655ebaa79b95cb7e198482\",\"previewComponentDigest\":\"f64e6962363c5fad3fde86643648bc413dc4a4cef42ad14dc79bc6f1341e784b\",\"resultPath\":\"docs/verification/bootstrap/technique-inventory.json\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:verify-atcoder-problems-metrics",
       "exitCode": 0,
-      "durationMs": 219.31037500000093,
+      "durationMs": 234.54541600000812,
       "outputDigest": "4dbce687376561decced0d53694c876c4720d3758b1604b0bccd31cf28202535",
       "outputBytes": 348,
       "observed": "> abc-textbook@0.1.0 corpus:verify-atcoder-problems-metrics\n> tsx scripts/corpus/verify-atcoder-problems-metrics.ts\n\n{\"command\":\"verify-atcoder-problems-metrics\",\"status\":\"passed\",\"snapshotPath\":\"/Users/fuma/Desktop/VSCode/abc-textbook/src/content/problem-metrics/atcoder-problems.json\",\"checkedAt\":\"2026-09-14T18:34:00+09:00\",\"problemCount\":868}"
@@ -29,7 +29,7 @@
     {
       "command": "npm run corpus:verify-problem-corpus",
       "exitCode": 0,
-      "durationMs": 41406.56016699999,
+      "durationMs": 40949.90424999999,
       "outputDigest": "93e12ddd3594b709e87b074fa01fc65ebc12db06e2fae4b746fb3c3af86eea06",
       "outputBytes": 1367,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-corpus\n> tsx scripts/corpus/verify-problem-corpus.ts --check\n\n{\"status\":\"accepted\",\"subjectDigest\":\"d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"mathematicalRegressions\":20,\"reviewMode\":\"agent_quality_review\",\"publicProjection\":\"pending_T160\"}\nauthor-problem-shards: passed\nverify-full-learning-units: passed\npr65-mathematical-checks.py: passed\npr65-review2-mathematical-checks.py: passed\npr65-review3-mathematical-checks.py: passed\npr65-review4-mathematical-checks.py: passed\npr65-review5-mathematical-checks.py: passed\npr65-review6-mathematical-checks.py: passed\npr65-review7-mathematical-checks.py: passed\npr65-review8-mathematical-checks.py: passed\npr65-review9-mathematical-checks.py: passed\npr65-review10-mathematical-checks.py: passed\npr65-review11-mathematical-checks.py: passed\npr65-review12-mathematical-checks.py: passed\npr65-review13-mathematical-checks.py: passed\npr65-review14-mathematical-checks.py: passed\npr65-review15-mathematical-checks.py: passed\npr65-review16-mathematical-checks.py: passed\npr65-review17-mathematical-checks.py: passed\npr65-review18-mathematical-checks.py: passed\npr65-review19-mathematical-checks.py: passed\npr65-review20-mathematical-checks.py: passed"
@@ -37,10 +37,10 @@
     {
       "command": "npm run corpus:verify-full-projections",
       "exitCode": 0,
-      "durationMs": 5617.989457999996,
-      "outputDigest": "85d24a37f9067290098a8bd4252652ec63df7caaac1bbfb8d1ca4f72cf3278c9",
+      "durationMs": 5369.221166000003,
+      "outputDigest": "b4da39f70bd27575f805494e9bb581d6737f7ac4251a343d3e4e70a659ee89b8",
       "outputBytes": 399,
-      "observed": "> abc-textbook@0.1.0 corpus:verify-full-projections\n> tsx scripts/corpus/verify-full-projections.ts --check\n\n{\"status\":\"passed\",\"fullProjectionDigest\":\"5ce4615fe09bd11f95c2263f47f15dd83060cfd629e86074a3ac36a73d0f6ede\",\"contests\":254,\"officialGaps\":1,\"problems\":868,\"tags\":213,\"learningUnits\":232,\"releases\":0,\"routes\":1576,\"searchDocuments\":1567,\"correctionImpacts\":12,\"retiredOptionalTargets\":72}"
+      "observed": "> abc-textbook@0.1.0 corpus:verify-full-projections\n> tsx scripts/corpus/verify-full-projections.ts --check\n\n{\"status\":\"passed\",\"fullProjectionDigest\":\"02efb8193d075893d7a617ea52213421fc58e0a04b6743a35f9817ad96e600fb\",\"contests\":254,\"officialGaps\":1,\"problems\":868,\"tags\":213,\"learningUnits\":232,\"releases\":0,\"routes\":1576,\"searchDocuments\":1567,\"correctionImpacts\":12,\"retiredOptionalTargets\":72}"
     }
   ],
   "checks": {
@@ -62,5 +62,5 @@
     "labels": ["E", "F", "G", "Ex", "H"],
     "problemSetDigest": "898d6ee7db594ba6f567a215ff103dd8548e74fc2b07beb4b1be2e21dcfe7c69"
   },
-  "evidenceDigest": "13971325f75c595e29173fa3612e65c2d31ea4174f88ec3026d4be5b0e0d9885"
+  "evidenceDigest": "cc4da049a133692b7ef8299abee966e079ec39547a55dfb730342100a57a4af0"
 }

@@ -10,12 +10,12 @@ Node 24.18.0 / npm 11.16.0とlockfileの依存を使う。
 
 ```sh
 npm ci
-npm run release:bootstrap -- --first 212 --last 466 --mode inputs
+npm run release:bootstrap -- --first 212 --last 466 --mode inputs --review-policy solo-maintainer
 npm run build
 node --import tsx scripts/corpus/verify-full-projections.ts --write-evidence
 npm run verify:initial-release -- --write
 npm run verify:initial-release -- --check
-npm run release:bootstrap -- --first 212 --last 466 --mode evidence
+npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-policy solo-maintainer
 ```
 
 bootstrapはproduction用のcanonical入力を読む。previewは明示した
@@ -40,9 +40,9 @@ inventoryのdigest、既存agent品質受入のlineageがある。
 `docs/reviews/human-content/releases/merge-review.json`は未承認packetである。未承認状態のproduction
 `verify:release`は終了2となり、`Production review` checkは通らない。
 
-原則third-party reviewを使い、original proofとmajor classificationのrisk
-reasonを残す。maintainerが一人であることをownerが明示した場合は、最初のbootstrapコマンドへ
-`--review-policy solo-maintainer`を付ける。以降の`--mode evidence`にも同じ指定を付け、変更したmanifestで検査を再実行する。これはConstitution
+2026-10-07のowner指示により、この初版は`self`と`solo_maintainer`を選択する。original proofとmajor
+classificationのrisk reasonを残し、bootstrapの`--mode inputs`と`--mode evidence`の両方へ
+`--review-policy solo-maintainer`を付ける。変更したmanifestで検査を再実行する。これはConstitution
 3.0.0のhigh-risk
 self-reviewであり、リスク理由の除去やagent品質受入から人間approvalへの読み替えではない。
 
@@ -71,13 +71,12 @@ build、link、schema、content
 completenessは二環境の`Verify`と`Initial corpus audit`が検査し、実差分・公開scopeは`Release validation`、人間reviewは`Production review`が検査する。設定payloadは[protected-main.json](protected-main.json)。strict
 checksとadminを含む保護を要求する。
 
-2026-10-07の実API確認ではprivate repositoryのbranch
-protectionは403で利用不可だった。設定済みとは報告しない。GitHub Freeのpublic
-repository、またはprivate
-repositoryで保護が利用可能な既存契約が必要である。追加必須費用0円を守るため有料upgradeを前提にしない。repositoryの公開範囲変更はowner判断であり、本作業では実行していない。
+2026-10-07、ownerがrepositoryをpublicに変更した後、上記payloadをAPIで設定した。GETで5つのrequired
+checks、strict、enforce admins、force push禁止、削除禁止を確認した。実応答は
+`docs/verification/initial-release/protected-main.json`へ保存する。private時の403は履歴として残し、現在の未設定状態とは扱わない。追加必須費用は0円で、有料upgradeは行っていない。
 [GitHubの公式仕様](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 
-利用可能になった後、ownerが設定し、読み取り結果を保存する。
+設定の再適用・確認は次を使う。
 
 ```sh
 gh api --method PUT repos/Fu-L/abc-textbook/branches/main/protection --input docs/operations/protected-main.json

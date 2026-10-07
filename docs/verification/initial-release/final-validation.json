@@ -2,12 +2,12 @@
   "schemaVersion": "1.0.0",
   "taskId": "T149",
   "status": "preparation_passed_production_on_hold",
-  "generatedAt": "2026-10-07T12:29:21.305116+00:00",
+  "generatedAt": "2026-10-07T13:53:08.581044+00:00",
   "automatedAuditSubject": {
-    "digest": "7c700e3b29fc9ac4558f8687024dc2f8900b3aa6d48c6e9c3911a7745d1363fd",
+    "digest": "50e934e1bfd52101fb7256cc38725f30e736274370178ee3558f7254f7deefbc",
     "fileCount": 9497
   },
-  "sourceProjectionDigest": "069bdceb773b0f1ca77b3697deb1c902c3b23305eaca3bbab577adfaf9d38bcc",
+  "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
   "validatedPreparationSnapshot": {
     "command": "verify:release",
     "mode": "preparation",
@@ -63,17 +63,13 @@
     "checkedLinks": 4648,
     "SC012Observations": 12,
     "SC012HumanTimingAccepted": false,
-    "SC012MaximumAutomatedDurationMs": 162.8869169999998,
-    "designLimitFilterP95Ms": 1.300000011920929,
+    "SC012MaximumAutomatedDurationMs": 143.62812499999927,
+    "designLimitFilterP95Ms": 1,
     "simulationWeeks": 52,
     "simulationRequiredCostJPY": 0,
     "actualProductionRollbackClaimed": false
   },
-  "pendingGates": [
-    "policy-selected-human-review",
-    "protected-main-required-checks",
-    "host-project-and-origin"
-  ],
+  "pendingGates": ["policy-selected-human-review", "host-project-and-origin"],
   "liveAcceptanceDeferred": {
     "issue": 52,
     "startsAfterIssue": 54,
@@ -87,5 +83,12 @@
       "SC-014 live updates"
     ]
   },
-  "productionReleaseApproved": false
+  "productionReleaseApproved": false,
+  "configuredGates": ["protected-main-required-checks"],
+  "selectedReviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": ["original_proof", "major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer"
+  },
+  "snapshotRefreshPending": true
 }

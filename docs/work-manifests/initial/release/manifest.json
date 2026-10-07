@@ -2,8 +2,8 @@
   "schemaVersion": "2.0.0",
   "manifestId": "work-manifest-T162-seed-release",
   "taskId": "T162",
-  "scopeDigest": "fbe40f8d8ba667eb8e2c4ecbfeae6d86cee41be4dd8af243cfcd23f43c363297",
-  "digest": "1566a540f1c352f1d4877ccc35435925758ee45c46b425069ae994d8a6b8e393",
+  "scopeDigest": "8cdfc42a79a38fe03c49be471d1f841ed24800588cb0b5eb1be3b84d2b94ded8",
+  "digest": "af373b4eda34090a30cd9c5701722fa6ff9cf094af0eb2baf3286aa562af95cb",
   "changeKind": "operations",
   "requiredRequirementIds": ["FR-001", "FR-026", "FR-027", "FR-030", "SC-001", "SC-012"],
   "learningOutcomeIds": [
@@ -255,8 +255,9 @@
     "rationale": "The declared review units change observable learning outcomes."
   },
   "reviewPolicy": {
-    "requiredMode": "third_party",
-    "riskReasons": ["original_proof", "major_classification_change"]
+    "requiredMode": "self",
+    "riskReasons": ["original_proof", "major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer"
   },
   "reviewUnits": [
     {
