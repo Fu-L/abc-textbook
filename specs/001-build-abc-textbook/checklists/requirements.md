@@ -31,6 +31,8 @@
 
 ## Notes
 
+- 2026-10-07のowner方針を反映。初版はABC212〜466の検証済み868問・213タグ・232 Unit、cutoff 2026-07-12T00:00:00+09:00。US5/live catch-upを公開後へ移し、#53 → #54 → #52の依存関係と各版の宣言範囲内100% coverageをspec/plan/tasks/data-model/contracts/quickstartへ揃えた。
+
 - Validation iteration 11 on 2026-07-14 followed `speckit-analyze` remediation.
 - 「E問題以上」を、公式問題一覧でDより後に並ぶ全競技問題と定義し、E〜Hの固定4枠による将来の欠落を解消した。
 - 典型体系を全対象問題の横断棚卸しから作る要件を追加し、コンテスト順の仮分類を公開正本にしないことを明示した。

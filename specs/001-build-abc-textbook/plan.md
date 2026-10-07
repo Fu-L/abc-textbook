@@ -4,9 +4,11 @@
 
 **Input**: Feature specification from `/specs/001-build-abc-textbook/spec.md`
 
+**Delivery policy updated**: 2026-10-07。実装順と引継ぎは[先行公開の手順](../../docs/operations/deploy-before-catch-up.md)を参照する。
+
 ## Summary
 
-ABC 212から公開基準日時点の最新終了済みABCまでについて、公式問題一覧でDより後に並ぶ全問題を収録し、全コーパスを横断した典型・学習成果・前提関係で教科書と問題集を構成する。固定のE〜H列ではなく、各公開範囲で確認した上級問題記号の和集合を公式順に扱う。
+初版はABC212〜466の検証済み868問・213タグ・232 Unitを固定範囲として先に公開する。キャッチアップ機能とABC467以降の収録は実デプロイ・事後検証後に追加する。各公開版が宣言した範囲について、公式問題一覧でDより後に並ぶ全問題を収録し、全コーパスを横断した典型・学習成果・前提関係で教科書と問題集を構成する。固定のE〜H列ではなく、各公開範囲で確認した上級問題記号の和集合を公式順に扱う。
 
 実装は静的Web教材とローカル更新CLIを一つのTypeScriptプロジェクトに置く。教材正本はGit管理の構造化データとMarkdown、学習記録はブラウザー内、更新候補は公開正本と分離したstagingに保存する。初期制作では、Foundational完了後に複数分野・複数Contestを含む小さなprivate previewを一周させ、設計上の問題を早期に検出する。そのpreviewで使う仮taxonomyはstagingだけに置き、全対象問題の公式メタデータ、全ProblemのTechnique Inventory、コーパス横断の正式taxonomyを揃えた後に、明示的な統合表を通して最終正本を生成する。
 
@@ -28,7 +30,7 @@ ABC 212から公開基準日時点の最新終了済みABCまでについて、�
 
 **Constraints**: 必須経路の追加費用0円、継続利用者1人、アカウント・常時稼働backend・有料APIなし。開催中コンテストを取得しない。公式問題文・解説を正本へ転載せず、公式URL、確認情報、必要最小限の引用、独自説明を保持する。公開には全自動検査、必要な作成者外レビュー、protected mainへのmergeを要求し、merge済みGit commitを静的hostへ渡す。特定LLM、外部参加者cohort、全OS・全実browserの手動証跡は必須経路にしない。
 
-**Scale/Scope**: 初期制作シードはABC 212〜466の255コンテスト。E〜Hは初期の基準列として認識するが、対象problem slotは文字列かつ公式順として扱い、Dより後の新しい記号を上限なく追加できる。1人分の学習記録を少なくとも1,500問題まで扱う。
+**Scale/Scope**: 初版はABC212〜466の255番号・254開催と公式欠番ABC316、868問・213タグ・232 Unit。収録基準日時は`2026-07-12T00:00:00+09:00`に固定する。E〜Hは初期の基準列として認識するが、対象problem slotは文字列かつ公式順として扱い、公開後にDより後の新しい記号を上限なく追加できる。1人分の学習記録を少なくとも1,500問題まで扱う。
 
 ## Constitution Check
 
@@ -243,11 +245,17 @@ previewの仮taxonomyから最終taxonomyへの統合は、T159の`FinalTaxonomy
 
 全Unitの習得対象色と理由は`unit-learning-targets.ts`で個別に定める。色名・レーティング帯は文字で示し、章・構造Unitは導入対象、学習Unitは習得対象とする。DAGに全体順位を与えず、`textbook-order.ts`の編集だけでは前提やProblemのhomeを変更しない。対象色は全問題を解く難易度ではなく、difficulty/pointによる並べ替え基準にも使わない。T160までdraftとし、公開時には受理済みfull_authoring本文の公開状態とmaterialization検証の契約を合わせて切り替える。
 
-### Initial Release Cutoff and Catch-up
+### Initial Deployment, Then Catch-up
 
-ABC 212〜466はbootstrap seedであり公開上限ではない。初版candidate直前にoffset付き`cutoffAt`を固定し、終了済み最新ABCまでの未収録Contestを昇順に通常updateへ通す。各ContestではDより後の全公式problemを列挙し、未完成解説、未解消分類、仮taxonomy、検証失敗、保留updateが一件でもあれば初版candidateを作らない。private previewはこのgateの対象範囲外であり、previewの成功を全件収録の代替にしない。
+初版の範囲はABC212〜466の868問、`cutoffAt=2026-07-12T00:00:00+09:00`に固定する。公開準備はPR #69までを統合した`main`から別branchで開始し、PR #70の追加36問・taxonomy・初回catch-up実装を初版へmergeしない。既存の作業branchと未commit変更は保存する。T162で初版用bootstrap・prepared Catalog・検証inventoryをこの範囲へ結び付ける。必要なら既存helperを小さく移植するが、本文やtaxonomyを再生成しない。生成したprojection・証跡は実際の新しいcommitへ固定する。
 
-bootstrapと全catch-up updateをCatalogのrelease change summaryへ束ねる。自動検査とpolicyに応じたself-reviewまたはthird-party reviewをprotected mainのmerge条件にし、成功したfull Git commitだけを静的hostへdeployする。high-risk self-reviewはsolo maintainer理由を明示した場合だけ許可する。cutoff後に終了したContestは次回対象とし、rollbackは既知release commitを再deployする。
+Issue #53は#51の検証済みseedを入力にT162、T145〜T151を実施し、Issue #54がT152〜T153の実公開と事後検証を行う。#52/T143〜T144/T163〜T164は#54の後に実施し、#53/#54をブロックしない。初版change summaryはbootstrapだけを含み、未公開catch-up IDを公開履歴へ混ぜない。公開host・HTTPS origin・base pathをT150で固定し、学習記録のキーとDB契約を維持する。
+
+自動検査とpolicyに応じたself-reviewまたはthird-party reviewをprotected mainのmerge条件にし、成功したfull Git commitだけを静的hostへdeployする。high-risk self-reviewはsolo maintainer理由を明示した場合だけ許可する。初版範囲の未完成解説、分類不整合、仮taxonomy、検証失敗、必要review欠落を認めない。範囲外の未着手・保留候補はstagingに隔離し、初版の失敗条件へ混ぜない。初版で未提供のlive更新機能は仕様のDelivery phasesに従って後続機能として扱い、既存simulationの結果は残す。
+
+公開後のcatch-upは初回bootstrapと分離し、公開済みCatalog・Release Metadata・実host履歴をbaseとして未収録Contestを昇順に選ぶ。更新の`baseReleaseVersion`を公開済み版に結び付け、`releaseKind`は既存schema値`incremental`を使う。取得・執筆・review・適用・projection・検証・公開は手動でもよい。各更新は1 Contestまたは独立した小batchとし、最後に収録するContestの終了後、次の未収録Contestの終了前となるoffset付きcutoffを固定する。1更新内の全D-after問題と全影響を検証してから公開し、遠い最新回への追随完了を中間版の条件にしない。
+
+追加・訂正時は既存の本文、semantic ownership、三つの前提DAG、読書順、Problem IDと学習記録を保持し、必要な変更だけを通常review/correctionへ通す。metrics・routes・catalog・Pagefind・sitemap/feedを同じ更新で検証する。旧公開履歴は変更せず、新版のsummaryにはその版で取り込む差分を載せる。rollbackは実host履歴にある既知commitを再deployする。初版しか公開していないhostで二つの既知公開版が必要なrollbackを成功扱いせず、simulationと実復旧確認を区別する。
 
 ## Verification Strategy
 

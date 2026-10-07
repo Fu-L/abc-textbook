@@ -414,7 +414,7 @@ schema version、createdAt、targetReleaseVersion、全record、不明Problem ID
 | Field | Rule |
 |---|---|
 | `id` / `kind` | 追加、訂正、taxonomy、bootstrap |
-| `baseReleaseVersion` | initialではnull |
+| `baseReleaseVersion` | 初版bootstrapだけnull。公開後のcatch-up/訂正/taxonomy更新は実際に公開済みのbase版を必須とする |
 | `contestId` | Contest追加時に必須 |
 | `advancedSlotLabels` | Dより後の全label。固定4枠不可 |
 | `targetProblemIds` | 変更種別にかかわらず影響を受けるProblem集合の正本。Problem operationの集合を必ず含む |
@@ -435,6 +435,8 @@ deployment adapterへ渡す最小recordであり、`schemaVersion`、`version`�
 ### Release
 
 公開版はRelease Metadataが指すGit commitである。Catalogには取り込んだupdate IDs、追加・変更・保留・取り下げ問題、taxonomy変更、検証要約、review evidence refs、changelogを保持し、未公開ON_HOLD試行はPublicationUpdate statusから参照する。rollbackは既知のRelease Metadataが指すcommitをdeployment adapterで再deployする。
+
+初版の収録範囲はABC212〜466の868問・213タグ・232 Unit、`cutoffAt=2026-07-12T00:00:00+09:00`に固定する。公開日や検証日時から収録上限を推測しない。prepared Catalogは実公開の証拠ではなく、公開履歴はhostの成功履歴とexact commitにのみ基づく。初版summaryはbootstrapのみ、公開後catch-upは公開済み版をbaseに`releaseKind=incremental`として今回の差分を記録する。初版の868問は以後のcoverage上限ではなく、各更新版の公式範囲から件数を再計算する。
 
 ### Release責務の重複解消
 
@@ -496,7 +498,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 
 公開前に少なくとも次を全件検査する。
 
-1. ABC 212からcutoffまでの各番号が、開催済みContestまたは公式欠番証跡のちょうど一方で連続被覆される。
+1. ABC212から各版が宣言した上限までの各番号が、開催済みContestまたは公式欠番証跡のちょうど一方で連続被覆され、offset付きcutoffと一致する。初版はABC466まで、基準日時は2026-07-12T00:00:00+09:00であり、公開日現在の最新回への追随は初版条件にしない。
 2. 各ContestのDより後の全公式ProblemがCatalogに存在する。
 3. AdvancedSlotRegistryが全Contest orderと矛盾せず、新labelを欠落させない。
 4. Problem集合とTechnique Inventory集合が一致する。
@@ -510,3 +512,4 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 12. contest matrix、search、simple local learning managementが公開Problemで利用可能である。
 13. private preview、仮taxonomy、未結合shard、preview-only evidenceが公開content treeへ入っていない。
 14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したrelease commitから再計算できる。
+15. 公開後catch-upは実際の公開済みbaseを参照し、既収録Contestを追加として再適用しない。未着手の後続Contestは現在のbatchへ混ぜず、batch内に未完成・保留がある場合はbatch全体を公開しない。

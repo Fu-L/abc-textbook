@@ -5,8 +5,9 @@ orderでDより後を対象にし、ARC・AGC・CF Div. 1・UCUPへ転用する�
 Outcomeとして判断する。
 
 Issue #49で用意するのは更新の検証、履歴生成、運用手順である。全公開投影はT160 / Issue
-#50、初回catch-upと実公開はIssue
-#52が所有する。`initial-v1`のsimulationをproduction更新へ流用しない。現在の`abc:update --fixture initial-v1`と`abc:review`はpreview用の入口であり、未実装のlive一括更新コマンドとして案内しない。
+#50。2026-10-07のowner方針により、初版868問の公開準備は#53、実デプロイと事後検証は#54、live
+catch-upの実装は#54完了後の#52が所有する。実装開始点は[先行公開の手順](deploy-before-catch-up.md)。`initial-v1`のsimulationをproduction更新へ流用しない。`abc:update --fixture initial-v1`と`abc:review`はpreview用の入口であり、PR
+#70の初回専用`--contest`経路も公開済みbaseからのlive更新完成とは扱わない。
 
 ## 1. Prepare：正本と差分を用意する
 
