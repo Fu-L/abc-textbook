@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "taskId": "T149",
   "status": "release_gate_passed_agent_quality_review",
-  "generatedAt": "2026-10-07T16:57:01.351614+00:00",
+  "generatedAt": "2026-10-07T17:23:34.548639+00:00",
   "automatedAuditSubject": {
-    "digest": "afc68a921c6d6b3cc7f371bfaa0d987b8d721b2e3276534aff45da8c38dc4771",
+    "digest": "7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e",
     "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
@@ -33,7 +33,7 @@
     "checkedLinks": 4648,
     "SC012Observations": 12,
     "SC012HumanTimingAccepted": false,
-    "SC012MaximumAutomatedDurationMs": 137.24725000000035,
+    "SC012MaximumAutomatedDurationMs": 134.92662500000006,
     "designLimitFilterP95Ms": 1.0999999940395355,
     "simulationWeeks": 52,
     "simulationRequiredCostJPY": 0,
@@ -66,7 +66,7 @@
   "agentQualityReviewEvidenceRef": {
     "evidenceId": "agent-content-review-initial-release",
     "path": "docs/reviews/agent-content/initial-release/release-review.json",
-    "digest": "e3fccaa66f4db319bff923c4a92e65e292695d3db15fe8ec6129c1f7185f4259",
+    "digest": "293fc5109b9d076fd716d2d4bcaae1aaade332faa00691bdaee8e651d78b6849",
     "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
     "acceptanceMode": "agent_quality_review",
     "aggregatePassed": true
@@ -81,7 +81,7 @@
   },
   "productionValidation": {
     "command": "verify:release",
-    "commit": "8a3480f1781acb61a948a83cfe81dbcaf8436bbb",
+    "commit": "17d21068e1b821f8ebdc382c3ab1ddb6307c73cd",
     "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
     "version": "2026.10.07",
     "cutoffAt": "2026-07-12T00:00:00+09:00",
@@ -108,7 +108,7 @@
   "validatedPreparationSnapshot": {
     "command": "verify:release",
     "mode": "preparation",
-    "commit": "8a3480f1781acb61a948a83cfe81dbcaf8436bbb",
+    "commit": "17d21068e1b821f8ebdc382c3ab1ddb6307c73cd",
     "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
     "aggregatePassed": true,
     "productionReleaseApproved": false,
