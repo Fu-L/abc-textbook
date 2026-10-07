@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "taskId": "T149",
   "status": "preparation_passed_production_on_hold",
-  "generatedAt": "2026-10-07T13:53:08.581044+00:00",
+  "generatedAt": "2026-10-07T13:55:41.940782+00:00",
   "automatedAuditSubject": {
     "digest": "50e934e1bfd52101fb7256cc38725f30e736274370178ee3558f7254f7deefbc",
     "fileCount": 9497
@@ -11,14 +11,14 @@
   "validatedPreparationSnapshot": {
     "command": "verify:release",
     "mode": "preparation",
-    "commit": "2348625aed8d4b7b94d6857cc762bd9f211d9b49",
+    "commit": "3d19b1a1ced667474f374ce8b9145a75f8f25bfd",
     "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
     "aggregatePassed": true,
     "productionReleaseApproved": false,
     "cutoffAt": "2026-07-12T00:00:00+09:00",
     "version": "2026.10.07",
     "problemCount": 868,
-    "pendingGates": [
+    "productionGateRequirements": [
       "policy-selected-human-review",
       "protected-main-required-checks",
       "host-project-and-origin"
@@ -32,11 +32,11 @@
     ]
   },
   "productionValidation": {
-    "requestedCommit": "2348625aed8d4b7b94d6857cc762bd9f211d9b49",
+    "requestedCommit": "3d19b1a1ced667474f374ce8b9145a75f8f25bfd",
     "exitCode": 2,
     "aggregatePassed": false,
     "observedError": "CANONICAL_PUBLICATION_UPDATE_MISSING: Every ordered update must exist once under staging/updates and be eligible.",
-    "reason": "Bootstrap remains ON_HOLD until genuine policy-selected human review."
+    "reason": "Bootstrap remains ON_HOLD until genuine owner self-review decisions, basis and reviewer-run check evidence."
   },
   "finalCommitBinding": {
     "source": "PR CI artifact final-validation-<full Git SHA> and read-only CLI output",
@@ -89,6 +89,5 @@
     "requiredMode": "self",
     "riskReasons": ["original_proof", "major_classification_change"],
     "highRiskSelfReviewReason": "solo_maintainer"
-  },
-  "snapshotRefreshPending": true
+  }
 }
