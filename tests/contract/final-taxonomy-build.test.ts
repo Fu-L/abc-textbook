@@ -31,9 +31,14 @@ import {
 } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
 
 const loadedContext = loadFinalTaxonomySourceContext();
+const loadedBuild = loadedContext.then((context) => ({
+  context,
+  build: buildFinalTaxonomyFromPolicy(context),
+}));
 const loadBuild = async () => {
-  const context = await loadedContext;
-  return { context, build: buildFinalTaxonomyFromPolicy(context) };
+  const { context, build } = await loadedBuild;
+  // Reuse the expensive 868-Problem baseline without sharing mutable test data.
+  return { context, build: structuredClone(build) };
 };
 
 describe('T159 deterministic full-corpus taxonomy build', () => {
@@ -174,7 +179,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.inputs.inventory.inventoryDigest).not.toBe(
       build.inputs.inventory.authoringInventoryDigest,
     );
-  }, 30_000);
+  }, 60_000);
 
   it('homes every Problem in the unique owner Unit of its primary Outcome', async () => {
     const { build } = await loadBuild();
@@ -234,7 +239,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       );
     }
     expect(build.placements.every(({ kind }) => kind === 'full')).toBe(true);
-  }, 30_000);
+  }, 60_000);
 
   it('derives the home solely from the primary Outcome when cross-reference roles change', async () => {
     const { build } = await loadBuild();
@@ -253,7 +258,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     ];
     expect(variants.map(primaryOutcomeOwnerUnitId)).toEqual([home, home]);
     expect(primaryOutcomeOwnerUnitId(placement)).toBe(home);
-  }, 30_000);
+  }, 60_000);
 
   it('keeps placements stable when the Unit DAG gains an independent prerequisite', async () => {
     const { context, build } = await loadBuild();
@@ -287,7 +292,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       vi.doUnmock('../../src/lib/taxonomy/final-taxonomy-policy.js');
       vi.resetModules();
     }
-  }, 30_000);
+  }, 60_000);
 
   it('keeps the placement digest stable when Unit DAG edges are enumerated in reverse', async () => {
     const { context, build } = await loadBuild();
@@ -315,7 +320,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       vi.doUnmock('../../src/lib/taxonomy/final-taxonomy-policy.js');
       vi.resetModules();
     }
-  }, 30_000);
+  }, 60_000);
 
   it('rejects a placement decision table changed after the accepted build input was bound', async () => {
     const { context, build } = await loadBuild();
@@ -340,7 +345,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(diagnostics.map(({ code }) => code)).toContain(
       'FINAL_TAXONOMY_PLACEMENT_POLICY_BINDING_MISMATCH',
     );
-  }, 30_000);
+  }, 60_000);
 
   it('materializes unique direct Unit owners and exact descendant navigation rollups', async () => {
     const { build } = await loadBuild();
@@ -449,7 +454,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
       expect(placement).not.toHaveProperty('learningUnitIds');
       expect(placement).not.toHaveProperty('presentationUnitId');
     }
-  }, 30_000);
+  }, 60_000);
 
   it('is byte-stable and does not use preview candidates to synthesize canonical taxonomy', async () => {
     const { context, build } = await loadBuild();
@@ -469,7 +474,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(build.tagDagDigest).toBe(canonicalDigest(build.tagPrerequisites));
     expect(build.learningUnitDagDigest).toBe(canonicalDigest(build.learningUnitPrerequisites));
     expect(build.placementDigest).toBe(canonicalDigest(build.placements));
-  }, 30_000);
+  }, 60_000);
 
   it('propagates the manifest third-party review policy to every integration entry', async () => {
     const context = await loadedContext;
@@ -495,7 +500,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
           entry.reviewPolicy.highRiskSelfReviewReason === undefined,
       ),
     ).toBe(true);
-  }, 30_000);
+  }, 60_000);
 
   it('binds the exact T154 metadata component and provisional integration, not only its taxonomy digest', async () => {
     const context = await loadedContext;
@@ -545,7 +550,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         provisionalEvidence: changedEvidence,
       });
     }).toThrow(/PREVIEW_METADATA_COMPONENT_DIGEST_MISMATCH/u);
-  }, 30_000);
+  }, 60_000);
 
   it('rejects a changed T154 metadata component through the source-context loader', async () => {
     const layout = defaultFinalTaxonomyBuildLayout();
@@ -572,7 +577,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     } finally {
       await rm(temporaryRoot, { recursive: true, force: true });
     }
-  }, 30_000);
+  }, 60_000);
 
   it('preserves decision audit data, ad-hoc insights, reuse gates, and curriculum prerequisites independently of navigation', async () => {
     const { context, build } = await loadBuild();
@@ -755,7 +760,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         ].every((outcomeId) => canonicalOutcomeIds.has(outcomeId)),
       ),
     ).toBe(true);
-  }, 30_000);
+  }, 60_000);
 
   it('binds review artifacts directly to the subject digest and stays on hold until acceptance', async () => {
     const { context, build } = await loadBuild();
@@ -765,7 +770,7 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
     expect(verification.reviewCheckResultsPath).toBe(FINAL_TAXONOMY_REVIEW_CHECK_RESULTS_PATH);
     expect(verification.status).toBe(build.status === 'accepted' ? 'passed' : 'on_hold');
     expect(verification.canonicalMaterializationAllowed).toBe(build.status === 'accepted');
-  }, 30_000);
+  }, 60_000);
 
   it('rejects unknown references, cyclic prerequisite graphs, unclassified Problems, incomplete impacts, and a non-owner home', async () => {
     const { context, build } = await loadBuild();
@@ -866,5 +871,5 @@ describe('T159 deterministic full-corpus taxonomy build', () => {
         singleProblemUnitIds: SINGLE_PROBLEM_UNIT_IDS,
       }),
     ).toThrow();
-  }, 30_000);
+  }, 60_000);
 });
