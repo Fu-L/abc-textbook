@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "932546dd9b5e571e45833f94f5a47382545342a79288251f88a526b90a74553b",
+    "digest": "afc68a921c6d6b3cc7f371bfaa0d987b8d721b2e3276534aff45da8c38dc4771",
     "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-07T16:34:49.906Z",
+  "generatedAt": "2026-10-07T16:53:56.924Z",
   "commands": [
     {
       "command": "npm run corpus:verify-learning-units",
       "exitCode": 0,
-      "durationMs": 2856.4232090000005,
+      "durationMs": 2891.361499999999,
       "outputDigest": "ad80a0669e69e15438280da6cf1d4319f2ab3f035c0160e7c80094c450de4204",
       "outputBytes": 360,
       "observed": "> abc-textbook@0.1.0 corpus:verify-learning-units\n> tsx scripts/corpus/verify-full-learning-units.ts --check\n\n{\"status\":\"passed\",\"subjectDigest\":\"2f34634472a8ca9901e28a5b49fd38c2954ba1d7b44dec461bfa1b9a4324b00e\",\"chapters\":9,\"units\":232,\"ownedOutcomes\":242,\"reachableProblems\":868,\"humanAcceptance\":\"separate_required_review\",\"sc010\":\"not_required_by_owner\"}"
@@ -21,7 +21,7 @@
     {
       "command": "npm run corpus:verify-problem-corpus",
       "exitCode": 0,
-      "durationMs": 40208.21824999999,
+      "durationMs": 39864.47837499999,
       "outputDigest": "93e12ddd3594b709e87b074fa01fc65ebc12db06e2fae4b746fb3c3af86eea06",
       "outputBytes": 1367,
       "observed": "> abc-textbook@0.1.0 corpus:verify-problem-corpus\n> tsx scripts/corpus/verify-problem-corpus.ts --check\n\n{\"status\":\"accepted\",\"subjectDigest\":\"d02f1c9f68fae4031bf4fbe06bdaf3df30abad8387e1751e5773dc20ef2faecf\",\"indexDigest\":\"617efb6f7d78127c90db2b8bafe3a2c60798b3ee227f37b3b03034bbb203f873\",\"shards\":248,\"problems\":868,\"mathematicalRegressions\":20,\"reviewMode\":\"agent_quality_review\",\"publicProjection\":\"pending_T160\"}\nauthor-problem-shards: passed\nverify-full-learning-units: passed\npr65-mathematical-checks.py: passed\npr65-review2-mathematical-checks.py: passed\npr65-review3-mathematical-checks.py: passed\npr65-review4-mathematical-checks.py: passed\npr65-review5-mathematical-checks.py: passed\npr65-review6-mathematical-checks.py: passed\npr65-review7-mathematical-checks.py: passed\npr65-review8-mathematical-checks.py: passed\npr65-review9-mathematical-checks.py: passed\npr65-review10-mathematical-checks.py: passed\npr65-review11-mathematical-checks.py: passed\npr65-review12-mathematical-checks.py: passed\npr65-review13-mathematical-checks.py: passed\npr65-review14-mathematical-checks.py: passed\npr65-review15-mathematical-checks.py: passed\npr65-review16-mathematical-checks.py: passed\npr65-review17-mathematical-checks.py: passed\npr65-review18-mathematical-checks.py: passed\npr65-review19-mathematical-checks.py: passed\npr65-review20-mathematical-checks.py: passed"
@@ -34,5 +34,5 @@
     "fixedOutcomeBlocksRequired": false,
     "basis": "All current owner inventories and prose fences inspected. Text fences are pseudocode; optional runnable/answer additions block until executed and verified."
   },
-  "evidenceDigest": "830e80129e34a440f6dd5a09c723e36718ee353f201bdde239fc2f6c8bbc56ec"
+  "evidenceDigest": "a544c8a85bba91abe01a20c4e2871de640843a33af892e9ed439d7d690cf2688"
 }

@@ -877,79 +877,79 @@
   ],
   "rawResult": {
     "path": "docs/verification/initial-release/browser-results.json",
-    "digest": "fdbd367e8e48201dc2a021d9a2fbb3ec51ff807d4f4c75e9e4eef93dd799deaa"
+    "digest": "34481b8a01c37003cd0127531e8def4b67a348e37a02f9cbd32b45d34c9b93aa"
   },
   "observations": [
     {
       "problemId": "abc212-e",
       "browser": "chromium",
-      "durationMs": 142.82945799999652,
+      "durationMs": 137.24725000000035,
       "preserved": true
     },
     {
       "problemId": "abc315-ex",
       "browser": "chromium",
-      "durationMs": 140.59508300000016,
+      "durationMs": 83.73812499999985,
       "preserved": true
     },
     {
       "problemId": "abc466-f",
       "browser": "chromium",
-      "durationMs": 145.19266700000298,
+      "durationMs": 135.77804099999776,
       "preserved": true
     },
     {
       "problemId": "abc466-g",
       "browser": "chromium",
-      "durationMs": 135.50012499999866,
+      "durationMs": 136.5168339999982,
       "preserved": true
     },
     {
       "problemId": "abc212-e",
       "browser": "firefox",
-      "durationMs": 89.60820899999817,
+      "durationMs": 89.1760409999988,
       "preserved": true
     },
     {
       "problemId": "abc315-ex",
       "browser": "firefox",
-      "durationMs": 68.05112499999814,
+      "durationMs": 76.08466699999917,
       "preserved": true
     },
     {
       "problemId": "abc466-f",
       "browser": "firefox",
-      "durationMs": 82.08774999999878,
+      "durationMs": 100.4899170000026,
       "preserved": true
     },
     {
       "problemId": "abc466-g",
       "browser": "firefox",
-      "durationMs": 98.9173750000009,
+      "durationMs": 81.00708300000042,
       "preserved": true
     },
     {
       "problemId": "abc212-e",
       "browser": "webkit",
-      "durationMs": 52.09920800000327,
+      "durationMs": 59.78662500000064,
       "preserved": true
     },
     {
       "problemId": "abc315-ex",
       "browser": "webkit",
-      "durationMs": 57.56854200000089,
+      "durationMs": 59.492999999998574,
       "preserved": true
     },
     {
       "problemId": "abc466-f",
       "browser": "webkit",
-      "durationMs": 48.308625000001484,
+      "durationMs": 53.95229100000142,
       "preserved": true
     },
     {
       "problemId": "abc466-g",
       "browser": "webkit",
-      "durationMs": 84.07516599999872,
+      "durationMs": 96.1251250000023,
       "preserved": true
     }
   ],

@@ -5,7 +5,7 @@
   "agentQualityReview": {
     "evidenceId": "agent-content-review-initial-release",
     "path": "docs/reviews/agent-content/initial-release/release-review.json",
-    "digest": "9a641101cf5751e7c531bcee1e4181412593b6ab065573e9cc7f8e95e66246b3",
+    "digest": "e3fccaa66f4db319bff923c4a92e65e292695d3db15fe8ec6129c1f7185f4259",
     "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
     "acceptanceMode": "agent_quality_review",
     "aggregatePassed": true

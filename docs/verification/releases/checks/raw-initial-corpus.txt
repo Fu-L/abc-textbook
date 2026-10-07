@@ -2,4 +2,4 @@
 > abc-textbook@0.1.0 verify:initial-release
 > tsx scripts/verify/initial-release.ts --check
 
-{"status":"passed","mode":"--check","inputSubject":{"digest":"932546dd9b5e571e45833f94f5a47382545342a79288251f88a526b90a74553b","fileCount":9500},"sourceProjectionDigest":"d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396","tasks":10}
+{"status":"passed","mode":"--check","inputSubject":{"digest":"afc68a921c6d6b3cc7f371bfaa0d987b8d721b2e3276534aff45da8c38dc4771","fileCount":9500},"sourceProjectionDigest":"d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396","tasks":10}

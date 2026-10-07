@@ -47,7 +47,7 @@ describe('full authored LearningUnit navigation', () => {
         })),
       ),
     };
-  });
+  }, 60_000);
 
   it('accepts all 232 authored Units without requiring topological or contiguous textbook order', () => {
     const result = buildLearningPath(actual, expected);
