@@ -69,6 +69,7 @@ jobs:
       - name: Read-only final validation
         run: GITHUB_SHA="$RELEASE_COMMIT" npm run verify:release -- --commit "$RELEASE_COMMIT"
       - name: Generate exact-commit deployment input
+        id: metadata
         if: ${{ !inputs.rollback }}
         env:
           VALIDATION_RESULTS_URL:
@@ -83,6 +84,7 @@ jobs:
               changedProblemIds: release.changedProblemIds, withdrawnProblemIds: release.withdrawnProblemIds,
               taxonomyChanges: release.taxonomyChanges.map(change => change.summary) } };
           fs.writeFileSync('/tmp/release-metadata.json', JSON.stringify(metadata, null, 2));
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `release-kind=${release.releaseKind}\n`);
           JS
       - name: Deploy or restore the known production commit
         env:
@@ -97,3 +99,39 @@ jobs:
           else
             npm run abc:deploy -- --metadata /tmp/release-metadata.json
           fi
+      - name: Install browsers for live production verification
+        if: ${{ !inputs.rollback && steps.metadata.outputs.release-kind == 'initial' }}
+        run: npm run test:e2e:install:ci
+      - name: Verify host history, public routes and learning-record compatibility
+        if: ${{ !inputs.rollback && steps.metadata.outputs.release-kind == 'initial' }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: >-
+          python3 docs/operations/verify-initial-deployment.py --commit "$RELEASE_COMMIT" --output
+          /tmp/initial-production-verified/initial-release.json
+      - name: Project immutable Git history from confirmed production metadata
+        if: ${{ !inputs.rollback && steps.metadata.outputs.release-kind == 'initial' }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const evidence = JSON.parse(fs.readFileSync('/tmp/initial-production-verified/initial-release.json'));
+          fs.writeFileSync('/tmp/host-history.json', JSON.stringify([evidence.releaseMetadata]));
+          const update = JSON.parse(fs.readFileSync('staging/updates/update-bootstrap-full-corpus/manifest.json'));
+          fs.writeFileSync('/tmp/update-list.json', JSON.stringify([update]));
+          JS
+          npm run release:history -- --host cloudflare-pages --releases /tmp/host-history.json --updates /tmp/update-list.json --public-output docs/verification/deployments/initial-history.json --hold-output staging/deployment-holds.json
+          cp docs/verification/deployments/initial-history.json /tmp/initial-production-verified/initial-history.json
+      - name: Preserve successful initial production verification
+        if: ${{ !inputs.rollback && steps.metadata.outputs.release-kind == 'initial' && success() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: initial-production-verification-${{ inputs.commit }}
+          path: /tmp/initial-production-verified/
+          if-no-files-found: error

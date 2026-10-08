@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "issue": 54,
+  "taskIds": ["T152", "T153"],
+  "status": "awaiting_production_configuration",
+  "observedAt": "2026-10-08T00:59:29.403250+00:00",
+  "productionPublished": false,
+  "publicUrl": null,
+  "firstPublishedAt": null,
+  "successfulHostHistory": [],
+  "validatedMergedSnapshot": {
+    "command": "verify:release",
+    "commit": "86f1abe931ddd77f8926256c57e5e7ab6fab84b9",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "aggregatePassed": true,
+    "acceptanceMode": "agent_quality_review",
+    "humanApprovalClaimed": false,
+    "problemCount": 868,
+    "outcomeCount": 242,
+    "outcomeCoverageDigest": "dd913c266baed7eb1adea334c2707ed7433cfaf57b25e3f610d63400d566e13d",
+    "correctionCount": 12,
+    "checks": [
+      "protected-base-diff",
+      "current-policy-review",
+      "catalog-coverage",
+      "canonical-entities",
+      "authored-documents",
+      "three-prerequisite-dags",
+      "semantic-primary-home",
+      "independent-editorial-order",
+      "metrics-identities",
+      "correction-targets"
+    ]
+  },
+  "protectedMain": {
+    "requiredChecks": [
+      "Verify (release baseline)",
+      "Verify (supported range)",
+      "Initial corpus audit",
+      "Release validation",
+      "Production review"
+    ],
+    "strict": true,
+    "enforceAdmins": true,
+    "forcePushesAllowed": false,
+    "deletionsAllowed": false
+  },
+  "mergedSnapshotChecks": [
+    {
+      "name": "Production review",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Fu-L/abc-textbook/actions/runs/37709322728/job/113091230694"
+    },
+    {
+      "name": "Verify (supported range)",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/Fu-L/abc-textbook/actions/runs/37709322728/job/113091230597"
+    },
+    {
+      "name": "Verify (release baseline)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Fu-L/abc-textbook/actions/runs/37709322728/job/113091230576"
+    },
+    {
+      "name": "Release validation",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Fu-L/abc-textbook/actions/runs/37709322728/job/113091230432"
+    },
+    {
+      "name": "Initial corpus audit",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/Fu-L/abc-textbook/actions/runs/37709322673/job/113091229652"
+    }
+  ],
+  "productionEnvironment": {
+    "name": "production",
+    "createdAt": "2026-10-08T00:53:03Z",
+    "requiredSecrets": ["CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN", "RELEASE_GATE_TOKEN"],
+    "requiredVariables": ["CLOUDFLARE_PAGES_PROJECT", "SITE_URL"],
+    "configuredSecrets": [],
+    "configuredVariables": []
+  },
+  "remainingPrerequisites": [
+    "Owner Cloudflare authentication / Free Direct Upload project / actual HTTPS origin",
+    "Configure production secrets and variables",
+    "Merge the operational verification PR after every required check passes",
+    "Validate and deploy the exact resulting protected-main SHA",
+    "Save actual host/browser verification and immutable Git history; keep T152/T153 open until then"
+  ],
+  "localRehearsal": {
+    "mode": "local_rehearsal",
+    "productionPublished": false,
+    "routeChecks": {
+      "htmlRoutes": 1573,
+      "problemRoutes": 868,
+      "sitemapScopeMatched": true,
+      "feedScopeMatched": true,
+      "allProblemNavigationMatched": true
+    },
+    "browserChecks": {
+      "engines": ["chromium", "firefox", "webkit"],
+      "tests": 93,
+      "pagefindQueriesPerEngine": 3,
+      "backupRestoreRecords": 120,
+      "independentTimestampsAndReload": true,
+      "dbName": "abc-textbook-learning-records",
+      "dbVersion": 2,
+      "disposableContexts": true
+    },
+    "databaseContractProbe": "passed_all_three_engines",
+    "originTested": "http://127.0.0.1:4323",
+    "sitemapOrigin": "https://abc-textbook.example",
+    "hostAPI": "not_executed_no_credentials",
+    "verifierSha256": "fcb7c850241c281b128afa2855ad075100052c9abb9eb7a82f747ea8d5e67953",
+    "completedAt": "2026-10-08T01:01:38.233392+00:00",
+    "fixtureTests": 6
+  },
+  "rollback": {
+    "knownCommitSimulation": "docs/verification/initial-release/zero-cost-52-weeks.json",
+    "sameCommitRedeploy": "not_run",
+    "betweenPublishedVersions": "not_applicable_no_production_release",
+    "actualProductionRollbackClaimed": false
+  },
+  "catchUpHandoff": {
+    "issue": 52,
+    "ready": false,
+    "reason": "T153 requires successful real production verification"
+  },
+  "note": "This is preflight/local rehearsal evidence, not a published release. Initial release and history JSON are created only after actual host verification.",
+  "applicableInitialAudits": {
+    "status": "passed",
+    "tasks": 10,
+    "subjectDigest": "7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e",
+    "fileCount": 9500,
+    "subjectUnchanged": true
+  }
+}

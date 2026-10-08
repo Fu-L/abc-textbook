@@ -102,6 +102,10 @@ readを要求するため、workflowの`contents: read` / `checks: read`の標�
 `GITHUB_TOKEN`だけでは代用しない。このtokenは保護設定とcheck結果の読み取りstepだけで使い、設定変更やmerge権限は要求しない。
 [GitHubのbranch protection API権限](https://docs.github.com/en/rest/branches/branch-protection#get-branch-protection)
 
+2026-10-08、#54でGitHubの`production` environmentを作成した。Cloudflare project・実origin・3
+Secretsと2
+Variablesは設定待ちである。設定先は[production environment](https://github.com/Fu-L/abc-textbook/settings/environments/23735421639/edit)。秘密値はチャット・Git・検証JSONへ記載せず、GitHubへ直接設定する。
+
 ## exact commitの初回deployとretry
 
 #54で、全required checksが成功したPRをprotected mainへmergeする。merge後のfull SHAに対するrequired
@@ -141,6 +145,45 @@ npm run release:history -- --host cloudflare-pages --releases /tmp/host-history.
 公開後にhomeの868問・232
 Unit、ABC212/ABC466/ABC316の表、代表Problem/Tag/Unitへの内部導線、Pagefindの`abc315-ex`と`abc466-g`検索、sitemap/feedとcatalog閉包、スマートフォン幅を確認する。配信metadataのSHA/cutoffが一致すること、Problem
 ID・DB名/version、修了・復習値と独立日時、120件backup/restoreが同originで保持されることを確認する。
+
+### 事後検証の実行と証跡保存
+
+初版の通常deployではworkflowが、uploadとhost成功確認に続いて
+`docs/operations/verify-initial-deployment.py`を実行する。初版以外の更新・rollbackでは、この固定868問の検査を実行しない。検証は公開originに対するread-only取得と、一時ブラウザーcontext内の学習記録操作で行う。実利用中のブラウザープロファイルは使わない。
+
+- Cloudflare APIのproduction / deploy / success / full SHAと、deployment
+  URL・公開originの最小metadataを照合する。
+- exact commitのCatalogと配信Catalogを全件照合し、1573 HTML
+  route、全868問題の学習control・内部導線、254開催の表・ABC316欠番、sitemap/feedの範囲を検査する。
+- 既存の初版E2EとSC-012を公開originで93件実行する。Chromium・Firefox・WebKitでキーボード、320px幅、独立日時・reload保持、120件backup/restoreを確認する。Pagefindは各engineで`abc212-e`・`abc315-ex`・`abc466-g`を検索する。
+- 検証前後の公開metadataが一致することを確認してから、実日時・origin・version・cutoff・full
+  SHA・host履歴・検査結果を保存する。失敗・未設定時は成功証跡を作らない。
+
+workflowは既存の`release:history --host cloudflare-pages`で、同じ配信metadataとexact Git
+Catalogから公開履歴も照合する。成功artifactを取得し、初版の事後検証記録と公開履歴へ保存する。
+
+```sh
+gh run download SUCCESSFUL_DEPLOY_RUN_ID --name initial-production-verification-FULL_MERGED_COMMIT --dir /tmp/initial-production-verified
+cp /tmp/initial-production-verified/initial-release.json docs/verification/deployments/initial-release.json
+cp /tmp/initial-production-verified/initial-history.json docs/verification/deployments/initial-history.json
+```
+
+公開後の手動再検証も同じ入口を使う。Node 24・locked dependencies・3
+browserと上記production環境変数を用意し、repo
+rootで実行する。既存E2Eが読む本文・検証実装・lockfileは対象commitと一致していなければ停止する。
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 docs/operations/verify-initial-deployment.py --commit FULL_PUBLISHED_COMMIT
+```
+
+同SHAを再公開しても`validationResultsUrl`は実runごとに変わりうる。各host
+metadataは同じcommit・scopeと照合し、配信metadataと一致する成功履歴を少なくとも一つ要求する。同SHAの成功uploadが複数あれば`sameCommitRedeploy`を記録する。これは二つの公開版間rollbackの成功ではない。最初の公開しかない場合、旧production版へのrollbackは`not_applicable_no_prior_production_version`とする。known-commit
+simulationは既存の52週simulationへ参照を残す。公開日時はupload開始の`created_on`ではなく、成功deploy
+stageの`ended_on`を記録する。[Cloudflare deployments API](https://developers.cloudflare.com/api/resources/pages/subresources/projects/subresources/deployments/methods/list/)
+
+初版の配信Catalogとfeedは検証済みcommitのprepared投影を維持する。実host成功を確認した公開履歴は、上記
+`release:history --host cloudflare-pages`で`initial-history.json`へ別途保存する。#52はその履歴、事後検証JSON、公開Catalogとmetadataをbaseにする。cutoffを公開日時として読み替えず、prepared
+recordをGit内でpublishedへ書き換えない。
 
 ## 初回失敗とrollback
 

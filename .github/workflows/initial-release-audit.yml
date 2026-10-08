@@ -20,5 +20,9 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
+      - name: Verify production verification fixtures
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python3 docs/operations/test_verify_initial_deployment.py
       - name: Reject stale or incomplete initial corpus audit evidence
         run: npm run verify:initial-release -- --check
