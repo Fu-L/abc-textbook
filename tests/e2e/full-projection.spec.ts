@@ -1,5 +1,44 @@
 import AxeBuilder from '@axe-core/playwright';
+import path from 'node:path';
 import { expect, test } from './fixtures.js';
+import {
+  assertPublicSurfacePreserved,
+  htmlAnchors,
+  readPublicSurface,
+} from '../fixtures/maintenance-compatibility.js';
+
+test('serves every old HTML/data URL and anchor from the compared build', async ({
+  request,
+}, testInfo) => {
+  test.skip(
+    !process.env.ABC_COMPAT_OLD_DIST,
+    'Set ABC_COMPAT_OLD_DIST to a separately built old commit.',
+  );
+  test.setTimeout(180_000);
+  const oldDist = process.env.ABC_COMPAT_OLD_DIST;
+  if (!oldDist) throw new Error('Missing old build');
+  const basePath = process.env.BASE_PATH ?? '/';
+  const before = await readPublicSurface(oldDist, basePath);
+  // Playwright preview always serves the working tree dist, even if integration compared another copy.
+  const built = await readPublicSurface(path.resolve('dist'), basePath);
+  assertPublicSurfacePreserved(before, built);
+  const routes = [...before];
+  for (let start = 0; start < routes.length; start += 8) {
+    await Promise.all(
+      routes.slice(start, start + 8).map(async ([route, anchors]) => {
+        const response = await request.get(new URL(route, testInfo.project.use.baseURL).href);
+        expect(response.status(), route).toBe(200);
+        if (response.headers()['content-type']?.includes('text/html')) {
+          const current = htmlAnchors(await response.text());
+          for (const anchor of anchors) expect(current, `${route}#${anchor}`).toContain(anchor);
+        } else {
+          expect(anchors, `${route}: expected HTML`).toEqual([]);
+        }
+        await response.dispose();
+      }),
+    );
+  }
+});
 
 test('connects the parent DP concept to its representative problems without claiming direct tags', async ({
   page,

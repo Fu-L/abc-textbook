@@ -70,6 +70,56 @@ IDとURLを維持し、執筆済み本文を削除・再初期化しない。教
 
 表示へ影響する変更は、対象ページの数式、読書順、内部導線、狭い画面、必要な操作を確認する。無関係な画面まで総当たりする義務はない。
 
+### 運用移行の前後比較（002 / PR-01以降）
+
+教材の保持は`tests/fixtures/maintenance-compatibility.ts`を使う既存テストで比較する。
+`ABC_COMPAT_BASE_REF`へ移行前のGit
+SHAを指定すると、そのcommitを一時領域へarchiveし、Problem/Tag/Outcome/UnitのIDとデータ、全Markdownのbytes、問題配置、Tag・Outcome・Unitの各直接前提、実際に旧moduleがexportした読書順を現在の正本と照合する。公開projectionの本文とtaxonomy・配置・前提・順序も照合する。Problemの本文pathは現行metadataに存在しないため、既存本文の`authoringUnit.docPath`から読む。旧受入台帳を新しい比較台帳へ複写しない。
+
+```sh
+ABC_COMPAT_BASE_REF="$compat_base_sha" npm test -- tests/integration/full-public-projection.test.ts tests/unit/textbook-order.test.ts
+```
+
+SHA未指定時は`HEAD`と作業ツリーを比較する。commit後の`HEAD`同士の成功を移行前との比較に数えず、後続PRでは保存した比較元SHAを明示する。教材保持テストは一致を要求するため、教材追加を伴う別依頼での追加許可の判定には流用しない。凍結manifestや全本文digestをcommitしない。
+
+URL保持は、別々にbuildした旧/new出力の全HTMLと公開データ（JSON/XML等）、HTMLの`id`と旧`a[name]`の集合を比較する。旧集合が新集合に含まれることを要求し、追加は許す。リンク元とリンク先の同時削除、catalog/feed/sitemap/metadataや過去のupdatesページの削除も検出する。内部リンク検査は残ったリンクの到達性を確認するので、この集合比較と併用する。
+
+現行の`release-metadata.json`は`production-deploy.yml`がbuild後にコピーする。全配信URLを比較するときはその工程も含む出力を使う。PR-01の教材不変の試験では、確認済みの公開metadataを一時領域で両出力へコピーし、既存metadataのURLとschemaの保持を検証できる。これは過去の公開JSONを使うfixtureであり、新しいSHAの配信や検証成功を示さない。取得できなければmetadataを含む実比較は未実施と報告し、使い捨てHTML/JSONでの欠落検出と区別する。
+
+作業ツリーに変更がある場合の一時コピー例を以下に示す。比較元SHAは変更前に確保し、commit後はそのSHAを指定する。依存は既存のNode/npm・lockfileを使う。`node_modules`のsymlink共有はAstroのcompile
+pathを混在させるため、実体をコピーするか各一時領域で`npm ci`する。
+
+```sh
+compat_base_sha=$(git rev-parse HEAD)
+compat_before=$(mktemp -d)
+compat_after=$(mktemp -d)
+git archive "$compat_base_sha" | tar -xf - -C "$compat_before"
+tar --exclude='./.git' --exclude='./node_modules' --exclude='./dist' --exclude='./.astro' --exclude='./test-results' --exclude='./playwright-report' --exclude='./coverage' -cf - . | tar -xf - -C "$compat_after"
+cp -R node_modules "$compat_before/"
+cp -R node_modules "$compat_after/"
+export SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook
+npm --prefix "$compat_before" run build
+npm --prefix "$compat_after" run build
+# 確認済み公開metadataをfixtureとして含める場合だけ、両出力へ同じ実入力をコピーする。
+# cp "$compat_published_metadata" "$compat_before/dist/release-metadata.json"
+# cp "$compat_published_metadata" "$compat_after/dist/release-metadata.json"
+ABC_COMPAT_BASE_REF="$compat_base_sha" ABC_COMPAT_OLD_DIST="$compat_before/dist" ABC_COMPAT_NEW_DIST="$compat_after/dist" npm test -- tests/integration/full-public-projection.test.ts tests/unit/textbook-order.test.ts tests/integration/internal-links.test.ts
+npm test -- tests/unit/learning-record-timestamp.test.ts tests/unit/learning-record-store.test.ts tests/integration/learning-record-backup.test.ts
+npm --prefix "$compat_after" run link:check:built
+ABC_COMPAT_OLD_DIST="$compat_before/dist" npm --prefix "$compat_after" run test:e2e:built -- --project=chromium tests/e2e/full-projection.spec.ts tests/e2e/learning-records.spec.ts
+rm -rf "$compat_before" "$compat_after"
+```
+
+buildが失敗したらそこで止め、残った古い出力を比較しない。旧/newは同じorigin/base
+pathでbuildする。`ABC_COMPAT_OLD_DIST`未指定時は実build間の集合比較だけskipされ、使い捨てHTMLでの削除検出テストと通常のE2Eは実行される。指定したディレクトリが欠落・不完全なら失敗する。integrationの新版は`ABC_COMPAT_NEW_DIST`（省略時は作業ツリーの`dist`）、E2Eの新版はpreviewが配信する同じ`dist`を使う。E2Eでは旧出力にあった全URLのHTTP応答とanchorも確認する。
+
+学習記録は使い捨てcontextで120件の旧DB version
+1とbackup、未知/取消ID、独立日時とoffset、reload、複数タブ、保存失敗、既存値の上書き途中での復元失敗を確認する。値・日時の一致まで検査し、件数だけを成功条件にしない。DB識別とbackup形式・保存実装は変更しない。
+
+比較元SHA、確認した公開metadataのSHA、既存Actionsの正常runと検出対象・時間はPR本文へ一度まとめる。CI時間の比較境界は、必須jobの最初の依存準備（Node
+setup）開始から最後の必須検証完了までのwall
+timeとする。並列jobの時間を加算せず、queue、checkout、検証後のartifact保存・cleanup、deployを除く。run/job全体の時間は別記する。非公開文書のみで旧検査をskipしたrunと全検証runを比較しない。既存ログの時刻精度や取得不足を明記し、5回の中央値や短縮率を未観測のまま達成済みと扱わない。
+
 ## 5. 結果を記録し、必要なら公開する
 
 変更概要、実行した検証と結果、未解決事項をPR本文または完了報告へまとめる。Git履歴、Actionsのログ・check結果、Pagesの公開履歴を一次記録として使う。通常更新用の別review

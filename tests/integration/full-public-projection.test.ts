@@ -1,4 +1,5 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, rm, writeFile } from 'node:fs/promises';
+import path from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
@@ -15,9 +16,133 @@ import { canonicalUiRoutes } from '../../src/lib/catalog/ui-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 import { joinAndFilterLearningRecords } from '../../src/lib/learning-records/filter.js';
 import { defaultLearningRecord } from '../../src/lib/learning-records/database.js';
+import {
+  assertCanonicalPreserved,
+  readCanonicalSnapshot,
+  withGitBaseline,
+} from '../fixtures/maintenance-compatibility.js';
 
 // Exercise the unreviewed projection independently of generated release acceptance.
 const projection = await loadFullPublicProjection({ usePreparedRelease: false });
+
+describe('maintenance compatibility against a Git commit', () => {
+  it('preserves every entity, document byte, placement, direct prerequisite and reading order', async () => {
+    await withGitBaseline(async (root) => {
+      const before = await readCanonicalSnapshot(root);
+      const after = await readCanonicalSnapshot(process.cwd());
+      expect([
+        before.problems.size,
+        before.tags.size,
+        before.outcomes.size,
+        before.units.size,
+      ]).toEqual([868, 213, 242, 232]);
+      assertCanonicalPreserved(before, after);
+      // Bind the runtime projection to the independently read canonical input, too.
+      expect(projection.catalog.problems.map(({ id }) => id).sort()).toEqual(
+        [...before.problems.keys()].sort(),
+      );
+      expect(new Map(projection.catalog.tags.map((value) => [value.id, value]))).toEqual(
+        before.tags,
+      );
+      expect(
+        new Map(projection.catalog.learningOutcomes.map((value) => [value.id, value])),
+      ).toEqual(before.outcomes);
+      expect(new Map(projection.catalog.learningUnits.map((value) => [value.id, value]))).toEqual(
+        before.units,
+      );
+      expect(projection.policy.placements).toEqual(before.placements);
+      expect(projection.prerequisites).toEqual(before.prerequisites);
+      expect(projection.ui.learningUnits.map(({ id }) => id)).toEqual(
+        before.order.flatMap(({ id, unitIds }) => [id, ...unitIds]),
+      );
+      for (const [id, document] of [...projection.unitDocuments, ...projection.problemDocuments]) {
+        const docPath = before.units.get(id)?.docPath ?? before.problemDocumentPaths.get(id);
+        if (!docPath) throw new Error(`Unknown projected document: ${id}`);
+        expect(Buffer.from(document.text), id).toEqual(
+          before.documents.get(path.relative('src/content/docs', docPath)),
+        );
+      }
+    });
+  }, 60_000);
+
+  it('detects missing/rewritten prose and classification drift in a disposable copy', async () => {
+    await withGitBaseline(async (root) => {
+      const before = await readCanonicalSnapshot(root);
+      const problem = [...before.problems.values()][0];
+      if (!problem) throw new Error('Missing baseline Problem');
+      const docPath = before.problemDocumentPaths.get(problem.id);
+      if (!docPath) throw new Error('Missing baseline document path');
+      const document = path.join(root, docPath);
+      const bytes = await readFile(document);
+      await rm(document);
+      await expect(readCanonicalSnapshot(root)).rejects.toThrow('Missing document');
+      await writeFile(document, Buffer.concat([bytes, Buffer.from('\n雛形への巻き戻し\n')]));
+      const rewritten = await readCanonicalSnapshot(root);
+      expect(() => {
+        assertCanonicalPreserved(before, rewritten);
+      }).toThrow('documents: changed');
+      await writeFile(document, bytes);
+      // Removing metadata and prose together still fails even though no dangling docPath remains.
+      const missing = {
+        ...before,
+        problems: new Map(before.problems),
+        documents: new Map(before.documents),
+      };
+      missing.problems.delete(problem.id);
+      missing.documents.delete(path.relative('src/content/docs', docPath));
+      expect(() => {
+        assertCanonicalPreserved(before, missing);
+      }).toThrow('problems: ID/path set changed');
+      const reclassified = { ...before, placements: structuredClone(before.placements) };
+      const placement = reclassified.placements[0];
+      if (!placement) throw new Error('Missing baseline placement');
+      const anotherOutcome = [...before.outcomes.keys()].find(
+        (id) => id !== placement.primaryOutcomeId,
+      );
+      if (!anotherOutcome) throw new Error('Missing alternate Outcome');
+      placement.primaryOutcomeId = anotherOutcome;
+      expect(() => {
+        assertCanonicalPreserved(before, reclassified);
+      }).toThrow('Problem placements changed');
+      for (const kind of [
+        'tagPrerequisites',
+        'learningOutcomePrerequisites',
+        'learningUnitPrerequisites',
+      ] as const) {
+        const drift = { ...before, prerequisites: structuredClone(before.prerequisites) };
+        drift.prerequisites[kind].pop();
+        expect(() => {
+          assertCanonicalPreserved(before, drift);
+        }).toThrow(`${kind}: direct prerequisites changed`);
+      }
+      for (const kind of ['tags', 'outcomes', 'units'] as const) {
+        const drift = {
+          ...before,
+          tags: new Map(before.tags),
+          outcomes: new Map(before.outcomes),
+          units: new Map(before.units),
+        };
+        const id = before[kind].keys().next().value;
+        if (!id) throw new Error(`Missing ${kind} fixture`);
+        drift[kind].delete(id);
+        expect(() => {
+          assertCanonicalPreserved(before, drift);
+        }).toThrow(`${kind}: ID/path set changed`);
+      }
+      const reordered = {
+        ...before,
+        order: before.order.map((chapter) => ({
+          ...chapter,
+          unitIds: [...chapter.unitIds].reverse(),
+        })),
+      };
+      expect(() => {
+        assertCanonicalPreserved(before, reordered);
+      }).toThrow('Textbook reading order changed');
+      assertCanonicalPreserved(before, await readCanonicalSnapshot(root));
+    });
+  }, 60_000);
+});
 describe('accepted canonical full public projection', () => {
   it('preserves representative problems independently of direct tag assignments for all 213 tags', () => {
     expect(projection.ui.tags).toHaveLength(213);
