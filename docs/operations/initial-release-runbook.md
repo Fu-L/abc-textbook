@@ -76,85 +76,81 @@ gh api repos/Fu-L/abc-textbook/branches/main/protection
 
 ## 静的hostと認証
 
-Cloudflare Pages Free / Direct Uploadを選定する。private
-repositoryのままビルド成果物を渡せる。読者はアカウント不要で、backend、生成API、analyticsは使わない。追加必須費用は0円。Freeの20,000ファイル・1ファイル25
-MiB以内をdeploy adapterが確認する。
-[Direct Uploadの公式手順](https://developers.cloudflare.com/pages/get-started/direct-upload/)、
-[Freeの制限](https://developers.cloudflare.com/pages/platform/limits/)
+2026-10-08、ownerは「GitHub
+Pagesに変更する」を選択した。#53のCloudflare選定は過去の準備記録として保持し、#54の実配信にはGitHub
+Pagesを使う。公開済みrepositoryのPagesをworkflow方式で有効化し、APIが返したURLは
+`https://fu-l.github.io/abc-textbook/`
+である。`SITE_URL=https://fu-l.github.io`、`BASE_PATH=/abc-textbook`
+をbuildと検証で統一する。読者のログイン・追加費用・backend・analyticsは不要である。
 
-#54の開始時にownerのCloudflare accountでDirect Upload projectを作成する。project名の第一候補は
-`fu-l-abc-textbook`、production branchは`main`、base
-pathは`/`。希望originは`https://fu-l-abc-textbook.pages.dev`だが、projectは未作成で名前の空きは未確認である。作成APIが返した実HTTPS
-originを`SITE_URL`へ設定し、それ以降は同じoriginを維持する。Cloudflareの無料管理アカウントは運用者の認証だけに使い、教科書利用者のアカウントにはしない。
-
-```sh
-npm exec --yes --package=wrangler@4.148.0 -- wrangler login
-npm exec --yes --package=wrangler@4.148.0 -- wrangler pages project create fu-l-abc-textbook --production-branch main
-npm exec --yes --package=wrangler@4.148.0 -- wrangler pages project list --json
-```
-
-GitHub Actionsの`production` environmentへaccount IDとPagesの編集が可能なAPI
-tokenをsecretとして設定する。tokenを文書・証跡へ書かない。secret名は`CLOUDFLARE_ACCOUNT_ID`、`CLOUDFLARE_API_TOKEN`。variable名は`CLOUDFLARE_PAGES_PROJECT`、`SITE_URL`。この設定と実originの確認は#54の開始条件である。
-
-同じenvironmentの`RELEASE_GATE_TOKEN`には、このrepositoryのAdministration readとChecks
-readを持つ運用者のfine-grained tokenを設定する。branch protectionのGETはAdministration
-readを要求するため、workflowの`contents: read` / `checks: read`の標準
-`GITHUB_TOKEN`だけでは代用しない。このtokenは保護設定とcheck結果の読み取りstepだけで使い、設定変更やmerge権限は要求しない。
-[GitHubのbranch protection API権限](https://docs.github.com/en/rest/branches/branch-protection#get-branch-protection)
+`github-pages` environmentはprotected branch限定とし、`main`の5つのrequired
+checks・strict・admin適用を維持する。実設定の確認は上記APIで行う。workflowは標準の`GITHUB_TOKEN`とOIDCを使い、追加secretやCloudflareログインを要求しない。
+[GitHub Pagesのworkflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
 ## exact commitの初回deployとretry
 
-#54で、全required checksが成功したPRをprotected mainへmergeする。merge後のfull SHAに対するrequired
-checksの成功を確認し、`Production deploy`
-workflowを手動起動する。branch名、PR番号、短縮SHAを公開snapshot IDにしない。
+#54で全required checksが成功したPRをprotected mainへmergeする。merge後のfull SHAに対する全required
+checksの成功を確認し、read-onlyの通常release検証を実行してから `Production deploy` を起動する。
 
 ```sh
+gh api repos/Fu-L/abc-textbook/branches/main/protection
+gh api repos/Fu-L/abc-textbook/commits/FULL_MERGED_COMMIT/check-runs
+npm run verify:release -- --commit FULL_MERGED_COMMIT
 gh workflow run production-deploy.yml --ref main -f commit=FULL_MERGED_COMMIT -f rollback=false
 gh run list --workflow production-deploy.yml
 ```
 
-workflowはmain所属、実branch protection、全required
-checksを確認し、read-only最終検証を実行する。最小Release MetadataはそのCI
-runで確定SHAと検証URLから生成する。自分自身を指すSHAをcommitへ書き込まない。adapterは隔離したexact
-checkoutでlocked install・build・link検査を行い、 `dist/release-metadata.json`だけをCI
-provenanceとして追加し、Wranglerでproductionへuploadする。hostのproduction / deploy-success / exact
-SHAと配信metadataの一致を確認したときだけ成功する。失敗時は新しいSHAを作らず、同じworkflow・同じSHAをretryする。
+workflowはmain所属と5つのcheck成功を確認し、exact checkoutでlocked
+install・read-only最終検証・build・link検査を行う。最小metadataにfull SHAと検証run
+URLを記録する。Pages
+APIの`pages_build_version`には公開対象SHAを明示するため、workflowを起動した最新mainのSHAと旧版のredeploy
+SHAを混同しない。成功statusと配信metadataを照合する。失敗時は同SHAでretryする。
+[Pages deployment API](https://docs.github.com/en/rest/pages/pages#create-a-github-pages-deployment)
 
-host成功履歴はCloudflare deployments APIが正本であり、prepared Catalogは公開履歴ではない。
-`release-metadata.json`の配信URLとCloudflare deployment ID / status / commitを#54の
-`docs/verification/deployments/initial-release.json`へ記録する。取得例は次のとおり。
+### 事後検証と履歴
+
+初版の通常公開と同SHAのredeployでは `docs/operations/verify-initial-deployment.py`
+を自動実行する。公開URLに対する取得と使い捨てブラウザーcontextを使う。
+
+- Pages APIの実deployment ID・`succeed`と配信metadataのfull
+  SHA・version・cutoff・868問scopeを照合する。
+- Gitのexact Catalogと配信Catalogを全件比較する。1573 HTML
+  route、全868問題の学習control・内部導線、254開催とABC316欠番、sitemap/feedを検査する。サブパスを含むURLを使う。
+- 既存の初版E2Eを3エンジン計93件実行し、キーボード・320px幅・独立日時・reload・120件backup/restoreを確認する。Pagefindで`abc212-e`・`abc315-ex`・`abc466-g`を検索する。DB名・version
+  2・Problem ID keyを確認する。
+- 検証前後のmetadata一致を確認する。成功したときだけ実結果を出力する。部分的成功を公開検証完了と記録しない。
+
+既存の`loadGitReleaseHistory`に、実host確認済みmetadataとそのSHAのCatalogを渡し、`initial-history.json`を導出する。Git内のprepared
+Catalogやfeedをpublishedへ書き換えない。Pages
+APIは公開完了時刻を返さないため、成功statusの実観測時刻を`publicationObservedAt`へ記録する。upload開始時刻や収録cutoffを公開日時にしない。GitHub
+environmentの成功status時刻はworkflow完了後に別途記録する。
 
 ```sh
-npm exec --yes --package=wrangler@4.148.0 -- wrangler pages deployment list --project-name fu-l-abc-textbook
+gh run download SUCCESSFUL_DEPLOY_RUN_ID --name initial-production-verification-FULL_MERGED_COMMIT --dir /tmp/initial-production-verified
+cp /tmp/initial-production-verified/initial-release.json docs/verification/deployments/initial-release.json
+cp /tmp/initial-production-verified/initial-history.json docs/verification/deployments/initial-history.json
 ```
 
-成功deploymentから取得した最小metadataの配列を`/tmp/host-history.json`へ保存し、bootstrap
-manifestを配列にした`/tmp/update-list.json`とともに、Git snapshotの履歴を照合する。
-`--host cloudflare-pages`は各prepared
-Catalogについて実host成功と配信metadataの一致を必須にする。Git内のprepared
-recordをpublishedへ書き換えず、初版の履歴出力はverification directoryへ保存する。
-
-```sh
-npm run release:history -- --host cloudflare-pages --releases /tmp/host-history.json --updates /tmp/update-list.json --public-output docs/verification/deployments/initial-history.json --hold-output staging/deployment-holds.json
-```
-
-公開後にhomeの868問・232
-Unit、ABC212/ABC466/ABC316の表、代表Problem/Tag/Unitへの内部導線、Pagefindの`abc315-ex`と`abc466-g`検索、sitemap/feedとcatalog閉包、スマートフォン幅を確認する。配信metadataのSHA/cutoffが一致すること、Problem
-ID・DB名/version、修了・復習値と独立日時、120件backup/restoreが同originで保持されることを確認する。
+手動再検証ではNode 24、locked
+dependencies、3ブラウザー、`SITE_URL`・`BASE_PATH`・`GH_TOKEN`と、workflowが取得した実
+`/tmp/pages-deployment.json`
+を用意して同じPython入口を使う。suite・本文・lockfileが対象commitと一致しなければ停止する。host
+receiptを手書きして公開証拠にしない。
 
 ## 初回失敗とrollback
 
-初回には旧production版がない。52週simulationのknown-commit
-rollback、初回公開SHAのredeploy、二つの実公開版間のrollbackは別の結果として記録する。旧版がない状態で本番rollback成功を主張しない。初回失敗はretryし、公開内容に問題があれば配信を停止して修正を通常reviewへ戻す。
-
-二版目以降は、host成功履歴にある既知commitへ次で戻す。
+初回には旧production版がない。52週simulation、初回公開SHAのredeploy、異なる実公開版間のrollbackを区別する。二版間rollbackは
+`not_applicable_no_prior_production_version` とする。
 
 ```sh
 gh workflow run production-deploy.yml --ref main -f commit=KNOWN_PUBLISHED_COMMIT -f rollback=true
 ```
 
-adapterはhost履歴からそのcommitのmetadataを取得して同じadapterで再deployする。任意のrollback用metadataを受け取らず、previewや失敗uploadを旧公開版に数えない。同一originと安定Problem
-IDを保つ。origin変更が必要なら、旧originでbackup
-export後、新originでimportして値と両日時の一致を確認する。
+rollback入口はPages APIでそのSHAの公開成功を確認し、同じSHAのlive
+metadata、またはGitへ保存した初版公開証跡からmetadataを復元する。任意metadataを入力させない。初版の同SHA再公開では同じmetadataを保ち、再び公開検証を行う。初版以外の公開版への対応は#52の履歴拡張で実装する。
 
-US5のlive受入、FR-022〜FR-025、SC-006/SC-007、SC-014のlive更新は#54完了後の#52へ引き継ぐ。既存の数学回帰、更新・訂正回帰、52週simulationは初版でも維持する。
+originとProblem IDを固定する。origin変更が必要なら、旧originでbackup
+export後、新originでimportし、値と両日時を照合する。
+
+#52は事後検証JSON・immutable Git履歴・公開Catalog・metadataを実公開baseとして受け取る。US5
+live受入、FR-022〜FR-025、SC-006/SC-007、SC-014のlive更新は#52で扱う。既存の数学回帰、更新・訂正回帰、52週simulationを維持する。

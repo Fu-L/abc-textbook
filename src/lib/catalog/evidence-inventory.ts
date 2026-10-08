@@ -507,7 +507,6 @@ export const loadCatalogEvidenceCanonicalSources = async (
     throw new CatalogEvidenceInventoryError('CANONICAL_WORK_MANIFEST_NOT_UNIQUE', 'No manifest.');
   }
   const isSeedBootstrap =
-    !baseCatalog &&
     release.releaseKind === 'initial' &&
     release.updateIds.length === 1 &&
     release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
@@ -515,6 +514,9 @@ export const loadCatalogEvidenceCanonicalSources = async (
   let initialProjectionDigest: string | undefined;
   if (isSeedBootstrap) {
     assertSeedRelease(currentCatalog);
+    // Initial publication is still the full accepted scope after the prepared
+    // catalog merges. Operational follow-ups do not create new content operations.
+    if (baseCatalog) assertSeedRelease(baseCatalog);
     await runGit(['diff', '--exit-code', baseCommit, 'HEAD', '--', 'src/content'], repositoryRoot);
     const projection = await loadFullPublicProjection({
       repositoryRoot,

@@ -184,3 +184,11 @@ GitHub branch protectionも現private repositoryの実APIで403となったた�
 ## #53 owner-authorized initial release review
 
 2026-10-07、ownerはhigh-risk self-reviewを選び、その後「人間の了承は不要です。」と明示した。初版だけをagent_quality_reviewで受け入れるowner例外を憲章・仕様へ記録し、通常/catch-upの人間レビュー契約は保持する。Catalogの独立agent refは固定scopeとsource/manifest/check/item coverageへbindingし、人間refsは空にする。既存schemaのself/third-party enumをagent modeへ読み替える方法は、人間証跡の意味を失うため採らない。
+
+## #54 owner-selected GitHub Pages publication
+
+2026-10-08、ownerはCloudflare設定待ちを解消するため「GitHub Pagesに変更する」を選択した。repositoryは#53でowner指示によりpublicへ変更済みである。#53のhost選定は過去の判断として残す。実公開はGitHub Pagesのworkflow方式とし、APIが返した `https://fu-l.github.io/abc-textbook/` を固定する。`github-pages` environmentはprotected branch限定に設定し、mainの既存5 required checksを維持する。標準GitHub token/OIDCで配信し、追加認証操作・backend・analyticsを増やさない。
+
+Pages APIに公開対象のexact SHAを`pages_build_version`として渡す。成功status・live metadata・exact Git Catalogを照合した後、既存のGit履歴builderで公開履歴を導出する。prepared Catalogとfeedは書き換えず、公開結果を `docs/verification/deployments/` へ保存する。Pagesは完了日時を返さないため、実成功statusの観測時刻とworkflow完了時刻を区別する。同SHA redeployを確認し、初版では異なる公開版間rollbackを未適用とする。
+
+[GitHubのcustom workflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)、[Pages REST API](https://docs.github.com/en/rest/pages/pages#create-a-github-pages-deployment)を確認した。現行手順は `docs/operations/initial-release-runbook.md`。

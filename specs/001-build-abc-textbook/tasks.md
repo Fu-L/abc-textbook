@@ -315,6 +315,8 @@ T133〜T142のチェック済み状態はPR #69までの検証実装・868問の
 - [ ] T152 Merge the fully validated tree to protected main and deploy that exact full commit hash without content changes by following `docs/operations/initial-release-runbook.md`
 - [ ] T153 Verify static-host deployment history, immutable Git Release history, route/search availability, known-commit rollback, and learning-record compatibility in `docs/verification/deployments/initial-release.json`
 
+#54作業状況（2026-10-08）: ownerの選択により実公開先をGitHub Pagesへ変更し、`https://fu-l.github.io/abc-textbook/` とprotected-branch限定のgithub-pages environmentを設定した。サブパス込みのexact commit公開と全公開導線・3ブラウザーの実検証を実装する。prepared初版をmainから引き継ぐ際のscope判定を回帰テスト付きで修正し、変更subjectの監査を再実行する。T152/T153は実公開検証成功まで未完了とし、現況は`docs/verification/deployments/initial-release-preflight.json`へ記録する。
+
 ### Issue #53 preparation progress (2026-10-07)
 
 T162/T145/T147のseed入力・bootstrap-only summary・SC-012自動観測を用意し、T133〜T142を現在のsubjectで全件再実行した。本文・taxonomy・配置のcanonical file差分は0件。SC-012は3エンジン×4固定Problemの自動操作と再読込保持であり、人間の読解時間を測っていない。

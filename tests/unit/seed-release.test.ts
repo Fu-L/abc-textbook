@@ -1,4 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { execFile } from 'node:child_process';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { promisify } from 'node:util';
+import { loadCatalogEvidenceCanonicalSources } from '../../src/lib/catalog/evidence-inventory.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import {
   assertSeedRelease,
@@ -10,6 +16,36 @@ import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/relea
 import { validatePublicationUpdate } from '../../src/lib/validation/publication-update.js';
 
 describe('accepted seed initial publication', () => {
+  it('continues unchanged bootstrap publication after its prepared catalog has merged', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'abc-seed-continuation-'));
+    const root = path.join(directory, 'repository');
+    const exec = promisify(execFile);
+    try {
+      await exec('git', ['clone', '--quiet', '--shared', process.cwd(), root]);
+      const git = (...args: string[]) => exec('git', args, { cwd: root });
+      const base = (await git('rev-parse', 'HEAD')).stdout.trim();
+      await git('update-ref', 'refs/remotes/origin/main', base);
+      await git('config', 'user.name', 'Fixture');
+      await git('config', 'user.email', 'fixture@example.invalid');
+      await writeFile(path.join(root, 'deployment-note.md'), 'Operational continuation.');
+      await git('add', 'deployment-note.md');
+      await git('commit', '--quiet', '-m', 'Continue prepared initial deployment');
+      const catalogPath = 'docs/verification/releases/catalog.json';
+      const catalog = JSON.parse(await readFile(path.join(root, catalogPath), 'utf8')) as unknown;
+      await expect(
+        loadCatalogEvidenceCanonicalSources(catalog, root, { catalogPath }),
+      ).resolves.toMatchObject({ catalog: { release: { problemCount: 868 } } });
+      const documentPath = (catalog as { authoringUnits: { docPath: string }[] }).authoringUnits[0]
+        ?.docPath;
+      if (!documentPath) throw new Error('Missing canonical document fixture.');
+      await writeFile(path.join(root, documentPath), 'Changed content');
+      await expect(
+        loadCatalogEvidenceCanonicalSources(catalog, root, { catalogPath }),
+      ).rejects.toThrow();
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  }, 120_000);
   it('fixes the cutoff and keeps all accepted Problem homes, prose and taxonomy', async () => {
     const { catalog } = await loadFullPublicProjection();
     expect(catalog.release.cutoffAt).toBe(INITIAL_RELEASE_CUTOFF);

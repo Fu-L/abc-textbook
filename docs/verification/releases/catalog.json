@@ -896,8 +896,8 @@
       "passedCheckCount": 2,
       "blockingFindingCount": 0,
       "evidenceDigests": [
-        "ab294e6678eb6b46d510eaf44a74998754d795c561c560e0b1a878d8ff555a30",
-        "312dcdf1f36b23558ba8507466c0be73f9295c0217d953fc1abab09ac1303111"
+        "de044e757f4646f15e65e873d44599ed9a3725cc2fc5883926d3e15d6b9ecdd0",
+        "f6387ca2a71cb2d7735c5e4f01e8f0cb454c387a475a2fb3f0f307246a923492"
       ],
       "checks": [
         {
@@ -905,20 +905,20 @@
           "command": "npm run verify:initial-release -- --check",
           "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
           "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
-          "resultDigest": "ab294e6678eb6b46d510eaf44a74998754d795c561c560e0b1a878d8ff555a30",
+          "resultDigest": "de044e757f4646f15e65e873d44599ed9a3725cc2fc5883926d3e15d6b9ecdd0",
           "exitCode": 0,
           "passed": true,
-          "completedAt": "2026-10-07T17:20:29.092Z"
+          "completedAt": "2026-10-08T01:45:11.301Z"
         },
         {
           "checkId": "check-initial-sc012",
           "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
           "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
           "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
-          "resultDigest": "312dcdf1f36b23558ba8507466c0be73f9295c0217d953fc1abab09ac1303111",
+          "resultDigest": "f6387ca2a71cb2d7735c5e4f01e8f0cb454c387a475a2fb3f0f307246a923492",
           "exitCode": 0,
           "passed": true,
-          "completedAt": "2026-10-07T17:19:01.682Z"
+          "completedAt": "2026-10-08T01:42:16.656Z"
         }
       ]
     },
@@ -927,7 +927,7 @@
     "agentQualityReviewEvidenceRef": {
       "evidenceId": "agent-content-review-initial-release",
       "path": "docs/reviews/agent-content/initial-release/release-review.json",
-      "digest": "293fc5109b9d076fd716d2d4bcaae1aaade332faa00691bdaee8e651d78b6849",
+      "digest": "48c5af17d6df71407bd6c852117e787568e446f4e41f964c1cd127977cc8e417",
       "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
       "acceptanceMode": "agent_quality_review",
       "aggregatePassed": true
