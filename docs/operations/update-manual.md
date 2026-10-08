@@ -200,6 +200,10 @@ catalog・欠落page・発動条件欠落の拒否も確認する。旧監査con
 catalogと受入台帳を除いたcandidateをbuildでき、projection単体は`usePreparedRelease: false`で訂正を検証できる。実作業ツリーの旧公開入力を消して制約を迂回せず、catalog
 CLIの証跡consumerはPR-05、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
 
+旧seed release
+consumerは初版bootstrapの`sourceSetFingerprint`も読むため、その経路内だけで旧受入subjectと現行本文から当時のprojection
+digest形式を再構成する。現行digestも受理するが、不明なfingerprintや本文・metadataの変更は引き続き拒否する。公開loaderの台帳読込を復活させず、旧bootstrap・台帳・公開catalogの値を書き換えない。この互換経路は旧consumerの整理まで保持する。
+
 復旧はloaderと検査CLIの変更をrevertする。旧台帳・教材・prepared
 catalogは保持しているため、旧経路へ戻せる。
 
