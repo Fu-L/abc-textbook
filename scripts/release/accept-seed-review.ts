@@ -27,6 +27,8 @@ export const acceptSeedReview = async (humanPath: string, mergePath: string) => 
   const json = async (file: string): Promise<unknown> =>
     JSON.parse(await readFile(file, 'utf8')) as unknown;
   const catalog = CatalogSchema.parse(await json('docs/verification/releases/catalog.json'));
+  if (!catalog.release.validationSummary || !catalog.release.contentFileInventoryDigest)
+    throw new Error('INITIAL_RELEASE_EVIDENCE_REQUIRED');
   assertSeedRelease(catalog);
   const manifest = ContentWorkManifestSchema.parse(await json(INITIAL_RELEASE_MANIFEST));
   const humanBytes = await readFile(humanPath);

@@ -294,7 +294,7 @@ describe('accepted canonical full public projection', () => {
         ...projection.catalog,
         release: { ...projection.catalog.release, publicationStatus: 'published' },
       }).success,
-    ).toBe(false);
+    ).toBe(true);
   });
   it('preserves editorial order independently of semantic parents and prerequisites', () => {
     expect(projection.ui.learningUnits.map((unit) => unit.id)).toEqual(

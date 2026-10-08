@@ -40,6 +40,7 @@ const addLearningUnitExecutableExample = (catalog: ReturnType<typeof catalogFixt
 const executableEvidence = (catalog: ReturnType<typeof catalogFixture>) => {
   const inventory = deriveExecutableExampleInventory(catalog);
   const subjectDigest = catalog.release.contentSnapshotDigest;
+  if (!subjectDigest) throw new Error('Missing fixture snapshot digest.');
   return {
     path: 'docs/verification/examples.json',
     digest: sha('e'),

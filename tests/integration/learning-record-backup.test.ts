@@ -16,50 +16,64 @@ const record = (index: number, overrides: Partial<LearningRecord> = {}): Learnin
 });
 
 describe('learning record backup and restore', () => {
-  it('exports and restores 100+ privacy-minimal records', async () => {
-    const records = Array.from({ length: 120 }, (_, index) =>
-      record(index, {
-        status: index % 2 ? 'in_progress' : 'completed',
-        statusUpdatedAt: '2026-07-29T08:00:00-04:00',
-        needsReview: index % 3 === 0,
-        needsReviewUpdatedAt: '2026-07-29T21:30:00+09:00',
-      }),
-    );
-    const ids = new Set(records.map(({ problemId }) => problemId));
-    const source = new InMemoryLearningRecordDatabase(records);
-    const backup = await exportLearningRecords(source, {
-      catalogVersion: '2026.07.1',
-      catalogProblemIds: ids,
-      exportedAt: '2026-07-29T10:30:00+09:00',
-    });
-    expect(JSON.stringify(backup)).not.toMatch(/account|sync|telemetry/iu);
-    const target = new InMemoryLearningRecordDatabase();
-    const preview = previewLearningRecordImport(backup, [], ids);
-    expect(preview.counts.new).toBe(120);
-    await applyLearningRecordImport(target, preview, 'newer-wins');
-    expect(target.records.size).toBe(120);
-    expect([...target.records.values()]).toEqual(records);
-    // A rollback makes formerly known IDs orphaned; re-adding them must recover the same records.
-    const withdrawnIds = new Set([...ids].slice(0, 100));
-    const afterWithdrawal = await exportLearningRecords(target, {
-      catalogVersion: '2026.07.1',
-      catalogProblemIds: withdrawnIds,
-      exportedAt: '2026-07-30T10:30:00+09:00',
-    });
-    expect(afterWithdrawal.orphanedProblemIds).toHaveLength(20);
-    const restored = new InMemoryLearningRecordDatabase();
-    const withdrawalPreview = previewLearningRecordImport(afterWithdrawal, [], withdrawnIds);
-    expect(withdrawalPreview.counts.unknown_problem_id).toBe(20);
-    await applyLearningRecordImport(restored, withdrawalPreview, 'newer-wins');
-    expect([...restored.records.values()]).toEqual(records);
-    const readded = await exportLearningRecords(restored, {
-      catalogVersion: '2026.07.1',
-      catalogProblemIds: ids,
-      exportedAt: '2026-07-31T10:30:00+09:00',
-    });
-    expect(readded.records).toEqual(records);
-    expect(readded.orphanedProblemIds).toEqual([]);
-  });
+  it.each(['2026.07.1', '2026.10.09-r10'])(
+    'exports and restores 100+ records with catalog %s',
+    async (catalogVersion) => {
+      const records = Array.from({ length: 120 }, (_, index) =>
+        record(index, {
+          status: index % 2 ? 'in_progress' : 'completed',
+          statusUpdatedAt: '2026-07-29T08:00:00-04:00',
+          needsReview: index % 3 === 0,
+          needsReviewUpdatedAt: '2026-07-29T21:30:00+09:00',
+        }),
+      );
+      const ids = new Set(records.map(({ problemId }) => problemId));
+      const source = new InMemoryLearningRecordDatabase(records);
+      const backup = await exportLearningRecords(source, {
+        catalogVersion,
+        catalogProblemIds: ids,
+        exportedAt: '2026-07-29T10:30:00+09:00',
+      });
+      expect(backup.catalogVersionAtExport).toBe(catalogVersion);
+      expect(Object.keys(backup).sort()).toEqual(
+        [
+          'schemaVersion',
+          'exportedAt',
+          'catalogVersionAtExport',
+          'records',
+          'orphanedProblemIds',
+        ].sort(),
+      );
+      expect(backup.schemaVersion).toBe('1.0.0');
+      expect(JSON.stringify(backup)).not.toMatch(/account|sync|telemetry/iu);
+      const target = new InMemoryLearningRecordDatabase();
+      const preview = previewLearningRecordImport(backup, [], ids);
+      expect(preview.counts.new).toBe(120);
+      await applyLearningRecordImport(target, preview, 'newer-wins');
+      expect(target.records.size).toBe(120);
+      expect([...target.records.values()]).toEqual(records);
+      // A rollback makes formerly known IDs orphaned; re-adding them must recover the same records.
+      const withdrawnIds = new Set([...ids].slice(0, 100));
+      const afterWithdrawal = await exportLearningRecords(target, {
+        catalogVersion,
+        catalogProblemIds: withdrawnIds,
+        exportedAt: '2026-07-30T10:30:00+09:00',
+      });
+      expect(afterWithdrawal.orphanedProblemIds).toHaveLength(20);
+      const restored = new InMemoryLearningRecordDatabase();
+      const withdrawalPreview = previewLearningRecordImport(afterWithdrawal, [], withdrawnIds);
+      expect(withdrawalPreview.counts.unknown_problem_id).toBe(20);
+      await applyLearningRecordImport(restored, withdrawalPreview, 'newer-wins');
+      expect([...restored.records.values()]).toEqual(records);
+      const readded = await exportLearningRecords(restored, {
+        catalogVersion,
+        catalogProblemIds: ids,
+        exportedAt: '2026-07-31T10:30:00+09:00',
+      });
+      expect(readded.records).toEqual(records);
+      expect(readded.orphanedProblemIds).toEqual([]);
+    },
+  );
 
   it('round-trips full orphaned records across catalog versions', async () => {
     const orphan = record(0, {
@@ -168,38 +182,41 @@ describe('learning record backup and restore', () => {
     ]);
   });
 
-  it('rolls back both overwrites and additions after the third restore write fails', async () => {
-    const incoming = [record(0), record(1), record(2)];
-    const original = record(0, {
-      status: 'in_progress',
-      needsReview: true,
-      needsReviewUpdatedAt: null,
-    });
-    const untouched = record(99);
-    const target = new InMemoryLearningRecordDatabase([original, untouched]);
-    // The first two writes must overwrite record(0) and add record(1) before failure.
-    target.failOnPutNumber = 3;
-    const preview = previewLearningRecordImport(
-      {
-        schemaVersion: '1.0.0',
-        exportedAt: '2026-07-29T12:30:00+09:00',
-        catalogVersionAtExport: '2026.07.1',
-        records: incoming,
-        orphanedProblemIds: [],
-      },
-      [original, untouched],
-      new Set(incoming.map(({ problemId }) => problemId)),
-    );
-    expect(preview.items.map(({ classification }) => classification)).toEqual([
-      'updated',
-      'new',
-      'new',
-    ]);
-    await expect(applyLearningRecordImport(target, preview, 'backup-wins')).rejects.toThrow(
-      'すべて取り消しました',
-    );
-    expect([...target.records.values()]).toEqual([original, untouched]);
-  });
+  it.each(['2026.07.1', '2026.10.09-r10'])(
+    'rolls back overwrites and additions for catalog %s after restore failure',
+    async (catalogVersionAtExport) => {
+      const incoming = [record(0), record(1), record(2)];
+      const original = record(0, {
+        status: 'in_progress',
+        needsReview: true,
+        needsReviewUpdatedAt: null,
+      });
+      const untouched = record(99);
+      const target = new InMemoryLearningRecordDatabase([original, untouched]);
+      // The first two writes must overwrite record(0) and add record(1) before failure.
+      target.failOnPutNumber = 3;
+      const preview = previewLearningRecordImport(
+        {
+          schemaVersion: '1.0.0',
+          exportedAt: '2026-07-29T12:30:00+09:00',
+          catalogVersionAtExport,
+          records: incoming,
+          orphanedProblemIds: [],
+        },
+        [original, untouched],
+        new Set(incoming.map(({ problemId }) => problemId)),
+      );
+      expect(preview.items.map(({ classification }) => classification)).toEqual([
+        'updated',
+        'new',
+        'new',
+      ]);
+      await expect(applyLearningRecordImport(target, preview, 'backup-wins')).rejects.toThrow(
+        'すべて取り消しました',
+      );
+      expect([...target.records.values()]).toEqual([original, untouched]);
+    },
+  );
 
   it('re-reads the latest local record inside the apply transaction', async () => {
     const oldLocal = record(0, { statusUpdatedAt: '2026-07-29T10:00:00+09:00' });

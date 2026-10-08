@@ -30,6 +30,13 @@ const { release } = Astro.props;
   <p>Git commit: <code>{release.commit}</code></p>
   <p><a href={release.validationResultsUrl}>検証結果</a></p>
   <details>
-    <summary>変更・検証・レビューの詳細</summary><pre>{JSON.stringify(release, null, 2)}</pre>
+    <summary>変更・公開情報の詳細</summary><pre>{JSON.stringify(release, null, 2)}</pre>
   </details>
 </TextbookLayout>
+
+<style>
+  pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+</style>

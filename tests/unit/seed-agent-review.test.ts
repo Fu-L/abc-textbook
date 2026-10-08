@@ -30,10 +30,12 @@ describe('owner-authorized initial release agent review', () => {
       createSeedReleaseManifest(catalog, catalog.release.validatedAt, true),
     );
     catalog.release.manifestDigest = manifest.digest;
+    const subjectDigest = catalog.release.contentFileInventoryDigest;
+    if (!subjectDigest) throw new Error('Missing fixture inventory digest.');
     const checks = INITIAL_RELEASE_CHECKS.map(([checkId, command], index) => ({
       checkId,
       command,
-      subjectDigest: catalog.release.contentFileInventoryDigest,
+      subjectDigest,
       resultPath: `tests/fixtures/seed-agent-review/${checkId}.json`,
       resultDigest: (index === 0 ? 'a' : 'b').repeat(64),
       passed: true,
@@ -48,7 +50,7 @@ describe('owner-authorized initial release agent review', () => {
       checks,
     };
     const inventory = deriveCatalogEvidenceTrustContext({ catalog, workManifest: manifest });
-    context = { catalog, manifest, inventory, checks: catalog.release.validationSummary.checks };
+    context = { catalog, manifest, inventory, checks };
     const ref = (path: string) => ({ path, digest: 'a'.repeat(64) });
     makeEvidence = () => {
       const unsigned = {
@@ -153,7 +155,7 @@ describe('owner-authorized initial release agent review', () => {
     ).toThrow('INITIAL_RELEASE_SCOPE_MISMATCH');
   });
 
-  it('retains agent acceptance in actual-host history and rejects an unreviewed or expanded catalog', () => {
+  it('retains legacy agent references, permits omitted reviews, and rejects expanded seed references', () => {
     const catalog = structuredClone(context.catalog);
     catalog.release.humanContentReviewEvidenceRefs = [];
     catalog.release.agentQualityReviewEvidenceRef = seedAgentReviewReference(
@@ -180,7 +182,9 @@ describe('owner-authorized initial release agent review', () => {
     expect(history[0]?.agentQualityReviewEvidenceRef?.acceptanceMode).toBe('agent_quality_review');
     expect(history[0]?.reviewEvidenceRefs).toEqual([]);
     delete catalog.release.agentQualityReviewEvidenceRef;
-    expect(() => buildReleaseHistory([{ metadata, catalog }])).toThrow();
+    expect(buildReleaseHistory([{ metadata, catalog }])[0]).not.toHaveProperty(
+      'agentQualityReviewEvidenceRef',
+    );
     const expanded = structuredClone(context.catalog);
     expanded.release.agentQualityReviewEvidenceRef = seedAgentReviewReference(
       makeEvidence(),

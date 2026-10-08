@@ -177,7 +177,19 @@ revertと既存Pages手順による再公開を優先する。revertが教材追
 
 以下は憲章改訂後も残る実装との差であり、今回の文書変更では撤去しない。後続の実装変更はこの欄を出発点にし、変更後の手順へ同時に更新する。新しい承認制度や証跡台帳を移行のために作らない。
 
-002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。これは未実装の移行設計であり、現行CLI/schemaへ新版を投入する手順ではない。実装時は旧日付版/URLを保持して`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`も旧受理値を残して拡張する。DB識別、backupのfield/schemaVersion、記録値・日時は変えない。
+002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。PR-03でschemaと履歴readerの互換拡張を実装した。catalog/metadataと`baseReleaseVersion`は旧日付版と`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`は1桁の日など従来の受理値と新版を読める。catalog
+`3.0.0`、metadata/backup
+`1.0.0`、DB識別、記録値・独立日時は維持する。採番・writer・deployはまだ切り替えておらず、新形式の本番発行はPR-07以降に限定する。
+
+旧catalog・metadata・履歴entryの値は補完・変換せず保持する。review参照、manifest/content
+inventory/snapshot
+digest、validationSummaryは新規入力で省略でき、存在する場合は従来の型・整合性・初版agent参照の対象制限を検証する。Source
+Revisionのfingerprint、registry
+digest、metadataの必須fieldはそのまま維持する。省略した証跡を成功件数・digest・時刻や空のreview欄で埋めない。
+
+履歴readerは入力された公開順序を保持し、同SHAの別runを別版として扱う。重複版、既存entryのSHA・範囲・概要・値・順序の書換え、未知Git
+commitは拒否する。旧`release:history`は従来どおり当時のGit
+catalogを読み、prepared版にはhostの確認を要求する。新版artifactを実配信成功後に追記するwriterは後続PRで移行する。旧catalog/deploy/初版検査のconsumerは引き続き証跡を要求し、今回のschema拡張だけで証跡なしの教材更新・公開が完成したとは扱わない。
 
 新版履歴は実配信した同じbuild
 artifactのcatalog/metadataと標準Pages/Actionsの成功から追記する。artifact取得不能時の同版公開JSONの照合と追記保留、履歴だけの変更も検証・配信した後はその配信自体の履歴追記を要求しない条件は[履歴入力契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#配信後の履歴入力と履歴だけの配信)を参照する。各consumerとworkflowを移行するPRで、この設計を確認済みの現行手順へ置き換える。教材内容の変更は禁止したまま一時コピーで経路を検証し、実訂正・1
@@ -185,7 +197,7 @@ Contest追加のSC-004受入は別依頼まで未達とする。
 
 002の公開移行はPR-07a（標準配信導入）→PR-07b（履歴writerと旧trigger切替の通常配信）→PR-07c（両先行版の成功確認後、indexと非公開運用文書だけを追記・配信）へ分ける。writer/workflow変更を履歴だけの配信へ混在させない。両版の実入力は標準artifactまたは同じ作業内の一時領域で確保し、取得不能な版の追記は保留する。
 
-PR-07a以降の[ローカルbuild入力設計](../../specs/002-simplify-maintenance/contracts/compatibility.md#ローカルbuildとactionsの入力)では、Actions外は既存の基準版で未公開candidateをbuildし、metadataを生成しない。Actions内は実runの作成日時・ID・SHAを検証し、入力不足を失敗とする。これも未実装の移行設計であり、現在のbuildやschemaに新版採番や新しい環境変数が対応済みとは扱わない。実装PRで対象回帰を確認して、この欄と現在のコマンド説明を同時に更新する。
+PR-07a以降の[ローカルbuild入力設計](../../specs/002-simplify-maintenance/contracts/compatibility.md#ローカルbuildとactionsの入力)では、Actions外は既存の基準版で未公開candidateをbuildし、metadataを生成しない。Actions内は実runの作成日時・ID・SHAを検証し、入力不足を失敗とする。これも未実装の移行設計であり、現在のbuildに新版採番や新しい環境変数が対応済みとは扱わない。実装PRで対象回帰を確認して、この欄と現在のコマンド説明を同時に更新する。
 
 | 対象                                                                                                                                  | 移行する内容                                                                | 保持・確認するもの                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |

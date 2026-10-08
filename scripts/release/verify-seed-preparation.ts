@@ -32,6 +32,7 @@ export const verifySeedPreparation = async (
   const json = async (file: string): Promise<unknown> =>
     JSON.parse(await readFile(path.join(root, file), 'utf8')) as unknown;
   assertSeedRelease(catalog);
+  if (!catalog.release.validationSummary) throw new Error('INITIAL_RELEASE_EVIDENCE_REQUIRED');
   if (catalog.release.publicationStatus !== 'prepared')
     throw new Error('INITIAL_PREPARATION_STATUS');
   if (

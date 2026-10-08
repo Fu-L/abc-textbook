@@ -27,6 +27,8 @@ export const acceptSeedAgentReview = async () => {
   const json = async (file: string): Promise<unknown> =>
     JSON.parse(await readFile(file, 'utf8')) as unknown;
   const catalog = CatalogSchema.parse(await json('docs/verification/releases/catalog.json'));
+  if (!catalog.release.validationSummary || !catalog.release.contentFileInventoryDigest)
+    throw new Error('INITIAL_RELEASE_EVIDENCE_REQUIRED');
   assertSeedRelease(catalog);
   const manifest = ContentWorkManifestSchema.parse(await json(INITIAL_RELEASE_MANIFEST));
   const constitution = await readFile('.specify/memory/constitution.md', 'utf8');

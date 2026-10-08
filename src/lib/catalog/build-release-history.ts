@@ -1,27 +1,28 @@
+import { z } from 'zod';
 import { canonicalJson } from '../domain/canonical-json.js';
 import { CatalogSchema, CatalogReleaseSchema } from '../domain/schema-parts/catalog.js';
 import { ReleaseMetadataSchema } from '../domain/schema-parts/release.js';
 
 /** Serialized public history contains only records of actual published commits. */
-export const PublicReleaseHistoryEntrySchema = ReleaseMetadataSchema.unwrap()
-  .extend({
-    validatedAt: CatalogReleaseSchema.shape.validatedAt,
-    firstContestId: CatalogReleaseSchema.shape.firstContestId,
-    lastContestId: CatalogReleaseSchema.shape.lastContestId,
-    contestCount: CatalogReleaseSchema.shape.contestCount,
-    problemCount: CatalogReleaseSchema.shape.problemCount,
-    validationSummary: CatalogReleaseSchema.shape.validationSummary,
-    reviewEvidenceRefs: CatalogReleaseSchema.shape.humanContentReviewEvidenceRefs,
-    agentQualityReviewEvidenceRef: CatalogReleaseSchema.shape.agentQualityReviewEvidenceRef,
-    changelogPath: CatalogReleaseSchema.shape.changelogPath,
-  })
-  .refine(
-    (entry) =>
-      entry.reviewEvidenceRefs.length > 0 || entry.agentQualityReviewEvidenceRef !== undefined,
-    {
-      message: 'Published history requires policy-selected review evidence.',
-    },
-  );
+export const PublicReleaseHistoryEntrySchema = ReleaseMetadataSchema.unwrap().extend({
+  validatedAt: CatalogReleaseSchema.shape.validatedAt,
+  firstContestId: CatalogReleaseSchema.shape.firstContestId,
+  lastContestId: CatalogReleaseSchema.shape.lastContestId,
+  contestCount: CatalogReleaseSchema.shape.contestCount,
+  problemCount: CatalogReleaseSchema.shape.problemCount,
+  validationSummary: CatalogReleaseSchema.shape.validationSummary,
+  reviewEvidenceRefs: CatalogReleaseSchema.shape.humanContentReviewEvidenceRefs,
+  agentQualityReviewEvidenceRef: CatalogReleaseSchema.shape.agentQualityReviewEvidenceRef,
+  changelogPath: CatalogReleaseSchema.shape.changelogPath,
+});
+
+/** Existing order is authoritative; repeated version identifiers cannot share a route. */
+export const PublicReleaseHistorySchema = z
+  .array(PublicReleaseHistoryEntrySchema)
+  .superRefine((entries, context) => {
+    if (new Set(entries.map(({ version }) => version)).size !== entries.length)
+      context.addIssue({ code: 'custom', message: 'RELEASE_HISTORY_DUPLICATE' });
+  });
 
 const freeze = <T>(value: T): T => {
   if (value !== null && typeof value === 'object') {
@@ -47,14 +48,15 @@ const projectRelease = (record: { readonly metadata: unknown; readonly catalog: 
       })
   )
     throw new Error('RELEASE_HISTORY_SUMMARY_MISMATCH');
+  const summary = release.validationSummary;
   if (
     release.publicationStatus === 'prepared' ||
     release.heldProblemIds.length ||
-    release.validationSummary.blockingFindingCount ||
-    !release.validationSummary.checkCount ||
-    release.validationSummary.passedCheckCount !== release.validationSummary.checkCount ||
-    release.validationSummary.checks.some((check) => !check.passed || check.exitCode !== 0) ||
-    (!release.humanContentReviewEvidenceRefs.length && !release.agentQualityReviewEvidenceRef)
+    (summary !== undefined &&
+      (summary.blockingFindingCount ||
+        !summary.checkCount ||
+        summary.passedCheckCount !== summary.checkCount ||
+        summary.checks.some((check) => !check.passed || check.exitCode !== 0)))
   )
     throw new Error('RELEASE_HISTORY_INCOMPLETE');
   return freeze({
@@ -64,15 +66,17 @@ const projectRelease = (record: { readonly metadata: unknown; readonly catalog: 
     lastContestId: release.lastContestId,
     contestCount: release.contestCount,
     problemCount: release.problemCount,
-    validationSummary: structuredClone(release.validationSummary),
-    reviewEvidenceRefs: structuredClone(release.humanContentReviewEvidenceRefs),
+    ...(summary !== undefined ? { validationSummary: structuredClone(summary) } : {}),
+    ...(release.humanContentReviewEvidenceRefs !== undefined
+      ? { reviewEvidenceRefs: structuredClone(release.humanContentReviewEvidenceRefs) }
+      : {}),
     ...(release.agentQualityReviewEvidenceRef
       ? { agentQualityReviewEvidenceRef: structuredClone(release.agentQualityReviewEvidenceRef) }
       : {}),
     changelogPath: release.changelogPath,
   });
 };
-export type PublicReleaseHistoryEntry = ReturnType<typeof projectRelease>;
+export type PublicReleaseHistoryEntry = z.infer<typeof PublicReleaseHistoryEntrySchema>;
 
 /** Historical catalogs must be read from their metadata commits by the caller;
  * never project old releases using the current catalog. The previous projection
@@ -82,13 +86,9 @@ export const buildReleaseHistory = (
   records: readonly { readonly metadata: unknown; readonly catalog: unknown }[],
   previous: readonly PublicReleaseHistoryEntry[] = [],
 ): readonly PublicReleaseHistoryEntry[] => {
-  const entries = records
-    .map(projectRelease)
-    .sort((a, b) => a.version.localeCompare(b.version, 'en'));
-  if (
-    new Set(entries.map((entry) => entry.version)).size !== entries.length ||
-    new Set(entries.map((entry) => entry.commit)).size !== entries.length
-  )
+  // Input follows actual publication order; run identifiers are not sortable versions.
+  const entries = records.map(projectRelease);
+  if (new Set(entries.map((entry) => entry.version)).size !== entries.length)
     throw new Error('RELEASE_HISTORY_DUPLICATE');
   if (
     previous.some(

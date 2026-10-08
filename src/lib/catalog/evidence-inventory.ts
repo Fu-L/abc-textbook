@@ -737,6 +737,11 @@ export const deriveCatalogEvidenceTrustContext = (
   }
   const manifest = manifestResult.data;
   const release = catalogResult.data.release;
+  if (!release.validationSummary || !release.contentFileInventoryDigest)
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_EVIDENCE_MISMATCH',
+      'Legacy inventory requires release evidence.',
+    );
   if (manifest.digest !== release.manifestDigest) {
     throw new CatalogEvidenceInventoryError(
       'CANONICAL_RELEASE_CONTEXT_MISMATCH',
@@ -1272,6 +1277,11 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     ),
   );
   const release = CatalogSchema.parse(canonicalSources.catalog).release;
+  if (!release.validationSummary || !release.humanContentReviewEvidenceRefs)
+    throw new CatalogEvidenceInventoryError(
+      'RELEASE_EVIDENCE_MISMATCH',
+      'Legacy inventory requires release evidence.',
+    );
   const agentQualityReview = parsed.data.agentQualityReview;
   if (agentQualityReview) {
     const file = await readPublicEvidenceFile(agentQualityReview.path, repositoryRoot);

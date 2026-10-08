@@ -35,7 +35,7 @@ import {
   validateAtCoderProblemsSnapshot,
   ATCODER_PROBLEMS_METRICS_PATH,
 } from '../corpus/atcoder-problems-metrics.js';
-import { PublicReleaseHistoryEntrySchema } from './build-release-history.js';
+import { PublicReleaseHistorySchema } from './build-release-history.js';
 import { INITIAL_RELEASE_CUTOFF } from './seed-release.js';
 
 export const FULL_PROJECTION_PATH = 'docs/verification/bootstrap/us4/full-projections.json';
@@ -389,7 +389,7 @@ export const loadFullPublicProjection = async (
       }),
     ),
   );
-  const history = z.array(PublicReleaseHistoryEntrySchema).parse(await json(PUBLIC_HISTORY_PATH));
+  const history = PublicReleaseHistorySchema.parse(await json(PUBLIC_HISTORY_PATH));
   const unitById = new Map(units.map((unit) => [unit.id, unit]));
   const orderedUnits = TEXTBOOK_CHAPTERS.flatMap((chapter) => [chapter.id, ...chapter.unitIds]).map(
     (id) => {
