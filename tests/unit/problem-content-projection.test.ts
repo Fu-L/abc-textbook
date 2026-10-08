@@ -95,6 +95,9 @@ describe('canonical Problem content projection', () => {
     'missing-related',
     'unknown-direct',
     'shared-path',
+    'unknown-outcome',
+    'duplicate-placement',
+    'non-canonical-path',
   ])('rejects %s instead of silently emitting incomplete links', (failure) => {
     const value = input();
     const [firstDocument, secondDocument] = value.documents;
@@ -110,6 +113,11 @@ describe('canonical Problem content projection', () => {
     if (failure === 'missing-related') related.relatedProblemIds = [];
     if (failure === 'unknown-direct') home.directProblemIds.push('abc212-g');
     if (failure === 'shared-path') secondDocument.docPath = firstDocument.docPath;
+    const placement = value.placements[0];
+    if (!placement) throw new Error('Fixture incomplete.');
+    if (failure === 'unknown-outcome') placement.supportingOutcomeIds = ['outcome-unknown'];
+    if (failure === 'duplicate-placement') value.placements.push({ ...placement });
+    if (failure === 'non-canonical-path') firstDocument.docPath = 'staging/draft.md';
     expect(() => buildProblemContent(value)).toThrow(/PROBLEM_CONTENT_/);
   });
 });

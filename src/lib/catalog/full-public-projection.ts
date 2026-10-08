@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { z } from 'zod';
+import type { z } from 'zod';
+import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
   CatalogSchema,
@@ -15,12 +16,16 @@ import {
   LearningOutcomeSchema,
   LearningUnitSchema,
   SourceRevisionSchema,
+  parseAtCoderContestResourceUrl,
   ProblemPlacementSchema,
   CanonicalProblemPlacementPolicySchema,
   CanonicalLearningPrerequisitesSchema,
 } from '../domain/schema-parts/catalog.js';
 import { readProblemAuthoringDocument } from '../authoring/problem-authoring-document.js';
-import { resolveProblemLocator } from '../authoring/verify-problem-corpus.js';
+import {
+  resolveProblemLocator,
+  validateJoinedProblemDocuments,
+} from '../authoring/verify-problem-corpus.js';
 import { structuredContentRoots } from './content-source-registry.js';
 import { buildProblemContent } from './build-problem-content.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
@@ -42,33 +47,28 @@ export const FULL_PROJECTION_PATH = 'docs/verification/bootstrap/us4/full-projec
 export const TAXONOMY_INDEX_PATH = 'src/content/indexes/taxonomy.json';
 export const PUBLIC_HISTORY_PATH = 'src/content/indexes/release-history.json';
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
-export const acceptedDraftDocument = (text: string): string =>
-  text.replace('\ndraft: false\n', '\ndraft: true\n');
-
-export const assertAcceptedUnitPublication = (
+/** Validate current prose and publication structure, without an accepted-byte inventory. */
+export const assertUnitPublication = (
   unit: z.infer<typeof LearningUnitSchema>,
   text: string,
-  accepted:
-    | {
-        readonly documentPath: string;
-        readonly documentDigest: string;
-        readonly metadataDigest: string;
-      }
-    | undefined,
 ): void => {
+  const { frontmatter, content } = parseFrontmatter(text);
+  const sections = ['概要', '考え方', '成立条件と計算量', '前提と範囲', '問題一覧', '根拠'];
   if (
     unit.contentPhase !== 'full_authoring' ||
-    !text.includes('\ndraft: false\n') ||
-    accepted?.documentPath !== unit.docPath ||
-    sha(acceptedDraftDocument(text)) !== accepted.documentDigest ||
-    canonicalDigest(
-      Object.fromEntries(Object.entries(unit).filter(([key]) => key !== 'contentPhase')),
-    ) !== accepted.metadataDigest
+    frontmatter.draft !== false ||
+    frontmatter.title !== unit.title ||
+    sections.some((heading) => {
+      const body = content.split(`## ${heading}\n`)[1]?.split(/\n## /u)[0]?.trim();
+      return !body;
+    }) ||
+    content.includes('objectPatterns') ||
+    content.includes('triggerPatterns')
   )
-    throw new Error(`FULL_PROJECTION_UNIT_NOT_ACCEPTED:${unit.id}`);
+    throw new Error(`FULL_PROJECTION_UNIT_DOCUMENT:${unit.id}`);
 };
 
-/** Loads only canonical roots and the accepted byte inventories. No taxonomy or shard regeneration. */
+/** Read canonical metadata and authored Markdown; never regenerate taxonomy or prose. */
 export const loadFullPublicProjection = async (
   options: {
     readonly repositoryRoot?: string;
@@ -84,7 +84,10 @@ export const loadFullPublicProjection = async (
     const files = (await readdir(path.join(root, directory), { recursive: true }))
       .filter((file) => file.endsWith('.json') && !file.startsWith('authoring/'))
       .sort();
-    return Promise.all(files.map(async (file) => schema.parse(await json(`${directory}/${file}`))));
+    const values = await Promise.all(
+      files.map(async (file) => schema.parse(await json(`${directory}/${file}`))),
+    );
+    return values;
   };
   const [contests, contestGaps, slots, metadata, inventory, tags, outcomes, units, sources] =
     await Promise.all([
@@ -98,6 +101,10 @@ export const loadFullPublicProjection = async (
       entities(structuredContentRoots.learningUnits, LearningUnitSchema),
       entities(structuredContentRoots.sources, SourceRevisionSchema),
     ]);
+  for (const values of [contests, metadata, inventory, tags, outcomes, units, sources]) {
+    const ids = values.map((value) => ('id' in value ? value.id : value.problemId));
+    if (new Set(ids).size !== values.length) throw new Error('FULL_PROJECTION_DUPLICATE_ENTITY');
+  }
   contests.sort((a, b) => a.number - b.number);
   const policy = CanonicalProblemPlacementPolicySchema.parse(
     await json('src/content/policies/problem-placements.json'),
@@ -105,88 +112,89 @@ export const loadFullPublicProjection = async (
   const prerequisites = CanonicalLearningPrerequisitesSchema.parse(
     await json('src/content/policies/learning-prerequisites.json'),
   );
-  const acceptedUnits = z
-    .object({
-      sourceBuild: z.string(),
-      subjectDigest: z.string(),
-      units: z.array(
-        z.object({
-          learningUnitId: z.string(),
-          documentPath: z.string(),
-          documentDigest: z.string(),
-          metadataDigest: z.string(),
-        }),
-      ),
-    })
-    .parse(await json('docs/verification/bootstrap/learning-unit-content.json'));
-  const acceptedProblems = z
-    .object({
-      subjectDigest: z.string(),
-      indexDigest: z.string(),
-      status: z.literal('passed'),
-      documents: z.array(
-        z.object({
-          problemId: z.string(),
-          path: z.string(),
-          digest: z.string(),
-        }),
-      ),
-      correctionImpacts: z.array(
-        z.object({
-          id: z.string(),
-          targets: z.array(z.object({ locator: z.unknown(), status: z.string() })),
-        }),
-      ),
-    })
-    .parse(await json('docs/verification/bootstrap/problem-authoring-units.json'));
-  const acceptance = z
-    .object({
-      status: z.literal('accepted'),
-      subjectDigest: z.string(),
-      unresolvedFindingCount: z.literal(0),
-    })
-    .parse(await json('docs/verification/bootstrap/us1.json'));
-  const acceptedMapping = z
-    .object({
-      subjectDigest: z.string(),
-      status: z.literal('passed'),
-      projectionDigest: z.string(),
-      items: z.unknown(),
-    })
-    .parse(await json('docs/verification/bootstrap/problem-content-projection.json'));
-  if (
-    acceptance.subjectDigest !== acceptedProblems.subjectDigest ||
-    acceptance.subjectDigest !== acceptedMapping.subjectDigest ||
-    acceptedUnits.sourceBuild !== policy.sourceBuild.digest
-  )
-    throw new Error('FULL_PROJECTION_ACCEPTANCE_SUBJECT');
-  if (
-    units.length !== acceptedUnits.units.length ||
-    metadata.length !== acceptedProblems.documents.length
-  )
-    throw new Error('FULL_PROJECTION_ACCEPTED_COVERAGE');
-  const unitDocuments = new Map<string, { text: string; digest: string; accepted: boolean }>();
+  const sourceById = new Map(sources.map((source) => [source.id, source]));
+  const requireSources = (owner: string, ids: readonly string[]) =>
+    ids.map((id) => {
+      const source = sourceById.get(id);
+      if (!source) throw new Error(`FULL_PROJECTION_SOURCE_UNKNOWN:${owner}:${id}`);
+      return source;
+    });
+  const unitDocuments = new Map<string, { text: string; digest: string; validated: boolean }>();
   const problemDocuments = new Map<
     string,
     ReturnType<typeof readProblemAuthoringDocument> & { text: string; digest: string }
   >();
   for (const unit of units) {
-    const accepted = acceptedUnits.units.find((item) => item.learningUnitId === unit.id);
     const text = (await read(unit.docPath)).toString('utf8');
-    assertAcceptedUnitPublication(unit, text, accepted);
-    unitDocuments.set(unit.id, { text, digest: sha(text), accepted: true });
+    assertUnitPublication(unit, text);
+    for (const source of requireSources(unit.id, unit.sourceRevisionIds))
+      if (!text.includes(`](${source.url})`))
+        throw new Error(`FULL_PROJECTION_UNIT_SOURCE_REFERENCE:${unit.id}:${source.id}`);
+    unitDocuments.set(unit.id, { text, digest: sha(text), validated: true });
   }
-  for (const document of acceptedProblems.documents) {
-    const text = (await read(document.path)).toString('utf8');
-    const parsed = readProblemAuthoringDocument(text);
+  // Problem metadata has no docPath. The authored frontmatter owns this reference.
+  const problemRoot = 'src/content/docs/problems';
+  const problemPaths = (await readdir(path.join(root, problemRoot), { recursive: true }))
+    .filter((file) => /\.mdx?$/u.test(file))
+    .sort()
+    .map((file) => `${problemRoot}/${file}`);
+  const documents = await Promise.all(
+    problemPaths.map(async (file) => {
+      const text = (await read(file)).toString('utf8');
+      return { ...readProblemAuthoringDocument(text), path: file, text, digest: sha(text) };
+    }),
+  );
+  validateJoinedProblemDocuments({
+    expectedDocuments: metadata.map((problem) => ({
+      problemId: problem.id,
+      path:
+        documents.find((document) => document.unit.problemId === problem.id)?.unit.docPath ?? '',
+    })),
+    documents,
+    discoveredPaths: problemPaths,
+  });
+  const unitIds = new Set(units.map((unit) => unit.id));
+  const outcomeIds = new Set(outcomes.map((outcome) => outcome.id));
+  const tagIds = new Set(tags.map((tag) => tag.id));
+  const metadataById = new Map(metadata.map((problem) => [problem.id, problem]));
+  for (const document of documents) {
+    const problem = metadataById.get(document.unit.problemId);
+    if (!problem) throw new Error(`FULL_PROJECTION_PROBLEM_UNKNOWN:${document.unit.problemId}`);
     if (
-      sha(text) !== document.digest ||
-      parsed.unit.problemId !== document.problemId ||
-      parsed.unit.docPath !== document.path
+      document.unit.additionalPrerequisiteUnitIds.some((id) => !unitIds.has(id)) ||
+      document.unit.learningOutcomeIds.some((id) => !outcomeIds.has(id)) ||
+      document.unit.tagIds.some((id) => !tagIds.has(id))
     )
-      throw new Error(`FULL_PROJECTION_PROBLEM_NOT_ACCEPTED:${document.problemId}`);
-    problemDocuments.set(document.problemId, { ...parsed, text, digest: sha(text) });
+      throw new Error(`FULL_PROJECTION_AUTHORING_REFERENCE:${problem.id}`);
+    const placement = policy.placements.find((item) => item.problemId === problem.id);
+    if (
+      placement?.kind !== document.unit.kind ||
+      placement.primaryProblemId !== document.unit.primaryProblemId
+    )
+      throw new Error(`FULL_PROJECTION_AUTHORING_PLACEMENT:${problem.id}`);
+    for (const source of requireSources(problem.id, document.unit.sourceRevisionIds))
+      if (!document.body.includes(`](${source.url})`))
+        throw new Error(`FULL_PROJECTION_PROBLEM_SOURCE_REFERENCE:${problem.id}:${source.id}`);
+    const refs = requireSources(problem.id, [
+      ...problem.sourceRevisionIds,
+      ...document.unit.sourceRevisionIds,
+    ]);
+    for (const source of refs) {
+      const identity = parseAtCoderContestResourceUrl(source.url);
+      if (
+        source.contestId !== problem.contestId ||
+        identity?.contestId !== problem.contestId ||
+        source.officialTaskId !== problem.officialTaskId ||
+        (source.sourceKind === 'official_problem' &&
+          (identity.resource !== 'task' || identity.taskId !== problem.officialTaskId))
+      )
+        throw new Error(`FULL_PROJECTION_SOURCE_TASK:${problem.id}:${source.id}`);
+    }
+    if (!refs.some((source) => source.sourceKind === 'official_problem'))
+      throw new Error(`FULL_PROJECTION_SOURCE_TASK_MISSING:${problem.id}`);
+    problemDocuments.set(problem.id, document);
   }
+  for (const record of inventory) requireSources(record.problemId, record.sourceRevisionIds);
   validateReleaseLearningStructure({
     tags,
     outcomes,
@@ -204,11 +212,6 @@ export const loadFullPublicProjection = async (
     units,
   });
   const mappingDigest = canonicalDigest(mapping);
-  if (
-    mappingDigest !== acceptedMapping.projectionDigest ||
-    canonicalJson(mapping) !== canonicalJson(acceptedMapping.items)
-  )
-    throw new Error('FULL_PROJECTION_MAPPING_DRIFT');
   const metrics = validateAtCoderProblemsSnapshot(
     await json(ATCODER_PROBLEMS_METRICS_PATH),
     metadata,
@@ -270,11 +273,9 @@ export const loadFullPublicProjection = async (
       const document = problemDocuments.get(locator.problemId);
       if (!document) throw new Error(`FULL_PROJECTION_CORRECTION_OWNER:${locator.problemId}`);
       if (resolveProblemLocator(document.unit, locator.path)) return true;
-      const accepted = acceptedProblems.correctionImpacts
-        .find((item) => item.id === impact.id)
-        ?.targets.find((target) => canonicalJson(target.locator) === canonicalJson(locator));
+      // These optional preview blocks are absent from the current canonical prose.
+      // All other missing correction locators still fail below.
       if (
-        accepted?.status !== 'not_applicable' ||
         document.unit.examples.length ||
         document.unit.exercises.length ||
         ![
@@ -295,15 +296,10 @@ export const loadFullPublicProjection = async (
   }));
   const contentInventory = [
     ...units.map((unit) => ({ path: unit.docPath, digest: unitDocuments.get(unit.id)?.digest })),
-    ...acceptedProblems.documents.map((document) => ({
-      path: document.path,
-      digest: document.digest,
-    })),
+    ...documents.map((document) => ({ path: document.unit.docPath, digest: document.digest })),
   ].sort((a, b) => a.path.localeCompare(b.path, 'en'));
   const contentDigest = canonicalDigest(contentInventory);
   const completedAt = policy.sourceBuild.acceptedAt;
-  const resultPath = 'docs/verification/bootstrap/problem-authoring-units.json';
-  const resultDigest = canonicalDigest(await json(resultPath));
   const catalog = CatalogSchema.parse({
     schemaVersion: '3.0.0',
     advancedSlotRegistry: registry,
@@ -329,25 +325,6 @@ export const loadFullPublicProjection = async (
       heldProblemIds: [],
       withdrawnProblemIds: [],
       taxonomyChanges: [],
-      validationSummary: {
-        checkCount: 1,
-        passedCheckCount: 1,
-        blockingFindingCount: 0,
-        evidenceDigests: [resultDigest],
-        checks: [
-          {
-            checkId: 'check-accepted-problem-corpus',
-            command: 'npm run corpus:verify-problem-corpus',
-            subjectDigest: acceptedProblems.subjectDigest,
-            resultPath,
-            resultDigest,
-            exitCode: 0,
-            passed: true,
-            completedAt,
-          },
-        ],
-      },
-      humanContentReviewEvidenceRefs: [],
       changelogPath: FULL_PROJECTION_PATH,
     },
     contests,
@@ -436,8 +413,6 @@ export const loadFullPublicProjection = async (
   const digest = canonicalDigest({
     catalog: projectCatalogContent(catalog),
     mappingDigest,
-    acceptedUnitSubject: acceptedUnits.subjectDigest,
-    acceptedProblemSubject: acceptedProblems.subjectDigest,
     contentInventory,
     corrections,
     retiredTargets,

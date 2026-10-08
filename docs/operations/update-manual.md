@@ -91,7 +91,7 @@ checkの重複指定はない。移行PRのmergeまではmainの旧workflowが�
 初版監査workflowは`workflow_dispatch`だけで起動する。明示的な監査では3browserと全工程を用意する。旧手動Production
 deployの初版事後検査も3browserを使うため、準備scriptを`test:e2e:install:all:ci`に揃えた。数学回帰は既存の`docs/verification/bootstrap/pr65*-mathematical-checks.py`から関係するものを選んで直接実行する。
 
-旧release/schema/loader/deployの技術的な台帳依存は後続PRまで残る。通常CIから外したことと、本文訂正を台帳なしでbuild・公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
+公開loaderの初版受入台帳依存はPR-04で外した。旧catalog/release/deployの証跡依存とprepared版のsnapshot照合は後続PRまで残る。本文を正本から検証できることと、訂正を通常経路で公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
 catalog/deployの復旧は[公開引継ぎ](deploy-before-catch-up.md)を参照する。監査CLIの全工程は通常runnerから独立して保持し、旧出力をdigestだけ書き換えて通さない。
 
 旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
@@ -175,7 +175,33 @@ revertと既存Pages手順による再公開を優先する。revertが教材追
 
 ## 既存実装からの移行
 
-以下は憲章改訂後も残る実装との差であり、今回の文書変更では撤去しない。後続の実装変更はこの欄を出発点にし、変更後の手順へ同時に更新する。新しい承認制度や証跡台帳を移行のために作らない。
+以下は各移行PRで確認した現行実装と、後続へ残る差である。後続の実装変更はこの欄を出発点にし、変更後の手順へ同時に更新する。新しい承認制度や証跡台帳を移行のために作らない。
+
+### 公開loaderの移行（002 / PR-04）
+
+公開projectionはstructured
+rootsの現行JSONと執筆済みMarkdownを読む。Unitはmetadataの`docPath`、Problemは正本の`src/content/docs/problems/`を走査し、本文frontmatterの`authoringUnit.docPath`・Problem
+ID・実pathの一致とmetadata全件の対応を確認する。本文やtaxonomyを再生成しない。Unitの`draft: false`とProblemの`draft: true`は既存parserの表現として維持する。
+
+`learning-unit-content.json`、`problem-authoring-units.json`、`us1.json`、`problem-content-projection.json`の必須読込と受理済みbytes・mappingの照合を外した。欠落・重複・未完成の本文、未検証claim・本文とclaimの矛盾、未知source・公式task不一致、出典リンク、主配置・関連先・前提DAG、metrics、教科書順と訂正先の確認は残す。旧previewの例・演習の既知のoptional
+locatorだけは、現行本文にも該当blockがない場合に対象外とし、それ以外の欠落は失敗する。
+
+build後の現行projection検査は同じ`dist`を使う。
+
+```sh
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run corpus:verify-full-projections
+ABC_COMPAT_NEW_DIST="$PWD/dist" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm test -- tests/integration/full-public-projection.test.ts
+```
+
+`--check`は旧`us4/full-projections.json`を読まず、正本とのcatalog一致、公開route、タグの発動条件・Outcome・問題導線、Contestのタグ配置、sitemap・feed・Pagefindを検査する。検査だけでは報告ファイルを書かない。`ABC_COMPAT_NEW_DIST`指定時は、旧台帳のない一時copyでCLIの成功とstale
+catalog・欠落page・発動条件欠落の拒否も確認する。旧監査consumer向けの明示的な`--write`・`--write-evidence`と台帳ファイル自体はまだ保持し、通常更新でその再生成を要求しない。
+
+`docs/verification/releases/catalog.json`が存在する通常buildでは、引き続きそのreleaseを読み、snapshotと現行正本の一致を要求する。本文訂正後の旧prepared版は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`で失敗する。一時copyでは旧prepared
+catalogと受入台帳を除いたcandidateをbuildでき、projection単体は`usePreparedRelease: false`で訂正を検証できる。実作業ツリーの旧公開入力を消して制約を迂回せず、catalog
+CLIの証跡consumerはPR-05、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
+
+復旧はloaderと検査CLIの変更をrevertする。旧台帳・教材・prepared
+catalogは保持しているため、旧経路へ戻せる。
 
 002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。PR-03でschemaと履歴readerの互換拡張を実装した。catalog/metadataと`baseReleaseVersion`は旧日付版と`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`は1桁の日など従来の受理値と新版を読める。catalog
 `3.0.0`、metadata/backup

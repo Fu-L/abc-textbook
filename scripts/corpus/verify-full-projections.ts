@@ -15,7 +15,6 @@ import { normalizeBasePath, resolveSite } from '../config/publication.js';
 import {
   projectionBuildDigest,
   projectionImplementationDigest,
-  verifyProjectionEvidence,
 } from '../verify/full-projection-evidence.js';
 
 const mode = process.argv[2] ?? '--check';
@@ -154,11 +153,12 @@ try {
         });
       }
     }
-    artifactInventory.push({
-      path: `dist/${file}`,
-      digest: createHash('sha256').update(bytes).digest('hex'),
-      byteLength: bytes.length,
-    });
+    if (mode !== '--check')
+      artifactInventory.push({
+        path: `dist/${file}`,
+        digest: createHash('sha256').update(bytes).digest('hex'),
+        byteLength: bytes.length,
+      });
   }
   if (cellProblemIds.size !== projection.ui.problems.length)
     throw new Error('FULL_PROJECTION_CELL_COVERAGE');
@@ -179,58 +179,50 @@ try {
     !builtFiles.some((file) => file.endsWith('.pf_meta'))
   )
     throw new Error('FULL_PROJECTION_PAGEFIND_MISSING');
-  const artifactDigest = canonicalDigest(artifactInventory);
-  const report = {
-    schemaVersion: '1.0.0',
-    taskId: 'T160',
-    status: 'passed',
-    sourceProjectionDigest: projection.digest,
-    implementationDigest: await projectionImplementationDigest(),
-    fullProjectionDigest: projectionBuildDigest(projection.digest, artifactDigest),
-    publicationStatus: 'prepared',
-    productionReleaseApproved: false,
-    build: { base, site },
-    mappingDigest: projection.mappingDigest,
-    counts: {
-      contests: projection.ui.contests.length,
-      officialGaps: projection.catalog.contestGaps.length,
-      problems: projection.ui.problems.length,
-      tags: projection.ui.tags.length,
-      learningUnits: projection.ui.learningUnits.length,
-      releases: projection.history.length,
-      routes: routes.length,
-      searchDocuments: indexedEntities.length,
-      correctionImpacts: projection.corrections.length,
-      retiredOptionalTargets: projection.retiredTargets.length,
-    },
-    textbookUnitIds: projection.ui.learningUnits.map((unit) => unit.id),
-    routes,
-    searchDocumentsDigest: canonicalDigest(indexedEntities),
-    correctionImpacts: projection.corrections,
-    retiredTargets: projection.retiredTargets,
-    artifactDigest,
-    artifactInventory,
+  const counts = {
+    contests: projection.ui.contests.length,
+    officialGaps: projection.catalog.contestGaps.length,
+    problems: projection.ui.problems.length,
+    tags: projection.ui.tags.length,
+    learningUnits: projection.ui.learningUnits.length,
+    releases: projection.history.length,
+    routes: routes.length,
+    searchDocuments: indexedEntities.length,
+    correctionImpacts: projection.corrections.length,
+    retiredOptionalTargets: projection.retiredTargets.length,
   };
+  // Legacy audit consumers may explicitly write their existing report. Normal
+  // checking validates the current source/build directly and never reads that report.
   if (mode === '--write' || mode === '--write-evidence') {
+    const artifactDigest = canonicalDigest(artifactInventory);
+    const report = {
+      schemaVersion: '1.0.0',
+      taskId: 'T160',
+      status: 'passed',
+      sourceProjectionDigest: projection.digest,
+      implementationDigest: await projectionImplementationDigest(),
+      fullProjectionDigest: projectionBuildDigest(projection.digest, artifactDigest),
+      publicationStatus: 'prepared',
+      productionReleaseApproved: false,
+      build: { base, site },
+      mappingDigest: projection.mappingDigest,
+      counts,
+      textbookUnitIds: projection.ui.learningUnits.map((unit) => unit.id),
+      routes,
+      searchDocumentsDigest: canonicalDigest(indexedEntities),
+      correctionImpacts: projection.corrections,
+      retiredTargets: projection.retiredTargets,
+      artifactDigest,
+      artifactInventory,
+    };
     await mkdir(path.dirname(FULL_PROJECTION_PATH), { recursive: true });
     await writeFile(FULL_PROJECTION_PATH, `${JSON.stringify(report, null, 2)}\n`);
-  } else {
-    const previous: unknown = JSON.parse(await readFile(FULL_PROJECTION_PATH, 'utf8')) as unknown;
-    const comparison = verifyProjectionEvidence(previous, report);
-    if (comparison.changedArtifacts.length)
-      console.log(
-        JSON.stringify({
-          frozenBuildDigest: comparison.frozenBuildDigest,
-          changedArtifactCount: comparison.changedArtifacts.length,
-          changedArtifactSample: comparison.changedArtifacts.slice(0, 10),
-        }),
-      );
   }
   console.log(
     JSON.stringify({
       status: 'passed',
-      fullProjectionDigest: report.fullProjectionDigest,
-      ...report.counts,
+      sourceProjectionDigest: projection.digest,
+      ...counts,
     }),
   );
 } catch (error) {
