@@ -135,12 +135,18 @@ Test**: 実際の旧catalog/metadata/historyの値を保持して読み、新規
 Test**: 一時コピーの既存本文を小さく訂正し、旧受入台帳を更新せずprojectionを生成できる。欠落・未完成・未知source・配置/前提不整合は失敗する。
 
 <!-- prettier-ignore -->
-- [ ] T018 [US1] `tests/integration/full-public-projection.test.ts`と`tests/unit/problem-content-projection.test.ts`へ受入台帳なしの一時コピー本文訂正、欠落本文、未完成構造、未知source/task不一致、配置/前提不整合の回帰を追加する。既存本文とUnit/Problemの`draft`表現を一括変更しない。
-- [ ] T019 [US1] `src/lib/catalog/full-public-projection.ts`と`src/lib/catalog/public-catalog.ts`でstructured roots・metadataの`docPath`から本文を読むようにし、bootstrapの`learning-unit-content.json`・`problem-authoring-units.json`・`us1.json`・`problem-content-projection.json`の必須読込と本文bytes受理照合を除く。既存本文parser、content生成、learning structure、metrics、教科書順を再利用する。
-- [ ] T020 [US1] `scripts/corpus/verify-full-projections.ts`と利用側を現行正本の検査へ揃え、旧受入digestがなくても本文/参照/配置/公開projectionの検査を実行する。`tests/integration/full-public-projection.test.ts`で旧台帳依存を外しても不具合検出が残ることを確認する。台帳ファイルは削除しない。
-- [ ] T021 [US1] T018と`tests/unit/textbook-order.test.ts`、前後比較、build・リンク・対象projection/search E2Eを実行する。数式・狭い画面・キーボード導線を確認し、`docs/operations/update-manual.md`へloader移行と旧prepared catalog/deployの残る制約を記す。
+- [X] T018 [US1] `tests/integration/full-public-projection.test.ts`と`tests/unit/problem-content-projection.test.ts`へ受入台帳なしの一時コピー本文訂正、欠落本文、未完成構造、未知source/task不一致、配置/前提不整合の回帰を追加する。既存本文とUnit/Problemの`draft`表現を一括変更しない。
+- [X] T019 [US1] `src/lib/catalog/full-public-projection.ts`と`src/lib/catalog/public-catalog.ts`でstructured roots・metadataの`docPath`から本文を読むようにし、bootstrapの`learning-unit-content.json`・`problem-authoring-units.json`・`us1.json`・`problem-content-projection.json`の必須読込と本文bytes受理照合を除く。既存本文parser、content生成、learning structure、metrics、教科書順を再利用する。
+- [X] T020 [US1] `scripts/corpus/verify-full-projections.ts`と利用側を現行正本の検査へ揃え、旧受入digestがなくても本文/参照/配置/公開projectionの検査を実行する。`tests/integration/full-public-projection.test.ts`で旧台帳依存を外しても不具合検出が残ることを確認する。台帳ファイルは削除しない。
+- [X] T021 [US1] T018と`tests/unit/textbook-order.test.ts`、前後比較、build・リンク・対象projection/search E2Eを実行する。数式・狭い画面・キーボード導線を確認し、`docs/operations/update-manual.md`へloader移行と旧prepared catalog/deployの残る制約を記す。
 
 **完了条件**: 教材のcommit差分0、既存出力の意味・URL/anchorが一致し、台帳更新なしで一時コピーの訂正をbuildできる。訂正の実公開完了とは数えない。
+
+**PR-04で確認した現行実装との差**: Problem
+metadataに`docPath`がないため、正本Markdownを走査してfrontmatterの所有ID・pathを実pathと照合する。既存parserとjoined
+document検証を再利用し、台帳のないcontent-only
+copyで訂正と失敗ケースを確認した。`--check`は現行source/buildを直接検査し、旧報告のdigestを要求しない。既存教材と旧台帳のcommit差分は0。旧prepared
+catalogのsnapshot照合と旧catalog/deployの証跡consumerは残り、実訂正公開・SC-004は後続と別依頼の対象である。
 
 **Revert**: loaderと利用側を戻す。未削除の旧台帳と既存教材をそのまま利用できる。
 

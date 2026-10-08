@@ -44,6 +44,7 @@ import {
   resolvePublicEvidencePath,
 } from './publication-boundary.js';
 import {
+  projectCatalogContent,
   deriveExecutableExampleInventory,
   executableExampleInventoryDigest,
   type TrustedCatalogReleaseEvidenceInventory,
@@ -54,6 +55,7 @@ import {
   TrustedCatalogDiffError,
 } from './trusted-diff.js';
 import { loadFullPublicProjection } from './full-public-projection.js';
+import { unitLearningTarget } from '../taxonomy/unit-learning-targets.js';
 import {
   validateSeedAgentQualityReview,
   SEED_AGENT_OWNER_INSTRUCTION,
@@ -511,7 +513,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
     release.updateIds.length === 1 &&
     release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
   let initialBaseCatalog;
-  let initialProjectionDigest: string | undefined;
+  let initialProjectionDigests: readonly string[] = [];
   if (isSeedBootstrap) {
     assertSeedRelease(currentCatalog);
     // Initial publication is still the full accepted scope after the prepared
@@ -523,7 +525,48 @@ export const loadCatalogEvidenceCanonicalSources = async (
       usePreparedRelease: false,
     });
     initialBaseCatalog = projection.catalog;
-    initialProjectionDigest = projection.digest;
+    // The retained seed consumer also reads historical bootstrap fingerprints.
+    // Reconstruct their old subject here; the public loader never reads these ledgers.
+    const subjectSchema = z.object({ subjectDigest: Sha256Schema });
+    const acceptedUnits = subjectSchema.parse(
+      await readJsonFile(
+        path.join(repositoryRoot, 'docs/verification/bootstrap/learning-unit-content.json'),
+        'INITIAL_UNIT_SUBJECT',
+      ),
+    );
+    const acceptedProblems = subjectSchema.parse(
+      await readJsonFile(
+        path.join(repositoryRoot, 'docs/verification/bootstrap/problem-authoring-units.json'),
+        'INITIAL_PROBLEM_SUBJECT',
+      ),
+    );
+    const contentInventory = [
+      ...projection.catalog.learningUnits.map((unit) => ({
+        path: unit.docPath,
+        digest: projection.unitDocuments.get(unit.id)?.digest,
+      })),
+      ...[...projection.problemDocuments.values()].map((document) => ({
+        path: document.unit.docPath,
+        digest: document.digest,
+      })),
+    ].sort((a, b) => a.path.localeCompare(b.path, 'en'));
+    initialProjectionDigests = [
+      projection.digest,
+      canonicalDigest({
+        catalog: projectCatalogContent(projection.catalog),
+        mappingDigest: projection.mappingDigest,
+        acceptedUnitSubject: acceptedUnits.subjectDigest,
+        acceptedProblemSubject: acceptedProblems.subjectDigest,
+        contentInventory,
+        corrections: projection.corrections,
+        retiredTargets: projection.retiredTargets,
+        history: projection.history,
+        editorialOrder: projection.ui.learningUnits.map((unit) => ({
+          id: unit.id,
+          target: unitLearningTarget(unit.id),
+        })),
+      }),
+    ];
     for (const key of [
       'contests',
       'contestGaps',
@@ -603,7 +646,7 @@ export const loadCatalogEvidenceCanonicalSources = async (
       bootstrap?.kind !== 'bootstrap' ||
       bootstrap.fixtureMode ||
       bootstrap.operations.length ||
-      bootstrap.sourceSetFingerprint !== initialProjectionDigest ||
+      !initialProjectionDigests.includes(bootstrap.sourceSetFingerprint) ||
       canonicalJson(
         bootstrap.authoringResults.map((result) => [result.problemId, result.draftPath]).sort(),
       ) !==

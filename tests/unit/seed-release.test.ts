@@ -35,6 +35,18 @@ describe('accepted seed initial publication', () => {
       await expect(
         loadCatalogEvidenceCanonicalSources(catalog, root, { catalogPath }),
       ).resolves.toMatchObject({ catalog: { release: { problemCount: 868 } } });
+      const bootstrapPath = path.join(
+        root,
+        'staging/updates/update-bootstrap-full-corpus/manifest.json',
+      );
+      const bootstrapText = await readFile(bootstrapPath, 'utf8');
+      const bootstrap = PublicationUpdateSchema.parse(JSON.parse(bootstrapText) as unknown);
+      bootstrap.sourceSetFingerprint = 'f'.repeat(64);
+      await writeFile(bootstrapPath, JSON.stringify(bootstrap));
+      await expect(
+        loadCatalogEvidenceCanonicalSources(catalog, root, { catalogPath }),
+      ).rejects.toThrow('INITIAL_BOOTSTRAP_BINDING');
+      await writeFile(bootstrapPath, bootstrapText);
       const documentPath = (catalog as { authoringUnits: { docPath: string }[] }).authoringUnits[0]
         ?.docPath;
       if (!documentPath) throw new Error('Missing canonical document fixture.');

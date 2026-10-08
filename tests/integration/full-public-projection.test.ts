@@ -1,12 +1,12 @@
-import { readFile, rm, writeFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
-import {
-  assertAcceptedUnitPublication,
-  loadFullPublicProjection,
-} from '../../src/lib/catalog/full-public-projection.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
@@ -281,7 +281,7 @@ describe('accepted canonical full public projection', () => {
   });
   it('distinguishes a prepared projection from a production Release without inventing human reviews', () => {
     expect(projection.catalog.release.publicationStatus).toBe('prepared');
-    expect(projection.catalog.release.humanContentReviewEvidenceRefs).toEqual([]);
+    expect(projection.catalog.release.humanContentReviewEvidenceRefs).toBeUndefined();
     expect(
       catalogContentDigest({
         ...projection.catalog,
@@ -321,46 +321,11 @@ describe('accepted canonical full public projection', () => {
       expect(problem.supportingOutcomeIds).toEqual(placement.supportingOutcomeIds);
     }
   });
-  it('binds published Unit bytes to their accepted draft body', async () => {
+  it('loads current Unit prose while preserving its published draft representation', () => {
     for (const unit of projection.catalog.learningUnits) {
-      const document = await readFile(unit.docPath, 'utf8');
-      expect(document).toContain('\ndraft: false\n');
-      expect(projection.unitDocuments.get(unit.id)?.accepted).toBe(true);
+      expect(projection.unitDocuments.get(unit.id)?.text).toContain('\ndraft: false\n');
+      expect(projection.unitDocuments.get(unit.id)?.validated).toBe(true);
     }
-  });
-  it('rejects skeletons, still-draft Units, unaccepted prose, and metadata drift', async () => {
-    const unit = projection.catalog.learningUnits.find(
-      (item) => item.id === 'unit-xor-linear-basis',
-    );
-    if (!unit) throw new Error('Missing fixture Unit');
-    const accepted = JSON.parse(
-      await readFile('docs/verification/bootstrap/learning-unit-content.json', 'utf8'),
-    ) as {
-      units: {
-        learningUnitId: string;
-        documentPath: string;
-        documentDigest: string;
-        metadataDigest: string;
-      }[];
-    };
-    const record = accepted.units.find((item) => item.learningUnitId === unit.id);
-    const text = await readFile(unit.docPath, 'utf8');
-    expect(() => {
-      assertAcceptedUnitPublication({ ...unit, contentPhase: 'canonical_skeleton' }, text, record);
-    }).toThrow('NOT_ACCEPTED');
-    expect(() => {
-      assertAcceptedUnitPublication(unit, text.replace('draft: false', 'draft: true'), record);
-    }).toThrow('NOT_ACCEPTED');
-    expect(() => {
-      assertAcceptedUnitPublication(unit, text + '\n未受理の説明\n', record);
-    }).toThrow('NOT_ACCEPTED');
-    expect(() => {
-      assertAcceptedUnitPublication(
-        { ...unit, directProblemIds: [...(unit.directProblemIds ?? [])].reverse() },
-        text,
-        record,
-      );
-    }).toThrow('NOT_ACCEPTED');
   });
   it('projects every entity to one canonical destination and indexes only those destinations', () => {
     const routes = canonicalUiRoutes(projection.ui);
@@ -386,3 +351,355 @@ describe('accepted canonical full public projection', () => {
     expect(canonicalDigest(projection.mapping)).toBe(projection.mappingDigest);
   }, 60_000);
 });
+
+describe('current canonical prose without bootstrap acceptance ledgers', () => {
+  it.each(['Problem', 'Unit'] as const)(
+    'requires registered, passed executable examples in current %s prose without ledgers',
+    async (owner) => {
+      await withGitBaseline(async (root) => {
+        const problem = projection.problemDocuments.get('abc212-e');
+        const unit = projection.catalog.learningUnits.find(
+          (item) => item.id === 'unit-xor-linear-basis',
+        );
+        if (!problem || !unit) throw new Error('Missing executable example fixtures');
+        const docPath = owner === 'Problem' ? problem.unit.docPath : unit.docPath;
+        const target = path.join(root, docPath);
+        const original = await readFile(target, 'utf8');
+        const { frontmatter, content } = parseFrontmatter(original);
+        const example = {
+          key: 'execution-check',
+          learningOutcomeIds:
+            owner === 'Problem' ? problem.unit.learningOutcomeIds : unit.learningOutcomeIds,
+          kind: 'executable' as const,
+          language: 'javascript',
+          omissions: [],
+          environment: 'Node.js 24.18.0',
+          input: '入力なし',
+          procedure: ['node example.cjs'],
+          executionTarget: 'example.cjs',
+          expectedResult: '1',
+          verificationStatus: 'passed' as const,
+          ...(owner === 'Problem' ? { learningUnitIds: ['unit-dp-state-design'] } : {}),
+        };
+        const update = async (
+          examples: readonly (Omit<typeof example, 'verificationStatus'> & {
+            verificationStatus: 'pending' | 'failed' | 'passed';
+          })[],
+          code: string,
+        ) => {
+          const body = content.replace(
+            owner === 'Problem' ? '## 実装上の注意\n\n' : '## 考え方\n\n',
+            (heading) => `${heading}${code}\n\n`,
+          );
+          if (owner === 'Problem') {
+            const metadata = Object.fromEntries(
+              Object.entries(problem.unit).filter(([key]) => key !== 'sections'),
+            );
+            await writeFile(
+              target,
+              `---\ntitle: ${JSON.stringify(frontmatter.title)}\ndraft: true\nauthoringUnit: ${JSON.stringify({ ...metadata, examples })}\n---\n${body}`,
+            );
+          } else {
+            await writeFile(target, original.replace(content, body));
+            await writeFile(
+              path.join(root, 'src/content/learning-units/unit-xor-linear-basis.json'),
+              JSON.stringify({ ...unit, examples }),
+            );
+            await writeFile(
+              path.join(root, 'src/content/indexes/taxonomy.json'),
+              JSON.stringify({
+                ...projection.taxonomyIndex,
+                learningUnits: projection.catalog.learningUnits.map((item) =>
+                  item.id === unit.id ? { ...unit, examples } : item,
+                ),
+              }),
+            );
+          }
+        };
+        const project = () =>
+          loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false });
+        for (const verificationStatus of ['pending', 'failed'] as const) {
+          await update(
+            [{ ...example, verificationStatus }],
+            '```javascript\nthrow new Error("未検証または失敗した例");\n```',
+          );
+          await expect(project(), `${owner}:${verificationStatus}`).rejects.toThrow(/EXAMPLE_HOLD/);
+        }
+        const code = '```javascript\nconsole.log(1);\n```';
+        await update([], code);
+        await expect(project(), `${owner}:unregistered`).rejects.toThrow(/UNREGISTERED_EXECUTABLE/);
+        await update([{ ...example, language: 'python' }], code);
+        await expect(project(), `${owner}:wrong-language`).rejects.toThrow(
+          /UNREGISTERED_EXECUTABLE/,
+        );
+        await update([example], `${code}\n\n${code}`);
+        await expect(project(), `${owner}:second-unregistered-block`).rejects.toThrow(
+          /UNREGISTERED_EXECUTABLE/,
+        );
+        await writeFile(path.join(root, 'example.cjs'), 'console.log(1);\n');
+        const { stdout } = await promisify(execFile)(process.execPath, ['example.cjs'], {
+          cwd: root,
+        });
+        expect(stdout.trim()).toBe(example.expectedResult);
+        await update([example], code);
+        const published = await project();
+        if (owner === 'Problem') {
+          expect(
+            published.catalog.problems.find((item) => item.id === 'abc212-e')?.publicationStatus,
+          ).toBe('published');
+          expect(
+            published.problemDocuments.get('abc212-e')?.unit.examples[0]?.verificationStatus,
+          ).toBe('passed');
+        } else {
+          expect(published.unitDocuments.get(unit.id)?.validated).toBe(true);
+          expect(
+            published.catalog.learningUnits.find((item) => item.id === unit.id)?.examples[0]
+              ?.verificationStatus,
+          ).toBe('passed');
+        }
+      });
+    },
+    60_000,
+  );
+
+  it('projects small Unit and Problem corrections from a content-only copy', async () => {
+    await withGitBaseline(async (root) => {
+      const unit = projection.catalog.learningUnits.find(
+        (item) => item.id === 'unit-xor-linear-basis',
+      );
+      const problem = projection.problemDocuments.get('abc212-e');
+      if (!unit || !problem) throw new Error('Missing correction fixtures');
+      const unitPath = path.join(root, unit.docPath);
+      const problemPath = path.join(root, problem.unit.docPath);
+      const unitText = await readFile(unitPath, 'utf8');
+      const problemText = await readFile(problemPath, 'utf8');
+      await writeFile(
+        unitPath,
+        unitText.replace('最高bitごとにpivotを保存する。', '各最高bitに対応するpivotを保存する。'),
+      );
+      // Unit prose is outside the structured catalog snapshot, so the legacy
+      // prepared release must also match the current document inventory.
+      await mkdir(path.join(root, 'docs/verification/releases'), { recursive: true });
+      await cp(
+        'docs/verification/releases/catalog.json',
+        path.join(root, 'docs/verification/releases/catalog.json'),
+      );
+      await expect(loadFullPublicProjection({ repositoryRoot: root })).rejects.toThrow(
+        'FULL_PROJECTION_PREPARED_RELEASE_DRIFT',
+      );
+      await writeFile(
+        problemPath,
+        problemText.replace(
+          '## 実装上の注意\n\n',
+          '## 実装上の注意\n\n添字と状態の対応を確認する。\n\n',
+        ),
+      );
+      const corrected = await loadFullPublicProjection({
+        repositoryRoot: root,
+        usePreparedRelease: false,
+      });
+      expect(corrected.unitDocuments.get(unit.id)?.text).toContain('各最高bitに対応するpivot');
+      expect(
+        corrected.problemDocuments.get('abc212-e')?.unit.sections.implementationNotes,
+      ).toContain('添字と状態の対応');
+      expect(corrected.mapping).toEqual(projection.mapping);
+      expect(canonicalUiRoutes(corrected.ui)).toEqual(canonicalUiRoutes(projection.ui));
+      expect(corrected.digest).not.toBe(projection.digest);
+      expect(corrected.catalog.release.validationSummary).toBeUndefined();
+      await expect(loadFullPublicProjection({ repositoryRoot: root })).rejects.toThrow(
+        'FULL_PROJECTION_PREPARED_RELEASE_DRIFT',
+      );
+    });
+  }, 60_000);
+
+  it('rejects invalid current prose, sources, placement and prerequisites without ledgers', async () => {
+    await withGitBaseline(async (root) => {
+      const problem = projection.problemDocuments.get('abc212-e');
+      const unit = projection.catalog.learningUnits.find(
+        (item) => item.id === 'unit-xor-linear-basis',
+      );
+      if (!problem || !unit) throw new Error('Missing rejection fixtures');
+      const problemPath = problem.unit.docPath;
+      const cases = [
+        { file: problemPath, change: () => null, error: /ENOENT|MISSING|COVERAGE/ },
+        { file: unit.docPath, change: () => null, error: /ENOENT|MISSING|COVERAGE/ },
+        {
+          file: problemPath,
+          change: (text: string) => text.replace('## 考察', '## 未完成'),
+          error: /AUTHORING_SECTION/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) =>
+            text.replace(
+              /## 考察\n\n[\s\S]*?\n\n## 典型の発動条件/u,
+              '## 考察\n\n\n\n## 典型の発動条件',
+            ),
+          error: /AUTHORING|explanation|reasoning/i,
+        },
+        {
+          file: problemPath,
+          change: (text: string) =>
+            text.replace('"verificationStatus":"verified"', '"verificationStatus":"held"'),
+          error: /CLAIM|verificationStatus/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) =>
+            text.replace('"problemId":"abc212-e"', '"problemId":"abc212-f"'),
+          error: /DUPLICATE|COVERAGE|OWNER/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) => text.replace(problemPath, 'src/content/docs/problems/wrong.md'),
+          error: /OWNER|PATH/,
+        },
+        {
+          file: unit.docPath,
+          change: (text: string) => text.replace('draft: false', 'draft: true'),
+          error: /UNIT_DOCUMENT/,
+        },
+        {
+          file: unit.docPath,
+          change: (text: string) => text.replace('## 考え方', '## 未完成'),
+          error: /UNIT_DOCUMENT/,
+        },
+        {
+          file: 'src/content/learning-units/unit-xor-linear-basis.json',
+          change: (text: string) => text.replace('full_authoring', 'canonical_skeleton'),
+          error: /UNIT_DOCUMENT/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) => text.replace('"unit-dp-state-design"', '"unit-unknown"'),
+          error: /AUTHORING_REFERENCE/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) => text.replace('## 正当性\n\n', '## 正当性\n\n別の主張。\n\n'),
+          error: /CLAIM_DRIFT/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) =>
+            text.replaceAll('https://atcoder.jp/', 'https://missing.example/'),
+          error: /SOURCE_REFERENCE/,
+        },
+        {
+          file: problemPath,
+          change: (text: string) =>
+            text.replaceAll(problem.unit.sourceRevisionIds[0] ?? '', 'source-unknown'),
+          error: /SOURCE/,
+        },
+        {
+          file: unit.docPath,
+          change: (text: string) =>
+            text.replaceAll('https://atcoder.jp/', 'https://missing.example/'),
+          error: /SOURCE/,
+        },
+        {
+          file: 'src/content/problems/abc212-abc263/abc212-e.json',
+          change: (text: string) => text.replace('abc212_e', 'abc212_f'),
+          error: /TASK|identity|officialUrl/i,
+        },
+        {
+          file: 'src/content/problems/abc212-abc263/abc212-e.json',
+          change: (text: string) =>
+            text.replaceAll(
+              projection.catalog.problems.find((item) => item.id === 'abc212-e')
+                ?.sourceRevisionIds[0] ?? '',
+              projection.catalog.problems.find((item) => item.id === 'abc212-f')
+                ?.sourceRevisionIds[0] ?? '',
+            ),
+          error: /SOURCE_TASK/,
+        },
+        {
+          file: 'src/content/policies/problem-placements.json',
+          change: () => {
+            const value = structuredClone(projection.policy);
+            const placement = value.placements[0];
+            if (!placement) throw new Error('Missing placement');
+            placement.primaryOutcomeId = 'outcome-unknown';
+            value.placementDigest = canonicalDigest(value.placements);
+            return JSON.stringify(value);
+          },
+          error: /OWNER|OUTCOME|PLACEMENT|PROBLEM_HOME/,
+        },
+        {
+          file: 'src/content/policies/learning-prerequisites.json',
+          change: () => {
+            const value = structuredClone(projection.prerequisites);
+            const edge = value.learningUnitPrerequisites[0];
+            if (!edge) throw new Error('Missing prerequisite');
+            edge.nodeId = 'unit-unknown';
+            value.learningUnitDagDigest = canonicalDigest(value.learningUnitPrerequisites);
+            return JSON.stringify(value);
+          },
+          error: /RELEASE_DAG_UNKNOWN/,
+        },
+      ];
+      for (const { file, change, error } of cases) {
+        const target = path.join(root, file);
+        const original = await readFile(target, 'utf8');
+        const changed = change(original);
+        expect(changed, file).not.toBe(original);
+        if (changed === null) await rm(target);
+        else await writeFile(target, changed);
+        try {
+          await expect(
+            loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false }),
+            file,
+          ).rejects.toThrow(error);
+        } finally {
+          await writeFile(target, original);
+        }
+      }
+    });
+  }, 60_000);
+});
+
+it.skipIf(!process.env.ABC_COMPAT_NEW_DIST)(
+  'checks the current built projection without frozen evidence and rejects stale output',
+  async () => {
+    const dist = process.env.ABC_COMPAT_NEW_DIST;
+    if (!dist) throw new Error('Missing build for projection verification');
+    await withGitBaseline(async (root) => {
+      await cp(dist, path.join(root, 'dist'), { recursive: true });
+      const endpointPath = path.join(root, 'dist/data/catalog.json');
+      const endpoint = await readFile(endpointPath, 'utf8');
+      await mkdir(path.join(root, 'docs/verification/releases'), { recursive: true });
+      await writeFile(path.join(root, 'docs/verification/releases/catalog.json'), endpoint);
+      const execute = promisify(execFile);
+      const verify = () =>
+        execute(
+          process.execPath,
+          [
+            '--import',
+            fileURLToPath(new URL('../../node_modules/tsx/dist/loader.mjs', import.meta.url)),
+            fileURLToPath(
+              new URL('../../scripts/corpus/verify-full-projections.ts', import.meta.url),
+            ),
+            '--check',
+          ],
+          { cwd: root, env: process.env },
+        );
+      expect((await verify()).stdout).toContain('"status":"passed"');
+      await expect(
+        readFile(path.join(root, 'docs/verification/bootstrap/us4/full-projections.json')),
+      ).rejects.toThrow(/ENOENT/);
+      await writeFile(endpointPath, endpoint.replace('Safety Journey', 'Stale title'));
+      await expect(verify()).rejects.toThrow('FULL_PROJECTION_ENDPOINT_STALE');
+      await writeFile(endpointPath, endpoint);
+      const page = path.join(root, 'dist/problems/abc212-e/index.html');
+      const html = await readFile(page);
+      await rm(page);
+      await expect(verify()).rejects.toThrow('ENOENT');
+      await writeFile(page, html);
+      const tagPage = path.join(root, 'dist/tags/tag-slope-trick/index.html');
+      const tagHtml = await readFile(tagPage, 'utf8');
+      await writeFile(tagPage, tagHtml.replaceAll('絶対値costを順次追加', '失われた発動条件'));
+      await expect(verify()).rejects.toThrow('FULL_PROJECTION_TAG_RECALL');
+    });
+  },
+  60_000,
+);
