@@ -128,7 +128,13 @@ export const checkDocumentation = (changes, root = process.cwd()) => {
   console.log(`Documentation validation passed: ${files.length} files, ${count} local references.`);
 };
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href &&
+  process.argv[2] === '--files'
+) {
+  checkDocumentation(process.argv.slice(3).map((file) => ({ file })));
+} else if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const changes = readChanges();
   const docsOnly = isDocumentationDiff(changes);
   if (docsOnly) checkDocumentation(changes);

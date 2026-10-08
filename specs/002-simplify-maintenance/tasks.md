@@ -77,7 +77,8 @@ SC-001〜003を後続PRで再実行できる比較方法があり、旧記録の
   archiveの本文を既存parserで読み、IDとpathの一意性・存在を比較する。新しい台帳は不要。
 - `release-metadata.json`は現行deployがbuild後にコピーする。全公開URLの試験は確認済み公開JSONを両一時出力へ加えるfixtureで実施し、新しい実配信の成功と区別した。
 - 非公開文書だけのCI簡略化は既に導入されている。T006の時間基準は旧全検証を実行した正常runを用い、文書のみでskipしたrunと混同しない。現行CI・保存実装は変更していない。
-- PR-01のCI確認で、テスト変更も旧初版監査の入力に含まれることと、旧seed consumerが削除済みの憲章見出しと3.0.0固定を要求することが判明した。保存失敗テストの操作を修正し、seedの憲章識別を現行方針へ合わせ、3.0.0固定は旧human形式だけに限定し、既存のbuild/監査/release結果を実検証から更新した。旧必須経路の削減や新しい証跡制度の追加は行っていない。
+- PR-01のCI確認で、テスト変更も旧初版監査の入力に含まれることと、旧seed
+  consumerが削除済みの憲章見出しと3.0.0固定を要求することが判明した。保存失敗テストの操作を修正し、seedの憲章識別を現行方針へ合わせ、3.0.0固定は旧human形式だけに限定し、既存のbuild/監査/release結果を実検証から更新した。旧必須経路の削減や新しい証跡制度の追加は行っていない。
 
 **Revert**: 追加テスト・手順説明・seedの憲章識別と更新した既存検証出力を戻す。教材・保存実装・公開環境は変更しない。
 
@@ -89,12 +90,20 @@ SC-001〜003を後続PRで再実行できる比較方法があり、旧記録の
 Test**: 文書・本文・追加/構造化データ・UI/記録・共通/未知差分で必要な検査が選ばれ、失敗/cancelがmergeと公開を止める。実GitHub設定とcheck名が一致する。
 
 <!-- prettier-ignore -->
-- [ ] T007 [US3] `tests/contract/verify-fast.test.ts`に変更選択と失敗伝播の回帰を追加する。PR merge-base/main前回SHAとの差、削除・rename・複数分類の和集合、未知path/差分取得不能の広い検査、skill変更のcontract、文書のみのbuild/E2E非実行、非zero exit/signalを確認する。
-- [ ] T008 [P] [US3] `scripts/verify/runner.ts`と`scripts/verify/fast.ts`を短い条件分岐による変更範囲の検査へ縮小する。通常経路からpreview凍結・全shard再join・初版受入・証跡生成・無関係な全数学回帰・3browser一律実行を除き、実データschema/ID/参照/DAG/本文/リンク/対象挙動を残す。差分不明は広い検査、失敗は非zeroで伝播する。
-- [ ] T009 [P] [US3] `package.json`の`check`/`build`とブラウザー準備の既存scriptを整理し、同runで`astro check`とbuildを重複実行しない。単独build時の必要検査を保ち、通常CIでは必要なChromiumだけを準備し、他browserの既存手動入口を残す。依存versionは変更しない。
-- [ ] T010 [US3] `.github/workflows/ci.yml`に単一Node 24.18.0/npm 11.16.0の`Verify (release baseline)`を用意する。文書差分でもrequired jobを起動し、job内で検査範囲を選ぶ。切替前のcommitでは旧4jobを残し、後続consumer移行を縛るrelease/review監査を除去するための検出範囲をT006に対応付ける。
-- [ ] T011 [US3] T010の同名baselineの実check成功後、`docs/operations/protected-main.json`に対応する実branch protection/rulesetから`Verify (supported range)`・`Initial corpus audit`・`Release validation`・`Production review`を外して読戻す。`.github/workflows/production-deploy.yml`のrequired参照を同名baselineに揃え、実設定整合を確認してから`ci.yml`/`initial-release-audit.yml`の旧必須jobを削除または対象変更時の手動入口へ移す。権限不足なら旧job削除を保留する。
+- [X] T007 [US3] `tests/contract/verify-fast.test.ts`に変更選択と失敗伝播の回帰を追加する。PR merge-base/main前回SHAとの差、削除・rename・複数分類の和集合、未知path/差分取得不能の広い検査、skill変更のcontract、文書のみのbuild/E2E非実行、非zero exit/signalを確認する。
+- [X] T008 [P] [US3] `scripts/verify/runner.ts`と`scripts/verify/fast.ts`を短い条件分岐による変更範囲の検査へ縮小する。通常経路からpreview凍結・全shard再join・初版受入・証跡生成・無関係な全数学回帰・3browser一律実行を除き、実データschema/ID/参照/DAG/本文/リンク/対象挙動を残す。差分不明は広い検査、失敗は非zeroで伝播する。
+- [X] T009 [P] [US3] `package.json`の`check`/`build`とブラウザー準備の既存scriptを整理し、同runで`astro check`とbuildを重複実行しない。単独build時の必要検査を保ち、通常CIでは必要なChromiumだけを準備し、他browserの既存手動入口を残す。依存versionは変更しない。
+- [X] T010 [US3] `.github/workflows/ci.yml`に単一Node 24.18.0/npm 11.16.0の`Verify (release baseline)`を用意する。文書差分でもrequired jobを起動し、job内で検査範囲を選ぶ。切替前のcommitでは旧4jobを残し、後続consumer移行を縛るrelease/review監査を除去するための検出範囲をT006に対応付ける。
+- [X] T011 [US3] T010の同名baselineの実check成功後、`docs/operations/protected-main.json`に対応する実branch protection/rulesetから`Verify (supported range)`・`Initial corpus audit`・`Release validation`・`Production review`を外して読戻す。`.github/workflows/production-deploy.yml`のrequired参照を同名baselineに揃え、実設定整合を確認してから`ci.yml`/`initial-release-audit.yml`の旧必須jobを削除または対象変更時の手動入口へ移す。権限不足なら旧job削除を保留する。
 - [ ] T012 [US3] T007のcontract、実PR/mainチェックと失敗時の停止を確認し、`docs/operations/update-manual.md`と`docs/operations/development.md`へ分類別検証、変更したscript引数、残る移行制約、設定切替と戻し順を反映する。ローカルJSONの変更を外部反映済みと報告しない。
+
+**PR-02の実装状況**: T007〜T011は実装・対象検証済み。旧4jobを残したbaselineの実成功後に実branch
+protectionを切り替えて読戻し、active rulesetにstatus
+check指定がないことも確認した。失敗・cancel・未完了checkを公開側が拒否する回帰と、文書リンク不備の実process失敗を確認した。実行結果は対応PRへ集約する。
+
+T012の分類別手順・script引数・残る制約・復旧順とPR
+checkの検証は実施済み。今回の依頼はPR作成までのためmerge/deployは実行していない。新workflowをmergeした後のmain
+check確認を残してT012は未完了とする。先行mainの旧baseline成功は新workflowのmain成功に数えない。通常更新5runの時間目標も未確認。
 
 **完了条件**: 単一基準環境、文書required検査、必要な失敗検出、GitHub実設定読戻しが成立し、廃止check待ちがない。CI短縮の目標達成は5回実測まで未確認。
 

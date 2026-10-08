@@ -70,7 +70,7 @@
     "test:e2e": "npm run build && npm run test:e2e:built --",
     "test:e2e:built": "playwright test",
     "test:e2e:install": "playwright install chromium firefox webkit",
-    "test:e2e:install:ci": "playwright install --with-deps chromium firefox webkit",
+    "test:e2e:install:ci": "playwright install --with-deps chromium",
     "link:check": "npm run build && npm run link:check:built",
     "link:check:built": "tsx scripts/validate/links.ts",
     "verify:fast": "tsx scripts/verify/fast.ts",
@@ -91,7 +91,9 @@
     "verify:initial-release": "tsx scripts/verify/initial-release.ts",
     "abc:deploy": "tsx scripts/deploy-release.ts",
     "release:accept-review": "tsx scripts/release/accept-seed-review.ts",
-    "release:accept-agent-review": "tsx scripts/release/accept-seed-agent-review.ts"
+    "release:accept-agent-review": "tsx scripts/release/accept-seed-agent-review.ts",
+    "build:checked": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "test:e2e:install:all:ci": "playwright install --with-deps chromium firefox webkit"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.1",

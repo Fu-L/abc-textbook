@@ -5,7 +5,6 @@ import { promisify } from 'node:util';
 import prettier from 'prettier';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
-import { VERIFICATION_STEPS } from './runner.js';
 import {
   assertAudit,
   auditCompleteness,
@@ -28,6 +27,29 @@ import {
 } from './initial-release-public.js';
 import { benchmarkInitialRelease } from './initial-release-performance.js';
 import { simulateZeroCostYear } from './initial-release-zero-cost.js';
+
+// The optional initial audit retains its full historical checks independently of normal CI.
+const INITIAL_VERIFICATION_STEPS = [
+  { id: 'lint', script: 'lint' },
+  { id: 'format', script: 'format:check' },
+  { id: 'check', script: 'check' },
+  { id: 'test', script: 'test' },
+  { id: 'corpus', script: 'corpus:verify' },
+  { id: 'problem-metrics', script: 'corpus:verify-atcoder-problems-metrics' },
+  { id: 'authoring', script: 'corpus:verify-authoring' },
+  { id: 'taxonomy', script: 'preview:taxonomy' },
+  { id: 'final-taxonomy', script: 'corpus:final-taxonomy' },
+  { id: 'canonical-taxonomy', script: 'corpus:materialize-taxonomy' },
+  { id: 'full-learning-content', script: 'corpus:verify-learning-units' },
+  { id: 'problem-shard-index', script: 'corpus:verify-problem-shard-index' },
+  { id: 'problem-shards', script: 'corpus:verify-problem-shards' },
+  { id: 'problem-corpus', script: 'corpus:verify-problem-corpus' },
+  { id: 'learning-content', script: 'preview:learning-content' },
+  { id: 'build', script: 'build' },
+  { id: 'full-projections', script: 'corpus:verify-full-projections' },
+  { id: 'links', script: 'link:check:built' },
+  { id: 'e2e', script: 'test:e2e:built' },
+];
 
 const exec = promisify(execFile);
 const mode = process.argv[2] ?? '--check';
@@ -192,7 +214,7 @@ try {
     };
     let unitReport: unknown;
     let browserReport: unknown;
-    for (const step of VERIFICATION_STEPS) {
+    for (const step of INITIAL_VERIFICATION_STEPS) {
       if (step.id === 'test') {
         const result = await run(process.execPath, [
           'node_modules/vitest/vitest.mjs',
