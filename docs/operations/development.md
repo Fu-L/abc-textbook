@@ -1,5 +1,8 @@
 # Local development
 
+現行の更新方針と検証範囲は[Codexの更新マニュアル](update-manual.md)と
+[Constitution 4.0.0](../../.specify/memory/constitution.md)を参照する。以下は既存環境・実装の説明であり、全コマンド・全ブラウザーの実行を通常更新の必須条件としない。CIの簡素化は別の実装変更で行う。
+
 ## Toolchain policy
 
 依存パッケージは`package-lock.json`で完全版を固定します。Node.jsとnpmは、通常開発で利用できる対応範囲と、リリース検証で再現する基準版を分けて管理します。
