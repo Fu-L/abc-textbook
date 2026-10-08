@@ -196,7 +196,7 @@ ABC_COMPAT_NEW_DIST="$PWD/dist" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-t
 `--check`は旧`us4/full-projections.json`を読まず、正本とのcatalog一致、公開route、タグの発動条件・Outcome・問題導線、Contestのタグ配置、sitemap・feed・Pagefindを検査する。検査だけでは報告ファイルを書かない。`ABC_COMPAT_NEW_DIST`指定時は、旧台帳のない一時copyでCLIの成功とstale
 catalog・欠落page・発動条件欠落の拒否も確認する。旧監査consumer向けの明示的な`--write`・`--write-evidence`と台帳ファイル自体はまだ保持し、通常更新でその再生成を要求しない。
 
-`docs/verification/releases/catalog.json`が存在する通常buildでは、引き続きそのreleaseを読み、snapshotと現行正本の一致を要求する。本文訂正後の旧prepared版は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`で失敗する。一時copyでは旧prepared
+`docs/verification/releases/catalog.json`が存在する通常buildでは、引き続きそのreleaseを読み、snapshotと本文inventoryの両方について現行正本との一致を要求する。本文訂正後の旧prepared版は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`で失敗する。一時copyでは旧prepared
 catalogと受入台帳を除いたcandidateをbuildでき、projection単体は`usePreparedRelease: false`で訂正を検証できる。実作業ツリーの旧公開入力を消して制約を迂回せず、catalog
 CLIの証跡consumerはPR-05、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
 

@@ -368,6 +368,16 @@ describe('current canonical prose without bootstrap acceptance ledgers', () => {
         unitPath,
         unitText.replace('最高bitごとにpivotを保存する。', '各最高bitに対応するpivotを保存する。'),
       );
+      // Unit prose is outside the structured catalog snapshot, so the legacy
+      // prepared release must also match the current document inventory.
+      await mkdir(path.join(root, 'docs/verification/releases'), { recursive: true });
+      await cp(
+        'docs/verification/releases/catalog.json',
+        path.join(root, 'docs/verification/releases/catalog.json'),
+      );
+      await expect(loadFullPublicProjection({ repositoryRoot: root })).rejects.toThrow(
+        'FULL_PROJECTION_PREPARED_RELEASE_DRIFT',
+      );
       await writeFile(
         problemPath,
         problemText.replace(
@@ -387,11 +397,6 @@ describe('current canonical prose without bootstrap acceptance ledgers', () => {
       expect(canonicalUiRoutes(corrected.ui)).toEqual(canonicalUiRoutes(projection.ui));
       expect(corrected.digest).not.toBe(projection.digest);
       expect(corrected.catalog.release.validationSummary).toBeUndefined();
-      await mkdir(path.join(root, 'docs/verification/releases'), { recursive: true });
-      await cp(
-        'docs/verification/releases/catalog.json',
-        path.join(root, 'docs/verification/releases/catalog.json'),
-      );
       await expect(loadFullPublicProjection({ repositoryRoot: root })).rejects.toThrow(
         'FULL_PROJECTION_PREPARED_RELEASE_DRIFT',
       );

@@ -405,8 +405,17 @@ export const loadFullPublicProjection = async (
     }
     if (prepared !== undefined) {
       const release = CatalogReleaseSchema.parse((prepared as { release: unknown }).release);
+      // The legacy release inventories all canonical content files, rather than
+      // the prose-only inventory used by the candidate projection above.
+      const { calculateActualContentFileInventory } = await import('./evidence-inventory.js');
+      const actualInventoryDigest = canonicalDigest(
+        await calculateActualContentFileInventory(root),
+      );
       Object.assign(catalog.release, release);
-      if (catalogContentDigest(catalog) !== release.contentSnapshotDigest)
+      if (
+        release.contentFileInventoryDigest !== actualInventoryDigest ||
+        catalogContentDigest(catalog) !== release.contentSnapshotDigest
+      )
         throw new Error('FULL_PROJECTION_PREPARED_RELEASE_DRIFT');
     }
   }
