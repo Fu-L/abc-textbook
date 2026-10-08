@@ -13,6 +13,7 @@ import {
   withBase,
 } from '../../src/lib/catalog/preview-ui-catalog.js';
 import { buildPreviewCatalogContract } from '../../src/lib/catalog/preview-catalog-contract.js';
+import { UiCatalogSchema } from '../../src/lib/catalog/ui-catalog.js';
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
@@ -55,6 +56,33 @@ describe('initial-v1 UI route contract', () => {
     );
   });
 
+  it.each(['2026.10.07', '2026.10.09-r9', '2026.10.09-r10'])(
+    'preserves the public history URL for %s',
+    (version) => {
+      const catalog = buildPreviewUiCatalog();
+      const entry = catalog.releaseHistory[0];
+      if (!entry) throw new Error('Missing preview history fixture.');
+      const projected = UiCatalogSchema.parse({
+        ...catalog,
+        releaseHistory: [{ ...entry, version, state: 'public', route: `/updates/${version}/` }],
+      });
+      expect(projected.releaseHistory[0]?.route).toBe(`/updates/${version}/`);
+      expect(withBase(projected.releaseHistory[0]?.route ?? '', '/abc-textbook')).toBe(
+        `/abc-textbook/updates/${version}/`,
+      );
+      for (const route of [
+        '/updates/2026.10.09-r0/',
+        '/updates/2026.10.09-r01/',
+        '/updates/2026.10.9-r9/',
+        '/problems/2026.10.09-r9/',
+      ]) {
+        expect(
+          UiCatalogSchema.safeParse({ ...catalog, releaseHistory: [{ ...entry, route }] }).success,
+        ).toBe(false);
+      }
+    },
+  );
+
   it('serves the preview through the repository-wide CatalogSchema contract', () => {
     const catalog = buildPreviewCatalogContract();
 
@@ -63,10 +91,10 @@ describe('initial-v1 UI route contract', () => {
     expect(catalog.problems.map(({ id }) => id)).toEqual(
       frozenPreviewUiCatalogSource.selectedProblemIds,
     );
-    expect(catalog.release.validationSummary.checks[0]?.resultDigest).toBe(
+    expect(catalog.release.validationSummary?.checks[0]?.resultDigest).toBe(
       componentEvidence.artifactFiles[0]?.digest,
     );
-    expect(catalog.release.humanContentReviewEvidenceRefs[0]?.digest).toBe(
+    expect(catalog.release.humanContentReviewEvidenceRefs?.[0]?.digest).toBe(
       componentEvidence.reviewEvidence.digest,
     );
     const sourceIds = new Set(catalog.sources.map(({ id }) => id));

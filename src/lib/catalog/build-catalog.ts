@@ -80,41 +80,45 @@ export interface CatalogLike {
     readonly cutoffAt: string;
     readonly validatedAt: string;
     readonly publicationEffectiveAt: string;
-    readonly manifestDigest: string;
-    readonly contentFileInventoryDigest: string;
-    readonly contentSnapshotDigest: string;
+    readonly manifestDigest?: string | undefined;
+    readonly contentFileInventoryDigest?: string | undefined;
+    readonly contentSnapshotDigest?: string | undefined;
     readonly updateIds: readonly string[];
     readonly firstContestId: string;
     readonly lastContestId: string;
     readonly contestCount: number;
     readonly problemCount: number;
     readonly slotRecordCount: number;
-    readonly validationSummary: {
-      readonly checkCount: number;
-      readonly passedCheckCount: number;
-      readonly blockingFindingCount: number;
-      readonly evidenceDigests: readonly string[];
-      readonly checks: readonly {
-        readonly checkId: string;
-        readonly command: string;
-        readonly subjectDigest: string;
-        readonly resultPath: string;
-        readonly resultDigest: string;
-        readonly exitCode: number;
-        readonly passed: boolean;
-        readonly completedAt: string;
-      }[];
-    };
-    readonly humanContentReviewEvidenceRefs: readonly {
-      readonly evidenceId: string;
-      readonly path: string;
-      readonly digest: string;
-      readonly subjectDigest: string;
-      readonly authorIds: readonly string[];
-      readonly reviewerIds: readonly string[];
-      readonly reviewMode: 'self' | 'third_party';
-      readonly aggregatePassed: boolean;
-    }[];
+    readonly validationSummary?:
+      | {
+          readonly checkCount: number;
+          readonly passedCheckCount: number;
+          readonly blockingFindingCount: number;
+          readonly evidenceDigests: readonly string[];
+          readonly checks: readonly {
+            readonly checkId: string;
+            readonly command: string;
+            readonly subjectDigest: string;
+            readonly resultPath: string;
+            readonly resultDigest: string;
+            readonly exitCode: number;
+            readonly passed: boolean;
+            readonly completedAt: string;
+          }[];
+        }
+      | undefined;
+    readonly humanContentReviewEvidenceRefs?:
+      | readonly {
+          readonly evidenceId: string;
+          readonly path: string;
+          readonly digest: string;
+          readonly subjectDigest: string;
+          readonly authorIds: readonly string[];
+          readonly reviewerIds: readonly string[];
+          readonly reviewMode: 'self' | 'third_party';
+          readonly aggregatePassed: boolean;
+        }[]
+      | undefined;
     readonly addedProblemIds: readonly string[];
     readonly changedProblemIds: readonly string[];
     readonly heldProblemIds: readonly string[];
@@ -902,11 +906,12 @@ export const validateCatalogSemantics = (
     }
   };
   const scopeTargets = new Set([...tagIds, ...unitIds, ...problemIds]);
-  const releaseChecks = catalog.release.validationSummary.checks;
-  const releaseEvidenceDigests = catalog.release.validationSummary.evidenceDigests;
+  const validationSummary = catalog.release.validationSummary;
+  const releaseChecks = validationSummary?.checks ?? [];
+  const releaseEvidenceDigests = validationSummary?.evidenceDigests ?? [];
   const releaseCheckIds = releaseChecks.map(({ checkId }) => checkId);
   const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
-  const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs;
+  const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs ?? [];
   const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
   const agentReview = catalog.release.agentQualityReviewEvidenceRef;
   const trustedAgentReview = trustedEvidence?.agentQualityReview;
@@ -956,11 +961,11 @@ export const validateCatalogSemantics = (
     sameStringSet(left.authorIds, right.authorIds) &&
     sameStringSet(left.reviewerIds, right.reviewerIds);
   const releaseEvidenceComplete =
-    catalog.release.validationSummary.checkCount > 0 &&
-    catalog.release.validationSummary.passedCheckCount ===
-      catalog.release.validationSummary.checkCount &&
-    catalog.release.validationSummary.blockingFindingCount === 0 &&
-    releaseChecks.length === catalog.release.validationSummary.checkCount &&
+    validationSummary !== undefined &&
+    validationSummary.checkCount > 0 &&
+    validationSummary.passedCheckCount === validationSummary.checkCount &&
+    validationSummary.blockingFindingCount === 0 &&
+    releaseChecks.length === validationSummary.checkCount &&
     new Set(releaseCheckIds).size === releaseCheckIds.length &&
     new Set(releaseResultDigests).size === releaseResultDigests.length &&
     sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
@@ -982,7 +987,8 @@ export const validateCatalogSemantics = (
         check.exitCode === 0 &&
         check.passed,
     ) &&
-    trustedEvidence?.subjectDigest === catalog.release.contentFileInventoryDigest &&
+    trustedEvidence !== undefined &&
+    trustedEvidence.subjectDigest === catalog.release.contentFileInventoryDigest &&
     trustedEvidence.checks.length === releaseChecks.length &&
     trustedEvidence.reviews.length === reviewEvidenceRefs.length &&
     sameStringSet(

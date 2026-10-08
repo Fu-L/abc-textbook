@@ -25,3 +25,6 @@ export const ProblemLabelSchema = z
   .max(16);
 export const ContestIdSchema = z.string().regex(/^abc[0-9]{3,}$/u);
 export const ProblemIdSchema = z.string().regex(/^abc[0-9]{3,}-[a-z][a-z0-9+_-]*$/u);
+
+/** Public release identifiers retain date-only versions and accept Actions run IDs. */
+export const ReleaseVersionSchema = z.string().regex(/^\d{4}\.\d{2}\.\d{2}(?:-r[1-9]\d*)?$/u);

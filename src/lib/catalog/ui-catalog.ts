@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ReleaseVersionSchema } from '../domain/schema-parts/content-common.js';
 import {
   buildAdvancedSlotRegistry,
   materializeContestSlotStates,
@@ -97,7 +98,17 @@ export const UiCatalogSchema = z.strictObject({
     z.strictObject({
       version: z.string().min(1),
       state: z.enum(['private-preview', 'public']),
-      route: routeSchema,
+      route: z.union([
+        routeSchema,
+        z
+          .string()
+          .refine(
+            (route) =>
+              route.startsWith('/updates/') &&
+              route.endsWith('/') &&
+              ReleaseVersionSchema.safeParse(route.slice('/updates/'.length, -1)).success,
+          ),
+      ]),
       subjectDigest: z.string().regex(/^[a-f0-9]{64}$/u),
       problemCount: z.number().int().nonnegative(),
       evidencePaths: z.array(z.string().min(1)).min(1),
@@ -119,7 +130,7 @@ const stateLabel = {
 export const withBase = (pathname: string, base: string): string => {
   const normalizedBase = base === '/' ? '' : `/${base.replace(/^\/+|\/+$/gu, '')}`;
   const normalizedPath = `/${pathname.replace(/^\/+|\/+$/gu, '')}`;
-  const isFile = /\/[^/]+\.[a-z0-9]+$/iu.test(normalizedPath);
+  const isFile = !pathname.endsWith('/') && /\/[^/]+\.[a-z0-9]+$/iu.test(normalizedPath);
   return `${normalizedBase}${normalizedPath === '/' || isFile ? normalizedPath : `${normalizedPath}/`}`;
 };
 

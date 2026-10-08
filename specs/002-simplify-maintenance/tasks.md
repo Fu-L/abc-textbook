@@ -117,11 +117,11 @@ check確認を残してT012は未完了とする。先行mainの旧baseline成�
 Test**: 実際の旧catalog/metadata/historyの値を保持して読み、新規reviewなしのentryも読める。旧欄の型違反・重複版・未知commitを拒否する。
 
 <!-- prettier-ignore -->
-- [ ] T013 [US4] `tests/unit/release-history.test.ts`と`tests/contract/schema-parity.test.ts`へ旧実データ読込、新規review/manifest/validationSummary digestなしの読込、存在する旧欄の不正型、旧日付版/新版`YYYY.MM.DD-r<run_id>`の受理、同版の異なるSHA/範囲/概要・重複版・未知commitの拒否を追加する。同SHAの別runは別版で受理し、旧entryの値・順序を保持する。`tests/integration/learning-record-backup.test.ts`で1桁の日を含む旧backupと新版のexport/import・未知ID・独立日時・原子性を確認する。架空の成功件数・digest・時刻を補わない。
-- [ ] T014 [US4] `src/lib/domain/schema-parts/catalog.ts`と`src/lib/domain/schema-parts/release.ts`で新規公開のhuman/agent review・初版例外・manifest/check digest必須を外す。旧入力に存在する欄の型と意味、Source Revision/fingerprint、metadataの既存必須field、catalog `3.0.0`/metadata `1.0.0`を保持する。version/baseReleaseVersionは旧日付版と新版を受理し、`src/lib/domain/schema-parts/learning.ts`の`catalogVersionAtExport`も従来の受理値を残して新版へ拡張する。backup field/schemaVersion・DB・記録形式は変えない。
-- [ ] T015 [US4] `src/lib/catalog/build-release-history.ts`、`scripts/release/build-history.ts`のreaderと`src/pages/updates/[version].astro`を旧欄欠落と新版へ対応させる。旧値・順序はそのまま表示・参照し、新版の順序を文字列辞書順に依存させず同SHAの別runを読めるようにする。新しい承認mode/receiptを作らず、writerと旧deployはまだ切り替えない。
-- [ ] T016 [US4] `scripts/generate-json-schemas.ts`を用いて`specs/001-build-abc-textbook/contracts/catalog.schema.json`、`release-metadata.schema.json`、`learning-record.schema.json`、`update-manifest.schema.json`等の実際に変わった生成schemaだけを更新し、Zod/refinement/JSON Schemaの一致を確認する。001の`spec.md`や教材frontmatterは書き換えない。
-- [ ] T017 [US4] schema/check、T013のテスト、旧履歴URLのbuild・リンク確認を実行し、`docs/operations/update-manual.md`へ旧欄の保持と新形式未発行を記す。新形式を本番へ書くのはPR-07以降に限定する。
+- [X] T013 [US4] `tests/unit/release-history.test.ts`と`tests/contract/schema-parity.test.ts`へ旧実データ読込、新規review/manifest/validationSummary digestなしの読込、存在する旧欄の不正型、旧日付版/新版`YYYY.MM.DD-r<run_id>`の受理、同版の異なるSHA/範囲/概要・重複版・未知commitの拒否を追加する。同SHAの別runは別版で受理し、旧entryの値・順序を保持する。`tests/integration/learning-record-backup.test.ts`で1桁の日を含む旧backupと新版のexport/import・未知ID・独立日時・原子性を確認する。架空の成功件数・digest・時刻を補わない。
+- [X] T014 [US4] `src/lib/domain/schema-parts/catalog.ts`と`src/lib/domain/schema-parts/release.ts`で新規公開のhuman/agent review・初版例外・manifest/check digest必須を外す。旧入力に存在する欄の型と意味、Source Revision/fingerprint、metadataの既存必須field、catalog `3.0.0`/metadata `1.0.0`を保持する。version/baseReleaseVersionは旧日付版と新版を受理し、`src/lib/domain/schema-parts/learning.ts`の`catalogVersionAtExport`も従来の受理値を残して新版へ拡張する。backup field/schemaVersion・DB・記録形式は変えない。
+- [X] T015 [US4] `src/lib/catalog/build-release-history.ts`、`scripts/release/build-history.ts`のreaderと`src/pages/updates/[version].astro`を旧欄欠落と新版へ対応させる。旧値・順序はそのまま表示・参照し、新版の順序を文字列辞書順に依存させず同SHAの別runを読めるようにする。新しい承認mode/receiptを作らず、writerと旧deployはまだ切り替えない。
+- [X] T016 [US4] `scripts/generate-json-schemas.ts`を用いて`specs/001-build-abc-textbook/contracts/catalog.schema.json`、`release-metadata.schema.json`、`learning-record.schema.json`、`update-manifest.schema.json`等の実際に変わった生成schemaだけを更新し、Zod/refinement/JSON Schemaの一致を確認する。001の`spec.md`や教材frontmatterは書き換えない。
+- [X] T017 [US4] schema/check、T013のテスト、旧履歴URLのbuild・リンク確認を実行し、`docs/operations/update-manual.md`へ旧欄の保持と新形式未発行を記す。新形式を本番へ書くのはPR-07以降に限定する。
 
 **完了条件**: 旧データの意味と値を変えず、証跡なし新規入力を読める。公開成功判定をschemaやcandidate生成へ移していない。
 

@@ -5,6 +5,7 @@ import { isOffsetDateTime } from '../date-time.js';
 import {
   OffsetDateTimeSchema as StructuralOffsetDateTimeSchema,
   ProblemIdSchema,
+  ReleaseVersionSchema,
 } from './content-common.js';
 
 const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
@@ -23,7 +24,7 @@ export const LearningRecordSchema = strictObject({
 export const LearningRecordBackupSchema = strictObject({
   schemaVersion: z.literal('1.0.0'),
   exportedAt: OffsetDateTimeSchema,
-  catalogVersionAtExport: z.string().regex(/^\d{4}\.\d{2}\.\d+$/u),
+  catalogVersionAtExport: z.union([z.string().regex(/^\d{4}\.\d{2}\.\d+$/u), ReleaseVersionSchema]),
   records: z.array(LearningRecordSchema),
   orphanedProblemIds: z.array(ProblemIdSchema),
 }).superRefine((backup, context) => {

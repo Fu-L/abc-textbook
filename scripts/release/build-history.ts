@@ -7,6 +7,7 @@ import {
   buildAdministratorHoldSummary,
   buildReleaseHistory,
   type PublicReleaseHistoryEntry,
+  PublicReleaseHistorySchema,
 } from '../../src/lib/catalog/build-release-history.js';
 import {
   PublicationUpdateSchema,
@@ -35,12 +36,16 @@ export const loadGitReleaseHistory = async (input: {
   const records = [];
   for (const candidate of input.metadata) {
     const metadata = ReleaseMetadataSchema.parse(candidate);
-    const { stdout: commit } = await exec(
-      'git',
-      ['rev-parse', '--verify', `${metadata.commit}^{commit}`],
-      { cwd: root },
-    );
-    if (commit.trim() !== metadata.commit) throw new Error('RELEASE_HISTORY_UNKNOWN_COMMIT');
+    try {
+      const { stdout: commit } = await exec(
+        'git',
+        ['rev-parse', '--verify', `${metadata.commit}^{commit}`],
+        { cwd: root },
+      );
+      if (commit.trim() !== metadata.commit) throw new Error('Commit ID mismatch.');
+    } catch (error) {
+      throw new Error('RELEASE_HISTORY_UNKNOWN_COMMIT', { cause: error });
+    }
     const { stdout } = await exec('git', ['show', `${metadata.commit}:${catalogPath}`], {
       cwd: root,
       maxBuffer: 128 * 1024 * 1024,
@@ -114,7 +119,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       throw new Error('History and update inputs must be arrays.');
     let previous: readonly PublicReleaseHistoryEntry[] = [];
     try {
-      previous = JSON.parse(await readFile(publicOutput, 'utf8')) as PublicReleaseHistoryEntry[];
+      const existing: unknown = JSON.parse(await readFile(publicOutput, 'utf8'));
+      previous = PublicReleaseHistorySchema.parse(existing);
     } catch (error) {
       if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
     }

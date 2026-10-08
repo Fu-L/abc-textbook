@@ -19,6 +19,7 @@ import {
   ProblemIdSchema,
   ProblemLabelSchema,
   SafePathSchema,
+  ReleaseVersionSchema,
   Sha256Schema,
 } from './content-common.js';
 
@@ -33,6 +34,7 @@ export {
   ProblemIdSchema,
   ProblemLabelSchema,
   SafePathSchema,
+  ReleaseVersionSchema,
   Sha256Schema,
 };
 export const OffsetDateTimeSchema = StructuralOffsetDateTimeSchema.refine(
@@ -1164,16 +1166,16 @@ export type SeedAgentQualityReviewReference = z.infer<typeof SeedAgentQualityRev
 export const CatalogReleaseSchema = strictObject({
   /** T160 prepares a full projection; production publication remains a later release gate. */
   publicationStatus: z.enum(['prepared', 'published']).optional(),
-  version: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
+  version: ReleaseVersionSchema,
   releaseKind: z.enum(['initial', 'incremental']),
   cutoffAt: OffsetDateTimeSchema,
   validatedAt: OffsetDateTimeSchema,
   publicationEffectiveAt: OffsetDateTimeSchema,
-  manifestDigest: Sha256Schema,
+  manifestDigest: Sha256Schema.optional(),
   /** Digest of the on-disk canonical content file inventory approved by release evidence. */
-  contentFileInventoryDigest: Sha256Schema,
+  contentFileInventoryDigest: Sha256Schema.optional(),
   /** Digest of the normalized logical catalog projection, including immutable release scope. */
-  contentSnapshotDigest: Sha256Schema,
+  contentSnapshotDigest: Sha256Schema.optional(),
   updateIds: entityIds.min(1),
   advancedSlotRegistryDigest: Sha256Schema,
   firstContestId: ContestIdSchema,
@@ -1186,18 +1188,12 @@ export const CatalogReleaseSchema = strictObject({
   heldProblemIds: z.array(ProblemIdSchema),
   withdrawnProblemIds: z.array(ProblemIdSchema),
   taxonomyChanges: z.array(TaxonomyChangeSchema),
-  validationSummary: ReleaseValidationSummarySchema,
-  humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema),
+  validationSummary: ReleaseValidationSummarySchema.optional(),
+  humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema).optional(),
   agentQualityReviewEvidenceRef: SeedAgentQualityReviewReferenceSchema.optional(),
   changelogPath: SafePathSchema,
 })
   .superRefine((release, context) => {
-    if (release.publicationStatus !== 'prepared' && !release.validationSummary.checks.length)
-      context.addIssue({
-        code: 'custom',
-        path: ['validationSummary', 'checks'],
-        message: 'Published releases require validation checks.',
-      });
     if (
       release.agentQualityReviewEvidenceRef &&
       (release.releaseKind !== 'initial' ||
@@ -1207,43 +1203,16 @@ export const CatalogReleaseSchema = strictObject({
         release.cutoffAt !== '2026-07-12T00:00:00+09:00' ||
         release.updateIds.length !== 1 ||
         release.updateIds[0] !== 'update-bootstrap-full-corpus' ||
-        release.humanContentReviewEvidenceRefs.length !== 0)
+        (release.humanContentReviewEvidenceRefs?.length ?? 0) !== 0)
     )
       context.addIssue({
         code: 'custom',
         path: ['agentQualityReviewEvidenceRef'],
         message: 'Owner-authorized agent acceptance is limited to the ABC212–466 seed release.',
       });
-    if (
-      release.publicationStatus !== 'prepared' &&
-      !release.humanContentReviewEvidenceRefs.length &&
-      !release.agentQualityReviewEvidenceRef
-    )
-      context.addIssue({
-        code: 'custom',
-        path: ['humanContentReviewEvidenceRefs'],
-        message: 'Published releases require policy-selected review evidence.',
-      });
   })
   .meta({
     allOf: [
-      {
-        if: {
-          not: {
-            properties: { publicationStatus: { const: 'prepared' } },
-            required: ['publicationStatus'],
-          },
-        },
-        then: {
-          properties: {
-            validationSummary: { properties: { checks: { minItems: 1 } } },
-          },
-          anyOf: [
-            { properties: { humanContentReviewEvidenceRefs: { minItems: 1 } } },
-            { required: ['agentQualityReviewEvidenceRef'] },
-          ],
-        },
-      },
       {
         if: { required: ['agentQualityReviewEvidenceRef'] },
         then: {

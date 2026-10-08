@@ -84,6 +84,8 @@ export const verifyFullReleaseCommit = async (input: {
       const catalog = CatalogSchema.parse(
         JSON.parse(await readFile(resolvedCatalog, 'utf8')) as unknown,
       );
+      if (!catalog.release.validationSummary || !catalog.release.humanContentReviewEvidenceRefs)
+        throw new Error('RELEASE_EVIDENCE_REQUIRED');
       if (input.preparation) return verifySeedPreparation(context, catalog, resolvedCatalog);
       const seed =
         catalog.release.releaseKind === 'initial' &&

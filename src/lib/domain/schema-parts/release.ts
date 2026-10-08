@@ -9,11 +9,12 @@ import {
   ProblemIdSchema,
   ProblemLabelSchema,
   SafePathSchema,
+  ReleaseVersionSchema,
   Sha256Schema,
 } from './catalog.js';
 
 const text = z.string().trim().min(1);
-const releaseVersion = z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u);
+const releaseVersion = ReleaseVersionSchema;
 const uniqueIds = uniqueArray(EntityIdSchema);
 
 export const AuthoringResultSchema = strictObject({
