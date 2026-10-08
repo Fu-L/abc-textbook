@@ -168,7 +168,7 @@ describe('learning record backup and restore', () => {
     ]);
   });
 
-  it('rolls back the whole restore transaction after an injected failure', async () => {
+  it('rolls back both overwrites and additions after the third restore write fails', async () => {
     const incoming = [record(0), record(1), record(2)];
     const original = record(0, {
       status: 'in_progress',
@@ -177,7 +177,8 @@ describe('learning record backup and restore', () => {
     });
     const untouched = record(99);
     const target = new InMemoryLearningRecordDatabase([original, untouched]);
-    target.failOnPutNumber = 2;
+    // The first two writes must overwrite record(0) and add record(1) before failure.
+    target.failOnPutNumber = 3;
     const preview = previewLearningRecordImport(
       {
         schemaVersion: '1.0.0',
@@ -186,9 +187,14 @@ describe('learning record backup and restore', () => {
         records: incoming,
         orphanedProblemIds: [],
       },
-      [],
+      [original, untouched],
       new Set(incoming.map(({ problemId }) => problemId)),
     );
+    expect(preview.items.map(({ classification }) => classification)).toEqual([
+      'updated',
+      'new',
+      'new',
+    ]);
     await expect(applyLearningRecordImport(target, preview, 'backup-wins')).rejects.toThrow(
       'すべて取り消しました',
     );

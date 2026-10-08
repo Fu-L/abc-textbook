@@ -403,7 +403,8 @@ test('a failed browser restore rolls back both overwrites and additions', async 
     const put = Reflect.get(IDBObjectStore.prototype, 'put');
     let calls = 0;
     IDBObjectStore.prototype.put = function (...args: Parameters<typeof put>) {
-      if (++calls === 2) throw new DOMException('Injected restore failure', 'QuotaExceededError');
+      // Awaited puts have already overwritten the existing record and added a new one.
+      if (++calls === 3) throw new DOMException('Injected restore failure', 'QuotaExceededError');
       return put.apply(this, args);
     };
   });

@@ -7,9 +7,9 @@
       "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-10-08T12:54:34.350Z",
+      "completedAt": "2026-10-08T13:40:59.356Z",
       "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
-      "resultDigest": "38cf2c28fe408a23c3eb17e44e9b9888e70a9ad8a901a5d8a1ce823ae2802a2c"
+      "resultDigest": "d684d93a2e2b77b0cc8c2f504b8c3610ede88b78fd0df38fe400e62ae068e86e"
     },
     {
       "checkId": "check-initial-sc012",
@@ -17,16 +17,16 @@
       "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
       "exitCode": 0,
       "passed": true,
-      "completedAt": "2026-10-08T12:52:07.470Z",
+      "completedAt": "2026-10-08T13:38:50.776Z",
       "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
-      "resultDigest": "83d5b3fe09045d87ec8fcdc675e64baad0937dd68f691c5374b8b9443147dacc"
+      "resultDigest": "91c9d736719a34e11bbad2c9ad0c0c1ab5dbbecf2dd91d05c91e4caa43e38c88"
     }
   ],
   "reviews": [],
   "agentQualityReview": {
     "evidenceId": "agent-content-review-initial-release",
     "path": "docs/reviews/agent-content/initial-release/release-review.json",
-    "digest": "c8568a3266aaf14a8342adfa093c1e325856c1c19de6c1692476964b86bdd82c",
+    "digest": "22386024341b95f6900910df1234729e89e56d43db323149a2002a528da53415",
     "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
     "acceptanceMode": "agent_quality_review",
     "aggregatePassed": true
