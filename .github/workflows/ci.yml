@@ -52,7 +52,12 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Validate nonpublic documentation changes
+        id: docs
+        uses: ./.github/actions/nonpublic-docs
+
       - name: Check textbook mathematical regressions
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run: |
           python3 docs/verification/bootstrap/pr65-mathematical-checks.py
           python3 docs/verification/bootstrap/pr65-review2-mathematical-checks.py
@@ -76,9 +81,11 @@ jobs:
           python3 docs/verification/bootstrap/pr65-review20-mathematical-checks.py
 
       - name: Install Playwright browsers
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run: npm run test:e2e:install:ci
 
       - name: Run full verification
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run: npm run verify:fast
 
   release-validation:
@@ -94,7 +101,11 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
+      - name: Validate nonpublic documentation changes
+        id: docs
+        uses: ./.github/actions/nonpublic-docs
       - name: Validate update and release implementation
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run: >-
           npm test -- tests/integration/release-commit.test.ts
           tests/integration/canonical-correction.test.ts
@@ -103,6 +114,7 @@ jobs:
           tests/unit/release-learning-structure.test.ts tests/unit/evidence-inventory.test.ts
           tests/unit/trusted-diff.test.ts tests/unit/human-content-review.test.ts
       - name: Validate exact release tree when a full catalog is supplied
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         shell: bash
         run: |
           if test -f docs/verification/releases/catalog.json; then
@@ -116,7 +128,7 @@ jobs:
             echo 'Implementation checks passed; no production release catalog has been supplied. The prepared T160 projection is verified separately and does not authorize production publication.'
           fi
       - name: Preserve exact-commit validation result
-        if: ${{ always() }}
+        if: ${{ always() && steps.docs.outputs.docs-only != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: final-validation-${{ github.sha }}
@@ -136,12 +148,16 @@ jobs:
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
+      - name: Validate nonpublic documentation changes
+        id: docs
+        uses: ./.github/actions/nonpublic-docs
       - name: Require current-subject policy-selected review of the exact release
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run:
           node --import tsx scripts/verify-release.ts --commit "$GITHUB_SHA" >
           /tmp/production-review.json
       - name: Preserve production gate result
-        if: ${{ always() }}
+        if: ${{ always() && steps.docs.outputs.docs-only != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: production-review-${{ github.sha }}

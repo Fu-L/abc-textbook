@@ -14,15 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24.18.0'
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
+      - name: Validate nonpublic documentation changes
+        id: docs
+        uses: ./.github/actions/nonpublic-docs
       - name: Verify production verification fixtures
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         env:
           PYTHONDONTWRITEBYTECODE: '1'
         run: python3 docs/operations/test_verify_initial_deployment.py
       - name: Reject stale or incomplete initial corpus audit evidence
+        if: ${{ steps.docs.outputs.docs-only != 'true' }}
         run: npm run verify:initial-release -- --check
