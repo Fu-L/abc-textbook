@@ -1,0 +1,5438 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskIds": ["T152", "T153"],
+  "status": "published_and_verified",
+  "verifiedAt": "2026-10-08T02:42:44.740500+00:00",
+  "productionPublished": true,
+  "publicUrl": "https://fu-l.github.io/abc-textbook/",
+  "commit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+  "version": "2026.10.07",
+  "cutoffAt": "2026-07-12T00:00:00+09:00",
+  "releaseMetadata": {
+    "schemaVersion": "1.0.0",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "commit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+    "validationResultsUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084",
+    "changeSummary": {
+      "updateIds": ["update-bootstrap-full-corpus"],
+      "addedProblemIds": [
+        "abc212-e",
+        "abc212-f",
+        "abc212-g",
+        "abc212-h",
+        "abc213-e",
+        "abc213-f",
+        "abc213-g",
+        "abc213-h",
+        "abc214-e",
+        "abc214-f",
+        "abc214-g",
+        "abc214-h",
+        "abc215-e",
+        "abc215-f",
+        "abc215-g",
+        "abc215-h",
+        "abc216-e",
+        "abc216-f",
+        "abc216-g",
+        "abc216-h",
+        "abc217-e",
+        "abc217-f",
+        "abc217-g",
+        "abc217-h",
+        "abc218-e",
+        "abc218-f",
+        "abc218-g",
+        "abc218-h",
+        "abc219-e",
+        "abc219-f",
+        "abc219-g",
+        "abc219-h",
+        "abc220-e",
+        "abc220-f",
+        "abc220-g",
+        "abc220-h",
+        "abc221-e",
+        "abc221-f",
+        "abc221-g",
+        "abc221-h",
+        "abc222-e",
+        "abc222-f",
+        "abc222-g",
+        "abc222-h",
+        "abc223-e",
+        "abc223-f",
+        "abc223-g",
+        "abc223-h",
+        "abc224-e",
+        "abc224-f",
+        "abc224-g",
+        "abc224-h",
+        "abc225-e",
+        "abc225-f",
+        "abc225-g",
+        "abc225-h",
+        "abc226-e",
+        "abc226-f",
+        "abc226-g",
+        "abc226-h",
+        "abc227-e",
+        "abc227-f",
+        "abc227-g",
+        "abc227-h",
+        "abc228-e",
+        "abc228-f",
+        "abc228-g",
+        "abc228-h",
+        "abc229-e",
+        "abc229-f",
+        "abc229-g",
+        "abc229-h",
+        "abc230-e",
+        "abc230-f",
+        "abc230-g",
+        "abc230-h",
+        "abc231-e",
+        "abc231-f",
+        "abc231-g",
+        "abc231-h",
+        "abc232-e",
+        "abc232-f",
+        "abc232-g",
+        "abc232-h",
+        "abc233-e",
+        "abc233-ex",
+        "abc233-f",
+        "abc233-g",
+        "abc234-e",
+        "abc234-ex",
+        "abc234-f",
+        "abc234-g",
+        "abc235-e",
+        "abc235-ex",
+        "abc235-f",
+        "abc235-g",
+        "abc236-e",
+        "abc236-ex",
+        "abc236-f",
+        "abc236-g",
+        "abc237-e",
+        "abc237-ex",
+        "abc237-f",
+        "abc237-g",
+        "abc238-e",
+        "abc238-ex",
+        "abc238-f",
+        "abc238-g",
+        "abc239-e",
+        "abc239-ex",
+        "abc239-f",
+        "abc239-g",
+        "abc240-e",
+        "abc240-ex",
+        "abc240-f",
+        "abc240-g",
+        "abc241-e",
+        "abc241-ex",
+        "abc241-f",
+        "abc241-g",
+        "abc242-e",
+        "abc242-ex",
+        "abc242-f",
+        "abc242-g",
+        "abc243-e",
+        "abc243-ex",
+        "abc243-f",
+        "abc243-g",
+        "abc244-e",
+        "abc244-ex",
+        "abc244-f",
+        "abc244-g",
+        "abc245-e",
+        "abc245-ex",
+        "abc245-f",
+        "abc245-g",
+        "abc246-e",
+        "abc246-ex",
+        "abc246-f",
+        "abc246-g",
+        "abc247-e",
+        "abc247-ex",
+        "abc247-f",
+        "abc247-g",
+        "abc248-e",
+        "abc248-ex",
+        "abc248-f",
+        "abc248-g",
+        "abc249-e",
+        "abc249-ex",
+        "abc249-f",
+        "abc249-g",
+        "abc250-e",
+        "abc250-ex",
+        "abc250-f",
+        "abc250-g",
+        "abc251-e",
+        "abc251-ex",
+        "abc251-f",
+        "abc251-g",
+        "abc252-e",
+        "abc252-ex",
+        "abc252-f",
+        "abc252-g",
+        "abc253-e",
+        "abc253-ex",
+        "abc253-f",
+        "abc253-g",
+        "abc254-e",
+        "abc254-ex",
+        "abc254-f",
+        "abc254-g",
+        "abc255-e",
+        "abc255-ex",
+        "abc255-f",
+        "abc255-g",
+        "abc256-e",
+        "abc256-ex",
+        "abc256-f",
+        "abc256-g",
+        "abc257-e",
+        "abc257-ex",
+        "abc257-f",
+        "abc257-g",
+        "abc258-e",
+        "abc258-ex",
+        "abc258-f",
+        "abc258-g",
+        "abc259-e",
+        "abc259-ex",
+        "abc259-f",
+        "abc259-g",
+        "abc260-e",
+        "abc260-ex",
+        "abc260-f",
+        "abc260-g",
+        "abc261-e",
+        "abc261-ex",
+        "abc261-f",
+        "abc261-g",
+        "abc262-e",
+        "abc262-ex",
+        "abc262-f",
+        "abc262-g",
+        "abc263-e",
+        "abc263-ex",
+        "abc263-f",
+        "abc263-g",
+        "abc264-e",
+        "abc264-ex",
+        "abc264-f",
+        "abc264-g",
+        "abc265-e",
+        "abc265-ex",
+        "abc265-f",
+        "abc265-g",
+        "abc266-e",
+        "abc266-ex",
+        "abc266-f",
+        "abc266-g",
+        "abc267-e",
+        "abc267-ex",
+        "abc267-f",
+        "abc267-g",
+        "abc268-e",
+        "abc268-ex",
+        "abc268-f",
+        "abc268-g",
+        "abc269-e",
+        "abc269-ex",
+        "abc269-f",
+        "abc269-g",
+        "abc270-e",
+        "abc270-ex",
+        "abc270-f",
+        "abc270-g",
+        "abc271-e",
+        "abc271-ex",
+        "abc271-f",
+        "abc271-g",
+        "abc272-e",
+        "abc272-ex",
+        "abc272-f",
+        "abc272-g",
+        "abc273-e",
+        "abc273-ex",
+        "abc273-f",
+        "abc273-g",
+        "abc274-e",
+        "abc274-ex",
+        "abc274-f",
+        "abc274-g",
+        "abc275-e",
+        "abc275-ex",
+        "abc275-f",
+        "abc275-g",
+        "abc276-e",
+        "abc276-ex",
+        "abc276-f",
+        "abc276-g",
+        "abc277-e",
+        "abc277-ex",
+        "abc277-f",
+        "abc277-g",
+        "abc278-e",
+        "abc278-ex",
+        "abc278-f",
+        "abc278-g",
+        "abc279-e",
+        "abc279-ex",
+        "abc279-f",
+        "abc279-g",
+        "abc280-e",
+        "abc280-ex",
+        "abc280-f",
+        "abc280-g",
+        "abc281-e",
+        "abc281-ex",
+        "abc281-f",
+        "abc281-g",
+        "abc282-e",
+        "abc282-ex",
+        "abc282-f",
+        "abc282-g",
+        "abc283-e",
+        "abc283-ex",
+        "abc283-f",
+        "abc283-g",
+        "abc284-e",
+        "abc284-ex",
+        "abc284-f",
+        "abc284-g",
+        "abc285-e",
+        "abc285-ex",
+        "abc285-f",
+        "abc285-g",
+        "abc286-e",
+        "abc286-ex",
+        "abc286-f",
+        "abc286-g",
+        "abc287-e",
+        "abc287-ex",
+        "abc287-f",
+        "abc287-g",
+        "abc288-e",
+        "abc288-ex",
+        "abc288-f",
+        "abc288-g",
+        "abc289-e",
+        "abc289-ex",
+        "abc289-f",
+        "abc289-g",
+        "abc290-e",
+        "abc290-ex",
+        "abc290-f",
+        "abc290-g",
+        "abc291-e",
+        "abc291-ex",
+        "abc291-f",
+        "abc291-g",
+        "abc292-e",
+        "abc292-ex",
+        "abc292-f",
+        "abc292-g",
+        "abc293-e",
+        "abc293-ex",
+        "abc293-f",
+        "abc293-g",
+        "abc294-e",
+        "abc294-ex",
+        "abc294-f",
+        "abc294-g",
+        "abc295-e",
+        "abc295-ex",
+        "abc295-f",
+        "abc295-g",
+        "abc296-e",
+        "abc296-ex",
+        "abc296-f",
+        "abc296-g",
+        "abc297-e",
+        "abc297-ex",
+        "abc297-f",
+        "abc297-g",
+        "abc298-e",
+        "abc298-ex",
+        "abc298-f",
+        "abc298-g",
+        "abc299-e",
+        "abc299-ex",
+        "abc299-f",
+        "abc299-g",
+        "abc300-e",
+        "abc300-ex",
+        "abc300-f",
+        "abc300-g",
+        "abc301-e",
+        "abc301-ex",
+        "abc301-f",
+        "abc301-g",
+        "abc302-e",
+        "abc302-ex",
+        "abc302-f",
+        "abc302-g",
+        "abc303-e",
+        "abc303-ex",
+        "abc303-f",
+        "abc303-g",
+        "abc304-e",
+        "abc304-ex",
+        "abc304-f",
+        "abc304-g",
+        "abc305-e",
+        "abc305-ex",
+        "abc305-f",
+        "abc305-g",
+        "abc306-e",
+        "abc306-ex",
+        "abc306-f",
+        "abc306-g",
+        "abc307-e",
+        "abc307-ex",
+        "abc307-f",
+        "abc307-g",
+        "abc308-e",
+        "abc308-ex",
+        "abc308-f",
+        "abc308-g",
+        "abc309-e",
+        "abc309-ex",
+        "abc309-f",
+        "abc309-g",
+        "abc310-e",
+        "abc310-ex",
+        "abc310-f",
+        "abc310-g",
+        "abc311-e",
+        "abc311-ex",
+        "abc311-f",
+        "abc311-g",
+        "abc312-e",
+        "abc312-ex",
+        "abc312-f",
+        "abc312-g",
+        "abc313-e",
+        "abc313-ex",
+        "abc313-f",
+        "abc313-g",
+        "abc314-e",
+        "abc314-ex",
+        "abc314-f",
+        "abc314-g",
+        "abc315-e",
+        "abc315-ex",
+        "abc315-f",
+        "abc315-g",
+        "abc317-e",
+        "abc317-ex",
+        "abc317-f",
+        "abc317-g",
+        "abc318-e",
+        "abc318-ex",
+        "abc318-f",
+        "abc318-g",
+        "abc319-e",
+        "abc319-f",
+        "abc319-g",
+        "abc320-e",
+        "abc320-f",
+        "abc320-g",
+        "abc321-e",
+        "abc321-f",
+        "abc321-g",
+        "abc322-e",
+        "abc322-f",
+        "abc322-g",
+        "abc323-e",
+        "abc323-f",
+        "abc323-g",
+        "abc324-e",
+        "abc324-f",
+        "abc324-g",
+        "abc325-e",
+        "abc325-f",
+        "abc325-g",
+        "abc326-e",
+        "abc326-f",
+        "abc326-g",
+        "abc327-e",
+        "abc327-f",
+        "abc327-g",
+        "abc328-e",
+        "abc328-f",
+        "abc328-g",
+        "abc329-e",
+        "abc329-f",
+        "abc329-g",
+        "abc330-e",
+        "abc330-f",
+        "abc330-g",
+        "abc331-e",
+        "abc331-f",
+        "abc331-g",
+        "abc332-e",
+        "abc332-f",
+        "abc332-g",
+        "abc333-e",
+        "abc333-f",
+        "abc333-g",
+        "abc334-e",
+        "abc334-f",
+        "abc334-g",
+        "abc335-e",
+        "abc335-f",
+        "abc335-g",
+        "abc336-e",
+        "abc336-f",
+        "abc336-g",
+        "abc337-e",
+        "abc337-f",
+        "abc337-g",
+        "abc338-e",
+        "abc338-f",
+        "abc338-g",
+        "abc339-e",
+        "abc339-f",
+        "abc339-g",
+        "abc340-e",
+        "abc340-f",
+        "abc340-g",
+        "abc341-e",
+        "abc341-f",
+        "abc341-g",
+        "abc342-e",
+        "abc342-f",
+        "abc342-g",
+        "abc343-e",
+        "abc343-f",
+        "abc343-g",
+        "abc344-e",
+        "abc344-f",
+        "abc344-g",
+        "abc345-e",
+        "abc345-f",
+        "abc345-g",
+        "abc346-e",
+        "abc346-f",
+        "abc346-g",
+        "abc347-e",
+        "abc347-f",
+        "abc347-g",
+        "abc348-e",
+        "abc348-f",
+        "abc348-g",
+        "abc349-e",
+        "abc349-f",
+        "abc349-g",
+        "abc350-e",
+        "abc350-f",
+        "abc350-g",
+        "abc351-e",
+        "abc351-f",
+        "abc351-g",
+        "abc352-e",
+        "abc352-f",
+        "abc352-g",
+        "abc353-e",
+        "abc353-f",
+        "abc353-g",
+        "abc354-e",
+        "abc354-f",
+        "abc354-g",
+        "abc355-e",
+        "abc355-f",
+        "abc355-g",
+        "abc356-e",
+        "abc356-f",
+        "abc356-g",
+        "abc357-e",
+        "abc357-f",
+        "abc357-g",
+        "abc358-e",
+        "abc358-f",
+        "abc358-g",
+        "abc359-e",
+        "abc359-f",
+        "abc359-g",
+        "abc360-e",
+        "abc360-f",
+        "abc360-g",
+        "abc361-e",
+        "abc361-f",
+        "abc361-g",
+        "abc362-e",
+        "abc362-f",
+        "abc362-g",
+        "abc363-e",
+        "abc363-f",
+        "abc363-g",
+        "abc364-e",
+        "abc364-f",
+        "abc364-g",
+        "abc365-e",
+        "abc365-f",
+        "abc365-g",
+        "abc366-e",
+        "abc366-f",
+        "abc366-g",
+        "abc367-e",
+        "abc367-f",
+        "abc367-g",
+        "abc368-e",
+        "abc368-f",
+        "abc368-g",
+        "abc369-e",
+        "abc369-f",
+        "abc369-g",
+        "abc370-e",
+        "abc370-f",
+        "abc370-g",
+        "abc371-e",
+        "abc371-f",
+        "abc371-g",
+        "abc372-e",
+        "abc372-f",
+        "abc372-g",
+        "abc373-e",
+        "abc373-f",
+        "abc373-g",
+        "abc374-e",
+        "abc374-f",
+        "abc374-g",
+        "abc375-e",
+        "abc375-f",
+        "abc375-g",
+        "abc376-e",
+        "abc376-f",
+        "abc376-g",
+        "abc377-e",
+        "abc377-f",
+        "abc377-g",
+        "abc378-e",
+        "abc378-f",
+        "abc378-g",
+        "abc379-e",
+        "abc379-f",
+        "abc379-g",
+        "abc380-e",
+        "abc380-f",
+        "abc380-g",
+        "abc381-e",
+        "abc381-f",
+        "abc381-g",
+        "abc382-e",
+        "abc382-f",
+        "abc382-g",
+        "abc383-e",
+        "abc383-f",
+        "abc383-g",
+        "abc384-e",
+        "abc384-f",
+        "abc384-g",
+        "abc385-e",
+        "abc385-f",
+        "abc385-g",
+        "abc386-e",
+        "abc386-f",
+        "abc386-g",
+        "abc387-e",
+        "abc387-f",
+        "abc387-g",
+        "abc388-e",
+        "abc388-f",
+        "abc388-g",
+        "abc389-e",
+        "abc389-f",
+        "abc389-g",
+        "abc390-e",
+        "abc390-f",
+        "abc390-g",
+        "abc391-e",
+        "abc391-f",
+        "abc391-g",
+        "abc392-e",
+        "abc392-f",
+        "abc392-g",
+        "abc393-e",
+        "abc393-f",
+        "abc393-g",
+        "abc394-e",
+        "abc394-f",
+        "abc394-g",
+        "abc395-e",
+        "abc395-f",
+        "abc395-g",
+        "abc396-e",
+        "abc396-f",
+        "abc396-g",
+        "abc397-e",
+        "abc397-f",
+        "abc397-g",
+        "abc398-e",
+        "abc398-f",
+        "abc398-g",
+        "abc399-e",
+        "abc399-f",
+        "abc399-g",
+        "abc400-e",
+        "abc400-f",
+        "abc400-g",
+        "abc401-e",
+        "abc401-f",
+        "abc401-g",
+        "abc402-e",
+        "abc402-f",
+        "abc402-g",
+        "abc403-e",
+        "abc403-f",
+        "abc403-g",
+        "abc404-e",
+        "abc404-f",
+        "abc404-g",
+        "abc405-e",
+        "abc405-f",
+        "abc405-g",
+        "abc406-e",
+        "abc406-f",
+        "abc406-g",
+        "abc407-e",
+        "abc407-f",
+        "abc407-g",
+        "abc408-e",
+        "abc408-f",
+        "abc408-g",
+        "abc409-e",
+        "abc409-f",
+        "abc409-g",
+        "abc410-e",
+        "abc410-f",
+        "abc410-g",
+        "abc411-e",
+        "abc411-f",
+        "abc411-g",
+        "abc412-e",
+        "abc412-f",
+        "abc412-g",
+        "abc413-e",
+        "abc413-f",
+        "abc413-g",
+        "abc414-e",
+        "abc414-f",
+        "abc414-g",
+        "abc415-e",
+        "abc415-f",
+        "abc415-g",
+        "abc416-e",
+        "abc416-f",
+        "abc416-g",
+        "abc417-e",
+        "abc417-f",
+        "abc417-g",
+        "abc418-e",
+        "abc418-f",
+        "abc418-g",
+        "abc419-e",
+        "abc419-f",
+        "abc419-g",
+        "abc420-e",
+        "abc420-f",
+        "abc420-g",
+        "abc421-e",
+        "abc421-f",
+        "abc421-g",
+        "abc422-e",
+        "abc422-f",
+        "abc422-g",
+        "abc423-e",
+        "abc423-f",
+        "abc423-g",
+        "abc424-e",
+        "abc424-f",
+        "abc424-g",
+        "abc425-e",
+        "abc425-f",
+        "abc425-g",
+        "abc426-e",
+        "abc426-f",
+        "abc426-g",
+        "abc427-e",
+        "abc427-f",
+        "abc427-g",
+        "abc428-e",
+        "abc428-f",
+        "abc428-g",
+        "abc429-e",
+        "abc429-f",
+        "abc429-g",
+        "abc430-e",
+        "abc430-f",
+        "abc430-g",
+        "abc431-e",
+        "abc431-f",
+        "abc431-g",
+        "abc432-e",
+        "abc432-f",
+        "abc432-g",
+        "abc433-e",
+        "abc433-f",
+        "abc433-g",
+        "abc434-e",
+        "abc434-f",
+        "abc434-g",
+        "abc435-e",
+        "abc435-f",
+        "abc435-g",
+        "abc436-e",
+        "abc436-f",
+        "abc436-g",
+        "abc437-e",
+        "abc437-f",
+        "abc437-g",
+        "abc438-e",
+        "abc438-f",
+        "abc438-g",
+        "abc439-e",
+        "abc439-f",
+        "abc439-g",
+        "abc440-e",
+        "abc440-f",
+        "abc440-g",
+        "abc441-e",
+        "abc441-f",
+        "abc441-g",
+        "abc442-e",
+        "abc442-f",
+        "abc442-g",
+        "abc443-e",
+        "abc443-f",
+        "abc443-g",
+        "abc444-e",
+        "abc444-f",
+        "abc444-g",
+        "abc445-e",
+        "abc445-f",
+        "abc445-g",
+        "abc446-e",
+        "abc446-f",
+        "abc446-g",
+        "abc447-e",
+        "abc447-f",
+        "abc447-g",
+        "abc448-e",
+        "abc448-f",
+        "abc448-g",
+        "abc449-e",
+        "abc449-f",
+        "abc449-g",
+        "abc450-e",
+        "abc450-f",
+        "abc450-g",
+        "abc451-e",
+        "abc451-f",
+        "abc451-g",
+        "abc452-e",
+        "abc452-f",
+        "abc452-g",
+        "abc453-e",
+        "abc453-f",
+        "abc453-g",
+        "abc454-e",
+        "abc454-f",
+        "abc454-g",
+        "abc455-e",
+        "abc455-f",
+        "abc455-g",
+        "abc456-e",
+        "abc456-f",
+        "abc456-g",
+        "abc457-e",
+        "abc457-f",
+        "abc457-g",
+        "abc458-e",
+        "abc458-f",
+        "abc458-g",
+        "abc459-e",
+        "abc459-f",
+        "abc459-g",
+        "abc460-e",
+        "abc460-f",
+        "abc460-g",
+        "abc461-e",
+        "abc461-f",
+        "abc461-g",
+        "abc462-e",
+        "abc462-f",
+        "abc462-g",
+        "abc463-e",
+        "abc463-f",
+        "abc463-g",
+        "abc464-e",
+        "abc464-f",
+        "abc464-g",
+        "abc465-e",
+        "abc465-f",
+        "abc465-g",
+        "abc466-e",
+        "abc466-f",
+        "abc466-g"
+      ],
+      "changedProblemIds": [],
+      "withdrawnProblemIds": [],
+      "taxonomyChanges": []
+    }
+  },
+  "host": "GitHub Pages",
+  "project": "Fu-L/abc-textbook",
+  "successfulHostHistory": [
+    {
+      "id": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "page_url": "https://fu-l.github.io/abc-textbook/",
+      "status_url": "https://api.github.com/repos/Fu-L/abc-textbook/pages/deployment/status/af8eca05b1612c5daddb05ddadc32b590f911146",
+      "preview_url": "",
+      "status": "succeed",
+      "commit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "workflowRunId": 37718434307,
+      "workflowCommit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "observedAt": "2026-10-08T02:37:33.276Z",
+      "workflowUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307"
+    }
+  ],
+  "publicationObservedAt": "2026-10-08T02:37:33.276000+00:00",
+  "firstPublishedAt": null,
+  "publicationTimeBasis": "firstPublicationObservedAt is the actual anonymous metadata observation; publicationObservedAt is the retry Pages-success observation; workflowSuccessAt includes post-publication verification. Pages does not return exact publication completion time, so firstPublishedAt remains null.",
+  "publicChecks": {
+    "htmlRoutes": 1573,
+    "problemRoutes": 868,
+    "sitemapScopeMatched": true,
+    "feedScopeMatched": true,
+    "allProblemNavigationMatched": true
+  },
+  "learningRecordCompatibility": {
+    "engines": ["chromium", "firefox", "webkit"],
+    "tests": 93,
+    "pagefindQueriesPerEngine": 3,
+    "backupRestoreRecords": 120,
+    "independentTimestampsAndReload": true,
+    "dbName": "abc-textbook-learning-records",
+    "dbVersion": 2,
+    "disposableContexts": true
+  },
+  "browserResults": {
+    "config": {
+      "argv": [
+        "/opt/hostedtoolcache/node/24.18.0/x64/bin/node",
+        "/home/runner/work/abc-textbook/abc-textbook/node_modules/@playwright/test/cli.js",
+        "test",
+        "--config",
+        "/tmp/abc-live-verification-thbkydms/playwright.config.mjs"
+      ],
+      "configFile": "/tmp/abc-live-verification-thbkydms/playwright.config.mjs",
+      "rootDir": "/home/runner/work/abc-textbook/abc-textbook/tests/e2e",
+      "failOnFlakyTests": false,
+      "forbidOnly": true,
+      "fullyParallel": true,
+      "globalSetup": null,
+      "globalTeardown": null,
+      "globalTimeout": 0,
+      "grep": {},
+      "grepInvert": {},
+      "maxFailures": 0,
+      "metadata": {
+        "ci": {
+          "commitHref": "https://github.com/Fu-L/abc-textbook/commit/af8eca05b1612c5daddb05ddadc32b590f911146",
+          "commitHash": "af8eca05b1612c5daddb05ddadc32b590f911146",
+          "buildHref": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307"
+        },
+        "actualWorkers": 3
+      },
+      "preserveOutput": "always",
+      "projects": [
+        {
+          "outputDir": "/tmp/abc-live-verification-thbkydms/test-results",
+          "repeatEach": 1,
+          "retries": 0,
+          "metadata": {
+            "ci": {
+              "commitHref": "https://github.com/Fu-L/abc-textbook/commit/af8eca05b1612c5daddb05ddadc32b590f911146",
+              "commitHash": "af8eca05b1612c5daddb05ddadc32b590f911146",
+              "buildHref": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307"
+            },
+            "actualWorkers": 3
+          },
+          "id": "chromium",
+          "name": "chromium",
+          "testDir": "/home/runner/work/abc-textbook/abc-textbook/tests/e2e",
+          "testIgnore": [],
+          "testMatch": ["**/initial-release.spec.ts", "**/seed-release.spec.ts"],
+          "timeout": 30000
+        },
+        {
+          "outputDir": "/tmp/abc-live-verification-thbkydms/test-results",
+          "repeatEach": 1,
+          "retries": 0,
+          "metadata": {
+            "ci": {
+              "commitHref": "https://github.com/Fu-L/abc-textbook/commit/af8eca05b1612c5daddb05ddadc32b590f911146",
+              "commitHash": "af8eca05b1612c5daddb05ddadc32b590f911146",
+              "buildHref": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307"
+            },
+            "actualWorkers": 3
+          },
+          "id": "firefox",
+          "name": "firefox",
+          "testDir": "/home/runner/work/abc-textbook/abc-textbook/tests/e2e",
+          "testIgnore": [],
+          "testMatch": ["**/initial-release.spec.ts", "**/seed-release.spec.ts"],
+          "timeout": 30000
+        },
+        {
+          "outputDir": "/tmp/abc-live-verification-thbkydms/test-results",
+          "repeatEach": 1,
+          "retries": 0,
+          "metadata": {
+            "ci": {
+              "commitHref": "https://github.com/Fu-L/abc-textbook/commit/af8eca05b1612c5daddb05ddadc32b590f911146",
+              "commitHash": "af8eca05b1612c5daddb05ddadc32b590f911146",
+              "buildHref": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307"
+            },
+            "actualWorkers": 3
+          },
+          "id": "webkit",
+          "name": "webkit",
+          "testDir": "/home/runner/work/abc-textbook/abc-textbook/tests/e2e",
+          "testIgnore": [],
+          "testMatch": ["**/initial-release.spec.ts", "**/seed-release.spec.ts"],
+          "timeout": 30000
+        }
+      ],
+      "quiet": false,
+      "reporter": [
+        [
+          "json",
+          {
+            "outputFile": "/tmp/abc-live-verification-thbkydms/browser-results.json"
+          }
+        ]
+      ],
+      "reportSlowTests": {
+        "max": 5,
+        "threshold": 300000
+      },
+      "shard": null,
+      "tags": [],
+      "updateSnapshots": "missing",
+      "updateSourceMethod": "patch",
+      "version": "1.61.1",
+      "workers": 3,
+      "webServer": null
+    },
+    "suites": [
+      {
+        "title": "initial-release.spec.ts",
+        "file": "initial-release.spec.ts",
+        "column": 0,
+        "line": 0,
+        "specs": [
+          {
+            "title": "initial release axe and keyboard /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2831,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:50.280Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-9c9da08823d53333726f",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 969,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:50.236Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-51c70219874343fbd978",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 8163,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:50.643Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-f2c3f55dd4e540272a9c",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 728,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:53.022Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-9166e2cc32b1de4ea2db",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 18226,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:53.768Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-352e67e47fd7a02cc83e",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1656,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:54.893Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-c22053f26aac88830aad",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2905,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:56.564Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-8094324120474e215b55",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 660,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:39:59.487Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-546fc2d0d42ccbe781d6",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 6485,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:00.168Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ade1027da6f7e7afd837",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 881,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:00.237Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-1657b5a26794e2109a5a",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2516,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:01.146Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b0fdcec96a057ab9e03f",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 827,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:03.688Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-92928a6b472940354a80",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 4229,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:04.561Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-bea825ae51f467c1f2bb",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 959,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:06.670Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ca28390e1056207b5fac",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3361,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:07.651Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-c461d259072129aab715",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 649,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:08.817Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-cf7c4c454de360a92fdd",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2978,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:09.491Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b848fa02f2cf980d31a5",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 746,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:11.052Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-08d5d518952fe0f5909d",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 6545,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:11.831Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-9969ec5ad77ef6357449",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1895,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:12.025Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-5bca3f91b2a13a3f6a4d",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2819,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:12.500Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-9def2f8e0b28c83c1827",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 805,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:13.960Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-73d57ed90bdf936195f0",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1253,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:14.787Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ed1cb640ab0ac4f0829e",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1209,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:15.338Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-0d8036e7e93e9afd18d6",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1137,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:16.062Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-8eab4cfc0fa419af3db1",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1144,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:16.565Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-76b755ce4f267d0cbd03",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release restores and exports 120 canonical records with exact values and timestamps",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1543,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:17.231Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-4cebebddd8589929d657",
+            "file": "initial-release.spec.ts",
+            "line": 116,
+            "column": 1
+          },
+          {
+            "title": "initial release axe and keyboard /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 5473,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:35.277Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-0577ce2d04df2942801e",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 3664,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:35.472Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-d3277d44d982d30973b1",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 12699,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:35.611Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-8069271ffc998461ad80",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1736,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:39.782Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-dc93989738192a654bc1",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 23805,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:41.582Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b1f14ef2b2c1a302aa5e",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2802,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:42.799Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-e955829ac881b76e9299",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 4540,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:45.637Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-3085c8c8faa03dff0b56",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1508,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:49.281Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b0b42dfcb2e13f5cff66",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 8440,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:50.207Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-e8d760859fa04c42f5a3",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1581,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:50.813Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-c2eddce5292392aa921c",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 3039,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:52.421Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ae8ada108fbf563bd2b9",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1553,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:55.480Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-1e902cb4fec29afadff3",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 5346,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:57.060Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-74445ed3ed8dc36bf340",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1624,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:58.678Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-2bbe3a44989c12c79f4f",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 4095,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:00.321Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b0884771c0cff153a98f",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 3808,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:02.444Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-8ca68153874dcfdea969",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3310,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:04.435Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-fa3a336de79923733f20",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1305,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:05.422Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-174662ed7daeb042c9be",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 7466,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:06.274Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-89537b8920abe556a9ee",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2470,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:06.775Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-243411c8437f1b274a72",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 5848,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:07.776Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-819209cf04ffc2a6780c",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 3193,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:09.278Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-e5b6f10b9be4fc9d0e81",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1983,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:12.496Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-d628708f88dce9aef163",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2986,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:13.669Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-5f420ef2d295811d570d",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2928,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:13.776Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-8762ba6d8ad55fdf05f0",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2548,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:14.500Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-e0f30921df7be94c5819",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release restores and exports 120 canonical records with exact values and timestamps",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 3,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3632,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:16.687Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-d22966a663aa11334c37",
+            "file": "initial-release.spec.ts",
+            "line": 116,
+            "column": 1
+          },
+          {
+            "title": "initial release axe and keyboard /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 12502,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:37.198Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-96f363f958e7e554e049",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 9214,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:38.422Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-f308749d88f6a7b992cd",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 18215,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:37.712Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-97286a5d101bed5a7f8b",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2159,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:47.760Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-60e8aefd31b169eebd70",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 21100,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:49.945Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-361534dfdc67002d1f4f",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3383,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:50.688Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-a916ab66005fd9c85e1b",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 4487,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:54.094Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-6a128eacdc8ac2ca5921",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /contests/abc466/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1583,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:56.473Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-d9a14e0c60f54a4e82dc",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 7113,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:58.081Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-c9ea11f887473c36eed2",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2016,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:58.600Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-deb86b72e11761892b13",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3713,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:00.644Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-dbf84cf7f68107a8697e",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /tags/tag-slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1912,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:04.378Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ce1532c40da5725e71cb",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 5527,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:05.220Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-112ca51a207178a1477e",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /learn/geometry-optimization/slope-trick/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1849,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:06.325Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-40aa94c47b1c4a05ab21",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 4715,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:08.198Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-703a61c38f5dc0fe0340",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /problems/abc466-g/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1958,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:10.769Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-99de7bb014db59646ae1",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 4187,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:11.066Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-a1f21ae753fd95ceccbb",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /updates/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1804,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:12.768Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-27a5f72c7e25456231e3",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 8003,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:12.943Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b2ed234cef62628b4146",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /review/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2295,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:14.591Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-1d27ef4ae83892b8fee8",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release axe and keyboard /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 4149,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:15.289Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-6a1c91cfd798ace5e94d",
+            "file": "initial-release.spec.ts",
+            "line": 22,
+            "column": 3
+          },
+          {
+            "title": "initial release no JavaScript and reflow /settings/learning-records/",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2135,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:16.915Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-fe3137ef0f08e06f73bb",
+            "file": "initial-release.spec.ts",
+            "line": 41,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 3587,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:19.077Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ab824ac8de115c9692de",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 3097,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:19.493Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-5d38275afdbbc8a747a6",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3902,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:20.996Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-b62177975f2a918a3583",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release independent record timestamps abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 3389,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:22.613Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-ec74c729cd932c6e4949",
+            "file": "initial-release.spec.ts",
+            "line": 69,
+            "column": 3
+          },
+          {
+            "title": "initial release restores and exports 120 canonical records with exact values and timestamps",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 6008,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:22.696Z",
+                    "annotations": [],
+                    "attachments": []
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "11aa40d21c6918b959b8-10670f1b27242eecb5df",
+            "file": "initial-release.spec.ts",
+            "line": 116,
+            "column": 1
+          }
+        ]
+      },
+      {
+        "title": "seed-release.spec.ts",
+        "file": "seed-release.spec.ts",
+        "column": 0,
+        "line": 0,
+        "specs": [
+          {
+            "title": "seed SC-012 abc212-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1226,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:17.750Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZSIsImJyb3dzZXIiOiJjaHJvbWl1bSIsImR1cmF0aW9uTXMiOjE4MC4zNDY2NTA5OTk5OTk4NCwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-2c85d98b608bbe70450f",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 0,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 1247,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:18.406Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMzMTUtZXgiLCJicm93c2VyIjoiY2hyb21pdW0iLCJkdXJhdGlvbk1zIjoyNDYuODE2MTQ4OTk5OTk4NCwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-d33b8adfa6afb42baea3",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 1,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 1292,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:18.808Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZiIsImJyb3dzZXIiOiJjaHJvbWl1bSIsImR1cmF0aW9uTXMiOjIzNy42ODg3NTQ5OTk5OTU1OCwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-5458cfb8ca74298d0b89",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "chromium",
+                "projectName": "chromium",
+                "results": [
+                  {
+                    "workerIndex": 2,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 1193,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:40:19.007Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZyIsImJyb3dzZXIiOiJjaHJvbWl1bSIsImR1cmF0aW9uTXMiOjI0Ni41NTU3NDI5OTk5OTcxNiwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-858cbfbe676bcaa7693e",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc212-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2567,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:16.741Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZSIsImJyb3dzZXIiOiJmaXJlZm94IiwiZHVyYXRpb25NcyI6Mzc0LjE2MjQxOTAwMDAwMDIsInByZXNlcnZlZCI6dHJ1ZX0="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-8d5efe2bfae901b81299",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2535,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:17.104Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMzMTUtZXgiLCJicm93c2VyIjoiZmlyZWZveCIsImR1cmF0aW9uTXMiOjQ1Mi4yMjIwMjIwMDAwMDE3NCwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-2b281404119e5a616fc8",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 5,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 2522,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:19.336Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZiIsImJyb3dzZXIiOiJmaXJlZm94IiwiZHVyYXRpb25NcyI6NDU2Ljc2MTE4OTk5OTk5NzQ0LCJwcmVzZXJ2ZWQiOnRydWV9"
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-0fa983644ef6f7e7dbcc",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "firefox",
+                "projectName": "firefox",
+                "results": [
+                  {
+                    "workerIndex": 4,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2360,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:41:19.662Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZyIsImJyb3dzZXIiOiJmaXJlZm94IiwiZHVyYXRpb25NcyI6NDIxLjA4ODI3NjAwMDAwMjIsInByZXNlcnZlZCI6dHJ1ZX0="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-0f9950ee4a8881dc5e0f",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc212-e",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 3469,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:24.952Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMyMTItZSIsImJyb3dzZXIiOiJ3ZWJraXQiLCJkdXJhdGlvbk1zIjo3ODMuODYyMzUyOTk5OTk2OCwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-c987ce42ae66c52b85b3",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc315-ex",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 7,
+                    "parallelIndex": 2,
+                    "status": "passed",
+                    "duration": 3112,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:26.109Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmMzMTUtZXgiLCJicm93c2VyIjoid2Via2l0IiwiZHVyYXRpb25NcyI6ODI4LjAyMjc1NTAwMDAwNTQsInByZXNlcnZlZCI6dHJ1ZX0="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-d7c46d2d0b08394c4363",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-f",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 6,
+                    "parallelIndex": 0,
+                    "status": "passed",
+                    "duration": 2735,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:28.452Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZiIsImJyb3dzZXIiOiJ3ZWJraXQiLCJkdXJhdGlvbk1zIjo1OTIuMDg4OTQ4MDAwMDA0MiwicHJlc2VydmVkIjp0cnVlfQ=="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-75212e6098658bec069e",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          {
+            "title": "seed SC-012 abc466-g",
+            "ok": true,
+            "tags": [],
+            "tests": [
+              {
+                "timeout": 30000,
+                "annotations": [],
+                "expectedStatus": "passed",
+                "projectId": "webkit",
+                "projectName": "webkit",
+                "results": [
+                  {
+                    "workerIndex": 8,
+                    "parallelIndex": 1,
+                    "status": "passed",
+                    "duration": 2579,
+                    "errors": [],
+                    "stdout": [],
+                    "stderr": [],
+                    "retry": 0,
+                    "startTime": "2026-10-08T02:42:28.739Z",
+                    "annotations": [],
+                    "attachments": [
+                      {
+                        "name": "sc012-observation",
+                        "contentType": "application/json",
+                        "body": "eyJwcm9ibGVtSWQiOiJhYmM0NjYtZyIsImJyb3dzZXIiOiJ3ZWJraXQiLCJkdXJhdGlvbk1zIjozOTQuNzY0MDA5OTk5OTk4OTYsInByZXNlcnZlZCI6dHJ1ZX0="
+                      }
+                    ]
+                  }
+                ],
+                "status": "expected"
+              }
+            ],
+            "id": "86c9112ab1c90180c303-ba28cdf0785dd7f2ceb1",
+            "file": "seed-release.spec.ts",
+            "line": 7,
+            "column": 3
+          }
+        ]
+      }
+    ],
+    "errors": [],
+    "stats": {
+      "startTime": "2026-10-08T02:39:25.385Z",
+      "duration": 193026.863,
+      "expected": 93,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "rollback": {
+    "knownCommitSimulation": "docs/verification/initial-release/zero-cost-52-weeks.json",
+    "sameCommitRedeploy": "host_confirmed_and_live_verified",
+    "betweenPublishedVersions": "not_applicable_no_prior_production_version",
+    "actualProductionRollbackClaimed": false,
+    "metadataPreservedAcrossRedeploy": true
+  },
+  "catchUpHandoff": {
+    "issue": 52,
+    "publishedCatalogPath": "/abc-textbook/data/catalog.json",
+    "gitCatalogPath": "docs/verification/releases/catalog.json",
+    "gitCatalogPublicationStatus": "prepared",
+    "metadataPath": "/abc-textbook/release-metadata.json",
+    "hostHistoryConfirmed": true,
+    "ready": true,
+    "initialUpperBound": 466,
+    "initialProblemCount": 868,
+    "immutableHistoryPath": "docs/verification/deployments/initial-history.json",
+    "acceptanceScope": "Initial release only; incremental live acceptance belongs to issue 52"
+  },
+  "validatedMergedSnapshot": {
+    "command": "verify:release",
+    "commit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+    "protectedBaseCommit": "86f1abe931ddd77f8926256c57e5e7ab6fab84b9",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "aggregatePassed": true,
+    "acceptanceMode": "agent_quality_review",
+    "humanApprovalClaimed": false,
+    "problemCount": 868,
+    "outcomeCount": 242,
+    "outcomeCoverageDigest": "dd913c266baed7eb1adea334c2707ed7433cfaf57b25e3f610d63400d566e13d",
+    "correctionCount": 12,
+    "checks": [
+      "protected-base-diff",
+      "current-policy-review",
+      "catalog-coverage",
+      "canonical-entities",
+      "authored-documents",
+      "three-prerequisite-dags",
+      "semantic-primary-home",
+      "independent-editorial-order",
+      "metrics-identities",
+      "correction-targets"
+    ]
+  },
+  "protectedMainChecks": [
+    {
+      "name": "Release validation",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37716131781/job/113112884555",
+      "completed_at": "2026-10-08T02:07:24Z"
+    },
+    {
+      "name": "Verify (supported range)",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37716131781/job/113112884520",
+      "completed_at": "2026-10-08T02:19:58Z"
+    },
+    {
+      "name": "Verify (release baseline)",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37716131781/job/113112884476",
+      "completed_at": "2026-10-08T02:22:55Z"
+    },
+    {
+      "name": "Production review",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37716131781/job/113112884228",
+      "completed_at": "2026-10-08T02:08:11Z"
+    },
+    {
+      "name": "Initial corpus audit",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37716131943/job/113112884155",
+      "completed_at": "2026-10-08T02:05:51Z"
+    }
+  ],
+  "protectedMain": {
+    "strict": true,
+    "enforceAdmins": true,
+    "requiredChecks": [
+      "Verify (release baseline)",
+      "Verify (supported range)",
+      "Initial corpus audit",
+      "Release validation",
+      "Production review"
+    ],
+    "forcePushesAllowed": false,
+    "deletionsAllowed": false
+  },
+  "initialPublicationObservation": {
+    "metadataObservedAt": "2026-10-08T02:29:27.031542+00:00",
+    "metadata": {
+      "schemaVersion": "1.0.0",
+      "version": "2026.10.07",
+      "cutoffAt": "2026-07-12T00:00:00+09:00",
+      "commit": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "validationResultsUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084",
+      "changeSummary": {
+        "updateIds": ["update-bootstrap-full-corpus"],
+        "addedProblemIds": [
+          "abc212-e",
+          "abc212-f",
+          "abc212-g",
+          "abc212-h",
+          "abc213-e",
+          "abc213-f",
+          "abc213-g",
+          "abc213-h",
+          "abc214-e",
+          "abc214-f",
+          "abc214-g",
+          "abc214-h",
+          "abc215-e",
+          "abc215-f",
+          "abc215-g",
+          "abc215-h",
+          "abc216-e",
+          "abc216-f",
+          "abc216-g",
+          "abc216-h",
+          "abc217-e",
+          "abc217-f",
+          "abc217-g",
+          "abc217-h",
+          "abc218-e",
+          "abc218-f",
+          "abc218-g",
+          "abc218-h",
+          "abc219-e",
+          "abc219-f",
+          "abc219-g",
+          "abc219-h",
+          "abc220-e",
+          "abc220-f",
+          "abc220-g",
+          "abc220-h",
+          "abc221-e",
+          "abc221-f",
+          "abc221-g",
+          "abc221-h",
+          "abc222-e",
+          "abc222-f",
+          "abc222-g",
+          "abc222-h",
+          "abc223-e",
+          "abc223-f",
+          "abc223-g",
+          "abc223-h",
+          "abc224-e",
+          "abc224-f",
+          "abc224-g",
+          "abc224-h",
+          "abc225-e",
+          "abc225-f",
+          "abc225-g",
+          "abc225-h",
+          "abc226-e",
+          "abc226-f",
+          "abc226-g",
+          "abc226-h",
+          "abc227-e",
+          "abc227-f",
+          "abc227-g",
+          "abc227-h",
+          "abc228-e",
+          "abc228-f",
+          "abc228-g",
+          "abc228-h",
+          "abc229-e",
+          "abc229-f",
+          "abc229-g",
+          "abc229-h",
+          "abc230-e",
+          "abc230-f",
+          "abc230-g",
+          "abc230-h",
+          "abc231-e",
+          "abc231-f",
+          "abc231-g",
+          "abc231-h",
+          "abc232-e",
+          "abc232-f",
+          "abc232-g",
+          "abc232-h",
+          "abc233-e",
+          "abc233-ex",
+          "abc233-f",
+          "abc233-g",
+          "abc234-e",
+          "abc234-ex",
+          "abc234-f",
+          "abc234-g",
+          "abc235-e",
+          "abc235-ex",
+          "abc235-f",
+          "abc235-g",
+          "abc236-e",
+          "abc236-ex",
+          "abc236-f",
+          "abc236-g",
+          "abc237-e",
+          "abc237-ex",
+          "abc237-f",
+          "abc237-g",
+          "abc238-e",
+          "abc238-ex",
+          "abc238-f",
+          "abc238-g",
+          "abc239-e",
+          "abc239-ex",
+          "abc239-f",
+          "abc239-g",
+          "abc240-e",
+          "abc240-ex",
+          "abc240-f",
+          "abc240-g",
+          "abc241-e",
+          "abc241-ex",
+          "abc241-f",
+          "abc241-g",
+          "abc242-e",
+          "abc242-ex",
+          "abc242-f",
+          "abc242-g",
+          "abc243-e",
+          "abc243-ex",
+          "abc243-f",
+          "abc243-g",
+          "abc244-e",
+          "abc244-ex",
+          "abc244-f",
+          "abc244-g",
+          "abc245-e",
+          "abc245-ex",
+          "abc245-f",
+          "abc245-g",
+          "abc246-e",
+          "abc246-ex",
+          "abc246-f",
+          "abc246-g",
+          "abc247-e",
+          "abc247-ex",
+          "abc247-f",
+          "abc247-g",
+          "abc248-e",
+          "abc248-ex",
+          "abc248-f",
+          "abc248-g",
+          "abc249-e",
+          "abc249-ex",
+          "abc249-f",
+          "abc249-g",
+          "abc250-e",
+          "abc250-ex",
+          "abc250-f",
+          "abc250-g",
+          "abc251-e",
+          "abc251-ex",
+          "abc251-f",
+          "abc251-g",
+          "abc252-e",
+          "abc252-ex",
+          "abc252-f",
+          "abc252-g",
+          "abc253-e",
+          "abc253-ex",
+          "abc253-f",
+          "abc253-g",
+          "abc254-e",
+          "abc254-ex",
+          "abc254-f",
+          "abc254-g",
+          "abc255-e",
+          "abc255-ex",
+          "abc255-f",
+          "abc255-g",
+          "abc256-e",
+          "abc256-ex",
+          "abc256-f",
+          "abc256-g",
+          "abc257-e",
+          "abc257-ex",
+          "abc257-f",
+          "abc257-g",
+          "abc258-e",
+          "abc258-ex",
+          "abc258-f",
+          "abc258-g",
+          "abc259-e",
+          "abc259-ex",
+          "abc259-f",
+          "abc259-g",
+          "abc260-e",
+          "abc260-ex",
+          "abc260-f",
+          "abc260-g",
+          "abc261-e",
+          "abc261-ex",
+          "abc261-f",
+          "abc261-g",
+          "abc262-e",
+          "abc262-ex",
+          "abc262-f",
+          "abc262-g",
+          "abc263-e",
+          "abc263-ex",
+          "abc263-f",
+          "abc263-g",
+          "abc264-e",
+          "abc264-ex",
+          "abc264-f",
+          "abc264-g",
+          "abc265-e",
+          "abc265-ex",
+          "abc265-f",
+          "abc265-g",
+          "abc266-e",
+          "abc266-ex",
+          "abc266-f",
+          "abc266-g",
+          "abc267-e",
+          "abc267-ex",
+          "abc267-f",
+          "abc267-g",
+          "abc268-e",
+          "abc268-ex",
+          "abc268-f",
+          "abc268-g",
+          "abc269-e",
+          "abc269-ex",
+          "abc269-f",
+          "abc269-g",
+          "abc270-e",
+          "abc270-ex",
+          "abc270-f",
+          "abc270-g",
+          "abc271-e",
+          "abc271-ex",
+          "abc271-f",
+          "abc271-g",
+          "abc272-e",
+          "abc272-ex",
+          "abc272-f",
+          "abc272-g",
+          "abc273-e",
+          "abc273-ex",
+          "abc273-f",
+          "abc273-g",
+          "abc274-e",
+          "abc274-ex",
+          "abc274-f",
+          "abc274-g",
+          "abc275-e",
+          "abc275-ex",
+          "abc275-f",
+          "abc275-g",
+          "abc276-e",
+          "abc276-ex",
+          "abc276-f",
+          "abc276-g",
+          "abc277-e",
+          "abc277-ex",
+          "abc277-f",
+          "abc277-g",
+          "abc278-e",
+          "abc278-ex",
+          "abc278-f",
+          "abc278-g",
+          "abc279-e",
+          "abc279-ex",
+          "abc279-f",
+          "abc279-g",
+          "abc280-e",
+          "abc280-ex",
+          "abc280-f",
+          "abc280-g",
+          "abc281-e",
+          "abc281-ex",
+          "abc281-f",
+          "abc281-g",
+          "abc282-e",
+          "abc282-ex",
+          "abc282-f",
+          "abc282-g",
+          "abc283-e",
+          "abc283-ex",
+          "abc283-f",
+          "abc283-g",
+          "abc284-e",
+          "abc284-ex",
+          "abc284-f",
+          "abc284-g",
+          "abc285-e",
+          "abc285-ex",
+          "abc285-f",
+          "abc285-g",
+          "abc286-e",
+          "abc286-ex",
+          "abc286-f",
+          "abc286-g",
+          "abc287-e",
+          "abc287-ex",
+          "abc287-f",
+          "abc287-g",
+          "abc288-e",
+          "abc288-ex",
+          "abc288-f",
+          "abc288-g",
+          "abc289-e",
+          "abc289-ex",
+          "abc289-f",
+          "abc289-g",
+          "abc290-e",
+          "abc290-ex",
+          "abc290-f",
+          "abc290-g",
+          "abc291-e",
+          "abc291-ex",
+          "abc291-f",
+          "abc291-g",
+          "abc292-e",
+          "abc292-ex",
+          "abc292-f",
+          "abc292-g",
+          "abc293-e",
+          "abc293-ex",
+          "abc293-f",
+          "abc293-g",
+          "abc294-e",
+          "abc294-ex",
+          "abc294-f",
+          "abc294-g",
+          "abc295-e",
+          "abc295-ex",
+          "abc295-f",
+          "abc295-g",
+          "abc296-e",
+          "abc296-ex",
+          "abc296-f",
+          "abc296-g",
+          "abc297-e",
+          "abc297-ex",
+          "abc297-f",
+          "abc297-g",
+          "abc298-e",
+          "abc298-ex",
+          "abc298-f",
+          "abc298-g",
+          "abc299-e",
+          "abc299-ex",
+          "abc299-f",
+          "abc299-g",
+          "abc300-e",
+          "abc300-ex",
+          "abc300-f",
+          "abc300-g",
+          "abc301-e",
+          "abc301-ex",
+          "abc301-f",
+          "abc301-g",
+          "abc302-e",
+          "abc302-ex",
+          "abc302-f",
+          "abc302-g",
+          "abc303-e",
+          "abc303-ex",
+          "abc303-f",
+          "abc303-g",
+          "abc304-e",
+          "abc304-ex",
+          "abc304-f",
+          "abc304-g",
+          "abc305-e",
+          "abc305-ex",
+          "abc305-f",
+          "abc305-g",
+          "abc306-e",
+          "abc306-ex",
+          "abc306-f",
+          "abc306-g",
+          "abc307-e",
+          "abc307-ex",
+          "abc307-f",
+          "abc307-g",
+          "abc308-e",
+          "abc308-ex",
+          "abc308-f",
+          "abc308-g",
+          "abc309-e",
+          "abc309-ex",
+          "abc309-f",
+          "abc309-g",
+          "abc310-e",
+          "abc310-ex",
+          "abc310-f",
+          "abc310-g",
+          "abc311-e",
+          "abc311-ex",
+          "abc311-f",
+          "abc311-g",
+          "abc312-e",
+          "abc312-ex",
+          "abc312-f",
+          "abc312-g",
+          "abc313-e",
+          "abc313-ex",
+          "abc313-f",
+          "abc313-g",
+          "abc314-e",
+          "abc314-ex",
+          "abc314-f",
+          "abc314-g",
+          "abc315-e",
+          "abc315-ex",
+          "abc315-f",
+          "abc315-g",
+          "abc317-e",
+          "abc317-ex",
+          "abc317-f",
+          "abc317-g",
+          "abc318-e",
+          "abc318-ex",
+          "abc318-f",
+          "abc318-g",
+          "abc319-e",
+          "abc319-f",
+          "abc319-g",
+          "abc320-e",
+          "abc320-f",
+          "abc320-g",
+          "abc321-e",
+          "abc321-f",
+          "abc321-g",
+          "abc322-e",
+          "abc322-f",
+          "abc322-g",
+          "abc323-e",
+          "abc323-f",
+          "abc323-g",
+          "abc324-e",
+          "abc324-f",
+          "abc324-g",
+          "abc325-e",
+          "abc325-f",
+          "abc325-g",
+          "abc326-e",
+          "abc326-f",
+          "abc326-g",
+          "abc327-e",
+          "abc327-f",
+          "abc327-g",
+          "abc328-e",
+          "abc328-f",
+          "abc328-g",
+          "abc329-e",
+          "abc329-f",
+          "abc329-g",
+          "abc330-e",
+          "abc330-f",
+          "abc330-g",
+          "abc331-e",
+          "abc331-f",
+          "abc331-g",
+          "abc332-e",
+          "abc332-f",
+          "abc332-g",
+          "abc333-e",
+          "abc333-f",
+          "abc333-g",
+          "abc334-e",
+          "abc334-f",
+          "abc334-g",
+          "abc335-e",
+          "abc335-f",
+          "abc335-g",
+          "abc336-e",
+          "abc336-f",
+          "abc336-g",
+          "abc337-e",
+          "abc337-f",
+          "abc337-g",
+          "abc338-e",
+          "abc338-f",
+          "abc338-g",
+          "abc339-e",
+          "abc339-f",
+          "abc339-g",
+          "abc340-e",
+          "abc340-f",
+          "abc340-g",
+          "abc341-e",
+          "abc341-f",
+          "abc341-g",
+          "abc342-e",
+          "abc342-f",
+          "abc342-g",
+          "abc343-e",
+          "abc343-f",
+          "abc343-g",
+          "abc344-e",
+          "abc344-f",
+          "abc344-g",
+          "abc345-e",
+          "abc345-f",
+          "abc345-g",
+          "abc346-e",
+          "abc346-f",
+          "abc346-g",
+          "abc347-e",
+          "abc347-f",
+          "abc347-g",
+          "abc348-e",
+          "abc348-f",
+          "abc348-g",
+          "abc349-e",
+          "abc349-f",
+          "abc349-g",
+          "abc350-e",
+          "abc350-f",
+          "abc350-g",
+          "abc351-e",
+          "abc351-f",
+          "abc351-g",
+          "abc352-e",
+          "abc352-f",
+          "abc352-g",
+          "abc353-e",
+          "abc353-f",
+          "abc353-g",
+          "abc354-e",
+          "abc354-f",
+          "abc354-g",
+          "abc355-e",
+          "abc355-f",
+          "abc355-g",
+          "abc356-e",
+          "abc356-f",
+          "abc356-g",
+          "abc357-e",
+          "abc357-f",
+          "abc357-g",
+          "abc358-e",
+          "abc358-f",
+          "abc358-g",
+          "abc359-e",
+          "abc359-f",
+          "abc359-g",
+          "abc360-e",
+          "abc360-f",
+          "abc360-g",
+          "abc361-e",
+          "abc361-f",
+          "abc361-g",
+          "abc362-e",
+          "abc362-f",
+          "abc362-g",
+          "abc363-e",
+          "abc363-f",
+          "abc363-g",
+          "abc364-e",
+          "abc364-f",
+          "abc364-g",
+          "abc365-e",
+          "abc365-f",
+          "abc365-g",
+          "abc366-e",
+          "abc366-f",
+          "abc366-g",
+          "abc367-e",
+          "abc367-f",
+          "abc367-g",
+          "abc368-e",
+          "abc368-f",
+          "abc368-g",
+          "abc369-e",
+          "abc369-f",
+          "abc369-g",
+          "abc370-e",
+          "abc370-f",
+          "abc370-g",
+          "abc371-e",
+          "abc371-f",
+          "abc371-g",
+          "abc372-e",
+          "abc372-f",
+          "abc372-g",
+          "abc373-e",
+          "abc373-f",
+          "abc373-g",
+          "abc374-e",
+          "abc374-f",
+          "abc374-g",
+          "abc375-e",
+          "abc375-f",
+          "abc375-g",
+          "abc376-e",
+          "abc376-f",
+          "abc376-g",
+          "abc377-e",
+          "abc377-f",
+          "abc377-g",
+          "abc378-e",
+          "abc378-f",
+          "abc378-g",
+          "abc379-e",
+          "abc379-f",
+          "abc379-g",
+          "abc380-e",
+          "abc380-f",
+          "abc380-g",
+          "abc381-e",
+          "abc381-f",
+          "abc381-g",
+          "abc382-e",
+          "abc382-f",
+          "abc382-g",
+          "abc383-e",
+          "abc383-f",
+          "abc383-g",
+          "abc384-e",
+          "abc384-f",
+          "abc384-g",
+          "abc385-e",
+          "abc385-f",
+          "abc385-g",
+          "abc386-e",
+          "abc386-f",
+          "abc386-g",
+          "abc387-e",
+          "abc387-f",
+          "abc387-g",
+          "abc388-e",
+          "abc388-f",
+          "abc388-g",
+          "abc389-e",
+          "abc389-f",
+          "abc389-g",
+          "abc390-e",
+          "abc390-f",
+          "abc390-g",
+          "abc391-e",
+          "abc391-f",
+          "abc391-g",
+          "abc392-e",
+          "abc392-f",
+          "abc392-g",
+          "abc393-e",
+          "abc393-f",
+          "abc393-g",
+          "abc394-e",
+          "abc394-f",
+          "abc394-g",
+          "abc395-e",
+          "abc395-f",
+          "abc395-g",
+          "abc396-e",
+          "abc396-f",
+          "abc396-g",
+          "abc397-e",
+          "abc397-f",
+          "abc397-g",
+          "abc398-e",
+          "abc398-f",
+          "abc398-g",
+          "abc399-e",
+          "abc399-f",
+          "abc399-g",
+          "abc400-e",
+          "abc400-f",
+          "abc400-g",
+          "abc401-e",
+          "abc401-f",
+          "abc401-g",
+          "abc402-e",
+          "abc402-f",
+          "abc402-g",
+          "abc403-e",
+          "abc403-f",
+          "abc403-g",
+          "abc404-e",
+          "abc404-f",
+          "abc404-g",
+          "abc405-e",
+          "abc405-f",
+          "abc405-g",
+          "abc406-e",
+          "abc406-f",
+          "abc406-g",
+          "abc407-e",
+          "abc407-f",
+          "abc407-g",
+          "abc408-e",
+          "abc408-f",
+          "abc408-g",
+          "abc409-e",
+          "abc409-f",
+          "abc409-g",
+          "abc410-e",
+          "abc410-f",
+          "abc410-g",
+          "abc411-e",
+          "abc411-f",
+          "abc411-g",
+          "abc412-e",
+          "abc412-f",
+          "abc412-g",
+          "abc413-e",
+          "abc413-f",
+          "abc413-g",
+          "abc414-e",
+          "abc414-f",
+          "abc414-g",
+          "abc415-e",
+          "abc415-f",
+          "abc415-g",
+          "abc416-e",
+          "abc416-f",
+          "abc416-g",
+          "abc417-e",
+          "abc417-f",
+          "abc417-g",
+          "abc418-e",
+          "abc418-f",
+          "abc418-g",
+          "abc419-e",
+          "abc419-f",
+          "abc419-g",
+          "abc420-e",
+          "abc420-f",
+          "abc420-g",
+          "abc421-e",
+          "abc421-f",
+          "abc421-g",
+          "abc422-e",
+          "abc422-f",
+          "abc422-g",
+          "abc423-e",
+          "abc423-f",
+          "abc423-g",
+          "abc424-e",
+          "abc424-f",
+          "abc424-g",
+          "abc425-e",
+          "abc425-f",
+          "abc425-g",
+          "abc426-e",
+          "abc426-f",
+          "abc426-g",
+          "abc427-e",
+          "abc427-f",
+          "abc427-g",
+          "abc428-e",
+          "abc428-f",
+          "abc428-g",
+          "abc429-e",
+          "abc429-f",
+          "abc429-g",
+          "abc430-e",
+          "abc430-f",
+          "abc430-g",
+          "abc431-e",
+          "abc431-f",
+          "abc431-g",
+          "abc432-e",
+          "abc432-f",
+          "abc432-g",
+          "abc433-e",
+          "abc433-f",
+          "abc433-g",
+          "abc434-e",
+          "abc434-f",
+          "abc434-g",
+          "abc435-e",
+          "abc435-f",
+          "abc435-g",
+          "abc436-e",
+          "abc436-f",
+          "abc436-g",
+          "abc437-e",
+          "abc437-f",
+          "abc437-g",
+          "abc438-e",
+          "abc438-f",
+          "abc438-g",
+          "abc439-e",
+          "abc439-f",
+          "abc439-g",
+          "abc440-e",
+          "abc440-f",
+          "abc440-g",
+          "abc441-e",
+          "abc441-f",
+          "abc441-g",
+          "abc442-e",
+          "abc442-f",
+          "abc442-g",
+          "abc443-e",
+          "abc443-f",
+          "abc443-g",
+          "abc444-e",
+          "abc444-f",
+          "abc444-g",
+          "abc445-e",
+          "abc445-f",
+          "abc445-g",
+          "abc446-e",
+          "abc446-f",
+          "abc446-g",
+          "abc447-e",
+          "abc447-f",
+          "abc447-g",
+          "abc448-e",
+          "abc448-f",
+          "abc448-g",
+          "abc449-e",
+          "abc449-f",
+          "abc449-g",
+          "abc450-e",
+          "abc450-f",
+          "abc450-g",
+          "abc451-e",
+          "abc451-f",
+          "abc451-g",
+          "abc452-e",
+          "abc452-f",
+          "abc452-g",
+          "abc453-e",
+          "abc453-f",
+          "abc453-g",
+          "abc454-e",
+          "abc454-f",
+          "abc454-g",
+          "abc455-e",
+          "abc455-f",
+          "abc455-g",
+          "abc456-e",
+          "abc456-f",
+          "abc456-g",
+          "abc457-e",
+          "abc457-f",
+          "abc457-g",
+          "abc458-e",
+          "abc458-f",
+          "abc458-g",
+          "abc459-e",
+          "abc459-f",
+          "abc459-g",
+          "abc460-e",
+          "abc460-f",
+          "abc460-g",
+          "abc461-e",
+          "abc461-f",
+          "abc461-g",
+          "abc462-e",
+          "abc462-f",
+          "abc462-g",
+          "abc463-e",
+          "abc463-f",
+          "abc463-g",
+          "abc464-e",
+          "abc464-f",
+          "abc464-g",
+          "abc465-e",
+          "abc465-f",
+          "abc465-g",
+          "abc466-e",
+          "abc466-f",
+          "abc466-g"
+        ],
+        "changedProblemIds": [],
+        "withdrawnProblemIds": [],
+        "taxonomyChanges": []
+      }
+    },
+    "pagesStatusObservedAt": "2026-10-08T02:33:48.685212+00:00",
+    "pagesStatus": {
+      "status": "succeed"
+    },
+    "pagesStatusUrl": "https://api.github.com/repos/Fu-L/abc-textbook/pages/deployments/af8eca05b1612c5daddb05ddadc32b590f911146",
+    "workflowRunId": 37717648084,
+    "fullVerificationPassed": false,
+    "verificationFailure": "HTTP 503 during live read-only verification; same-SHA retry later passed"
+  },
+  "firstPublicationObservedAt": "2026-10-08T02:29:27.031542+00:00",
+  "workflowAttempts": [
+    {
+      "id": 37717648084,
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "conclusion": "failure",
+      "created_at": "2026-10-08T02:23:44Z",
+      "updated_at": "2026-10-08T02:29:33Z",
+      "exactCommitValidation": "success",
+      "pagesDeploymentStep": "success",
+      "liveVerification": "HTTP_503_failed"
+    },
+    {
+      "id": 37718434307,
+      "html_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307",
+      "head_sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "conclusion": "success",
+      "created_at": "2026-10-08T02:33:16Z",
+      "updated_at": "2026-10-08T02:42:51Z",
+      "exactCommitValidation": "success",
+      "pagesDeploymentStep": "success",
+      "liveVerification": "passed"
+    }
+  ],
+  "githubEnvironmentHistory": [
+    {
+      "id": 6925670223,
+      "sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "environment": "github-pages",
+      "created_at": "2026-10-08T02:23:46Z",
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/deployments/6925670223",
+      "statuses": [
+        {
+          "state": "failure",
+          "created_at": "2026-10-08T02:29:34Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084/job/113117750313",
+          "environment_url": "https://fu-l.github.io/abc-textbook/"
+        },
+        {
+          "state": "in_progress",
+          "created_at": "2026-10-08T02:23:50Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084/job/113117750313",
+          "environment_url": ""
+        },
+        {
+          "state": "queued",
+          "created_at": "2026-10-08T02:23:48Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084/job/113117750313",
+          "environment_url": ""
+        },
+        {
+          "state": "queued",
+          "created_at": "2026-10-08T02:23:48Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084/job/113117750313",
+          "environment_url": ""
+        },
+        {
+          "state": "waiting",
+          "created_at": "2026-10-08T02:23:47Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37717648084/job/113117750313",
+          "environment_url": ""
+        }
+      ]
+    },
+    {
+      "id": 6925795579,
+      "sha": "af8eca05b1612c5daddb05ddadc32b590f911146",
+      "environment": "github-pages",
+      "created_at": "2026-10-08T02:33:17Z",
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/deployments/6925795579",
+      "statuses": [
+        {
+          "state": "success",
+          "created_at": "2026-10-08T02:42:51Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307/job/113120260870",
+          "environment_url": "https://fu-l.github.io/abc-textbook/"
+        },
+        {
+          "state": "in_progress",
+          "created_at": "2026-10-08T02:33:22Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307/job/113120260870",
+          "environment_url": ""
+        },
+        {
+          "state": "queued",
+          "created_at": "2026-10-08T02:33:19Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307/job/113120260870",
+          "environment_url": ""
+        },
+        {
+          "state": "waiting",
+          "created_at": "2026-10-08T02:33:19Z",
+          "log_url": "https://github.com/Fu-L/abc-textbook/actions/runs/37718434307/job/113120260870",
+          "environment_url": ""
+        }
+      ]
+    }
+  ],
+  "workflowSuccessAt": "2026-10-08T02:42:51Z",
+  "beforePublication": {
+    "pages": {
+      "url": "https://api.github.com/repos/Fu-L/abc-textbook/pages",
+      "status": null,
+      "cname": null,
+      "custom_404": false,
+      "html_url": "https://fu-l.github.io/abc-textbook/",
+      "build_type": "workflow",
+      "source": {
+        "branch": "main",
+        "path": "/"
+      },
+      "public": true,
+      "protected_domain_state": null,
+      "pending_domain_unverified_at": null,
+      "https_enforced": true
+    },
+    "environmentDeploymentCount": 0,
+    "observedAt": "2026-10-08T01:51:23.271293+00:00"
+  },
+  "declaredScope": {
+    "firstContestNumber": 212,
+    "lastContestNumber": 466,
+    "contestNumbers": 255,
+    "heldContests": 254,
+    "officialGaps": [
+      {
+        "number": 316,
+        "contestId": "abc316",
+        "status": "officially_unheld",
+        "evidenceUrl": "https://atcoder.jp/contests/abc350/tasks/abc350_a",
+        "evidenceAssertion": "ABC316 was not held on AtCoder.",
+        "checkedAt": "2026-07-24T23:59:30+09:00",
+        "termsCheckedAt": "2026-07-24T23:59:30+09:00",
+        "fingerprint": "9d49649208a11fb1cea424d1057b1f9e06942db647c7a30a4e97926a87083e6b"
+      }
+    ],
+    "problems": 868,
+    "tags": 213,
+    "learningUnits": 232,
+    "learningOutcomes": 242
+  }
+}

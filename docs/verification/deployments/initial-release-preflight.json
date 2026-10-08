@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "issue": 54,
   "taskIds": ["T152", "T153"],
-  "status": "current_subject_validated_pending_pr_ci",
+  "status": "superseded_by_actual_production_verification",
   "observedAt": "2026-10-08T01:45:05.351592+00:00",
   "productionPublished": false,
   "publicUrl": "https://fu-l.github.io/abc-textbook/",
@@ -123,7 +123,7 @@
     "ready": false,
     "reason": "T153 requires successful real production verification"
   },
-  "note": "This is preflight/local rehearsal evidence, not a published release. Initial release and history JSON are created only after actual host verification.",
+  "note": "Historical preflight/local rehearsal; the productionPublished=false flag describes this pre-publication record. Actual publication and verification are recorded in initial-release.json.",
   "applicableInitialAudits": {
     "status": "passed",
     "tasks": 10,
@@ -197,5 +197,6 @@
       "disposableContexts": true
     },
     "completedAt": "2026-10-08T01:30:00.730025+00:00"
-  }
+  },
+  "actualEvidencePath": "docs/verification/deployments/initial-release.json"
 }
