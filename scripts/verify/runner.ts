@@ -116,6 +116,8 @@ const dataTests = [
   'tests/unit/release-history.test.ts',
 ];
 const recordTests = [
+  // Record filtering consumes coverage across leaf, parent, and chapter Units.
+  'tests/integration/full-public-projection.test.ts',
   'tests/unit/learning-record-store.test.ts',
   'tests/unit/learning-record-timestamp.test.ts',
   'tests/integration/learning-record-backup.test.ts',
@@ -185,7 +187,7 @@ export function selectVerificationSteps(
     steps.push({ id: 'links', script: 'link:check:built' });
     if (env.CI) steps.push({ id: 'browsers', script: 'test:e2e:install:ci' });
     const e2e = new Set<string>();
-    if (prose || data || ui) e2e.add('tests/e2e/full-projection.spec.ts');
+    if (prose || data || ui || records) e2e.add('tests/e2e/full-projection.spec.ts');
     if (data || ui) e2e.add('tests/e2e/search.spec.ts');
     if (ui) {
       e2e.add('tests/e2e/accessibility.spec.ts');

@@ -19,6 +19,8 @@ pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動�
 
 複数分類は検査の和集合を実行する。renameは削除と追加に分解し、両pathを判定する。本文・データの削除も検査対象にする。非公開文書の削除、空差分、不正なGit出力は広い検査へ戻る。検査の失敗・signalは非zeroで後続を止め、cancelを成功へ置き換えない。
 
+学習記録の変更には保存・日時・backupのテストに加え、既存の`full-public-projection.test.ts`と`full-projection.spec.ts`を選ぶ。`src/lib/learning-records/filter.ts`だけの変更でも、葉単元・親単元・章の配下にある問題を問題一覧と復習一覧で絞り込む挙動を検証する。問題の主配置単元だけに絞る回帰を検出し、複数分類で選ばれても同じテストは重複実行しない。
+
 CIは既存文書checkerのfixtureも確認する。変更選択のcontractはrunner・workflow等の変更で選ぶVitest全体に含め、同じrunで重複実行しない。`scripts/verify/runner.ts`が分類を担当し、非公開文書の書式・参照検査は既存`.github/actions/nonpublic-docs/check.mjs --files ...`を再利用する。通常経路にpreview凍結・全shard再join・初版監査・release/review証跡照合・一律の数学回帰は含めない。関係する教材変更ではCodexが公式根拠・証明・境界条件を確認し、既存`docs/verification/bootstrap/pr65*-mathematical-checks.py`の該当回帰を実行する。
 
 切替中は旧4jobも残している。新baselineの実成功後に実branch

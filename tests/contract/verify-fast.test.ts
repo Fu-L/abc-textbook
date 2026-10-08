@@ -108,6 +108,25 @@ describe('verify:fast change selection', () => {
     expect(ids(...files)).toContain('links');
   });
 
+  it('checks Unit coverage and review filtering for a learning-record filter change alone', () => {
+    const file = 'src/lib/learning-records/filter.ts';
+    expect(testArgs(file)).toEqual(
+      expect.arrayContaining([
+        'tests/integration/full-public-projection.test.ts',
+        'tests/unit/learning-record-store.test.ts',
+        'tests/unit/learning-record-timestamp.test.ts',
+        'tests/integration/learning-record-backup.test.ts',
+        'tests/integration/learning-record-control.test.ts',
+      ]),
+    );
+    expect(plan(file).find((step) => step.id === 'e2e')?.args).toEqual([
+      '--project=chromium',
+      'tests/e2e/full-projection.spec.ts',
+      'tests/e2e/learning-records.spec.ts',
+    ]);
+    expect(plan(file).find((step) => step.id === 'build')?.script).toBe('build:checked');
+  });
+
   it('selects skill consumers rather than treating skill instructions as documentation', () => {
     expect(testArgs('.agents/skills/abc-explanation-author/references/writing-policy.md')).toEqual(
       expect.arrayContaining([
@@ -139,6 +158,16 @@ describe('verify:fast change selection', () => {
     );
     expect(steps.map((s) => s.id)).toContain('docs');
     expect(testArgs(...files)).toContain('tests/integration/learning-record-backup.test.ts');
+    expect(
+      testArgs(...files).filter(
+        (file) => file === 'tests/integration/full-public-projection.test.ts',
+      ),
+    ).toHaveLength(1);
+    expect(
+      steps
+        .find((s) => s.id === 'e2e')
+        ?.args?.filter((file) => file === 'tests/e2e/full-projection.spec.ts'),
+    ).toHaveLength(1);
   });
 
   it.each([
