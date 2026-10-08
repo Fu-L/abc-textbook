@@ -18,6 +18,10 @@ describe('US2 taxonomy contract', () => {
     const catalog = catalogFixture();
     const tag = catalog.tags[0];
     if (!tag) throw new Error('Technique Tag fixture is missing.');
+    tag.aliases = [...new Set([...tag.aliases, tag.name, tag.name.toLocaleLowerCase('en-US')])];
+    tag.formerNames = [...new Set([...tag.formerNames, tag.name])];
+    expect(TechniqueTagSchema.safeParse(tag).success).toBe(true);
+    expect(codes(catalog)).not.toContain('TAG_TERM_DUPLICATE');
     catalog.tags.push({
       ...structuredClone(tag),
       id: 'tag-duplicate-graph',

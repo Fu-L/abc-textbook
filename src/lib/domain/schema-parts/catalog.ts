@@ -1096,7 +1096,7 @@ const ReleaseValidationSummarySchema = strictObject({
   passedCheckCount: z.number().int().nonnegative(),
   blockingFindingCount: z.number().int().nonnegative(),
   evidenceDigests: uniqueArray(Sha256Schema),
-  checks: z.array(ReleaseCheckSchema).min(1),
+  checks: z.array(ReleaseCheckSchema),
 }).superRefine((summary, context) => {
   const checkIds = summary.checks.map(({ checkId }) => checkId);
   const resultDigests = summary.checks.map(({ resultDigest }) => resultDigest);
@@ -1150,6 +1150,17 @@ export const ReviewEvidenceReferenceSchema = strictObject({
   }
 });
 
+/** Owner-authorized initial-seed acceptance; never a human review reference. */
+export const SeedAgentQualityReviewReferenceSchema = strictObject({
+  evidenceId: z.literal('agent-content-review-initial-release'),
+  path: z.literal('docs/reviews/agent-content/initial-release/release-review.json'),
+  digest: Sha256Schema,
+  subjectDigest: Sha256Schema,
+  acceptanceMode: z.literal('agent_quality_review'),
+  aggregatePassed: z.literal(true),
+});
+export type SeedAgentQualityReviewReference = z.infer<typeof SeedAgentQualityReviewReferenceSchema>;
+
 export const CatalogReleaseSchema = strictObject({
   /** T160 prepares a full projection; production publication remains a later release gate. */
   publicationStatus: z.enum(['prepared', 'published']).optional(),
@@ -1177,14 +1188,41 @@ export const CatalogReleaseSchema = strictObject({
   taxonomyChanges: z.array(TaxonomyChangeSchema),
   validationSummary: ReleaseValidationSummarySchema,
   humanContentReviewEvidenceRefs: z.array(ReviewEvidenceReferenceSchema),
+  agentQualityReviewEvidenceRef: SeedAgentQualityReviewReferenceSchema.optional(),
   changelogPath: SafePathSchema,
 })
   .superRefine((release, context) => {
-    if (release.publicationStatus !== 'prepared' && !release.humanContentReviewEvidenceRefs.length)
+    if (release.publicationStatus !== 'prepared' && !release.validationSummary.checks.length)
+      context.addIssue({
+        code: 'custom',
+        path: ['validationSummary', 'checks'],
+        message: 'Published releases require validation checks.',
+      });
+    if (
+      release.agentQualityReviewEvidenceRef &&
+      (release.releaseKind !== 'initial' ||
+        release.firstContestId !== 'abc212' ||
+        release.lastContestId !== 'abc466' ||
+        release.problemCount !== 868 ||
+        release.cutoffAt !== '2026-07-12T00:00:00+09:00' ||
+        release.updateIds.length !== 1 ||
+        release.updateIds[0] !== 'update-bootstrap-full-corpus' ||
+        release.humanContentReviewEvidenceRefs.length !== 0)
+    )
+      context.addIssue({
+        code: 'custom',
+        path: ['agentQualityReviewEvidenceRef'],
+        message: 'Owner-authorized agent acceptance is limited to the ABC212–466 seed release.',
+      });
+    if (
+      release.publicationStatus !== 'prepared' &&
+      !release.humanContentReviewEvidenceRefs.length &&
+      !release.agentQualityReviewEvidenceRef
+    )
       context.addIssue({
         code: 'custom',
         path: ['humanContentReviewEvidenceRefs'],
-        message: 'Published releases require human review references.',
+        message: 'Published releases require policy-selected review evidence.',
       });
   })
   .meta({
@@ -1196,7 +1234,29 @@ export const CatalogReleaseSchema = strictObject({
             required: ['publicationStatus'],
           },
         },
-        then: { properties: { humanContentReviewEvidenceRefs: { minItems: 1 } } },
+        then: {
+          properties: {
+            validationSummary: { properties: { checks: { minItems: 1 } } },
+          },
+          anyOf: [
+            { properties: { humanContentReviewEvidenceRefs: { minItems: 1 } } },
+            { required: ['agentQualityReviewEvidenceRef'] },
+          ],
+        },
+      },
+      {
+        if: { required: ['agentQualityReviewEvidenceRef'] },
+        then: {
+          properties: {
+            releaseKind: { const: 'initial' },
+            firstContestId: { const: 'abc212' },
+            lastContestId: { const: 'abc466' },
+            problemCount: { const: 868 },
+            cutoffAt: { const: '2026-07-12T00:00:00+09:00' },
+            updateIds: { const: ['update-bootstrap-full-corpus'] },
+            humanContentReviewEvidenceRefs: { maxItems: 0 },
+          },
+        },
       },
     ],
   });

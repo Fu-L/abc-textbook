@@ -1,0 +1,848 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T151",
+  "status": "release_gate_passed_agent_quality_review",
+  "generatedAt": "2026-10-07T17:23:34.548639+00:00",
+  "goal": "ABCの過去問からARC・AGC・CF Div. 1・UCUPへ進むための典型知識・適用条件・不変量・正当性・計算量と手法選択を学ぶ、一人用の教科書。",
+  "scope": {
+    "firstContest": "abc212",
+    "lastContest": "abc466",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "problemCount": 868,
+    "tagCount": 213,
+    "learningUnitCount": 232,
+    "learningOutcomeCount": 242,
+    "numberCoverage": 255,
+    "heldContestGap": "abc316",
+    "hostPublished": false
+  },
+  "constitution": {
+    "version": "3.0.0",
+    "path": ".specify/memory/constitution.md",
+    "sha256": "828171b531ac70bf5c53eab6fb7cd82ea9d15372b15ab7f8c365b4b7dad2a6e4",
+    "reviewPolicy": "self / third_party / solo_maintainer; Issue #53 fixed initial release accepts agent_quality_review without human approval",
+    "principleEvidence": {
+      "I": "242 Outcomes uniquely owned; 232 Unit / 868 Problem packet; current-subject coverage verification",
+      "II": "Official revisions and allowed-use claims; accepted source lineage and 20 independent mathematical regressions",
+      "III": "Independent textbook order, target colors with textual reasons, three prerequisite DAGs, route/keyboard/axe/reflow/no-JavaScript checks",
+      "IV": "All Problem explanations accepted and byte-preserved; optional block inventories checked without fabricating examples or exercises",
+      "V": "One canonical corpus and shared static rendering, stable Problem IDs and DB contracts; no new paid service or backend"
+    },
+    "selectedReviewPolicy": {
+      "requiredMode": "self",
+      "riskReasons": ["original_proof", "major_classification_change"],
+      "highRiskSelfReviewReason": "solo_maintainer",
+      "acceptanceMode": "agent_quality_review",
+      "ownerInstruction": "人間の了承は不要です。"
+    }
+  },
+  "privacyBoundary": {
+    "privatePreviewIncluded": false,
+    "unpublishedCatchUpIncluded": false,
+    "learnerRecordsInPublicArtifacts": false,
+    "multiUserBackendAdded": false,
+    "telemetryAdded": false
+  },
+  "shardJoinEvidence": "docs/verification/bootstrap/problem-authoring-units.json",
+  "requirementAudit": [
+    {
+      "requirementId": "FR-001",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "教材はABC212から各公開版が明示した収録上限までを連続した番号範囲として記録し、開催済みContestと公式欠番証跡の和で全番号を被覆したうえで、各開催回の公式問題一覧でDより後に並ぶ実在問題を100%カタログ化しなければならない。初版はABC466までの868問とし、公開日現在の最新回までの追随を要求しない。公開後の各更新版は宣言した収録上限と基準日時に一致し、実際の範囲を超える網羅性を主張してはならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-002",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各対象問題枠は公式上の存在・不存在・未確認・取り下げと、教材側の未収録・作成中・公開保留・収録済み・訂正確認中を分けて保持し、空欄のない表示状態を導出しなければならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-003",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各問題はコンテスト番号、公式問題記号、問題名、公式参照先、制約、難易度の根拠、公開状態、最終確認日を保持しなければならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-004",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json",
+        "docs/verification/bootstrap/us1.json",
+        "docs/verification/bootstrap/learning-unit-content.json",
+        "docs/verification/initial-release/mathematical-regressions.txt"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各完全解説は自然な考察手順、典型と問題固有要素の分解、復習時の助言を含まなければならない。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "FR-005",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json",
+        "docs/verification/bootstrap/us1.json",
+        "docs/verification/bootstrap/learning-unit-content.json",
+        "docs/verification/initial-release/mathematical-regressions.txt"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各完全解説は、状態・遷移・境界条件を再現できる考察、前提を明示した正当性、採用手法全体の時間・空間計算量とその導出、最大制約との整合、実装上の注意を含まなければならない。アルゴリズム名や公式の結論を繰り返すだけの説明を完成としない。独立した「具体例」「確認問題」「確認する観点」「解答と理由」は生成しない。必要な短い追跡や反例は考察・証明に組み込み、例・演習の件数を完全性の条件にしない。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "FR-006",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/sources-and-claims.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "外部情報に基づく解説は権威ある出典と確認日を追跡でき、根拠との矛盾が解消されるまで公開できないようにしなければならない。",
+      "assessment": "Source revisions, confirmation dates and allowed-use claims are traced to accepted authoring evidence; reuse policy is retained."
+    },
+    {
+      "requirementId": "FR-007",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "典型タグと学習単位は全対象問題の技法・前提を横断的に棚卸しした結果から作り、コンテスト番号ごとの一時分類を公開体系の正本にしてはならない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-008",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各正式タグは名称、定義、学習成果、代表問題、親またはルート、教材上の前提タグ、同義語・旧名称に加え、未知問で想起するための対象・発動条件・不変量・目的・除外条件からなるsemantic signatureを持たなければならない。該当する前提ではないTag間関係がある場合は、その型と学習上の理由も保持しなければならない。該当関係がないTagでは空の関係集合を許容し、件数を満たすためだけの関係を作ってはならない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-009",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各問題は一つ以上の典型タグに関連付き、主・補助の典型と問題固有の要素を区別しなければならない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-010",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "Tag、Outcome、LearningUnitの直接前提を、それぞれの循環のない有向グラフとして保持する。グラフの辺は再利用可能な技能間の前提を表し、Problem固有のsupporting OutcomeからUnit間の辺を追加してはならない。DAGから全体の履修順や隣接関係を正本化せず、分野別目次の表示順とも区別する。単なる併用、対比、類似、特殊化、拡張、帰着、実装基盤の関係を前提へ押し込んではならない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-011",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各LearningUnitは共通前提、対象外、簡潔な学習理由、問題一覧を持つ。TagとOutcomeは分類・前提・関連問題のmetadataとし、それぞれ一つのUnitへ直接所属させ、navigation集合は自身と子孫の所属集合の和集合とする。各Problemのsemantic primary Outcomeが一意のhome Unitを決め、`directProblemIds`はそのUnitだけに置く。追加primary Outcomeは追加で学ぶ技能、supporting Outcomeは既習技能として保持するが、いずれもhome Unitを変えない。`problemIds`はUnit自身と子孫がhomeであるProblemのcoverage、`relatedProblemIds`はhomeが別のsubtreeにあり追加primaryまたはsupporting Outcomeを参照するProblemとする。分野別目次の表示順は`textbook-order.ts`で別に編集する。Unit内Problemの読む順は受理済みの配列を後続の本文執筆・公開projectionへ引き継ぎ、shardの公式順で並べ直さない。固定のガイド・転移・評価課題は生成しない。各Problem固有のauthoring unitとfull解説原則を維持し、`contentPhase`で後続の本文執筆へ引き継ぎ、T160までcanonical文書はdraftとする。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-011a",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "章・構造Unitを含む全UnitにAtCoder Algorithmの色名、対応するレーティング帯、選定理由を表示する。色は上位競技者の観点で、その内容の標準形・適用条件・不変量・計算量を理解し、実装またはライブラリへの帰着を使えるようになるべき対象を編集判断として示す。全掲載問題の完答難度、未知問での発想難度、内部rankや掲載問題の難度集計からは決めない。章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とし、子孫の最高難度を親に転記しない。公式の色帯と教材独自の習得目安を区別し、必修の履修順や読者の色による閲覧制限には使わない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "FR-012",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json",
+        "docs/verification/bootstrap/us1.json",
+        "docs/verification/bootstrap/learning-unit-content.json",
+        "docs/verification/initial-release/mathematical-regressions.txt"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "各対象問題は完全解説を既定とし、主要な解法・証明・計算量・前提・学習成果が同じと検証できる場合だけ、根拠と差分付きの類題または補充問題にできる。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "FR-013",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "全対象問題は少なくとも一つの教科書学習単位または典型別問題集から到達可能でなければならず、未分類・参照不能な問題がある版を公開してはならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-014",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "コンテスト表は対象範囲で確認されたDより後の問題記号の和集合を公式順の列として生成し、E〜Hに固定せず将来の新しい記号も表示しなければならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-015",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "収録済みの各表セルから問題詳細、解説、対応する学習単位、主・補助タグ、類題へそれぞれ一回の操作で直接移動できなければならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-016",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "公開済みの問題名、タグの正式名・同義語・旧名称、すべての階層の学習単位名、コンテスト番号を検索でき、未公開候補や端末固有状態を検索文書へ混入させてはならない。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "FR-017",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "学習者は問題ごとの解答状況を未着手・挑戦中・修了から選び、これと独立して要復習を付け外しできなければならない。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "FR-018",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "教材は解答状況、要復習、それぞれの最終更新日時を保持し、コンテスト、問題記号、典型、章、解答状況、要復習で絞り込めなければならない。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "FR-019",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "一方の学習状態を変更しても他方の値と更新日時を変更してはならず、日時から日付、時刻、タイムゾーンを判別できなければならない。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "FR-020",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "教材の追加、解説修正、タグ再編、前提・教材掲載順・Unit内問題順の変更後も既存問題の学習記録を保持し、新規問題は未着手・要復習なし・更新記録なしで追加しなければならない。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "FR-021",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "学習者は全学習記録を版、作成日時、対象教材版付きの一ファイルへバックアップし、復元前に差分と競合方針を確認して全件を原子的に適用できなければならない。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "FR-022",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "教材管理者は終了済みの未収録ABCを候補化する処理を一回の開始操作で実行できなければならない。"
+    },
+    {
+      "requirementId": "FR-023",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "更新準備は対象問題ごとに、完成した解説草案、必要入力とテンプレートを伴う要執筆、具体的理由を伴う保留のいずれかを示し、未完成入力を完成草案として扱ってはならない。"
+    },
+    {
+      "requirementId": "FR-024",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "更新候補は対象範囲、出典、解説構成、例、タグ、3つの直接前提DAG、独立した教材掲載順、Unit内問題順、索引、相互参照を検証し、問題ごとの結果と修正理由を示さなければならない。"
+    },
+    {
+      "requirementId": "FR-025",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "同じ入力の更新を再実行しても重複問題、重複解説、重複索引を作ってはならない。"
+    },
+    {
+      "requirementId": "FR-026",
+      "status": "owner_authorized_initial_agent_review_and_all_checks_passed",
+      "evidencePaths": [
+        "docs/reviews/agent-content/initial-release/release-review.json",
+        "docs/verification/initial-release/matrix.json",
+        ".specify/memory/constitution.md"
+      ],
+      "limitation": "Fixed ABC212–466 initial-release owner exception. Human approval is not required or claimed; later updates retain the existing review policy.",
+      "requirementText": "mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。",
+      "ownerDisposition": "2026-10-07: 人間の了承は不要です。 Agent item decisions/bases, all Outcomes, source lineage, mathematics and successful current-subject checks are required."
+    },
+    {
+      "requirementId": "FR-027",
+      "status": "protected_main_configured_production_review_required",
+      "evidencePaths": [
+        "docs/verification/initial-release/protected-main.json",
+        ".github/workflows/ci.yml"
+      ],
+      "limitation": "Public repository; API PUT/GET confirmed all five required contexts, strict checks and admin enforcement. Missing production review still blocks merge.",
+      "requirementText": "一つ以上の更新を含むrelease commitは、未解決の検証失敗または必要レビューの欠落がある間はprotected mainへmergeしてはならない。公開snapshot IDはmerge済みのfull Git commit hashとし、デプロイ時に別のcandidate state、owner approval、独自digestを要求してはならない。"
+    },
+    {
+      "requirementId": "FR-028",
+      "status": "accepted_correction_closure_and_existing_regressions",
+      "evidencePaths": [
+        "docs/verification/bootstrap/us4/full-projections.json",
+        "tests/integration/canonical-correction.test.ts"
+      ],
+      "limitation": "No new correction is included in this seed release.",
+      "requirementText": "公式情報の訂正、タグ再編、解説修正では、影響するProblem本文・内包block・配置、LearningUnit本文・任意の内包block、前提policy、および派生索引を所有者と具体的locatorで列挙し、同じ更新単位で再確認しなければならない。`CorrectionImpact`のownerは`problem`、`learning_unit`、`problem_placement`、`learning_prerequisites`とし、Unit全順序を独立ownerにしない。掲載順・導線の整合は編集データとの照合で確認する。canonical materialization時点で将来taskが所有する対象は`pending`のまま、そのtaskと全Source Revisionを保持しなければならない。",
+      "assessment": "T160 resolves the accepted correction owners and preserves 72 retired optional locators; canonical correction regressions stay mandatory."
+    },
+    {
+      "requirementId": "FR-029",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/accessibility-and-links.json",
+        "docs/verification/initial-release/examples-and-answers.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "公開版は壊れた内部参照、未説明の検証失敗、未定義の必須用語、必要な代替テキストの欠落、再現不能な例を含んではならない。",
+      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with current-subject initial agent quality review."
+    },
+    {
+      "requirementId": "FR-030",
+      "status": "adapter_and_prepared_summary_implemented_actual_publication_pending_issue_54",
+      "evidencePaths": [
+        "docs/operations/initial-release-runbook.md",
+        "docs/verification/releases/change-summary.json"
+      ],
+      "limitation": "No successful host deployment or published history exists yet.",
+      "requirementText": "公開版はversion、cutoff、full Git commit hash、検証結果URL、実際に取り込んだ更新、対象範囲、追加・変更・取り下げ問題、タグ体系の変更、検証日を示す履歴を持ち、未公開の保留試行は管理者向け状態表示へ分離しなければならない。rollbackは履歴中の既知release commitを再deployして行う。"
+    },
+    {
+      "requirementId": "FR-031",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/schema-contracts.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "解説方針は目的、入力、出力、行動規則、品質確認を自己完結して定義する再利用可能で版付きの専用skillへ移し、各解説は使用版を追跡できなければならない。",
+      "assessment": "Dedicated versioned authoring skill and its fixed-input quality evidence are retained; the initial release does not rerun a paid generator."
+    },
+    {
+      "requirementId": "FR-032",
+      "status": "zero_cost_static_path_prepared_public_protection_configured",
+      "evidencePaths": [
+        "docs/verification/initial-release/zero-cost-52-weeks.json",
+        "docs/verification/initial-release/production-host.json",
+        "docs/verification/initial-release/protected-main.json"
+      ],
+      "limitation": "Owner changed repository to public. Protected main is configured without a paid upgrade; Cloudflare Free project/origin configuration remains for #54.",
+      "requirementText": "閲覧、検索、学習管理、週次更新、検証、公開の必須経路は、既存機器と通常の通信環境を除き、有料契約、従量課金、常時稼働する有料ホスティングなしで運用できなければならない。"
+    },
+    {
+      "requirementId": "FR-033",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/zero-cost-52-weeks.json",
+        "docs/verification/initial-release/learning-records.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "継続利用者は教材管理者を兼ねる一人とし、複数利用者のアカウント、権限分離、共同編集、進捗同期を必須にしてはならない。",
+      "assessment": "One local learner/maintainer, IndexedDB and static hosting remain the required model. No user account, sync or collaboration service is introduced."
+    },
+    {
+      "requirementId": "FR-034",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "Technique Inventoryの計算量欄は任意とし、平方根で抑える分割、償却解析、出力依存、実用上重要な定数倍など、計算量解析自体が解法選択や実現可能性の本質となる場合に限って保持しなければならない。その場合も、公式解説または問題固有の解析で確定した解法全体の時間・空間計算量だけを記録する。通常の計算量は根拠があっても省略し、部分テクニック単体の典型計算量や汎用fallback値を補完してはならない。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "CQ-001",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "すべての実質的な章、節、解説、例、演習は宣言された学習成果へ追跡できなければならない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "CQ-002",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/sources-and-claims.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "外部情報または時点に依存する主張は、権威ある出典、対象版またはコンテスト、確認日を明記しなければならない。",
+      "assessment": "Source revisions, confirmation dates and allowed-use claims are traced to accepted authoring evidence; reuse policy is retained."
+    },
+    {
+      "requirementId": "CQ-003",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/examples-and-answers.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "すべての実行可能な例は必要環境、入力、手順、期待結果を明示して公開前に検証し、疑似コードや省略はその種類と範囲を表示しなければならない。",
+      "assessment": "Only present executable examples and optional exercises are checked. Retired or absent blocks are not fabricated to satisfy a count."
+    },
+    {
+      "requirementId": "CQ-004",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/accessibility-and-links.json",
+        "docs/verification/initial-release/examples-and-answers.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "新しい専門用語は初出で定義し、図、表、色、配置に依存する必須情報には同等のテキスト説明を付けなければならない。",
+      "assessment": "Every generated route is checked for references/headings/text alternatives and shared templates in three engines; accepted prose supplies definition lineage, with current-subject initial agent quality review."
+    },
+    {
+      "requirementId": "CQ-005",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/examples-and-answers.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "任意に含める演習は学習成果に対応し、最終答案だけでなく考え方または検証方法を含む検証済みの解答資料を持たなければならない。",
+      "assessment": "Only present executable examples and optional exercises are checked. Retired or absent blocks are not fabricated to satisfy a count."
+    },
+    {
+      "requirementId": "CQ-006",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json",
+        "docs/verification/bootstrap/us1.json",
+        "docs/verification/bootstrap/learning-unit-content.json",
+        "docs/verification/initial-release/mathematical-regressions.txt"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "解説は事実の列挙ではなく、対象学習者が解法へ到達する自然な思考の流れを正確で一貫した日本語で示さなければならない。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "CQ-007",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/sources-and-claims.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "出典の著作権と利用条件を尊重し、必要以上の転載を避け、参照と独自説明によって教材価値を提供しなければならない。",
+      "assessment": "Source revisions, confirmation dates and allowed-use claims are traced to accepted authoring evidence; reuse policy is retained."
+    },
+    {
+      "requirementId": "SC-001",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "初版公開時に、ABC212〜466の255番号（254開催とABC316の公式欠番）の欠落が0件で、Dより後に公式に存在する868問の100%がカタログと公開導線に存在する。公開後の各更新版も、宣言した収録上限までの欠落が0件で対象問題の100%が存在する。最新回への追随状況は収録範囲と区別して示す。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "SC-002",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "公開対象問題の100%に、公式参照、最終確認日、一つ以上の典型タグ、到達可能な学習単位または問題集の入口があり、未分類・参照不能が0件である。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "SC-003",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/examples-and-answers.json",
+        "docs/verification/bootstrap/us1.json",
+        "docs/verification/bootstrap/learning-unit-content.json",
+        "docs/verification/initial-release/mathematical-regressions.txt"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "公開する完全解説の100%が、考察、典型と固有要素、正当性、計算量、制約整合、実装注意、出典、skill版を持ち、状態・遷移・境界条件・証明・計算量を再現できる。独立した例・確認問題の有無で完全性を判定しない。",
+      "assessment": "Accepted authoring evidence and independent mathematical regressions supply lineage. Byte preservation is checked; automation does not perform a new human assessment of every argument."
+    },
+    {
+      "requirementId": "SC-004",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/taxonomy.json",
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "全正式タグの100%が学習成果、代表問題、完全なsemantic signatureを持ち、型付きTag間関係の未知参照・自己参照・対称関係の片方向欠落、3つの直接前提DAGの未知参照と循環がいずれも0件である。教科書掲載順は全Unitをちょうど一回含み、所属章と意味階層が一致し、章直下でないUnitの概念上の親リンク、対象色・レーティング帯・理由と直接前提リンクの欠落が0件である。掲載順は意味階層・前提DAGから独立し、親子subtreeの連続性を要求しない。",
+      "assessment": "Accepted Outcome ownership, unique Problem homes, three DAGs, signatures, independent textbook order, conceptual parents and text color reasons are checked without rebuilding taxonomy."
+    },
+    {
+      "requirementId": "SC-005",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "コンテスト表が対象範囲で確認されたDより後の全問題記号を列として示し、収録済みセルの100%から問題、解説、学習単位、主・補助タグ、類題へそれぞれ一回の操作で到達できる。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "SC-006",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "新しい終了済みABCの更新準備を一回の開始操作で実行し、15分以内に全対象問題について完成草案、要執筆、具体的保留のいずれかを確認できる。"
+    },
+    {
+      "requirementId": "SC-007",
+      "status": "live_acceptance_deferred_to_issue_52",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/operations/deploy-before-catch-up.md"
+      ],
+      "limitation": "Existing offline regressions remain required; no live completion is asserted.",
+      "requirementText": "同じ入力の更新を繰り返したとき、重複問題、重複解説、重複索引が0件である。"
+    },
+    {
+      "requirementId": "SC-008",
+      "status": "owner_authorized_initial_agent_review_and_all_checks_passed",
+      "evidencePaths": [
+        "docs/reviews/agent-content/initial-release/release-review.json",
+        "docs/verification/initial-release/matrix.json",
+        ".specify/memory/constitution.md"
+      ],
+      "limitation": "Fixed ABC212–466 initial-release owner exception. Human approval is not required or claimed; later updates retain the existing review policy.",
+      "requirementText": "各公開版で、壊れた内部参照、未解決の検証失敗、未確認の技術的主張、含まれる例の再現不能、検証されていない解答資料がいずれも0件である。",
+      "ownerDisposition": "2026-10-07: 人間の了承は不要です。 Agent item decisions/bases, all Outcomes, source lineage, mathematics and successful current-subject checks are required."
+    },
+    {
+      "requirementId": "SC-009",
+      "status": "retired_by_owner",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/verification/learner-outcomes/bootstrap/sc-009.json"
+      ],
+      "limitation": "No personal answer, self-score, or human approval is synthesized.",
+      "requirementText": "Issue #48実装中の運用者指示により、個人用教材の本人self-study・自己採点ゲートを廃止。旧記録は履歴として保持し、T077には`not_required_by_owner`と代替の全件本文品質・数学回帰・coverage検証への参照を記録する。回答・採点・合格率を生成しない。"
+    },
+    {
+      "requirementId": "SC-010",
+      "status": "retired_by_owner",
+      "evidencePaths": [
+        "specs/001-build-abc-textbook/spec.md",
+        "docs/verification/bootstrap/learning-unit-content.json"
+      ],
+      "limitation": "No personal answer, self-score, or human approval is synthesized.",
+      "requirementText": "運用者のIssue #46実装中の指示により廃止。5位置の手動self-study、質問票、自己採点の提出は要求しない。Unitの掲載・前提・学習意図・開始問題への導線はT057の全件自動検証で確認する。"
+    },
+    {
+      "requirementId": "SC-011",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "対象表セルの100%が収録済み、未収録、作成中、公開保留、訂正確認中、公式問題なし、公式取り下げのいずれかを理由付きで示し、意味不明な空欄が0件である。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    },
+    {
+      "requirementId": "SC-012",
+      "status": "automated_route_operation_and_persistence_verification",
+      "evidencePaths": [
+        "docs/verification/learner-outcomes/initial-release/sc-012.json",
+        "docs/verification/initial-release/learning-records.json"
+      ],
+      "limitation": "12 fixed representative observations and all 868 shared route controls. Automated duration does not measure human reading.",
+      "requirementText": "学習者は任意の問題詳細表示後、追加画面遷移なしで修了と要復習を30秒以内に設定でき、再度開いたとき両状態と各更新日時の100%が保持される。"
+    },
+    {
+      "requirementId": "SC-013",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "コンテスト追加、解説修正、タグ再編、前提・教材掲載順・Unit内問題順変更の各検証で、既存問題の学習状態と更新日時の意図しない変更・消失が0件である。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "SC-014",
+      "status": "simulation_verification_live_update_deferred_to_issue_52",
+      "evidencePaths": [
+        "docs/verification/initial-release/zero-cost-52-weeks.json",
+        "docs/verification/initial-release/production-host.json"
+      ],
+      "limitation": "Simulation does not assert real future Contest authoring or live host pricing guarantees.",
+      "requirementText": "52週分の更新を模擬し、取得、更新準備、検証、必要レビュー、merge、静的デプロイ、バックアップの必須経路で、既存機器・電気・通常通信を除く継続費用が0円である。"
+    },
+    {
+      "requirementId": "SC-015",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/sources-and-claims.json",
+        "docs/verification/initial-release/schema-contracts.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "事前固定した3件以上の執筆入力について、ルートの一時的な指示ファイルなしで専用skillと入力だけから作った候補の100%が品質契約を満たし、入力不足の候補は完成扱いされない。",
+      "assessment": "Dedicated versioned authoring skill and its fixed-input quality evidence are retained; the initial release does not rerun a paid generator."
+    },
+    {
+      "requirementId": "SC-016",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "解答状況と要復習を異なる時刻に変更する検証で、一方の変更により他方の更新日時が変わる問題が0件である。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "SC-017",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "表または任意の問題画面から2回以内の操作で要復習一覧へ到達でき、要復習でない問題の混入が0件である。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "SC-018",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/learning-records.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "100件以上の異なる学習記録を復元する検証で、事前に差分と競合方針を確認でき、成功時の値・日時一致率が100%、失敗注入時の部分反映が0件である。",
+      "assessment": "Three-engine record, filter and backup/restore regressions cover independent timestamps, stable IDs, 120 records and injected atomic failure; actual host persistence is a #54 check."
+    },
+    {
+      "requirementId": "SC-019",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": ["docs/verification/initial-release/performance.json"],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "255コンテストの初期規模、公開版の実対象範囲、1,500問題・500タグ・1,000学習単位の設計上限について、同じ基準環境で全教材と索引の生成が各5分以内に完了し、設計上限での複合絞り込みの95パーセンタイルが100ミリ秒以内である。",
+      "assessment": "Sequential repeated real builds and design-limit compound filtering are measured on the recorded Node/npm/machine baseline; thresholds are checked by T141."
+    },
+    {
+      "requirementId": "SC-020",
+      "status": "accepted_seed_and_current_automated_verification",
+      "evidencePaths": [
+        "docs/verification/initial-release/corpus-completeness.json",
+        "docs/verification/initial-release/public-projections.json",
+        "docs/verification/initial-release/accessibility-and-links.json"
+      ],
+      "limitation": "Accepted prose and taxonomy are retained byte for byte. Automated checks and source lineage are evidence, not new human approval.",
+      "requirementText": "E〜Hにない新しい問題記号を含む検証用コンテストでも、Dより後の全問題が自動的に対象、表列、検索、更新、網羅性判定へ含まれ、固定4枠へ切り捨てられる件数が0件である。",
+      "assessment": "Declared range, official slots, routes, table links and search are checked against the accepted inventory; no catch-up completeness is claimed."
+    }
+  ],
+  "blockingGates": [],
+  "exactCommitEvidence": "Read-only verify:release output binds the final prepared Git SHA in CI; in-tree records never embed their own future commit hash.",
+  "automatedAuditSubject": {
+    "digest": "7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e",
+    "fileCount": 9500
+  },
+  "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
+  "contentFileInventoryDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+  "automatedEvidence": {
+    "matrixPath": "docs/verification/initial-release/matrix.json",
+    "matrixEvidenceDigest": "4fa8e74c531e834fa41b91d7a2a1b84f9c898ce9459c61ee6a56aa228e822d2f",
+    "reports": [
+      {
+        "taskId": "T133",
+        "path": "docs/verification/initial-release/schema-contracts.json",
+        "digest": "db6f58785204c8aecac17696ba697db7d346fc14f1dcd9c24652281e7cd67d11"
+      },
+      {
+        "taskId": "T134",
+        "path": "docs/verification/initial-release/corpus-completeness.json",
+        "digest": "c27df46624c45dd769ab1a2571acbd443e265179fea6eb485e2f62d1b33ae0e9"
+      },
+      {
+        "taskId": "T135",
+        "path": "docs/verification/initial-release/taxonomy.json",
+        "digest": "2b507450d9b9ecfd4297326314e313ca2f10b40d9f34cc0759379346315e345f"
+      },
+      {
+        "taskId": "T136",
+        "path": "docs/verification/initial-release/sources-and-claims.json",
+        "digest": "5214dae6f54322650fac90ec6c860343268bff8d036c98d052482bf299ee2ba9"
+      },
+      {
+        "taskId": "T137",
+        "path": "docs/verification/initial-release/examples-and-answers.json",
+        "digest": "f75df027361cd5636afac6fd23b797e0ba2ace8ff5cb7602b7c98ec6bb7961b5"
+      },
+      {
+        "taskId": "T138",
+        "path": "docs/verification/initial-release/accessibility-and-links.json",
+        "digest": "ec20ac2379a31845ccf14d36456cbfe32847d99bcf87472b35ea0f0a8e9cf4a0"
+      },
+      {
+        "taskId": "T139",
+        "path": "docs/verification/initial-release/learning-records.json",
+        "digest": "dc027c852d1ecd496e612141fa06415b3c220351061d01602cc1f94f5f99f051"
+      },
+      {
+        "taskId": "T140",
+        "path": "docs/verification/initial-release/public-projections.json",
+        "digest": "de7ec006ccc314685f77abd84941c4c36e6f37fc33c99fa59dbd5ddb5beb2786"
+      },
+      {
+        "taskId": "T141",
+        "path": "docs/verification/initial-release/performance.json",
+        "digest": "ac8c13fa836a882bf2e005b3f0d7d589d6d69a2a657c547c273d243744f83ab0"
+      },
+      {
+        "taskId": "T142",
+        "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
+        "digest": "6691129cceba1048d3af4c10766bb66337cafdc68eec9f4daf7550ad4556e94a"
+      }
+    ],
+    "testResults": {
+      "path": "docs/verification/initial-release/test-results.json",
+      "digest": "a813608d1bcd650835ed66325f29058e6a8f504d25ed1a45af56fd5c77acc158"
+    },
+    "browserResults": {
+      "path": "docs/verification/initial-release/browser-results.json",
+      "digest": "38eeb56cae4d652befafef916a542847222bac8c160e6940f20cb2ff934028e6"
+    }
+  },
+  "finalCommitEvidence": "docs/verification/initial-release/final-validation.json; final-head CI artifacts bind full Git SHA without self-reference.",
+  "releaseGatePassed": true,
+  "productionPublished": false,
+  "humanApprovalClaimed": false,
+  "deploymentPrerequisites": {
+    "issue": 54,
+    "steps": [
+      "Configure Free Cloudflare project / persistent HTTPS origin / credentials",
+      "Merge to protected main after all required CI succeeds",
+      "Deploy and verify that exact merged SHA"
+    ]
+  },
+  "validatedReleaseSnapshot": {
+    "command": "verify:release",
+    "commit": "17d21068e1b821f8ebdc382c3ab1ddb6307c73cd",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "aggregatePassed": true,
+    "acceptanceMode": "agent_quality_review",
+    "humanApprovalClaimed": false,
+    "problemCount": 868,
+    "outcomeCount": 242,
+    "outcomeCoverageDigest": "dd913c266baed7eb1adea334c2707ed7433cfaf57b25e3f610d63400d566e13d",
+    "correctionCount": 12,
+    "checks": [
+      "protected-base-diff",
+      "current-policy-review",
+      "catalog-coverage",
+      "canonical-entities",
+      "authored-documents",
+      "three-prerequisite-dags",
+      "semantic-primary-home",
+      "independent-editorial-order",
+      "metrics-identities",
+      "correction-targets"
+    ]
+  }
+}

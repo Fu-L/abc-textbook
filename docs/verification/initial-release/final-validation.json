@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "taskId": "T149",
+  "status": "release_gate_passed_agent_quality_review",
+  "generatedAt": "2026-10-07T17:23:34.548639+00:00",
+  "automatedAuditSubject": {
+    "digest": "7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e",
+    "fileCount": 9500
+  },
+  "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
+  "finalCommitBinding": {
+    "source": "PR CI artifact final-validation-<full Git SHA> and read-only CLI output",
+    "note": "This in-tree record cannot embed its own future commit hash. Its validated snapshot is historical; final-head validation is rerun after this evidence-only commit."
+  },
+  "scope": {
+    "problemCount": 868,
+    "learningUnitCount": 232,
+    "tagCount": 213,
+    "learningOutcomeCount": 242,
+    "canonicalContentFileDiffCount": 0,
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "catchUpIncluded": false,
+    "hostPublicationHistory": []
+  },
+  "results": {
+    "tests": 592,
+    "browserTests": 225,
+    "browserEngines": ["chromium", "firefox", "webkit"],
+    "auditTasksPassed": 10,
+    "independentMathematicalRegressionScripts": 20,
+    "staticPages": 1576,
+    "brokenInternalLinks": 0,
+    "checkedLinks": 4648,
+    "SC012Observations": 12,
+    "SC012HumanTimingAccepted": false,
+    "SC012MaximumAutomatedDurationMs": 134.92662500000006,
+    "designLimitFilterP95Ms": 1.0999999940395355,
+    "simulationWeeks": 52,
+    "simulationRequiredCostJPY": 0,
+    "actualProductionRollbackClaimed": false
+  },
+  "pendingGates": [],
+  "liveAcceptanceDeferred": {
+    "issue": 52,
+    "startsAfterIssue": 54,
+    "requirements": [
+      "FR-022",
+      "FR-023",
+      "FR-024",
+      "FR-025",
+      "SC-006",
+      "SC-007",
+      "SC-014 live updates"
+    ]
+  },
+  "configuredGates": ["protected-main-required-checks"],
+  "selectedReviewPolicy": {
+    "requiredMode": "self",
+    "riskReasons": ["original_proof", "major_classification_change"],
+    "highRiskSelfReviewReason": "solo_maintainer"
+  },
+  "releaseGatePassed": true,
+  "productionPublished": false,
+  "humanApprovalClaimed": false,
+  "acceptanceMode": "agent_quality_review",
+  "agentQualityReviewEvidenceRef": {
+    "evidenceId": "agent-content-review-initial-release",
+    "path": "docs/reviews/agent-content/initial-release/release-review.json",
+    "digest": "293fc5109b9d076fd716d2d4bcaae1aaade332faa00691bdaee8e651d78b6849",
+    "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+    "acceptanceMode": "agent_quality_review",
+    "aggregatePassed": true
+  },
+  "deploymentPrerequisites": {
+    "issue": 54,
+    "steps": [
+      "Configure actual Free host project/origin/credentials",
+      "Merge and deploy exact protected-main SHA",
+      "Verify actual publication/history/record compatibility"
+    ]
+  },
+  "productionValidation": {
+    "command": "verify:release",
+    "commit": "17d21068e1b821f8ebdc382c3ab1ddb6307c73cd",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "version": "2026.10.07",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "aggregatePassed": true,
+    "acceptanceMode": "agent_quality_review",
+    "humanApprovalClaimed": false,
+    "problemCount": 868,
+    "outcomeCount": 242,
+    "outcomeCoverageDigest": "dd913c266baed7eb1adea334c2707ed7433cfaf57b25e3f610d63400d566e13d",
+    "correctionCount": 12,
+    "checks": [
+      "protected-base-diff",
+      "current-policy-review",
+      "catalog-coverage",
+      "canonical-entities",
+      "authored-documents",
+      "three-prerequisite-dags",
+      "semantic-primary-home",
+      "independent-editorial-order",
+      "metrics-identities",
+      "correction-targets"
+    ]
+  },
+  "validatedPreparationSnapshot": {
+    "command": "verify:release",
+    "mode": "preparation",
+    "commit": "17d21068e1b821f8ebdc382c3ab1ddb6307c73cd",
+    "protectedBaseCommit": "01041f8bd269b02ccb99de2ccd421a1e86fc9920",
+    "aggregatePassed": true,
+    "productionReleaseApproved": false,
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "version": "2026.10.07",
+    "problemCount": 868,
+    "productionGateRequirements": [
+      "policy-selected-review",
+      "protected-main-required-checks",
+      "host-project-and-origin"
+    ],
+    "checks": [
+      "real-protected-base-diff",
+      "accepted-seed-and-shard-join",
+      "bootstrap-only-summary",
+      "T133-T142-current-subject",
+      "SC-012-automated-controls-and-persistence"
+    ]
+  }
+}

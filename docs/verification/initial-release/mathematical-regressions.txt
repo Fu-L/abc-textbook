@@ -1,0 +1,373 @@
+Running docs/verification/bootstrap/pr65-mathematical-checks.py
+ABC464 F: subset expectation vs all permutations: 3645
+ABC456 G: inclusion-exclusion vs all binary words: 91
+ABC357 G: signed walls vs cell DP: 36
+ABC398 G: classification vs full game tree: 5604
+median exhaustive operation comparisons 1767 counterexample 1
+separator exact subset comparisons 342
+ABC251 Ex: compressed-scale windows vs binomial coefficients: 4095
+Running docs/verification/bootstrap/pr65-review10-mathematical-checks.py
+ABC214 H nonnegative network vs K-path enumeration: 3072 passed
+ABC224 H fixed-flow shift vs all camera assignments and dual flows: 500 passed
+ABC229 H column addition vs whole-board minimax: 400 passed
+ABC229 H exact dyadics vs single-column minimax: 120 passed
+ABC264 Ex root-only prefix answers vs induced-subset enumeration: 500 passed
+ABC267 Ex product-tree layer accounting: 3 passed
+ABC267 Ex subset enumeration: 4368 passed
+ABC269 Ex weighted affine path merge vs antichain enumeration: 500 passed
+ABC271 Ex all direction masks and bounded BFS: 20736 passed
+ABC275 Ex weighted events vs original interval attacks: 500 passed
+ABC406 G weighted coefficients and reconstruction vs coordinate DP: 1000 passed
+ABC408 G strict Stern-Brocot vs denominator enumeration: 946 passed
+Running docs/verification/bootstrap/pr65-review11-mathematical-checks.py
+ABC242 Ex duplicate-interval regression: 1 passed
+ABC242 Ex subset counts and original expectation: 600 passed
+ABC250 G every holding state vs original trading DP: 3279 passed
+ABC265 Ex original two-turn minimax and mixed distribution: 2592 passed
+ABC288 Ex digit DP, distinct correction and original sorted enumeration: 280 passed
+ABC288 Ex unlabeled parity partitions vs restricted growth enumeration: 9 passed
+ABC373 F signed marginal tails vs original multiplicity enumeration: 500 passed
+ABC383 G every recursive boundary state vs direct DP: 9782 passed
+ABC400 G matching enumeration, parity DP and penalty reconstruction: 350 passed
+ABC400 G zero and scaled integer boundaries: 2 passed
+Concavity is not closed under pointwise max: 1 passed
+Matching exchange concavity with signed edge weights: 150 passed
+Total: 17546 independent finite checks passed
+Running docs/verification/bootstrap/pr65-review12-mathematical-checks.py
+{"223 all suffix spans": 4187, "223 pivot queries": 62805, "236 optimal basis": 280, "249 30-bit representative": 1, "249 affine set": 1157, "249 nonempty subsets": 506, "254 original moves and assignments": 1696, "290 coin DP": 18991, "290 disjoint placement": 42, "290 original cuts": 42, "301 camera objective": 354, "301 coincident xy projections": 1, "301 projected false intersection": 1, "301 ray contributions": 273, "301 true 3D crossings": 354, "442 billion copies": 1, "442 bounded knapsack": 500, "442 run boundaries": 5255, "442 selected sum bound": 1, "442 unavailable residues": 1, "451 linear normal form": 64000, "451 original xor walks": 3334, "451 trie and equality": 4000, "868 prose and Claim": 868}
+Passed 168650 independent finite comparisons.
+Running docs/verification/bootstrap/pr65-review13-mathematical-checks.py
+{
+  "checks": {
+    "214 interval injections": 3002,
+    "214 sparse jump and inclusive endpoint": 1,
+    "226 all assignments": 31375,
+    "226 multiple twos on same person": 1,
+    "226 prefer five over four for three": 1,
+    "226 total capacity is insufficient criterion": 1,
+    "236 all graph cancellation": 6,
+    "236 connected coefficient": 6,
+    "236 distinct assignments": 634,
+    "236 huge LCM saturation": 1,
+    "245 larger injections": 300,
+    "245 rectangle injections": 9936,
+    "252 all merge choices": 125,
+    "252 arbitrary remainder splitting": 186,
+    "252 optimal contraction": 121,
+    "291 LCA on original path": 20802,
+    "291 one root": 1443,
+    "291 subtree halves": 7038,
+    "373 64bit aggregation": 18,
+    "373 allocation predicate": 5355,
+    "373 binary answer": 1785,
+    "373 equal budget is unsafe": 1,
+    "373 monotonicity": 1785,
+    "373 original strict boundary fails": 1,
+    "373 tied zero remaining": 1,
+    "384 all absorption orders": 4096,
+    "384 equality cannot absorb": 1,
+    "384 exact integer division": 36,
+    "384 reconsider after strengthening": 1,
+    "all correctness claim synchronization": 868,
+    "all document count": 1
+  },
+  "total": 88928
+}
+Running docs/verification/bootstrap/pr65-review14-mathematical-checks.py
+257 64bit objective: 1
+257 collinear and duplicate blocks: 12
+257 final modular scale: 96
+257 maintained sums: 7814
+257 mapping versus all dice outcomes: 179
+257 simultaneous event order: 7814
+257 sweep versus all subsets: 550
+289 absolute offset and odd parity: 64
+289 compressed convolution versus original walks: 64
+289 renewal versus absorbing walks: 64
+289 unreachable time range: 1
+289 zero time initial meeting: 1
+294 all ranks and all masks: 280
+294 coefficient recurrence: 1050
+294 core versus all colorings: 3300
+294 deletion contraction versus all colorings: 3300
+294 larger hybrid graphs: 72
+295 ancestor root differs from DSU root: 1
+295 full SCC partition: 21368
+295 reachable minima: 21368
+295 root attributes after branch merges: 1
+295 successful union bound: 21368
+330 moments versus all completions: 15125
+330 restore factorial and modular answer: 15125
+344 heap versus original point inequalities: 164
+344 one swap per pair: 164
+344 sorted scores after tied events: 7083
+450 modular expectation: 329
+450 pair recurrence versus original subtractions: 329
+correctness Claim synchronization: 868
+document count: 1
+Finite mathematical comparisons: 127087
+Document synchronization comparisons: 868
+Running docs/verification/bootstrap/pr65-review15-mathematical-checks.py
+check_merge passed
+check_palindrome passed
+check_magic passed
+check_circle passed
+check_maze passed
+check_runs passed
+check_suffix passed
+check_walls passed
+check_documents passed
+{
+  "272 rotations including padding extremes": 1364,
+  "273 item-mask shortest paths": 2000,
+  "310 decomposition multiset": 29233,
+  "310 original unbounded magic": 6408,
+  "313 explicit original operations": 336,
+  "313 large integer lifetime": 100,
+  "313 modular lifetime": 336,
+  "313 persistent forbidden pair": 2940,
+  "349 feasibility and lexical minimum": 3656,
+  "349 work bound including invalid input": 3656,
+  "358 length": 1295,
+  "358 necessary and sufficient lengths": 12,
+  "358 rendered passage": 1295,
+  "400 original circular painting": 726,
+  "427 all-input action": 69450,
+  "427 binary blocks": 12000,
+  "427 cursor count": 6582,
+  "427 local versus bulk": 4,
+  "427 quadratic counterexample": 4,
+  "427 threshold equality": 69450,
+  "document proof and claim agree": 868,
+  "full audit domains": 1,
+  "full audit membership": 1
+}
+Running docs/verification/bootstrap/pr65-review16-mathematical-checks.py
+check_446 passed
+check_302 passed
+check_399 passed
+check_261 passed
+check_462 passed
+check_452 passed
+check_380 passed
+check_435 passed
+check_documents passed
+{
+  "261 original weighted adjacent swaps": 9330,
+  "302 balanced edge equations": 11230,
+  "302 constructed sorted array": 21840,
+  "302 construction meets lower bound": 21840,
+  "302 one swap lower bound": 256,
+  "302 original arbitrary swap BFS": 21840,
+  "380 inverse four and window normalization": 719,
+  "380 original window and permutation mean": 719,
+  "399 constructed final word": 667,
+  "399 incoming cycle example": 1,
+  "399 original global replace BFS": 695,
+  "435 generated intervals bound total visits": 41640,
+  "435 original per-cell repaint": 41640,
+  "435 white count": 41640,
+  "446 minimum": 1,
+  "446 old sentinel exposes regression": 1,
+  "446 original subsequences": 3272,
+  "446 repeated one": 1,
+  "446 sample one trace": 1,
+  "446 sample three": 1,
+  "446 sample two": 1,
+  "452 original continuous substrings": 9840,
+  "452 positions are not types": 1,
+  "452 types preserved by both directions": 9840,
+  "462 even larger K parity counterexample": 1,
+  "462 negative predecessor is necessary": 1,
+  "462 original phase and direction Dijkstra": 6084,
+  "868 claim source binding": 868,
+  "868 document proof and claim agreement": 868,
+  "868 domains": 1,
+  "868 membership": 1
+}
+Running docs/verification/bootstrap/pr65-review17-mathematical-checks.py
+ABC441 G: 318860 interval summaries after all <=3 updates
+ABC453 G: 115500 version/range sums, unequal N/M and M=1
+ABC458 G: 85590 daily states vs integer DP and actual distributions
+ABC394 E: 19767 all <=3 vertex two-letter directed graphs
+ABC397 F: 3267 arrays, every cut state and final three-way split
+ABC372 G: 6072 strict integer lattice counts vs original inequalities
+ABC459 F: 3245 integer block solutions vs original BFS/unit stabilization
+ABC415 F: 7422 string partitions vs direct runs, empty identity/associativity
+ABC383 E: 9644 legal disjoint token matchings vs minimax Floyd/permutations
+ABC356 G: 6375 rate/query configurations vs all pairs of original styles
+PR65 review17 mathematical checks passed
+Running docs/verification/bootstrap/pr65-review18-mathematical-checks.py
+ABC249 E: run-length DP matches exhaustive strings through length 6
+ABC254 E: BFS keeps the shortest arrival; bounded DFS can miss a vertex
+ABC281 E: K=1 sliding update inserts before erasing and returns 1, 2
+ABC343 E: pair/triple inclusion counts recover exact coverage volumes
+ABC387 E: every prefix row has range, digit-sum, and divisibility guarantees
+ABC392 E: global cycle-edge pool supplies C-1 component merges
+ABC424 E: exact dyadic batching matches literal greedy on 588 cases
+ABC427 E: forbidden wind is detected by T's reverse preimage
+ABC434 E: a surplus edge covers the root chosen at its endpoint
+ABC449 E: zero-frequency values participate in value-ordered ties
+ABC454 E: exact strip construction visits every legal cell in 110 cases
+ABC459 E: falling-product binomials and strict true-ancestor selection
+All review 18 finite checks passed.
+Running docs/verification/bootstrap/pr65-review19-mathematical-checks.py
+ABC254 G: normalized time vs original shortest paths: 22032
+ABC466 G: negative targets and carry counts vs nonnegative enumeration: 64
+ABC464 G: all budget answers vs literal flips: 508
+ABC386 G: connected recurrence and correction vs Kruskal: 9
+ABC238 Ex: last-pair sum vs forward rational expectation: 124
+ABC399 G: latest-position basis vs fresh elimination for every suffix: 65610
+ABC448 G: triangular nested maximum vs exact game vertices, incl. sample: 6
+ABC252 Ex: per-left prefix nodes vs explicit XOR-pair ranking: 5184
+ABC280 Ex: stack prefix tree incl. identical/terminal leaves vs all occurrences: 930
+ABC296 Ex: initial/cost/final frontier states vs full grid fillings: 590
+ABC273 Ex: direct quotient skips and operation count vs explicit ancestors: 2145
+ABC397 G cut directions, ABC281 Ex 0/1 materials, ABC365 G clock: passed
+All review 19 finite checks passed.
+Running docs/verification/bootstrap/pr65-review2-mathematical-checks.py
+Actual textbook correctness Claim/body consistency: 868
+ABC272 Ex: permutations, DP, FPS and even flip counts: 175
+ABC232 H: all endpoints in rectangles up to 15x15: 13965
+ABC466 F: weighted prefixes vs all starting integers: 18648
+ABC245 Ex: fixed-residue states vs full residue DP: 828
+ABC230 H: two-unknown CDQ vs direct multiset counting: 63
+ABC278 Ex: rank convolution and Stirling inversion vs vector tuples: 15
+ABC317 Ex: polynomial transfer and return denominator vs graph walks: 4368
+ABC315 Ex: shifted CDQ pairs vs quadratic recurrence: 192
+ABC214 F: first-completion DP vs all nonadjacent subsequences: 2046
+ABC214 G: cycle rook polynomial vs all permutations: 501
+ABC295 Ex: frontier sweep vs deduplicated row/column prefix constructions: 1350
+ABC258 Ex: relative-parity matrices vs odd-step compositions: 8191
+ABC300 Ex: submask Bostan-Mori vs direct K-bonacci sequence: 1024
+ABC313 Ex: ordered fragment coefficients vs front-row permutations: 72
+ABC273 G: transition table vs all matrices up to 3x3: 819
+ABC252 G: forest interval recurrence vs all rooted labelled trees: 153
+ABC292 G: digit/block bases and recurrence vs explicit completions: 100
+Running docs/verification/bootstrap/pr65-review20-mathematical-checks.py
+ABC317 F: lower-prefix comparisons: 12288 ; positive triples: 432
+ABC429 F: leaf matrices and full answer vs unrestricted BFS: 1168
+ABC434 F: Z comparator: 3844 ; second concatenation: 455
+ABC456 F: both initial states, daily matrix and terminal holiday vs subsets: 1538
+ABC457 F: all constrained gap arrays (including impossible arrays) vs permutation counts and lazy updates: 873
+ABC374 F: prefix event DP vs arbitrary batch subsets: 315
+ABC268 E: even/odd half-open affine pieces: 501
+ABC443 F: suffix break vs full-edge BFS, moduli 1..1000
+ABC448 F: coordinate bounds with skipped/empty strips: 3002
+Running docs/verification/bootstrap/pr65-review3-mathematical-checks.py
+ABC298 Ex: all endpoints including equality and different roots: 80847
+ABC359 G: centroid path contributions versus pair distances: 3144
+ABC281 Ex: coefficient slices versus sequential whole-polynomial updates: 672
+ABC290 Ex: all parity cases, empty reduced DP, versus permutations: 144
+ABC299 Ex: six boundary equations versus full periodic Markov system: 675
+ABC299 Ex: matrix powers and nonzero pivots at the actual 10^9 period: OK
+ABC371 G: residues versus orbit enumeration / big-integer CRT: 976
+ABC235 Ex: same-weight/multiedge/disconnected painting versus set unions: 840
+ABC235 Ex: truncated convolution work, chain/balanced/random merges: 90
+ABC255 G: sparse absent-frequency mex versus all legal moves: 1598
+ABC260 G: four imos marks versus direct geometric inequality: 200
+ABC268 E: affine half-open intervals versus circular distances: 9450
+ABC430 G: set mapping and maximum/count versus explicit leaves: 13824
+ABC382 G: finite tables and coordinate normalization versus tile BFS: 83529
+ABC219 H: remaining-count interval DP versus all visit orders: 150
+ABC270 Ex: affine jumps with repeated breakpoints versus full Markov system: 296
+ABC265 F: both diagonal sums and coincident centers versus lattice enumeration: 270
+ABC299 F: canonical boundary DP versus distinct binary subsequences: 1022
+ABC387 G: rooted EGF conversion versus all graphs and edge-simple circuits: 1099
+ABC389 G: layer-state coefficients versus all labelled graphs and BFS: 32834
+Actual textbook correctness Claim/body consistency: 868
+Running docs/verification/bootstrap/pr65-review4-mathematical-checks.py
+ABC381 G: restored factors, block/chirp evaluation, cycles versus recurrence: 9471
+ABC308 Ex: root/non-tree oracle and full Q cost versus simple-cycle enumeration: 1620
+ABC444 G: nonunit preperiod/both ends and conjugate counts versus all exponents: 1968
+ABC355 G: causal rectangle DP, end costs, penalty/ties versus all facilities: 504
+ABC393 G: scaled circulation, residual potentials, rational budget interpolation versus LP envelope: 433
+ABC402 G: closed Euclidean moments versus direct signed floors: 11830
+ABC436 G: shifted narrow coefficient bands versus unbounded knapsack: 200
+ABC217 H: hard origin via finite anchors versus reachable-coordinate DP: 480
+ABC454 F: decrease-side selection versus all interval operations modulo M: 295
+ABC305 Ex: bounded edges, fixed A=1, both outputs and ties versus every partition: 540
+ABC454 F: central-crossing normalization versus original interval +1 and all palindromes: 430
+ABC228 H: addition-cost hull DP versus all admissible final heights: 225
+ABC219 G: sparse/isolated heavy-light timestamps and final resolution versus direct updates: 405
+Running docs/verification/bootstrap/pr65-review5-mathematical-checks.py
+ABC447 G sweep / sextuple enumeration / top4 associativity: 4696
+ABC378 G direct LIS/LDS, insertion equivalence, hook and ideal DP: 50646
+ABC311 Ex all retained subsets, every root, zero weights and save flag: 601
+ABC365 F block merge and query range versus grid BFS: 15249
+ABC418 F all endpoint matrices / dynamic prefix constraints: 3120
+ABC399 F rolling label DP versus direct interval powers: 1452
+ABC431 G lexicographic multiplicities and recovered exchange indices: 13936
+ABC425 G all nonempty 3-bit sets and prefixes / unary recursion count: 2296
+ABC449 G low-degree differential recurrence / distinct repunit sums: 96
+ABC434 F three-block Z comparator / all concatenation permutations: 1250
+ABC439 G geometric coefficients with zero denominators and last turn: 1365
+ABC406 G original coordinate DP / slope clipping / recovered path cost: 450
+Running docs/verification/bootstrap/pr65-review6-mathematical-checks.py
+ABC249 Ex: exact marginal distributions and full-process Bellman equations agree for N=2..5
+ABC440 F: feasible subsets and explicit construction agree for N=2..6 (1148 subsets)
+ABC222 H: local condition agrees with exhaustive operation search through 5 vertices (567 labelled trees)
+ABC222 F: diameter exception vs all destinations (145 trees)
+ABC290 F / ABC359 F: all labelled trees N=2..6, degree realization, diameters, binomial sum and 150 convex allocations
+ABC288 E: all 5913 insertion ranks and 120 purchase-order/selection DPs
+ABC297 G: direct mex vs periodic expression (48750 states)
+ABC429 F: column matrices vs unrestricted four-direction BFS (9360 boards)
+ABC213 E: full persistent-wall state vs compressed static graph (148 boards)
+ABC388 G: offset predicate vs exhaustive matching (27027 intervals)
+ABC347 F: six partitions / central incremental maximum vs all square triples (135 boards)
+Running docs/verification/bootstrap/pr65-review7-mathematical-checks.py
+ABC318 Ex: 617 individual AC/WA classifications and EGF totals agree
+ABC461 G: every simple graph on at most five vertices, including isolated vertices
+ABC304 Ex: 1,500 release/deadline DAGs against every permutation
+ABC301 Ex: 350 multigraphs, every edge and endpoint pair; same-weight and parallel edges
+ABC231 H: exhaustive weighted edge covers versus all differential matchings
+ABC263 G: 350 multisets against individual pairing; every intermediate capacity checked
+ABC302 Ex: 500 value multigraphs against all endpoint selections
+ABC311 F: every forced grid through 2x3 and 3x2, including one-row/column boundaries
+ABC354 G: 350 substring posets against every antichain
+ABC361 G: 700 sparse boards against full-grid flood fill
+ABC388 F: 1,800 obstacle/step instances against all-position DP
+ABC390 E: 900 nondecreasing budget frontiers, including ties and plateaus
+ABC431 E: every initial and final mirror placement through 2x3 and 3x2
+ABC435 F: all height permutations through N=6 against every removal operation
+ABC453 F: 1,000 sampled trees/capacity lists; every constructed edge cut checked
+Running docs/verification/bootstrap/pr65-review8-mathematical-checks.py
+ABC225 H: 2251 seat/fixed-seat configurations through N=8; K=0 and M=N included
+ABC323 G: 600 matrices / 3,000 evaluations, including zero pivots and paired swaps
+ABC323 G: every permutation through N=5; full inversion-count distribution against Prufer trees
+ABC347 G: all 25 label pairs and 120 fixed/variable grids against all fillings
+ABC452 E: 700 unequal-length arrays against every ordered pair, including quotient zero
+ABC216 H: all robot moves for K=2,3, N<=3 and every start subset in 0..4
+ABC463 G: every directional update through N=25,M=30 and all walks through N=10
+ABC234 G: every ternary-valued array through N=6 against every partition
+ABC450 F: 500 graphs against all candidate-edge subsets, including duplicate edges
+ABC465 E: 503 bounds against integer enumeration; zero, real zero digits, exactly-one condition
+ABC466 E: all two-valued card faces through N=5 against up to two original interval flips
+ABC260 Ex: every three-color frequency vector through N=6 against all labeled permutations
+ABC412 G: 180 degree/parity instances against every original subgraph and Tutte interpolation
+ABC447 E: every connected simple graph through N=5 with shuffled edge numbers against all deletions
+Running docs/verification/bootstrap/pr65-review9-mathematical-checks.py
+PR65 review9 independent finite checks passed
+  DAG covers: 1024
+  DFS/BFS graphs: 728
+  hull supports: 12775
+  Nim mex products: 256
+  Nim field identities: 200
+  edited LIS arrays: 3279
+  tree mex sums: 1441
+  multiset arrangements: 836
+  functional graph inequalities: 864
+  recursive string prefixes: 11760
+  zero-sum subset partitions: 500
+  interval harvests: 3000
+  distance colourings: 500
+  monotone operation dominance: 500
+  ABC-increase DP states: 1809
+  ABC-increase outside alphabet: 40
+  palindrome antichains: 510
+  Nim virtual sequence comparisons: 500
+  multiset insertion witnesses: 166
+  digit occurrence prefixes: 109109
+  palindrome repair sums: 3279
+  order statistic expectations: 1776
+All independent mathematical regressions passed

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkId": "check-initial-sc012",
+  "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
+  "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+  "exitCode": 0,
+  "passed": true,
+  "completedAt": "2026-10-07T17:19:01.682Z"
+}

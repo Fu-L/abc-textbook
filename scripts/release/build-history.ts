@@ -15,6 +15,9 @@ import {
 import { parseKeyValueArguments } from '../corpus/cli-support.js';
 import { SafePathSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { FULL_RELEASE_CATALOG_PATH } from './validate-full-release.js';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
+import { CloudflarePagesTarget } from '../../src/lib/deployment/cloudflare-pages-target.js';
 
 const exec = promisify(execFile);
 /** The input is the host's already-published metadata history. Each catalog is
@@ -25,6 +28,7 @@ export const loadGitReleaseHistory = async (input: {
   readonly repositoryRoot?: string;
   readonly catalogPath?: string;
   readonly previous?: readonly PublicReleaseHistoryEntry[];
+  readonly confirmHostPublication?: (commit: string) => Promise<unknown>;
 }) => {
   const root = input.repositoryRoot ?? process.cwd();
   const catalogPath = input.catalogPath ?? FULL_RELEASE_CATALOG_PATH;
@@ -41,7 +45,18 @@ export const loadGitReleaseHistory = async (input: {
       cwd: root,
       maxBuffer: 128 * 1024 * 1024,
     });
-    records.push({ metadata, catalog: JSON.parse(stdout) as unknown });
+    const catalog = CatalogSchema.parse(JSON.parse(stdout) as unknown);
+    if (catalog.release.publicationStatus === 'prepared' && input.confirmHostPublication) {
+      const confirmed = await input.confirmHostPublication(metadata.commit);
+      if (
+        !confirmed ||
+        canonicalJson(ReleaseMetadataSchema.parse(confirmed)) !== canonicalJson(metadata)
+      )
+        throw new Error('RELEASE_HISTORY_HOST_NOT_CONFIRMED');
+      // Host success changes the history projection, never the original Git catalog.
+      catalog.release.publicationStatus = 'published';
+    }
+    records.push({ metadata, catalog });
   }
   return buildReleaseHistory(records, input.previous);
 };
@@ -71,6 +86,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       '--public-output',
       '--hold-output',
       '--catalog',
+      '--host',
     ]);
     const releasesPath = args.get('--releases');
     const updatesPath = args.get('--updates');
@@ -103,10 +119,24 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
     }
     const catalogPath = args.get('--catalog');
+    const host = args.get('--host');
+    if (host && host !== 'cloudflare-pages') throw new Error('RELEASE_HISTORY_HOST_INVALID');
+    const target = host
+      ? new CloudflarePagesTarget({
+          repositoryRoot: process.cwd(),
+          accountId: process.env.CLOUDFLARE_ACCOUNT_ID ?? '',
+          apiToken: process.env.CLOUDFLARE_API_TOKEN ?? '',
+          project: process.env.CLOUDFLARE_PAGES_PROJECT ?? '',
+          origin: process.env.SITE_URL ?? '',
+        })
+      : undefined;
     const history = await loadGitReleaseHistory({
       metadata,
       previous,
       ...(catalogPath ? { catalogPath } : {}),
+      ...(target
+        ? { confirmHostPublication: (commit: string) => target.getDeployment(commit) }
+        : {}),
     });
     const holds = buildAdministratorHoldSummary(
       updateValues.map((value: unknown) => PublicationUpdateSchema.parse(value)),

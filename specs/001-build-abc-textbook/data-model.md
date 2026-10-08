@@ -513,3 +513,7 @@ SC-012について、全公開Problem routeが共有LearningRecord component/act
 13. private preview、仮taxonomy、未結合shard、preview-only evidenceが公開content treeへ入っていない。
 14. `FR-001`/`SC-001`に対応するABC 212〜cutoffの連続性とDより後のProblem 100% coverageを、previewとは独立したrelease commitから再計算できる。
 15. 公開後catch-upは実際の公開済みbaseを参照し、既収録Contestを追加として再適用しない。未着手の後続Contestは現在のbatchへ混ぜず、batch内に未完成・保留がある場合はbatch全体を公開しない。
+
+## #53 initial-release agent acceptance
+
+`Catalog.release.agentQualityReviewEvidenceRef`はownerが人間承認を不要としたABC212–466初版だけのagent品質受入を参照する。`acceptanceMode=agent_quality_review`で、human refsと併存しない。対象scope・manifest・check・全232 item/242 Outcome・憲章/templates・既存本文品質lineageにbindingし、初版以外へ流用できない。実host成功後の履歴にもagent refを保持し、人間reviewへ読み替えない。

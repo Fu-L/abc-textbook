@@ -15,6 +15,7 @@ import {
   OffsetDateTimeSchema,
   SafePathSchema,
   Sha256Schema,
+  SeedAgentQualityReviewReferenceSchema,
 } from '../domain/schema-parts/catalog.js';
 import {
   ExecutableExampleEvidenceSchema,
@@ -52,6 +53,18 @@ import {
   parseTrustedCatalog,
   TrustedCatalogDiffError,
 } from './trusted-diff.js';
+import { loadFullPublicProjection } from './full-public-projection.js';
+import {
+  validateSeedAgentQualityReview,
+  SEED_AGENT_OWNER_INSTRUCTION,
+} from '../validation/seed-agent-review.js';
+import {
+  assertSeedRelease,
+  createSeedReleaseManifest,
+  INITIAL_RELEASE_MANIFEST,
+  INITIAL_BOOTSTRAP_ID,
+} from './seed-release.js';
+import { canonicalJson } from '../domain/canonical-json.js';
 
 const text = z.string().trim().min(1);
 
@@ -126,6 +139,8 @@ const execFileAsync = promisify(execFile);
 export interface CatalogEvidenceTrustOptions {
   /** The public catalog file whose current bytes are being validated. */
   readonly catalogPath: string;
+  /** Preparation inspection only; never supplied by production validation. */
+  readonly allowHeldBootstrap?: boolean;
 }
 
 interface ContentFileInventoryEntry {
@@ -374,28 +389,33 @@ const calculateBaseContentFileInventory = async (
     .split('\n')
     .map((value) => value.trim())
     .filter(Boolean);
-  return Promise.all(
-    relativePaths.map(async (relativePath) => {
-      let raw: string | Buffer;
-      try {
-        raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
-      } catch {
-        throw new CatalogEvidenceInventoryError(
-          'TRUSTED_BASE_CONTENT_UNREADABLE',
-          `Cannot read ${relativePath} from the protected base commit.`,
-        );
-      }
-      const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
-      return {
-        path: relativePath,
-        sha256: createHash('sha256').update(bytes).digest('hex'),
-        byteLength: bytes.byteLength,
-      };
-    }),
-  );
+  const files: ContentFileInventoryEntry[] = [];
+  for (let offset = 0; offset < relativePaths.length; offset += 32)
+    files.push(
+      ...(await Promise.all(
+        relativePaths.slice(offset, offset + 32).map(async (relativePath) => {
+          let raw: string | Buffer;
+          try {
+            raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
+          } catch {
+            throw new CatalogEvidenceInventoryError(
+              'TRUSTED_BASE_CONTENT_UNREADABLE',
+              `Cannot read ${relativePath} from the protected base commit.`,
+            );
+          }
+          const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
+          return {
+            path: relativePath,
+            sha256: createHash('sha256').update(bytes).digest('hex'),
+            byteLength: bytes.byteLength,
+          };
+        }),
+      )),
+    );
+  return files;
 };
 
-const calculateActualContentFileInventory = async (
+export const calculateActualContentFileInventory = async (
   repositoryRoot: string,
 ): Promise<ContentFileInventoryEntry[]> =>
   Promise.all(
@@ -486,11 +506,50 @@ export const loadCatalogEvidenceCanonicalSources = async (
   if (!manifestMatch) {
     throw new CatalogEvidenceInventoryError('CANONICAL_WORK_MANIFEST_NOT_UNIQUE', 'No manifest.');
   }
-  const committedScope = await readCommittedManifestScope(
-    manifestMatch.path,
-    repositoryRoot,
-    baseCommit,
-  );
+  const isSeedBootstrap =
+    !baseCatalog &&
+    release.releaseKind === 'initial' &&
+    release.updateIds.length === 1 &&
+    release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
+  let initialBaseCatalog;
+  let initialProjectionDigest: string | undefined;
+  if (isSeedBootstrap) {
+    assertSeedRelease(currentCatalog);
+    await runGit(['diff', '--exit-code', baseCommit, 'HEAD', '--', 'src/content'], repositoryRoot);
+    const projection = await loadFullPublicProjection({
+      repositoryRoot,
+      usePreparedRelease: false,
+    });
+    initialBaseCatalog = projection.catalog;
+    initialProjectionDigest = projection.digest;
+    for (const key of [
+      'contests',
+      'contestGaps',
+      'contestSlots',
+      'problems',
+      'techniqueInventory',
+      'tags',
+      'learningOutcomes',
+      'learningUnits',
+      'placements',
+      'authoringUnits',
+      'sources',
+      'correctionImpacts',
+    ] as const)
+      if (canonicalJson(currentCatalog[key]) !== canonicalJson(projection.catalog[key]))
+        throw new CatalogEvidenceInventoryError('INITIAL_CANONICAL_DRIFT', key);
+    if (path.relative(repositoryRoot, manifestMatch.path) !== INITIAL_RELEASE_MANIFEST)
+      throw new CatalogEvidenceInventoryError('INITIAL_MANIFEST_PATH', manifestMatch.path);
+  }
+  const committedScope = isSeedBootstrap
+    ? ContentWorkManifestSchema.parse(
+        createSeedReleaseManifest(
+          currentCatalog,
+          manifestMatch.value.createdAt,
+          manifestMatch.value.reviewPolicy.highRiskSelfReviewReason === 'solo_maintainer',
+        ),
+      )
+    : await readCommittedManifestScope(manifestMatch.path, repositoryRoot, baseCommit);
   try {
     validateContentWorkManifest(manifestMatch.value, committedScope);
   } catch (error) {
@@ -518,7 +577,11 @@ export const loadCatalogEvidenceCanonicalSources = async (
   }
   if (
     updates.size !== release.updateIds.length ||
-    release.updateIds.some((id) => updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH')
+    release.updateIds.some(
+      (id) =>
+        updates.get(id)?.state !== 'ELIGIBLE_FOR_BATCH' &&
+        !(isSeedBootstrap && options.allowHeldBootstrap && updates.get(id)?.state === 'ON_HOLD'),
+    )
   ) {
     throw new CatalogEvidenceInventoryError(
       'CANONICAL_PUBLICATION_UPDATE_MISSING',
@@ -532,6 +595,25 @@ export const loadCatalogEvidenceCanonicalSources = async (
     }
     return update;
   });
+  if (isSeedBootstrap) {
+    const bootstrap = orderedUpdates[0];
+    if (
+      bootstrap?.kind !== 'bootstrap' ||
+      bootstrap.fixtureMode ||
+      bootstrap.operations.length ||
+      bootstrap.sourceSetFingerprint !== initialProjectionDigest ||
+      canonicalJson(
+        bootstrap.authoringResults.map((result) => [result.problemId, result.draftPath]).sort(),
+      ) !==
+        canonicalJson(
+          currentCatalog.authoringUnits.map((unit) => [unit.problemId, unit.docPath]).sort(),
+        )
+    )
+      throw new CatalogEvidenceInventoryError(
+        'INITIAL_BOOTSTRAP_BINDING',
+        'Bootstrap must bind the unchanged accepted seed and every authored document.',
+      );
+  }
   const expectedBaseReleaseVersion =
     release.releaseKind === 'initial' ? null : (baseCatalog?.release.version ?? null);
   if (orderedUpdates.some((update) => update.baseReleaseVersion !== expectedBaseReleaseVersion)) {
@@ -552,10 +634,15 @@ export const loadCatalogEvidenceCanonicalSources = async (
   const operationIds = new Set<string>();
   let trustedDiff: ReturnType<typeof buildTrustedPublicationDiff>;
   try {
-    trustedDiff = buildTrustedPublicationDiff(orderedUpdates, baseCatalog, currentCatalog, {
-      baseFiles: baseContentFiles,
-      currentFiles: actualContentFiles,
-    });
+    trustedDiff = buildTrustedPublicationDiff(
+      orderedUpdates,
+      initialBaseCatalog ?? baseCatalog,
+      currentCatalog,
+      {
+        baseFiles: baseContentFiles,
+        currentFiles: actualContentFiles,
+      },
+    );
   } catch (error) {
     if (error instanceof TrustedCatalogDiffError) {
       throw new CatalogEvidenceInventoryError(error.code, error.message);
@@ -577,6 +664,9 @@ export const loadCatalogEvidenceCanonicalSources = async (
         correctionImpacts: trustedUpdate.correctionImpacts,
         baseFiles: baseContentFiles,
         currentFiles: actualContentFiles,
+        ...(isSeedBootstrap
+          ? { initialPublicationProblemIds: currentCatalog.problems.map((problem) => problem.id) }
+          : {}),
       });
     } catch (error) {
       if (error instanceof PublicationUpdateError) {
@@ -723,9 +813,22 @@ export const deriveCatalogEvidenceTrustContext = (
 export const CatalogReleaseEvidenceInventorySchema = strictObject({
   subjectDigest: Sha256Schema,
   checks: z.array(CatalogCheckReferenceSchema).min(1),
-  reviews: z.array(CatalogReviewReferenceSchema).min(1),
+  reviews: z.array(CatalogReviewReferenceSchema),
+  agentQualityReview: SeedAgentQualityReviewReferenceSchema.optional(),
   executableExampleEvidence: CatalogExecutableExampleEvidenceReferenceSchema.optional(),
 }).superRefine((inventory, context) => {
+  if (!inventory.reviews.length && !inventory.agentQualityReview)
+    context.addIssue({
+      code: 'custom',
+      path: ['reviews'],
+      message: 'Review evidence is required.',
+    });
+  if (inventory.agentQualityReview && inventory.reviews.length)
+    context.addIssue({
+      code: 'custom',
+      path: ['reviews'],
+      message: 'Agent acceptance is not human approval.',
+    });
   const checkIds = inventory.checks.map(({ checkId }) => checkId);
   const resultPaths = inventory.checks.map(({ resultPath }) => resultPath);
   const evidenceIds = inventory.reviews.map(({ evidenceId }) => evidenceId);
@@ -1167,7 +1270,81 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     ),
   );
   const release = CatalogSchema.parse(canonicalSources.catalog).release;
+  const agentQualityReview = parsed.data.agentQualityReview;
+  if (agentQualityReview) {
+    const file = await readPublicEvidenceFile(agentQualityReview.path, repositoryRoot);
+    if (file.digest !== agentQualityReview.digest) throw new Error('INITIAL_AGENT_REVIEW_DIGEST');
+    const agent = validateSeedAgentQualityReview(file.value, {
+      catalog: catalogResult.data,
+      manifest: ContentWorkManifestSchema.parse(canonicalSources.workManifest),
+      inventory: trustedContext,
+      checks,
+    });
+    if (agentQualityReview.subjectDigest !== agent.subjectDigest)
+      throw new Error('INITIAL_AGENT_REVIEW_SUBJECT');
+    for (const ref of [
+      agent.auditMatrix,
+      agent.constitution,
+      agent.mathematicalRegressions,
+      ...agent.dependentTemplates,
+      ...agent.lineage,
+      ...agent.checkResultRefs,
+    ]) {
+      const sourcePath = ref.path.startsWith('.specify/')
+        ? await resolvePublicCatalogInput(ref.path, repositoryRoot)
+        : await resolvePublicEvidencePath(ref.path, repositoryRoot);
+      const bytes = await readFile(sourcePath);
+      if (digestBytes(bytes) !== ref.digest)
+        throw new Error(`INITIAL_AGENT_REVIEW_STALE:${ref.path}`);
+    }
+    const constitution = await readFile(path.join(repositoryRoot, agent.constitution.path), 'utf8');
+    if (!constitution.includes(SEED_AGENT_OWNER_INSTRUCTION))
+      throw new Error('INITIAL_AGENT_REVIEW_OWNER_INSTRUCTION');
+    const matrix = JSON.parse(
+      await readFile(path.join(repositoryRoot, agent.auditMatrix.path), 'utf8'),
+    ) as {
+      status: string;
+      inputSubject: { digest: string };
+      sourceProjectionDigest: string;
+    };
+    if (
+      matrix.status !== 'passed' ||
+      matrix.inputSubject.digest !== agent.auditInputSubjectDigest ||
+      matrix.sourceProjectionDigest !== agent.sourceProjectionDigest
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_AUDIT');
+    const templateFiles = (
+      await readdir(path.join(repositoryRoot, '.specify/templates'), {
+        recursive: true,
+        withFileTypes: true,
+      })
+    )
+      .filter((entry) => entry.isFile())
+      .map((entry) => path.relative(repositoryRoot, path.join(entry.parentPath, entry.name)));
+    if (
+      !sameStringSet(
+        templateFiles,
+        agent.dependentTemplates.map((ref) => ref.path),
+      )
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_TEMPLATES');
+    const mathematical = await readFile(
+      path.join(repositoryRoot, agent.mathematicalRegressions.path),
+      'utf8',
+    );
+    if (
+      (
+        mathematical.match(
+          /^Running docs\/verification\/bootstrap\/pr65.*-mathematical-checks\.py$/gmu,
+        ) ?? []
+      ).length !== 20 ||
+      !mathematical.endsWith('All independent mathematical regressions passed\n')
+    )
+      throw new Error('INITIAL_AGENT_REVIEW_MATHEMATICAL_REGRESSIONS');
+  }
   if (
+    canonicalDigest(release.agentQualityReviewEvidenceRef ?? null) !==
+      canonicalDigest(agentQualityReview ?? null) ||
     release.validationSummary.checks.length !== checks.length ||
     release.validationSummary.checks.some((reference) => {
       const check = checks.find(({ checkId }) => checkId === reference.checkId);
@@ -1200,6 +1377,7 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
   const subjectDigests = [
     ...checks.map(({ subjectDigest }) => subjectDigest),
     ...reviews.map(({ subjectDigest }) => subjectDigest),
+    ...(agentQualityReview ? [agentQualityReview.subjectDigest] : []),
   ];
   const subjectDigest = subjectDigests[0];
   if (
@@ -1217,6 +1395,7 @@ export const loadTrustedCatalogReleaseEvidenceInventory = async (
     subjectDigest,
     checks,
     reviews,
+    ...(agentQualityReview ? { agentQualityReview } : {}),
     ...(executableExampleEvidence ? { executableExampleEvidence } : {}),
   };
 };

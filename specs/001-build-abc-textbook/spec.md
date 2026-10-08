@@ -22,6 +22,8 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 
 初版の必須成果はUS1〜US4の教材・導線・検索・学習記録と、検証・レビュー・公開履歴・デプロイ・rollbackである。US5、新Contestの取得・執筆・適用を含むFR-022〜FR-025、SC-006/SC-007、およびSC-014のlive更新経路の受入は公開後のキャッチアップ段階へ移す。既存の更新・訂正・52週simulationの回帰検査は維持するが、その成功をlive機能の完成と報告しない。FR-020/SC-013の既存記録保護とFR-026〜FR-030の適用可能な公開品質要件は初版にも適用する。
 
+**#53初版レビューのowner例外（2026-10-07）**: ownerはhigh-risk self-reviewを指定した後、「人間の了承は不要です。」と明示した。固定868問のT146と初版公開レビューgateは`agent_quality_review`と全自動検査で受け入れ、人間のitem承認・reviewer-run check・merge承認を要求しない。`self`、全risk reason、`solo_maintainer`、current-subject binding、232 itemのagent decision/basis、242 Outcome被覆、未解消blocking finding 0件は保持する。FR-026およびSC-008の人間承認条件はこの初版だけ本例外を適用し、agent品質受入を人間approvalとして記録しない。通常・catch-up更新のレビューpolicyと#54のprotected-main merge/exact-commit deployは別に維持する。
+
 公開後は実際に公開済みの版をbaseとして未収録Contestを昇順に取り込む。各更新版の収録上限とoffset付き`cutoffAt`を固定し、その範囲内の100%収録を検証する。1 Contestずつ、または独立して検証できる小さなbatchで公開でき、遠い最新回まで追いつくことを中間更新の公開条件にしない。同じ更新内の未完成・保留を部分公開しない。手動執筆・レビュー・公開判断を許容し、一括化・自動化の完成を初版公開条件にしない。
 
 ## Learner and Scope *(mandatory)*
@@ -205,6 +207,7 @@ ABC 212以降の上級問題を年代順に並べるだけでなく、必要な�
 - **FR-026**: mergeおよび公開前に、適用可能な自動検査を実行した人間reviewerが学習成果の被覆を明示的に確認しなければならない。リスク理由のない通常更新ではmanifest ownerが`self` reviewを行い、外部person IDなしで完了できる。公式根拠との矛盾・訂正、独自証明などの自動判定不能な新規正当化、または学習成果・典型タグ・前提・問題配置の重大な分類変更のいずれかを含む高リスク更新では、原則として作成者以外の第三者が`third_party` reviewを行う。ただしmaintainerが一人だけの場合は、全risk reasonを保持して`solo_maintainer`理由を明示したときに限りmanifest ownerの`self` reviewを選択できる。high-risk self-reviewでもcurrent subjectへのbinding、全適用checkの成功、全itemの明示approvalとreview basis、未解消blocking finding 0件を必須とする。review policyと証跡のreview modeは一致し、自己reviewと第三者reviewを証跡上明示的に区別しなければならない。
   Issue #48の初期コーパス受入（T074/T078）に限り、運用者の明示指示により本人承認ゲートを除外し、current subjectの`agent_quality_review`、全件検証、本文品質点検、独立数学回帰、成果被覆を根拠とする。人間approvalやproduction merge/deploy承認は主張しない。
   Issue #49の実装受入（T131）も運用者の明示指示によりcurrent-subjectの`agent_quality_review`と全自動検証で完了する。productionのself/third-party review・merge・deploy契約は維持し、人間approvalや実公開を主張しない。
+  Issue #53の固定ABC212〜466初版（T146と初版公開review gate）はownerの「人間の了承は不要です。」指示により、全risk reason・self/solo-maintainer policyを保持したcurrent-subjectの`agent_quality_review`、全232 itemの根拠付きagent decision、242 Outcome被覆、全自動検査で受け入れる。人間approvalを要求・生成しない。後続更新とprotected-main/exact-commit deploy契約は維持する。
 - **FR-027**: 一つ以上の更新を含むrelease commitは、未解決の検証失敗または必要レビューの欠落がある間はprotected mainへmergeしてはならない。公開snapshot IDはmerge済みのfull Git commit hashとし、デプロイ時に別のcandidate state、owner approval、独自digestを要求してはならない。
 - **FR-028**: 公式情報の訂正、タグ再編、解説修正では、影響するProblem本文・内包block・配置、LearningUnit本文・任意の内包block、前提policy、および派生索引を所有者と具体的locatorで列挙し、同じ更新単位で再確認しなければならない。`CorrectionImpact`のownerは`problem`、`learning_unit`、`problem_placement`、`learning_prerequisites`とし、Unit全順序を独立ownerにしない。掲載順・導線の整合は編集データとの照合で確認する。canonical materialization時点で将来taskが所有する対象は`pending`のまま、そのtaskと全Source Revisionを保持しなければならない。
 - **FR-029**: 公開版は壊れた内部参照、未説明の検証失敗、未定義の必須用語、必要な代替テキストの欠落、再現不能な例を含んではならない。

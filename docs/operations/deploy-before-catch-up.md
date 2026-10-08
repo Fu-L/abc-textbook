@@ -41,15 +41,15 @@ mainと変更内容を読み、公開準備用の別branch/worktreeを作る。
 
 1. `src/lib/catalog/full-public-projection.ts`とbootstrap処理で、seed-onlyの対象・固定cutoff・bootstrap-only
    summaryを明示する。sourceの受理日や最新Contest取得結果から初版上限を広げない。既存本文・taxonomyを再生成しない。
-2. `docs/verification/releases/catalog.json`、`evidence-inventory.json`、`docs/reviews/human-content/releases/merge-review.json`など、`verify:release`の実入力を用意する。既存canonical
+2. `docs/verification/releases/catalog.json`、`evidence-inventory.json`、`docs/reviews/agent-content/initial-release/release-review.json`など、`verify:release`の実入力を用意する。既存canonical
    fileを初公開するという理由だけで架空のadd operationを作らず、保護済みGit
    base/currentの実差分と公開scopeをそれぞれ検証する。
 3. prepared
    Catalogと実hostの公開履歴を分ける。存在しないpublished履歴や人間reviewを作らない。bootstrap
    summaryには実際の初版全868問を記録する。
 4. T150で無償のstatic host、HTTPS origin、base path、認証、exact-commit
-   build/deploy、成功履歴、retry、検証手順を選定する。現時点ではhost未選定であり、実行可能なproduction
-   deploy CLI/runbookは未完成である。
+   build/deploy、成功履歴、retry、検証手順を選定する。Cloudflare Pages
+   Freeのadapter/runbookを用意し、#54の開始時に実project・継続origin・認証を設定する。
 5. ホーム・範囲表示・履歴と公開導線を検証し、実装や契約変更でdigestが変わる証跡を正しいsubjectで更新する。904問版の証跡を868問版へ貼り替えない。
 
 `SITE_URL`と`BASE_PATH`は選定hostに合わせて設定する。IndexedDBのDB名・version・Problem
@@ -71,7 +71,8 @@ npm run verify:release -- --commit HEAD
 slots、出典・本文・配置、routes/search/index閉包、学習記録の独立日時・backup/restore、性能・無料経路を対象とする。既存の数学回帰と更新・訂正・52週simulationを維持する。live
 US5/FR-022〜FR-025/SC-006/SC-007とSC-014のlive更新受入はPhase
 9へ追跡する。simulation成功をlive更新の完成に数えず、未提供機能を公開UIで案内しない。必要reviewはFR-026とConstitution
-3.0.0に従い、既存のagent品質受入と人間approvalを混同しない。SC-009/SC-010の廃止指示は保持する。
+3.0.0に記録した#53 owner指示により、この固定初版はhigh-risk self/solo-maintainer policyと全risk
+reasonを保持したagent_quality_reviewで受け入れ、人間approvalを要求・生成しない。後続更新へこの例外を広げない。SC-009/SC-010の廃止指示は保持する。
 
 表示・検証実装の変更でT160のbuild証跡が変わる場合は、[初期教材の品質検証](initial-release-verification.md)に従ってbuild証跡を更新する。実commitが変わればexact
 treeを再検証し、required checkを通ったprotected mainのfull

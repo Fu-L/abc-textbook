@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile } from 'node:fs/promises';
+import path from 'node:path';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { assertAudit } from './initial-release-audits.js';
 
@@ -19,7 +20,7 @@ export const AUDIT_ROOT = 'docs/verification/initial-release';
 export const fileSha = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');
 
 /** Source/implementation/acceptance inputs, not generated audit outputs or task status. */
-export const auditInputSubject = async () => {
+export const auditInputSubject = async (repositoryRoot = process.cwd()) => {
   const directories = [
     'src',
     'scripts',
@@ -45,15 +46,29 @@ export const auditInputSubject = async () => {
     '.specify/memory/constitution.md',
   ];
   for (const directory of directories) {
-    for (const file of await readdir(directory, { recursive: true, withFileTypes: true }))
+    for (const file of await readdir(path.join(repositoryRoot, directory), {
+      recursive: true,
+      withFileTypes: true,
+    }))
       if (
         file.isFile() &&
         /\.(?:[cm]?js|tsx?|astro|json|md|py|txt|ya?ml|svg|css|sh)$/u.test(file.name)
-      )
-        files.push(`${file.parentPath}/${file.name}`.replace(`${process.cwd()}/`, ''));
+      ) {
+        const relative = path.relative(repositoryRoot, `${file.parentPath}/${file.name}`);
+        // Derived review packets bind this audit's result and are not audit inputs.
+        if (
+          !relative.startsWith('docs/reviews/human-content/initial-release/') &&
+          !relative.startsWith('docs/reviews/human-content/releases/') &&
+          !relative.startsWith('docs/reviews/agent-content/initial-release/')
+        )
+          files.push(relative);
+      }
   }
   const inventory = await Promise.all(
-    files.sort().map(async (path) => ({ path, digest: fileSha(await readFile(path)) })),
+    files.sort().map(async (file) => ({
+      path: file,
+      digest: fileSha(await readFile(path.join(repositoryRoot, file))),
+    })),
   );
   return { digest: canonicalDigest(inventory), fileCount: inventory.length };
 };

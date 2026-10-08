@@ -2,6 +2,7 @@ import {
   CatalogContract,
   parseAtCoderContestResourceUrl,
   SYMMETRIC_TECHNIQUE_TAG_RELATION_TYPES,
+  type SeedAgentQualityReviewReference,
 } from '../domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../domain/canonical-json.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
@@ -38,6 +39,7 @@ interface Entity {
 }
 
 export interface TrustedCatalogReleaseEvidenceInventory {
+  readonly agentQualityReview?: SeedAgentQualityReviewReference | undefined;
   readonly subjectDigest: string;
   readonly checks: readonly {
     readonly checkId: string;
@@ -70,6 +72,7 @@ export interface TrustedCatalogReleaseEvidenceInventory {
 export interface CatalogLike {
   readonly schemaVersion: '3.0.0';
   readonly release: {
+    readonly agentQualityReviewEvidenceRef?: SeedAgentQualityReviewReference | undefined;
     readonly publicationStatus?: 'prepared' | 'published' | undefined;
     readonly version: string;
     readonly releaseKind: 'initial' | 'incremental';
@@ -489,6 +492,7 @@ export const buildCatalog = (
   input: unknown,
   sourcePaths: readonly string[] = [],
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
 ): CatalogLike => {
   const stagingPath = sourcePaths.find(hasStagingPathSegment);
   if (stagingPath) {
@@ -500,7 +504,7 @@ export const buildCatalog = (
     ]);
   }
   const catalog = assembleCatalog(input);
-  const diagnostics = validateCatalogSemantics(catalog, trustedEvidence);
+  const diagnostics = validateCatalogSemantics(catalog, trustedEvidence, options);
   if (diagnostics.length > 0) throw new CatalogBuildError(diagnostics);
   return Object.freeze(catalog);
 };
@@ -508,9 +512,10 @@ export const buildCatalog = (
 export const validateCatalogSemantics = (
   catalog: CatalogLike,
   trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
 ): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
-  if (catalog.release.publicationStatus === 'prepared')
+  if (catalog.release.publicationStatus === 'prepared' && !options.allowPreparedRelease)
     diagnostics.push({
       code: 'PUBLIC_PROJECTION_NOT_RELEASE',
       message:
@@ -903,6 +908,21 @@ export const validateCatalogSemantics = (
   const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
   const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs;
   const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
+  const agentReview = catalog.release.agentQualityReviewEvidenceRef;
+  const trustedAgentReview = trustedEvidence?.agentQualityReview;
+  const agentReviewComplete =
+    agentReview !== undefined &&
+    trustedAgentReview !== undefined &&
+    canonicalDigest(agentReview) === canonicalDigest(trustedAgentReview) &&
+    agentReview.subjectDigest === catalog.release.contentFileInventoryDigest &&
+    catalog.release.releaseKind === 'initial' &&
+    catalog.release.firstContestId === 'abc212' &&
+    catalog.release.lastContestId === 'abc466' &&
+    catalog.release.problemCount === 868 &&
+    catalog.release.cutoffAt === '2026-07-12T00:00:00+09:00' &&
+    catalog.release.updateIds.length === 1 &&
+    catalog.release.updateIds[0] === 'update-bootstrap-full-corpus' &&
+    reviewEvidenceRefs.length === 0;
   const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
     const sortedLeft = [...left].sort();
     const sortedRight = [...right].sort();
@@ -944,7 +964,8 @@ export const validateCatalogSemantics = (
     new Set(releaseCheckIds).size === releaseCheckIds.length &&
     new Set(releaseResultDigests).size === releaseResultDigests.length &&
     sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
-    reviewEvidenceRefs.length > 0 &&
+    (reviewEvidenceRefs.length > 0 || agentReviewComplete) &&
+    (agentReview === undefined ? trustedAgentReview === undefined : agentReviewComplete) &&
     new Set(reviewEvidenceIds).size === reviewEvidenceIds.length &&
     reviewEvidenceRefs.every(
       (review) =>
@@ -991,7 +1012,7 @@ export const validateCatalogSemantics = (
     diagnostics.push({
       code: 'RELEASE_EVIDENCE_INCOMPLETE',
       message:
-        'Every release check and human review must match the trusted current subject before publication.',
+        'Every release check and policy-selected review must match the trusted current subject before publication.',
     });
   }
   for (const inventory of catalog.techniqueInventory) {
@@ -1163,16 +1184,6 @@ export const validateCatalogSemantics = (
     }
   }
   for (const tag of catalog.tags) {
-    const normalizedTerms = [tag.name, ...tag.aliases, ...tag.formerNames].map((term) =>
-      term.normalize('NFKC').trim().toLocaleLowerCase('en-US'),
-    );
-    if (new Set(normalizedTerms).size !== normalizedTerms.length) {
-      diagnostics.push({
-        code: 'TAG_TERM_DUPLICATE',
-        entityId: tag.id,
-        message: 'A tag name, alias, or former name is duplicated within the tag.',
-      });
-    }
     if (tag.parentId) requireRefs(tag.id, 'parentId', [tag.parentId], tagIds);
     requireRefs(tag.id, 'prerequisiteTagIds', tag.prerequisiteTagIds, tagIds);
     requireRefs(
@@ -1226,6 +1237,8 @@ export const validateCatalogSemantics = (
   }
   const tagTermOwners = new Map<string, string>();
   for (const tag of catalog.tags) {
+    // Accepted aliases may include the canonical name or spelling variants.
+    // They identify one concept; only ownership by different Tags is ambiguous.
     for (const term of [tag.name, ...tag.aliases, ...tag.formerNames]) {
       const normalized = term.normalize('NFKC').trim().toLocaleLowerCase('en-US');
       const existingOwner = tagTermOwners.get(normalized);

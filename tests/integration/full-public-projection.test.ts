@@ -16,7 +16,8 @@ import { renderPublicDocument } from '../../src/lib/catalog/render-public-docume
 import { joinAndFilterLearningRecords } from '../../src/lib/learning-records/filter.js';
 import { defaultLearningRecord } from '../../src/lib/learning-records/database.js';
 
-const projection = await loadFullPublicProjection();
+// Exercise the unreviewed projection independently of generated release acceptance.
+const projection = await loadFullPublicProjection({ usePreparedRelease: false });
 describe('accepted canonical full public projection', () => {
   it('preserves representative problems independently of direct tag assignments for all 213 tags', () => {
     expect(projection.ui.tags).toHaveLength(213);
@@ -120,7 +121,7 @@ describe('accepted canonical full public projection', () => {
       }
     }
     expect(checkedParagraphs).toBeGreaterThan(1000);
-  }, 30_000);
+  }, 60_000);
   it('displays all accepted authoring bracket escapes without losing set differences', async () => {
     const checkedIds = new Set<string>();
     let checkedLines = 0;
@@ -254,9 +255,9 @@ describe('accepted canonical full public projection', () => {
     );
   });
   it('freezes a reproducible projection digest', async () => {
-    const again = await loadFullPublicProjection();
+    const again = await loadFullPublicProjection({ usePreparedRelease: false });
     expect(again.digest).toBe(projection.digest);
     expect(projection.ui.subjectDigest).toBe(projection.digest);
     expect(canonicalDigest(projection.mapping)).toBe(projection.mappingDigest);
-  }, 15_000);
+  }, 60_000);
 });

@@ -33,6 +33,9 @@ import {
 } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { validateMergeReviewEvidence } from '../../src/lib/validation/human-content-review.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
+import { assertSeedRelease, INITIAL_BOOTSTRAP_ID } from '../../src/lib/catalog/seed-release.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import { verifySeedPreparation } from './verify-seed-preparation.js';
 
 export const FULL_RELEASE_CATALOG_PATH = 'docs/verification/releases/catalog.json';
 export const FULL_RELEASE_EVIDENCE_PATH = 'docs/verification/releases/evidence-inventory.json';
@@ -64,6 +67,7 @@ export const verifyFullReleaseCommit = async (input: {
   readonly evidencePath?: string;
   readonly mergeReviewPath?: string;
   readonly mergedMainCommit?: string;
+  readonly preparation?: boolean;
 }) =>
   withReleaseCommit(
     {
@@ -80,6 +84,20 @@ export const verifyFullReleaseCommit = async (input: {
       const catalog = CatalogSchema.parse(
         JSON.parse(await readFile(resolvedCatalog, 'utf8')) as unknown,
       );
+      if (input.preparation) return verifySeedPreparation(context, catalog, resolvedCatalog);
+      const seed =
+        catalog.release.releaseKind === 'initial' &&
+        catalog.release.updateIds[0] === INITIAL_BOOTSTRAP_ID;
+      if (seed) {
+        assertSeedRelease(catalog);
+        if (
+          catalog.release.agentQualityReviewEvidenceRef &&
+          catalog.release.publicationStatus !== 'prepared'
+        )
+          throw new Error('INITIAL_AGENT_REVIEW_REQUIRES_PREPARED_GIT_SNAPSHOT');
+        if (catalog.release.publicationStatus === 'prepared')
+          await verifySeedPreparation(context, catalog, resolvedCatalog);
+      }
       const sources = await loadCatalogEvidenceCanonicalSources(catalog, root, {
         catalogPath: resolvedCatalog,
       });
@@ -98,7 +116,7 @@ export const verifyFullReleaseCommit = async (input: {
         sources,
         root,
       );
-      buildCatalog(catalog, [], evidence);
+      buildCatalog(catalog, [], evidence, { allowPreparedRelease: true });
 
       // Match serialized projections to their real canonical entities, not just to
       // another declared digest. Source packets are inputs, not SourceRevision entities.
@@ -111,6 +129,9 @@ export const verifyFullReleaseCommit = async (input: {
         ['techniqueInventory', 'technique-inventory', 'problemId'],
         ['sources', 'sources', 'id'],
       ] as const) {
+        // Seed metadata deliberately remains uncollected; the accepted projection
+        // supplies publication state, placement and metrics without rewriting it.
+        if (seed && collection === 'problems') continue;
         const actual = [];
         for (const file of await filesUnder(root, `src/content/${directory}`)) {
           if (file.startsWith('src/content/sources/authoring/')) continue;
@@ -179,10 +200,12 @@ export const verifyFullReleaseCommit = async (input: {
       // Canonical impacts remain pending until their real targets are checked.
       // The public catalog records the verified projection; the checks below
       // must still resolve every target and recompute every index from bytes.
-      const publicImpacts = policy.correctionImpacts.map((impact) => ({
-        ...impact,
-        verificationStatus: 'verified' as const,
-      }));
+      const publicImpacts = seed
+        ? (await loadFullPublicProjection({ repositoryRoot: root })).catalog.correctionImpacts
+        : policy.correctionImpacts.map((impact) => ({
+            ...impact,
+            verificationStatus: 'verified' as const,
+          }));
       if (canonicalJson(catalog.correctionImpacts) !== canonicalJson(publicImpacts))
         throw new Error('RELEASE_CORRECTION_INVENTORY_MISMATCH');
       const corrections = await Promise.all(
@@ -202,90 +225,92 @@ export const verifyFullReleaseCommit = async (input: {
       );
       if (!constitution.includes('**Version**: 3.0.0'))
         throw new Error('RELEASE_CONSTITUTION_VERSION');
-      const mergeReviewPath = input.mergeReviewPath ?? FULL_RELEASE_MERGE_REVIEW_PATH;
-      const merge = MergeReviewEvidenceSchema.parse(
-        JSON.parse(
-          await readFile(await resolvePublicEvidencePath(mergeReviewPath, root), 'utf8'),
-        ) as unknown,
-      );
-      const manifest = ContentWorkManifestSchema.parse(sources.workManifest);
-      const ref = catalog.release.humanContentReviewEvidenceRefs.find(
-        (reference) => reference.path === merge.humanContentReviewEvidencePath,
-      );
-      if (!ref) throw new Error('RELEASE_MERGE_REVIEW_NOT_BOUND');
-      const human = HumanContentReviewEvidenceSchema.parse(
-        JSON.parse(
-          await readFile(await resolvePublicEvidencePath(ref.path, root), 'utf8'),
-        ) as unknown,
-      );
-      const fileEntry = async (file: string) => {
-        const bytes = await readFile(path.join(root, file));
-        return {
-          path: file,
-          sha256: createHash('sha256').update(bytes).digest('hex'),
-          byteLength: bytes.length,
+      if (!catalog.release.agentQualityReviewEvidenceRef) {
+        const mergeReviewPath = input.mergeReviewPath ?? FULL_RELEASE_MERGE_REVIEW_PATH;
+        const merge = MergeReviewEvidenceSchema.parse(
+          JSON.parse(
+            await readFile(await resolvePublicEvidencePath(mergeReviewPath, root), 'utf8'),
+          ) as unknown,
+        );
+        const manifest = ContentWorkManifestSchema.parse(sources.workManifest);
+        const ref = catalog.release.humanContentReviewEvidenceRefs.find(
+          (reference) => reference.path === merge.humanContentReviewEvidencePath,
+        );
+        if (!ref) throw new Error('RELEASE_MERGE_REVIEW_NOT_BOUND');
+        const human = HumanContentReviewEvidenceSchema.parse(
+          JSON.parse(
+            await readFile(await resolvePublicEvidencePath(ref.path, root), 'utf8'),
+          ) as unknown,
+        );
+        const fileEntry = async (file: string) => {
+          const bytes = await readFile(path.join(root, file));
+          return {
+            path: file,
+            sha256: createHash('sha256').update(bytes).digest('hex'),
+            byteLength: bytes.length,
+          };
         };
-      };
-      const contentFiles = await Promise.all(
-        (await filesUnder(root, 'src/content', false)).map(fileEntry),
-      );
-      const actualSubject = await Promise.all(
-        merge.subjectFiles.map((file) => fileEntry(file.path)),
-      );
-      if (
-        canonicalJson(actualSubject) !== canonicalJson(merge.subjectFiles) ||
-        canonicalJson(contentFiles) !== canonicalJson(merge.subjectFiles) ||
-        canonicalDigest(merge.subjectFiles) !== catalog.release.contentFileInventoryDigest
-      )
-        throw new Error('RELEASE_MERGE_SUBJECT_FILES_STALE');
-      const templateFiles = await filesUnder(root, '.specify/templates', false);
-      const declaredTemplates = merge.constitutionCheck.dependentTemplates;
-      for (const file of declaredTemplates)
-        if (canonicalJson(await fileEntry(file.path)) !== canonicalJson(file))
-          throw new Error('RELEASE_CONSTITUTION_TEMPLATE_STALE');
-      if (templateFiles.some((file) => !declaredTemplates.some((entry) => entry.path === file)))
-        throw new Error('RELEASE_CONSTITUTION_TEMPLATE_MISSING');
-      for (const check of merge.applicableChecks) {
-        for (const [file, digest] of [
-          [check.resultPath, check.resultDigest],
-          [check.rawResultPath, check.rawResultDigest],
-        ]) {
-          if (
-            !file ||
-            createHash('sha256')
-              .update(await readFile(await resolvePublicEvidencePath(file, root)))
-              .digest('hex') !== digest
-          )
-            throw new Error(`RELEASE_MERGE_CHECK_STALE:${check.checkId}`);
+        const contentFiles = await Promise.all(
+          (await filesUnder(root, 'src/content', false)).map(fileEntry),
+        );
+        const actualSubject = await Promise.all(
+          merge.subjectFiles.map((file) => fileEntry(file.path)),
+        );
+        if (
+          canonicalJson(actualSubject) !== canonicalJson(merge.subjectFiles) ||
+          canonicalJson(contentFiles) !== canonicalJson(merge.subjectFiles) ||
+          canonicalDigest(merge.subjectFiles) !== catalog.release.contentFileInventoryDigest
+        )
+          throw new Error('RELEASE_MERGE_SUBJECT_FILES_STALE');
+        const templateFiles = await filesUnder(root, '.specify/templates', false);
+        const declaredTemplates = merge.constitutionCheck.dependentTemplates;
+        for (const file of declaredTemplates)
+          if (canonicalJson(await fileEntry(file.path)) !== canonicalJson(file))
+            throw new Error('RELEASE_CONSTITUTION_TEMPLATE_STALE');
+        if (templateFiles.some((file) => !declaredTemplates.some((entry) => entry.path === file)))
+          throw new Error('RELEASE_CONSTITUTION_TEMPLATE_MISSING');
+        for (const check of merge.applicableChecks) {
+          for (const [file, digest] of [
+            [check.resultPath, check.resultDigest],
+            [check.rawResultPath, check.rawResultDigest],
+          ]) {
+            if (
+              !file ||
+              createHash('sha256')
+                .update(await readFile(await resolvePublicEvidencePath(file, root)))
+                .digest('hex') !== digest
+            )
+              throw new Error(`RELEASE_MERGE_CHECK_STALE:${check.checkId}`);
+          }
         }
-      }
-      const mergeManifest = ContentWorkManifestSchema.parse(await json(merge.workManifestPath));
-      if (
-        !merge.workManifestPath.startsWith('docs/work-manifests/') ||
-        canonicalJson(mergeManifest) !== canonicalJson(manifest)
-      )
-        throw new Error('RELEASE_MERGE_WORK_MANIFEST_MISMATCH');
-      validateMergeReviewEvidence(merge, {
-        subjectDigest: catalog.release.contentFileInventoryDigest,
-        workManifestPath: merge.workManifestPath,
-        workManifestDigest: manifest.digest,
-        humanReview: {
-          id: human.id,
-          digest: ref.digest,
-          subjectDigest: human.subjectDigest,
-          aggregatePassed: human.aggregatePassed,
+        const mergeManifest = ContentWorkManifestSchema.parse(await json(merge.workManifestPath));
+        if (
+          !merge.workManifestPath.startsWith('docs/work-manifests/') ||
+          canonicalJson(mergeManifest) !== canonicalJson(manifest)
+        )
+          throw new Error('RELEASE_MERGE_WORK_MANIFEST_MISMATCH');
+        validateMergeReviewEvidence(merge, {
+          subjectDigest: catalog.release.contentFileInventoryDigest,
+          workManifestPath: merge.workManifestPath,
+          workManifestDigest: manifest.digest,
+          humanReview: {
+            id: human.id,
+            digest: ref.digest,
+            subjectDigest: human.subjectDigest,
+            aggregatePassed: human.aggregatePassed,
+            reviewerId: human.reviewer.personId,
+            reviewMode: human.reviewMode,
+          },
+          constitutionVersion: '3.0.0',
+          constitutionDigest: createHash('sha256').update(constitution).digest('hex'),
           reviewerId: human.reviewer.personId,
-          reviewMode: human.reviewMode,
-        },
-        constitutionVersion: '3.0.0',
-        constitutionDigest: createHash('sha256').update(constitution).digest('hex'),
-        reviewerId: human.reviewer.personId,
-        checks: catalog.release.validationSummary.checks.map((check) => ({
-          checkId: check.checkId,
-          command: check.command,
-          applicable: true,
-        })),
-      });
+          checks: catalog.release.validationSummary.checks.map((check) => ({
+            checkId: check.checkId,
+            command: check.command,
+            applicable: true,
+          })),
+        });
+      }
       return {
         command: 'verify:release',
         commit: context.commit,
@@ -293,6 +318,9 @@ export const verifyFullReleaseCommit = async (input: {
         version: catalog.release.version,
         cutoffAt: catalog.release.cutoffAt,
         aggregatePassed: true,
+        ...(catalog.release.agentQualityReviewEvidenceRef
+          ? { acceptanceMode: 'agent_quality_review', humanApprovalClaimed: false }
+          : { acceptanceMode: 'human_review' }),
         problemCount: catalog.problems.length,
         outcomeCount: outcomeCoverage.length,
         outcomeCoverageDigest: canonicalDigest(outcomeCoverage),

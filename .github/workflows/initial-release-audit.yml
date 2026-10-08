@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   evidence:
+    name: Initial corpus audit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

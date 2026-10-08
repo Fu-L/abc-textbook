@@ -151,8 +151,41 @@ try {
         };
       } catch (error) {
         const failure = error as Error & { stdout?: string; stderr?: string };
+        let failedTests: string | undefined;
+        if (args.includes('--reporter=json') && failure.stdout) {
+          try {
+            const report = JSON.parse(failure.stdout) as {
+              testResults?: {
+                name: string;
+                status: string;
+                message?: string;
+                assertionResults: { fullName: string; status: string; failureMessages: string[] }[];
+              }[];
+            };
+            failedTests = JSON.stringify(
+              report.testResults?.flatMap<unknown>((file) => {
+                const assertions = file.assertionResults
+                  .filter((test) => test.status === 'failed')
+                  .map((test) => ({ file: file.name, ...test }));
+                return assertions.length || file.status !== 'failed'
+                  ? assertions
+                  : [
+                      {
+                        file: file.name,
+                        suiteFailure: true,
+                        message:
+                          file.message ??
+                          'Suite failed before individual assertions; check setup hooks.',
+                      },
+                    ];
+              }),
+            );
+          } catch {
+            // Keep native output when the failed command did not finish its JSON report.
+          }
+        }
         throw new Error(
-          `${command} failed: ${failure.message}\n${failure.stdout?.slice(-3000) ?? ''}\n${failure.stderr?.slice(-3000) ?? ''}`,
+          `${command} failed: ${failure.message}\n${failedTests ?? failure.stdout?.slice(-3000) ?? ''}\n${failure.stderr?.slice(-3000) ?? ''}`,
           { cause: error },
         );
       }
@@ -374,7 +407,7 @@ try {
         digest: fileSha(await readFile(browserSummary.rawReportPath)),
       },
       productionReleaseApproved: false,
-      nextGate: 'Issue #52 post-catch-up validation',
+      nextGate: 'Issue #53 seed release gate, then Issue #54 deployment',
     };
     await writeJson(`${AUDIT_ROOT}/matrix.json`, {
       ...matrix,

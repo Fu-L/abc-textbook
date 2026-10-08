@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0.0",
+  "checkId": "check-initial-corpus",
+  "command": "npm run verify:initial-release -- --check",
+  "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+  "exitCode": 0,
+  "passed": true,
+  "completedAt": "2026-10-07T17:20:29.092Z"
+}

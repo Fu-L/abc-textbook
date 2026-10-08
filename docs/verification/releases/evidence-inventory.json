@@ -1,0 +1,34 @@
+{
+  "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+  "checks": [
+    {
+      "checkId": "check-initial-corpus",
+      "command": "npm run verify:initial-release -- --check",
+      "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-10-07T17:20:29.092Z",
+      "resultPath": "docs/verification/releases/checks/check-initial-corpus.json",
+      "resultDigest": "ab294e6678eb6b46d510eaf44a74998754d795c561c560e0b1a878d8ff555a30"
+    },
+    {
+      "checkId": "check-initial-sc012",
+      "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
+      "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+      "exitCode": 0,
+      "passed": true,
+      "completedAt": "2026-10-07T17:19:01.682Z",
+      "resultPath": "docs/verification/releases/checks/check-initial-sc012.json",
+      "resultDigest": "312dcdf1f36b23558ba8507466c0be73f9295c0217d953fc1abab09ac1303111"
+    }
+  ],
+  "reviews": [],
+  "agentQualityReview": {
+    "evidenceId": "agent-content-review-initial-release",
+    "path": "docs/reviews/agent-content/initial-release/release-review.json",
+    "digest": "293fc5109b9d076fd716d2d4bcaae1aaade332faa00691bdaee8e651d78b6849",
+    "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
+    "acceptanceMode": "agent_quality_review",
+    "aggregatePassed": true
+  }
+}

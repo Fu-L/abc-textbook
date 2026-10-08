@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { canonicalDigest, canonicalJson } from '../domain/canonical-json.js';
 import {
   CatalogSchema,
+  CatalogReleaseSchema,
   ContestSchema,
   OfficialContestGapMetadataSchema,
   ContestSlotRecordSchema,
@@ -23,7 +24,7 @@ import { resolveProblemLocator } from '../authoring/verify-problem-corpus.js';
 import { structuredContentRoots } from './content-source-registry.js';
 import { buildProblemContent } from './build-problem-content.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
-import { catalogContentDigest, assembleCatalog } from './build-catalog.js';
+import { catalogContentDigest, projectCatalogContent, assembleCatalog } from './build-catalog.js';
 import { verifyCanonicalCorrectionTargets } from './correction-targets.js';
 import { validateReleaseLearningStructure } from './release-learning-structure.js';
 import { buildUiCatalog } from './ui-catalog.js';
@@ -35,6 +36,7 @@ import {
   ATCODER_PROBLEMS_METRICS_PATH,
 } from '../corpus/atcoder-problems-metrics.js';
 import { PublicReleaseHistoryEntrySchema } from './build-release-history.js';
+import { INITIAL_RELEASE_CUTOFF } from './seed-release.js';
 
 export const FULL_PROJECTION_PATH = 'docs/verification/bootstrap/us4/full-projections.json';
 export const TAXONOMY_INDEX_PATH = 'src/content/indexes/taxonomy.json';
@@ -71,6 +73,7 @@ export const loadFullPublicProjection = async (
   options: {
     readonly repositoryRoot?: string;
     readonly verifyDerivedFiles?: boolean;
+    readonly usePreparedRelease?: boolean;
   } = {},
 ) => {
   const root = options.repositoryRoot ?? process.cwd();
@@ -308,7 +311,7 @@ export const loadFullPublicProjection = async (
       publicationStatus: 'prepared',
       version: completedAt.slice(0, 10).replaceAll('-', '.'),
       releaseKind: 'initial',
-      cutoffAt: contests.at(-1)?.endedAt,
+      cutoffAt: INITIAL_RELEASE_CUTOFF,
       validatedAt: completedAt,
       publicationEffectiveAt: completedAt,
       manifestDigest: policy.sourceBuild.digest,
@@ -416,8 +419,22 @@ export const loadFullPublicProjection = async (
       };
     },
   );
+  if (options.usePreparedRelease !== false) {
+    let prepared: unknown;
+    try {
+      prepared = await json('docs/verification/releases/catalog.json');
+    } catch (error) {
+      if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
+    }
+    if (prepared !== undefined) {
+      const release = CatalogReleaseSchema.parse((prepared as { release: unknown }).release);
+      Object.assign(catalog.release, release);
+      if (catalogContentDigest(catalog) !== release.contentSnapshotDigest)
+        throw new Error('FULL_PROJECTION_PREPARED_RELEASE_DRIFT');
+    }
+  }
   const digest = canonicalDigest({
-    catalog,
+    catalog: projectCatalogContent(catalog),
     mappingDigest,
     acceptedUnitSubject: acceptedUnits.subjectDigest,
     acceptedProblemSubject: acceptedProblems.subjectDigest,

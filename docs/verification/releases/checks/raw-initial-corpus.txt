@@ -1,0 +1,5 @@
+
+> abc-textbook@0.1.0 verify:initial-release
+> tsx scripts/verify/initial-release.ts --check
+
+{"status":"passed","mode":"--check","inputSubject":{"digest":"7531a804b4262a5d1003598d1b4613ae046d73eaee2a492dd51c902f60e78c3e","fileCount":9500},"sourceProjectionDigest":"d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396","tasks":10}

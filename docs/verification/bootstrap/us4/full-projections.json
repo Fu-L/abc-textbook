@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "taskId": "T160",
   "status": "passed",
-  "sourceProjectionDigest": "58201322c567a997939a3568766e54faecc0ec97c41bdad6937518ba8c25e9e4",
-  "implementationDigest": "06d9d7ffc6cef0d85103d49cfd651f0adae4eaece2b790166b41414aa3c9f3b8",
-  "fullProjectionDigest": "4654b1148e0846a8b725d520c363e32159ecf1950b6e0770cb225a2963ea9a4f",
+  "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
+  "implementationDigest": "cabdfba0f8e0a5f0be74e9758148c0af2bec3088f1a414ff2be21a9c26b895f8",
+  "fullProjectionDigest": "02efb8193d075893d7a617ea52213421fc58e0a04b6743a35f9817ad96e600fb",
   "publicationStatus": "prepared",
   "productionReleaseApproved": false,
   "build": {
@@ -3622,7 +3622,7 @@
       "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
     }
   ],
-  "artifactDigest": "a22c0df444d9bee4b8fc51409cb42572bf61c763f8504ea7eb46e09f51eb7f2b",
+  "artifactDigest": "44b306fa6fc2b79ad8472df51ed49c86374be8fe0ed3874bfa6a8b62e70493cf",
   "artifactInventory": [
     {
       "path": "dist/404.html",
@@ -5011,18 +5011,18 @@
     },
     {
       "path": "dist/data/catalog.json",
-      "digest": "3706c1dc8a12aa931a4358f60b557af73cd3dcde4b9ba339087a1019ae59f7db",
-      "byteLength": 16531926
+      "digest": "db2015106954cd78371a064a395dc5718ba5586486c2cde5a636c73bad684fd3",
+      "byteLength": 16531319
     },
     {
       "path": "dist/feed.xml",
-      "digest": "f34f435138a0b799912f61e1d93d20df860208b9486468eb5bebc0bcf22f3e34",
+      "digest": "aa2c6de2912429009e7c533345f316e82090110a6c9feca95d5b45ae22a55c5a",
       "byteLength": 229
     },
     {
       "path": "dist/index.html",
-      "digest": "4799ea707f56b65b03a1c5d2ef219ab50d792e197fdd29369e901850a4b38ad4",
-      "byteLength": 4524
+      "digest": "86d111b9e81d5b54884c49c54b37efa5e9568b0480a2c1465b5a91ff86c49528",
+      "byteLength": 4608
     },
     {
       "path": "dist/learn/combinatorics-algebra/bostan-mori/index.html",
@@ -9275,6 +9275,11 @@
       "byteLength": 1002
     },
     {
+      "path": "dist/pagefind/fragment/ja_6953658.pf_fragment",
+      "digest": "65adefebefbe7239ef591e6cafdc71b3f5a133d745ea9a27904b8cb92c7e78c7",
+      "byteLength": 339
+    },
+    {
       "path": "dist/pagefind/fragment/ja_69757ee.pf_fragment",
       "digest": "7cd6b785126ddc66c99308f490e94bd027fbe4e445992fa76221b234aacf27fa",
       "byteLength": 4003
@@ -11755,11 +11760,6 @@
       "byteLength": 974
     },
     {
-      "path": "dist/pagefind/fragment/ja_b7357a1.pf_fragment",
-      "digest": "2bd27120e853e4edb45121e1ae835aa99722085aad9d3ed5725dcecb51cecf92",
-      "byteLength": 211
-    },
-    {
       "path": "dist/pagefind/fragment/ja_b755b85.pf_fragment",
       "digest": "cb862135413771c945a70d3ee0b29fcb4653829a5c7a7a44c9254c857824e058",
       "byteLength": 4951
@@ -13205,11 +13205,6 @@
       "byteLength": 4188
     },
     {
-      "path": "dist/pagefind/fragment/ja_e41347a.pf_fragment",
-      "digest": "7dcbdd7bf40ec47596d0b036408d24ef0b2c0ab2905d2d88a171ebcfb6155741",
-      "byteLength": 712
-    },
-    {
       "path": "dist/pagefind/fragment/ja_e434ad5.pf_fragment",
       "digest": "874241c390db0b357dbcca81073ce2d52fb4155f762dfebc6af4200f7e5e0463",
       "byteLength": 3524
@@ -13513,6 +13508,11 @@
       "path": "dist/pagefind/fragment/ja_ee67bab.pf_fragment",
       "digest": "b5fc6b9191ee73d857a1db77ec221c5989ebec564aac1fa61eb7cc0127a40439",
       "byteLength": 1173
+    },
+    {
+      "path": "dist/pagefind/fragment/ja_ee7ff34.pf_fragment",
+      "digest": "05c8ef003155fc897b9fbe2ee72e5d0838abdb1a38e84c9e0cbaea25d2df1a97",
+      "byteLength": 775
     },
     {
       "path": "dist/pagefind/fragment/ja_eea5d62.pf_fragment",
@@ -14060,9 +14060,9 @@
       "byteLength": 34240
     },
     {
-      "path": "dist/pagefind/index/ja_12972e7.pf_index",
-      "digest": "9259d085f47541d39cf4a84314ceeb42a79805392bc9202cb5a81a78926f34ee",
-      "byteLength": 32249
+      "path": "dist/pagefind/index/ja_1369af9.pf_index",
+      "digest": "ce69544686af22941fbd070b2ffb8f70ecfe8e8475e5457dfbb7154893fd5845",
+      "byteLength": 22072
     },
     {
       "path": "dist/pagefind/index/ja_18d09cf.pf_index",
@@ -14070,9 +14070,14 @@
       "byteLength": 31167
     },
     {
-      "path": "dist/pagefind/index/ja_19fe8f5.pf_index",
-      "digest": "06d3e1f6fedf1867e2565ac0876b6f1b062de4755e13a1855f9f4acba5a8fb5d",
-      "byteLength": 44324
+      "path": "dist/pagefind/index/ja_1ba6a27.pf_index",
+      "digest": "c47a7b3087d2603b96bffe324699d77e48838b3f1532f6bfa1b789472795f67b",
+      "byteLength": 25082
+    },
+    {
+      "path": "dist/pagefind/index/ja_1f5ebbe.pf_index",
+      "digest": "e3f5633c9bdc03826ed13905671f60882cd56461823ce80ea0b80ee992604ebb",
+      "byteLength": 29000
     },
     {
       "path": "dist/pagefind/index/ja_1f7d91b.pf_index",
@@ -14095,9 +14100,29 @@
       "byteLength": 27164
     },
     {
+      "path": "dist/pagefind/index/ja_2347193.pf_index",
+      "digest": "529d7248fb06102f519904db28fe2cfbe7f12986115574309d544de2def49eec",
+      "byteLength": 29962
+    },
+    {
+      "path": "dist/pagefind/index/ja_257273a.pf_index",
+      "digest": "f87d2fff5ded3b302635fd4c7a7a22d664f850b3ca9f0b9de1029b247d91040f",
+      "byteLength": 28975
+    },
+    {
+      "path": "dist/pagefind/index/ja_281f893.pf_index",
+      "digest": "e874655a7f31fb4976e85d5d7e1de66836bf5e23479b5573da6e60296a42ccec",
+      "byteLength": 34689
+    },
+    {
       "path": "dist/pagefind/index/ja_2821b0b.pf_index",
       "digest": "0bef9f672fc16bb1bbd76cfdbdc77c7073fe2b96175674461ec29223539bce09",
       "byteLength": 27023
+    },
+    {
+      "path": "dist/pagefind/index/ja_288f5c5.pf_index",
+      "digest": "a3b010138f6534f0d4900b394fd4a5892859b56fde7776ff142689f3f972fcd2",
+      "byteLength": 84057
     },
     {
       "path": "dist/pagefind/index/ja_291d5ab.pf_index",
@@ -14110,24 +14135,19 @@
       "byteLength": 30126
     },
     {
-      "path": "dist/pagefind/index/ja_2d70ebc.pf_index",
-      "digest": "145b52da6c9f0238d72d4b355e818a3bfb058eb4b03bf0982aa3798bda6b0442",
-      "byteLength": 27176
+      "path": "dist/pagefind/index/ja_2c9caa3.pf_index",
+      "digest": "014665015dd96974239767d7943ee83379c75e44d96ac566a004dc9bec015e46",
+      "byteLength": 35629
     },
     {
-      "path": "dist/pagefind/index/ja_2febb8d.pf_index",
-      "digest": "4e11037849bddf2c269c81ab5208f66a1552a424795c012561f02a666a507bc4",
-      "byteLength": 33130
+      "path": "dist/pagefind/index/ja_2ffb231.pf_index",
+      "digest": "e93d3a3f41cea92f70c18524b3df9f07ea42e9c2ac6625e5148e0aec77f8d01b",
+      "byteLength": 26037
     },
     {
       "path": "dist/pagefind/index/ja_3089b9c.pf_index",
       "digest": "bfc5fbb7b62bb777ea29ee2847ec30dffda256985819bc7ff9b1e6f45422721d",
       "byteLength": 36410
-    },
-    {
-      "path": "dist/pagefind/index/ja_30d7b23.pf_index",
-      "digest": "d8e6c7c3b60e3eccac0641a0a49a0562c9dbbfea873e57abdd3297a68b0a82b2",
-      "byteLength": 26863
     },
     {
       "path": "dist/pagefind/index/ja_31ea569.pf_index",
@@ -14145,14 +14165,19 @@
       "byteLength": 39958
     },
     {
-      "path": "dist/pagefind/index/ja_39baee8.pf_index",
-      "digest": "4328aa0249b0ff676d25348d1920c7eaeb1fb381462a38670ba2ffe3a02b64cf",
-      "byteLength": 40775
-    },
-    {
       "path": "dist/pagefind/index/ja_3a84b1f.pf_index",
       "digest": "710231ce248fe31ebd8866388c573daef7f3ff5c2ce5ed87a93a6cc29e3cba0e",
       "byteLength": 23116
+    },
+    {
+      "path": "dist/pagefind/index/ja_3af78c9.pf_index",
+      "digest": "3c9b66c8ad5f2fadb7e65dc69d9ddfa66c095c06055acb67fd11046b8e75c0fe",
+      "byteLength": 30025
+    },
+    {
+      "path": "dist/pagefind/index/ja_3c1e674.pf_index",
+      "digest": "c5d4220f06b065f91c2b25c495b956ff3a1280475c00ae451f9b23fe583ca76c",
+      "byteLength": 26285
     },
     {
       "path": "dist/pagefind/index/ja_3d17d16.pf_index",
@@ -14160,19 +14185,14 @@
       "byteLength": 22639
     },
     {
-      "path": "dist/pagefind/index/ja_3ec72d7.pf_index",
-      "digest": "f1fe72f76e2b9d482a2b99e2572e1b08646ef9e9b03289d352cd1fb4ca03eb41",
-      "byteLength": 30023
+      "path": "dist/pagefind/index/ja_3eead45.pf_index",
+      "digest": "2930b98b589652fd89a9802c92d9fc09b5890096aa462938bcf649bffd5f94d3",
+      "byteLength": 40775
     },
     {
-      "path": "dist/pagefind/index/ja_43aee95.pf_index",
-      "digest": "b1319c8f09f8b481768aa837de238097d4fa7c524aa647f7f9af679bc65a8b88",
-      "byteLength": 84086
-    },
-    {
-      "path": "dist/pagefind/index/ja_43e4fe3.pf_index",
-      "digest": "caf1df8b946a1758831b22da2b613404573c75d8ef58b993b70dd94657fe9689",
-      "byteLength": 54032
+      "path": "dist/pagefind/index/ja_4120d62.pf_index",
+      "digest": "d333ffe7fe0f68accea838093259abaf3b5798f06cd400477045317e5af989bf",
+      "byteLength": 55754
     },
     {
       "path": "dist/pagefind/index/ja_457f168.pf_index",
@@ -14185,34 +14205,29 @@
       "byteLength": 35121
     },
     {
-      "path": "dist/pagefind/index/ja_4d6d466.pf_index",
-      "digest": "97923d1063df0c0d57ce5f68a0d602cbd1e6ba8c045edee98198ae61cb729a6a",
-      "byteLength": 51033
+      "path": "dist/pagefind/index/ja_4e8e8cb.pf_index",
+      "digest": "d49a88fd655ab5a13402547d5538504ab638f8a5eca50bfe58e00764d9d13756",
+      "byteLength": 39400
     },
     {
-      "path": "dist/pagefind/index/ja_5384cde.pf_index",
-      "digest": "8ec25e35c75aaec9253d09286011c38293bf8f4186f47127f6393303f5ce62d2",
-      "byteLength": 71569
+      "path": "dist/pagefind/index/ja_50b950c.pf_index",
+      "digest": "bf379ba0f6ffce682d8dee0c27a2412b205485f632b9a864f0dea1f22583aae4",
+      "byteLength": 25966
     },
     {
-      "path": "dist/pagefind/index/ja_5653c48.pf_index",
-      "digest": "0177b6b1e6757d3ec69791c77366fb9c8a30912f93655776f98d271ccc867ad5",
-      "byteLength": 34677
+      "path": "dist/pagefind/index/ja_5531dd9.pf_index",
+      "digest": "7a72891699ff2e2c4a0843d04261e4cdcb96c337d83683df24c2b64a11e09daa",
+      "byteLength": 32254
+    },
+    {
+      "path": "dist/pagefind/index/ja_562a59d.pf_index",
+      "digest": "8dac051e6a55d5c7b599db6419c42270710c291c32d67c9c8c7bef186fa215bc",
+      "byteLength": 27172
     },
     {
       "path": "dist/pagefind/index/ja_57fc50a.pf_index",
       "digest": "d5308ddd50208ec5ad64406c355378686885a286eab24f6a8fbe31c8ccc53cf7",
       "byteLength": 28506
-    },
-    {
-      "path": "dist/pagefind/index/ja_5878e67.pf_index",
-      "digest": "dc4362bd55b330db2004935a7467c189bdf0de6b071f0f1029a60167618d2b77",
-      "byteLength": 25441
-    },
-    {
-      "path": "dist/pagefind/index/ja_5bc2a71.pf_index",
-      "digest": "f5d0170af559c016446075a52add8187a4561f2f6c18293427cc2f8b635d56d3",
-      "byteLength": 32643
     },
     {
       "path": "dist/pagefind/index/ja_5bc35ad.pf_index",
@@ -14240,29 +14255,29 @@
       "byteLength": 41765
     },
     {
-      "path": "dist/pagefind/index/ja_644a456.pf_index",
-      "digest": "46eba883cc8582ee541e36ed48de561cac3f2247f0473ff0ea5c828efd0793ff",
-      "byteLength": 24264
-    },
-    {
       "path": "dist/pagefind/index/ja_67f3dd6.pf_index",
       "digest": "beb7b9b8843d6481ee8ecac482481aa79171a39ce49186bdbb8f97ed811f5dcb",
       "byteLength": 26943
     },
     {
-      "path": "dist/pagefind/index/ja_688fa07.pf_index",
-      "digest": "69ca6766efb134e3d4312bb6a1dbd1364fb26e1de782149a769d6775dbdbb22e",
-      "byteLength": 42669
+      "path": "dist/pagefind/index/ja_695562d.pf_index",
+      "digest": "60b0c786c778c9d78c76a1ef417e10c5b274504902517c3a13c8e3d38d146a49",
+      "byteLength": 54034
     },
     {
-      "path": "dist/pagefind/index/ja_6d7a909.pf_index",
-      "digest": "7c38838b2d7f5a4648745dbfbdb5077aea336fb0573907290f84e93b11ccd496",
-      "byteLength": 22072
+      "path": "dist/pagefind/index/ja_6c18c77.pf_index",
+      "digest": "31a5cad6661ebe842729d142ec16d57ba07486611ee16d120ebe7147d5b59868",
+      "byteLength": 20134
     },
     {
       "path": "dist/pagefind/index/ja_6fd18a1.pf_index",
       "digest": "aeaea91d1164298d8baeac9971307894ed55c1f616ea9ec112529999841c5124",
       "byteLength": 26839
+    },
+    {
+      "path": "dist/pagefind/index/ja_7444227.pf_index",
+      "digest": "3a1aacad3a2382368f97985917cedb39a739a4efd27c2e8639d9897bf21d1753",
+      "byteLength": 26075
     },
     {
       "path": "dist/pagefind/index/ja_7488298.pf_index",
@@ -14280,19 +14295,14 @@
       "byteLength": 26708
     },
     {
-      "path": "dist/pagefind/index/ja_7788972.pf_index",
-      "digest": "dc80cfa5e7b9699201910c6a5690921c1300bf4a7d3ab2d2d72964a85b98a79c",
-      "byteLength": 23518
-    },
-    {
       "path": "dist/pagefind/index/ja_77f9c12.pf_index",
       "digest": "0c0ddf21d67b5823f13a067339fdfefc03c03bd47595fe6f6016f3cba8975b49",
       "byteLength": 28700
     },
     {
-      "path": "dist/pagefind/index/ja_7b63428.pf_index",
-      "digest": "38f7d97335b5d2331fa767144f68ad179f0ebb6e09675a5359d642356a1bacce",
-      "byteLength": 39399
+      "path": "dist/pagefind/index/ja_7867fcd.pf_index",
+      "digest": "a05d6222f6a019daa18834db61b589105aa5d2d8838546960f9da9c539f4dee7",
+      "byteLength": 30328
     },
     {
       "path": "dist/pagefind/index/ja_7c2b5e8.pf_index",
@@ -14300,24 +14310,19 @@
       "byteLength": 25955
     },
     {
-      "path": "dist/pagefind/index/ja_7ccbbed.pf_index",
-      "digest": "4a0bbda6c8953c45b7fde641e41525a2bc9e6c98450db06367fe3f26b4baea92",
-      "byteLength": 35624
-    },
-    {
       "path": "dist/pagefind/index/ja_7d16d15.pf_index",
       "digest": "023f145c990cc8eda5c02b66a13ab55e2e1f6afc9876678197f9d4f92bd8126e",
       "byteLength": 25525
     },
     {
-      "path": "dist/pagefind/index/ja_7eaf51c.pf_index",
-      "digest": "7ef6ff40d76ea14b7939a198421950fcc37a3d18517bbb0923938e063c4106c5",
-      "byteLength": 30397
+      "path": "dist/pagefind/index/ja_7eb8d44.pf_index",
+      "digest": "b31c141642cc3a968fe987b3618be8c54ebaa92908609898d57336dcbe88c47d",
+      "byteLength": 25444
     },
     {
-      "path": "dist/pagefind/index/ja_7f2ca3f.pf_index",
-      "digest": "df4d064a18bc99fcae976aa3836cd9aa0b9e98f8ff294fb550d5b2016e623d2a",
-      "byteLength": 25966
+      "path": "dist/pagefind/index/ja_818f85f.pf_index",
+      "digest": "368e8052857ef2a81037ea52b00bc473e6a9c83aeb2f3a0784fa7ba6d1ee4bcd",
+      "byteLength": 51029
     },
     {
       "path": "dist/pagefind/index/ja_8191157.pf_index",
@@ -14325,29 +14330,34 @@
       "byteLength": 27784
     },
     {
+      "path": "dist/pagefind/index/ja_81baeea.pf_index",
+      "digest": "ad668172bd288d8f962ee60548457051e1e6a30bba433223fb3435aa364a1bd4",
+      "byteLength": 44326
+    },
+    {
+      "path": "dist/pagefind/index/ja_842fc0a.pf_index",
+      "digest": "d63a5fb70508fcf4082ee475d9656923a5bdb6d4e2eeff184f34910eef5c32d0",
+      "byteLength": 23731
+    },
+    {
       "path": "dist/pagefind/index/ja_84a47ea.pf_index",
       "digest": "b8ea4355bc89cc986f8b5172be68c43834a86d1c85345fc25d38f2992e5bcf1f",
       "byteLength": 28244
     },
     {
-      "path": "dist/pagefind/index/ja_8512a3d.pf_index",
-      "digest": "6c3ae6cc337519999c3e642d74597cab0485292b9222020c598f16aca85846b6",
-      "byteLength": 27772
+      "path": "dist/pagefind/index/ja_8e19559.pf_index",
+      "digest": "bc97733d8ea923a316a176ff914ac4614deb801d103eb2933b54294ae8d4c069",
+      "byteLength": 32659
     },
     {
-      "path": "dist/pagefind/index/ja_8756308.pf_index",
-      "digest": "b698c6f252918e22b214c03467b4f093136db6f099c94d999cf8ea627596b896",
-      "byteLength": 38753
+      "path": "dist/pagefind/index/ja_8eb2ff7.pf_index",
+      "digest": "a245dcf91d81ed1dcbcf3c511902c04de5236f293647f5b919f8165e8e086bfa",
+      "byteLength": 23523
     },
     {
-      "path": "dist/pagefind/index/ja_8ccbb33.pf_index",
-      "digest": "25ad60ed60c2c9098690ad1e77c6e965a30f2e6d63b95bb18f9c09184bf39503",
-      "byteLength": 38297
-    },
-    {
-      "path": "dist/pagefind/index/ja_8deb4d9.pf_index",
-      "digest": "eed6f6a4d57a48eb9104a2e62d5cfa04ad427c006df00768ce3c5603e2ebc049",
-      "byteLength": 26078
+      "path": "dist/pagefind/index/ja_8f8261b.pf_index",
+      "digest": "8a942c050541afd7e2a149e4719797f1f3898cf66af51095fc928f0c152ce06d",
+      "byteLength": 77029
     },
     {
       "path": "dist/pagefind/index/ja_8fddd8d.pf_index",
@@ -14355,9 +14365,19 @@
       "byteLength": 28314
     },
     {
+      "path": "dist/pagefind/index/ja_951ff39.pf_index",
+      "digest": "1fcac023bc10c16a2cde7ee32054cc8f38e8593fbb361f41786d73ec74467c42",
+      "byteLength": 42672
+    },
+    {
       "path": "dist/pagefind/index/ja_95787a3.pf_index",
       "digest": "13d096fc65067368a96f159ab3cb03db16ddc1752b54aec721d68cdf757bef72",
       "byteLength": 29881
+    },
+    {
+      "path": "dist/pagefind/index/ja_95809da.pf_index",
+      "digest": "8afc850f40275aca081de4231fdc0277761c927d9a3a3558bb3e4aee9f207814",
+      "byteLength": 28524
     },
     {
       "path": "dist/pagefind/index/ja_9727a47.pf_index",
@@ -14365,29 +14385,14 @@
       "byteLength": 29586
     },
     {
-      "path": "dist/pagefind/index/ja_9752d2e.pf_index",
-      "digest": "c70a7fec61f970cff6f9b713c17c0d51ebdd1ec68561b46b2a5e43a5d331609a",
-      "byteLength": 29593
-    },
-    {
       "path": "dist/pagefind/index/ja_97d6e95.pf_index",
       "digest": "8be7ab4cedc59c1bc47da72c8ab48e8531f0eef793ab160137bf6d72bc72e063",
       "byteLength": 25113
     },
     {
-      "path": "dist/pagefind/index/ja_9b7c3ef.pf_index",
-      "digest": "d1172b2b61c7d24d8249ba7d60c9129ffbf237fbc9c56b31b5fa7460be109078",
-      "byteLength": 28980
-    },
-    {
-      "path": "dist/pagefind/index/ja_a190e11.pf_index",
-      "digest": "387e2f2968b07fc1ff359b2c18f645dd2c97f06c50a4ef348f7daf9a1d1e6fd3",
-      "byteLength": 55747
-    },
-    {
-      "path": "dist/pagefind/index/ja_a2b2dd9.pf_index",
-      "digest": "bb7ce1b5d2b5e88e0fcd33d636b3b6c7faac7d1fdaae6be68c9cf1378f367bf8",
-      "byteLength": 31660
+      "path": "dist/pagefind/index/ja_999916c.pf_index",
+      "digest": "eec57f6362320994c2ebae9e69d8250bf7049b404064929937456b6f6becc4d8",
+      "byteLength": 27315
     },
     {
       "path": "dist/pagefind/index/ja_a2e381e.pf_index",
@@ -14395,9 +14400,19 @@
       "byteLength": 28815
     },
     {
-      "path": "dist/pagefind/index/ja_a364414.pf_index",
-      "digest": "cecc97dc9f38e30075fe2c3b38b90d3f1b623bf61a0489e968329a1ad8eeaef2",
-      "byteLength": 77031
+      "path": "dist/pagefind/index/ja_a3f87e3.pf_index",
+      "digest": "20c44c8f02458aba4539007b8692e6e0433d47bd2eb1c012cb243fa455714823",
+      "byteLength": 42826
+    },
+    {
+      "path": "dist/pagefind/index/ja_a7898cc.pf_index",
+      "digest": "296268bbecaaf3384337888217dc750bcb35a244315ac61d3e6c0caabb24ddcd",
+      "byteLength": 25452
+    },
+    {
+      "path": "dist/pagefind/index/ja_a9152dc.pf_index",
+      "digest": "df3b8888494bb51db34bdcf9f57947ff28a5ca56100edb5ef22351cf8a3b0c32",
+      "byteLength": 27988
     },
     {
       "path": "dist/pagefind/index/ja_aa90d89.pf_index",
@@ -14405,19 +14420,24 @@
       "byteLength": 29754
     },
     {
+      "path": "dist/pagefind/index/ja_abd5c9e.pf_index",
+      "digest": "3d4c9d5236d489002f698e51ea86abed4dd1befb7ef478e63c794daff1e9de26",
+      "byteLength": 27773
+    },
+    {
       "path": "dist/pagefind/index/ja_ad4f3e2.pf_index",
       "digest": "87540e126017df641e6104efa94d4aa0cd6f643d664fe9049f3385cbeace2634",
       "byteLength": 29965
     },
     {
-      "path": "dist/pagefind/index/ja_adb6c2c.pf_index",
-      "digest": "d3990ad440a0c6c84e5bbb38326713d0ae636f9511087968b52544bcbfdd5a2d",
-      "byteLength": 25453
-    },
-    {
       "path": "dist/pagefind/index/ja_ae94c65.pf_index",
       "digest": "4aa836b5842d5dbd5dc0e9f96034f74a8c4f9b90471c53baf13749322c6e6401",
       "byteLength": 29339
+    },
+    {
+      "path": "dist/pagefind/index/ja_aec91a1.pf_index",
+      "digest": "cb375664718cbae839288fc2ad889d069859675ac15ccaebd4b5f8417ec04ab6",
+      "byteLength": 33129
     },
     {
       "path": "dist/pagefind/index/ja_af82c01.pf_index",
@@ -14435,39 +14455,59 @@
       "byteLength": 34379
     },
     {
-      "path": "dist/pagefind/index/ja_b3d2c99.pf_index",
-      "digest": "d19b7d25e827adc1d0117835b6e9b6bc63d259161424d8d7baf1aafcfca59593",
-      "byteLength": 42617
+      "path": "dist/pagefind/index/ja_b7193fb.pf_index",
+      "digest": "f8246c46d65c504e7dcad7510936367173557eca13784f6013433b5abc00a072",
+      "byteLength": 38572
     },
     {
-      "path": "dist/pagefind/index/ja_b423aa1.pf_index",
-      "digest": "234383e4860185238dd2b57aec72ade38d3f383e20838432a3775f63575438d5",
-      "byteLength": 23731
-    },
-    {
-      "path": "dist/pagefind/index/ja_b63caf8.pf_index",
-      "digest": "04f15ebee6f777f1fa1f7301cc1ed6d44400a387c9d57295ac804c40ba3cd1ee",
+      "path": "dist/pagefind/index/ja_bb691b7.pf_index",
+      "digest": "81256e2d015f1503492c99a0109622226c547c338b4b0f714fbc2c81949aae66",
       "byteLength": 25617
     },
     {
-      "path": "dist/pagefind/index/ja_ba56bce.pf_index",
-      "digest": "dd0d0a2e1e2b85fe1003cfa4749fa84f24e7099c9c73d3f614aa194bf08ab0a9",
-      "byteLength": 26037
+      "path": "dist/pagefind/index/ja_bc9eb87.pf_index",
+      "digest": "cf97ecf85f21ec5386e93e4c8425d56bc5f6df56e303b965abc388f32b019e40",
+      "byteLength": 31679
     },
     {
-      "path": "dist/pagefind/index/ja_bb83faf.pf_index",
-      "digest": "7805fc829ad7263c1394dd7a2380776996da823e282a44df930a7069fe26d446",
-      "byteLength": 25620
+      "path": "dist/pagefind/index/ja_bd1c9fb.pf_index",
+      "digest": "82365ec78b3d42d6ba4ecf50111a1b41c0001870bd9e6a433324d138e064298b",
+      "byteLength": 30673
     },
     {
-      "path": "dist/pagefind/index/ja_c143205.pf_index",
-      "digest": "8f5d0509c4586812752569fe0ed92dc01499dc8f6b194ee5ee0dcb29d565fa7b",
-      "byteLength": 25007
+      "path": "dist/pagefind/index/ja_bebb743.pf_index",
+      "digest": "ce6cdd39db47cc642e59a4be16284d12a5cd85880dd882692fe851412d74c6ea",
+      "byteLength": 71574
     },
     {
-      "path": "dist/pagefind/index/ja_c49fa61.pf_index",
-      "digest": "701b936fbcfec4bcc701fb04c46251594e74e248a37dee309e3c7f8e16f54d8f",
-      "byteLength": 26902
+      "path": "dist/pagefind/index/ja_bfe9edd.pf_index",
+      "digest": "512c703fbc7f773660e92df6c44d4b837908b115773db8587bce52134cc8ee20",
+      "byteLength": 26863
+    },
+    {
+      "path": "dist/pagefind/index/ja_c1139b2.pf_index",
+      "digest": "cd43706057a7e37e981b9ebd741a769a1440c591104b4aa5f34c61dda063a969",
+      "byteLength": 28986
+    },
+    {
+      "path": "dist/pagefind/index/ja_c19f8ec.pf_index",
+      "digest": "dcc42376f16c6c575a353842a9bddfba54d843d0031358a735e5cee5d271e1b6",
+      "byteLength": 26910
+    },
+    {
+      "path": "dist/pagefind/index/ja_c52b76b.pf_index",
+      "digest": "b71964c19ec9fdf60fc9cba18d0a706e5591503e671c0ec6710189fc62e3c2c2",
+      "byteLength": 24411
+    },
+    {
+      "path": "dist/pagefind/index/ja_c544aae.pf_index",
+      "digest": "3e004ff37ff4af2cc2184226613689ff6bb72fb4224986a2b12f48cbf625fdbb",
+      "byteLength": 24264
+    },
+    {
+      "path": "dist/pagefind/index/ja_c5c42b2.pf_index",
+      "digest": "eb72a1b2229b19772716c049dbcea2f250cb1ddae1f5c2942c481aca7f93fe2f",
+      "byteLength": 28504
     },
     {
       "path": "dist/pagefind/index/ja_c642e11.pf_index",
@@ -14480,54 +14520,24 @@
       "byteLength": 35815
     },
     {
-      "path": "dist/pagefind/index/ja_c6cc621.pf_index",
-      "digest": "1efe4d504f93b23fa29818ada226b9cf021148b771050abdd0212759ca187071",
-      "byteLength": 26863
-    },
-    {
-      "path": "dist/pagefind/index/ja_c7a7a2a.pf_index",
-      "digest": "d5a3c90c030b0b84f7d73e8eab88d64242c38b14268b0c088313c9f63a9c3e28",
-      "byteLength": 28504
-    },
-    {
-      "path": "dist/pagefind/index/ja_c7ac7a5.pf_index",
-      "digest": "afc673a5167a3713feb43a1adb1a7aee81697d8c9b8f45e14617f08bd384f8dd",
-      "byteLength": 58884
-    },
-    {
-      "path": "dist/pagefind/index/ja_c7c437f.pf_index",
-      "digest": "a0b192d403aa87ff735bfddb60090af8b2e8f0bb2ae97b20658f48eed48eee0e",
-      "byteLength": 27977
-    },
-    {
-      "path": "dist/pagefind/index/ja_c899dcc.pf_index",
-      "digest": "bf96e79e13d5fe80056de00cc5fb2a1e4af351a5e3f2b3efeafb1c3b517eeda0",
-      "byteLength": 29966
-    },
-    {
-      "path": "dist/pagefind/index/ja_c9f78ec.pf_index",
-      "digest": "c3e0f20e6276b6707af030d4e286df1a8d12717df06dba76cdad4dfc2134edd0",
-      "byteLength": 27585
-    },
-    {
       "path": "dist/pagefind/index/ja_ca01a41.pf_index",
       "digest": "08116fc9be86d35269ff51d3e581eef56f436d87b26daac40830f97c74e05f60",
       "byteLength": 27997
     },
     {
-      "path": "dist/pagefind/index/ja_cbb45b7.pf_index",
-      "digest": "5f01f5ca79470ba1475cbafba075ef1a0dbf869b8e7fb8edcaf96efaac0f958f",
-      "byteLength": 30678
-    },
-    {
-      "path": "dist/pagefind/index/ja_cbfafee.pf_index",
-      "digest": "5ff29dfb1fb89d4331f791e5b7b37c669aad62335ce1db50970133920b3493c4",
-      "byteLength": 20132
-    },
-    {
       "path": "dist/pagefind/index/ja_cd3c8aa.pf_index",
       "digest": "196191ea129deda0edaa8b6fb08b91c960ed76c7e0cfc545f86be5ebb523f8c4",
       "byteLength": 9061
+    },
+    {
+      "path": "dist/pagefind/index/ja_ce52895.pf_index",
+      "digest": "52c7efcbff1d293f17fdfd8c2e215ae52fff539bbb87d3d2e70f588d8f94725b",
+      "byteLength": 58884
+    },
+    {
+      "path": "dist/pagefind/index/ja_cf4490a.pf_index",
+      "digest": "9c9bb047f67d4a63ef65a60b9e73278138eaed7c4de29d166994a74dfea0feff",
+      "byteLength": 25009
     },
     {
       "path": "dist/pagefind/index/ja_cfb6341.pf_index",
@@ -14540,9 +14550,9 @@
       "byteLength": 26426
     },
     {
-      "path": "dist/pagefind/index/ja_d6b85d4.pf_index",
-      "digest": "2b0046d05271b58016a054b4f5c55f50353d6ad49354bda8b3a69f660efa403a",
-      "byteLength": 29006
+      "path": "dist/pagefind/index/ja_d351b1c.pf_index",
+      "digest": "150130106fc38930421e97adb3130cf14750baf9cc6cb8f0a9b07fd182df9a09",
+      "byteLength": 25619
     },
     {
       "path": "dist/pagefind/index/ja_da2c574.pf_index",
@@ -14565,29 +14575,19 @@
       "byteLength": 30771
     },
     {
-      "path": "dist/pagefind/index/ja_dedadac.pf_index",
-      "digest": "c88abf697005aa2070c2854856983294cd5b6af2c0c1516e5390dbb062187659",
-      "byteLength": 24412
-    },
-    {
       "path": "dist/pagefind/index/ja_def4837.pf_index",
       "digest": "3a776df6d1c227dbbeb88d705a721832a18cd466ab0a45b926a672cb92651ee9",
       "byteLength": 29453
     },
     {
-      "path": "dist/pagefind/index/ja_e2818d7.pf_index",
-      "digest": "30d353ec8198c542ea3f8c897f0a5b90c70a8dda87d41039a2fd1ca94792707b",
-      "byteLength": 27983
+      "path": "dist/pagefind/index/ja_e279ee1.pf_index",
+      "digest": "9a537ea3621fb6d406e3bee172fbab32b078783a39291d0235a4291fd2689363",
+      "byteLength": 38301
     },
     {
-      "path": "dist/pagefind/index/ja_e517d1f.pf_index",
-      "digest": "e9f167cc2d073037bcb610c477297285382c8f8bc90e36c3ad8fbf7e71656834",
-      "byteLength": 28973
-    },
-    {
-      "path": "dist/pagefind/index/ja_e834f59.pf_index",
-      "digest": "d2f835340339629b3e69cc3865cc08882f3616e633385deaa90067bf527f6f5f",
-      "byteLength": 26285
+      "path": "dist/pagefind/index/ja_e5abd52.pf_index",
+      "digest": "8e068902200e1afac8fcbbe04d576cb38c47ed92595f2f2fc177c7821bf4e5d7",
+      "byteLength": 29598
     },
     {
       "path": "dist/pagefind/index/ja_eb9519b.pf_index",
@@ -14595,14 +14595,9 @@
       "byteLength": 26011
     },
     {
-      "path": "dist/pagefind/index/ja_ecd0f9f.pf_index",
-      "digest": "084d710af123333aa4316334551d204913ac2ea8dd21c648fed7e959562070d2",
-      "byteLength": 28515
-    },
-    {
-      "path": "dist/pagefind/index/ja_ed3c6e6.pf_index",
-      "digest": "7dff124b8116afefaad55c8c6471313047b856763ba88ac92422324ade912257",
-      "byteLength": 26096
+      "path": "dist/pagefind/index/ja_ee318cd.pf_index",
+      "digest": "8707ef82afc6fd8090333548f72fe97c02437151f154d86a23c1d8aa676dcb5b",
+      "byteLength": 27993
     },
     {
       "path": "dist/pagefind/index/ja_ee4bcf2.pf_index",
@@ -14610,14 +14605,14 @@
       "byteLength": 32420
     },
     {
+      "path": "dist/pagefind/index/ja_ee4ddf8.pf_index",
+      "digest": "406b1e3c69ba28482278a4b097a1072c5c8c4b8ff325acac1834fb15b5e8020e",
+      "byteLength": 26902
+    },
+    {
       "path": "dist/pagefind/index/ja_f046357.pf_index",
       "digest": "1fb260481236351d367924f5b7a6c8f13469f8844e48eb7a718261cf238a6978",
       "byteLength": 31357
-    },
-    {
-      "path": "dist/pagefind/index/ja_f0ed399.pf_index",
-      "digest": "c1829fc09f23d16734c7e652de5ef923391b9c3489888ea6457f2183e3db7732",
-      "byteLength": 25082
     },
     {
       "path": "dist/pagefind/index/ja_f183479.pf_index",
@@ -14630,14 +14625,19 @@
       "byteLength": 27424
     },
     {
-      "path": "dist/pagefind/index/ja_f7e41c6.pf_index",
-      "digest": "808d3845ae1c661ad3296e0f00429b3af3745c8cb0279dcacbea01a4b160e27e",
-      "byteLength": 27309
+      "path": "dist/pagefind/index/ja_f735e8e.pf_index",
+      "digest": "f966ab355fd38c4eb89403102f9997afc9d9a5bb6a260214af2e1026771c69db",
+      "byteLength": 27586
     },
     {
-      "path": "dist/pagefind/index/ja_fa7fbf9.pf_index",
-      "digest": "75a4bf5f1e34818ec34eb10966ba074174e996560d619c53cc555d5b349a2402",
-      "byteLength": 30327
+      "path": "dist/pagefind/index/ja_f7d6948.pf_index",
+      "digest": "a28c3451740414952022e6b3949f16c2bf52137044eeade892ca8d986e6a7aa3",
+      "byteLength": 26096
+    },
+    {
+      "path": "dist/pagefind/index/ja_f864321.pf_index",
+      "digest": "197404098acf97186c9e890bbf086640c563a1276377f33c16f2d09ab9fa43cb",
+      "byteLength": 30411
     },
     {
       "path": "dist/pagefind/index/ja_ffb1f51.pf_index",
@@ -14656,7 +14656,7 @@
     },
     {
       "path": "dist/pagefind/pagefind-entry.json",
-      "digest": "58fe887d94ab2fe68740bcc802ce9ca684c591fd5fa53cdfe5db0f1388ebccb7",
+      "digest": "f1e68f22421864a9cc7350b3e619915e03fe7751e1be8f2102d461fd095a7a18",
       "byteLength": 174
     },
     {
@@ -14690,9 +14690,9 @@
       "byteLength": 41255
     },
     {
-      "path": "dist/pagefind/pagefind.ja_7fbfed3952.pf_meta",
-      "digest": "5847605671ad7bd9bd555adf4f903b81caa319afe9442af49d2fb30b2e3703fc",
-      "byteLength": 14004
+      "path": "dist/pagefind/pagefind.ja_e611af7f66.pf_meta",
+      "digest": "d4b2bf5a7060a9ef5b92dea2a7bb6e94ed677a25ce71cfcdcc320e81e3e463f4",
+      "byteLength": 13998
     },
     {
       "path": "dist/pagefind/pagefind.js",
@@ -20141,8 +20141,8 @@
     },
     {
       "path": "dist/updates/index.html",
-      "digest": "d19adb25443cb22e447872f79d3dd4176c4c914f817e3f04a46c4eed10aa9c2e",
-      "byteLength": 3782
+      "digest": "dc23abfd259294fb08d3f66fb30688822bb416718a69358127449a4488ec3550",
+      "byteLength": 3933
     }
   ]
 }
