@@ -57,8 +57,11 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -
 buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を使う。E2Eの環境・fixtureは`playwright.config.ts`と対象テストに合わせる。変更で検出すべき不具合に合わせてテストを選び、無関係な数学回帰や全件監査を繰り返さない。他ブラウザー固有の挙動、広範囲のschema・共通処理・依存変更では必要な検証を追加する。必須検査が失敗したら原因を修正し、影響する検査を再実行する。
 
 現在の`verify:fast`は名称にかかわらず広範囲の検証であり、3ブラウザーも含む。GitHub
-Actionsは旧release/reviewゲートと複数環境をまだ実行する。この文書改訂ではscript・workflow・required
-checksを変更していない。ローカルの対象検証だけで現行のCIゲートが解除されたと扱わない。
+Actionsは、非公開文書だけの追加・修正を除いて旧release/reviewゲートと複数環境をまだ実行する。非公開文書の限定的なCI移行では5つのrequired
+check名を維持し、各job内で変更文書の書式・ローカルリンク・見出し参照とfeature選択を確認する。対象はAGENTS、README、Spec
+Kitの憲章・テンプレート・feature選択、`docs/operations/`と`specs/`のMarkdown。PRのmerge-baseまたはmain
+push前のSHAとの差を使い、削除・rename・未知path・差分取得不能、教材・コード・schema・skill・workflowを含む変更は従来の全検証へ戻す。文書検査の失敗はcheck
+failureとして伝播する。詳細は[開発手順](development.md#非公開文書のci検証)を参照する。単一環境化と通常教材更新の旧証跡依存の撤去は未実装であり、ローカルの対象検証だけで現行のCIゲートが解除されたと扱わない。
 
 ## 4. 互換性と見やすさを確認する
 
