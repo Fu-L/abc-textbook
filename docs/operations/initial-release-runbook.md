@@ -154,3 +154,15 @@ export後、新originでimportし、値と両日時を照合する。
 
 #52は事後検証JSON・immutable Git履歴・公開Catalog・metadataを実公開baseとして受け取る。US5
 live受入、FR-022〜FR-025、SC-006/SC-007、SC-014のlive更新は#52で扱う。既存の数学回帰、更新・訂正回帰、52週simulationを維持する。
+
+## #54の実公開結果（2026-10-08）
+
+PR #73をmergeし、5必須チェックと通常のread-only release検証に成功した
+`af8eca05b1612c5daddb05ddadc32b590f911146` を [GitHub Pages](https://fu-l.github.io/abc-textbook/)
+へ公開した。[初回run](https://github.com/Fu-L/abc-textbook/actions/runs/37717648084)ではPages配信とmetadata照合が成功した後、事後取得でHTTP
+503となった。[同SHAの再配信run](https://github.com/Fu-L/abc-textbook/actions/runs/37718434307)ではmetadataを保って再配信し、全公開導線・検索・3エンジンの学習記録検証が成功した。
+
+実結果は `docs/verification/deployments/initial-release.json`、exact Git
+Catalogから導出した公開履歴は `initial-history.json`
+に保存した。firstPublicationObservedAtは最初に認証なしでmetadataを確認した実時刻であり、Pagesの正確な完了時刻ではない。workflowSuccessAtは事後検証を含む実job成功時刻である。初回のHTTP
+503と初回jobのfailureを保持し、配信成功と全検証成功を区別する。初版のため、二つの公開版間rollbackは未適用。#52はこの実公開baseから開始する。
