@@ -1,5 +1,6 @@
 import { canonicalDigest } from '../domain/canonical-json.js';
 import type { ProblemAuthoringUnit } from '../domain/schema-parts/authoring-unit.js';
+import { validatePublicationExamples } from './publication-examples.js';
 
 export interface JoinedProblemDocument {
   readonly unit: ProblemAuthoringUnit;
@@ -133,11 +134,9 @@ export const validateJoinedProblemDocuments = (input: {
       fail(`STANDALONE_SECTION:${unit.problemId}`);
     // A prose quotation needs explicit source/length review; the current corpus contains none.
     if (/^\s*>\s+/mu.test(body)) fail(`QUOTATION_REVIEW_REQUIRED:${unit.problemId}`);
-    const executableFences = [...body.matchAll(/^\s*(?:```|~~~)([\w+-]+).*$/gmu)].filter(
-      (match) => !['text', 'plaintext', 'pseudo', 'pseudocode', 'math'].includes(match[1] ?? ''),
+    validatePublicationExamples(body, unit.examples, (reason) =>
+      fail(`${reason}:${unit.problemId}`),
     );
-    if (executableFences.length && !unit.examples.some((example) => example.kind === 'executable'))
-      fail(`UNREGISTERED_EXECUTABLE:${unit.problemId}`);
     for (const claim of unit.claims)
       if (claim.sourceRevisionIds.some((id) => !unit.sourceRevisionIds.includes(id)))
         fail(`CLAIM_SOURCE:${unit.problemId}`);

@@ -353,6 +353,115 @@ describe('accepted canonical full public projection', () => {
 });
 
 describe('current canonical prose without bootstrap acceptance ledgers', () => {
+  it.each(['Problem', 'Unit'] as const)(
+    'requires registered, passed executable examples in current %s prose without ledgers',
+    async (owner) => {
+      await withGitBaseline(async (root) => {
+        const problem = projection.problemDocuments.get('abc212-e');
+        const unit = projection.catalog.learningUnits.find(
+          (item) => item.id === 'unit-xor-linear-basis',
+        );
+        if (!problem || !unit) throw new Error('Missing executable example fixtures');
+        const docPath = owner === 'Problem' ? problem.unit.docPath : unit.docPath;
+        const target = path.join(root, docPath);
+        const original = await readFile(target, 'utf8');
+        const { frontmatter, content } = parseFrontmatter(original);
+        const example = {
+          key: 'execution-check',
+          learningOutcomeIds:
+            owner === 'Problem' ? problem.unit.learningOutcomeIds : unit.learningOutcomeIds,
+          kind: 'executable' as const,
+          language: 'javascript',
+          omissions: [],
+          environment: 'Node.js 24.18.0',
+          input: '入力なし',
+          procedure: ['node example.cjs'],
+          executionTarget: 'example.cjs',
+          expectedResult: '1',
+          verificationStatus: 'passed' as const,
+          ...(owner === 'Problem' ? { learningUnitIds: ['unit-dp-state-design'] } : {}),
+        };
+        const update = async (
+          examples: readonly (Omit<typeof example, 'verificationStatus'> & {
+            verificationStatus: 'pending' | 'failed' | 'passed';
+          })[],
+          code: string,
+        ) => {
+          const body = content.replace(
+            owner === 'Problem' ? '## 実装上の注意\n\n' : '## 考え方\n\n',
+            (heading) => `${heading}${code}\n\n`,
+          );
+          if (owner === 'Problem') {
+            const metadata = Object.fromEntries(
+              Object.entries(problem.unit).filter(([key]) => key !== 'sections'),
+            );
+            await writeFile(
+              target,
+              `---\ntitle: ${JSON.stringify(frontmatter.title)}\ndraft: true\nauthoringUnit: ${JSON.stringify({ ...metadata, examples })}\n---\n${body}`,
+            );
+          } else {
+            await writeFile(target, original.replace(content, body));
+            await writeFile(
+              path.join(root, 'src/content/learning-units/unit-xor-linear-basis.json'),
+              JSON.stringify({ ...unit, examples }),
+            );
+            await writeFile(
+              path.join(root, 'src/content/indexes/taxonomy.json'),
+              JSON.stringify({
+                ...projection.taxonomyIndex,
+                learningUnits: projection.catalog.learningUnits.map((item) =>
+                  item.id === unit.id ? { ...unit, examples } : item,
+                ),
+              }),
+            );
+          }
+        };
+        const project = () =>
+          loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false });
+        for (const verificationStatus of ['pending', 'failed'] as const) {
+          await update(
+            [{ ...example, verificationStatus }],
+            '```javascript\nthrow new Error("未検証または失敗した例");\n```',
+          );
+          await expect(project(), `${owner}:${verificationStatus}`).rejects.toThrow(/EXAMPLE_HOLD/);
+        }
+        const code = '```javascript\nconsole.log(1);\n```';
+        await update([], code);
+        await expect(project(), `${owner}:unregistered`).rejects.toThrow(/UNREGISTERED_EXECUTABLE/);
+        await update([{ ...example, language: 'python' }], code);
+        await expect(project(), `${owner}:wrong-language`).rejects.toThrow(
+          /UNREGISTERED_EXECUTABLE/,
+        );
+        await update([example], `${code}\n\n${code}`);
+        await expect(project(), `${owner}:second-unregistered-block`).rejects.toThrow(
+          /UNREGISTERED_EXECUTABLE/,
+        );
+        await writeFile(path.join(root, 'example.cjs'), 'console.log(1);\n');
+        const { stdout } = await promisify(execFile)(process.execPath, ['example.cjs'], {
+          cwd: root,
+        });
+        expect(stdout.trim()).toBe(example.expectedResult);
+        await update([example], code);
+        const published = await project();
+        if (owner === 'Problem') {
+          expect(
+            published.catalog.problems.find((item) => item.id === 'abc212-e')?.publicationStatus,
+          ).toBe('published');
+          expect(
+            published.problemDocuments.get('abc212-e')?.unit.examples[0]?.verificationStatus,
+          ).toBe('passed');
+        } else {
+          expect(published.unitDocuments.get(unit.id)?.validated).toBe(true);
+          expect(
+            published.catalog.learningUnits.find((item) => item.id === unit.id)?.examples[0]
+              ?.verificationStatus,
+          ).toBe('passed');
+        }
+      });
+    },
+    60_000,
+  );
+
   it('projects small Unit and Problem corrections from a content-only copy', async () => {
     await withGitBaseline(async (root) => {
       const unit = projection.catalog.learningUnits.find(

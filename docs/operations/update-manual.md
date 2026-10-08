@@ -186,6 +186,10 @@ ID・実pathの一致とmetadata全件の対応を確認する。本文やtaxono
 `learning-unit-content.json`、`problem-authoring-units.json`、`us1.json`、`problem-content-projection.json`の必須読込と受理済みbytes・mappingの照合を外した。欠落・重複・未完成の本文、未検証claim・本文とclaimの矛盾、未知source・公式task不一致、出典リンク、主配置・関連先・前提DAG、metrics、教科書順と訂正先の確認は残す。旧previewの例・演習の既知のoptional
 locatorだけは、現行本文にも該当blockがない場合に対象外とし、それ以外の欠落は失敗する。
 
+Problem・Unitとも、実行例は既存の`examples`で`verificationStatus: passed`を要求する。実行言語を付けた各fenced
+code blockには、同じ`language`の実行例を一件ずつ登録する。Unitの例情報はUnit
+metadata、Problemの例情報は本文frontmatterに置く。環境・入力・実行手順・期待結果を記し、コードを実行してから成功を記録する。非実行の擬似コード・図・数式は`pseudo`、`pseudocode`、`text`、`plaintext`、`math`で明示する。未登録・未検証・失敗した実行コードは公開projectionで拒否し、旧digest台帳の再生成で代用しない。
+
 build後の現行projection検査は同じ`dist`を使う。
 
 ```sh

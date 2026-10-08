@@ -22,6 +22,7 @@ import {
   CanonicalLearningPrerequisitesSchema,
 } from '../domain/schema-parts/catalog.js';
 import { readProblemAuthoringDocument } from '../authoring/problem-authoring-document.js';
+import { validatePublicationExamples } from '../authoring/publication-examples.js';
 import {
   resolveProblemLocator,
   validateJoinedProblemDocuments,
@@ -66,6 +67,9 @@ export const assertUnitPublication = (
     content.includes('triggerPatterns')
   )
     throw new Error(`FULL_PROJECTION_UNIT_DOCUMENT:${unit.id}`);
+  validatePublicationExamples(content, unit.examples, (reason) => {
+    throw new Error(`FULL_PROJECTION_UNIT_${reason}:${unit.id}`);
+  });
 };
 
 /** Read canonical metadata and authored Markdown; never regenerate taxonomy or prose. */
