@@ -1,5 +1,10 @@
 # 全カタログの週次更新と復旧
 
+> **旧更新pipelineの技術資料**: 現行方針と通常更新の入口は
+> [Codexの更新マニュアル](update-manual.md)と
+> [Constitution 4.0.0](../../.specify/memory/constitution.md)。以下の人間承認・self/third-party選択・毎回の全件審査は新しい作業の必須条件ではない。manifest・digest・release検証への実装依存は残っているため、既存CLIを使う際の技術的制約として参照する。公開先はGitHub
+> Pagesに確定済み。撤去・簡素化の対象と互換性確認は更新マニュアルの移行欄に従う。
+
 この手順は、ABCの新しい問題や訂正を、既存の典型・学習成果・本文へ一つの更新として取り込むためのもの。ABCの回次やdifficulty順に教科書を組み替えない。終了済みContestの公式task
 orderでDより後を対象にし、ARC・AGC・CF Div. 1・UCUPへ転用する能力を意味上のprimary
 Outcomeとして判断する。

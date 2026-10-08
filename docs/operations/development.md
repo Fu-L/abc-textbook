@@ -1,5 +1,8 @@
 # Local development
 
+現行の更新方針と検証範囲は[Codexの更新マニュアル](update-manual.md)と
+[Constitution 4.0.0](../../.specify/memory/constitution.md)を参照する。以下は既存環境・実装の説明であり、全コマンド・全ブラウザーの実行を通常更新の必須条件としない。単一環境化などCI全体の簡素化は別の実装変更で行う。
+
 ## 非公開文書のCI検証
 
 CIの5つの必須check名は維持する。AGENTS、README、Spec

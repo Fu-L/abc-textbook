@@ -1,5 +1,11 @@
 # ABC212〜466 初版公開手順
 
+> **初版の実績と現行公開実装の資料**: 現行の更新方針は [Codexの更新マニュアル](update-manual.md)と
+> [Constitution 4.0.0](../../.specify/memory/constitution.md)。初版固有の全件監査・review
+> packet・owner例外を通常更新へ適用しない。以下の「後続更新は従来のself/third-party
+> policy」という方針は廃止済み。workflowのrequired
+> checks・証跡依存・deploy引数は今回変更していないため、実際の公開操作ではこれらの現行制約を確認する。移行対象は更新マニュアルに記載する。
+
 初版は868問・213タグ・232 Unit、254開催とABC316の公式欠番を収録する。収録cutoffは
 `2026-07-12T00:00:00+09:00`。公開準備日・検証日・配信日は別の情報である。本文、taxonomy、配置、読書順、Problem
 IDとIndexedDB契約を維持する。#53で用意するのは公開入力、検査、レビューpacketとdeploy入口であり、mainへのmergeと実配信は#54で行う。

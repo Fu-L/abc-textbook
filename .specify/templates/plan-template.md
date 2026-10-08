@@ -4,55 +4,46 @@
 
 **Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit-plan` command; its definition describes the execution workflow.
+**Note**: `/speckit-plan`が使うテンプレート。憲章と
+`docs/operations/update-manual.md`を先に読む。小さな教材修正には新しい計画書を要求しない。
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+[改善する教材・読者の操作と、そのための変更を簡潔に記載]
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Language/Version**: [package.json・lockfile・.nvmrcの既存環境を参照]
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]
+**Primary Dependencies**: [Astro/Starlight等、今回変更する依存だけ記載]
 
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
+**Storage**: [教材ファイル、ブラウザー内の学習記録。影響がなければその旨を記載]
 
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
+**Testing**: [schema検証・対象テスト・build・リンク・必要なE2Eの実行方法]
 
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
+**Target Platform**: [GitHub Pagesの既存originとbase pathを維持する静的サイト]
 
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [個人用の静的教材／ローカル検証CLI]
 
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
+**Performance Goals**: [今回必要な表示性能・検証時間の目標。不要なら該当なし]
 
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
+**Constraints**: [既存教材・URL・ID・学習記録・公開環境の互換性]
 
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
-
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Scale/Scope**: [変更する教材・機能と影響範囲]
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_Codexが計画時と設計後に確認する。対象外は理由を一言で記し、承認者を設けない。_
 
-- **Learning outcomes**: Identify the target learner, prerequisites, measurable outcomes,
-  scope boundaries, and the planned assessment for each outcome.
-- **Accuracy and traceability**: List authoritative, version-aware sources and define how
-  claims, definitions, and changing behavior will be verified.
-- **Progression and accessibility**: Show the learning sequence, define new terminology, and
-  identify accessibility requirements for text, visuals, navigation, and exercises.
-- **Reproducibility**: Define the documented environment and validation method for every
-  executable example, exercise, and answer key.
-- **Consistency and maintainability**: Identify canonical sources, conventions, affected
-  cross-references, and the repository checks that will prevent drift.
+- **教材品質**: 学習成果、前提、読書順、文章、表示の改善を説明できる。
+- **正確性**: 公式根拠と解法・独自論証・境界条件・計算量の確認方法がある。
+- **マニュアル**: 更新マニュアルを参照し、手順変更があれば同時に更新する。
+- **検証**: 変更に効くschema・テスト・build等を選び、不要な重複を追加しない。
+- **簡素さ**: 人間・第三者承認、別台帳、独自release/deploy機構を追加しない。
+- **互換性**: 教材、URL、Problem ID、IndexedDB、backup、公開originを保持する。
 
-Any failed gate MUST be recorded in Complexity Tracking with its risk, owner, and removal or
-review condition. Unjustified failures block Phase 0 and implementation.
+未解決の不適合は設計を修正する。旧実装からの移行が必要な場合は対象と残作業をComplexity
+Trackingへ記し、失敗を成功扱いしない。
 
 ## Project Structure
 
@@ -60,65 +51,34 @@ review condition. Unjustified failures block Phase 0 and implementation.
 
 ```text
 specs/[###-feature]/
-├── plan.md              # This file (/speckit-plan command output)
-├── research.md          # Phase 0 output (/speckit-plan command)
-├── data-model.md        # Phase 1 output (/speckit-plan command)
-├── quickstart.md        # Phase 1 output (/speckit-plan command)
-├── contracts/           # Phase 1 output (/speckit-plan command)
-└── tasks.md             # Phase 2 output (/speckit-tasks command - NOT created by /speckit-plan)
+├── spec.md
+├── plan.md
+├── research.md       # 調査事項。なければ該当なし
+├── data-model.md     # データ変更。なければ該当なし
+├── quickstart.md     # 今回の実行・検証方法
+├── contracts/        # 必要な契約のみ。既存schemaは参照する
+└── tasks.md          # /speckit-tasksの出力
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+src/content/          # 公開教材・構造化データの正本
+src/components/       # 表示
+src/pages/            # 公開導線
+src/lib/              # schema・共通処理・学習記録
+scripts/              # 既存CLI
+tests/                # 既存unit/contract/integration/e2e
+docs/operations/      # Codexの更新マニュアル
+.github/workflows/    # 標準のCI・Pages公開
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: [変更する実在pathだけ示す。新しい層は必要性を説明]
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
+> 必要な場合だけ記載。別manifest、risk-owner台帳、承認証跡を作らない。
 
-| Violation | Why Needed | Risk | Owner | Removal or Review Condition |
-|-----------|------------|------|-------|-----------------------------|
-| [constitution gate] | [specific need] | [learner/project impact] | [name/role] | [dated or testable condition] |
+| Constraint or migration | Why needed | Affected paths | Completion check     |
+| ----------------------- | ---------- | -------------- | -------------------- |
+| [現行実装の制約]        | [残す理由] | [実在path]     | [解消を確認する方法] |

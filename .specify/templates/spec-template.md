@@ -8,150 +8,87 @@
 
 **Input**: User description: "$ARGUMENTS"
 
-## Learner and Scope *(mandatory)*
-
-**Target learner**: [Who this content serves and their relevant background]
-
-**Prerequisites**: [Knowledge, tools, and environment required before starting]
-
-**Learning outcomes**: [Observable capabilities learners will demonstrate after completion]
-
-**In scope**: [Concepts and learner capabilities covered]
-
-**Out of scope**: [Adjacent topics intentionally excluded]
-
-## User Scenarios & Testing *(mandatory)*
-
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
+憲章とdocs/operations/update-manual.mdを先に読む。
+設計が必要な変更、またはSpec Kitを指定された作業に使う。
+小さな教材修正には新しいspecを要求しない。不要なstoryや要件は削除する。
 -->
+
+## Learner and Scope _(mandatory)_
+
+**Target learner**: [個人学習者の背景。既存教材と同じなら既存定義を参照]
+
+**Prerequisites**: [必要な知識と既存の前提単元]
+
+**Learning outcomes**: [今回改善する理解・解法・読者の操作]
+
+**In scope**: [変更する本文・分類・表示・機能]
+
+**Out of scope**: [変更しない隣接事項]
+
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - [Brief Title] (Priority: P1)
 
-[Describe this user journey in plain language]
+[読者が何を理解・実行できるようになるか]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [学習上の効果]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 2 - [Brief Title] (Priority: P2)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Codexが対象教材・表示・挙動で確認する方法]
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** [前提], **When** [読む・操作する], **Then** [確認可能な結果]
 
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-[Add more user stories as needed, each with an assigned priority]
+[独立した成果が複数ある場合だけstoryを追加する]
 
 ### Edge Cases
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
+- [今回関係する境界条件、欠測、空入力、既存データなど]
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
-
-## Requirements *(mandatory)*
-
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- **FR-001**: [読者に必要な具体的挙動。本文だけの変更なら該当なし]
+- **FR-002**: [既存URL・Problem ID・学習記録・公開環境への互換性条件]
 
-### Content Quality Requirements *(mandatory)*
+### Content Quality Requirements _(applicable items only)_
 
-- **CQ-001**: Every substantive section MUST trace to a declared learning outcome.
-- **CQ-002**: Version-sensitive or external claims MUST name an authoritative source and the
-  applicable version or verification date.
-- **CQ-003**: Every executable example MUST state its environment, inputs, procedure, and
-  expected observable result.
-- **CQ-004**: New terminology MUST be defined at first use, and required non-text content MUST
-  have an equivalent text alternative where supported.
-- **CQ-005**: Exercises MUST map to learning outcomes and define how answers are verified.
+- **CQ-001**: 本文・分類・前提・読書順は学習成果と一貫し、用語を説明する。
+- **CQ-002**: 解法と条件は公式根拠で確認し、独自論証は仮定と正当性を示す。
+- **CQ-003**: 完全解説は具体的な手順・境界条件・全体の計算量へ接続する。
+- **CQ-004**: 表示変更では数式・狭い画面・キーボード・色以外の説明を確認する。
+- **CQ-005**: 掲載する実行可能コードだけ環境・入力・手順・期待結果を確認する。
 
-Replace or extend these entries with feature-specific, testable requirements; do not remove an
-applicable constitutional obligation.
+該当する要件を具体化する。例題・演習・評価・解答セクションや人間による読解測定・承認を一律に要求しない。
 
-*Example of marking unclear requirements:*
+### Validation and Operations
 
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **VO-001**: 構造化データの変更は既存schemaとID・参照・不変条件の検証を通す。
+- **VO-002**: 挙動の変更は対象の自動テストを通し、検証範囲を影響に合わせる。
+- **VO-003**: 更新方法が変わる場合は更新マニュアルを同じ変更で修正する。
+- **VO-004**: 完了はCodexの確認と必要な自動検証で判断し、人間・第三者承認を要求しない。
 
-### Key Entities *(include if feature involves data)*
+別のreview
+evidence・manifest・digest台帳や独自のrelease/deploy機構を新規要件にしない。既存実装の制約は移行対象として明記する。
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+### Key Entities _(include if feature involves data)_
 
-## Success Criteria *(mandatory)*
+- **[Entity]**: [既存正本と関係。今回変更するものだけ]
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-001**: [対象教材・表示・挙動が満たす具体的な結果]
+- **SC-002**: [既存教材・URL・学習記録が保持される確認方法]
+- **SC-003**: [今回必要な自動検証が成功する条件]
+
+人間のアンケート、自己学習時間、承認率、無関係な全コーパス監査を成功条件にしない。検証時間を改善する変更では既存Actionsログと変更後の同条件の時間を比較する。
 
 ## Assumptions
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right assumptions based on reasonable defaults
-  chosen when the feature description did not specify certain details.
--->
-
-- [Assumption about target users, e.g., "Users have stable internet connectivity"]
-- [Assumption about scope boundaries, e.g., "Mobile support is out of scope for v1"]
-- [Assumption about data/environment, e.g., "Existing authentication system will be reused"]
-- [Dependency on existing system/service, e.g., "Requires access to the existing user profile API"]
+- 個人利用の静的教科書で、作業は自然言語の指示を受けたCodexが完結させる。
+- 既存のAstro・GitHub Pages・端末内学習記録を維持する。
+- [今回固有の仮定だけ追加。不明点が実装へ影響する場合だけ確認する]
