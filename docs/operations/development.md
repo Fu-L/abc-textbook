@@ -74,7 +74,7 @@ npm run verify:fast
 - `link:check` は同じ実行内でbuildした `dist` の内部linkだけを検査します。
 - `verify:fast` は内部link検査とChromium/Firefox/WebKitの主要E2Eまで実行します。
 - GitHub
-  Actionsの[CI workflow](../../.github/workflows/ci.yml)は、リリース基準版と対応範囲のローリング版をそれぞれ`npm ci`および`verify:fast`で検証します。
+  Actionsの[CI workflow](../../.github/workflows/ci.yml)は、リリース基準版と対応範囲のローリング版をそれぞれ`npm ci`および`verify:fast`で検証します。両環境の公開設定は`SITE_URL=https://fu-l.github.io`、`BASE_PATH=/abc-textbook`です。保存済み公開投影の証跡と比較するローカルの`verify:fast`にも、同じ環境変数を指定します。
 - `check` は`src/client/`のbrowser source、Astro frontmatter/build、Node.js
   CLI/config、Vitest、Playwrightの型環境を分離して検査します。
 - live source確認はoffline suite成功後に明示的なdry-runとして実行します。

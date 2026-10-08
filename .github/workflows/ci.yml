@@ -17,6 +17,9 @@ jobs:
   verify:
     name: Verify (${{ matrix.name }})
     runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://fu-l.github.io
+      BASE_PATH: /abc-textbook
     strategy:
       fail-fast: false
       matrix:

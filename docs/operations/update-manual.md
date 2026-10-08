@@ -75,6 +75,9 @@ npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-pol
 catalogのcheck・SC-012・agent結果も[先行公開の引継ぎ](deploy-before-catch-up.md)の既存コマンドで更新し、実commitのrelease/review検証とActionsの全required
 check成功まで確認する。教材正本と公開履歴を変更せず、新しいmanifestや承認制度を追加しない。これは旧consumerが残る間だけの制約であり、通常更新への恒久的な全件監査義務ではない。
 
+CIの両`Verify`
+jobは公開先と同じ`SITE_URL=https://fu-l.github.io`、`BASE_PATH=/abc-textbook`でbuild・公開投影・内部リンク・E2Eを確認する。保存済みT160の`build`もこの設定に結び付くため、ローカルで`verify:fast`を再現するときも両変数を指定する。未指定の既定origin・ルートpathとの比較は`FULL_PROJECTION_EVIDENCE_STALE`になる。公開設定の不一致はCIとローカルの入力を揃えて直し、証跡の比較を緩めたりdigestだけを書き換えたりしない。
+
 旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
 Manual」を運用方針として認識する。削除済みのIssue
 #53限定見出しを復活させない。憲章3.0.0固定の照合は旧human merge-review形式に限定し、seed
