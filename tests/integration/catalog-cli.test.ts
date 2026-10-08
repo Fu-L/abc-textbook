@@ -1,11 +1,15 @@
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import { catalogContentDigest } from '../../src/lib/catalog/build-catalog.js';
+import type { z } from 'zod';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { deriveCatalogEvidenceTrustContext } from '../../src/lib/catalog/evidence-inventory.js';
@@ -19,6 +23,162 @@ import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
 const calculateContentSubjectDigest = (files: readonly unknown[]): string => canonicalDigest(files);
+
+describe('catalog CLI current canonical content', () => {
+  let root: string;
+  let catalog: z.infer<typeof CatalogSchema>;
+  const run = async (script: string, args: string[]) =>
+    execFileAsync(
+      process.execPath,
+      [
+        '--import',
+        path.resolve('node_modules/tsx/dist/loader.mjs'),
+        path.resolve(`scripts/catalog-${script}.ts`),
+        ...args,
+      ],
+      { cwd: root, maxBuffer: 4 * 1024 * 1024 },
+    )
+      .then(({ stdout, stderr }) => ({ code: 0, stdout, stderr }))
+      .catch((error: unknown) => error as { code: number; stdout: string; stderr: string });
+  const writeCatalog = async (value = catalog) =>
+    writeFile(path.join(root, 'catalog.json'), JSON.stringify(value));
+
+  beforeAll(async () => {
+    root = await mkdtemp(path.join(tmpdir(), 'abc-catalog-current-'));
+    await mkdir(path.join(root, 'staging'));
+    await cp('src/content', path.join(root, 'src/content'), { recursive: true });
+    catalog = (await loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false }))
+      .catalog;
+    for (const key of ['manifestDigest', 'contentFileInventoryDigest', 'contentSnapshotDigest'])
+      Reflect.deleteProperty(catalog.release, key);
+    await writeCatalog();
+  }, 60_000);
+  afterAll(async () => {
+    await rm(root, { recursive: true, force: true });
+  });
+
+  it('builds and validates without Git, manifest, review or evidence inventory', async () => {
+    expect(await run('validate', ['--input', 'catalog.json'])).toMatchObject({
+      code: 0,
+      stdout: 'CATALOG_VALID\n',
+    });
+    expect(
+      await run('build', ['--input', 'catalog.json', '--output', 'output.json']),
+    ).toMatchObject({ code: 0 });
+    const output = CatalogSchema.parse(
+      JSON.parse(await readFile(path.join(root, 'output.json'), 'utf8')) as unknown,
+    );
+    expect(canonicalDigest(output)).toBe(canonicalDigest(catalog));
+    const before = await readFile(path.join(root, 'output.json'));
+    const overwrite = await run('build', ['--input', 'catalog.json', '--output', 'output.json']);
+    expect(overwrite.code).toBe(70);
+    expect(overwrite.stderr).toContain('EEXIST');
+    expect((await readFile(path.join(root, 'output.json'))).equals(before)).toBe(true);
+  }, 60_000);
+
+  it.each(['validate', 'build'])(
+    'rejects malformed and unknown arguments for %s',
+    async (script) => {
+      const required =
+        script === 'build'
+          ? ['--input', 'catalog.json', '--output', 'unused.json']
+          : ['--input', 'catalog.json'];
+      for (const args of [
+        [...required, '--unknown', 'value'],
+        [...required, '--input', 'catalog.json'],
+        [...required, '--evidence-inventory'],
+        ['--input', '--output', 'unused.json'],
+        [...required, '--evidence-inventory', '--unknown'],
+      ])
+        expect(await run(script, args)).toMatchObject({ code: 64 });
+    },
+    60_000,
+  );
+
+  it.each([
+    ['type', 'CATALOG_SCHEMA_INVALID'],
+    ['duplicate', 'DUPLICATE_PROBLEM_ID'],
+    ['reference', 'CATALOG_REFERENCE_MISSING'],
+    ['tag-cycle', 'DEPENDENCY_CYCLE'],
+    ['outcome-cycle', 'DEPENDENCY_CYCLE'],
+    ['placement', 'CATALOG_CANONICAL_DRIFT'],
+    ['claim', 'AUTHORING_CLAIM_NOT_VERIFIED'],
+  ])(
+    'rejects %s even without an inventory',
+    async (kind, diagnostic) => {
+      const changed = structuredClone(catalog);
+      const problem = changed.problems[0];
+      const tag = changed.tags[0];
+      const outcome = changed.learningOutcomes[0];
+      const placement = changed.placements[0];
+      const claim = changed.authoringUnits[0]?.claims[0];
+      if (!problem || !tag || !outcome || !placement || !claim)
+        throw new Error('Missing fixture entities.');
+      if (kind === 'type') Reflect.set(problem, 'title', 42);
+      if (kind === 'duplicate') changed.problems.push(structuredClone(problem));
+      if (kind === 'reference') problem.sourceRevisionIds = ['unknown-source'];
+      if (kind === 'tag-cycle') tag.prerequisiteTagIds = [tag.id];
+      if (kind === 'outcome-cycle') outcome.prerequisiteOutcomeIds = [outcome.id];
+      if (kind === 'placement') placement.rationale += ' Drift';
+      if (kind === 'claim') claim.verificationStatus = 'unverified';
+      await writeCatalog(changed);
+      for (const script of ['validate', 'build']) {
+        const args = [
+          '--input',
+          'catalog.json',
+          ...(script === 'build' ? ['--output', 'invalid.json'] : []),
+        ];
+        const result = await run(script, args);
+        expect(result.code).toBe(2);
+        expect(result.stderr).toContain(diagnostic);
+      }
+      await writeCatalog();
+    },
+    60_000,
+  );
+
+  it('rejects a Unit prerequisite cycle in the canonical policy', async () => {
+    const file = path.join(root, 'src/content/policies/learning-prerequisites.json');
+    const before = await readFile(file);
+    const value = JSON.parse(before.toString()) as {
+      learningUnitPrerequisites: { nodeId: string; prerequisiteId: string }[];
+      learningUnitDagDigest: string;
+    };
+    const id = catalog.learningUnits[0]?.id;
+    if (!id) throw new Error('Missing fixture Unit.');
+    value.learningUnitPrerequisites.push({ nodeId: id, prerequisiteId: id });
+    value.learningUnitDagDigest = canonicalDigest(value.learningUnitPrerequisites);
+    await writeFile(file, JSON.stringify(value));
+    expect(await run('validate', ['--input', 'catalog.json'])).toMatchObject({ code: 2 });
+    await writeFile(file, before);
+  }, 60_000);
+
+  it('checks current prose and rejects a stale serialized document', async () => {
+    const unit = catalog.authoringUnits[0];
+    if (!unit || typeof unit.sections.reasoning !== 'string')
+      throw new Error('Missing fixture prose.');
+    const file = path.join(root, unit.docPath);
+    const before = await readFile(file, 'utf8');
+    await rm(file);
+    expect(await run('validate', ['--input', 'catalog.json'])).toMatchObject({ code: 2 });
+    await writeFile(
+      file,
+      before.replace(unit.sections.reasoning, `${unit.sections.reasoning}\n訂正した着想。`),
+    );
+    const updated = (
+      await loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false })
+    ).catalog;
+    // New content is accepted with no new work/review ledger.
+    updated.release.contentSnapshotDigest = catalogContentDigest(updated);
+    await writeCatalog(updated);
+    expect(await run('validate', ['--input', 'catalog.json'])).toMatchObject({ code: 0 });
+    await writeCatalog();
+    const stale = await run('validate', ['--input', 'catalog.json']);
+    expect(stale.code).toBe(2);
+    expect(stale.stderr).toContain('CATALOG_CANONICAL_DRIFT');
+    await writeFile(file, before);
+  }, 60_000);
+});
 
 describe('catalog validation CLI evidence boundary', () => {
   let repositoryRoot: string;
@@ -39,6 +199,88 @@ describe('catalog validation CLI evidence boundary', () => {
     await writeFile(absolutePath, contents, 'utf8');
     return createHash('sha256').update(contents).digest('hex');
   };
+
+  it('accepts the retained legacy inventory and rejects an invalid legacy field', async () => {
+    // Clone existing inputs into a disposable Git repository; no new review/check receipts.
+    const snapshot = path.join(repositoryRoot, 'snapshot');
+    await execFileAsync('git', ['clone', '--shared', '--quiet', '--no-checkout', '.', snapshot]);
+    await execFileAsync('git', ['reset', '--mixed', '--quiet', 'HEAD'], { cwd: snapshot });
+    // Only materialize inputs read by the old consumer; historical build artifacts are unnecessary.
+    await execFileAsync(
+      'git',
+      [
+        'restore',
+        '--source=HEAD',
+        '--worktree',
+        '--',
+        'src/content',
+        'docs/work-manifests',
+        'docs/verification/releases',
+        'docs/reviews/agent-content/initial-release',
+        'docs/verification/initial-release',
+        'docs/verification/bootstrap/us1.json',
+        'docs/verification/bootstrap/learning-unit-content.json',
+        'docs/verification/bootstrap/problem-authoring-units.json',
+        '.specify/memory/constitution.md',
+        '.specify/templates',
+        'staging/updates',
+      ],
+      { cwd: snapshot },
+    );
+    await execFileAsync('git', ['update-ref', 'refs/remotes/origin/main', 'HEAD'], {
+      cwd: snapshot,
+    });
+    await execFileAsync(
+      'git',
+      [
+        '-c',
+        'user.name=Fixture',
+        '-c',
+        'user.email=fixture@example.com',
+        'commit',
+        '--allow-empty',
+        '-m',
+        'Legacy validation fixture',
+      ],
+      { cwd: snapshot },
+    );
+    const inputPath = 'docs/verification/releases/catalog.json';
+    const evidencePath = 'docs/verification/releases/evidence-inventory.json';
+    const original = CatalogSchema.parse(
+      JSON.parse(await readFile(path.join(snapshot, inputPath), 'utf8')) as unknown,
+    );
+    // The legacy CLI never accepted a prepared projection as a published release.
+    // Remove that marker in the fixture while retaining the old actual evidence values.
+    Reflect.deleteProperty(original.release, 'publicationStatus');
+    original.release.contentSnapshotDigest = catalogContentDigest(original);
+    await writeFile(path.join(snapshot, inputPath), JSON.stringify(original));
+    const invoke = (script: string, extra: string[] = []) =>
+      execFileAsync(
+        process.execPath,
+        [
+          '--import',
+          path.resolve('node_modules/tsx/dist/loader.mjs'),
+          path.resolve(`scripts/catalog-${script}.ts`),
+          '--input',
+          inputPath,
+          '--evidence-inventory',
+          evidencePath,
+          ...extra,
+        ],
+        { cwd: snapshot },
+      );
+    expect((await invoke('validate')).stdout).toBe('CATALOG_VALID\n');
+    const evidence = JSON.parse(
+      await readFile(path.join(snapshot, evidencePath), 'utf8'),
+    ) as Record<string, unknown>;
+    evidence.checks = 'invalid';
+    await writeFile(path.join(snapshot, evidencePath), JSON.stringify(evidence));
+    const error = await invoke('validate').catch(
+      (value: unknown) => value as { code: number; stderr: string },
+    );
+    expect(error).toMatchObject({ code: 2 });
+    expect(error.stderr).toContain('EVIDENCE_INVENTORY_SCHEMA_INVALID');
+  }, 60_000);
 
   it('fails closed for a normal weekly-update fixture when evidence omits a required check', async () => {
     const contentPath = 'src/content/docs/index.md';

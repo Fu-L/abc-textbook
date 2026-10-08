@@ -91,7 +91,8 @@ checkの重複指定はない。移行PRのmergeまではmainの旧workflowが�
 初版監査workflowは`workflow_dispatch`だけで起動する。明示的な監査では3browserと全工程を用意する。旧手動Production
 deployの初版事後検査も3browserを使うため、準備scriptを`test:e2e:install:all:ci`に揃えた。数学回帰は既存の`docs/verification/bootstrap/pr65*-mathematical-checks.py`から関係するものを選んで直接実行する。
 
-公開loaderの初版受入台帳依存はPR-04で外した。旧catalog/release/deployの証跡依存とprepared版のsnapshot照合は後続PRまで残る。本文を正本から検証できることと、訂正を通常経路で公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
+公開loaderの初版受入台帳依存はPR-04で、通常catalog
+CLIのinventory必須はPR-05で外した。旧release/deployの証跡依存とprepared版のsnapshot照合は後続PRまで残る。本文を正本から検証できることと、訂正を通常経路で公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
 catalog/deployの復旧は[公開引継ぎ](deploy-before-catch-up.md)を参照する。監査CLIの全工程は通常runnerから独立して保持し、旧出力をdigestだけ書き換えて通さない。
 
 旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
@@ -202,7 +203,7 @@ catalog・欠落page・発動条件欠落の拒否も確認する。旧監査con
 
 `docs/verification/releases/catalog.json`が存在する通常buildでは、引き続きそのreleaseを読み、snapshotと本文inventoryの両方について現行正本との一致を要求する。本文訂正後の旧prepared版は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`で失敗する。一時copyでは旧prepared
 catalogと受入台帳を除いたcandidateをbuildでき、projection単体は`usePreparedRelease: false`で訂正を検証できる。実作業ツリーの旧公開入力を消して制約を迂回せず、catalog
-CLIの証跡consumerはPR-05、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
+CLIは以下のPR-05の手順を使い、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
 
 旧seed release
 consumerは初版bootstrapの`sourceSetFingerprint`も読むため、その経路内だけで旧受入subjectと現行本文から当時のprojection
@@ -210,6 +211,33 @@ digest形式を再構成する。現行digestも受理するが、不明なfinge
 
 復旧はloaderと検査CLIの変更をrevertする。旧台帳・教材・prepared
 catalogは保持しているため、旧経路へ戻せる。
+
+### catalog CLIの移行（002 / PR-05）
+
+通常の生成・検証では`--evidence-inventory`を省略できる。リポジトリrootから、正本と一致するcatalog
+JSONを入力する。入力のschema・ID・参照・出典とclaim・配置を検査し、正本loaderで本文・主配置・関連先・Tag/Outcome/Unitの3DAGと読書順を検証したprojectionと照合する。inventory全体のvalidatorをskipする経路ではなく、内容の意味検証と旧release証跡の照合を分離した。
+
+```sh
+npm run catalog:validate -- --input docs/verification/releases/catalog.json
+mkdir -p build
+npm run catalog:build -- --input docs/verification/releases/catalog.json --output build/validated-catalog.json
+```
+
+入力catalogはrepository内のstaging以外に置く。訂正を試す場合は、正本の一時コピーをrootとして`loadFullPublicProjection({ usePreparedRelease: false })`の`catalog`をJSONへ保存し、同じrootでCLIを実行する。入力JSONの本文だけ変更すると`CATALOG_CANONICAL_DRIFT`で失敗する。通常経路はGitのprotected
+base、新規manifest/review/check結果を要求しない。旧任意欄がある入力は型を検査して値を保持し、`contentSnapshotDigest`があれば内容との一致も検査する。`prepared`も検証可能だが、CLI成功は配信成功を表さない。
+
+未知・重複・値欠落の引数はexit 64、schema・意味・正本不整合はexit 2、読み書き等の実行失敗はexit
+70。buildは既存outputを`wx`で拒否し、失敗時も既存bytesを保持する。
+
+旧`--evidence-inventory PATH`は、PR-07の公開consumer移行後、PR-10で旧release/deploy
+consumerを整理するまで互換引数として残す。指定時は旧manifest・protected-base差分・inventory全体・check/review・実行例証跡の従来の検証を行う。旧入力を黙って無視せず、不正・欠落・staleを拒否する。旧`buildCatalog`/`validateCatalogSemantics`はrelease
+gateを維持し、通常CLIは`buildCanonicalCatalog`の内容検証と正本projection照合を使う。
+
+新しい訂正の影響検査では`enumerateCorrectionImpacts`へ現行`catalog`と変更前の`previousCatalog`、source/claimの変更対象、問題ID、変更前後の前提policyを渡す。`verifyCanonicalCorrectionTargets`の`scope`へ同じ範囲を渡し、変更前後の主配置・関連Unit・Outcome
+owner・追加前提Unit・直接前提の隣接Unitと現存block、配置・前提policy・再生成indexの確認漏れを検出する。返値はメモリー上の検査結果であり、証跡登録や別台帳の保存は不要。既存の履歴locatorは従来どおり実対象へ解決し、過去の訂正記録を書き換えない。
+
+旧release/deploy
+consumerと台帳は削除していない。通常サイトbuildの旧prepared版照合もPR-07まで残り、今回のCLI移行だけで実教材訂正の公開・SC-004達成とは扱わない。復旧はCLIとvalidatorの変更をrevertし、保持した旧inputとinventory指定を使う。
 
 002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。PR-03でschemaと履歴readerの互換拡張を実装した。catalog/metadataと`baseReleaseVersion`は旧日付版と`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`は1桁の日など従来の受理値と新版を読める。catalog
 `3.0.0`、metadata/backup

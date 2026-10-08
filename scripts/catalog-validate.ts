@@ -1,36 +1,21 @@
-import { readFile } from 'node:fs/promises';
+import { CatalogBuildError } from '../src/lib/catalog/build-catalog.js';
+import { CatalogEvidenceInventoryError } from '../src/lib/catalog/evidence-inventory.js';
+import { CatalogPublicationBoundaryError } from '../src/lib/catalog/publication-boundary.js';
 
-import { buildCatalog, CatalogBuildError } from '../src/lib/catalog/build-catalog.js';
-import {
-  CatalogEvidenceInventoryError,
-  loadCatalogEvidenceCanonicalSources,
-  loadTrustedCatalogReleaseEvidenceInventory,
-} from '../src/lib/catalog/evidence-inventory.js';
-import {
-  CatalogPublicationBoundaryError,
-  resolvePublicCatalogInput,
-} from '../src/lib/catalog/publication-boundary.js';
+import { loadCatalogInput, parseCatalogArgs } from './catalog-input.js';
 
-const args = process.argv.slice(2);
-const inputIndex = args.indexOf('--input');
-const inputPath = inputIndex < 0 ? undefined : args[inputIndex + 1];
-const evidenceIndex = args.indexOf('--evidence-inventory');
-const evidencePath = evidenceIndex < 0 ? undefined : args[evidenceIndex + 1];
-if (!inputPath || !evidencePath || args.length !== 4) {
-  console.error('Usage: catalog-validate --input CATALOG.json --evidence-inventory INVENTORY.json');
+let args: ReturnType<typeof parseCatalogArgs> | undefined;
+try {
+  args = parseCatalogArgs(process.argv.slice(2), false);
+} catch {
+  console.error(
+    'Usage: catalog-validate --input CATALOG.json [--evidence-inventory INVENTORY.json]',
+  );
   process.exitCode = 64;
-} else {
+}
+if (args?.input) {
   try {
-    const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
-    const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input, process.cwd(), {
-      catalogPath: resolvedInputPath,
-    });
-    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
-      evidencePath,
-      canonicalSources,
-    );
-    buildCatalog(input, [], trustedEvidence);
+    await loadCatalogInput(args.input, args['evidence-inventory']);
     console.log('CATALOG_VALID');
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));

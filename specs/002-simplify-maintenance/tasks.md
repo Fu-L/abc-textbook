@@ -158,14 +158,18 @@ catalogのsnapshot照合と旧catalog/deployの証跡consumerは残り、実訂�
 inventoryなしで正本からcatalog生成・検証でき、旧指定も検証して受理する。型・重複ID・未知参照・3DAG循環・訂正先漏れ・出力上書きを拒否する。
 
 <!-- prettier-ignore -->
-- [ ] T022 [US1] `tests/integration/catalog-cli.test.ts`と`tests/contract/catalog-scope.test.ts`へinventory省略/旧指定、旧入力不正、型違反・重複ID・未知参照・各DAG循環、既存output上書き拒否のケースを追加する。未知引数を黙って無視しない。
-- [ ] T023 [US1] `src/lib/catalog/build-catalog.ts`と`src/lib/catalog/evidence-inventory.ts`の呼出側で、現行正本のschema/ID/参照/DAG/配置/本文の意味検証と旧release証跡照合を分離する。通常生成は前者を必ず行い、inventory全体のvalidatorをskipしない。
-- [ ] T024 [US1] `scripts/catalog-build.ts`と`scripts/catalog-validate.ts`で既存input/output・exit・上書き防止を保ち、`--evidence-inventory`を任意にする。移行期間中の旧指定は従来の入力検証を行い、通常の省略経路で新規manifest/reviewを要求しない。
-- [ ] T025 [US1] `src/lib/catalog/correction-targets.ts`と`scripts/update-abc/correction-impact.ts`の関係する利用側を整理し、証跡登録の代わりに変更前後の主配置・関連Unit・source/claim・前提の影響検査を残す。`tests/integration/canonical-correction.test.ts`で訂正先漏れを検出する。
-- [ ] T026 [US1] T022/T025と`tests/unit/domain-invariants.test.ts`、schema/check、build・リンクを実行し、`docs/operations/update-manual.md`と`specs/002-simplify-maintenance/contracts/compatibility.md`へinventory不要の現行コマンド、旧引数を残す期間、旧release consumer未削除を記す。
+- [X] T022 [US1] `tests/integration/catalog-cli.test.ts`と`tests/contract/catalog-scope.test.ts`へinventory省略/旧指定、旧入力不正、型違反・重複ID・未知参照・各DAG循環、既存output上書き拒否のケースを追加する。未知引数を黙って無視しない。
+- [X] T023 [US1] `src/lib/catalog/build-catalog.ts`と`src/lib/catalog/evidence-inventory.ts`の呼出側で、現行正本のschema/ID/参照/DAG/配置/本文の意味検証と旧release証跡照合を分離する。通常生成は前者を必ず行い、inventory全体のvalidatorをskipしない。
+- [X] T024 [US1] `scripts/catalog-build.ts`と`scripts/catalog-validate.ts`で既存input/output・exit・上書き防止を保ち、`--evidence-inventory`を任意にする。移行期間中の旧指定は従来の入力検証を行い、通常の省略経路で新規manifest/reviewを要求しない。
+- [X] T025 [US1] `src/lib/catalog/correction-targets.ts`と`scripts/update-abc/correction-impact.ts`の関係する利用側を整理し、証跡登録の代わりに変更前後の主配置・関連Unit・source/claim・前提の影響検査を残す。`tests/integration/canonical-correction.test.ts`で訂正先漏れを検出する。
+- [X] T026 [US1] T022/T025と`tests/unit/domain-invariants.test.ts`、schema/check、build・リンクを実行し、`docs/operations/update-manual.md`と`specs/002-simplify-maintenance/contracts/compatibility.md`へinventory不要の現行コマンド、旧引数を残す期間、旧release consumer未削除を記す。
 
 **完了条件**: inventoryなしのCLIが成功し、必要な意味検証と不正入力拒否が残る。旧release/deploy
 consumerは保持する。
+
+**PR-05で確認した現行実装との差**: 通常CLIは`buildCanonicalCatalog`のschema・意味検証と、旧prepared版を使わず正本loaderで再構築したprojectionの照合を行う。旧`buildCatalog`/`validateCatalogSemantics`はrelease
+consumer向けのgateを維持し、inventory指定時は従来のtrust再構築とinventory全体の検証へ進む。新しい訂正は変更前後のcatalog/前提を`scope`に渡して影響先漏れを検査し、旧履歴locatorの解決は保持する。既存868問・体系・本文・公開入力は変更せず、旧release/deploy
+consumerの削除・実教材訂正の配信は行っていない。
 
 **Revert**: CLIとvalidatorの変更を戻す。旧input・互換呼出は保持されている。
 

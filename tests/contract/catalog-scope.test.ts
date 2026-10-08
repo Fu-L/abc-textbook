@@ -8,6 +8,7 @@ import {
 } from '../../src/lib/catalog/advanced-slot-registry.js';
 import {
   buildCatalog,
+  buildCanonicalCatalog,
   validateCatalogSemantics,
   type CatalogLike,
 } from '../../src/lib/catalog/build-catalog.js';
@@ -19,6 +20,7 @@ import {
 } from '../../src/lib/preview/cohort-selection.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import {
   frozenInitialV1RulesDigest,
   frozenInitialV1SelectionRules,
@@ -50,6 +52,21 @@ const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
 
 describe('US2 catalog scope contract', () => {
+  it('builds current content without release ledgers while keeping semantic diagnostics', async () => {
+    const catalog = (await loadFullPublicProjection({ usePreparedRelease: false })).catalog;
+    Reflect.deleteProperty(catalog.release, 'manifestDigest');
+    Reflect.deleteProperty(catalog.release, 'contentFileInventoryDigest');
+    Reflect.deleteProperty(catalog.release, 'contentSnapshotDigest');
+    Reflect.deleteProperty(catalog.release, 'validationSummary');
+    Reflect.deleteProperty(catalog.release, 'humanContentReviewEvidenceRefs');
+    expect(buildCanonicalCatalog(catalog).problems.length).toBe(catalog.problems.length);
+    expect(() => buildCatalog(catalog)).toThrow('RELEASE_EVIDENCE_INVENTORY_REQUIRED');
+    const problem = catalog.problems[0];
+    if (!problem) throw new Error('Missing Problem fixture.');
+    catalog.problems.push(structuredClone(problem));
+    expect(() => buildCanonicalCatalog(catalog)).toThrow('DUPLICATE_PROBLEM_ID');
+  });
+
   it('freezes valid, non-overlapping learning-outcome review units before story changes', async () => {
     const manifest = await readJson<unknown>('docs/work-manifests/initial/us2/manifest.json');
     expect(() => {

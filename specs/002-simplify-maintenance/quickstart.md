@@ -60,14 +60,14 @@ npm test -- tests/contract/explanation-authoring-skill.test.ts tests/unit/proble
 
 各PRに関係するsubsetを選ぶ。旧catalog/metadata/historyと既存本文を実データで読めることを確認する。新規reviewなしの履歴を読むケースと、duplicate/未公開/不一致を拒否するケースを既存テストへ追加する。旧日付版と新版`YYYY.MM.DD-r<run_id>`、同SHAの別runの別版を受理し、旧履歴の順序を保持すること。backupは1桁の日を含む旧入力と新版のexport/importが成功し、field・schemaVersion・値・独立日時・未知IDが変わらないことを確認する。型違反・重複ID・未知source参照・Tag/Outcome/Unit各DAG循環・未完成本文・訂正先漏れが失敗すること。
 
-PR-04では一時copyの既存本文を訂正し、受理台帳を更新せずprojectionを作れることを検証する。PR-05後のCLIは次の形で動くことを確認する（**移行後の期待コマンド。現行はinventory必須**）。
+PR-04では一時copyの既存本文を訂正し、受理台帳を更新せずprojectionを作れることを検証する。PR-05後のCLIは次の形で動くことを確認する（PR-05で実装済み）。
 
 ```sh
-npm run catalog:validate -- --input /tmp/abc-textbook-candidate/catalog.json
-npm run catalog:build -- --input /tmp/abc-textbook-candidate/catalog.json --output /tmp/abc-textbook-candidate/validated-catalog.json
+npm run catalog:validate -- --input build/candidate/catalog.json
+npm run catalog:build -- --input build/candidate/catalog.json --output build/candidate/validated-catalog.json
 ```
 
-candidateは既存正本から作る使い捨て入力。出力がすでに存在する場合の上書き拒否も確認する。旧証跡を指定する既存呼出も移行期間中は型検証して受理する。PR-04だけでは旧prepared
+candidateはCLIを実行するrepository内の正本から作る使い捨て入力。staging以外に置く。出力がすでに存在する場合の上書き拒否も確認する。旧証跡を指定する既存呼出も移行期間中は型検証して受理する。PR-04だけでは旧prepared
 catalog/deploy依存が残るため、訂正公開まで成立したとは扱わない。
 
 ## 公開出力に影響するPR: buildとリンク、必要なE2E

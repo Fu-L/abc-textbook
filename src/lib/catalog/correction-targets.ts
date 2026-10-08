@@ -22,6 +22,8 @@ export const enumerateCanonicalCorrectionImpact = (input: {
   readonly problemIds: readonly string[];
   readonly changeSummary: string;
   readonly derivedIndexPaths: readonly string[];
+  readonly prerequisites?: z.infer<typeof CanonicalLearningPrerequisitesSchema>;
+  readonly previousPrerequisites?: z.infer<typeof CanonicalLearningPrerequisitesSchema>;
 }) => {
   const locators: z.infer<typeof CorrectionImpactSchema>['affectedContentLocators'] = [];
   const problemIds = new Set(input.problemIds);
@@ -30,7 +32,12 @@ export const enumerateCanonicalCorrectionImpact = (input: {
     ...input.catalog.authoringUnits,
     ...(input.previousCatalog?.authoringUnits ?? []),
   ])
-    if (unit.sourceRevisionIds.some((id) => revisions.has(id))) problemIds.add(unit.problemId);
+    if (
+      [...unit.sourceRevisionIds, ...unit.claims.flatMap((claim) => claim.sourceRevisionIds)].some(
+        (id) => revisions.has(id),
+      )
+    )
+      problemIds.add(unit.problemId);
   if (!problemIds.size) throw new Error('CORRECTION_PROBLEM_SCOPE_EMPTY');
   for (const problemId of problemIds) {
     const unit = input.catalog.authoringUnits.find((owner) => owner.problemId === problemId);
@@ -75,6 +82,29 @@ export const enumerateCanonicalCorrectionImpact = (input: {
       )
       .map((unit) => unit.id),
   );
+  // Include the Outcome owner (home) and explicitly required Units on either side,
+  // even when a former classification no longer lists the Problem in coverage.
+  for (const catalog of [input.catalog, input.previousCatalog].filter(
+    (value) => value !== undefined,
+  )) {
+    const owners = catalog.authoringUnits.filter((unit) => problemIds.has(unit.problemId));
+    const outcomes = new Set(owners.flatMap((unit) => unit.learningOutcomeIds));
+    for (const owner of owners)
+      for (const id of owner.additionalPrerequisiteUnitIds) affectedUnitIds.add(id);
+    for (const unit of catalog.learningUnits)
+      if (unit.ownedLearningOutcomeIds?.some((id) => outcomes.has(id)))
+        affectedUnitIds.add(unit.id);
+  }
+  const directlyAffected = new Set(affectedUnitIds);
+  for (const policy of [input.prerequisites, input.previousPrerequisites])
+    for (const edge of policy?.learningUnitPrerequisites ?? [])
+      if (directlyAffected.has(edge.nodeId) || directlyAffected.has(edge.prerequisiteId)) {
+        affectedUnitIds.add(edge.nodeId);
+        affectedUnitIds.add(edge.prerequisiteId);
+      }
+  for (const id of affectedUnitIds)
+    if (!input.catalog.learningUnits.some((unit) => unit.id === id))
+      throw new Error(`CORRECTION_TARGET_MISSING:${id}`);
   // Resolve surviving units against the current catalog: both removed and added
   // relations need their current prose checked after a classification change.
   for (const unit of input.catalog.learningUnits) {
@@ -119,15 +149,33 @@ export const enumerateCanonicalCorrectionImpact = (input: {
 
 /** Mapping completeness is insufficient: resolve the actual target and bind its
  * bytes, including derived indexes freshly calculated from canonical content.
- * The caller persists this report with its update; this function never writes.
+ * The result is an in-memory verification result; no evidence registration is required.
  */
 export const verifyCanonicalCorrectionTargets = async (input: {
   readonly impact: unknown;
   readonly catalog: z.infer<typeof CatalogSchema>;
   readonly readTarget: (file: string) => Promise<Buffer>;
   readonly indexProjections: ReadonlyMap<string, unknown>;
+  /** New corrections supply their complete before/after scope. Historical locators
+   * can still be resolved without re-authoring old correction records. */
+  readonly scope?: Omit<Parameters<typeof enumerateCanonicalCorrectionImpact>[0], 'catalog'>;
 }) => {
   const impact = CorrectionImpactSchema.parse(input.impact);
+  if (input.scope) {
+    const expected = enumerateCanonicalCorrectionImpact({ ...input.scope, catalog: input.catalog });
+    const actual = new Set(impact.affectedContentLocators.map((locator) => canonicalJson(locator)));
+    for (const locator of expected.affectedContentLocators)
+      if (!actual.has(canonicalJson(locator)))
+        throw new Error(`CORRECTION_TARGET_OMITTED:${canonicalJson(locator)}`);
+    const sources = new Set(impact.sourceRevisionIds ?? [impact.sourceRevisionId]);
+    if (
+      impact.sourceRevisionId !== expected.sourceRevisionId ||
+      expected.sourceRevisionIds?.some((id) => !sources.has(id))
+    )
+      throw new Error('CORRECTION_SOURCE_OMITTED');
+    if (expected.derivedIndexPaths.some((file) => !impact.derivedIndexPaths.includes(file)))
+      throw new Error('CORRECTION_INDEX_OMITTED');
+  }
   for (const sourceId of impact.sourceRevisionIds ?? [impact.sourceRevisionId])
     if (!input.catalog.sources.some((source) => source.id === sourceId))
       throw new Error(`CORRECTION_SOURCE_MISSING:${sourceId}`);
