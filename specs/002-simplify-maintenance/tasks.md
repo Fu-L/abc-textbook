@@ -13,7 +13,7 @@
 - 実教材の訂正・1
   Contest追加・その公開はこのタスク一覧の実装対象に含めない。SC-004とM5の実運用受入は、別の教材変更依頼で確認するまで未達と報告する。仕様を弱めたり、fixture成功を実公開成功と数えたりしない。
 - 削除・簡略化を先行する。ただし参照中のproducer/台帳はconsumer移行後に削除する。旧CLIを成功するno-opに置き換えず、検証失敗を隠さない。
-- 人間・第三者・別エージェントの承認を完了条件にしない。GitHub実設定・接続不足は具体的な未完了として扱う。今回行うのはタスク生成だけであり、以下の実装・外部設定・merge・deployは未実施。
+- 人間・第三者・別エージェントの承認を完了条件にしない。GitHub実設定・接続不足は具体的な未完了として扱う。タスク生成時点では実装・外部設定・merge・deployは未実施。現在の実装状況は各タスクのチェックと対応PRを参照する。
 
 **Organization**: 各実装フェーズは1つのstoryと1つのPRを担当する。story全体に複数のPRが必要なため、同じstoryを複数フェーズに分ける。P1のUS2互換性とUS3検証簡略化を先行し、US4のreader準備をUS1の前提として配置する。順序はplanの依存に従い、ユーザーstoryを横断する巨大PRを作らない。PR-07は標準配信導入・writer/旧trigger切替・成功済み版の履歴追記の3PR、PR-10はCLI・adapter/schema・生成物の削除へ分割する。
 
@@ -45,8 +45,8 @@ PR-07a以降のローカルbuildは[build入力契約](contracts/compatibility.m
 **Goal**: 現在の変更を保ち、実装対象と禁止対象を特定する。ここだけの準備PRは作らず、PR-01の作業開始時に行う。
 
 <!-- prettier-ignore -->
-- [ ] T001 `AGENTS.md`、`.specify/memory/constitution.md`、`docs/operations/update-manual.md`、`specs/002-simplify-maintenance/plan.md`を読み、Git差分から既存の未commit変更と教材変更禁止範囲を確認する。ブランチ・feature選択・依存の再初期化を行わない。
-- [ ] T002 `specs/002-simplify-maintenance/tasks.md`の依存順・要求対応を現行`package.json`、`.github/workflows/ci.yml`、`src/lib/catalog/full-public-projection.ts`と照合し、実装中に判明した差だけ本一覧へ反映する。旧仕様の承認義務と技術的consumerを区別する。
+- [X] T001 `AGENTS.md`、`.specify/memory/constitution.md`、`docs/operations/update-manual.md`、`specs/002-simplify-maintenance/plan.md`を読み、Git差分から既存の未commit変更と教材変更禁止範囲を確認する。ブランチ・feature選択・依存の再初期化を行わない。
+- [X] T002 `specs/002-simplify-maintenance/tasks.md`の依存順・要求対応を現行`package.json`、`.github/workflows/ci.yml`、`src/lib/catalog/full-public-projection.ts`と照合し、実装中に判明した差だけ本一覧へ反映する。旧仕様の承認義務と技術的consumerを区別する。
 
 **完了条件**: 対象path、教材禁止範囲、現在のconsumerと保持する差分が確認でき、未実装の簡素化を実装済みと扱っていない。
 
@@ -61,15 +61,25 @@ phase**: 独立した共通基盤の新設は不要。以下のPR-01互換性検
 UnitのID/本文bytes/配置/3DAG/読書順と、全公開URL/anchorを比較する。100件以上の旧backup・未知ID・旧DB・独立日時・原子的復元は既存fixtureで確認する。
 
 <!-- prettier-ignore -->
-- [ ] T003 [P] [US2] `tests/integration/full-public-projection.test.ts`と`tests/unit/textbook-order.test.ts`へ不足する前後比較を追加する。既存commitと一時コピーからID集合、本文bytes、配置、Tag/Outcome/Unit各直接前提と教科書順を比較し、本文欠落や再分類を検出する。新しい凍結manifestや全本文digestをcommitしない。
-- [ ] T004 [P] [US2] `tests/integration/internal-links.test.ts`と`tests/e2e/full-projection.spec.ts`へ、一時領域の旧/new buildの全HTML・data URLとanchor集合の比較を追加する。リンク元とリンク先が同時に消えるケース、既存公開JSON/feed/sitemap/updatesの欠落を検出する。
-- [ ] T005 [P] [US2] `tests/integration/learning-record-backup.test.ts`、`tests/unit/learning-record-timestamp.test.ts`、`tests/e2e/learning-records.spec.ts`の既存ケースを確認し、不足する旧DB version 1・100件以上・未知/取消ID・独立日時・reload・複数タブ・保存失敗・原子的復元だけを補う。`src/lib/learning-records/database.ts`とbackup形式は変更しない。
-- [ ] T006 [US2] T003〜T005とquickstartのPR-01 subsetを実行し、`docs/operations/update-manual.md`へ比較方法を記す。`.github/workflows/ci.yml`と`initial-release-audit.yml`の各検査が検出する不具合・残す検出手段・時間、比較元SHA/公開SHA、CI時間の計測境界を既存ActionsログからPR本文へまとめる。観測できない値を補作しない。
+- [X] T003 [P] [US2] `tests/integration/full-public-projection.test.ts`と`tests/unit/textbook-order.test.ts`へ不足する前後比較を追加する。既存commitと一時コピーからID集合、本文bytes、配置、Tag/Outcome/Unit各直接前提と教科書順を比較し、本文欠落や再分類を検出する。新しい凍結manifestや全本文digestをcommitしない。
+- [X] T004 [P] [US2] `tests/integration/internal-links.test.ts`と`tests/e2e/full-projection.spec.ts`へ、一時領域の旧/new buildの全HTML・data URLとanchor集合の比較を追加する。リンク元とリンク先が同時に消えるケース、既存公開JSON/feed/sitemap/updatesの欠落を検出する。
+- [X] T005 [P] [US2] `tests/integration/learning-record-backup.test.ts`、`tests/unit/learning-record-timestamp.test.ts`、`tests/e2e/learning-records.spec.ts`の既存ケースを確認し、不足する旧DB version 1・100件以上・未知/取消ID・独立日時・reload・複数タブ・保存失敗・原子的復元だけを補う。`src/lib/learning-records/database.ts`とbackup形式は変更しない。
+- [X] T006 [US2] T003〜T005とquickstartのPR-01 subsetを実行し、`docs/operations/update-manual.md`へ比較方法を記す。`.github/workflows/ci.yml`と`initial-release-audit.yml`の各検査が検出する不具合・残す検出手段・時間、比較元SHA/公開SHA、CI時間の計測境界を既存ActionsログからPR本文へまとめる。観測できない値を補作しない。
 
 **完了条件**:
 SC-001〜003を後続PRで再実行できる比較方法があり、旧記録の検査が成功する。移行前CIの同種・同規模の実測基準を確認するか、取得不足を明記する。
 
-**Revert**: 追加テストと手順説明を戻す。教材・保存実装・公開環境は変更しない。
+**PR-01で確認した現行実装との差**:
+
+- 作業開始時は`main`で差分0、002設計はcommit済みだった。既存状態を再初期化せず、Issue
+  #75のPR用ブランチでT001〜T006だけを実装した。後続タスクは未実施。
+- Problem metadataには`docPath`がなく、本文frontmatterの`authoringUnit.docPath`にある。Git
+  archiveの本文を既存parserで読み、IDとpathの一意性・存在を比較する。新しい台帳は不要。
+- `release-metadata.json`は現行deployがbuild後にコピーする。全公開URLの試験は確認済み公開JSONを両一時出力へ加えるfixtureで実施し、新しい実配信の成功と区別した。
+- 非公開文書だけのCI簡略化は既に導入されている。T006の時間基準は旧全検証を実行した正常runを用い、文書のみでskipしたrunと混同しない。現行CI・保存実装は変更していない。
+- PR-01のCI確認で、テスト変更も旧初版監査の入力に含まれることと、旧seed consumerが削除済みの憲章見出しと3.0.0固定を要求することが判明した。保存失敗テストの操作を修正し、seedの憲章識別を現行方針へ合わせ、3.0.0固定は旧human形式だけに限定し、既存のbuild/監査/release結果を実検証から更新した。旧必須経路の削減や新しい証跡制度の追加は行っていない。
+
+**Revert**: 追加テスト・手順説明・seedの憲章識別と更新した既存検証出力を戻す。教材・保存実装・公開環境は変更しない。
 
 ## Phase 3 / PR-02: US3 — 旧必須経路の削減と単一環境CI（P1 / M3）
 

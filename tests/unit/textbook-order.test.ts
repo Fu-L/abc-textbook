@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
+import { readTextbookOrder, withGitBaseline } from '../fixtures/maintenance-compatibility.js';
 
 const chapterUnitIds = (chapterId: string): readonly string[] => {
   const chapter = TEXTBOOK_CHAPTERS.find(({ id }) => id === chapterId);
@@ -20,6 +21,17 @@ const expectAdjacentSequence = (chapterId: string, before: string, after: string
 };
 
 describe('textbook Unit reading order', () => {
+  it('compares every chapter and Unit with the order actually exported by the old commit', async () => {
+    await withGitBaseline(async (root) => {
+      const before = await readTextbookOrder(root);
+      expect(TEXTBOOK_CHAPTERS).toEqual(before);
+      const reversed = before.map((chapter) => ({
+        ...chapter,
+        unitIds: [...chapter.unitIds].reverse(),
+      }));
+      expect(reversed).not.toEqual(TEXTBOOK_CHAPTERS);
+    });
+  });
   it('completes the reusable design toolkit before game-specific parity strategy', () => {
     expect(chapterUnitIds('unit-chapter-modeling')).toEqual([
       'unit-bounded-enumeration',

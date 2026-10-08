@@ -4,35 +4,35 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
-    "fileCount": 9500
+    "digest": "5029d37e4182f5484fd1f5342d3de31939b75fa2f1edf2d16478fce7dee33784",
+    "fileCount": 9501
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-08T01:43:43.344Z",
+  "generatedAt": "2026-10-08T13:40:24.318Z",
   "commands": [
     {
       "command": "node node_modules/vitest/vitest.mjs run --reporter=json",
       "exitCode": 0,
-      "durationMs": 56092.40008300001,
-      "outputDigest": "4513120624fa3a0f558a62ba9dd1949192b4b33075d77736940ad8c174ba1291",
-      "outputBytes": 215272,
-      "observed": "s\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":3.563957999999957,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":3.7193340000000035,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":3.5203329999999937,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":3.4464169999999967,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":3.4193750000000023,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791423509043,\"endTime\":1791423509174.4194,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
+      "durationMs": 63535.446291,
+      "outputDigest": "0fa7917ab7099dcd08fee6e3091a633adebc9a32da06561bf22608eae357f469",
+      "outputBytes": 217564,
+      "observed": "estorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":3.9629580000000146,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":7.793374999999969,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":4.348457999999994,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":5.2247919999999795,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":13.654291,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791466466041,\"endTime\":1791466466306.6543,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
     },
     {
       "command": "npm run build",
       "exitCode": 0,
-      "durationMs": 19748.628541000013,
-      "outputDigest": "9b2a536ad812f5bb5b8464aa6d44fe8fd4102371937b6f1cf466fcc43898afbd",
-      "outputBytes": 136258,
-      "observed": "index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-ancestor-lca/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-balanced-separator/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-distance-residue/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-euler-flattening/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-metric-diameter/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-model-structure/index.html (+0ms) \n10:40:36   ├─ /tags/tag-tree-precedence-contraction/index.html (+0ms) \n10:40:36   ├─ /tags/tag-trie-prefix/index.html (+0ms) \n10:40:36   ├─ /tags/tag-two-pointers-window/index.html (+0ms) \n10:40:36   ├─ /tags/tag-two-sat/index.html (+0ms) \n10:40:36   ├─ /tags/tag-two-variable-convex-lattice-optimization/index.html (+0ms) \n10:40:36   ├─ /tags/tag-value-bucket-aggregation/index.html (+0ms) \n10:40:36   ├─ /tags/tag-value-range-dp/index.html (+0ms) \n10:40:36   ├─ /tags/tag-virtual-tree/index.html (+0ms) \n10:40:36   ├─ /tags/tag-weighted-bipartite-matching/index.html (+0ms) \n10:40:36   ├─ /tags/tag-witness-impact-localization/index.html (+0ms) \n10:40:36   ├─ /tags/tag-xor-linear-basis/index.html (+0ms) \n10:40:36   ├─ /tags/tag-xor-threshold-matching/index.html (+0ms) \n10:40:36   ├─ /tags/tag-z-algorithm-prefix-matching/index.html (+0ms) \n10:40:36   ├─ /tags/index.html (+1ms) \n10:40:36   ├─ /updates/index.html (+1ms) \n10:40:36   ├─ /index.html (+1ms) \n10:40:36 ✓ Completed in 7.68s.\n\n10:40:36 [build] ✓ Completed in 9.38s.\n10:40:36 [starlight:pagefind] Building search index with Pagefind...\n10:40:37 [starlight:pagefind] Found 1576 HTML files.\n10:40:39 [starlight:pagefind] Finished building search index in 2.35s.\n10:40:39 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n10:40:39 [build] 1576 page(s) built in 13.09s\n10:40:39 [build] Complete!\nEntry docs → 404 was not found."
+      "durationMs": 19446.81812499999,
+      "outputDigest": "60e480e218233377187b17edc9723e862b9011ab6226e76322c658563bc4d0cc",
+      "outputBytes": 136264,
+      "observed": "index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-ancestor-lca/index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-balanced-separator/index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-distance-residue/index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-euler-flattening/index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-metric-diameter/index.html (+0ms) \n22:36:35   ├─ /tags/tag-tree-model-structure/index.html (+1ms) \n22:36:35   ├─ /tags/tag-tree-precedence-contraction/index.html (+2ms) \n22:36:35   ├─ /tags/tag-trie-prefix/index.html (+1ms) \n22:36:35   ├─ /tags/tag-two-pointers-window/index.html (+1ms) \n22:36:35   ├─ /tags/tag-two-sat/index.html (+1ms) \n22:36:35   ├─ /tags/tag-two-variable-convex-lattice-optimization/index.html (+0ms) \n22:36:35   ├─ /tags/tag-value-bucket-aggregation/index.html (+0ms) \n22:36:35   ├─ /tags/tag-value-range-dp/index.html (+0ms) \n22:36:35   ├─ /tags/tag-virtual-tree/index.html (+0ms) \n22:36:35   ├─ /tags/tag-weighted-bipartite-matching/index.html (+0ms) \n22:36:35   ├─ /tags/tag-witness-impact-localization/index.html (+0ms) \n22:36:35   ├─ /tags/tag-xor-linear-basis/index.html (+0ms) \n22:36:35   ├─ /tags/tag-xor-threshold-matching/index.html (+0ms) \n22:36:35   ├─ /tags/tag-z-algorithm-prefix-matching/index.html (+0ms) \n22:36:35   ├─ /tags/index.html (+1ms) \n22:36:35   ├─ /updates/index.html (+1ms) \n22:36:35   ├─ /index.html (+1ms) \n22:36:35 ✓ Completed in 7.73s.\n\n22:36:35 [build] ✓ Completed in 9.21s.\n22:36:35 [starlight:pagefind] Building search index with Pagefind...\n22:36:36 [starlight:pagefind] Found 1576 HTML files.\n22:36:37 [starlight:pagefind] Finished building search index in 2.64s.\n22:36:38 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n22:36:38 [build] 1576 page(s) built in 13.11s\n22:36:38 [build] Complete!\nEntry docs → 404 was not found."
     },
     {
       "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
       "exitCode": 0,
-      "durationMs": 87975.447334,
-      "outputDigest": "f9e51f9f07d96efb1777ff669f67d70b0d2e0d351719733ab89e66e39a7acd95",
-      "outputBytes": 278415,
-      "observed": "\"duration\": 1701,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:42:14.896Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 7,\n                  \"parallelIndex\": 2,\n                  \"status\": \"passed\",\n                  \"duration\": 383,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:42:15.023Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-08T01:40:48.902Z\",\n    \"duration\": 87754.08,\n    \"expected\": 225,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
+      "durationMs": 122512.646458,
+      "outputDigest": "52c7183b404fd87ec5e19cacbd05a8d99eb3d0dc21c96fdfdd0501df7ec8d5d7",
+      "outputBytes": 294759,
+      "observed": "\"duration\": 2185,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T13:38:48.539Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 62,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 7,\n                  \"parallelIndex\": 0,\n                  \"status\": \"passed\",\n                  \"duration\": 426,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T13:38:48.602Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 95,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-08T13:36:48.488Z\",\n    \"duration\": 122288.662,\n    \"expected\": 240,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
     }
   ],
   "checks": {
@@ -679,7 +679,7 @@
     "clientBundles": {
       "decisionCount": 8196,
       "violationCount": 0,
-      "decisionDigest": "f27bdba7a84b0cdf086e98fe641afed750679bd9b859230bbf308ffd12000510",
+      "decisionDigest": "6673ab1c3995ae7226691956bea7dfd85940a96e0edb853631413b3a8678bdeb",
       "chunks": [
         {
           "chunkPath": "_astro/page.B2uBVZjk.js",
@@ -2263,8 +2263,8 @@
           ]
         },
         {
-          "chunkPath": "_astro/SearchControl.astro_astro_type_script_index_0_lang.DG9N79Km.js",
-          "chunkDigest": "220a7aded2ec5c685677be50ecfa1d93ba263b3a00687094105fd70f237c914c",
+          "chunkPath": "_astro/SearchControl.astro_astro_type_script_index_0_lang.7evSHMEW.js",
+          "chunkDigest": "bfaa216e09e937b537ef0b2e56276a5573f36cf7f4ab1b018a853a3825686d69",
           "containsLearningRecordBundle": false,
           "allowed": true,
           "routes": [
@@ -3844,8 +3844,8 @@
           ]
         },
         {
-          "chunkPath": "_astro/preload-helper.CxFQXtKk.js",
-          "chunkDigest": "b39ea8a0a9ff7dd6b08f09d4cc161bbfc41f2039d1606fecbaed8f165af4070d",
+          "chunkPath": "_astro/preload-helper.Vy-0IZma.js",
+          "chunkDigest": "2388d3aed1abaab7b1c7535b9878c924f1a49251928f4e850c5dbf1ca343b88c",
           "containsLearningRecordBundle": false,
           "allowed": true,
           "routes": [
@@ -9114,5 +9114,5 @@
     "dependencyLockDigest": "cca80644b99f845f00d9e5b03e5fe6924fba5f98a8e83bdcf03d53c66341af72",
     "dependencyModel": "Locked local open-source runtime/build tools; no generator API, hosted backend, account, telemetry or paid service required by the tested local path."
   },
-  "evidenceDigest": "039e5af7f98a331104c0869b8f261785b9344aa467fc09d270337d09958cf4fe"
+  "evidenceDigest": "56d1069c8c1740351a5aa788c230cf41ca4cf9f1c9562ccb19a801682ee72cf0"
 }

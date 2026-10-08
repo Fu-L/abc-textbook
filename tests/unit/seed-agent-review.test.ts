@@ -1,4 +1,5 @@
 import { beforeAll, describe, expect, it } from 'vitest';
+import { readFile } from 'node:fs/promises';
 import { digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import {
@@ -10,12 +11,17 @@ import {
   SeedAgentQualityReviewSchema,
   validateSeedAgentQualityReview,
   seedAgentReviewReference,
+  SEED_AGENT_OWNER_INSTRUCTION,
 } from '../../src/lib/validation/seed-agent-review.js';
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { ContentWorkManifestSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { buildReleaseHistory } from '../../src/lib/catalog/build-release-history.js';
 
 describe('owner-authorized initial release agent review', () => {
+  it('recognizes the current constitution when refreshing and loading legacy seed evidence', async () => {
+    const constitution = await readFile('.specify/memory/constitution.md', 'utf8');
+    expect(constitution).toContain(SEED_AGENT_OWNER_INSTRUCTION);
+  });
   let context: Parameters<typeof validateSeedAgentQualityReview>[1];
   let makeEvidence: () => ReturnType<typeof SeedAgentQualityReviewSchema.parse>;
   beforeAll(async () => {

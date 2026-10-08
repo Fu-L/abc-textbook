@@ -4,16 +4,16 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
-    "fileCount": 9500
+    "digest": "5029d37e4182f5484fd1f5342d3de31939b75fa2f1edf2d16478fce7dee33784",
+    "fileCount": 9501
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-08T01:43:43.344Z",
+  "generatedAt": "2026-10-08T13:40:24.318Z",
   "commands": [
     {
       "command": "npm run schema:check",
       "exitCode": 0,
-      "durationMs": 267.3115000000107,
+      "durationMs": 273.97066599997925,
       "outputDigest": "60ea1640c5667856da1032ef675c5ba967f56135c286491a4b0a7f09fb25f9c2",
       "outputBytes": 83,
       "observed": "> abc-textbook@0.1.0 schema:check\n> tsx scripts/generate-json-schemas.ts --check"
@@ -21,10 +21,10 @@
     {
       "command": "node node_modules/vitest/vitest.mjs run --reporter=json",
       "exitCode": 0,
-      "durationMs": 56092.40008300001,
-      "outputDigest": "4513120624fa3a0f558a62ba9dd1949192b4b33075d77736940ad8c174ba1291",
-      "outputBytes": 215272,
-      "observed": "s\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":3.563957999999957,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":3.7193340000000035,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":3.5203329999999937,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":3.4464169999999967,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":3.4193750000000023,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791423509043,\"endTime\":1791423509174.4194,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
+      "durationMs": 63535.446291,
+      "outputDigest": "0fa7917ab7099dcd08fee6e3091a633adebc9a32da06561bf22608eae357f469",
+      "outputBytes": 217564,
+      "observed": "estorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":3.9629580000000146,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":7.793374999999969,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":4.348457999999994,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":5.2247919999999795,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":13.654291,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791466466041,\"endTime\":1791466466306.6543,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
     }
   ],
   "checks": {
@@ -32,5 +32,5 @@
     "testResultsPath": "docs/verification/initial-release/test-results.json",
     "unknownFieldAndDriftTests": true
   },
-  "evidenceDigest": "17a8c7ba2e793ebaeb51573b5d9fcd84867b16355ccf9bf88361b56427064d7b"
+  "evidenceDigest": "e443fd6e5730738d46e357e0a86d90e67db837a046d7cfb4ad66b14f4a143ee9"
 }

@@ -13,8 +13,8 @@ import { assertSeedRelease } from '../catalog/seed-release.js';
 
 export const SEED_AGENT_REVIEW_PATH =
   'docs/reviews/agent-content/initial-release/release-review.json';
-export const SEED_AGENT_OWNER_INSTRUCTION =
-  '**Issue #53 owner instruction (initial release only)**';
+// Both legacy evidence writers and readers recognize the current Codex-only governance.
+export const SEED_AGENT_OWNER_INSTRUCTION = '### III. Codex-Only Work Guided by a Manual';
 
 const fileReference = strictObject({ path: z.string().min(1), digest: Sha256Schema });
 const agentItem = strictObject({

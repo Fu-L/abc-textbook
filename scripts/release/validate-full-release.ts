@@ -223,9 +223,11 @@ export const verifyFullReleaseCommit = async (input: {
         path.join(root, '.specify/memory/constitution.md'),
         'utf8',
       );
-      if (!constitution.includes('**Version**: 3.0.0'))
-        throw new Error('RELEASE_CONSTITUTION_VERSION');
       if (!catalog.release.agentQualityReviewEvidenceRef) {
+        // The version-3 contract belongs to the retained human merge-review format.
+        // Seed agent evidence already binds and validates the current constitution.
+        if (!constitution.includes('**Version**: 3.0.0'))
+          throw new Error('RELEASE_CONSTITUTION_VERSION');
         const mergeReviewPath = input.mergeReviewPath ?? FULL_RELEASE_MERGE_REVIEW_PATH;
         const merge = MergeReviewEvidenceSchema.parse(
           JSON.parse(

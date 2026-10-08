@@ -1,5 +1,5 @@
 {
-  "passedTests": 593,
+  "passedTests": 599,
   "files": [
     {
       "path": "tests/contract/canonical-taxonomy-materialization.test.ts",
@@ -35,10 +35,10 @@
     { "path": "tests/integration/canonical-correction.test.ts", "status": "passed", "tests": 6 },
     { "path": "tests/integration/catalog-cli.test.ts", "status": "passed", "tests": 1 },
     { "path": "tests/integration/full-learning-path.test.ts", "status": "passed", "tests": 5 },
-    { "path": "tests/integration/full-public-projection.test.ts", "status": "passed", "tests": 14 },
+    { "path": "tests/integration/full-public-projection.test.ts", "status": "passed", "tests": 16 },
     { "path": "tests/integration/git-deployment-adapter.test.ts", "status": "passed", "tests": 5 },
     { "path": "tests/integration/initial-release-audit.test.ts", "status": "passed", "tests": 7 },
-    { "path": "tests/integration/internal-links.test.ts", "status": "passed", "tests": 3 },
+    { "path": "tests/integration/internal-links.test.ts", "status": "passed", "tests": 5 },
     { "path": "tests/integration/learning-record-backup.test.ts", "status": "passed", "tests": 12 },
     { "path": "tests/integration/learning-record-control.test.ts", "status": "passed", "tests": 2 },
     { "path": "tests/integration/preview-verify.test.ts", "status": "passed", "tests": 10 },
@@ -84,11 +84,11 @@
     { "path": "tests/unit/publication-update.test.ts", "status": "passed", "tests": 9 },
     { "path": "tests/unit/release-history.test.ts", "status": "passed", "tests": 4 },
     { "path": "tests/unit/release-learning-structure.test.ts", "status": "passed", "tests": 4 },
-    { "path": "tests/unit/seed-agent-review.test.ts", "status": "passed", "tests": 4 },
+    { "path": "tests/unit/seed-agent-review.test.ts", "status": "passed", "tests": 5 },
     { "path": "tests/unit/seed-release.test.ts", "status": "passed", "tests": 3 },
     { "path": "tests/unit/setup-smoke.test.ts", "status": "passed", "tests": 1 },
     { "path": "tests/unit/technique-authoring.test.ts", "status": "passed", "tests": 8 },
-    { "path": "tests/unit/textbook-order.test.ts", "status": "passed", "tests": 7 },
+    { "path": "tests/unit/textbook-order.test.ts", "status": "passed", "tests": 8 },
     { "path": "tests/unit/trusted-diff.test.ts", "status": "passed", "tests": 19 }
   ]
 }
