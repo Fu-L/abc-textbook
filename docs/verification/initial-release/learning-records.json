@@ -4,32 +4,32 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "ff6cce14295e6fe3f99fd1fe0173cde366a6c82aa872dc646deea0354745f2b9",
+    "digest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
     "fileCount": 9500
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-08T01:24:34.484Z",
+  "generatedAt": "2026-10-08T01:43:43.344Z",
   "commands": [
     {
       "command": "node node_modules/vitest/vitest.mjs run --reporter=json",
       "exitCode": 0,
-      "durationMs": 61116.50275000001,
-      "outputDigest": "9c25338ae2974df2a264b174f1c0c96eae6b5e9e5712ceebae5b8f9ddf4071f1",
-      "outputBytes": 215214,
-      "observed": "ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":4.964292,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":6.653666000000044,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":5.024916999999959,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":3.9414580000000115,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":4.656083000000081,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791422349026,\"endTime\":1791422349377.656,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
+      "durationMs": 56092.40008300001,
+      "outputDigest": "4513120624fa3a0f558a62ba9dd1949192b4b33075d77736940ad8c174ba1291",
+      "outputBytes": 215272,
+      "observed": "s\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows an explanation docPath move through the complete release validation\",\"status\":\"passed\",\"title\":\"allows an explanation docPath move through the complete release validation\",\"duration\":3.563957999999957,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff allows replacing correction impact index paths through the complete release validation\",\"status\":\"passed\",\"title\":\"allows replacing correction impact index paths through the complete release validation\",\"duration\":3.7193340000000035,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting one entity diff across updates even when paths differ\",\"status\":\"passed\",\"title\":\"rejects splitting one entity diff across updates even when paths differ\",\"duration\":3.5203329999999937,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects the same entity diff and path claimed by multiple updates\",\"status\":\"passed\",\"title\":\"rejects the same entity diff and path claimed by multiple updates\",\"duration\":3.4464169999999967,\"failureMessages\":[],\"meta\":{},\"tags\":[]},{\"ancestorTitles\":[\"trusted publication diff\"],\"fullName\":\"trusted publication diff rejects splitting shared source paths across entity updates\",\"status\":\"passed\",\"title\":\"rejects splitting shared source paths across entity updates\",\"duration\":3.4193750000000023,\"failureMessages\":[],\"meta\":{},\"tags\":[]}],\"startTime\":1791423509043,\"endTime\":1791423509174.4194,\"status\":\"passed\",\"message\":\"\",\"name\":\"/Users/fuma/Desktop/VSCode/abc-textbook/tests/unit/trusted-diff.test.ts\"}]}"
     },
     {
       "command": "node node_modules/@playwright/test/cli.js test --workers=3 --reporter=json",
       "exitCode": 0,
-      "durationMs": 90668.82795899999,
-      "outputDigest": "a6e7bd5070f96da15b85a1d3a577b4c1feb21fb9af01f9f713d81b890bb681aa",
-      "outputBytes": 278418,
-      "observed": "\"duration\": 1720,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:23:04.818Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 6,\n                  \"parallelIndex\": 2,\n                  \"status\": \"passed\",\n                  \"duration\": 415,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:23:04.963Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-08T01:21:36.161Z\",\n    \"duration\": 90445.299,\n    \"expected\": 225,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
+      "durationMs": 87975.447334,
+      "outputDigest": "f9e51f9f07d96efb1777ff669f67d70b0d2e0d351719733ab89e66e39a7acd95",
+      "outputBytes": 278415,
+      "observed": "\"duration\": 1701,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:42:14.896Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-ef38209e0eade1d930bb\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 48,\n          \"column\": 1\n        },\n        {\n          \"title\": \"keeps the mobile textbook navigation stable and CSP-clean\",\n          \"ok\": true,\n          \"tags\": [],\n          \"tests\": [\n            {\n              \"timeout\": 30000,\n              \"annotations\": [],\n              \"expectedStatus\": \"passed\",\n              \"projectId\": \"webkit\",\n              \"projectName\": \"webkit\",\n              \"results\": [\n                {\n                  \"workerIndex\": 7,\n                  \"parallelIndex\": 2,\n                  \"status\": \"passed\",\n                  \"duration\": 383,\n                  \"errors\": [],\n                  \"stdout\": [],\n                  \"stderr\": [],\n                  \"retry\": 0,\n                  \"startTime\": \"2026-10-08T01:42:15.023Z\",\n                  \"annotations\": [],\n                  \"attachments\": []\n                }\n              ],\n              \"status\": \"expected\"\n            }\n          ],\n          \"id\": \"b4937e646d94600d41e9-8b8e648c9f59c1eaa1db\",\n          \"file\": \"setup-smoke.spec.ts\",\n          \"line\": 78,\n          \"column\": 1\n        }\n      ]\n    }\n  ],\n  \"errors\": [],\n  \"stats\": {\n    \"startTime\": \"2026-10-08T01:40:48.902Z\",\n    \"duration\": 87754.08,\n    \"expected\": 225,\n    \"skipped\": 0,\n    \"unexpected\": 0,\n    \"flaky\": 0\n  }\n}"
     }
   ],
   "checks": {
-    "startTime": "2026-10-08T01:21:36.161Z",
-    "duration": 90445.299,
+    "startTime": "2026-10-08T01:40:48.902Z",
+    "duration": 87754.08,
     "expected": 225,
     "skipped": 0,
     "unexpected": 0,
@@ -41,5 +41,5 @@
     "testResultsPath": "docs/verification/initial-release/test-results.json",
     "basis": "Full-route shared control markers/module delivery plus three-engine non-preview records, independent timestamps, real 120-record download/restore, migration and atomic injected-failure regressions."
   },
-  "evidenceDigest": "4c8125f5428fc942cd8284bd68a282e4197bc5f11d0aff3ac89b17206995e96f"
+  "evidenceDigest": "e59c18e8c6b89bfb96adcb0e345846c6c0e6afd5159c8028b6e084b420ca788f"
 }

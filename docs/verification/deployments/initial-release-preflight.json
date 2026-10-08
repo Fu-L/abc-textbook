@@ -3,7 +3,7 @@
   "issue": 54,
   "taskIds": ["T152", "T153"],
   "status": "current_subject_validated_pending_pr_ci",
-  "observedAt": "2026-10-08T01:25:55.113088+00:00",
+  "observedAt": "2026-10-08T01:45:05.351592+00:00",
   "productionPublished": false,
   "publicUrl": "https://fu-l.github.io/abc-textbook/",
   "firstPublishedAt": null,
@@ -127,13 +127,13 @@
   "applicableInitialAudits": {
     "status": "passed",
     "tasks": 10,
-    "subjectDigest": "ff6cce14295e6fe3f99fd1fe0173cde366a6c82aa872dc646deea0354745f2b9",
+    "subjectDigest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
     "fileCount": 9500,
     "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
     "unitIntegrationTests": 593,
     "browserStats": {
-      "startTime": "2026-10-08T01:21:36.161Z",
-      "duration": 90445.299,
+      "startTime": "2026-10-08T01:40:48.902Z",
+      "duration": 87754.08,
       "expected": 225,
       "skipped": 0,
       "unexpected": 0,
@@ -160,5 +160,42 @@
     "requiredVariables": ["CLOUDFLARE_PAGES_PROJECT", "SITE_URL"],
     "configuredSecrets": [],
     "configuredVariables": []
+  },
+  "ciFirstAttempt": {
+    "commit": "d3487a86256c48ca5b0697c152e2aa10f83afd07",
+    "runUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37713072360",
+    "passedChecks": [
+      "Verify (release baseline)",
+      "Initial corpus audit",
+      "Release validation",
+      "Production review"
+    ],
+    "failedCheck": "Verify (supported range)",
+    "finding": "New full-corpus continuation regression exceeded its 60-second timeout; 592 other tests passed",
+    "fix": "Finite timeout for this full-repository fixture raised to 120 seconds; fresh current-subject audits passed"
+  },
+  "pagesSubpathRehearsal": {
+    "mode": "local_subpath_rehearsal",
+    "productionPublished": false,
+    "originTested": "http://127.0.0.1:4323/abc-textbook",
+    "configuredPublicUrl": "https://fu-l.github.io/abc-textbook/",
+    "routeChecks": {
+      "htmlRoutes": 1573,
+      "problemRoutes": 868,
+      "sitemapScopeMatched": true,
+      "feedScopeMatched": true,
+      "allProblemNavigationMatched": true
+    },
+    "browserChecks": {
+      "engines": ["chromium", "firefox", "webkit"],
+      "tests": 93,
+      "pagefindQueriesPerEngine": 3,
+      "backupRestoreRecords": 120,
+      "independentTimestampsAndReload": true,
+      "dbName": "abc-textbook-learning-records",
+      "dbVersion": 2,
+      "disposableContexts": true
+    },
+    "completedAt": "2026-10-08T01:30:00.730025+00:00"
   }
 }

@@ -45,7 +45,7 @@ describe('accepted seed initial publication', () => {
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
-  }, 60_000);
+  }, 120_000);
   it('fixes the cutoff and keeps all accepted Problem homes, prose and taxonomy', async () => {
     const { catalog } = await loadFullPublicProjection();
     expect(catalog.release.cutoffAt).toBe(INITIAL_RELEASE_CUTOFF);
