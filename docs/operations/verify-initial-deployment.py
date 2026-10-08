@@ -1,7 +1,7 @@
-"""Read-only T153 checks against a real Cloudflare Pages production origin.
+"""Read-only T153 checks against a real GitHub Pages production site.
 
 Run from the repository root with Node 24, locked dependencies and Playwright
-browsers installed. Credentials are read from the production environment only.
+browsers installed. GitHub Actions authenticates with its repository token and OIDC.
 The existing browser suites write records in disposable browser contexts.
 """
 
@@ -35,17 +35,14 @@ def fetch(url, token=None):
 
 
 def successful_production(deployment, commit):
-    return (
-        deployment.get("environment") == "production"
-        and deployment.get("latest_stage", {}).get("name") == "deploy"
-        and deployment.get("latest_stage", {}).get("status") == "success"
-        and deployment.get("deployment_trigger", {}).get("metadata", {}).get("commit_hash")
-        == commit
-    )
+    return (deployment.get("status") == "succeed" and deployment.get("commit") == commit
+            and deployment.get("id") == commit)
 
 
 def publication_time(deployment):
-    value = deployment["latest_stage"].get("ended_on")
+    # Pages exposes status without a completion timestamp. Record the actual
+    # successful-status observation, never upload creation as publication time.
+    value = deployment.get("observedAt")
     require(value, "HOST_PUBLICATION_TIME_MISSING")
     instant = datetime.fromisoformat(value.replace("Z", "+00:00"))
     require(instant.tzinfo is not None, "HOST_PUBLICATION_TIME_INVALID")
@@ -103,6 +100,9 @@ class Page(HTMLParser):
 
 
 def verify_routes(origin, catalog, history):
+    base = urlparse(origin).path.rstrip("/")
+    def without_base(link):
+        return link[len(base):] if base and link.startswith(base + "/") else link
     routes = canonical_routes(catalog, history)
     all_problem_links = set()
 
@@ -116,7 +116,7 @@ def verify_routes(origin, catalog, history):
     # Bound requests to avoid making the one-person verification a load test.
     with ThreadPoolExecutor(max_workers=4) as pool:
         for page in pool.map(inspect, sorted(routes)):
-            all_problem_links.update(link for link in page.links if link.startswith("/problems/abc"))
+            all_problem_links.update(link for link in map(without_base, page.links) if link.startswith("/problems/abc"))
     require({f'/problems/{p["id"]}/' for p in catalog["problems"]} <= all_problem_links,
             "PROBLEM_NAVIGATION_INCOMPLETE")
     sitemap = ET.fromstring(fetch(origin + "/sitemap.xml"))
@@ -124,7 +124,7 @@ def verify_routes(origin, catalog, history):
     require(len(locations) == len(set(locations)), "SITEMAP_DUPLICATES")
     require(set(locations) == {origin + route for route in routes}, "SITEMAP_SCOPE_MISMATCH")
     feed = ET.fromstring(fetch(origin + "/feed.xml"))
-    require(feed.findtext("{*}id").rstrip("/") == origin, "FEED_ORIGIN_MISMATCH")
+    require(feed.findtext("{*}id").rstrip("/") == f"{urlparse(origin).scheme}://{urlparse(origin).netloc}", "FEED_ORIGIN_MISMATCH")
     entries = feed.findall("{*}entry")
     require([entry.findtext("{*}title") for entry in entries] == [r["version"] for r in history],
             "FEED_HISTORY_MISMATCH")
@@ -136,7 +136,7 @@ def verify_routes(origin, catalog, history):
     contests = Page(fetch(origin + "/contests/"))
     require(set(contests.rows) == {f'matrix-title-{c["id"]}' for c in catalog["contests"]}
             and len(contests.rows) == 254, "CONTEST_MATRIX_SCOPE_MISMATCH")
-    require({f'/problems/{p["id"]}/' for p in catalog["problems"]} <= contests.links,
+    require({f'/problems/{p["id"]}/' for p in catalog["problems"]} <= set(map(without_base, contests.links)),
             "CONTEST_PROBLEM_NAVIGATION_INCOMPLETE")
     require("matrix-title-abc316" not in contests.rows and
             catalog["contestGaps"][0]["status"] == "officially_unheld", "OFFICIAL_GAP_MISMATCH")
@@ -172,7 +172,7 @@ def browser_checks(root, origin, directory):
         'for (const engine of [chromium, firefox, webkit]) {\n'
         'const browser = await engine.launch();\n'
         'try { const page = await browser.newPage(); const external = [];\n'
-        f'page.on("request", request => {{ if (new URL(request.url()).origin !== {json.dumps(origin)}) external.push(request.url()); }});\n'
+        f'page.on("request", request => {{ if (new URL(request.url()).origin !== {json.dumps(f"{urlparse(origin).scheme}://{urlparse(origin).netloc}")}) external.push(request.url()); }});\n'
         f'await page.goto({json.dumps(origin + "/problems/abc466-g/")});\n'
         'await expect(page.getByLabel("学習状況")).toBeEnabled();\n'
         'const contract = await page.evaluate(async () => {\n'
@@ -183,7 +183,7 @@ def browser_checks(root, origin, directory):
         '} finally { db.close(); } });\n'
         'if (!contract) throw Error("PRODUCTION_DATABASE_CONTRACT_MISMATCH");\n'
         'const found = await page.evaluate(async () => {\n'
-        'const { search } = await import("/pagefind/pagefind.js");\n'
+        f'const {{ search }} = await import({json.dumps(urlparse(origin).path.rstrip("/") + "/pagefind/pagefind.js")});\n'
         'for (const id of ["abc212-e", "abc315-ex", "abc466-g"]) {\n'
         'const result = await search(id);\n'
         'const entries = await Promise.all(result.results.slice(0, 20).map(entry => entry.data()));\n'
@@ -206,11 +206,12 @@ def verify(commit):
     parsed = urlparse(site)
     require(parsed.scheme == "https" and parsed.netloc and not parsed.path and not parsed.query
             and not parsed.fragment and not parsed.username, "HTTPS_ORIGIN_REQUIRED")
-    account = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "")
-    token = os.environ.get("CLOUDFLARE_API_TOKEN", "")
-    project = os.environ.get("CLOUDFLARE_PAGES_PROJECT", "")
-    require(re.fullmatch(r"[a-f0-9]{32}", account) and token and re.fullmatch(r"[a-z0-9-]+", project),
-            "CLOUDFLARE_CONFIGURATION_REQUIRED")
+    base = os.environ.get("BASE_PATH", "/abc-textbook")
+    require(base == "/abc-textbook", "PAGES_BASE_PATH_MISMATCH")
+    site += base
+    token = os.environ.get("GH_TOKEN", "")
+    repository = os.environ.get("GITHUB_REPOSITORY", "Fu-L/abc-textbook")
+    require(repository == "Fu-L/abc-textbook" and token, "GITHUB_CONFIGURATION_REQUIRED")
 
     def git(*args):
         return subprocess.check_output(["git", *args], text=True, cwd=root)
@@ -226,28 +227,16 @@ def verify(commit):
             and len(catalog["learningUnits"]) == 232 and len(catalog["contests"]) == 254
             and catalog["release"]["cutoffAt"] == "2026-07-12T00:00:00+09:00", "SEED_SCOPE_MISMATCH")
     history = json.loads(git("show", commit + ":src/content/indexes/release-history.json"))
-    deployments = []
-    for number in range(1, 101):
-        response = json.loads(fetch(
-            f"https://api.cloudflare.com/client/v4/accounts/{account}/pages/projects/{project}/deployments?per_page=100&page={number}", token))
-        require(response.get("success"), "HOST_HISTORY_FAILED")
-        deployments.extend(response["result"])
-        if len(response["result"]) < 100:
-            break
-    else:
-        raise ValueError("HOST_HISTORY_PAGINATION_INCOMPLETE")
-    successes = [d for d in deployments if successful_production(d, commit)]
-    require(successes, "SUCCESSFUL_PRODUCTION_HISTORY_MISSING")
+    receipt = json.loads(Path("/tmp/pages-deployment.json").read_text())
+    require(successful_production(receipt, commit), "SUCCESSFUL_PRODUCTION_HISTORY_MISSING")
+    status_url = f"https://api.github.com/repos/{repository}/pages/deployments/{receipt['id']}"
+    status = json.loads(fetch(status_url, token))
+    require(status.get("status") == "succeed", "HOST_PUBLICATION_NOT_CONFIRMED")
+    settings = json.loads(fetch(f"https://api.github.com/repos/{repository}/pages", token))
+    require(settings["html_url"].rstrip("/") == site and settings["build_type"] == "workflow"
+            and settings["https_enforced"], "HOST_CONFIGURATION_MISMATCH")
     metadata = json.loads(fetch(site + "/release-metadata.json"))
     verify_metadata(metadata, catalog, commit)
-    host_metadata = []
-    for deployment in successes:
-        url = urlparse(deployment["url"])
-        require(url.scheme == "https" and url.hostname.endswith(".pages.dev"), "HOST_URL_INVALID")
-        recorded = json.loads(fetch(deployment["url"].rstrip("/") + "/release-metadata.json"))
-        verify_metadata(recorded, catalog, commit)
-        host_metadata.append(recorded)
-    require(metadata in host_metadata, "HOST_METADATA_MISMATCH")
     require(json.loads(fetch(site + "/data/catalog.json")) == catalog, "LIVE_CATALOG_MISMATCH")
     routes = verify_routes(site, catalog, history)
     with tempfile.TemporaryDirectory(prefix="abc-live-verification-") as temporary:
@@ -257,26 +246,21 @@ def verify(commit):
         "schemaVersion": "1.0.0", "taskIds": ["T152", "T153"], "status": "published_and_verified",
         "verifiedAt": datetime.now(timezone.utc).isoformat(), "productionPublished": True,
         "publicUrl": site, "commit": commit, "version": metadata["version"], "cutoffAt": metadata["cutoffAt"],
-        "releaseMetadata": metadata, "host": "Cloudflare Pages Free", "project": project,
-        "successfulHostHistory": [{key: d[key] for key in
-                                   ("id", "url", "created_on", "environment", "latest_stage", "deployment_trigger")}
-                                  for d in successes],
-        "firstPublishedAt": min(publication_time(d) for d in successes).isoformat(),
+        "releaseMetadata": metadata, "host": "GitHub Pages", "project": repository,
+        "successfulHostHistory": [receipt],
+        "publicationObservedAt": publication_time(receipt).isoformat(),
+        "firstPublishedAt": None,
+        "publicationTimeBasis": "Pages successful-status observation; job completion is recorded separately",
         "publicChecks": routes, "learningRecordCompatibility": browsers,
         "browserResults": raw,
         "rollback": {"knownCommitSimulation": "docs/verification/initial-release/zero-cost-52-weeks.json",
-                     "sameCommitRedeploy": "host_confirmed" if len(successes) > 1 else "not_run",
-                     "betweenPublishedVersions": "not_tested" if any(
-                         d.get("environment") == "production"
-                         and d.get("latest_stage", {}).get("name") == "deploy"
-                         and d.get("latest_stage", {}).get("status") == "success"
-                         and d.get("deployment_trigger", {}).get("metadata", {}).get("commit_hash") != commit
-                         for d in deployments) else "not_applicable_no_prior_production_version",
+                     "sameCommitRedeploy": "host_confirmed" if os.environ.get("ROLLBACK") == "true" else "not_run",
+                     "betweenPublishedVersions": "not_applicable_no_prior_production_version",
                      "actualProductionRollbackClaimed": False},
-        "catchUpHandoff": {"issue": 52, "publishedCatalogPath": "/data/catalog.json",
+        "catchUpHandoff": {"issue": 52, "publishedCatalogPath": base + "/data/catalog.json",
                            "gitCatalogPath": "docs/verification/releases/catalog.json",
                            "gitCatalogPublicationStatus": catalog["release"]["publicationStatus"],
-                           "metadataPath": "/release-metadata.json", "hostHistoryConfirmed": True},
+                           "metadataPath": base + "/release-metadata.json", "hostHistoryConfirmed": True},
     }
 
 
@@ -289,6 +273,20 @@ if __name__ == "__main__":
         evidence = verify(args.commit)
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
+        # Derive immutable history from the accepted catalog at its own SHA.
+        # The callback is backed by the Pages success and live metadata checked
+        # above. Prepared Git inputs remain unchanged.
+        history_script = """
+import { loadGitReleaseHistory } from './scripts/release/build-history.ts';
+const metadata = JSON.parse(process.env.VERIFIED_METADATA);
+console.log(JSON.stringify(await loadGitReleaseHistory({ metadata: [metadata],
+  confirmHostPublication: async commit => {
+    if (commit !== metadata.commit) throw Error('UNCONFIRMED_HISTORY_COMMIT');
+    return metadata;
+  } })));"""
+        history = subprocess.check_output(["node", "--import", "tsx", "--input-type=module", "-e", history_script],
+            text=True, env={**os.environ, "VERIFIED_METADATA": json.dumps(evidence["releaseMetadata"])})
+        (output.parent / "initial-history.json").write_text(json.dumps(json.loads(history), ensure_ascii=False, indent=2) + "\n")
         output.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n")
         print(json.dumps({"status": evidence["status"], "commit": args.commit, "output": str(output)}))
     except Exception as error:

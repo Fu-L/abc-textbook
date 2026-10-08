@@ -41,13 +41,11 @@ class DeploymentVerificationTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "SUMMARY_MISMATCH"):
             deployment.verify_metadata(wrong, self.catalog, self.commit)
 
-    def test_preview_failed_upload_and_another_commit_are_not_published(self):
-        good = {"environment": "production", "latest_stage": {"name": "deploy", "status": "success"},
-                "deployment_trigger": {"metadata": {"commit_hash": self.commit}}}
+    def test_pending_failed_deploy_and_another_commit_are_not_published(self):
+        good = {"status": "succeed", "commit": self.commit, "id": self.commit}
         self.assertTrue(deployment.successful_production(good, self.commit))
-        for field, value in [("environment", "preview"), ("latest_stage", {"name": "build", "status": "success"}),
-                             ("latest_stage", {"name": "deploy", "status": "failure"})]:
-            self.assertFalse(deployment.successful_production({**good, field: value}, self.commit))
+        for status in ["queued", "building", "deployment_failed"]:
+            self.assertFalse(deployment.successful_production({**good, "status": status}, self.commit))
         self.assertFalse(deployment.successful_production(good, "b" * 40))
         self.assertFalse(deployment.successful_production({}, self.commit))
 
@@ -72,15 +70,15 @@ class DeploymentVerificationTests(unittest.TestCase):
                 deployment.verify(self.commit)
             fetch.assert_not_called()
 
-    def test_publication_time_is_successful_deploy_completion_not_upload_creation(self):
+    def test_publication_time_is_successful_status_observation_not_upload_creation(self):
         result = deployment.publication_time({
             "created_on": "2026-10-08T00:00:00Z",
-            "latest_stage": {"ended_on": "2026-10-08T00:02:00Z"},
+            "observedAt": "2026-10-08T00:02:00Z",
         })
         self.assertEqual(result.isoformat(), "2026-10-08T00:02:00+00:00")
         for value in [None, "2026-10-08T00:02:00"]:
             with self.subTest(value=value), self.assertRaises(ValueError):
-                deployment.publication_time({"latest_stage": {"ended_on": value}})
+                deployment.publication_time({"observedAt": value})
 
 
 if __name__ == "__main__":

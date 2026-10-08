@@ -105,3 +105,7 @@ T163では次を実装し、実際に使えるcommand/引数を[キャッチア�
 
 この文書更新は公開順と実装計画の変更であり、production deploy、PR
 merge、既存教材の巻き戻しは実行していない。
+
+#54では2026-10-08のowner選択により公開先をGitHub Pagesへ変更した。実URLは
+`https://fu-l.github.io/abc-textbook/`。Cloudflare認証待ちは解除し、現行の公開・検証手順は
+`initial-release-runbook.md` に従う。

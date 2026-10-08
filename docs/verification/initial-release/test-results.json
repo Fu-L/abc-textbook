@@ -1,5 +1,5 @@
 {
-  "passedTests": 592,
+  "passedTests": 593,
   "files": [
     {
       "path": "tests/contract/canonical-taxonomy-materialization.test.ts",
@@ -85,7 +85,7 @@
     { "path": "tests/unit/release-history.test.ts", "status": "passed", "tests": 4 },
     { "path": "tests/unit/release-learning-structure.test.ts", "status": "passed", "tests": 4 },
     { "path": "tests/unit/seed-agent-review.test.ts", "status": "passed", "tests": 4 },
-    { "path": "tests/unit/seed-release.test.ts", "status": "passed", "tests": 2 },
+    { "path": "tests/unit/seed-release.test.ts", "status": "passed", "tests": 3 },
     { "path": "tests/unit/setup-smoke.test.ts", "status": "passed", "tests": 1 },
     { "path": "tests/unit/technique-authoring.test.ts", "status": "passed", "tests": 8 },
     { "path": "tests/unit/textbook-order.test.ts", "status": "passed", "tests": 7 },

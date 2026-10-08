@@ -315,7 +315,7 @@ T133〜T142のチェック済み状態はPR #69までの検証実装・868問の
 - [ ] T152 Merge the fully validated tree to protected main and deploy that exact full commit hash without content changes by following `docs/operations/initial-release-runbook.md`
 - [ ] T153 Verify static-host deployment history, immutable Git Release history, route/search availability, known-commit rollback, and learning-record compatibility in `docs/verification/deployments/initial-release.json`
 
-#54作業状況（2026-10-08）: PR #72のmerge後SHA `86f1abe931ddd77f8926256c57e5e7ab6fab84b9`は通常のread-only release検証に合格した。GitHubのproduction environmentを作成し、runbookに実host履歴・全公開導線・3ブラウザーの学習記録検証と成功artifact保存を追加した。本文・taxonomyと受入subjectは維持する。Cloudflare project・origin・認証設定待ちの間、T152/T153は未完了とし、published証跡と#52開始許可を生成しない。現況は`docs/verification/deployments/initial-release-preflight.json`へ記録する。
+#54作業状況（2026-10-08）: ownerの選択により実公開先をGitHub Pagesへ変更し、`https://fu-l.github.io/abc-textbook/` とprotected-branch限定のgithub-pages environmentを設定した。サブパス込みのexact commit公開と全公開導線・3ブラウザーの実検証を実装する。prepared初版をmainから引き継ぐ際のscope判定を回帰テスト付きで修正し、変更subjectの監査を再実行する。T152/T153は実公開検証成功まで未完了とし、現況は`docs/verification/deployments/initial-release-preflight.json`へ記録する。
 
 ### Issue #53 preparation progress (2026-10-07)
 
