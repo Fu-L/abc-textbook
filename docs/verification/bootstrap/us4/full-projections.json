@@ -3,8 +3,8 @@
   "taskId": "T160",
   "status": "passed",
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "implementationDigest": "5d1136bd6c84e0016e51d149a64020a815cab982947261bf4781b1ff94cb9552",
-  "fullProjectionDigest": "eede8a21d099adeb09d12a7abb153edd72bb69ee83e8d2eb385c88232e608e6d",
+  "implementationDigest": "0dd5b502612b050176863fa4bc9e6f7a06f53a67885968bedd12b2aaf46da1fe",
+  "fullProjectionDigest": "42e5c734918fd4f5acf8016d3119fcb8231a8efdc3febb32d554f2e895426698",
   "publicationStatus": "prepared",
   "productionReleaseApproved": false,
   "build": {
@@ -3622,7 +3622,7 @@
       "documentDigest": "eb8e1605e634f59daa15e2d813f2add745a1150b5071e73a0196a989265b275e"
     }
   ],
-  "artifactDigest": "5349e6e80365c3eb499631fc71f7450a178ec951ebbf7f5394ece5de1ef12cff",
+  "artifactDigest": "ab421270457c40542a1ab9e359ea956a1672923f77b73cd09bf1b67f0620b6da",
   "artifactInventory": [
     {
       "path": "dist/404.html",
@@ -5011,8 +5011,8 @@
     },
     {
       "path": "dist/data/catalog.json",
-      "digest": "331277f6214f9059110233a5e3eee80bb2aea8c09094029efa9657a3a92aa9d5",
-      "byteLength": 16532536
+      "digest": "e4cf5427fcf201b14d3d159533a1ee22e8b53e07f354b81bd0bba0118e83b564",
+      "byteLength": 16532975
     },
     {
       "path": "dist/feed.xml",

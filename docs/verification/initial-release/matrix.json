@@ -3,61 +3,61 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "e93481706f18c5f5a41c77cae3024ec1f6e037cd3fa7f955d39e18ba2647b43e",
+    "digest": "68d69a598d536a9a1bab33dfdd64522adb0f8e25ba3d24d71663d4fc48ee5a5f",
     "fileCount": 9501
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-08T12:39:35.369Z",
+  "generatedAt": "2026-10-08T12:53:37.152Z",
   "reports": [
     {
       "taskId": "T133",
       "path": "docs/verification/initial-release/schema-contracts.json",
-      "digest": "f386b04528f7d8d74cce1785f63dfcb9bc40ac1a738195983b4d097505493818"
+      "digest": "7ba01b1c526c3b3ed4dadabf5c06b7b9438df93669b94da62702ff89832a9539"
     },
     {
       "taskId": "T134",
       "path": "docs/verification/initial-release/corpus-completeness.json",
-      "digest": "b9c080b29348322b9431761cb86a9638f94a3fdf798659289a9b0fc8c34676f6"
+      "digest": "01c0cad3b3df2b51347dadf1132bb221fa12c6b4bbffe47fcf801b569642b24b"
     },
     {
       "taskId": "T135",
       "path": "docs/verification/initial-release/taxonomy.json",
-      "digest": "7384677b2c1fd35bb9bbbf96e77502a39971dbaf3882e0c9f5772015efec2e46"
+      "digest": "80d09686591c0e460670f14f72606e91589302ebd7d463baae4fe0d167ca281e"
     },
     {
       "taskId": "T136",
       "path": "docs/verification/initial-release/sources-and-claims.json",
-      "digest": "66f4f955728f5b998c1f6467b8b59f892f17aeffc38cbb0448cef3783b98f9c5"
+      "digest": "ad801a0591be6b7cf2b7716e4c3a936736084b130f134c417441aed64f872a0d"
     },
     {
       "taskId": "T137",
       "path": "docs/verification/initial-release/examples-and-answers.json",
-      "digest": "c864f798fd4b38796f81b2779d32e4341fb6dadda8db67e37568e06002d2e9ab"
+      "digest": "eb7008793aecb20a404abd75a7f1a858a5743543e62a31da545664e91be30a7c"
     },
     {
       "taskId": "T138",
       "path": "docs/verification/initial-release/accessibility-and-links.json",
-      "digest": "7ac7287b66818bd6f9deca8ca4883a024f2058fd08c65af9f3e00a2478d6d92d"
+      "digest": "547071fcaae004df0b6013824405c5a3013c1f0f0eaf8d2c2ee3bc33eacaef0c"
     },
     {
       "taskId": "T139",
       "path": "docs/verification/initial-release/learning-records.json",
-      "digest": "0e1892032e003ccae040c444cf0f01342ce3dade04ed359b52550c36f4da7a49"
+      "digest": "e7481fea3b5684759224e5fc5c20f448ea631b63600533de2ae14416903bafed"
     },
     {
       "taskId": "T140",
       "path": "docs/verification/initial-release/public-projections.json",
-      "digest": "ac234c624ec5f32c9ca74906b1f350791941500ca9963be4bf5bb61da90eec3f"
+      "digest": "17d0485bcd93a0216cb28d4a027db5d99f0d2fcc8332fc773fcbfc853b4863af"
     },
     {
       "taskId": "T141",
       "path": "docs/verification/initial-release/performance.json",
-      "digest": "40f7f50567c370732ab5cf45249aa71b6678e4912524ad4364e5ce03b24e377f"
+      "digest": "503dff5eccd1a2af42a39a090f993d20fc2a0fb4cd7f34fdfe7c36cd6b870942"
     },
     {
       "taskId": "T142",
       "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
-      "digest": "677608c3c29af14d3523e3150fd9dd6b8049eafb7830af5a13634a7e21d57ccb"
+      "digest": "46558f35e55240f3d88dc6ba56644d5cabb8ccfd1f2aaeb101d392ec94ca920b"
     }
   ],
   "testResults": {
@@ -66,9 +66,9 @@
   },
   "browserResults": {
     "path": "docs/verification/initial-release/browser-results.json",
-    "digest": "4f60ca93236da63ed844744742e3e6d534befdbc473b815784378be1275bf91f"
+    "digest": "a0a06e8330675a910139f1548d5bc23e82171a2eef6f016441d464fca3aab55a"
   },
   "productionReleaseApproved": false,
   "nextGate": "Issue #53 seed release gate, then Issue #54 deployment",
-  "evidenceDigest": "b6918520183d6d1f9c92862075496c584858aef846dae8be43b09402ec9e7e8d"
+  "evidenceDigest": "fb4990cc5ba7877d5d84c342cd5178887eb26612313be77cd92f3248746757af"
 }
