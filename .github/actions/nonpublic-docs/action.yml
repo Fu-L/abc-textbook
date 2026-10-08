@@ -1,0 +1,15 @@
+name: Check nonpublic documentation
+description: Validate documentation-only changes without re-accepting the initial corpus
+outputs:
+  docs-only:
+    description:
+      True only after an additions/modifications-only documentation diff passes validation
+    value: ${{ steps.check.outputs.docs-only }}
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: node --test .github/actions/nonpublic-docs/check.test.mjs
+    - id: check
+      shell: bash
+      run: node .github/actions/nonpublic-docs/check.mjs

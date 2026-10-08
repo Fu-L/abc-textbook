@@ -1,7 +1,18 @@
 # Local development
 
 現行の更新方針と検証範囲は[Codexの更新マニュアル](update-manual.md)と
-[Constitution 4.0.0](../../.specify/memory/constitution.md)を参照する。以下は既存環境・実装の説明であり、全コマンド・全ブラウザーの実行を通常更新の必須条件としない。CIの簡素化は別の実装変更で行う。
+[Constitution 4.0.0](../../.specify/memory/constitution.md)を参照する。以下は既存環境・実装の説明であり、全コマンド・全ブラウザーの実行を通常更新の必須条件としない。単一環境化などCI全体の簡素化は別の実装変更で行う。
+
+## 非公開文書のCI検証
+
+CIの5つの必須check名は維持する。AGENTS、README、Spec
+Kitの憲章・テンプレート・feature選択、`docs/operations/`と`specs/`のMarkdownだけを追加・修正するPR/main
+pushでは、各check内で変更文書の書式・ローカルリンク・見出し参照を確認する。旧初版audit/release/reviewと教材のbuild・全検証はこの変更範囲では実行しない。
+
+PRはmerge-base、mainはpush前のSHAとの差で判定する。削除・rename・未知path・差分取得不能、教材・コード・schema・skill・workflowを含む変更は従来の全検証へ戻す。文書検査の失敗はcheckを失敗させる。`.github/actions/nonpublic-docs/`に判定と検証をまとめ、設定変更自体のPRでは従来の検査も実行する。
+
+これは文書変更のための限定的な移行であり、単一環境CIや通常教材更新の旧証跡依存の撤去は未実装。required設定・production
+deploy・公開教材・学習記録は変更しない。復旧はこのCI変更をrevertし、旧5checkの実行へ戻す。
 
 ## Toolchain policy
 
