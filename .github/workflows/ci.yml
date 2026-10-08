@@ -15,6 +15,37 @@ concurrency:
 
 jobs:
   verify:
+    name: Verify (release baseline)
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://fu-l.github.io
+      BASE_PATH: /abc-textbook
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js 24.18.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - name: Select npm 11.16.0
+        run: npm install --global npm@11.16.0
+      - name: Verify runtime versions
+        run: |
+          test "$(node --version)" = v24.18.0
+          test "$(npm --version)" = 11.16.0
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Verify change selection and documentation checker
+        run: |
+          npm test -- tests/contract/verify-fast.test.ts
+          node --test .github/actions/nonpublic-docs/check.test.mjs
+      - name: Verify changed scope
+        run: npm run verify:fast
+
+  legacy-supported:
     name: Verify (${{ matrix.name }})
     runs-on: ubuntu-latest
     env:
@@ -24,9 +55,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: release baseline
-            node-version: '24.18.0'
-            npm-version: '11.16.0'
           - name: supported range
             node-version: '24.x'
             npm-version: '11.17.0'
@@ -85,7 +113,7 @@ jobs:
 
       - name: Install Playwright browsers
         if: ${{ steps.docs.outputs.docs-only != 'true' }}
-        run: npm run test:e2e:install:ci
+        run: npm run test:e2e:install:all:ci
 
       - name: Run full verification
         if: ${{ steps.docs.outputs.docs-only != 'true' }}

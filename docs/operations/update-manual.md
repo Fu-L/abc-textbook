@@ -56,27 +56,36 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -
 
 buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を使う。E2Eの環境・fixtureは`playwright.config.ts`と対象テストに合わせる。変更で検出すべき不具合に合わせてテストを選び、無関係な数学回帰や全件監査を繰り返さない。他ブラウザー固有の挙動、広範囲のschema・共通処理・依存変更では必要な検証を追加する。必須検査が失敗したら原因を修正し、影響する検査を再実行する。
 
-現在の`verify:fast`は名称にかかわらず広範囲の検証であり、3ブラウザーも含む。GitHub
-Actionsは、非公開文書だけの追加・修正を除いて旧release/reviewゲートと複数環境をまだ実行する。非公開文書の限定的なCI移行では5つのrequired
-check名を維持し、各job内で変更文書の書式・ローカルリンク・見出し参照とfeature選択を確認する。対象はAGENTS、README、Spec
-Kitの憲章・テンプレート・feature選択、`docs/operations/`と`specs/`のMarkdown。PRのmerge-baseまたはmain
-push前のSHAとの差を使い、削除・rename・未知path・差分取得不能、教材・コード・schema・skill・workflowを含む変更は従来の全検証へ戻す。文書検査の失敗はcheck
-failureとして伝播する。詳細は[開発手順](development.md#非公開文書のci検証)を参照する。単一環境化と通常教材更新の旧証跡依存の撤去は未実装であり、ローカルの対象検証だけで現行のCIゲートが解除されたと扱わない。
-
-旧ゲートの移行前は、テストだけの変更も`auditInputSubject`に含まれるため、保存済み初版監査との不一致で`AUDIT_REPORT_SUBJECT`や`INITIAL_PREPARATION_AUDIT_STALE`になる。digestだけを書き換えず、[既存監査の再実行手順](initial-release-verification.md)で実検証から既存出力を更新する。PR-01の比較テストは旧build未指定だとskipされ、旧監査の「skipなし」の条件を満たさないので、別buildの比較元と作業ツリーの出力を明示する。
+`verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain
+push前のSHAとの差から必要な検査を選ぶ。複数分類は和集合、renameは削除・追加の両pathを扱う。未知path・取得不能・空差分・非公開文書の削除は広い検査へ進む。通常経路からpreview凍結・全shard再join・毎回の初版監査・release/review照合・一律の数学回帰を外した。既存の正本loaderのschema、ID・参照・3DAG・配置・本文・リンクと対象挙動の検証は残る。
 
 ```sh
-ABC_COMPAT_BASE_REF="$compat_base_sha" ABC_COMPAT_OLD_DIST="$compat_before/dist" ABC_COMPAT_NEW_DIST="$PWD/dist" npm run verify:initial-release -- --write
-npm run verify:initial-release -- --check
-npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-policy solo-maintainer --acceptance agent-quality-review
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- --base origin/main
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- --all
 ```
 
-この監査内で作業ツリーの`dist`を再buildする。比較元にも同じbuild工程の出力を使い、配信工程でのみ追加するmetadataのfixtureは、この再実行とは別の公開URL比較で扱う。監査を参照する既存prepared
-catalogのcheck・SC-012・agent結果も[先行公開の引継ぎ](deploy-before-catch-up.md)の既存コマンドで更新し、実commitのrelease/review検証とActionsの全required
-check成功まで確認する。教材正本と公開履歴を変更せず、新しいmanifestや承認制度を追加しない。これは旧consumerが残る間だけの制約であり、通常更新への恒久的な全件監査義務ではない。
+ローカル`--base REF`はtrackedの作業差分と未追跡ファイルも含める。ActionsではcheckoutしたSHAとのcommit差分を使う。`--all`またはローカル差分未指定は広い検査。未知引数は使用法違反で停止する。失敗はexit
+2、使用法違反64、signal/実行不能70で後続を止める。非公開文書だけは書式・リンク・見出し・feature選択を検証し、build・E2E・browser準備を実行しない。
 
-CIの両`Verify`
-jobは公開先と同じ`SITE_URL=https://fu-l.github.io`、`BASE_PATH=/abc-textbook`でbuild・公開投影・内部リンク・E2Eを確認する。保存済みT160の`build`もこの設定に結び付くため、ローカルで`verify:fast`を再現するときも両変数を指定する。未指定の既定origin・ルートpathとの比較は`FULL_PROJECTION_EVIDENCE_STALE`になる。公開設定の不一致はCIとローカルの入力を揃えて直し、証跡の比較を緩めたりdigestだけを書き換えたりしない。
+`check`でAstro/各TypeScript環境を検査した同runは`build:checked`でbuildする。単独`build`にはAstro
+checkを保持する。build出力は`:built`へ渡して再利用する。通常CIはE2Eを選んだときだけChromiumを準備する。他browserは`test:e2e:install`、Linuxでは`test:e2e:install:all:ci`で準備し、`test:e2e:built -- --project=firefox`等で必要なspecを実行する。
+
+### CI必須設定の切替と復旧
+
+切替中は旧4jobを残している。`Verify (release baseline)`の実成功を確認してから、次の順で切り替える。設定例JSONだけの変更を外部反映済みとは扱わない。
+
+1. 実branch protectionと有効rulesetを取得し、required checkと他の保護条件を確認する。
+2. baselineの実checkが成功したSHA/runを確認する。旧4jobの旧証跡失効を架空の成功で埋めない。
+3. branch protectionのrequired status checksだけをPATCHし、`strict: true`とGitHub Actionsのapp
+   IDを保持して`Verify (release baseline)`を残す。rulesetにもstatus
+   checksがあれば同じ名前へ揃える。再取得して一致を確認する。
+4. `protected-main.json`と`production-deploy.yml`を同名baselineへ揃え、deploy側が失敗・cancel・未完了checkを拒否することを確認する。
+5. 実設定とdeploy参照が一致した後に旧通常jobを外す。初版監査・他browser・数学回帰の手動入口は保持する。権限不足なら旧job削除を保留する。
+
+復旧は旧checkを実行するworkflowへ戻してから実required設定を戻す。通常の削除後に旧名だけを先にrequiredへ追加すると、そのcheckが生成されずmergeを止める。
+
+旧release/schema/loader/deployの技術的な台帳依存は後続PRまで残る。通常CIから外したことと、本文訂正を台帳なしでbuild・公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
+catalog/deployの復旧は[公開引継ぎ](deploy-before-catch-up.md)を参照する。監査CLIの全工程は通常runnerから独立して保持し、旧出力をdigestだけ書き換えて通さない。
 
 旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
 Manual」を運用方針として認識する。削除済みのIssue
