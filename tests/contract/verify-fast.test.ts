@@ -1,7 +1,8 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { describe, expect, it, vi } from 'vitest';
 
 import {
@@ -33,6 +34,41 @@ describe('verify:fast change selection', () => {
       await runVerification({ args: [], env: validEnvironment, changes, execute, report: vi.fn() }),
     ).toBe(0);
     expect(execute.mock.calls).toHaveLength(1);
+  });
+
+  it('propagates a real documentation link failure through the required runner', async () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'verify-doc-failure-'));
+    try {
+      symlinkSync(path.resolve('node_modules'), path.join(root, 'node_modules'), 'dir');
+      writeFileSync(path.join(root, 'fixture.md'), '# Fixture\n\n[Broken](missing.md)\n');
+      const helper = path.join(root, 'check.mjs');
+      const moduleUrl = pathToFileURL(
+        path.resolve('.github/actions/nonpublic-docs/check.mjs'),
+      ).href;
+      writeFileSync(
+        helper,
+        `import { checkDocumentation } from ${JSON.stringify(moduleUrl)}; try { checkDocumentation([{file:'fixture.md'}], process.env.ABC_TEST_DOC_ROOT); } catch (error) { console.error(error.message); process.exit(1); }`,
+      );
+      const report = vi.fn();
+      expect(
+        await runVerification({
+          args: [],
+          env: validEnvironment,
+          changes: changed('README.md'),
+          report,
+          execute: (step) =>
+            executeVerificationStep(
+              { ...step, script: helper, args: [] },
+              { ...process.env, ABC_TEST_DOC_ROOT: root },
+            ),
+        }),
+      ).toBe(EXIT_CODE.verificationFailure);
+      expect(report).toHaveBeenCalledWith(
+        expect.stringContaining('failed with native exit code 1'),
+      );
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 
   it('validates published prose, real projection and links with one checked build', () => {
@@ -329,5 +365,92 @@ describe('verify:fast failure propagation and script contract', () => {
     expect(pkg.scripts['build:checked']).not.toContain('astro check');
     expect(pkg.scripts['test:e2e:install:ci']).toBe('playwright install --with-deps chromium');
     expect(pkg.scripts['test:e2e:install']).toContain('chromium firefox webkit');
+  });
+});
+
+describe('production required-check failure gate', () => {
+  const workflow = readFileSync('.github/workflows/production-deploy.yml', 'utf8');
+  const gate = workflow.split("node --input-type=module <<'JS'\n")[1]?.split('\n          JS')[0];
+  if (!gate) throw Error('Missing production check gate');
+
+  it('accepts only completed successful required checks', () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'verify-deploy-success-'));
+    try {
+      const file = path.join(root, 'checks.jsonl');
+      const settings = JSON.parse(readFileSync('docs/operations/protected-main.json', 'utf8')) as {
+        required_status_checks: { contexts: string[] };
+      };
+      writeFileSync(
+        file,
+        settings.required_status_checks.contexts
+          .map((name) => JSON.stringify({ name, status: 'completed', conclusion: 'success' }))
+          .join('\n'),
+      );
+      expect(() =>
+        execFileSync(
+          process.execPath,
+          [
+            '--input-type=module',
+            '-e',
+            gate.replace("'/tmp/check-runs.jsonl'", 'process.env.ABC_TEST_CHECKS_FILE'),
+          ],
+          { env: { ...process.env, ABC_TEST_CHECKS_FILE: file }, stdio: 'pipe' },
+        ),
+      ).not.toThrow();
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it.each(['failure', 'cancelled', 'timed_out', 'skipped', null])(
+    'rejects a latest required check with conclusion %s even after an older success',
+    (conclusion) => {
+      const root = mkdtempSync(path.join(os.tmpdir(), 'verify-deploy-check-'));
+      try {
+        const file = path.join(root, 'checks.jsonl');
+        const checks = [
+          { name: 'Verify (release baseline)', status: 'completed', conclusion },
+          { name: 'Verify (release baseline)', status: 'completed', conclusion: 'success' },
+        ];
+        writeFileSync(file, checks.map((check) => JSON.stringify(check)).join('\n'));
+        const source = gate.replace("'/tmp/check-runs.jsonl'", 'process.env.ABC_TEST_CHECKS_FILE');
+        expect(() =>
+          execFileSync(process.execPath, ['--input-type=module', '-e', source], {
+            env: { ...process.env, ABC_TEST_CHECKS_FILE: file },
+            stdio: 'pipe',
+          }),
+        ).toThrow();
+      } finally {
+        rmSync(root, { recursive: true, force: true });
+      }
+    },
+  );
+
+  it('rejects an in-progress required check rather than deploying its older successful run', () => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'verify-deploy-check-'));
+    try {
+      const file = path.join(root, 'checks.jsonl');
+      writeFileSync(
+        file,
+        JSON.stringify({
+          name: 'Verify (release baseline)',
+          status: 'in_progress',
+          conclusion: 'success',
+        }),
+      );
+      expect(() =>
+        execFileSync(
+          process.execPath,
+          [
+            '--input-type=module',
+            '-e',
+            gate.replace("'/tmp/check-runs.jsonl'", 'process.env.ABC_TEST_CHECKS_FILE'),
+          ],
+          { env: { ...process.env, ABC_TEST_CHECKS_FILE: file }, stdio: 'pipe' },
+        ),
+      ).toThrow();
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 });

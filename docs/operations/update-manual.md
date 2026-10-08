@@ -72,7 +72,9 @@ checkを保持する。build出力は`:built`へ渡して再利用する。通�
 
 ### CI必須設定の切替と復旧
 
-切替中は旧4jobを残している。`Verify (release baseline)`の実成功を確認してから、次の順で切り替える。設定例JSONだけの変更を外部反映済みとは扱わない。
+現在の実required checkは`Verify (release baseline)`のみで、`strict: true`とGitHub Actionsのapp
+IDを保持して読戻し済み。active main rulesetにstatus
+checkの重複指定はない。移行PRのmergeまではmainの旧workflowが旧jobを生成する。再切替は、旧4jobを残したcommitでbaselineの実成功を確認し、次の順で行う。設定例JSONだけの変更を外部反映済みとは扱わない。
 
 1. 実branch protectionと有効rulesetを取得し、required checkと他の保護条件を確認する。
 2. baselineの実checkが成功したSHA/runを確認する。旧4jobの旧証跡失効を架空の成功で埋めない。
@@ -83,6 +85,9 @@ checkを保持する。build出力は`:built`へ渡して再利用する。通�
 5. 実設定とdeploy参照が一致した後に旧通常jobを外す。初版監査・他browser・数学回帰の手動入口は保持する。権限不足なら旧job削除を保留する。
 
 復旧は旧checkを実行するworkflowへ戻してから実required設定を戻す。通常の削除後に旧名だけを先にrequiredへ追加すると、そのcheckが生成されずmergeを止める。
+
+初版監査workflowは`workflow_dispatch`だけで起動する。明示的な監査では3browserと全工程を用意する。旧手動Production
+deployの初版事後検査も3browserを使うため、準備scriptを`test:e2e:install:all:ci`に揃えた。数学回帰は既存の`docs/verification/bootstrap/pr65*-mathematical-checks.py`から関係するものを選んで直接実行する。
 
 旧release/schema/loader/deployの技術的な台帳依存は後続PRまで残る。通常CIから外したことと、本文訂正を台帳なしでbuild・公開できることは別である。初版監査の明示的な再実行は[既存監査手順](initial-release-verification.md)、旧prepared
 catalog/deployの復旧は[公開引継ぎ](deploy-before-catch-up.md)を参照する。監査CLIの全工程は通常runnerから独立して保持し、旧出力をdigestだけ書き換えて通さない。
@@ -180,13 +185,13 @@ Contest追加のSC-004受入は別依頼まで未達とする。
 
 PR-07a以降の[ローカルbuild入力設計](../../specs/002-simplify-maintenance/contracts/compatibility.md#ローカルbuildとactionsの入力)では、Actions外は既存の基準版で未公開candidateをbuildし、metadataを生成しない。Actions内は実runの作成日時・ID・SHAを検証し、入力不足を失敗とする。これも未実装の移行設計であり、現在のbuildやschemaに新版採番や新しい環境変数が対応済みとは扱わない。実装PRで対象回帰を確認して、この欄と現在のコマンド説明を同時に更新する。
 
-| 対象                                                                                                                                  | 移行する内容                                                                         | 保持・確認するもの                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| `.github/workflows/ci.yml`、`initial-release-audit.yml`                                                                               | 複数環境・重複release/review・毎回の全件監査を整理し、schemaと対象テストを中心にする | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
-| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名の依存を揃え、標準Pages build/upload/deployへ寄せる                           | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
-| `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる          | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
-| `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                         | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
-| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 旧review modeとskill digest前提を利用側と一緒に見直す                                | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
-| live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                                  | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
+| 対象                                                                                                                                  | 移行する内容                                                                | 保持・確認するもの                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `.github/workflows/ci.yml`、`initial-release-audit.yml`                                                                               | 通常CIは単一環境の変更選択へ移行済み。初版監査は手動のみ                    | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
+| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。標準Pages配信は後続PR          | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
+| `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
+| `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
+| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 旧review modeとskill digest前提を利用側と一緒に見直す                       | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
+| live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                         | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
 
 通常更新のCIは単一の基準環境を基本とし、変更に必要なschema・テスト・buildを残す。追加・維持する検査ごとに検出する不具合と実行時間を評価する。約20分かかる現状からの短縮は、後続変更のActions実測で確認する。憲章と文書の改訂だけでCI短縮やlive更新機能の完成を報告しない。

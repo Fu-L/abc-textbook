@@ -50,7 +50,7 @@ jobs:
           gh api --paginate "repos/$GITHUB_REPOSITORY/commits/$RELEASE_COMMIT/check-runs?per_page=100" --jq '.check_runs[] | {name, conclusion, status}' > /tmp/check-runs.jsonl
           node --input-type=module <<'JS'
           import fs from 'node:fs';
-          const required = ['Verify (release baseline)', 'Verify (supported range)', 'Initial corpus audit', 'Release validation', 'Production review'];
+          const required = ['Verify (release baseline)'];
           const checks = fs.readFileSync('/tmp/check-runs.jsonl', 'utf8').trim().split('\n').map(JSON.parse);
           for (const name of required) {
             const check = checks.find(check => check.name === name);
@@ -131,7 +131,7 @@ jobs:
             throw Error('Pages deployment timed out');
       - name: Install browsers for initial live verification
         if: ${{ steps.metadata.outputs.release-kind == 'initial' }}
-        run: npm run test:e2e:install:ci
+        run: npm run test:e2e:install:all:ci
       - name: Verify live routes, search and learning-record compatibility
         if: ${{ steps.metadata.outputs.release-kind == 'initial' }}
         env:
