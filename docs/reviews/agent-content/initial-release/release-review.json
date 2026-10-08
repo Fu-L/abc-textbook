@@ -5,7 +5,7 @@
   "scope": "ABC212–466 initial release",
   "ownerInstruction": "人間の了承は不要です。",
   "humanApprovalClaimed": false,
-  "generatedAt": "2026-10-08T01:45:16.601Z",
+  "generatedAt": "2026-10-08T12:40:04.654Z",
   "subjectDigest": "4f4e50350d5412b6e7a9ae883e99bbfeba4390f9198fb974299dbf01c77b7b47",
   "workManifestDigest": "af373b4eda34090a30cd9c5701722fa6ff9cf094af0eb2baf3286aa562af95cb",
   "inventoryDigest": "76a7c857887db643351020fbe9fc02a3c9fc05f19420e7bbb067c545dc4e867b",
@@ -16,44 +16,44 @@
   },
   "auditMatrix": {
     "path": "docs/verification/initial-release/matrix.json",
-    "digest": "b65f715c030cdc5e8c01c5a2028968fedf6bbeca9c9f3ccfdea10e40455fc897"
+    "digest": "52abf6d6d00c37e6e980566efd56a9d927945a3722954fb5a0b70000831269ac"
   },
-  "auditInputSubjectDigest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
+  "auditInputSubjectDigest": "e93481706f18c5f5a41c77cae3024ec1f6e037cd3fa7f955d39e18ba2647b43e",
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
   "checkResultRefs": [
     {
       "path": "docs/verification/releases/checks/check-initial-corpus.json",
-      "digest": "de044e757f4646f15e65e873d44599ed9a3725cc2fc5883926d3e15d6b9ecdd0"
+      "digest": "8c49e7a12b268b97a76292ebd17330ed0761c071d52f702f126b7ebdb798e6db"
     },
     {
       "path": "docs/verification/releases/checks/check-initial-sc012.json",
-      "digest": "f6387ca2a71cb2d7735c5e4f01e8f0cb454c387a475a2fb3f0f307246a923492"
+      "digest": "8ee6ac2a76d2da7cfa22de32fbf6f0a388cbb621b76a6ca460903605af51d235"
     }
   ],
   "constitution": {
     "path": ".specify/memory/constitution.md",
-    "digest": "828171b531ac70bf5c53eab6fb7cd82ea9d15372b15ab7f8c365b4b7dad2a6e4"
+    "digest": "afb5eb5ce482411f0d9986a4bfedb55c9e174ff36daeeee4aba01f58fec82f90"
   },
   "dependentTemplates": [
     {
       "path": ".specify/templates/checklist-template.md",
-      "digest": "709d8ab8384a3a49f5e0f64479f71553ef6d6f8bb4f00281b05f47837993b536"
+      "digest": "b19c3453c00d5a070f36944b62eb6a583a150d2cf813c22fe812ed2c63bc43cc"
     },
     {
       "path": ".specify/templates/constitution-template.md",
-      "digest": "ce7549540fa45543cca797a150201d868e64495fdff39dc38246fb17bd4024b3"
+      "digest": "b0e6fd05af3d68173761e70ec5ce3f5b10cb1f9ffd2587f8ee6abf6cd6e54c15"
     },
     {
       "path": ".specify/templates/plan-template.md",
-      "digest": "648dfe0a8d817713ad1f58f0b06948f1cdb590a114b9a673dea8aa4bc9ae2c95"
+      "digest": "42d82d889ea7b82afe5ac9466570bb3e54d1ed05de9134739198c1ec0a0c6fb3"
     },
     {
       "path": ".specify/templates/spec-template.md",
-      "digest": "267cf99a43d94cf70bef382f20488803524e3b0a3205ddf818684abc8d8fbfa3"
+      "digest": "26ed60ff098cbe84444b2541a740847543abb53a2a6c59b396ea207a61dde9e7"
     },
     {
       "path": ".specify/templates/tasks-template.md",
-      "digest": "e1889ed6865069725d1cb4f7b5f009ebc2c1993d45e241b02a998e4477362534"
+      "digest": "08ce015efdcd38471c21155500e71d84efaba95feb9d69420719f9d31cc18d61"
     }
   ],
   "lineage": [
@@ -3954,5 +3954,5 @@
   ],
   "blockingFindingCount": 0,
   "aggregatePassed": true,
-  "evidenceDigest": "e834d42c6ef871ea060cc3ba3cd1c05ff3cc67da2b6bbcdba45bac7ecfbd8fcb"
+  "evidenceDigest": "1f5bd39bf9c78ff73832dc4ef86ea8da87aa110ee143248039ed1356851ed9cd"
 }

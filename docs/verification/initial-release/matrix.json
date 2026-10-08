@@ -3,72 +3,72 @@
   "status": "passed",
   "scope": "canonical-full-corpus",
   "inputSubject": {
-    "digest": "a72faabdea2bc7aab702d6c25865b572f39ecc4f8b3c71a93ae25ab4f1596d4c",
-    "fileCount": 9500
+    "digest": "e93481706f18c5f5a41c77cae3024ec1f6e037cd3fa7f955d39e18ba2647b43e",
+    "fileCount": 9501
   },
   "sourceProjectionDigest": "d974f3a99d98646d1e3a518202ff76b7d25c77b79a9b38fb06e97d197bb2e396",
-  "generatedAt": "2026-10-08T01:43:43.344Z",
+  "generatedAt": "2026-10-08T12:39:35.369Z",
   "reports": [
     {
       "taskId": "T133",
       "path": "docs/verification/initial-release/schema-contracts.json",
-      "digest": "311aa308be06a8d2cb343ee3fee81455e4f7c863ed640e1e91e975c8a31cb743"
+      "digest": "f386b04528f7d8d74cce1785f63dfcb9bc40ac1a738195983b4d097505493818"
     },
     {
       "taskId": "T134",
       "path": "docs/verification/initial-release/corpus-completeness.json",
-      "digest": "dbb0ce1d99033c672385bbd6587b68929f6c6283c5746a5a4ad5ecf422ffa386"
+      "digest": "b9c080b29348322b9431761cb86a9638f94a3fdf798659289a9b0fc8c34676f6"
     },
     {
       "taskId": "T135",
       "path": "docs/verification/initial-release/taxonomy.json",
-      "digest": "97afaf2d1957458b8617de882e2826b535757eddc49621f2a675907b6cfa062e"
+      "digest": "7384677b2c1fd35bb9bbbf96e77502a39971dbaf3882e0c9f5772015efec2e46"
     },
     {
       "taskId": "T136",
       "path": "docs/verification/initial-release/sources-and-claims.json",
-      "digest": "9b89c5e843f5340bc747ed2e03c68cdb664c915156325dba6e225ae0c09c25fe"
+      "digest": "66f4f955728f5b998c1f6467b8b59f892f17aeffc38cbb0448cef3783b98f9c5"
     },
     {
       "taskId": "T137",
       "path": "docs/verification/initial-release/examples-and-answers.json",
-      "digest": "0582ae12703b912937cf01ae4937004c45f2b295b4160c59ed2035696ac917ae"
+      "digest": "c864f798fd4b38796f81b2779d32e4341fb6dadda8db67e37568e06002d2e9ab"
     },
     {
       "taskId": "T138",
       "path": "docs/verification/initial-release/accessibility-and-links.json",
-      "digest": "cc3c2286f508dc90c7dee8260fc5f3ae61468c521536db6a20242e5f4f08d6a1"
+      "digest": "7ac7287b66818bd6f9deca8ca4883a024f2058fd08c65af9f3e00a2478d6d92d"
     },
     {
       "taskId": "T139",
       "path": "docs/verification/initial-release/learning-records.json",
-      "digest": "f32de603673f38af95363445208fdbbb9cd599679770bc50b31785e6c54e7a85"
+      "digest": "0e1892032e003ccae040c444cf0f01342ce3dade04ed359b52550c36f4da7a49"
     },
     {
       "taskId": "T140",
       "path": "docs/verification/initial-release/public-projections.json",
-      "digest": "d3fa5cdaaa43970aa25a6d4f328d35422bb16e3c29e55f5e97b889d2523017d7"
+      "digest": "ac234c624ec5f32c9ca74906b1f350791941500ca9963be4bf5bb61da90eec3f"
     },
     {
       "taskId": "T141",
       "path": "docs/verification/initial-release/performance.json",
-      "digest": "74520692b9c6286c02d39dfc63da53b5223e708de07e42f03bb4fd51d898fca6"
+      "digest": "40f7f50567c370732ab5cf45249aa71b6678e4912524ad4364e5ce03b24e377f"
     },
     {
       "taskId": "T142",
       "path": "docs/verification/initial-release/zero-cost-52-weeks.json",
-      "digest": "08748b77e5d07ea3fc28a39859ddc402df5aa955afa4bcb39ac443d828e597ed"
+      "digest": "677608c3c29af14d3523e3150fd9dd6b8049eafb7830af5a13634a7e21d57ccb"
     }
   ],
   "testResults": {
     "path": "docs/verification/initial-release/test-results.json",
-    "digest": "5d2a3036613fdb3504f1b0ca38f6933814d891967f201d035496aaf174f0c511"
+    "digest": "a3d83becc341fc13b3ce1d91a7d1fe5732767219c0f5c58971c6235c177bd667"
   },
   "browserResults": {
     "path": "docs/verification/initial-release/browser-results.json",
-    "digest": "126dd3c89046aefa441b2cc0a9726464c1b8f5e581db5976124885678767eeae"
+    "digest": "4f60ca93236da63ed844744742e3e6d534befdbc473b815784378be1275bf91f"
   },
   "productionReleaseApproved": false,
   "nextGate": "Issue #53 seed release gate, then Issue #54 deployment",
-  "evidenceDigest": "12626d22f82fa7bf3641827bc2162a9fc7cd41954b5698119be9cdd9c878cc54"
+  "evidenceDigest": "b6918520183d6d1f9c92862075496c584858aef846dae8be43b09402ec9e7e8d"
 }

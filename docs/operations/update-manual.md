@@ -63,6 +63,22 @@ Kitの憲章・テンプレート・feature選択、`docs/operations/`と`specs/
 push前のSHAとの差を使い、削除・rename・未知path・差分取得不能、教材・コード・schema・skill・workflowを含む変更は従来の全検証へ戻す。文書検査の失敗はcheck
 failureとして伝播する。詳細は[開発手順](development.md#非公開文書のci検証)を参照する。単一環境化と通常教材更新の旧証跡依存の撤去は未実装であり、ローカルの対象検証だけで現行のCIゲートが解除されたと扱わない。
 
+旧ゲートの移行前は、テストだけの変更も`auditInputSubject`に含まれるため、保存済み初版監査との不一致で`AUDIT_REPORT_SUBJECT`や`INITIAL_PREPARATION_AUDIT_STALE`になる。digestだけを書き換えず、[既存監査の再実行手順](initial-release-verification.md)で実検証から既存出力を更新する。PR-01の比較テストは旧build未指定だとskipされ、旧監査の「skipなし」の条件を満たさないので、別buildの比較元と作業ツリーの出力を明示する。
+
+```sh
+ABC_COMPAT_BASE_REF="$compat_base_sha" ABC_COMPAT_OLD_DIST="$compat_before/dist" ABC_COMPAT_NEW_DIST="$PWD/dist" npm run verify:initial-release -- --write
+npm run verify:initial-release -- --check
+npm run release:bootstrap -- --first 212 --last 466 --mode evidence --review-policy solo-maintainer --acceptance agent-quality-review
+```
+
+この監査内で作業ツリーの`dist`を再buildする。比較元にも同じbuild工程の出力を使い、配信工程でのみ追加するmetadataのfixtureは、この再実行とは別の公開URL比較で扱う。監査を参照する既存prepared
+catalogのcheck・SC-012・agent結果も[先行公開の引継ぎ](deploy-before-catch-up.md)の既存コマンドで更新し、実commitのrelease/review検証とActionsの全required
+check成功まで確認する。教材正本と公開履歴を変更せず、新しいmanifestや承認制度を追加しない。これは旧consumerが残る間だけの制約であり、通常更新への恒久的な全件監査義務ではない。
+
+旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
+Manual」を運用方針として認識する。削除済みのIssue
+#53限定見出しを復活させない。既存schemaとseedの対象制限、本文・check・監査結果との照合は保ち、人間承認を表す結果は作らない。
+
 ## 4. 互換性と見やすさを確認する
 
 既存Problem

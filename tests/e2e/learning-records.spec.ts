@@ -337,7 +337,8 @@ test('failed writes restore the displayed values and retain the stored timestamp
     '進捗を保存できませんでした。表示を元に戻しました。',
   );
   await expect(page.getByLabel('学習状況')).toHaveValue('completed');
-  await page.getByLabel('要復習').uncheck();
+  // The failed write immediately restores the checked state; uncheck() would reject that rollback.
+  await page.getByLabel('要復習').click();
   await expect(page.getByRole('status')).toContainText(
     '復習設定を保存できませんでした。表示を元に戻しました。',
   );
