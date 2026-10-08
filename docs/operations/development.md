@@ -19,7 +19,7 @@ pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動�
 
 複数分類は検査の和集合を実行する。renameは削除と追加に分解し、両pathを判定する。本文・データの削除も検査対象にする。非公開文書の削除、空差分、不正なGit出力は広い検査へ戻る。検査の失敗・signalは非zeroで後続を止め、cancelを成功へ置き換えない。
 
-CIは常に変更選択のcontractと既存文書checkerのfixtureも確認する。`scripts/verify/runner.ts`が分類を担当し、非公開文書の書式・参照検査は既存`.github/actions/nonpublic-docs/check.mjs --files ...`を再利用する。通常経路にpreview凍結・全shard再join・初版監査・release/review証跡照合・一律の数学回帰は含めない。関係する教材変更ではCodexが公式根拠・証明・境界条件を確認し、既存`docs/verification/bootstrap/pr65*-mathematical-checks.py`の該当回帰を実行する。
+CIは既存文書checkerのfixtureも確認する。変更選択のcontractはrunner・workflow等の変更で選ぶVitest全体に含め、同じrunで重複実行しない。`scripts/verify/runner.ts`が分類を担当し、非公開文書の書式・参照検査は既存`.github/actions/nonpublic-docs/check.mjs --files ...`を再利用する。通常経路にpreview凍結・全shard再join・初版監査・release/review証跡照合・一律の数学回帰は含めない。関係する教材変更ではCodexが公式根拠・証明・境界条件を確認し、既存`docs/verification/bootstrap/pr65*-mathematical-checks.py`の該当回帰を実行する。
 
 切替中は旧4jobも残している。新baselineの実成功後に実branch
 protection/rulesetを読んで旧4checkを外し、deploy参照を揃えてから旧jobを手動入口へ移す。実設定の切替状況と復旧順は[更新マニュアル](update-manual.md#ci必須設定の切替と復旧)を参照する。

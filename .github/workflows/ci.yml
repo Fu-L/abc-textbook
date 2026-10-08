@@ -38,9 +38,7 @@ jobs:
           test "$(npm --version)" = 11.16.0
       - name: Install locked dependencies
         run: npm ci
-      - name: Verify change selection and documentation checker
-        run: |
-          npm test -- tests/contract/verify-fast.test.ts
-          node --test .github/actions/nonpublic-docs/check.test.mjs
+      - name: Verify documentation checker
+        run: node --test .github/actions/nonpublic-docs/check.test.mjs
       - name: Verify changed scope
         run: npm run verify:fast
