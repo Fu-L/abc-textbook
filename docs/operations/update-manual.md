@@ -204,7 +204,16 @@ groupで直列化し、進行中の配信を後続pushでcancelしない。
 
 標準経路の初回成功までは`production-deploy.yml`を旧版専用の手動復旧入口として保持する。通常経路から独自API/pollとrelease再検証/rebuildを外し、標準deploy成功後は旧手動入口が使用を拒否する。trigger自体の撤去はPR-07bで行う。復旧でもorigin/base、DB識別・値・独立日時、追加IDの記録を保持する。本番を故意に壊す試験はせず、既存失敗runと使い捨てfixtureで失敗の区別を確認する。
 
-PR-07aのコードとfixture検証、実environmentの読戻しは実施した。依頼がPR作成までのため、新workflowの実main配信・公開確認はmerge後のT037として未実施。fixture成功を実配信成功に数えず、SC-004の実教材訂正/追加公開も未達とする。
+2026-10-09に[標準main run 37924546170](https://github.com/Fu-L/abc-textbook/actions/runs/37924546170)の検証・upload/deployと公開確認を完了した（T037）。配信SHAは`8eb07c12c66efdf7cfe7d890425bc7d0aab7d94c`、版は`2026.10.09-r37924546170`。公開catalog/metadataは同runの標準artifactとbytesが一致し、版・SHA/run・範囲・変更概要も整合した。配信前後の教材部分14項目・868問・232単元と収録範囲は不変。実公開のChromium
+17件で旧URL/anchor全件、代表問題/単元、検索、要復習、独立日時、120件backup復元・export、設定と更新履歴を確認した。公開sitemapの旧1,573
+URLも保持した。
+
+初回main run
+37924000193は未配信文書の書式違反で配信前に停止し、[修正PR #97](https://github.com/Fu-L/abc-textbook/pull/97)で復旧した。旧run
+37717648084は配信step成功後の公開確認失敗であり、配信前失敗と区別した。mainでの674テスト・Chromium
+80件・内部リンク4,653件が成功し、environmentのprotected branch限定・reviewer必須なしとrequired
+baseline/strict/Actions app
+IDを読戻した。配信済みの両JSONは取得済み。旧trigger撤去・履歴writer/index切替はPR-07b/07cへ残し、SC-004の実教材訂正/追加公開は未達とする。
 
 ## 既存実装からの移行
 
@@ -298,7 +307,7 @@ consumerと台帳は削除していない。通常サイトbuildの旧prepared�
 
 002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。PR-03でschemaと履歴readerの互換拡張を実装した。catalog/metadataと`baseReleaseVersion`は旧日付版と`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`は1桁の日など従来の受理値と新版を読める。catalog
 `3.0.0`、metadata/backup
-`1.0.0`、DB識別、記録値・独立日時は維持する。採番・標準deployはPR-07aで実装した。実main成功の確認とwriter切替・新形式の履歴追記は後続へ残る。
+`1.0.0`、DB識別、記録値・独立日時は維持する。採番・標準deployはPR-07aで実装し、T037で実main配信と公開確認も完了した。writer切替・新形式の履歴追記は後続へ残る。
 
 旧catalog・metadata・履歴entryの値は補完・変換せず保持する。review参照、manifest/content
 inventory/snapshot
@@ -321,7 +330,7 @@ PR-07aで[ローカルbuildとActionsの入力契約](../../specs/002-simplify-m
 | 対象                                                                                                                                  | 移行する内容                                                                                                  | 保持・確認するもの                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `.github/workflows/ci.yml`、`initial-release-audit.yml`                                                                               | 通常CIは単一環境の変更選択へ移行済み。初版監査は手動のみ                                                      | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
-| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。標準Pages配信をPR-07aで実装。実main成功確認と旧trigger撤去は後続 | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
+| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。PR-07aの標準Pages実main配信・公開確認は完了。旧trigger撤去は後続 | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
 | `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる                                   | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
 | `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                                                  | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
 | `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する                                                | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
