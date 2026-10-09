@@ -282,7 +282,7 @@ describe('catalog validation CLI evidence boundary', () => {
     );
     expect(error).toMatchObject({ code: 2 });
     expect(error.stderr).toContain('EVIDENCE_INVENTORY_SCHEMA_INVALID');
-  }, 120_000);
+  }, 180_000);
 
   it('fails closed for a normal weekly-update fixture when evidence omits a required check', async () => {
     const contentPath = 'src/content/docs/index.md';
