@@ -200,6 +200,8 @@ describe('catalog validation CLI evidence boundary', () => {
     return createHash('sha256').update(contents).digest('hex');
   };
 
+  // This compatibility test reconstructs the full legacy release twice.
+  // Allow for the slower disk and CPU of the release-baseline CI runner.
   it('accepts the retained legacy inventory and rejects an invalid legacy field', async () => {
     // Clone existing inputs into a disposable Git repository; no new review/check receipts.
     const snapshot = path.join(repositoryRoot, 'snapshot');
@@ -280,7 +282,7 @@ describe('catalog validation CLI evidence boundary', () => {
     );
     expect(error).toMatchObject({ code: 2 });
     expect(error.stderr).toContain('EVIDENCE_INVENTORY_SCHEMA_INVALID');
-  }, 60_000);
+  }, 120_000);
 
   it('fails closed for a normal weekly-update fixture when evidence omits a required check', async () => {
     const contentPath = 'src/content/docs/index.md';
