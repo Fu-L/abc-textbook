@@ -9,6 +9,7 @@ import {
   EXIT_CODE,
   executeVerificationStep,
   readVerificationChanges,
+  mergePublicationChanges,
   runVerification,
   selectVerificationSteps,
   type VerificationChange,
@@ -23,6 +24,47 @@ const testArgs = (...files: string[]) =>
   plan(...files).find((step) => step.id === 'test')?.args ?? [];
 
 describe('verify:fast change selection', () => {
+  it('verifies history-only publications without another history append or the full data suite', () => {
+    expect(
+      ids('src/content/indexes/release-history.json', 'docs/operations/update-manual.md'),
+    ).toEqual(['docs', 'format', 'test', 'build', 'links']);
+    expect(testArgs('src/content/indexes/release-history.json')).toContain(
+      'tests/unit/release-history.test.ts',
+    );
+  });
+  it('merges undeployed changes and refuses the history-only shortcut when lookup fails', () => {
+    const env = {
+      GITHUB_EVENT_NAME: 'push',
+      GITHUB_REF: 'refs/heads/main',
+      GITHUB_SHA: 'a'.repeat(40),
+      ABC_TEXTBOOK_PUBLICATION_BASE_SHA: 'b'.repeat(40),
+    };
+    const git = (args: readonly string[]) =>
+      args[0] === 'diff'
+        ? 'M\0src/content/docs/problems/abc212-e.md\0'
+        : args[0] === 'rev-parse' && args[1] === 'HEAD'
+          ? 'a'.repeat(40)
+          : 'b'.repeat(40);
+    const union = mergePublicationChanges(
+      changed('src/content/indexes/release-history.json'),
+      env,
+      git,
+    );
+    expect(union).toContainEqual({ status: 'M', file: 'src/content/docs/problems/abc212-e.md' });
+    expect(selectVerificationSteps(union).map(({ id }) => id)).toContain('e2e');
+    expect(
+      mergePublicationChanges(
+        changed('docs/operations/update-manual.md'),
+        { ...env, ABC_TEXTBOOK_PUBLICATION_BASE_SHA: undefined },
+        git,
+      ),
+    ).toBeNull();
+    expect(
+      mergePublicationChanges(changed('docs/operations/update-manual.md'), env, () => {
+        throw Error('unknown commit');
+      }),
+    ).toBeNull();
+  });
   it('checks nonpublic documentation without preparing browsers, type checking or building', async () => {
     const changes = changed(
       'docs/operations/development.md',

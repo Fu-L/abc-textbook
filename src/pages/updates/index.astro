@@ -1,6 +1,10 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import { publicCatalog, withBase } from '../../lib/catalog/public-catalog.js';
+import {
+  publicCatalog,
+  publicReleaseMetadata,
+  withBase,
+} from '../../lib/catalog/public-catalog.js';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -10,6 +14,30 @@ const base = import.meta.env.BASE_URL;
   breadcrumbs={[{ label: '更新履歴' }]}
 >
   <span data-pagefind-meta="entity-kind">更新履歴</span><h1>更新履歴</h1>
+  <h2 id="latest-deployment">最新の配信情報</h2>
+  <p>
+    この一覧は公開後に追記する履歴です。最新の配信は、一覧への反映前や履歴だけの更新を含め、GitHub
+    Pages の公開履歴で確認できます。
+  </p>
+  <p>
+    <a
+      href="https://github.com/Fu-L/abc-textbook/deployments/activity_log?environments_filter=github-pages"
+      >Pages の公開履歴</a
+    >
+    {' / '}<a href="https://github.com/Fu-L/abc-textbook/actions/workflows/ci.yml"
+      >Actions の検証・配信結果</a
+    >
+  </p>
+  {
+    publicReleaseMetadata && (
+      <p>
+        この配信の版: <code>{publicReleaseMetadata.version}</code>。{' '}
+        <a href={withBase('/release-metadata.json', base)}>配信 metadata</a> /{' '}
+        <a href={publicReleaseMetadata.validationResultsUrl}>この版の検証・配信結果</a>
+      </p>
+    )
+  }
+  <h2 id="published-history">公開後に記録した履歴</h2>
   {
     publicCatalog.releaseHistory.length === 0 ? (
       <p>

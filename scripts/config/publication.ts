@@ -5,6 +5,54 @@ export class UsageError extends Error {
   }
 }
 
+export interface BuildPublication {
+  readonly version: string;
+  readonly runUrl?: string;
+  readonly commit?: string;
+  readonly createdAt?: string;
+}
+
+/** A rerun keeps its original UTC date and run ID, even across midnight. */
+export function resolveBuildPublication(input: {
+  readonly env: NodeJS.ProcessEnv;
+  readonly head: string;
+  readonly historyVersions: readonly string[];
+  readonly baselineVersion?: string;
+}): BuildPublication {
+  const { env, head } = input;
+  if (env.GITHUB_ACTIONS !== 'true') {
+    const version = input.historyVersions.at(-1) ?? input.baselineVersion;
+    if (!version || !/^\d{4}\.\d{2}\.\d{2}(?:-r[1-9]\d*)?$/u.test(version))
+      throw new UsageError(
+        'PUBLICATION_BASELINE_MISSING: release history or baseline catalog version is required.',
+      );
+    return { version };
+  }
+  const createdAt = env.ABC_TEXTBOOK_RUN_CREATED_AT;
+  if (
+    !env.GITHUB_REPOSITORY ||
+    !/^[\w.-]+\/[\w.-]+$/u.test(env.GITHUB_REPOSITORY) ||
+    !env.GITHUB_RUN_ID ||
+    !/^[1-9]\d*$/u.test(env.GITHUB_RUN_ID) ||
+    !env.GITHUB_SHA ||
+    !/^[a-f0-9]{40}$/u.test(env.GITHUB_SHA) ||
+    env.GITHUB_SHA !== head ||
+    !createdAt ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/u.test(createdAt) ||
+    !Number.isFinite(Date.parse(createdAt)) ||
+    new Date(createdAt).toISOString() !== createdAt.replace('Z', '.000Z')
+  )
+    throw new UsageError(
+      'PUBLICATION_ACTIONS_INPUT_INVALID: repository, run ID, run created_at and exact checkout SHA are required.',
+    );
+  return {
+    version: `${createdAt.slice(0, 10).replaceAll('-', '.')}-r${env.GITHUB_RUN_ID}`,
+    createdAt,
+    commit: env.GITHUB_SHA,
+    runUrl: `https://github.com/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}`,
+  };
+}
+
 /**
  * 公開先がルートでもサブパスでも、Astroへ渡すbaseの形式を統一する。
  */

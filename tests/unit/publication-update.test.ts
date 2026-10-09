@@ -1,4 +1,17 @@
 import { describe, expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { mkdtemp, mkdir, readFile, rm, writeFile, access } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import { buildReleaseHistory } from '../../src/lib/catalog/build-release-history.js';
+import { buildPublicationCandidate } from '../../src/lib/catalog/build-publication.js';
+import { writeBuildReleaseMetadata } from '../../scripts/release/build-history.js';
+
+const legacyCatalog = CatalogSchema.parse(
+  JSON.parse(readFileSync('docs/verification/releases/catalog.json', 'utf8')) as unknown,
+);
 
 import {
   assertReviewComplete,
@@ -304,5 +317,125 @@ describe('publication update validation', () => {
     expect(() => {
       validatePublicationUpdate(correction, trustedPublicationUpdateContext(correction));
     }).toThrow(/PUBLICATION_UPDATE_INVALID/u);
+  });
+});
+
+// Disposable candidate inputs never represent a successful Pages deployment.
+describe('standard Pages candidate', () => {
+  const publication = {
+    version: '2026.10.09-r123',
+    createdAt: '2026-10-09T00:00:00Z',
+    commit: 'a'.repeat(40),
+    runUrl: 'https://github.com/Fu-L/abc-textbook/actions/runs/123',
+  };
+  it('replaces stale public metadata from the same built catalog and removes it locally', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'publication-metadata-'));
+    try {
+      const candidate = buildPublicationCandidate(legacyCatalog, publication, [], []);
+      await mkdir(path.join(root, 'data'));
+      await writeFile(path.join(root, 'data/catalog.json'), JSON.stringify(candidate.catalog));
+      const metadataPath = path.join(root, 'release-metadata.json');
+      const directory = pathToFileURL(`${root}/`);
+      await writeFile(metadataPath, '{"stale":true}');
+      await writeBuildReleaseMetadata(directory, publication);
+      expect(JSON.parse(await readFile(metadataPath, 'utf8')) as unknown).toEqual(
+        candidate.metadata,
+      );
+      await writeBuildReleaseMetadata(directory, null);
+      await expect(access(metadataPath)).rejects.toThrow();
+      await expect(
+        writeBuildReleaseMetadata(directory, { ...publication, version: '2026.10.09-r124' }),
+      ).rejects.toThrow('PUBLICATION_METADATA_CATALOG_MISMATCH');
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  });
+  it('builds a prepared candidate without old acceptance or check digests', () => {
+    const candidate = buildPublicationCandidate(legacyCatalog, publication, [], []);
+    expect(candidate.catalog.release.publicationStatus).toBe('prepared');
+    expect(candidate.catalog.release.version).toBe(publication.version);
+    expect(candidate.metadata?.commit).toBe(publication.commit);
+    expect(candidate.metadata?.validationResultsUrl).toBe(publication.runUrl);
+    expect(candidate.catalog.release.validationSummary).toBeUndefined();
+    expect(candidate.catalog.release.agentQualityReviewEvidenceRef).toBeUndefined();
+    expect(candidate.catalog.release.manifestDigest).toBeUndefined();
+    expect(candidate.catalog.release.contentSnapshotDigest).toBeUndefined();
+    expect(() =>
+      buildReleaseHistory([{ catalog: candidate.catalog, metadata: candidate.metadata }]),
+    ).toThrow('RELEASE_HISTORY_INCOMPLETE');
+  });
+  it('keeps cutoff and scope and empties textbook changes for a history-only deployment', () => {
+    const candidate = buildPublicationCandidate(
+      legacyCatalog,
+      publication,
+      [
+        { status: 'M', file: 'src/content/indexes/release-history.json' },
+        { status: 'M', file: 'docs/operations/update-manual.md' },
+      ],
+      [],
+    );
+    expect(candidate.metadata?.changeSummary).toMatchObject({
+      addedProblemIds: [],
+      changedProblemIds: [],
+      withdrawnProblemIds: [],
+      taxonomyChanges: [],
+    });
+    for (const key of [
+      'cutoffAt',
+      'firstContestId',
+      'lastContestId',
+      'problemCount',
+      'contestCount',
+    ] as const)
+      expect(candidate.catalog.release[key]).toBe(legacyCatalog.release[key]);
+    expect(candidate.catalog.problems).toEqual(legacyCatalog.problems);
+  });
+  it('includes a previously undeployed prose correction in the change summary', () => {
+    const candidate = buildPublicationCandidate(
+      legacyCatalog,
+      publication,
+      [
+        { status: 'M', file: 'src/content/docs/problems/abc212-e.md' },
+        { status: 'M', file: 'src/content/indexes/release-history.json' },
+      ],
+      [],
+    );
+    expect(candidate.metadata?.changeSummary.changedProblemIds).toEqual(['abc212-e']);
+  });
+  it('does not claim an empty textbook scope when the publication comparison is unavailable', () => {
+    const candidate = buildPublicationCandidate(legacyCatalog, publication, null, []);
+    expect(candidate.metadata?.changeSummary.changedProblemIds).toHaveLength(868);
+  });
+  it('keeps local baseline candidates metadata-free', () => {
+    const candidate = buildPublicationCandidate(
+      legacyCatalog,
+      { version: legacyCatalog.release.version },
+      [],
+      [],
+    );
+    expect(candidate.metadata).toBeNull();
+    expect(candidate.catalog.release.publicationStatus).toBe('prepared');
+  });
+  it('rejects an existing version with a different SHA, scope, or summary', () => {
+    const candidate = buildPublicationCandidate(legacyCatalog, publication, [], []);
+    if (!candidate.metadata) throw new Error('Missing fixture metadata');
+    const entry = {
+      ...candidate.metadata,
+      validatedAt: candidate.catalog.release.validatedAt,
+      firstContestId: candidate.catalog.release.firstContestId,
+      lastContestId: candidate.catalog.release.lastContestId,
+      contestCount: candidate.catalog.release.contestCount,
+      problemCount: candidate.catalog.release.problemCount,
+      changelogPath: candidate.catalog.release.changelogPath,
+    };
+    expect(() => buildPublicationCandidate(legacyCatalog, publication, [], [entry])).not.toThrow();
+    for (const change of [
+      { commit: 'b'.repeat(40) },
+      { problemCount: 867 },
+      { changeSummary: { ...entry.changeSummary, changedProblemIds: ['abc212-e'] } },
+    ])
+      expect(() =>
+        buildPublicationCandidate(legacyCatalog, publication, [], [{ ...entry, ...change }]),
+      ).toThrow('PUBLICATION_VERSION_CONFLICT');
   });
 });

@@ -40,6 +40,18 @@ const documentationPath = (file: string): boolean =>
   /^docs\/operations\/[^/]+\.md$/u.test(file) ||
   /^specs\/\d{3}-[^/]+\/(?:[^/]+\/)*[^/]+\.md$/u.test(file);
 
+/** Main must also verify changes that never reached a successful deployment. */
+export function mergePublicationChanges(
+  changes: readonly VerificationChange[] | null,
+  env: NodeJS.ProcessEnv,
+  git?: GitReader,
+): readonly VerificationChange[] | null {
+  if (env.GITHUB_EVENT_NAME !== 'push' || env.GITHUB_REF !== 'refs/heads/main') return changes;
+  if (!env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA || !changes) return null;
+  const pending = readVerificationChanges(env, env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA, git);
+  return pending ? [...changes, ...pending] : null;
+}
+
 /** Renames become deletion + addition, keeping both paths in the verification union. */
 export function readVerificationChanges(
   env: NodeJS.ProcessEnv,
@@ -140,7 +152,8 @@ export function selectVerificationSteps(
     data = false,
     ui = false,
     records = false,
-    skill = false;
+    skill = false,
+    history = false;
   const docs: string[] = [];
   for (const { status, file } of changes ?? []) {
     if (!['A', 'M', 'D'].includes(status)) {
@@ -150,7 +163,8 @@ export function selectVerificationSteps(
     if (documentationPath(file)) {
       if (status === 'D') broad = true;
       else docs.push(file);
-    } else if (file.startsWith('src/content/docs/')) prose = true;
+    } else if (file === 'src/content/indexes/release-history.json') history = true;
+    else if (file.startsWith('src/content/docs/')) prose = true;
     else if (file.startsWith('src/content/') || file === 'src/lib/taxonomy/textbook-order.ts')
       data = true;
     else if (file.startsWith('src/lib/learning-records/')) records = true;
@@ -169,9 +183,10 @@ export function selectVerificationSteps(
       args: ['--files', ...docs],
     });
   const runtime = broad || ui || records || skill;
-  const publish = broad || prose || data || ui || records;
+  const publish = broad || prose || data || ui || records || history;
   if (runtime) steps.push({ id: 'lint', script: 'lint' });
-  if (broad || prose || data || runtime) steps.push({ id: 'format', script: 'format:check' });
+  if (broad || prose || data || runtime || history)
+    steps.push({ id: 'format', script: 'format:check' });
   if (broad || data) steps.push({ id: 'schema', script: 'schema:check' });
   if (runtime) steps.push({ id: 'check', script: 'check' });
   const tests = new Set<string>();
@@ -180,12 +195,18 @@ export function selectVerificationSteps(
   if (records) for (const test of recordTests) tests.add(test);
   if (ui) tests.add('tests/contract/ui-routes.test.ts');
   if (skill) for (const test of skillTests) tests.add(test);
+  if (history) {
+    tests.add('tests/unit/release-history.test.ts');
+    tests.add('tests/unit/publication-config.test.ts');
+    tests.add('tests/unit/publication-update.test.ts');
+  }
   if (broad || tests.size)
     steps.push({ id: 'test', script: 'test', ...(broad ? {} : { args: [...tests] }) });
   if (publish) {
     steps.push({ id: 'build', script: runtime ? 'build:checked' : 'build' });
     steps.push({ id: 'links', script: 'link:check:built' });
-    if (env.CI) steps.push({ id: 'browsers', script: 'test:e2e:install:ci' });
+    if (env.CI && (broad || prose || data || ui || records))
+      steps.push({ id: 'browsers', script: 'test:e2e:install:ci' });
     const e2e = new Set<string>();
     if (prose || data || ui || records) e2e.add('tests/e2e/full-projection.spec.ts');
     if (data || ui) e2e.add('tests/e2e/search.spec.ts');
@@ -194,11 +215,12 @@ export function selectVerificationSteps(
       e2e.add('tests/e2e/contest-matrix.spec.ts');
     }
     if (records || data) e2e.add('tests/e2e/learning-records.spec.ts');
-    steps.push({
-      id: 'e2e',
-      script: 'test:e2e:built',
-      args: ['--project=chromium', ...(broad ? [] : [...e2e])],
-    });
+    if (broad || e2e.size)
+      steps.push({
+        id: 'e2e',
+        script: 'test:e2e:built',
+        args: ['--project=chromium', ...(broad ? [] : [...e2e])],
+      });
   }
   return steps;
 }
@@ -242,7 +264,7 @@ export async function runVerification(options: {
   const changes = all
     ? null
     : options.changes === undefined
-      ? readVerificationChanges(options.env, base)
+      ? mergePublicationChanges(readVerificationChanges(options.env, base), options.env)
       : options.changes;
   const steps = selectVerificationSteps(changes, options.env);
   const execute =
@@ -261,6 +283,13 @@ export async function runVerification(options: {
   } catch (error) {
     report(error instanceof Error ? error.message : String(error));
     return EXIT_CODE.internal;
+  }
+  if (options.env.GITHUB_OUTPUT) {
+    const { appendFileSync } = await import('node:fs');
+    appendFileSync(
+      options.env.GITHUB_OUTPUT,
+      `publication=${String(steps.some(({ id }) => id === 'build'))}\n`,
+    );
   }
   return EXIT_CODE.success;
 }
