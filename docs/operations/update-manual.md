@@ -194,6 +194,8 @@ URLを照合し、代表問題・単元・検索・要復習・設定・過去�
 | 同SHA/runの再実行                                    | 現在のmainを対象にする。同じ版の検証済みartifactがあればdeploy jobを再実行し、消失・期限切れならbaselineから同SHA/runで再検証・buildする。新版へ採番し直さない。 |
 | 公開後の不具合                                       | 不具合PRをGit revertし、新main SHA・新runの別版を同じCI/Pages経路で配信する。旧版への上書きや履歴削除で成功扱いにしない。                                        |
 
+mainでは最後の成功配信以降の未配信差分も検査するため、PRの差分外にある文書の書式違反で停止することがある。失敗ログに挙がった文書を修正し、検査範囲を狭めて回避しない。`specs/`など通常のPrettier対象外の文書も、文書checkerは`--ignore-path /dev/null`で検査する。修正にも同じ指定を使い、文章・リンク・タスクの完了状態が変わっていないことを確認する。
+
 artifact名はbuildしたattemptごとに付け、baselineのstep/job outputをdeployへ渡す。deploy
 jobだけの再実行でも保存した同じ名前を使い、配信直前のmain
 SHA確認を再実行する。一致する場合だけ元artifactを配信し、期限切れ等で見つからなければbaselineを含む全jobを再実行する。mainが先へ進んでいたら古いrunの配信を停止し、現在のmainのrunを使う。旧状態へ戻す必要があればGit
