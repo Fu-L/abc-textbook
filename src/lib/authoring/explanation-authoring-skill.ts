@@ -82,7 +82,7 @@ export const AuthoringInputPacketSchema = z
       )
       .min(1),
     sources: z.array(NormalizedAuthoringSourceSchema).min(1),
-    skill: AuthoringSkillSubjectSchema,
+    skill: AuthoringSkillSubjectSchema.optional(),
   })
   .strict();
 
@@ -147,10 +147,7 @@ export const classifyExplanationKind = (
   return candidate.additionalElement === null ? 'similar' : 'supplement';
 };
 
-export const validateAuthoringInput = (
-  value: unknown,
-  expectedSkill: AuthoringSkillSubject,
-): InputValidationResult => {
+export const validateAuthoringInput = (value: unknown): InputValidationResult => {
   const parsed = AuthoringInputPacketSchema.safeParse(value);
   if (!parsed.success) {
     return {
@@ -167,25 +164,6 @@ export const validateAuthoringInput = (
 
   const input = parsed.data;
   const diagnostics: AuthoringDiagnostic[] = [];
-  if (input.skill.version !== expectedSkill.version) {
-    diagnostics.push(
-      diagnostic(
-        'SKILL_VERSION_MISMATCH',
-        'skill.version',
-        `Expected ${expectedSkill.version}, received ${input.skill.version}.`,
-      ),
-    );
-  }
-  if (input.skill.digest !== expectedSkill.digest) {
-    diagnostics.push(
-      diagnostic(
-        'SKILL_DIGEST_MISMATCH',
-        'skill.digest',
-        'The authoring packet does not reference the frozen skill digest.',
-      ),
-    );
-  }
-
   const sourceById = new Map(input.sources.map((source) => [source.sourceRevisionId, source]));
   const problemSources = input.sources.filter(
     (source) =>
@@ -253,11 +231,8 @@ export const validateAuthoringInput = (
   return { status: diagnostics.length === 0 ? 'ready' : 'on_hold', diagnostics };
 };
 
-export const prepareExplanationAuthoring = (
-  value: unknown,
-  expectedSkill: AuthoringSkillSubject,
-): AuthoringPreparationResult => {
-  const validation = validateAuthoringInput(value, expectedSkill);
+export const prepareExplanationAuthoring = (value: unknown): AuthoringPreparationResult => {
+  const validation = validateAuthoringInput(value);
   if (validation.status === 'on_hold') {
     const parsedProblemId = z.object({ problemId }).safeParse(value);
     return {
@@ -284,7 +259,6 @@ export const prepareExplanationAuthoring = (
 
 export const validateAuthoringOutput = (
   value: unknown,
-  expectedSkill: AuthoringSkillSubject,
   input: AuthoringInputPacket,
 ): InputValidationResult => {
   const parsed = ProblemAuthoringUnitSchema.safeParse(value);
@@ -302,29 +276,10 @@ export const validateAuthoringOutput = (
   }
 
   const unit: ProblemAuthoringUnit = parsed.data;
-  const inputValidation = validateAuthoringInput(input, expectedSkill);
+  const inputValidation = validateAuthoringInput(input);
   if (inputValidation.status === 'on_hold') return inputValidation;
   const validatedInput = AuthoringInputPacketSchema.parse(input);
   const diagnostics: AuthoringDiagnostic[] = [];
-  if (unit.skill.name !== expectedSkill.name || unit.skill.version !== expectedSkill.version) {
-    diagnostics.push(
-      diagnostic(
-        'SKILL_VERSION_MISMATCH',
-        'skill',
-        'Output must use the frozen authoring skill name and version.',
-      ),
-    );
-  }
-  if (unit.skill.digest !== expectedSkill.digest) {
-    diagnostics.push(
-      diagnostic(
-        'SKILL_DIGEST_MISMATCH',
-        'skill.digest',
-        'Output must use the frozen authoring skill digest.',
-      ),
-    );
-  }
-
   if (unit.problemId !== validatedInput.problemId) {
     diagnostics.push(
       diagnostic(
@@ -549,10 +504,3 @@ export const validateAuthoringOutput = (
   }
   return { status: diagnostics.length === 0 ? 'ready' : 'on_hold', diagnostics };
 };
-
-export type AuthoringRiskReason =
-  'official_source_conflict' | 'independent_proof' | 'major_classification_change';
-
-export const requiredReviewMode = (
-  riskReasons: readonly AuthoringRiskReason[],
-): 'self' | 'third_party' => (riskReasons.length === 0 ? 'self' : 'third_party');

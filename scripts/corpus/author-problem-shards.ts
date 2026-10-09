@@ -172,7 +172,7 @@ try {
           : undefined,
       };
       const authored = authorProblemInShard(context, shard, problemId, detail);
-      const validation = validateAuthoringOutput(unit, context.skill, authored.input);
+      const validation = validateAuthoringOutput(unit, authored.input);
       if (unit.docPath !== docPath || unit.problemId !== problemId)
         throw new Error(`SHARD_DOCUMENT_OWNER_MISMATCH:${docPath}`);
       const canonicalDocument = renderProblemAuthoringDocument(unit, title, authored.links);

@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { glob, readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 import { ProblemAuthoringUnitSchema } from '../../src/lib/domain/schema-parts/authoring-unit.js';
 import {
@@ -27,6 +27,55 @@ describe('co-located full Problem document', () => {
     expect(read.body).not.toContain('prereq-abc-advanced-v1');
     expect(read.body).not.toContain('追加前提:');
     expect(read.body).toContain('この解説で扱わないこと:');
+  });
+  it('round-trips documents without legacy skill or optional blocks', () => {
+    const unit = structuredClone(fixture);
+    delete unit.skill;
+    unit.examples = [];
+    unit.exercises = [];
+    const doc = renderProblemAuthoringDocument(unit, 'ABC212 G', links);
+    const read = readProblemAuthoringDocument(doc);
+    expect(read.unit).toEqual(unit);
+    expect(read.unit).not.toHaveProperty('skill');
+    expect(doc).not.toContain('"skill"');
+    expect(read.unit.examples).toEqual([]);
+    expect(read.unit.exercises).toEqual([]);
+  });
+  it.each(['similar', 'supplement'] as const)('round-trips %s with no skill subject', (kind) => {
+    const unit = structuredClone(fixture);
+    delete unit.skill;
+    unit.kind = kind;
+    unit.primaryProblemId = 'abc213-g';
+    unit.differenceSummary = '境界の扱いが変わる。';
+    unit.sections = {
+      differences: '空の場合の寄与は0とする。残りの証明と全体計算量はprimaryの議論が適用できる。',
+      implementationNotes: '集計前に空の場合を分ける。',
+    };
+    unit.examples = [];
+    unit.exercises = [];
+    const doc = renderProblemAuthoringDocument(unit, '差分の説明', links);
+    expect(readProblemAuthoringDocument(doc).unit).toEqual(unit);
+    expect(doc).not.toContain('undefined');
+  });
+  it('reads all 868 historical manuscripts with and without their old skill field', async () => {
+    let count = 0;
+    for await (const file of glob('src/content/docs/problems/**/*.md')) {
+      const document = await readFile(file, 'utf8');
+      const { unit } = readProblemAuthoringDocument(document);
+      expect(unit.skill, file).toBeDefined();
+      const metadata: Partial<typeof unit> = structuredClone(unit);
+      delete metadata.sections;
+      delete metadata.skill;
+      const withoutSkill = document.replace(
+        /^authoringUnit:.*$/mu,
+        () => `authoringUnit: ${JSON.stringify(metadata)}`,
+      );
+      const expected = structuredClone(unit);
+      delete expected.skill;
+      expect(readProblemAuthoringDocument(withoutSkill).unit, file).toEqual(expected);
+      count++;
+    }
+    expect(count).toBe(868);
   });
   it('rejects missing proofs and publication-enabled copies', () => {
     const doc = renderProblemAuthoringDocument(fixture, 'ABC212 G', links);

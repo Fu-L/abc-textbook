@@ -1,5 +1,4 @@
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -214,14 +213,9 @@ export const validatePreviewUpdateReview = async (input: {
     readonly reviewPolicy: unknown;
   };
   const sourcePacket = (await readJson(skillManifest.sourcePacket.path)) as Record<string, unknown>;
-  const skillArtifacts = await Promise.all(
-    skillManifest.artifacts.map(async (artifact) => ({
-      path: artifact.path,
-      digest: createHash('sha256')
-        .update(await readFile(path.join(root, artifact.path)))
-        .digest('hex'),
-    })),
-  );
+  // This reader verifies the historical preview subject. The active skill is
+  // no longer frozen to that initial authoring bundle.
+  const skillArtifacts = skillManifest.artifacts;
   const sourcePacketDigest = canonicalDigest(
     Object.fromEntries(
       Object.entries(sourcePacket).filter(([key]) => key !== 'authoringSkillDigest'),
@@ -266,7 +260,6 @@ export const validatePreviewUpdateReview = async (input: {
     digestWithoutField(taxonomy, 'taxonomyDigest') === taxonomy.taxonomyDigest &&
     component.authoringSkillVersion === skillManifest.authoringSkillVersion &&
     component.authoringSkillDigest === skillManifest.authoringSkillDigest &&
-    canonicalDigest(skillArtifacts) === canonicalDigest(skillManifest.artifacts) &&
     sourcePacketDigest === skillManifest.sourcePacket.digest &&
     calculatedSkillDigest === skillManifest.authoringSkillDigest;
   if (

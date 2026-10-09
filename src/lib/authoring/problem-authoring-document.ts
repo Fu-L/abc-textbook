@@ -2,16 +2,17 @@ import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { z } from 'zod';
 import {
   ProblemAuthoringUnitSchema,
+  ExplanationTextSchema,
   type ProblemAuthoringUnit,
 } from '../domain/schema-parts/authoring-unit.js';
 
 export const ProblemAuthoringDetailsSchema = z
   .object({
-    time: z.string().min(1),
-    space: z.string().min(1),
-    correctness: z.string().min(1),
+    time: ExplanationTextSchema,
+    space: ExplanationTextSchema,
+    correctness: ExplanationTextSchema,
     // A complete explanation is authored explicitly; inventory prose is only an outline.
-    reasoning: z.string().min(1),
+    reasoning: ExplanationTextSchema,
     // A chosen algorithm can require less than the taxonomy's related techniques.
     additionalPrerequisiteUnitIds: z.array(z.string().min(1)).optional(),
     example: z
@@ -31,15 +32,15 @@ export const ProblemAuthoringDetailsSchema = z
       .strict()
       .optional(),
     holdReason: z.string().optional(),
-    constraintConsistency: z.string().optional(),
+    constraintConsistency: ExplanationTextSchema.optional(),
     reviewMode: z.enum(['self', 'third_party']).optional(),
     sectionOverrides: z
       .object({
-        reasoning: z.string().min(1).optional(),
-        technique: z.string().min(1).optional(),
-        problemSpecificElements: z.string().min(1).optional(),
-        reviewAdvice: z.string().min(1).optional(),
-        implementationNotes: z.string().min(1).optional(),
+        reasoning: ExplanationTextSchema.optional(),
+        technique: ExplanationTextSchema.optional(),
+        problemSpecificElements: ExplanationTextSchema.optional(),
+        reviewAdvice: ExplanationTextSchema.optional(),
+        implementationNotes: ExplanationTextSchema.optional(),
       })
       .strict()
       .optional(),
@@ -82,6 +83,12 @@ const SECTION_TITLES = {
   implementationNotes: '実装上の注意',
   reviewAdvice: '復習の核',
 } as const;
+const ABBREVIATED_SECTION_TITLES = {
+  differences: '差分',
+  implementationNotes: '実装上の注意',
+} as const;
+const sectionTitles = (kind: unknown) =>
+  kind === 'full' ? SECTION_TITLES : ABBREVIATED_SECTION_TITLES;
 const list = (items: readonly string[]) => items.map((s) => `- ${s}`).join('\n');
 const readerFacingExclusions = (topics: readonly string[]): string[] =>
   topics.filter((topic) => !topic.includes('実装部品だけを偶然共有する解法'));
@@ -99,7 +106,7 @@ export const renderProblemAuthoringDocument = (
 ): string => {
   const unit = ProblemAuthoringUnitSchema.parse(value);
   const { sections, ...metadata } = unit;
-  const paragraphs = Object.entries(SECTION_TITLES)
+  const paragraphs = Object.entries(sectionTitles(unit.kind))
     .map(([key, heading]) => `## ${heading}\n\n${String(sections[key])}`)
     .join('\n\n');
   const complexity = sections.complexity as { time: string; space: string };
@@ -110,9 +117,13 @@ export const renderProblemAuthoringDocument = (
   const excludedTopics = exclusions.length
     ? `この解説で扱わないこと:\n\n${list(exclusions)}\n\n`
     : '';
+  const complexityText =
+    unit.kind === 'full'
+      ? `## 計算量と制約\n\n### 時間\n\n${complexity.time}\n\n### 空間\n\n${complexity.space}\n\n### 制約との対応\n\n${String(sections.constraintConsistency)}\n\n`
+      : '';
   const body =
     `## 学習の位置\n\n${links.home}\n\n${list(links.outcomes)}\n\n${prerequisites}${excludedTopics}` +
-    `${paragraphs}\n\n## 計算量と制約\n\n### 時間\n\n${complexity.time}\n\n### 空間\n\n${complexity.space}\n\n### 制約との対応\n\n${String(sections.constraintConsistency)}\n\n` +
+    `${paragraphs}\n\n${complexityText}` +
     `## 出典\n\n${list(links.sources)}\n`;
   return `---\ntitle: ${JSON.stringify(title)}\ndraft: true\nauthoringUnit: ${JSON.stringify(metadata)}\n---\n\n${protectMathematicalLinks(body)}`;
 };
@@ -136,18 +147,22 @@ export const readProblemAuthoringDocument = (
   )
     throw new Error('AUTHORING_DRAFT_FRONTMATTER_REQUIRED');
   const sections: Record<string, unknown> = {};
-  const headings = Object.entries(SECTION_TITLES);
+  const kind = (frontmatter.authoringUnit as Record<string, unknown>).kind;
+  const full = kind === 'full';
+  const headings = Object.entries(sectionTitles(kind));
   for (const [i, [key, title]] of headings.entries())
     sections[key] = between(
       content,
       `## ${title}\n\n`,
-      `\n\n## ${headings[i + 1]?.[1] ?? '計算量と制約'}\n`,
+      `\n\n## ${headings[i + 1]?.[1] ?? (full ? '計算量と制約' : '出典')}\n`,
     );
-  sections.complexity = {
-    time: between(content, '### 時間\n\n', '\n\n### 空間\n'),
-    space: between(content, '### 空間\n\n', '\n\n### 制約との対応\n'),
-  };
-  sections.constraintConsistency = between(content, '### 制約との対応\n\n', '\n\n## 出典\n');
+  if (full) {
+    sections.complexity = {
+      time: between(content, '### 時間\n\n', '\n\n### 空間\n'),
+      space: between(content, '### 空間\n\n', '\n\n### 制約との対応\n'),
+    };
+    sections.constraintConsistency = between(content, '### 制約との対応\n\n', '\n\n## 出典\n');
+  }
   return {
     unit: ProblemAuthoringUnitSchema.parse({ ...frontmatter.authoringUnit, sections }),
     body: content,

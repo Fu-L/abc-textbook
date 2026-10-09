@@ -26,8 +26,8 @@ Unitとし、関連問題の参照と区別する。開催順・difficultyから
 問題追加ではID、公式task
 identity、主配置、関連先、metrics、索引、導線を整合させる。訂正では変更前後の関連先を確認し、関連から外れた単元にも古い説明を残さない。独自証明や大きな分類変更もCodexが確認し、第三者承認を待たない。
 
-既存の一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧skillのmanifest/digestやreview
-modeは現在の実装依存であり、新しい通常更新への恒久的な承認義務ではない。これらを撤去する実装変更は「既存実装からの移行」に従う。
+通常の執筆・訂正は、対象確認→正本編集→検証→報告で進める。管理用のmanifest/digestやreview
+modeを作らず、独立した演習・評価・解答の節を一律に増やさない。一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧初版・release/deployの残る依存は「既存実装からの移行」を参照する。
 
 ## 3. 変更に必要な検証を選ぶ
 
@@ -212,6 +212,26 @@ digest形式を再構成する。現行digestも受理するが、不明なfinge
 復旧はloaderと検査CLIの変更をrevertする。旧台帳・教材・prepared
 catalogは保持しているため、旧経路へ戻せる。
 
+### 執筆skillと本文readerの移行（002 / PR-06）
+
+[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)は公式根拠と完全解説の品質を確認する。通常入力は`validateAuthoringInput(input)`、未執筆の準備は`prepareExplanationAuthoring(input)`、完成草案は`validateAuthoringOutput(unit, input)`を使う。出力のProblem・学習成果・baseline・前提・Tag・placementとclaim根拠を入力へ照合する。Source
+Revisionのschema・fingerprint・task
+identity・確認日時は正本の検証を継続し、公式解説indexを問題個別の根拠にしない。
+
+本文frontmatterの`authoringUnit.skill`と入力packetの`skill`は任意。旧欄があればname/version/digestを型検証してそのまま読み、現在のskill
+version/digestとの一致を要求しない。旧`ProblemAuthoringDetails.reviewMode`は`self`/`third_party`として読めるが、承認要件を発生させない。既存868本文とsourceを一括変換したり、旧digestを現在の値へ補正したりしない。`prepareAuthoringResults`はskillを省略でき、省略時にはskill
+version/digestの結果欄を生成しない。
+
+`examples`/`exercises`は不要なら`[]`。必要な例・反例は本文の該当箇所へ組み込む。コードや演習を置いた場合だけ、既存の環境・入力・手順・期待結果・実行先・学習成果と検証結果の契約を満たす。掲載した実行可能コードは実行し、失敗・未検証の結果を完成草案へ含めない。
+
+full本文の着想、状態・保持する量、初期化・遷移・操作順・答えの取り出し方、証明、境界、前処理を含む全体計算量をCodexが確認する。必須節・時間/空間評価の欠落、空白だけの原稿、本文のない小見出しは対象fieldと理由を持つ診断で保留する。構造検証だけで状態や論証の十分性を保証せず、公式根拠との照合・検算・文章確認を行う。訂正では変更前後の主配置・関連先・前提と現存blockを`enumerateCorrectionImpacts`/`verifyCanonicalCorrectionTargets`で確認し、存在しない演習や新しい証跡の作成を要求しない。
+
+初版shardとpreviewの互換readerは、過去manifestに記録されたartifact subjectと当時のsource
+packetの内部整合を確認する。現在のskill文書を当時のartifact
+digestへ固定せず、868本文の旧subjectを保持する。旧`corpus:author-problem-shards`は初版専用のmanifest/review出力を残すため、通常執筆では使わない。初版の明示的な`corpus:verify-authoring`は旧bundleを再照合する監査専用経路として残るため、当時のGit版で実行する。現行skillの改訂後に、旧証跡のdigestだけを更新して通さない。旧release/deployやprepared版の照合はPR-07以降まで残り、今回の移行だけで実教材訂正の公開完了とは扱わない。
+
+復旧は新形式の利用側の依存順を確認してskillとconsumerをまとめてrevertする。既存本文・source・旧証跡は保持している。
+
 ### catalog CLIの移行（002 / PR-05）
 
 通常の生成・検証では`--evidence-inventory`を省略できる。リポジトリrootから、正本と一致するcatalog
@@ -267,7 +287,7 @@ PR-07a以降の[ローカルbuild入力設計](../../specs/002-simplify-maintena
 | `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。標準Pages配信は後続PR          | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
 | `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
 | `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
-| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 旧review modeとskill digest前提を利用側と一緒に見直す                       | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
+| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する              | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
 | live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                         | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
 
 通常更新のCIは単一の基準環境を基本とし、変更に必要なschema・テスト・buildを残す。追加・維持する検査ごとに検出する不具合と実行時間を評価する。約20分かかる現状からの短縮は、後続変更のActions実測で確認する。憲章と文書の改訂だけでCI短縮やlive更新機能の完成を報告しない。

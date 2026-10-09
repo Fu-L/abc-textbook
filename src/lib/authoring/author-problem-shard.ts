@@ -80,7 +80,7 @@ export const authorProblemInShard = (
     sources,
     skill: context.skill,
   };
-  const validation = validateAuthoringInput(input, context.skill);
+  const validation = validateAuthoringInput(input);
   if (validation.status !== 'ready')
     throw new Error(`SHARD_INPUT_BLOCKED:${problemId}:${JSON.stringify(validation.diagnostics)}`);
   const technique = inventory.typicalTechniques

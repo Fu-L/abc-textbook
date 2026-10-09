@@ -6,10 +6,8 @@ import { describe, expect, it } from 'vitest';
 
 import {
   classifyExplanationKind,
-  requiredReviewMode,
   validateAuthoringOutput,
   type AuthoringInputPacket,
-  type AuthoringSkillSubject,
 } from '../../src/lib/authoring/explanation-authoring-skill.js';
 import type { ProblemAuthoringUnit } from '../../src/lib/domain/schema-parts/authoring-unit.js';
 
@@ -70,11 +68,6 @@ describe('explanation quality contract', () => {
     );
     const input = fixtures.fixtures[0]?.input;
     if (!input) throw new Error('Complete authoring fixture is missing.');
-    const skill: AuthoringSkillSubject = {
-      name: 'abc-explanation-author',
-      version: fixtures.authoringSkillVersion,
-      digest: fixtures.authoringSkillDigest,
-    };
     const unit = await readJson<ProblemAuthoringUnit>(fixtures.representativeOutputPath);
 
     expect(unit.sections.reasoning).toContain('制約');
@@ -83,7 +76,7 @@ describe('explanation quality contract', () => {
     expect(unit.sections.problemSpecificElements).toContain('注目');
     expect(unit.sections.reviewAdvice).toContain('\n- ');
 
-    expect(validateAuthoringOutput(unit, skill, input)).toEqual({
+    expect(validateAuthoringOutput(unit, input)).toEqual({
       status: 'ready',
       diagnostics: [],
     });
@@ -96,7 +89,7 @@ describe('explanation quality contract', () => {
     subjectMismatch.additionalPrerequisiteUnitIds = ['unit-fictional'];
     subjectMismatch.excludedTopics = ['架空の対象外'];
     subjectMismatch.tagIds = ['tag-fictional'];
-    const subjectResult = validateAuthoringOutput(subjectMismatch, skill, input);
+    const subjectResult = validateAuthoringOutput(subjectMismatch, input);
     expect(subjectResult.status).toBe('on_hold');
     expect(subjectResult.diagnostics.map(({ code }) => code)).toEqual(
       expect.arrayContaining([
@@ -121,7 +114,7 @@ describe('explanation quality contract', () => {
       },
       additionalElement: null,
     };
-    const placementResult = validateAuthoringOutput(unit, skill, placementInput);
+    const placementResult = validateAuthoringOutput(unit, placementInput);
     expect(placementResult.diagnostics.map(({ code }) => code)).toEqual(
       expect.arrayContaining(['OUTPUT_KIND_MISMATCH', 'OUTPUT_PRIMARY_PROBLEM_MISMATCH']),
     );
@@ -147,7 +140,6 @@ describe('explanation quality contract', () => {
     ];
     const foreignSourceResult = validateAuthoringOutput(
       foreignSourceOutput,
-      skill,
       inputWithForeignSource,
     );
     expect(foreignSourceResult.diagnostics.map(({ code }) => code)).toEqual(
@@ -171,7 +163,6 @@ describe('explanation quality contract', () => {
     ];
     const disallowedSourceResult = validateAuthoringOutput(
       disallowedSourceOutput,
-      skill,
       inputWithDisallowedSource,
     );
     expect(disallowedSourceResult.diagnostics.map(({ code }) => code)).toContain(
@@ -185,7 +176,7 @@ describe('explanation quality contract', () => {
     if (!incompleteExample || !incompleteExercise) throw new Error('Output fixture is incomplete.');
     incompleteExample.verificationStatus = 'failed';
     incompleteExercise.answer.verificationStatus = 'pending';
-    const result = validateAuthoringOutput(incomplete, skill, input);
+    const result = validateAuthoringOutput(incomplete, input);
     expect(result.status).toBe('on_hold');
     expect(result.diagnostics.map(({ code }) => code)).toContain('OUTPUT_CONTRACT_INVALID');
 
@@ -199,9 +190,7 @@ describe('explanation quality contract', () => {
     unverifiedClaim.verificationStatus = 'stale';
     unverifiedExample.verificationStatus = 'failed';
     unverifiedExercise.answer.verificationStatus = 'pending';
-    expect(
-      validateAuthoringOutput(unverified, skill, input).diagnostics.map(({ code }) => code),
-    ).toEqual(
+    expect(validateAuthoringOutput(unverified, input).diagnostics.map(({ code }) => code)).toEqual(
       expect.arrayContaining([
         'TECHNICAL_CLAIM_NOT_VERIFIED',
         'EXAMPLE_NOT_REPRODUCIBLE',
@@ -227,12 +216,5 @@ describe('explanation quality contract', () => {
       { cwd: process.cwd(), maxBuffer: 1024 * 1024 },
     );
     expect(result.stdout.trim()).toBe(example.expectedResult);
-  });
-
-  it('uses self review normally and third-party review only for fixed high-risk reasons', () => {
-    expect(requiredReviewMode([])).toBe('self');
-    expect(requiredReviewMode(['official_source_conflict'])).toBe('third_party');
-    expect(requiredReviewMode(['independent_proof'])).toBe('third_party');
-    expect(requiredReviewMode(['major_classification_change'])).toBe('third_party');
   });
 });

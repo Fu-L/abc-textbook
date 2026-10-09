@@ -1,16 +1,20 @@
 ---
-problemId: ""
+problemId: ''
+docPath: ''
 kind: full
 primaryProblemId: null
 differenceSummary: null
 learningOutcomeIds: []
-baseline: { id: "", version: "" }
+baselineId: ''
+baselineVersion: ''
 additionalPrerequisiteUnitIds: []
 excludedTopics: []
 tagIds: []
 sourceRevisionIds: []
-skill: { name: abc-explanation-author, version: "", digest: "" }
 revision: 1
+claims: []
+examples: []
+exercises: []
 ---
 
 ## 自然な考察ロードマップ
@@ -23,6 +27,10 @@ revision: 1
 
 ### アルゴリズムへの落とし込み
 
+#### 状態・保持する量の定義
+
+#### 初期化・遷移・操作順・答えの取り出し方
+
 ## 典型要素
 
 ## 問題固有の要素と見抜き方
@@ -31,10 +39,12 @@ revision: 1
 
 ## 正当性
 
+手順が保つ不変条件・対応と終了条件を示し、漏れ・重複と境界を確認する。
+
 ## 計算量
 
-- 時間:
-- 空間:
+- 時間: 前処理・全状態・全遷移を含む全体評価とその理由。
+- 空間: 保持する状態・データ構造の個数とその理由。
 
 ## 制約との整合
 
@@ -42,6 +52,4 @@ revision: 1
 
 ## Claims
 
-## Examples
-
-## Exercise / Assessment / Answer
+必要な短い例・反例は本文へ組み込む。コードを掲載する場合だけExamplesの契約に従って環境・入力・手順・期待結果を示し、実行可能コードを実行する。独立した演習・評価・解答の節は一律に追加しない。

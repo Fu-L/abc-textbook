@@ -132,6 +132,7 @@ describe('canonical correction target validation', () => {
     const source = catalog.sources[0];
     const problem = catalog.authoringUnits[0];
     if (!source || !problem) throw new Error('Missing fixture owners.');
+    delete problem.skill;
     problem.examples = [];
     problem.exercises = [];
     const input = {
@@ -175,6 +176,7 @@ describe('canonical correction target validation', () => {
       const unit = catalog.learningUnits[0];
       const source = catalog.sources[0];
       if (!authoring || !unit || !source) throw new Error('Missing fixture owners.');
+      delete authoring.skill;
       authoring.docPath = 'problem.md';
       unit.docPath = 'unit.md';
       const impact = {
