@@ -72,8 +72,20 @@ export const renderPublicDocument = async (
   omitTitle = false,
   problemRoutes: ReadonlyMap<string, string> = new Map(),
 ): Promise<string> => {
-  const { content } = parseFrontmatter(text);
-  const rendered = await (await processor).render(content);
+  const { frontmatter, content } = parseFrontmatter(text);
+  const authoring = frontmatter.authoringUnit as
+    { kind?: unknown; primaryProblemId?: unknown } | undefined;
+  // The public loader validates the primary as a full explanation. Generate its
+  // reader-facing link from the same metadata, including for hand-authored prose.
+  const primaryProblemId =
+    authoring?.kind === 'similar' || authoring?.kind === 'supplement'
+      ? authoring.primaryProblemId
+      : null;
+  const introduction =
+    typeof primaryProblemId === 'string'
+      ? `参照元の完全解説: [${primaryProblemId}](/problems/${primaryProblemId}/)。先に参照元の着想・成立条件・正当性・全体計算量を確認し、以下ではこの問題で変わる点を読む。\n\n`
+      : '';
+  const rendered = await (await processor).render(`${introduction}${content}`);
   const $ = load(rendered.code, null, false);
   if (omitTitle) $('h1').remove();
   $('a[href]').each((_index, element) => {

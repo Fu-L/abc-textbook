@@ -226,6 +226,11 @@ version/digestの結果欄を生成しない。
 
 full本文の着想、状態・保持する量、初期化・遷移・操作順・答えの取り出し方、証明、境界、前処理を含む全体計算量をCodexが確認する。必須節・時間/空間評価の欠落、空白だけの原稿、本文のない小見出しは対象fieldと理由を持つ診断で保留する。構造検証だけで状態や論証の十分性を保証せず、公式根拠との照合・検算・文章確認を行う。訂正では変更前後の主配置・関連先・前提と現存blockを`enumerateCorrectionImpacts`/`verifyCanonicalCorrectionTargets`で確認し、存在しない演習や新しい証跡の作成を要求しない。
 
+`similar`/`supplement`は参照元が既存の`full`解説であることを公開loaderで確認する。差分には対象問題の検証済みSource
+Revisionを持つclaimを置き、そのtextを`sections.differences`へ一致させる。`full`の`correctness`
+claimと正当性節の照合は維持する。短縮解説の公開本文の冒頭には`primaryProblemId`から参照元のIDと内部リンクを生成し、共通の成立条件・証明・全体計算量へ戻れるようにする。両短縮形式の変更ではreaderの往復変換に加え、`tests/integration/full-public-projection.test.ts`で公開loader、差分と根拠の不一致・未検証claim・対象外source・参照元の拒否、本番base
+path付きHTMLの導線を確認する。形式を変える訂正では本文の訂正先も`full`の`sections.reasoning`から短縮形式の`sections.differences`へ更新し、現存する節に解決することを確認する。本文surfaceのschemaは両節を受理するが、公開loaderは欠落した節を拒否する。分類の可否は学習成果・前提・手法・証明・漸近計算量の比較で判断し、同じTagだけを理由に短縮しない。
+
 初版shardとpreviewの互換readerは、過去manifestに記録されたartifact subjectと当時のsource
 packetの内部整合を確認する。現在のskill文書を当時のartifact
 digestへ固定せず、868本文の旧subjectを保持する。旧`corpus:author-problem-shards`は初版専用のmanifest/review出力を残すため、通常執筆では使わない。初版の明示的な`corpus:verify-authoring`は旧bundleを再照合する監査専用経路として残るため、当時のGit版で実行する。現行skillの改訂後に、旧証跡のdigestだけを更新して通さない。旧release/deployやprepared版の照合はPR-07以降まで残り、今回の移行だけで実教材訂正の公開完了とは扱わない。

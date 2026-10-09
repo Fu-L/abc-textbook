@@ -14,6 +14,14 @@ import { buildCatalog, catalogContentDigest } from '../../src/lib/catalog/build-
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalUiRoutes } from '../../src/lib/catalog/ui-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
+import {
+  readProblemAuthoringDocument,
+  renderProblemAuthoringDocument,
+} from '../../src/lib/authoring/problem-authoring-document.js';
+import {
+  validateAuthoringOutput,
+  type AuthoringInputPacket,
+} from '../../src/lib/authoring/explanation-authoring-skill.js';
 import { joinAndFilterLearningRecords } from '../../src/lib/learning-records/filter.js';
 import { defaultLearningRecord } from '../../src/lib/learning-records/database.js';
 import {
@@ -144,6 +152,209 @@ describe('maintenance compatibility against a Git commit', () => {
   }, 60_000);
 });
 describe('accepted canonical full public projection', () => {
+  it.each(['similar', 'supplement'] as const)(
+    'publishes %s through the authoring reader, public loader and production-subpath HTML',
+    async (kind) => {
+      await withGitBaseline(async (root) => {
+        const document = projection.problemDocuments.get('abc212-g');
+        const primary = projection.problemDocuments.get('abc335-g');
+        const problem = projection.catalog.problems.find((item) => item.id === 'abc212-g');
+        if (!document || !primary || !problem) throw new Error('Missing abbreviated fixtures');
+        // This disposable conversion exercises the format contract, not a proposed
+        // reclassification of these real Problems. Keep the target's verified proof/sources.
+        const unit = structuredClone(document.unit);
+        delete unit.skill;
+        unit.kind = kind;
+        unit.primaryProblemId = primary.unit.problemId;
+        unit.differenceSummary = '公開consumerの短縮形式を検証するfixture。';
+        unit.sections = {
+          differences: String(unit.sections.correctness),
+          implementationNotes: String(unit.sections.implementationNotes),
+        };
+        const claim = unit.claims[0];
+        if (!claim) throw new Error('Missing difference claim');
+        claim.key = 'difference-proof';
+        claim.text = String(unit.sections.differences);
+        unit.examples = [];
+        unit.exercises = [];
+        const sources = unit.sourceRevisionIds.map((id) => {
+          const source = projection.catalog.sources.find((item) => item.id === id);
+          if (!source) throw new Error(`Missing fixture source: ${id}`);
+          return source;
+        });
+        const links = {
+          home: '[主題の単元](src/content/docs/learn/number-theory/cyclic-group-exponent-counting.md)',
+          outcomes: unit.learningOutcomeIds,
+          prerequisites: [],
+          sources: sources.map((source) => `[公式出典](${source.url})`),
+        };
+        const text = renderProblemAuthoringDocument(unit, document.title, links);
+        const read = readProblemAuthoringDocument(text);
+        const input: AuthoringInputPacket = {
+          problemId: unit.problemId,
+          learningOutcomeIds: unit.learningOutcomeIds,
+          baseline: { id: unit.baselineId, version: unit.baselineVersion },
+          additionalPrerequisiteUnitIds: unit.additionalPrerequisiteUnitIds,
+          excludedTopics: unit.excludedTopics,
+          tagIds: unit.tagIds,
+          constraints: [problem.constraintsSummary ?? '公式問題の制約を保持する。'],
+          placementCandidate: {
+            primaryProblemId: unit.primaryProblemId,
+            comparison: {
+              learningOutcomes: true,
+              prerequisites: true,
+              coreMethod: true,
+              proofIdea: true,
+              asymptoticComplexity: true,
+            },
+            additionalElement: kind === 'supplement' ? unit.differenceSummary : null,
+          },
+          technicalClaims: unit.claims.map(({ text, sourceRevisionIds }) => ({
+            text,
+            sourceRevisionIds,
+          })),
+          sources: sources.map((source) => ({
+            sourceRevisionId: source.id,
+            path: `src/content/sources/${source.id}.json`,
+            sourceKind: source.sourceKind as 'official_problem' | 'official_editorial',
+            officialTaskId: problem.officialTaskId,
+            checkedAt: source.checkedAt,
+            termsCheckedAt: source.termsCheckedAt,
+            allowedUses: ['constraint_reference', 'technical_claim'],
+          })),
+        };
+        expect(validateAuthoringOutput(read.unit, input)).toEqual({
+          status: 'ready',
+          diagnostics: [],
+        });
+        const policy = structuredClone(projection.policy);
+        const placement = policy.placements.find((item) => item.problemId === unit.problemId);
+        if (!placement) throw new Error('Missing fixture placement');
+        placement.kind = kind;
+        placement.primaryProblemId = unit.primaryProblemId;
+        placement.sharedOutcomeIds = unit.learningOutcomeIds;
+        placement.additionalElement = input.placementCandidate.additionalElement;
+        // Keep current correction targets attached to the actual section after
+        // changing the fixture's kind; the loader must still reject missing targets.
+        for (const impact of policy.correctionImpacts)
+          for (const locator of impact.affectedContentLocators)
+            if (
+              locator.ownerType === 'problem' &&
+              locator.problemId === unit.problemId &&
+              locator.path === 'sections.reasoning'
+            )
+              locator.path = 'sections.differences';
+        const policyPath = path.join(root, 'src/content/policies/problem-placements.json');
+        const writePolicy = async () => {
+          policy.placementDigest = canonicalDigest(policy.placements);
+          policy.correctionImpactDigest = canonicalDigest(policy.correctionImpacts);
+          await writeFile(policyPath, JSON.stringify(policy));
+          await writeFile(
+            path.join(root, 'src/content/indexes/taxonomy.json'),
+            JSON.stringify({ ...projection.taxonomyIndex, placements: policy.placements }),
+          );
+        };
+        await writePolicy();
+        const documentPath = path.join(root, unit.docPath);
+        await writeFile(documentPath, text);
+        const project = () =>
+          loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false });
+        const published = await project();
+        const publishedDocument = published.problemDocuments.get(unit.problemId);
+        if (!publishedDocument) throw new Error('Missing published abbreviated document');
+        expect(publishedDocument.unit).toEqual(read.unit);
+        expect(
+          published.catalog.problems.find((item) => item.id === unit.problemId)?.publicationStatus,
+        ).toBe('published');
+        expect(published.problemDocuments.get(unit.primaryProblemId)?.unit.kind).toBe('full');
+        // Use the same renderer as the actual Problem page, with the production base path.
+        const $ = load(await renderPublicDocument(publishedDocument.text, '/abc-textbook/'));
+        const reference = $('a[href="/abc-textbook/problems/abc335-g/"]');
+        expect(reference).toHaveLength(1);
+        expect(reference.text()).toBe('abc335-g');
+        expect($('p').first().text()).toContain('参照元の完全解説');
+        expect($('p').first().text()).toContain('成立条件・正当性・全体計算量');
+        expect(
+          $('h2')
+            .map((_i, heading) => $(heading).text())
+            .get(),
+        ).toContain('差分');
+        expect(
+          $('h2')
+            .map((_i, heading) => $(heading).text())
+            .get(),
+        ).not.toContain('正当性');
+        expect(published.mapping.some((item) => item.route === '/problems/abc335-g/')).toBe(true);
+
+        for (const failure of [
+          'missing-claim',
+          'drift',
+          'unverified',
+          'stale',
+          'contradicted',
+          'foreign-source',
+        ] as const) {
+          const invalid = structuredClone(unit);
+          const differenceClaim = invalid.claims[0];
+          if (!differenceClaim) throw new Error('Missing rejection claim');
+          if (failure === 'missing-claim') differenceClaim.text = '差分とは別の根拠。';
+          if (failure === 'drift') invalid.sections.differences = '出典と照合していない差分。';
+          if (['unverified', 'stale', 'contradicted'].includes(failure))
+            differenceClaim.verificationStatus = failure as 'unverified' | 'stale' | 'contradicted';
+          if (failure === 'foreign-source')
+            differenceClaim.sourceRevisionIds = primary.unit.sourceRevisionIds;
+          await writeFile(
+            documentPath,
+            renderProblemAuthoringDocument(invalid, document.title, links),
+          );
+          await expect(project(), `${kind}:${failure}`).rejects.toThrow(
+            /CLAIM_DRIFT|CLAIM_HOLD|CLAIM_SOURCE/,
+          );
+        }
+        await writeFile(documentPath, text);
+        const bodyTarget = policy.correctionImpacts
+          .flatMap((impact) => impact.affectedContentLocators)
+          .find(
+            (locator) =>
+              locator.ownerType === 'problem' &&
+              locator.problemId === unit.problemId &&
+              locator.path === 'sections.differences',
+          );
+        if (!bodyTarget) throw new Error('Missing abbreviated body correction target');
+        bodyTarget.path = 'sections.reasoning';
+        await writePolicy();
+        await expect(project()).rejects.toThrow(/CORRECTION_MISSING/);
+        bodyTarget.path = 'sections.differences';
+        const abbreviatedPrimary = structuredClone(primary.unit);
+        abbreviatedPrimary.kind = 'similar';
+        abbreviatedPrimary.primaryProblemId = 'abc212-e';
+        abbreviatedPrimary.differenceSummary = '参照元が短縮解説である不正なfixture。';
+        abbreviatedPrimary.sections = {
+          differences: String(abbreviatedPrimary.sections.correctness),
+          implementationNotes: String(abbreviatedPrimary.sections.implementationNotes),
+        };
+        abbreviatedPrimary.examples = [];
+        abbreviatedPrimary.exercises = [];
+        await writeFile(
+          path.join(root, abbreviatedPrimary.docPath),
+          renderProblemAuthoringDocument(abbreviatedPrimary, primary.title, links),
+        );
+        for (const primaryProblemId of ['abc999-g', primary.unit.problemId]) {
+          const invalid = { ...unit, primaryProblemId };
+          placement.primaryProblemId = primaryProblemId;
+          await writePolicy();
+          await writeFile(
+            documentPath,
+            renderProblemAuthoringDocument(invalid, document.title, links),
+          );
+          await expect(project(), `${kind}:primary:${primaryProblemId}`).rejects.toThrow(
+            /PRIMARY|REFERENCE/,
+          );
+        }
+      });
+    },
+    60_000,
+  );
   it('preserves representative problems independently of direct tag assignments for all 213 tags', () => {
     expect(projection.ui.tags).toHaveLength(213);
     for (const tag of projection.catalog.tags) {

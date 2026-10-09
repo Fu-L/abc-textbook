@@ -120,16 +120,28 @@ export const validateJoinedProblemDocuments = (input: {
   )
     fail('PATH_COVERAGE');
   const expected = new Map(input.expectedDocuments.map((d) => [d.problemId, d.path]));
+  const units = new Map(input.documents.map(({ unit }) => [unit.problemId, unit]));
   for (const { unit, path, body } of input.documents) {
     if (path !== unit.docPath || path !== expected.get(unit.problemId))
       fail(`OWNER:${unit.problemId}`);
     if (unit.claims.some((claim) => claim.verificationStatus !== 'verified'))
       fail(`CLAIM_HOLD:${unit.problemId}`);
-    const correctness = unit.claims.find((claim) => claim.key === 'correctness');
+    if (unit.kind !== 'full') {
+      const primary = unit.primaryProblemId ? units.get(unit.primaryProblemId) : undefined;
+      if (!primary) fail(`PRIMARY_MISSING:${unit.problemId}`);
+      if (primary?.kind !== 'full') fail(`PRIMARY_NOT_FULL:${unit.problemId}`);
+    }
     // Markdown escapes before coefficient-extraction brackets do not change the claim.
     const prose = (value: string) => value.replace(/\\\[/gu, '[');
-    if (!correctness || prose(correctness.text) !== prose(String(unit.sections.correctness)))
-      fail(`CLAIM_DRIFT:${unit.problemId}`);
+    const section = unit.kind === 'full' ? 'correctness' : 'differences';
+    // Full explanations keep their canonical proof claim. Abbreviated explanations
+    // evidence their own differences; the primary full document supplies the common proof.
+    const matchingClaim = unit.claims.some(
+      (claim) =>
+        (unit.kind !== 'full' || claim.key === 'correctness') &&
+        prose(claim.text) === prose(String(unit.sections[section])),
+    );
+    if (!matchingClaim) fail(`CLAIM_DRIFT:${unit.problemId}`);
     if (/^#{2,3} (?:具体例|確認問題|確認する観点|解答と理由)\s*$/mu.test(body))
       fail(`STANDALONE_SECTION:${unit.problemId}`);
     // A prose quotation needs explicit source/length review; the current corpus contains none.

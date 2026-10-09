@@ -3016,19 +3016,19 @@ export const CanonicalProblemPlacementPolicySchema = strictObject({
             canonicalImpact.derivedIndexPaths.includes(path),
           );
         } else {
-          const expectedPath =
+          const expectedPaths =
             assessment.surface === 'body'
-              ? 'sections.reasoning'
+              ? ['sections.reasoning', 'sections.differences']
               : assessment.surface === 'example'
-                ? 'examples.taxonomy-integration'
+                ? ['examples.taxonomy-integration']
                 : assessment.surface === 'exercise'
-                  ? 'exercises.taxonomy-integration'
-                  : 'exercises.taxonomy-integration.answer';
+                  ? ['exercises.taxonomy-integration']
+                  : ['exercises.taxonomy-integration.answer'];
           hasCanonicalMapping = canonicalImpact.affectedContentLocators.some(
             (locator) =>
               locator.ownerType === 'problem' &&
               locator.problemId === assessment.problemId &&
-              locator.path === expectedPath,
+              expectedPaths.includes(locator.path),
           );
         }
       } else if (assessment.ownerType === 'learning_unit_candidate') {
