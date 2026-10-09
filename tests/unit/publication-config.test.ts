@@ -210,6 +210,50 @@ describe('standard Pages workflow', () => {
     );
     expect(workflow.concurrency.group).toContain('production-deploy');
   });
+  it.each(['same SHA', 'new main', 'API failure'])(
+    'checks current main when only deploy is rerun: %s',
+    async (scenario) => {
+      const guard = required(deploy.steps.find(({ uses }) => uses === 'actions/github-script@v7'));
+      expect(deploy.steps.indexOf(guard)).toBe(deploy.steps.indexOf(deployment) - 1);
+      expect(guard.if).toBeUndefined();
+      expect(deployment.if).toBeUndefined();
+      expect(required(deploy.permissions).contents).toBe('read');
+
+      const sha = 'a'.repeat(40);
+      const getRef = vi.fn().mockImplementation(() =>
+        scenario === 'API failure'
+          ? Promise.reject(Error('API unavailable'))
+          : Promise.resolve({
+              data: { object: { sha: scenario === 'same SHA' ? sha : 'b'.repeat(40) } },
+            }),
+      );
+      const deployArtifact = vi.fn();
+      const rerunDeploy = async () => {
+        await (runInNewContext(`(async () => {${required(required(guard.with).script)}})()`, {
+          github: { rest: { git: { getRef } } },
+          context: { repo: { owner: 'Fu-L', repo: 'abc-textbook' }, sha },
+        }) as Promise<void>);
+        deployArtifact(required(deployment.with).artifact_name);
+      };
+
+      // The original successful verify/upload are not rerun in any of these cases.
+      expect(canRun(required(deploy.if), 'push', 'refs/heads/main', true, true)).toBe(true);
+      if (scenario === 'same SHA') {
+        await rerunDeploy();
+        expect(deployArtifact).toHaveBeenCalledWith('${{ needs.verify.outputs.artifact-name }}');
+      } else {
+        await expect(rerunDeploy()).rejects.toThrow(
+          scenario === 'new main' ? 'Current main differs from this run' : 'API unavailable',
+        );
+        expect(deployArtifact).not.toHaveBeenCalled();
+      }
+      expect(getRef).toHaveBeenCalledExactlyOnceWith({
+        owner: 'Fu-L',
+        repo: 'abc-textbook',
+        ref: 'heads/main',
+      });
+    },
+  );
   it('uses real run creation time and the latest successful deployment outside this run', async () => {
     const exported: Record<string, string> = {};
     const statuses = new Map([

@@ -161,7 +161,8 @@ timeとする。並列jobの時間を加算せず、queue、checkout、検証後
 ## 5. 標準Pagesで公開する
 
 mainへのpushで`CI`の`Verify (release baseline)`が必要な検証を実行する。同runで一度buildした`dist`を`configure-pages`→`upload-pages-artifact`へ渡し、成功したbaselineに`needs`で依存する`Deploy GitHub Pages`が同じartifactを配信する。deploy
-jobはcheckout・再検証・再buildを行わない。PRはcandidateの検証だけで、upload/deployしない。
+jobは配信直前に標準GitHub
+APIで現在のmainのSHAを取得し、runのSHAと一致する場合だけ配信する。不一致・取得失敗は停止する。checkout・再検証・再buildは行わない。PRはcandidateの検証だけで、upload/deployしない。
 
 2026-10-09に公式READMEとreleaseの入力を確認し、`configure-pages@v6`、`upload-pages-artifact@v5`、`deploy-pages@v5`を採用した。標準権限と`github-pages`
 environment、origin/base pathを維持する。実environmentはprotected
@@ -194,8 +195,9 @@ URLを照合し、代表問題・単元・検索・要復習・設定・過去�
 | 公開後の不具合                                       | 不具合PRをGit revertし、新main SHA・新runの別版を同じCI/Pages経路で配信する。旧版への上書きや履歴削除で成功扱いにしない。                                        |
 
 artifact名はbuildしたattemptごとに付け、baselineのstep/job outputをdeployへ渡す。deploy
-jobだけの再実行でも保存した同じ名前を使い、期限切れ等で見つからなければbaselineを含む全jobを再実行する。古いrunを新mainへ置き換えて配信せず、upload前のmain
-SHA確認が失敗した場合はGit revertの新runを使う。production全体は旧復旧workflowと同じconcurrency
+jobだけの再実行でも保存した同じ名前を使い、配信直前のmain
+SHA確認を再実行する。一致する場合だけ元artifactを配信し、期限切れ等で見つからなければbaselineを含む全jobを再実行する。mainが先へ進んでいたら古いrunの配信を停止し、現在のmainのrunを使う。旧状態へ戻す必要があればGit
+revertの新runを使う。API取得失敗は接続を確認して再実行する。upload前の照合成功だけでdeploy単独再実行の配信可否を判断しない。production全体は旧復旧workflowと同じconcurrency
 groupで直列化し、進行中の配信を後続pushでcancelしない。
 
 標準経路の初回成功までは`production-deploy.yml`を旧版専用の手動復旧入口として保持する。通常経路から独自API/pollとrelease再検証/rebuildを外し、標準deploy成功後は旧手動入口が使用を拒否する。trigger自体の撤去はPR-07bで行う。復旧でもorigin/base、DB識別・値・独立日時、追加IDの記録を保持する。本番を故意に壊す試験はせず、既存失敗runと使い捨てfixtureで失敗の区別を確認する。
