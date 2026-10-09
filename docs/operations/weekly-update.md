@@ -14,6 +14,17 @@ Issue #49で用意するのは更新の検証、履歴生成、運用手順で�
 catch-upの実装は#54完了後の#52が所有する。実装開始点は[先行公開の手順](deploy-before-catch-up.md)。`initial-v1`のsimulationをproduction更新へ流用しない。`abc:update --fixture initial-v1`と`abc:review`はpreview用の入口であり、PR
 #70の初回専用`--contest`経路も公開済みbaseからのlive更新完成とは扱わない。
 
+## 通常配信・履歴・復旧
+
+正本を編集し、[変更に必要な検証](update-manual.md#3-変更に必要な検証を選ぶ)を通したPRをmainへ反映すると、CIの同run/SHAで検証したartifactを標準Pagesへ配信する。requiredは`Verify (release baseline)`。PRや非公開文書だけの変更は配信しない。公開後はmetadataの版/SHA/runと代表導線を確認する。旧手動`production-deploy.yml`はPR-07aの実成功後にPR-07bで撤去した。
+
+履歴は[実配信済み版の追記手順](update-manual.md#実配信済み版を履歴へ追記する002--pr-07b)で、成功した同一artifactのcatalog/metadataから既存indexへ反映する。artifact取得不能時の同版公開JSON、追記保留、同版再追記差分0を区別する。新版にGit内の旧catalogを代用しない。PR-07bは実indexを変えず、両先行版の実成功後にPR-07cで成功順に追記する。indexと非公開文書だけの配信自体には次の追記を要求しない。
+
+失敗・cancel時はupload/deployへ進めず、配信後の確認失敗は「配信済み・確認未完了」と報告する。同runの再実行は同版で、artifact消失時は同SHA/runでbaselineから再検証する。公開後の不具合はGit
+revertによる新main SHA/runの別版で復旧し、origin/baseと学習記録を保持する。
+
+以下は旧pipelineの履歴資料であり、通常更新の入口ではない。
+
 ## 1. Prepare：正本と差分を用意する
 
 Node.jsは`.nvmrc`、npmは`packageManager`に記載した版で`npm ci`する。`origin/main`をfetchし、更新用branchで開始する。学習記録はブラウザーの設定画面からJSONへexportしておく。Gitの教材バックアップとIndexedDBの学習記録バックアップは別々に保管する。
@@ -136,25 +147,17 @@ commitとしてdeployすることも禁止する。
 
 ## 6. 履歴とBackup
 
-deploy成功後、hostが記録したmetadata履歴をJSON配列として保存する。更新manifestの一覧は別JSON配列にする。次の生成器は各releaseのCatalogを、そのrelease自身のcommitから読む。
-
-```bash
-npm run release:history -- \
-  --releases build/host-release-history.json \
-  --updates staging/update-list.json \
-  --public-output build/release-history.json \
-  --hold-output staging/status/hold-summary.json
-```
-
-公開projectionはversion、cutoff、commit、実際の変更、範囲、検証日時・URL、review
-refs、changelogを持つ。旧versionの書き換え、重複commit、不一致summary、保留付きCatalogを拒否する。管理者向けprojectionだけが未公開試行のProblem別理由・再開条件を持つ。`staging/status/`を公開、Pagefind、sitemap、feedへ含めない。T160はこのpublic
-historyを公開routeへ接続する。
+新版writerの旧引数は廃止した。現行の[履歴追記手順](update-manual.md#実配信済み版を履歴へ追記する002--pr-07b)で、成功runを指定して既存indexへ追記する。旧日付版のreaderだけが当時のGit
+catalogを読む。旧entryの値・順序・URLを保持し、同SHAの別runは別版として扱う。管理用保留projectionは公開せず、失敗候補を成功履歴へ追加しない。
 
 最後に学習記録を再exportし、release version付きのJSONとGit /
 host履歴を保管する。taxonomy訂正でProblem
 IDが同じ場合、学習記録の値・日時は変更しない。restoreは設定画面で件数と競合policyをpreviewしてから適用する。
 
-## Deployment adapterの復旧
+## 旧Deployment adapterの復旧資料
+
+現行の復旧は上記のGit
+revertと標準Pagesを使う。以下は旧adapterの技術的挙動であり、旧手動triggerは使用できない。
 
 hostの通信失敗は公開履歴を確認し、exact
 commitが既に公開済みならその結果を取得する。未公開なら同じmetadata /

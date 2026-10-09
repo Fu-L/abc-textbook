@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 # Serialize main verification + publication. A later push never cancels a deployment.
-# The recovery workflow uses the same production group.
+# Keep the production concurrency key stable across the migration.
 concurrency:
   group:
     ${{ github.ref == 'refs/heads/main' && 'production-deploy' || format('ci-{0}-{1}',
