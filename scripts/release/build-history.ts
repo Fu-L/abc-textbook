@@ -15,10 +15,49 @@ import {
 } from '../../src/lib/domain/schema-parts/release.js';
 import { parseKeyValueArguments } from '../corpus/cli-support.js';
 import { SafePathSchema } from '../../src/lib/domain/schema-parts/catalog.js';
-import { FULL_RELEASE_CATALOG_PATH } from './validate-full-release.js';
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalJson } from '../../src/lib/domain/canonical-json.js';
-import { CloudflarePagesTarget } from '../../src/lib/deployment/cloudflare-pages-target.js';
+import type { BuildPublication } from '../config/publication.js';
+import { CatalogReleaseSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+
+/** Build identity is shared by the catalog and metadata; it is not host success. */
+export function createBuildReleaseMetadata(catalogRelease: unknown, publication: BuildPublication) {
+  if (!publication.commit || !publication.runUrl) return null;
+  const release = CatalogReleaseSchema.parse(catalogRelease);
+  if (release.version !== publication.version || release.publicationStatus !== 'prepared')
+    throw new Error('PUBLICATION_METADATA_CATALOG_MISMATCH');
+  return ReleaseMetadataSchema.parse({
+    schemaVersion: '1.0.0',
+    version: release.version,
+    cutoffAt: release.cutoffAt,
+    commit: publication.commit,
+    validationResultsUrl: publication.runUrl,
+    changeSummary: {
+      updateIds: release.updateIds,
+      addedProblemIds: release.addedProblemIds,
+      changedProblemIds: release.changedProblemIds,
+      withdrawnProblemIds: release.withdrawnProblemIds,
+      taxonomyChanges: release.taxonomyChanges.map(({ summary }) => summary),
+    },
+  });
+}
+
+/** Replace stale copied metadata after build; local output has no such file. */
+export async function writeBuildReleaseMetadata(
+  directory: URL,
+  publication: BuildPublication | null,
+) {
+  const target = new URL('release-metadata.json', directory);
+  if (!publication) {
+    await rm(target, { force: true });
+    return;
+  }
+  const catalog = JSON.parse(await readFile(new URL('data/catalog.json', directory), 'utf8')) as {
+    release: unknown;
+  };
+  const metadata = createBuildReleaseMetadata(catalog.release, publication);
+  await writeFile(target, `${JSON.stringify(metadata, null, 2)}\n`);
+}
 
 const exec = promisify(execFile);
 /** The input is the host's already-published metadata history. Each catalog is
@@ -32,7 +71,7 @@ export const loadGitReleaseHistory = async (input: {
   readonly confirmHostPublication?: (commit: string) => Promise<unknown>;
 }) => {
   const root = input.repositoryRoot ?? process.cwd();
-  const catalogPath = input.catalogPath ?? FULL_RELEASE_CATALOG_PATH;
+  const catalogPath = input.catalogPath ?? 'docs/verification/releases/catalog.json';
   const records = [];
   for (const candidate of input.metadata) {
     const metadata = ReleaseMetadataSchema.parse(candidate);
@@ -127,7 +166,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     const catalogPath = args.get('--catalog');
     const host = args.get('--host');
     if (host && host !== 'cloudflare-pages') throw new Error('RELEASE_HISTORY_HOST_INVALID');
-    const target = host
+    const { CloudflarePagesTarget } = host
+      ? await import('../../src/lib/deployment/cloudflare-pages-target.js')
+      : { CloudflarePagesTarget: undefined };
+    const target = CloudflarePagesTarget
       ? new CloudflarePagesTarget({
           repositoryRoot: process.cwd(),
           accountId: process.env.CLOUDFLARE_ACCOUNT_ID ?? '',

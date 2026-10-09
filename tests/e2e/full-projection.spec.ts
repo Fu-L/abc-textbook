@@ -1,11 +1,42 @@
 import AxeBuilder from '@axe-core/playwright';
 import path from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
 import { expect, test } from './fixtures.js';
 import {
   assertPublicSurfacePreserved,
   htmlAnchors,
   readPublicSurface,
 } from '../fixtures/maintenance-compatibility.js';
+
+test('distinguishes recorded history from the latest deployment and omits local metadata links', async ({
+  page,
+  request,
+}) => {
+  await page.goto('./updates/');
+  await expect(page.getByRole('link', { name: 'Pages の公開履歴' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Actions の検証・配信結果' })).toBeVisible();
+  const history = JSON.parse(readFileSync('src/content/indexes/release-history.json', 'utf8')) as {
+    version: string;
+  }[];
+  for (const { version } of history)
+    await expect(page.getByRole('link', { name: version, exact: true })).toBeVisible();
+  const catalog = JSON.parse(readFileSync('dist/data/catalog.json', 'utf8')) as {
+    release: { version: string; publicationStatus: string };
+  };
+  expect(catalog.release.publicationStatus).toBe('prepared');
+  const link = page.getByRole('link', { name: '配信 metadata', exact: true });
+  if (existsSync('dist/release-metadata.json')) {
+    await expect(link).toBeVisible();
+    const response = await request.get('./release-metadata.json');
+    expect(response.status()).toBe(200);
+    expect((await response.json()) as unknown).toMatchObject({ version: catalog.release.version });
+    if (!history.some(({ version }) => version === catalog.release.version))
+      await expect(page.locator(`a[href$="/updates/${catalog.release.version}/"]`)).toHaveCount(0);
+  } else {
+    await expect(link).toHaveCount(0);
+    expect((await request.get('./release-metadata.json')).status()).toBe(404);
+  }
+});
 
 test('serves every old HTML/data URL and anchor from the compared build', async ({
   request,

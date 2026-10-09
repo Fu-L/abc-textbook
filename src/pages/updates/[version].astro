@@ -29,6 +29,7 @@ const { release } = Astro.props;
   <p>検証日時: <time datetime={release.validatedAt}>{release.validatedAt}</time></p>
   <p>Git commit: <code>{release.commit}</code></p>
   <p><a href={release.validationResultsUrl}>検証結果</a></p>
+  <p><a href={new URL('../', Astro.url).pathname}>最新の配信情報と公開履歴の一覧</a></p>
   <details>
     <summary>変更・公開情報の詳細</summary><pre>{JSON.stringify(release, null, 2)}</pre>
   </details>

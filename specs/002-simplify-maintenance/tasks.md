@@ -199,17 +199,24 @@ Test**: 旧本文と管理証跡なしの新規fixtureを読み、公式task不�
 mainの同run/SHAで検証した`dist`だけをupload/deployし、PR/文書のみ/失敗/cancelは公開しない。metadataのSHA/runと実配信が一致する。訂正buildは一時コピーで確認する。
 
 <!-- prettier-ignore -->
-- [ ] T032 [US4] `tests/unit/publication-config.test.ts`と`tests/unit/publication-update.test.ts`を再利用し、不足するworkflow/metadataの回帰ケースを追加する。PR配信禁止、非公開文書のみ配信なし、required失敗/cancel時のupload/deploy停止、artifact/SHA対応、同日別runとrevert後の別版・日跨ぎ同run再実行の同版・同版不一致拒否・候補のpublished誤記録を検出する。Actions外のrun入力なしbuildが基準版のprepared candidateを作りmetadataを出さないこと、古いmetadataの混入防止、metadataなしの更新一覧、空index時の基準版読込/基準版不足、Actions入力の欠落・不正・SHA不一致の失敗を確認する。履歴だけの配信で教材差分集合が空、cutoff/範囲不変、追加の履歴追記なし、過去の未配信教材差分を含む場合は通常検査へ戻ることも確認する。専用deploy adapterを新設しない。
-- [ ] T033 [US4] `scripts/config/publication.ts`、`src/lib/catalog/public-catalog.ts`、`scripts/release/build-history.ts`の関係するmetadata生成部分を必要最小限に改修し、検証する正本からcandidateをbuildする。既存必須field・範囲・変更概要と実build SHA/Actions run URLを`/release-metadata.json`へ出し、旧prepared snapshot照合・新規review/check digest補作を不要にする。`contracts/compatibility.md`に従いrun作成UTC日付とrun IDから新版を採番し、同run再実行で版を維持、同版不一致は拒否する。履歴だけの配信も実buildの新版/SHA/runを出し、教材差分集合は空、cutoff/収録範囲は保持する。ローカルはbuild入力契約に従って既存の基準版を使い、metadataを生成・コピーしない。Actions内では実runの作成日時を`ABC_TEXTBOOK_RUN_CREATED_AT`から受け取り、run ID/SHAを含む入力不足・不正は失敗とする。
-- [ ] T034 [P] [US4] `.github/workflows/ci.yml`のbaselineで1回作った検証済み`dist`を標準`configure-pages`/`upload-pages-artifact`/`deploy-pages`で公開するよう`needs`・main条件・標準権限・`github-pages` environmentを接続する。build前に実runの作成日時を取得し`ABC_TEXTBOOK_RUN_CREATED_AT`で渡す。取得失敗時に現在日付・ローカル版へfallbackしない。履歴だけの変更もbuild/リンク/対象履歴検査と配信を行い、成功後にその配信自体の履歴追記を要求しない。公開対象判定は最後の成功配信SHAとの差も検査選択へ合流させ、履歴だけ判定に未配信教材変更を含めない。`production-deploy.yml`の独自API/poll・再verify/rebuildを通常経路から外し、初回成功まで旧手動経路を復旧用に保持する。二重deployを防ぎ、production配信を途中cancelしないconcurrencyにする。適用Action版は実装時に公式READMEを確認する。
-- [ ] T035 [P] [US4] `src/pages/updates/index.astro`と`src/pages/updates/[version].astro`で過去URL/値を保持し、最新履歴index未反映の間もmetadataと標準Pages/Actionsへ案内する。indexの公開履歴と履歴だけの配信を含む最新metadataの配信を区別し、未配信candidateをpublished entry/pageへ追加しない。metadataを生成しないローカルbuildではmetadataリンクを出さず、既存履歴の表示と内部リンクを保つ。
-- [ ] T036 [US4] T032、schema/check、前後URL/anchor比較、build・リンク・対象Chromium E2Eを実行する。一時コピーの小さな訂正を旧台帳更新なしで同経路へ通し、`docs/operations/update-manual.md`と`initial-release-runbook.md`へ標準配信、失敗区別、同SHA再実行/artifact消失時の再検証、Git revertによる復旧を記す。
+- [X] T032 [US4] `tests/unit/publication-config.test.ts`と`tests/unit/publication-update.test.ts`を再利用し、不足するworkflow/metadataの回帰ケースを追加する。PR配信禁止、非公開文書のみ配信なし、required失敗/cancel時のupload/deploy停止、artifact/SHA対応、同日別runとrevert後の別版・日跨ぎ同run再実行の同版・同版不一致拒否・候補のpublished誤記録を検出する。Actions外のrun入力なしbuildが基準版のprepared candidateを作りmetadataを出さないこと、古いmetadataの混入防止、metadataなしの更新一覧、空index時の基準版読込/基準版不足、Actions入力の欠落・不正・SHA不一致の失敗を確認する。履歴だけの配信で教材差分集合が空、cutoff/範囲不変、追加の履歴追記なし、過去の未配信教材差分を含む場合は通常検査へ戻ることも確認する。専用deploy adapterを新設しない。
+- [X] T033 [US4] `scripts/config/publication.ts`、`src/lib/catalog/public-catalog.ts`、`scripts/release/build-history.ts`の関係するmetadata生成部分を必要最小限に改修し、検証する正本からcandidateをbuildする。既存必須field・範囲・変更概要と実build SHA/Actions run URLを`/release-metadata.json`へ出し、旧prepared snapshot照合・新規review/check digest補作を不要にする。`contracts/compatibility.md`に従いrun作成UTC日付とrun IDから新版を採番し、同run再実行で版を維持、同版不一致は拒否する。履歴だけの配信も実buildの新版/SHA/runを出し、教材差分集合は空、cutoff/収録範囲は保持する。ローカルはbuild入力契約に従って既存の基準版を使い、metadataを生成・コピーしない。Actions内では実runの作成日時を`ABC_TEXTBOOK_RUN_CREATED_AT`から受け取り、run ID/SHAを含む入力不足・不正は失敗とする。
+- [X] T034 [P] [US4] `.github/workflows/ci.yml`のbaselineで1回作った検証済み`dist`を標準`configure-pages`/`upload-pages-artifact`/`deploy-pages`で公開するよう`needs`・main条件・標準権限・`github-pages` environmentを接続する。build前に実runの作成日時を取得し`ABC_TEXTBOOK_RUN_CREATED_AT`で渡す。取得失敗時に現在日付・ローカル版へfallbackしない。履歴だけの変更もbuild/リンク/対象履歴検査と配信を行い、成功後にその配信自体の履歴追記を要求しない。公開対象判定は最後の成功配信SHAとの差も検査選択へ合流させ、履歴だけ判定に未配信教材変更を含めない。`production-deploy.yml`の独自API/poll・再verify/rebuildを通常経路から外し、初回成功まで旧手動経路を復旧用に保持する。二重deployを防ぎ、production配信を途中cancelしないconcurrencyにする。適用Action版は実装時に公式READMEを確認する。
+- [X] T035 [P] [US4] `src/pages/updates/index.astro`と`src/pages/updates/[version].astro`で過去URL/値を保持し、最新履歴index未反映の間もmetadataと標準Pages/Actionsへ案内する。indexの公開履歴と履歴だけの配信を含む最新metadataの配信を区別し、未配信candidateをpublished entry/pageへ追加しない。metadataを生成しないローカルbuildではmetadataリンクを出さず、既存履歴の表示と内部リンクを保つ。
+- [X] T036 [US4] T032、schema/check、前後URL/anchor比較、build・リンク・対象Chromium E2Eを実行する。一時コピーの小さな訂正を旧台帳更新なしで同経路へ通し、`docs/operations/update-manual.md`と`initial-release-runbook.md`へ標準配信、失敗区別、同SHA再実行/artifact消失時の再検証、Git revertによる復旧を記す。
 - [ ] T037 [US4] `.github/workflows/ci.yml`の実main runで標準Pages配信を確認し、実environmentの不要なreview必須設定を確認・整理する。metadata commit/run・検証/artifact/deploy対象の一致、代表問題/単元/検索/要復習/設定/履歴と既存URLを確認する。既存失敗run/fixtureで配信前失敗・配信失敗・配信後確認失敗・復旧を区別し、`docs/operations/update-manual.md`の手順と一致させる。本番故障を故意に起こさず、権限/公開依頼不足は未実施として残す。
 
 **完了条件**: 標準配信の実成功と公開確認が一致し、同runでbuildを重ねていない。教材内容を変えず、DB名/version/store/key・backup・origin/baseを保持する。実訂正のSC-004は別依頼まで未達。
 
 **Revert**: 初回失敗では旧正常公開を維持し切替変更を戻す。新形式が既に公開されていればreaderを維持する。以後の復旧は不具合PRのGit
 revertと新main SHAの同経路配信を使う。
+
+**PR-07aの実装・検証状況**: T032〜T036を実装し、Node 24.18.0/npm
+11.16.0で対象回帰・schema/check・既存全テスト・本番subpath
+build/リンク・Chromiumの対象E2Eを確認した。全教材部分と旧URL/anchorを比較し、一時コピーの本文訂正・古いmetadata除去・Actions入力での同一catalog/metadata生成・旧履歴ページと候補非登録を検証した。実indexと教材正本の変更は0。
+
+実required checkは`Verify (release baseline)`/strict/app IDを保持し、実`github-pages`
+environmentにはreviewer必須設定がないことを読戻した。既存runの配信後確認失敗とfixtureの配信前失敗を区別した。依頼はPR作成までのためmerge/deployは実行せず、新workflowの実main配信・metadata/artifact一致・公開代表導線確認はT037を未完了として残す。旧復旧triggerと履歴writer/index切替はPR-07b/07cへ残し、fixtureを実配信成功やSC-004達成として扱わない。
 
 ## Phase 9 / PR-07b: US4 — 履歴writerと旧triggerの切替（P2 / M4）
 

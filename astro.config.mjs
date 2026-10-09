@@ -1,8 +1,14 @@
 import react from '@astrojs/react';
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
+import { execFileSync } from 'node:child_process';
 
-import { normalizeBasePath, resolveSite } from './scripts/config/publication.ts';
+import {
+  normalizeBasePath,
+  resolveSite,
+  resolveBuildPublication,
+} from './scripts/config/publication.ts';
+import { writeBuildReleaseMetadata } from './scripts/release/build-history.ts';
 
 const base = normalizeBasePath(process.env.BASE_PATH ?? '/');
 const site = resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example');
@@ -26,6 +32,24 @@ export default defineConfig({
     syntaxHighlight: 'prism',
   },
   integrations: [
+    {
+      name: 'build-publication-metadata',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          // Overwrite copied public/metadata only from this same built catalog.
+          // Local candidates remove it even when a stale public file was copied.
+          const publication =
+            process.env.GITHUB_ACTIONS === 'true'
+              ? resolveBuildPublication({
+                  env: process.env,
+                  head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+                  historyVersions: [],
+                })
+              : null;
+          await writeBuildReleaseMetadata(dir, publication);
+        },
+      },
+    },
     react(),
     starlight({
       title: 'ABC上級問題体系化教科書',

@@ -121,7 +121,8 @@ SHA未指定時は`HEAD`と作業ツリーを比較する。commit後の`HEAD`�
 
 URL保持は、別々にbuildした旧/new出力の全HTMLと公開データ（JSON/XML等）、HTMLの`id`と旧`a[name]`の集合を比較する。旧集合が新集合に含まれることを要求し、追加は許す。リンク元とリンク先の同時削除、catalog/feed/sitemap/metadataや過去のupdatesページの削除も検出する。内部リンク検査は残ったリンクの到達性を確認するので、この集合比較と併用する。
 
-現行の`release-metadata.json`は`production-deploy.yml`がbuild後にコピーする。全配信URLを比較するときはその工程も含む出力を使う。PR-01の教材不変の試験では、確認済みの公開metadataを一時領域で両出力へコピーし、既存metadataのURLとschemaの保持を検証できる。これは過去の公開JSONを使うfixtureであり、新しいSHAの配信や検証成功を示さない。取得できなければmetadataを含む実比較は未実施と報告し、使い捨てHTML/JSONでの欠落検出と区別する。
+標準Actions
+buildでは`release-metadata.json`を同じ正本・SHA/runから生成する。ローカルcandidateにはmetadataを生成しないため、全配信URLを比較するときはActions入力を明示した使い捨てbuildを用いる。PR-01の教材不変の試験では、確認済みの公開metadataを一時領域で両出力へコピーし、既存metadataのURLとschemaの保持を検証できる。これは過去の公開JSONを使うfixtureであり、新しいSHAの配信や検証成功を示さない。取得できなければmetadataを含む実比較は未実施と報告し、使い捨てHTML/JSONでの欠落検出と区別する。
 
 作業ツリーに変更がある場合の一時コピー例を以下に示す。比較元SHAは変更前に確保し、commit後はそのSHAを指定する。依存は既存のNode/npm・lockfileを使う。`node_modules`のsymlink共有はAstroのcompile
 pathを混在させるため、実体をコピーするか各一時領域で`npm ci`する。
@@ -157,22 +158,51 @@ pathでbuildする。`ABC_COMPAT_OLD_DIST`未指定時は実build間の集合比
 setup）開始から最後の必須検証完了までのwall
 timeとする。並列jobの時間を加算せず、queue、checkout、検証後のartifact保存・cleanup、deployを除く。run/job全体の時間は別記する。非公開文書のみで旧検査をskipしたrunと全検証runを比較しない。既存ログの時刻精度や取得不足を明記し、5回の中央値や短縮率を未観測のまま達成済みと扱わない。
 
-## 5. 結果を記録し、必要なら公開する
+## 5. 標準Pagesで公開する
 
-変更概要、実行した検証と結果、未解決事項をPR本文または完了報告へまとめる。Git履歴、Actionsのログ・check結果、Pagesの公開履歴を一次記録として使う。通常更新用の別review
-evidence、work manifest、digest台帳は追加しない。参照される公式Source
-Revisionや既存公開データは、移行前に削除しない。秘密情報や私的な学習記録をcommitしない。
+mainへのpushで`CI`の`Verify (release baseline)`が必要な検証を実行する。同runで一度buildした`dist`を`configure-pages`→`upload-pages-artifact`へ渡し、成功したbaselineに`needs`で依存する`Deploy GitHub Pages`が同じartifactを配信する。deploy
+jobは配信直前に標準GitHub
+APIで現在のmainのSHAを取得し、runのSHAと一致する場合だけ配信する。不一致・取得失敗は停止する。checkout・再検証・再buildは行わない。PRはcandidateの検証だけで、upload/deployしない。
 
-公開を含む依頼では、現行のrequired checksを満たした変更をmergeし、GitHub ActionsとGitHub
-Pagesで公開する。別の人間承認は求めない。公開成功の状態と代表ページ・検索・関連導線を確認する。未実行のmerge・deployは報告で区別する。
+2026-10-09に公式READMEとreleaseの入力を確認し、`configure-pages@v6`、`upload-pages-artifact@v5`、`deploy-pages@v5`を採用した。標準権限と`github-pages`
+environment、origin/base pathを維持する。実environmentはprotected
+branch限定で、必須reviewer設定はなかった。設定例だけで実設定変更を報告しない。
 
-現在の公開先は`https://fu-l.github.io/abc-textbook/`。
-`SITE_URL=https://fu-l.github.io`、`BASE_PATH=/abc-textbook`を維持する。現行workflowの詳細と初版の実績は[初版公開runbook](initial-release-runbook.md)を参照する。独自の証跡依存が残る公開処理を、文書だけで置換済みとは扱わない。人間承認を要求する旧記述は新規作業の方針として無効だが、実際の検証器が通らない場合は具体的な依存を修正する作業として扱う。架空の人間ID・承認やcheck成功を作らない。
+- [configure-pages](https://github.com/actions/configure-pages)、[upload-pages-artifact](https://github.com/actions/upload-pages-artifact)、[deploy-pages](https://github.com/actions/deploy-pages)
+
+workflowは実runの`created_at`をAPIから取得して`ABC_TEXTBOOK_RUN_CREATED_AT`へ渡す。Actions内では`GITHUB_REPOSITORY`、正整数`GITHUB_RUN_ID`、checkoutと一致する`GITHUB_SHA`も必須。取得失敗・欠落・不正時は停止し、現在日付やローカル版にfallbackしない。版はrun作成日のUTC日付とrun
+IDによる`YYYY.MM.DD-r<run_id>`。日を跨ぐ同run再実行でも同版、別run/revertは別版になる。
+
+最後の成功した`github-pages`
+deploymentのSHAとの差を、push直前との差へ合流して検査する。同run自身の配信を比較元から外し、再実行の概要を保つ。配信履歴の取得・Git差分が不明なら広い通常検査を行い、metadataの訂正影響範囲も全収録問題へ保守的に広げる。差分不明を教材変更0件や履歴だけの配信として記録しない。非公開文書だけでも未配信の教材変更があれば検査・配信し、実際に非公開文書しか差がなければ配信しない。
+
+履歴indexと非公開運用文書だけの差分は、履歴・metadataの対象テスト、build、リンク確認を行って配信する。教材の追加・訂正・削除・taxonomy差分集合は空、cutoff/収録範囲は不変。その配信自体の履歴追記は要求しない。`/updates/`の公開後に記録した履歴と最新metadataを区別し、candidateをpublished
+entry/pageへ登録しない。実indexの追記とwriter切替は後続PR-07b/07cに残る。
+
+通常のローカルbuildはrun入力を要求せず、履歴末尾の版、空indexなら`docs/verification/releases/catalog.json`の`release.version`識別子だけを使う。基準版不足は失敗。正本から`publicationStatus: prepared`のcandidateを作り、旧snapshot/review/check結果を流用せず、metadataを生成・コピーしない。build終了時に古いmetadataも除去する。ローカルcandidateを配信済み版のartifactとしてupload・履歴登録しない。
+
+公開確認ではPages/Actionsの成功と、配信した`/data/catalog.json`・`/release-metadata.json`の版、SHA、run
+URLを照合し、代表問題・単元・検索・要復習・設定・過去履歴を開く。metadataの存在だけで成功としない。artifact名にはSHA/run/attemptを含め、検証済みの同一成果物だけを配信する。標準artifactは7日保持し、成功後の同じ作業内で後続履歴用の両JSONを取得する。
 
 ## 6. 失敗時に復旧する
 
-build・検証失敗は変更箇所を修正し、必要な検査だけ再実行する。deployが失敗したらActions・Pagesの状態を確認し、同じ検証済みcommitのjobを再実行する。配信成功と事後検査の失敗を区別し、公開済みと推測しない。公開後に不具合があれば、標準のGit
-revertと既存Pages手順による再公開を優先する。revertが教材追加や学習記録互換性へ与える影響を確認する。現在のworkflowの旧版再配信には既知の公開commitなどの制約があるため、runbookを読む。originを変更する必要がある場合は旧originでのexportと新originでのimportを先に定める。
+| 状態                                                 | 対応                                                                                                                                                             |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 配信前のschema・型・テスト・build・リンク失敗/cancel | upload/deployへ進まない。変更箇所を修正して必要な検査を再実行する。                                                                                              |
+| 標準Pages配信失敗                                    | Actions/Pagesの失敗を確認し、旧正常版を維持する。公開完了と報告しない。                                                                                          |
+| 配信成功後の導線確認失敗                             | 「配信済み・確認未完了」と報告し、修正またはGit revertへ進む。                                                                                                   |
+| 同SHA/runの再実行                                    | 現在のmainを対象にする。同じ版の検証済みartifactがあればdeploy jobを再実行し、消失・期限切れならbaselineから同SHA/runで再検証・buildする。新版へ採番し直さない。 |
+| 公開後の不具合                                       | 不具合PRをGit revertし、新main SHA・新runの別版を同じCI/Pages経路で配信する。旧版への上書きや履歴削除で成功扱いにしない。                                        |
+
+artifact名はbuildしたattemptごとに付け、baselineのstep/job outputをdeployへ渡す。deploy
+jobだけの再実行でも保存した同じ名前を使い、配信直前のmain
+SHA確認を再実行する。一致する場合だけ元artifactを配信し、期限切れ等で見つからなければbaselineを含む全jobを再実行する。mainが先へ進んでいたら古いrunの配信を停止し、現在のmainのrunを使う。旧状態へ戻す必要があればGit
+revertの新runを使う。API取得失敗は接続を確認して再実行する。upload前の照合成功だけでdeploy単独再実行の配信可否を判断しない。production全体は旧復旧workflowと同じconcurrency
+groupで直列化し、進行中の配信を後続pushでcancelしない。
+
+標準経路の初回成功までは`production-deploy.yml`を旧版専用の手動復旧入口として保持する。通常経路から独自API/pollとrelease再検証/rebuildを外し、標準deploy成功後は旧手動入口が使用を拒否する。trigger自体の撤去はPR-07bで行う。復旧でもorigin/base、DB識別・値・独立日時、追加IDの記録を保持する。本番を故意に壊す試験はせず、既存失敗runと使い捨てfixtureで失敗の区別を確認する。
+
+PR-07aのコードとfixture検証、実environmentの読戻しは実施した。依頼がPR作成までのため、新workflowの実main配信・公開確認はmerge後のT037として未実施。fixture成功を実配信成功に数えず、SC-004の実教材訂正/追加公開も未達とする。
 
 ## 既存実装からの移行
 
@@ -201,9 +231,9 @@ ABC_COMPAT_NEW_DIST="$PWD/dist" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-t
 `--check`は旧`us4/full-projections.json`を読まず、正本とのcatalog一致、公開route、タグの発動条件・Outcome・問題導線、Contestのタグ配置、sitemap・feed・Pagefindを検査する。検査だけでは報告ファイルを書かない。`ABC_COMPAT_NEW_DIST`指定時は、旧台帳のない一時copyでCLIの成功とstale
 catalog・欠落page・発動条件欠落の拒否も確認する。旧監査consumer向けの明示的な`--write`・`--write-evidence`と台帳ファイル自体はまだ保持し、通常更新でその再生成を要求しない。
 
-`docs/verification/releases/catalog.json`が存在する通常buildでは、引き続きそのreleaseを読み、snapshotと本文inventoryの両方について現行正本との一致を要求する。本文訂正後の旧prepared版は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`で失敗する。一時copyでは旧prepared
-catalogと受入台帳を除いたcandidateをbuildでき、projection単体は`usePreparedRelease: false`で訂正を検証できる。実作業ツリーの旧公開入力を消して制約を迂回せず、catalog
-CLIは以下のPR-05の手順を使い、標準配信・ローカルcandidate入力はPR-07で移行する。このfixture成功を実訂正公開やSC-004の達成に数えない。
+通常サイトbuildはPR-07aで旧prepared
+snapshot/inventory照合を外し、現行正本からcandidateを生成する。旧catalog CLI・release/deploy
+consumerが読む入力は保持し、明示した旧照合の失敗を無視しない。一時コピーでの訂正build成功と実訂正公開・SC-004の達成は区別する。
 
 旧seed release
 consumerは初版bootstrapの`sourceSetFingerprint`も読むため、その経路内だけで旧受入subjectと現行本文から当時のprojection
@@ -262,11 +292,11 @@ gateを維持し、通常CLIは`buildCanonicalCatalog`の内容検証と正本pr
 owner・追加前提Unit・直接前提の隣接Unitと現存block、配置・前提policy・再生成indexの確認漏れを検出する。返値はメモリー上の検査結果であり、証跡登録や別台帳の保存は不要。既存の履歴locatorは従来どおり実対象へ解決し、過去の訂正記録を書き換えない。
 
 旧release/deploy
-consumerと台帳は削除していない。通常サイトbuildの旧prepared版照合もPR-07まで残り、今回のCLI移行だけで実教材訂正の公開・SC-004達成とは扱わない。復旧はCLIとvalidatorの変更をrevertし、保持した旧inputとinventory指定を使う。
+consumerと台帳は削除していない。通常サイトbuildの旧prepared版照合はPR-07aで外したが、CLI移行だけで実教材訂正の公開・SC-004達成とは扱わない。復旧はCLIとvalidatorの変更をrevertし、保持した旧inputとinventory指定を使う。
 
 002の分析後に、[公開互換契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#新版の採番と再実行)へ採番・再実行・履歴入力を具体化した。PR-03でschemaと履歴readerの互換拡張を実装した。catalog/metadataと`baseReleaseVersion`は旧日付版と`YYYY.MM.DD-r<run_id>`を受理し、backupの`catalogVersionAtExport`は1桁の日など従来の受理値と新版を読める。catalog
 `3.0.0`、metadata/backup
-`1.0.0`、DB識別、記録値・独立日時は維持する。採番・writer・deployはまだ切り替えておらず、新形式の本番発行はPR-07以降に限定する。
+`1.0.0`、DB識別、記録値・独立日時は維持する。採番・標準deployはPR-07aで実装した。実main成功の確認とwriter切替・新形式の履歴追記は後続へ残る。
 
 旧catalog・metadata・履歴entryの値は補完・変換せず保持する。review参照、manifest/content
 inventory/snapshot
@@ -284,15 +314,15 @@ Contest追加のSC-004受入は別依頼まで未達とする。
 
 002の公開移行はPR-07a（標準配信導入）→PR-07b（履歴writerと旧trigger切替の通常配信）→PR-07c（両先行版の成功確認後、indexと非公開運用文書だけを追記・配信）へ分ける。writer/workflow変更を履歴だけの配信へ混在させない。両版の実入力は標準artifactまたは同じ作業内の一時領域で確保し、取得不能な版の追記は保留する。
 
-PR-07a以降の[ローカルbuild入力設計](../../specs/002-simplify-maintenance/contracts/compatibility.md#ローカルbuildとactionsの入力)では、Actions外は既存の基準版で未公開candidateをbuildし、metadataを生成しない。Actions内は実runの作成日時・ID・SHAを検証し、入力不足を失敗とする。これも未実装の移行設計であり、現在のbuildに新版採番や新しい環境変数が対応済みとは扱わない。実装PRで対象回帰を確認して、この欄と現在のコマンド説明を同時に更新する。
+PR-07aで[ローカルbuildとActionsの入力契約](../../specs/002-simplify-maintenance/contracts/compatibility.md#ローカルbuildとactionsの入力)を実装した。現在のコマンド、metadata生成、失敗/再実行は上の「標準Pagesで公開する」「失敗時に復旧する」を参照する。旧履歴writerと復旧専用consumerはまだ残る。
 
-| 対象                                                                                                                                  | 移行する内容                                                                | 保持・確認するもの                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `.github/workflows/ci.yml`、`initial-release-audit.yml`                                                                               | 通常CIは単一環境の変更選択へ移行済み。初版監査は手動のみ                    | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
-| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。標準Pages配信は後続PR          | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
-| `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
-| `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
-| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する              | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
-| live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                         | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
+| 対象                                                                                                                                  | 移行する内容                                                                                                  | 保持・確認するもの                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `.github/workflows/ci.yml`、`initial-release-audit.yml`                                                                               | 通常CIは単一環境の変更選択へ移行済み。初版監査は手動のみ                                                      | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
+| `.github/workflows/production-deploy.yml`、required checks、`docs/operations/protected-main.json`                                     | check名と実required設定はbaselineへ統一済み。標準Pages配信をPR-07aで実装。実main成功確認と旧trigger撤去は後続 | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
+| `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる                                   | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
+| `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                                                  | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
+| `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する                                                | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
+| live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                                                           | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
 
 通常更新のCIは単一の基準環境を基本とし、変更に必要なschema・テスト・buildを残す。追加・維持する検査ごとに検出する不具合と実行時間を評価する。約20分かかる現状からの短縮は、後続変更のActions実測で確認する。憲章と文書の改訂だけでCI短縮やlive更新機能の完成を報告しない。

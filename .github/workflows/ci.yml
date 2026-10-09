@@ -9,14 +9,26 @@ on:
 permissions:
   contents: read
 
+# Serialize main verification + publication. A later push never cancels a deployment.
+# The recovery workflow uses the same production group.
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group:
+    ${{ github.ref == 'refs/heads/main' && 'production-deploy' || format('ci-{0}-{1}',
+    github.workflow, github.ref) }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   verify:
     name: Verify (release baseline)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      deployments: read
+      pages: read
+    outputs:
+      publication: ${{ steps.scope.outputs.publication }}
+      artifact-name: ${{ steps.scope.outputs.artifact-name }}
     env:
       SITE_URL: https://fu-l.github.io
       BASE_PATH: /abc-textbook
@@ -25,6 +37,34 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Read actual run identity and last successful deployment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: run } = await github.rest.actions.getWorkflowRun({ ...context.repo, run_id: context.runId });
+            if (run.id !== context.runId || !run.created_at) throw Error('Run identity unavailable');
+            core.exportVariable('ABC_TEXTBOOK_RUN_CREATED_AT', run.created_at);
+            if (context.eventName !== 'push' || context.ref !== 'refs/heads/main') return;
+            try {
+              for await (const { data } of github.paginate.iterator(github.rest.repos.listDeployments, {
+                ...context.repo, environment: 'github-pages', per_page: 100
+              })) {
+                for (const deployment of data) {
+                  const statuses = await github.paginate(github.rest.repos.listDeploymentStatuses, {
+                    ...context.repo, deployment_id: deployment.id, per_page: 100
+                  });
+                  const success = statuses.find(status => status.state === 'success');
+                  // Excluding this run keeps its summary stable on a later rerun.
+                  if (!success || [success.log_url, success.target_url].some(url => url?.includes(`/actions/runs/${context.runId}/`))) continue;
+                  if (!/^[a-f0-9]{40}$/.test(deployment.sha)) throw Error('Deployment SHA unavailable');
+                  core.exportVariable('ABC_TEXTBOOK_PUBLICATION_BASE_SHA', deployment.sha);
+                  return;
+                }
+              }
+              core.warning('No successful deployment found; verify the full scope.');
+            } catch (error) {
+              core.warning(`Deployment comparison unavailable; verify the full scope: ${error.message}`);
+            }
       - name: Set up Node.js 24.18.0
         uses: actions/setup-node@v4
         with:
@@ -41,4 +81,56 @@ jobs:
       - name: Verify documentation checker
         run: node --test .github/actions/nonpublic-docs/check.test.mjs
       - name: Verify changed scope
-        run: npm run verify:fast
+        id: scope
+        run: |
+          npm run verify:fast
+          echo "artifact-name=github-pages-$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_OUTPUT"
+      - name: Confirm the artifact still targets current main
+        if:
+          ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+          steps.scope.outputs.publication == 'true' }}
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+      - name: Configure Pages
+        if:
+          ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+          steps.scope.outputs.publication == 'true' }}
+        uses: actions/configure-pages@v6
+      - name: Upload the validated dist
+        if:
+          ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+          steps.scope.outputs.publication == 'true' }}
+        uses: actions/upload-pages-artifact@v5
+        with:
+          name: ${{ steps.scope.outputs.artifact-name }}
+          path: dist
+          retention-days: 7
+
+  deploy:
+    name: Deploy GitHub Pages
+    needs: verify
+    if:
+      ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+      needs.verify.result == 'success' && needs.verify.outputs.publication == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Confirm current main immediately before deployment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // A deploy-only rerun retains the original SHA and successful verify outputs.
+            const { data: main } = await github.rest.git.getRef({ ...context.repo, ref: 'heads/main' });
+            if (main.object.sha !== context.sha) {
+              throw Error(`Current main differs from this run: ${main.object.sha} != ${context.sha}`);
+            }
+      - name: Deploy the validated artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ needs.verify.outputs.artifact-name }}

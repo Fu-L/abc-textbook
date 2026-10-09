@@ -1,4 +1,4 @@
-name: Production deploy
+name: Production deploy (legacy recovery only)
 
 on:
   workflow_dispatch:
@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   checks: read
+  actions: read
   pages: write
   id-token: write
   deployments: read
@@ -43,6 +44,17 @@ jobs:
         shell: bash
         run: |
           test "$GITHUB_REF" = refs/heads/main
+          # This recovery entry is retained only until the standard main path succeeds.
+          # The shared concurrency group prevents overlapping production deployments.
+          gh run list --workflow ci.yml --branch main --status success --limit 100 --json databaseId --jq '.[].databaseId' > /tmp/standard-ci-runs.txt
+          : > /tmp/standard-deploy-jobs.txt
+          while IFS= read -r run; do
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run/jobs" --jq '.jobs[] | select(.name == "Deploy GitHub Pages" and .conclusion == "success") | .id' >> /tmp/standard-deploy-jobs.txt
+          done < /tmp/standard-ci-runs.txt
+          if test -s /tmp/standard-deploy-jobs.txt; then
+            echo 'Standard Pages has succeeded; use Git revert through CI instead of legacy recovery.' >&2
+            exit 2
+          fi
           test "${#RELEASE_COMMIT}" = 40
           test "$(git rev-parse HEAD)" = "$RELEASE_COMMIT"
           git fetch origin main
@@ -94,7 +106,7 @@ jobs:
           JS
       - name: Build locked exact tree and check internal links
         run: |
-          npm run build
+          GITHUB_ACTIONS=false npm run build
           npm run link:check:built
           cp /tmp/release-metadata.json dist/release-metadata.json
           touch dist/.nojekyll

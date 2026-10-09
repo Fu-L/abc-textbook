@@ -1,10 +1,12 @@
 # ABC212〜466 初版公開手順
 
-> **初版の実績と現行公開実装の資料**: 現行の更新方針は [Codexの更新マニュアル](update-manual.md)と
-> [Constitution 4.0.0](../../.specify/memory/constitution.md)。初版固有の全件監査・review
-> packet・owner例外を通常更新へ適用しない。以下の「後続更新は従来のself/third-party
-> policy」という方針は廃止済み。workflowのrequired
-> checks・証跡依存・deploy引数は今回変更していないため、実際の公開操作ではこれらの現行制約を確認する。移行対象は更新マニュアルに記載する。
+> **初版の過去手順と復旧資料**: 通常配信は[更新マニュアルの標準Pages手順](update-manual.md#5-標準pagesで公開する)に従う。PR-07aではCIの同run/SHAで一度build・検証したdistを標準Pages
+> Actionsへ渡す。以下の初版監査・旧review/台帳・独自配信は通常更新の条件にしない。旧手動経路は標準経路の初回成功までの復旧用に保持し、成功後は使用を拒否する。旧trigger撤去はPR-07bに残る。
+
+標準配信の確認は、Actions/Pages成功、metadataの版/SHA/run、代表導線を照合する。配信前失敗・配信失敗・配信後確認失敗を区別する。同runの再実行は元のUTC作成日/run
+IDの同版で、artifact消失時は同SHAでbaselineから再検証・buildする。古いrunで新mainを上書きせず、公開後の復旧は不具合PRのGit
+revertを新runの別版として同経路へ通す。origin/baseと学習記録は保持する。実main配信の確認はmerge後に行い、fixtureやPR
+buildの成功で代用しない。
 
 初版は868問・213タグ・232 Unit、254開催とABC316の公式欠番を収録する。収録cutoffは
 `2026-07-12T00:00:00+09:00`。公開準備日・検証日・配信日は別の情報である。本文、taxonomy、配置、読書順、Problem
