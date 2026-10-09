@@ -204,7 +204,7 @@ mainの同run/SHAで検証した`dist`だけをupload/deployし、PR/文書の�
 - [X] T034 [P] [US4] `.github/workflows/ci.yml`のbaselineで1回作った検証済み`dist`を標準`configure-pages`/`upload-pages-artifact`/`deploy-pages`で公開するよう`needs`・main条件・標準権限・`github-pages` environmentを接続する。build前に実runの作成日時を取得し`ABC_TEXTBOOK_RUN_CREATED_AT`で渡す。取得失敗時に現在日付・ローカル版へfallbackしない。履歴だけの変更もbuild/リンク/対象履歴検査と配信を行い、成功後にその配信自体の履歴追記を要求しない。公開対象判定は最後の成功配信SHAとの差も検査選択へ合流させ、履歴だけ判定に未配信教材変更を含めない。`production-deploy.yml`の独自API/poll・再verify/rebuildを通常経路から外し、初回成功まで旧手動経路を復旧用に保持する。二重deployを防ぎ、production配信を途中cancelしないconcurrencyにする。適用Action版は実装時に公式READMEを確認する。
 - [X] T035 [P] [US4] `src/pages/updates/index.astro`と`src/pages/updates/[version].astro`で過去URL/値を保持し、最新履歴index未反映の間もmetadataと標準Pages/Actionsへ案内する。indexの公開履歴と履歴だけの配信を含む最新metadataの配信を区別し、未配信candidateをpublished entry/pageへ追加しない。metadataを生成しないローカルbuildではmetadataリンクを出さず、既存履歴の表示と内部リンクを保つ。
 - [X] T036 [US4] T032、schema/check、前後URL/anchor比較、build・リンク・対象Chromium E2Eを実行する。一時コピーの小さな訂正を旧台帳更新なしで同経路へ通し、`docs/operations/update-manual.md`と`initial-release-runbook.md`へ標準配信、失敗区別、同SHA再実行/artifact消失時の再検証、Git revertによる復旧を記す。
-- [ ] T037 [US4] `.github/workflows/ci.yml`の実main runで標準Pages配信を確認し、実environmentの不要なreview必須設定を確認・整理する。metadata commit/run・検証/artifact/deploy対象の一致、代表問題/単元/検索/要復習/設定/履歴と既存URLを確認する。既存失敗run/fixtureで配信前失敗・配信失敗・配信後確認失敗・復旧を区別し、`docs/operations/update-manual.md`の手順と一致させる。本番故障を故意に起こさず、権限/公開依頼不足は未実施として残す。
+- [X] T037 [US4] `.github/workflows/ci.yml`の実main runで標準Pages配信を確認し、実environmentの不要なreview必須設定を確認・整理する。metadata commit/run・検証/artifact/deploy対象の一致、代表問題/単元/検索/要復習/設定/履歴と既存URLを確認する。既存失敗run/fixtureで配信前失敗・配信失敗・配信後確認失敗・復旧を区別し、`docs/operations/update-manual.md`の手順と一致させる。本番故障を故意に起こさず、権限/公開依頼不足は未実施として残す。
 
 **完了条件**: 標準配信の実成功と公開確認が一致し、同runでbuildを重ねていない。教材内容を変えず、DB名/version/store/key・backup・origin/baseを保持する。実訂正のSC-004は別依頼まで未達。
 
@@ -216,7 +216,15 @@ revertと新main SHAの同経路配信を使う。
 build/リンク・Chromiumの対象E2Eを確認した。全教材部分と旧URL/anchorを比較し、一時コピーの本文訂正・古いmetadata除去・Actions入力での同一catalog/metadata生成・旧履歴ページと候補非登録を検証した。実indexと教材正本の変更は0。
 
 実required checkは`Verify (release baseline)`/strict/app IDを保持し、実`github-pages`
-environmentにはreviewer必須設定がないことを読戻した。既存runの配信後確認失敗とfixtureの配信前失敗を区別した。依頼はPR作成までのためmerge/deployは実行せず、新workflowの実main配信・metadata/artifact一致・公開代表導線確認はT037を未完了として残す。旧復旧triggerと履歴writer/index切替はPR-07b/07cへ残し、fixtureを実配信成功やSC-004達成として扱わない。
+environmentにはreviewer必須設定がないことを読戻した。2026-10-09に[main run 37924546170](https://github.com/Fu-L/abc-textbook/actions/runs/37924546170)の標準Pages配信と公開確認を完了した（T037）。SHAは`8eb07c12c66efdf7cfe7d890425bc7d0aab7d94c`、版は`2026.10.09-r37924546170`。公開catalog/metadataは同runのartifactとbytesが一致し、教材部分14項目・868問・232単元と収録範囲は配信前後で不変。実公開Chromium
+17件で全旧URL/anchor・教材導線・検索・復習・独立日時・120件backup互換性・設定・更新履歴を確認し、公開sitemapの旧1,573
+URLも保持した。mainの674テスト・Chromium 80件・内部リンク4,653件が成功した。
+
+初回main run
+37924000193の配信前失敗（未配信文書の書式違反）は[PR #97](https://github.com/Fu-L/abc-textbook/pull/97)で修正し、旧run
+37717648084の配信後確認失敗と区別した。required baseline/strict/Actions app
+IDとenvironmentのprotected
+branch限定・reviewer必須なしを実設定で再確認した。後続履歴入力用の配信済みcatalog/metadataは標準artifactから取得済み。旧復旧triggerと履歴writer/index切替はPR-07b/07cへ残し、SC-004の実教材訂正/追加公開は未達。
 
 ## Phase 9 / PR-07b: US4 — 履歴writerと旧triggerの切替（P2 / M4）
 
