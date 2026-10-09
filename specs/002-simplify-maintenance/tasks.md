@@ -241,7 +241,7 @@ Test**: 一時indexで実成功した版だけの追記、旧entry不変・重�
 
 **PR-07bの実装・検証状況**:
 T038〜T039を実装し、標準Pages/Actionsの成功とSHA/run、配信された同一artifactのcatalog/metadataを照合する追記へ切り替えた。旧日付版reader・旧entryを保持し、新版のGit
-catalog代用を拒否する。取得不能時の公開JSON
+catalog代用を拒否する。取得済み標準artifact.tarは`--artifact-dir`で実成功と照合して利用でき、保存ディレクトリを変更しない。取得不能時の公開JSON
 fallback・追記保留・再追記差分0・同SHA別run・成功順・履歴だけの配信・未配信コード差分の回帰を確認した。
 
 T040の旧workflow撤去、3運用文書の更新、実required/environment/ruleset読戻しとローカル検証は完了。PR-07aの[実成功run 37924546170](https://github.com/Fu-L/abc-textbook/actions/runs/37924546170)を再確認し、標準artifact内のcatalog/metadataを一時領域へ取得した。公開両JSONとbytesが一致し、一時indexへのartifact追記・公開JSON

@@ -3,6 +3,8 @@ import { readFile, mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {
+  type ConfirmedPublication,
+  readPagesArtifact,
   loadPublishedReleaseHistory,
   confirmPagesPublication,
   loadGitReleaseHistory,
@@ -395,6 +397,48 @@ describe('post-publication history writer', () => {
     Object.assign(bad.catalog.release, change);
     input.readArtifact.mockResolvedValue(bad);
     await expect(loadPublishedReleaseHistory(input)).rejects.toThrow();
+  });
+  it('uses the saved standard artifact after logs expire and preserves it for the next append', async () => {
+    const root = await mkdtemp(path.join(os.tmpdir(), 'abc-saved-artifact-'));
+    try {
+      await mkdir(path.join(root, 'data'));
+      await writeFile(path.join(root, 'data/catalog.json'), JSON.stringify(pair().catalog));
+      await writeFile(path.join(root, 'release-metadata.json'), JSON.stringify(pair().metadata));
+      execFileSync('tar', [
+        '-cf',
+        path.join(root, 'artifact.tar'),
+        '-C',
+        root,
+        './data/catalog.json',
+        './release-metadata.json',
+      ]);
+      const input = setup();
+      const confirmed = { ...publication, artifactName: null };
+      input.confirmPublication.mockResolvedValue(confirmed);
+      const readArtifact = (value: ConfirmedPublication) =>
+        readPagesArtifact('Fu-L/abc-textbook', '9', value, root);
+      expect((await loadPublishedReleaseHistory({ ...input, readArtifact })).status).toBe(
+        'appended',
+      );
+      expect(await readPagesArtifact('Fu-L/abc-textbook', '9', confirmed, root)).toEqual(pair());
+      const bad = pair();
+      bad.metadata.version = '2026.10.09-r10';
+      await writeFile(path.join(root, 'release-metadata.json'), JSON.stringify(bad.metadata));
+      execFileSync('tar', [
+        '-cf',
+        path.join(root, 'artifact.tar'),
+        '-C',
+        root,
+        './data/catalog.json',
+        './release-metadata.json',
+      ]);
+      await expect(loadPublishedReleaseHistory({ ...input, readArtifact })).rejects.toThrow(
+        'RELEASE_HISTORY_IDENTITY_MISMATCH',
+      );
+      expect(input.readPublic).not.toHaveBeenCalled();
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
   });
   it('rejects unknown commits and unconfirmed runs before acquiring input', async () => {
     const input = setup();

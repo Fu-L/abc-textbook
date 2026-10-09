@@ -315,29 +315,31 @@ export async function readPagesArtifact(
   repository: string,
   runId: string,
   publication: ConfirmedPublication,
+  savedDirectory?: string,
 ): Promise<DeliveredRelease | null> {
-  if (!publication.artifactName) return null;
-  const temporary = await mkdtemp(path.join(os.tmpdir(), 'abc-pages-history-'));
+  if (!publication.artifactName && !savedDirectory) return null;
+  const temporary = savedDirectory ?? (await mkdtemp(path.join(os.tmpdir(), 'abc-pages-history-')));
   try {
-    try {
-      await exec(
-        'gh',
-        [
-          'run',
-          'download',
-          runId,
-          '--repo',
-          repository,
-          '--name',
-          publication.artifactName,
-          '--dir',
-          temporary,
-        ],
-        { maxBuffer: 1024 * 1024 },
-      );
-    } catch {
-      return null;
-    }
+    if (!savedDirectory && publication.artifactName)
+      try {
+        await exec(
+          'gh',
+          [
+            'run',
+            'download',
+            runId,
+            '--repo',
+            repository,
+            '--name',
+            publication.artifactName,
+            '--dir',
+            temporary,
+          ],
+          { maxBuffer: 1024 * 1024 },
+        );
+      } catch {
+        return null;
+      }
     const archive = path.join(temporary, 'artifact.tar');
     // Acquisition failure permits fallback; malformed/acquired JSON must be rejected.
     try {
@@ -356,7 +358,7 @@ export async function readPagesArtifact(
       metadata: await read('./release-metadata.json'),
     };
   } finally {
-    await rm(temporary, { recursive: true, force: true });
+    if (!savedDirectory) await rm(temporary, { recursive: true, force: true });
   }
 }
 
@@ -398,12 +400,16 @@ const writeProjection = async (file: string, value: unknown) => {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const args = parseKeyValueArguments(process.argv.slice(2), ['--run', '--public-output']);
+    const args = parseKeyValueArguments(process.argv.slice(2), [
+      '--run',
+      '--public-output',
+      '--artifact-dir',
+    ]);
     const runId = args.get('--run'),
       publicOutput = args.get('--public-output');
     if (!runId || !/^[1-9]\d*$/u.test(runId) || !publicOutput)
       throw Error(
-        'Usage: release:history --run SUCCESSFUL_MAIN_RUN_ID --public-output EXISTING_INDEX.json',
+        'Usage: release:history --run SUCCESSFUL_MAIN_RUN_ID --public-output EXISTING_INDEX.json [--artifact-dir DOWNLOADED_PAGES_ARTIFACT_DIR]',
       );
     // Require the existing index; never rebuild or silently replace it with an empty array.
     const previous = PublicReleaseHistorySchema.parse(
@@ -441,7 +447,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
               )
             ).stdout,
         }),
-      readArtifact: (publication) => readPagesArtifact(repository, runId, publication),
+      readArtifact: (publication) =>
+        readPagesArtifact(repository, runId, publication, args.get('--artifact-dir')),
       readPublic: readPublicRelease,
     });
     if (result.status === 'appended') await writeProjection(publicOutput, result.history);

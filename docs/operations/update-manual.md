@@ -208,6 +208,8 @@ CLIの読取権限と、対象SHAを含むGit履歴が必要。
 ```sh
 cp src/content/indexes/release-history.json /tmp/abc-release-history.json
 npm run release:history -- --run 37924546170 --public-output /tmp/abc-release-history.json
+# 同じ作業内で取得した標準artifactを使う場合（artifact.tarのあるディレクトリ）。
+npm run release:history -- --run 37924546170 --public-output /tmp/abc-release-history.json --artifact-dir /tmp/pr07a-pages-artifact
 # 独立した履歴PRでのみ、成功順に各runを追記する。
 npm run release:history -- --run SUCCESSFUL_MAIN_RUN_ID --public-output src/content/indexes/release-history.json
 ```
