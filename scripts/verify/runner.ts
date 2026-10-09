@@ -40,6 +40,18 @@ const documentationPath = (file: string): boolean =>
   /^docs\/operations\/[^/]+\.md$/u.test(file) ||
   /^specs\/\d{3}-[^/]+\/(?:[^/]+\/)*[^/]+\.md$/u.test(file);
 
+/** Only a known index + nonpublic documentation diff stops the append chain. */
+export function isHistoryOnlyPublication(changes: readonly VerificationChange[] | null): boolean {
+  return (
+    !!changes?.some(({ file }) => file === 'src/content/indexes/release-history.json') &&
+    changes.every(
+      ({ status, file }) =>
+        ['A', 'M'].includes(status) &&
+        (file === 'src/content/indexes/release-history.json' || documentationPath(file)),
+    )
+  );
+}
+
 /** Main must also verify changes that never reached a successful deployment. */
 export function mergePublicationChanges(
   changes: readonly VerificationChange[] | null,

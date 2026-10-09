@@ -99,6 +99,57 @@ export const buildReleaseHistory = (
   return freeze(entries);
 };
 
+/** Caller confirms Pages/Actions before projecting the delivered prepared artifact. */
+export function appendReleaseHistory(
+  record: { readonly metadata: unknown; readonly catalog: unknown },
+  previous: readonly PublicReleaseHistoryEntry[],
+) {
+  PublicReleaseHistorySchema.parse(previous);
+  const catalog = CatalogSchema.parse(record.catalog);
+  // The source artifact stays prepared; publication is recorded only in the history.
+  catalog.release.publicationStatus = 'published';
+  const entry = projectRelease({ ...record, catalog });
+  const existing = previous.find(({ version }) => version === entry.version);
+  if (existing) {
+    const identity = ({
+      schemaVersion,
+      version,
+      cutoffAt,
+      commit,
+      validationResultsUrl,
+      changeSummary,
+      firstContestId,
+      lastContestId,
+      contestCount,
+      problemCount,
+    }: PublicReleaseHistoryEntry) => ({
+      schemaVersion,
+      version,
+      cutoffAt,
+      commit,
+      validationResultsUrl,
+      changeSummary,
+      firstContestId,
+      lastContestId,
+      contestCount,
+      problemCount,
+    });
+    if (canonicalJson(identity(existing)) !== canonicalJson(identity(entry)))
+      throw new Error('RELEASE_HISTORY_REWRITE');
+    return previous;
+  }
+  const contests = [...catalog.contests].sort((a, b) => a.number - b.number);
+  if (
+    catalog.release.contestCount !== contests.length ||
+    catalog.release.problemCount !== catalog.problems.length ||
+    catalog.release.slotRecordCount !== catalog.contestSlots.length ||
+    catalog.release.firstContestId !== contests[0]?.id ||
+    catalog.release.lastContestId !== contests.at(-1)?.id
+  )
+    throw Error('RELEASE_HISTORY_RANGE_MISMATCH');
+  return freeze([...previous, entry]);
+}
+
 interface UpdateStatus {
   readonly updateId: string;
   readonly state: string;

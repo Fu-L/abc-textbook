@@ -235,9 +235,19 @@ PR-07aの実deploy成功・公開確認。実履歴の追記は次のPR-07cで�
 Test**: 一時indexで実成功した版だけの追記、旧entry不変・重複版拒否・失敗候補非掲載を検証する。writer/trigger変更は通常検証・配信を通し、成功済み版の入力を後続PRで使える。
 
 <!-- prettier-ignore -->
-- [ ] T038 [US4] `scripts/release/build-history.ts`と`src/lib/catalog/build-release-history.ts`のwriterを、標準Pages/Actionsの成功と対象run/SHAを確認した既存indexへの追記に縮小する。新版の入力は実配信した同じartifact内の`data/catalog.json`と`release-metadata.json`とし、schema/版/SHA/run/範囲/概要を照合する。旧entryの値・順序と当時のGit catalog読込を残し、新版にGit内の旧prepared catalogを代用しない。artifact取得不能なら対象版/SHA/runに一致する現在配信中の公開JSONを成功確認後に利用し、それも取得不能なら追記だけ保留する。同版/SHA/範囲/概要の既存entryへの再追記は差分0、不一致・失敗候補は拒否する。事前published登録、自己参照commit、承認receipt、専用artifact保管庫を作らない。
-- [ ] T039 [US4] `tests/unit/release-history.test.ts`にT038の入力を使う追記/不一致/失敗/再追記差分0の回帰を追加する。Git内catalogが旧版でも配信artifactから新版を追記できること、artifact取得不能時の同版公開JSON利用、別版JSON拒否/追記保留、同SHA別runの別版、旧entryの値/順序/URL保持、履歴だけの配信を追記対象にしないことを検証する。テスト用成功と実配信成功は区別する。
+- [X] T038 [US4] `scripts/release/build-history.ts`と`src/lib/catalog/build-release-history.ts`のwriterを、標準Pages/Actionsの成功と対象run/SHAを確認した既存indexへの追記に縮小する。新版の入力は実配信した同じartifact内の`data/catalog.json`と`release-metadata.json`とし、schema/版/SHA/run/範囲/概要を照合する。旧entryの値・順序と当時のGit catalog読込を残し、新版にGit内の旧prepared catalogを代用しない。artifact取得不能なら対象版/SHA/runに一致する現在配信中の公開JSONを成功確認後に利用し、それも取得不能なら追記だけ保留する。同版/SHA/範囲/概要の既存entryへの再追記は差分0、不一致・失敗候補は拒否する。事前published登録、自己参照commit、承認receipt、専用artifact保管庫を作らない。
+- [X] T039 [US4] `tests/unit/release-history.test.ts`にT038の入力を使う追記/不一致/失敗/再追記差分0の回帰を追加する。Git内catalogが旧版でも配信artifactから新版を追記できること、artifact取得不能時の同版公開JSON利用、別版JSON拒否/追記保留、同SHA別runの別版、旧entryの値/順序/URL保持、履歴だけの配信を追記対象にしないことを検証する。テスト用成功と実配信成功は区別する。
 - [ ] T040 [US4] PR-07a成功後に`.github/workflows/production-deploy.yml`の旧手動triggerを無効化し、`docs/operations/update-manual.md`、`weekly-update.md`、`initial-release-runbook.md`をwriter/配信・再実行・復旧とPR-07cの追記手順へ整合させる。T038〜T039とbuild・リンク・対象検査を通し、コード/workflow変更として実main配信・公開確認を行う。`src/content/indexes/release-history.json`は変更しない。実required/environment設定を読戻し、旧triggerと二重公開がないことを確認する。PR-07a/07bの配信済みcatalog/metadataを標準artifactから取得し、必要なら一時領域へ置く。取得不足は追記未完了として報告する。
+
+**PR-07bの実装・検証状況**:
+T038〜T039を実装し、標準Pages/Actionsの成功とSHA/run、配信された同一artifactのcatalog/metadataを照合する追記へ切り替えた。旧日付版reader・旧entryを保持し、新版のGit
+catalog代用を拒否する。取得不能時の公開JSON
+fallback・追記保留・再追記差分0・同SHA別run・成功順・履歴だけの配信・未配信コード差分の回帰を確認した。
+
+T040の旧workflow撤去、3運用文書の更新、実required/environment/ruleset読戻しとローカル検証は完了。PR-07aの[実成功run 37924546170](https://github.com/Fu-L/abc-textbook/actions/runs/37924546170)を再確認し、標準artifact内のcatalog/metadataを一時領域へ取得した。公開両JSONとbytesが一致し、一時indexへのartifact追記・公開JSON
+fallback・再追記差分0を実入力で確認した。教材・実indexの変更は0。fixtureの成功を実配信成功に数えていない。
+
+今回の依頼はPR作成までのため、PR-07bのmerge・実main配信・公開確認・配信済み入力取得は未実施。mainでの旧trigger撤去反映と二重公開がないことの確認もmerge後に残るため、T040は未完了とする。PR-07cの実index追記は両先行版の実成功確認後に行い、今回へ混在させない。
 
 **完了条件**:
 writerの対象検査、通常配信の実成功と公開確認、成功後の旧trigger停止が成立する。実index追記は未実施とし、PR-07bを履歴だけの配信に分類しない。

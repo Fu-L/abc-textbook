@@ -1,12 +1,15 @@
 # ABC212〜466 初版公開手順
 
 > **初版の過去手順と復旧資料**: 通常配信は[更新マニュアルの標準Pages手順](update-manual.md#5-標準pagesで公開する)に従う。PR-07aではCIの同run/SHAで一度build・検証したdistを標準Pages
-> Actionsへ渡す。以下の初版監査・旧review/台帳・独自配信は通常更新の条件にしない。旧手動経路は標準経路の初回成功までの復旧用に保持し、成功後は使用を拒否する。旧trigger撤去はPR-07bに残る。
+> Actionsへ渡す。以下の初版監査・旧review/台帳・独自配信は通常更新の条件にしない。PR-07aの実成功・公開確認後、PR-07bで旧`production-deploy.yml`を撤去した。以下の旧起動コマンドは履歴資料であり実行できない。
 
 標準配信の確認は、Actions/Pages成功、metadataの版/SHA/run、代表導線を照合する。配信前失敗・配信失敗・配信後確認失敗を区別する。同runの再実行は元のUTC作成日/run
 IDの同版で、artifact消失時は同SHAでbaselineから再検証・buildする。古いrunで新mainを上書きせず、公開後の復旧は不具合PRのGit
 revertを新runの別版として同経路へ通す。origin/baseと学習記録は保持する。実main配信の確認はmerge後に行い、fixtureやPR
 buildの成功で代用しない。
+
+現行の履歴は[実配信済み版の追記手順](update-manual.md#実配信済み版を履歴へ追記する002--pr-07b)を使う。新版は標準Pages/Actionsの実成功と同一artifactのcatalog/metadataから追記し、旧日付版のGit
+readerと既存URLを保持する。artifact取得不能時には一致する公開JSONのみ利用し、双方取得不能なら追記を保留する。PR-07bの実main配信・公開確認後に、PR-07cで両先行版を成功順に追記する。履歴だけの配信自体は追記対象にしない。
 
 初版は868問・213タグ・232 Unit、254開催とABC316の公式欠番を収録する。収録cutoffは
 `2026-07-12T00:00:00+09:00`。公開準備日・検証日・配信日は別の情報である。本文、taxonomy、配置、読書順、Problem
@@ -95,7 +98,7 @@ Pagesを使う。公開済みrepositoryのPagesをworkflow方式で有効化し�
 checks・strict・admin適用を維持する。実設定の確認は上記APIで行う。workflowは標準の`GITHUB_TOKEN`とOIDCを使い、追加secretやCloudflareログインを要求しない。
 [GitHub Pagesのworkflow](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
-## exact commitの初回deployとretry
+## 旧exact commitの初回deployとretry（履歴資料）
 
 #54で全required checksが成功したPRをprotected mainへmergeする。merge後のfull SHAに対する全required
 checksの成功を確認し、read-onlyの通常release検証を実行してから `Production deploy` を起動する。
@@ -145,7 +148,7 @@ dependencies、3ブラウザー、`SITE_URL`・`BASE_PATH`・`GH_TOKEN`と、wor
 を用意して同じPython入口を使う。suite・本文・lockfileが対象commitと一致しなければ停止する。host
 receiptを手書きして公開証拠にしない。
 
-## 初回失敗とrollback
+## 旧初回失敗とrollback（履歴資料）
 
 初回には旧production版がない。52週simulation、初回公開SHAのredeploy、異なる実公開版間のrollbackを区別する。二版間rollbackは
 `not_applicable_no_prior_production_version` とする。

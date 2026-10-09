@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { parse as parseYaml } from 'yaml';
 
@@ -191,6 +191,9 @@ describe('standard Pages workflow', () => {
         expect(canRun(expression, event, ref, success, publication)).toBe(expected);
     },
   );
+  it('removes the legacy production workflow after standard Pages succeeded', () => {
+    expect(existsSync('.github/workflows/production-deploy.yml')).toBe(false);
+  });
   it('deploys only the same run/SHA/attempt artifact after the baseline succeeds', () => {
     expect(deploy.needs).toBe('verify');
     expect(required(upload.with).path).toBe('dist');
