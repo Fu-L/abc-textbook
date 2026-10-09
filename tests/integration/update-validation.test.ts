@@ -47,14 +47,6 @@ describe('US5 update validation', () => {
     'staging/previews/initial-v1/taxonomy/index.json',
     'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
     'src/content/sources/authoring/initial-v1.json',
-    '.agents/skills/abc-explanation-author/SKILL.md',
-    '.agents/skills/abc-explanation-author/references/input-output-contract.md',
-    '.agents/skills/abc-explanation-author/references/placement-policy.md',
-    '.agents/skills/abc-explanation-author/references/review-policy.md',
-    '.agents/skills/abc-explanation-author/references/source-policy.md',
-    '.agents/skills/abc-explanation-author/references/writing-policy.md',
-    '.agents/skills/abc-explanation-author/templates/abbreviated-explanation.md',
-    '.agents/skills/abc-explanation-author/templates/full-explanation.md',
   ];
 
   const copyReviewValidationArtifacts = async (outputRoot: string): Promise<void> => {
@@ -246,6 +238,26 @@ describe('US5 update validation', () => {
           repositoryRoot: outputRoot,
         }),
       ).rejects.toThrow('REVIEW_ITEM_INVENTORY_INVALID');
+    } finally {
+      await rm(outputRoot, { recursive: true, force: true });
+    }
+  });
+
+  it('rejects a changed historical skill subject without depending on current instructions', async () => {
+    const outputRoot = await mkdtemp(path.join(tmpdir(), 'abc-review-old-skill-'));
+    try {
+      await copyReviewValidationArtifacts(outputRoot);
+      const manifestPath = 'docs/verification/authoring-skill/initial-v1/skill-manifest.json';
+      const manifest = JSON.parse(await readFile(path.join(outputRoot, manifestPath), 'utf8')) as {
+        artifacts: { digest: string }[];
+      };
+      const artifact = manifest.artifacts[0];
+      if (!artifact) throw new Error('Missing historical artifact subject.');
+      artifact.digest = '0'.repeat(64);
+      await writeFile(path.join(outputRoot, manifestPath), JSON.stringify(manifest));
+      await expect(
+        validatePreviewUpdateReview({ updateId, evidencePath, repositoryRoot: outputRoot }),
+      ).rejects.toThrow('REVIEW_COMPONENT_SUBJECT_DIGEST_MISMATCH');
     } finally {
       await rm(outputRoot, { recursive: true, force: true });
     }

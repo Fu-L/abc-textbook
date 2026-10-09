@@ -296,13 +296,7 @@ const preparePipeline = async (options: PipelineOptions): Promise<PipelineResult
     throw new Error('RESUME_INPUT_MISMATCH');
   }
 
-  const skill = {
-    name: 'abc-explanation-author' as const,
-    version: '1.1.1',
-    digest: '6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa',
-  };
   const authoring = prepareAuthoringResults({
-    skill,
     targets: manifest.selectedProblemIds.map((problemId) =>
       options.failAt === 'author'
         ? {

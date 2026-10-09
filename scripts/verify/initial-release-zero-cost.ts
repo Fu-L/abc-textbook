@@ -45,8 +45,6 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
     },
   });
   const weeks = [];
-  const skill = projection.catalog.authoringUnits[0];
-  if (!skill) throw new Error('SIMULATION_SKILL_MISSING');
   try {
     await git(['init']);
     await git(['config', 'user.name', 'Offline simulation']);
@@ -76,11 +74,6 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
         'AUDIT_WEEKLY_ACQUISITION',
       );
       const authoring = prepareAuthoringResults({
-        skill: {
-          name: 'abc-explanation-author',
-          version: skill.skill.version,
-          digest: skill.skill.digest,
-        },
         targets: acquired.problemIds.map((problemId, index) => ({
           problemId,
           slotLabel: acquired.advancedSlotLabels[index] ?? '',

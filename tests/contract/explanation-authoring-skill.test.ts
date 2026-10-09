@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 
 import { describe, expect, it } from 'vitest';
@@ -6,11 +5,12 @@ import { describe, expect, it } from 'vitest';
 import {
   prepareExplanationAuthoring,
   validateAuthoringInput,
+  validateAuthoringOutput,
   type AuthoringInputPacket,
-  type AuthoringSkillSubject,
 } from '../../src/lib/authoring/explanation-authoring-skill.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
-import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
+import { prepareAuthoringResults } from '../../scripts/update-abc/author.js';
+import { ProblemAuthoringUnitSchema } from '../../src/lib/domain/schema-parts/authoring-unit.js';
 
 interface SkillArtifact {
   readonly path: string;
@@ -75,42 +75,19 @@ interface SourcePacket {
 const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
 
-const fileDigest = async (filePath: string): Promise<string> =>
-  createHash('sha256')
-    .update(await readFile(filePath))
-    .digest('hex');
-
 const withoutField = (
   value: Readonly<Record<string, unknown>>,
   field: string,
 ): Record<string, unknown> =>
   Object.fromEntries(Object.entries(value).filter(([key]) => key !== field));
 
-const skillSubject = (manifest: SkillManifest): AuthoringSkillSubject => ({
-  name: 'abc-explanation-author',
-  version: manifest.authoringSkillVersion,
-  digest: manifest.authoringSkillDigest,
-});
-
 describe('explanation authoring skill contract', () => {
-  it('freezes the US1 review units before authoring changes', async () => {
-    const manifest = await readJson<unknown>('docs/work-manifests/initial/us1/manifest.json');
-    expect(() => {
-      validateContentWorkManifest(manifest);
-    }).not.toThrow();
-  });
-
-  it('freezes one self-contained skill version and canonical digest', async () => {
+  it('reads the historical skill subject without binding current instructions to its digest', async () => {
     const manifest = await readJson<SkillManifest>(
       'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
     );
     const sourcePacket = await readJson<SourcePacket>(manifest.sourcePacket.path);
-    const artifactDigests = await Promise.all(
-      manifest.artifacts.map(async (artifact) => ({
-        path: artifact.path,
-        digest: await fileDigest(artifact.path),
-      })),
-    );
+    const artifactDigests = manifest.artifacts;
     const packetDigest = canonicalDigest(withoutField(sourcePacket, 'authoringSkillDigest'));
     const calculatedSkillDigest = canonicalDigest({
       authoringSkillName: manifest.authoringSkillName,
@@ -124,7 +101,6 @@ describe('explanation authoring skill contract', () => {
     });
 
     expect(manifest.status).toBe('frozen');
-    expect(artifactDigests).toEqual(manifest.artifacts);
     expect(packetDigest).toBe(manifest.sourcePacket.digest);
     expect(calculatedSkillDigest).toBe(manifest.authoringSkillDigest);
     expect(sourcePacket.authoringSkillVersion).toBe(manifest.authoringSkillVersion);
@@ -174,7 +150,7 @@ describe('explanation authoring skill contract', () => {
     }
   });
 
-  it('keeps the complete writing policy inside the frozen skill artifacts', async () => {
+  it('keeps the complete writing policy in the current skill instructions', async () => {
     const manifest = await readJson<SkillManifest>(
       'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
     );
@@ -182,9 +158,9 @@ describe('explanation authoring skill contract', () => {
       manifest.artifacts.map(async ({ path }) => ({ path, content: await readFile(path, 'utf8') })),
     );
     const combinedSkill = artifactContents.map(({ content }) => content).join('\n');
-    const writingPolicy = artifactContents.find(({ path }) =>
-      path.endsWith('/references/writing-policy.md'),
-    )?.content;
+    const writingPolicy = artifactContents
+      .find(({ path }) => path.endsWith('/references/writing-policy.md'))
+      ?.content.replace(/\s+/gu, ' ');
     const fullTemplate = artifactContents.find(({ path }) =>
       path.endsWith('/templates/full-explanation.md'),
     )?.content;
@@ -219,18 +195,13 @@ describe('explanation authoring skill contract', () => {
   });
 
   it('prepares the fixed complete fixtures and holds the incomplete fixture', async () => {
-    const manifest = await readJson<SkillManifest>(
-      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
-    );
     const fixtureManifest = await readJson<FixtureManifest>(
       'tests/fixtures/authoring-skill/manifest.json',
     );
     expect(fixtureManifest.fixtures).toHaveLength(3);
-    expect(fixtureManifest.authoringSkillVersion).toBe(manifest.authoringSkillVersion);
-    expect(fixtureManifest.authoringSkillDigest).toBe(manifest.authoringSkillDigest);
 
     for (const fixture of fixtureManifest.fixtures) {
-      const result = prepareExplanationAuthoring(fixture.input, skillSubject(manifest));
+      const result = prepareExplanationAuthoring(fixture.input);
       expect(result.status, fixture.fixtureId).toBe(fixture.expectedStatus);
       if (fixture.expectedKind !== undefined) {
         expect(result.explanationKind, fixture.fixtureId).toBe(fixture.expectedKind);
@@ -244,10 +215,7 @@ describe('explanation authoring skill contract', () => {
     }
   });
 
-  it('holds a stale skill subject and unresolved or disallowed claim sources', async () => {
-    const manifest = await readJson<SkillManifest>(
-      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
-    );
+  it('accepts an old skill version while holding unresolved claim sources', async () => {
     const fixtures = await readJson<FixtureManifest>(
       'tests/fixtures/authoring-skill/manifest.json',
     );
@@ -262,17 +230,15 @@ describe('explanation authoring skill contract', () => {
     if (!firstClaim) throw new Error('Technical claim fixture is missing.');
     firstClaim.sourceRevisionIds = ['source-revision-missing'];
 
-    const result = validateAuthoringInput(input, skillSubject(manifest));
+    const result = validateAuthoringInput(input);
     expect(result.status).toBe('on_hold');
+    expect(result.diagnostics.map(({ code }) => code)).not.toContain('SKILL_VERSION_MISMATCH');
     expect(result.diagnostics.map(({ code }) => code)).toEqual(
-      expect.arrayContaining(['SKILL_VERSION_MISMATCH', 'SOURCE_REVISION_MISSING']),
+      expect.arrayContaining(['SOURCE_REVISION_MISSING']),
     );
   });
 
   it('holds a technical claim that cites another Problem source revision', async () => {
-    const manifest = await readJson<SkillManifest>(
-      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
-    );
     const fixtures = await readJson<FixtureManifest>(
       'tests/fixtures/authoring-skill/manifest.json',
     );
@@ -290,15 +256,12 @@ describe('explanation authoring skill contract', () => {
     input.sources.push(foreignSource);
     firstClaim.sourceRevisionIds = [foreignSource.sourceRevisionId];
 
-    const result = validateAuthoringInput(input, skillSubject(manifest));
+    const result = validateAuthoringInput(input);
     expect(result.status).toBe('on_hold');
     expect(result.diagnostics.map(({ code }) => code)).toContain('SOURCE_PROBLEM_MISMATCH');
   });
 
   it('binds the displayed Ex slot to its official h task without allowing another contest', async () => {
-    const manifest = await readJson<SkillManifest>(
-      'docs/verification/authoring-skill/initial-v1/skill-manifest.json',
-    );
     const fixtures = await readJson<FixtureManifest>(
       'tests/fixtures/authoring-skill/manifest.json',
     );
@@ -307,12 +270,122 @@ describe('explanation authoring skill contract', () => {
     input.sources.forEach((source) => {
       source.officialTaskId = 'abc274_h';
     });
-    expect(validateAuthoringInput(input, skillSubject(manifest)).status).toBe('ready');
+    expect(validateAuthoringInput(input).status).toBe('ready');
     input.sources.forEach((source) => {
       source.officialTaskId = 'abc275_h';
     });
+    expect(validateAuthoringInput(input).diagnostics.map(({ code }) => code)).toContain(
+      'SOURCE_PROBLEM_MISMATCH',
+    );
+  });
+
+  const freshFixture = async () => {
+    const fixtures = await readJson<FixtureManifest>(
+      'tests/fixtures/authoring-skill/manifest.json',
+    );
+    const input = structuredClone(fixtures.fixtures[0]?.input) as AuthoringInputPacket;
+    delete input.skill;
+    const unit = ProblemAuthoringUnitSchema.parse(
+      await readJson<unknown>('tests/fixtures/authoring-skill/full-abc212-g.json'),
+    );
+    delete unit.skill;
+    unit.examples = [];
+    unit.exercises = [];
+    return { input, unit };
+  };
+
+  it('prepares and validates new authoring without skill evidence or independent exercises', async () => {
+    const { input, unit } = await freshFixture();
+    expect(prepareExplanationAuthoring(input).status).toBe('authoring_required');
+    expect(validateAuthoringOutput(unit, input)).toEqual({ status: 'ready', diagnostics: [] });
+    const result = prepareAuthoringResults({
+      targets: [{ problemId: input.problemId, slotLabel: 'G', draftPath: unit.docPath }],
+    });
+    expect(result[0]).not.toHaveProperty('authoringSkillDigest');
+    expect(result[0]).not.toHaveProperty('authoringSkillVersion');
+  });
+
+  it('type-checks any historical skill fields without requiring current version equality', async () => {
+    const { input, unit } = await freshFixture();
+    const skill = {
+      name: 'abc-explanation-author' as const,
+      version: '0.1.0',
+      digest: 'a'.repeat(64),
+    };
+    expect(validateAuthoringInput({ ...input, skill }).status).toBe('ready');
+    expect(validateAuthoringOutput({ ...unit, skill }, input).status).toBe('ready');
+    expect(validateAuthoringInput({ ...input, skill: { ...skill, digest: 42 } }).status).toBe(
+      'on_hold',
+    );
     expect(
-      validateAuthoringInput(input, skillSubject(manifest)).diagnostics.map(({ code }) => code),
-    ).toContain('SOURCE_PROBLEM_MISMATCH');
+      validateAuthoringOutput({ ...unit, skill: { ...skill, version: null } }, input).status,
+    ).toBe('on_hold');
+  });
+
+  it('keeps task, source-use, and executable verification checks for evidence-free output', async () => {
+    const { input, unit } = await freshFixture();
+    const wrongTask = structuredClone(input);
+    wrongTask.sources.forEach((source) => {
+      source.officialTaskId = 'abc213_g';
+    });
+    expect(validateAuthoringOutput(unit, wrongTask).diagnostics.map(({ code }) => code)).toContain(
+      'SOURCE_PROBLEM_MISMATCH',
+    );
+    const disallowed = structuredClone(input);
+    disallowed.sources.forEach((source) => {
+      source.allowedUses = ['constraint_reference'];
+    });
+    expect(validateAuthoringOutput(unit, disallowed).diagnostics.map(({ code }) => code)).toContain(
+      'SOURCE_USE_NOT_ALLOWED',
+    );
+    const legacyUnit = ProblemAuthoringUnitSchema.parse(
+      await readJson<unknown>('tests/fixtures/authoring-skill/full-abc212-g.json'),
+    );
+    unit.examples = legacyUnit.examples;
+    const example = unit.examples[0];
+    if (!example) throw new Error('Missing executable fixture.');
+    expect(validateAuthoringOutput(unit, input).status).toBe('ready');
+    example.verificationStatus = 'pending';
+    expect(validateAuthoringOutput(unit, input).diagnostics.map(({ code }) => code)).toContain(
+      'EXAMPLE_NOT_REPRODUCIBLE',
+    );
+    example.verificationStatus = 'failed';
+    expect(validateAuthoringOutput(unit, input).diagnostics.map(({ code }) => code)).toContain(
+      'EXAMPLE_NOT_REPRODUCIBLE',
+    );
+  });
+
+  it.each(['unverified', 'stale', 'contradicted'] as const)(
+    'holds %s technical claims without management evidence',
+    async (verificationStatus) => {
+      const { input, unit } = await freshFixture();
+      const claim = unit.claims[0];
+      if (!claim) throw new Error('Missing claim fixture.');
+      claim.verificationStatus = verificationStatus;
+      expect(validateAuthoringOutput(unit, input).diagnostics.map(({ code }) => code)).toContain(
+        'TECHNICAL_CLAIM_NOT_VERIFIED',
+      );
+    },
+  );
+
+  it.each([
+    ['reasoning', '', 'sections.reasoning'],
+    ['reasoning', '### 状態の定義\n\n### 遷移と手順\n\n更新を行う。', 'sections.reasoning'],
+    [
+      'reasoning',
+      '### 状態の定義\n\ndp[i] は i 番目までの最適値。\n\n### 遷移と手順\n',
+      'sections.reasoning',
+    ],
+    ['correctness', '', 'sections.correctness'],
+    ['implementationNotes', '', 'sections.implementationNotes'],
+    ['constraintConsistency', '', 'sections.constraintConsistency'],
+    ['complexity', { time: '', space: 'O(N)' }, 'sections.complexity.time'],
+    ['complexity', { time: 'O(N)', space: '' }, 'sections.complexity.space'],
+  ])('diagnoses unfinished %s at its field', async (key, value, expectedPath) => {
+    const { input, unit } = await freshFixture();
+    unit.sections[key] = value;
+    const result = validateAuthoringOutput(unit, input);
+    expect(result.status).toBe('on_hold');
+    expect(result.diagnostics.map(({ path }) => path)).toContain(expectedPath);
   });
 });

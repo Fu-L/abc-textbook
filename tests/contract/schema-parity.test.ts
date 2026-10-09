@@ -86,6 +86,28 @@ describe('canonical Zod and JSON Schema parity', () => {
     );
   });
 
+  it('accepts new catalog authoring without a skill subject and validates old fields when present', () => {
+    const catalog = makeTrustedCatalog({});
+    const unit = catalog.authoringUnits[0];
+    if (!unit) throw new Error('Missing authoring fixture.');
+    const { skill, ...newUnit } = unit;
+    expect(skill).toBeDefined();
+    const input = { ...catalog, authoringUnits: [newUnit] };
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    addFormats(ajv);
+    const validateJsonSchema = ajv.compile(CatalogContract.jsonSchema);
+    expect(validateJsonSchema(input)).toBe(true);
+    expect(validateContractValue(CatalogContract, input)).toBe(true);
+    const invalid = {
+      ...input,
+      authoringUnits: [
+        { ...newUnit, skill: { name: 'abc-explanation-author', version: '1.0.0', digest: 42 } },
+      ],
+    };
+    expect(validateJsonSchema(invalid)).toBe(false);
+    expect(validateContractValue(CatalogContract, invalid)).toBe(false);
+  });
+
   it('routes semantic collection invariants through the canonical validator', () => {
     const duplicateRecords = {
       schemaVersion: '1.0.0',

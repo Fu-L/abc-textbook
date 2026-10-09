@@ -2459,7 +2459,6 @@
           "excludedTopics",
           "tagIds",
           "sourceRevisionIds",
-          "skill",
           "revision",
           "claims",
           "examples",

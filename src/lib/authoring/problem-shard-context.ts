@@ -68,12 +68,9 @@ export const loadProblemShardContext = async (frozenAt: string) => {
     sourceNormalizationVersion: string;
   }>('docs/verification/authoring-skill/initial-v1/skill-manifest.json');
   if (manifest.status !== 'frozen') throw new Error('SHARD_SKILL_NOT_FROZEN');
-  const artifactSubjects = [];
-  for (const artifact of manifest.artifacts) {
-    const digest = shardFileDigest(await readFile(artifact.path, 'utf8'));
-    if (digest !== artifact.digest) throw new Error(`SHARD_SKILL_ARTIFACT_DRIFT:${artifact.path}`);
-    artifactSubjects.push({ path: artifact.path, digest });
-  }
+  // These subjects describe initial authoring. Current skill instructions can evolve
+  // without rewriting the 868 documents or their historical manifest.
+  const artifactSubjects = manifest.artifacts;
   const sourcePacket = await readShardJson<Record<string, unknown>>(
     'src/content/sources/authoring/initial-v1.json',
   );

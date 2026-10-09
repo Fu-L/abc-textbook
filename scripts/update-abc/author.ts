@@ -23,20 +23,21 @@ export interface AuthoringResult {
   readonly reasonCode: string | null;
   readonly reason: string | null;
   readonly retryCondition: string | null;
-  readonly authoringSkillVersion: string;
-  readonly authoringSkillDigest: string;
+  readonly authoringSkillVersion?: string;
+  readonly authoringSkillDigest?: string;
 }
 
 export const prepareAuthoringResults = (input: {
-  readonly skill: AuthoringSkillSubject;
+  readonly skill?: AuthoringSkillSubject;
   readonly targets: readonly AuthoringTarget[];
 }): AuthoringResult[] =>
   input.targets.map((target) => {
     const shared = {
       problemId: target.problemId,
       slotLabel: target.slotLabel,
-      authoringSkillVersion: input.skill.version,
-      authoringSkillDigest: input.skill.digest,
+      ...(input.skill
+        ? { authoringSkillVersion: input.skill.version, authoringSkillDigest: input.skill.digest }
+        : {}),
     };
     if (target.draftPath)
       return {
@@ -57,7 +58,7 @@ export const prepareAuthoringResults = (input: {
         packetPath: target.packetPath,
         templatePath: target.templatePath,
         reasonCode: 'AUTHORING_REQUIRED',
-        reason: 'Complete authoring inputs are ready for the frozen authoring skill.',
+        reason: 'Complete authoring inputs are ready for explanation authoring.',
         retryCondition: null,
       };
     const block = target.block ?? {

@@ -181,11 +181,11 @@ consumerの削除・実教材訂正の配信は行っていない。
 Test**: 旧本文と管理証跡なしの新規fixtureを読み、公式task不一致・未検証claim・未完成解説を診断する。868本文のfrontmatter差分は0。
 
 <!-- prettier-ignore -->
-- [ ] T027 [US1] `tests/contract/explanation-authoring-skill.test.ts`、`tests/unit/problem-authoring-document.test.ts`、`tests/unit/problem-authoring-details.test.ts`に旧skill欄あり/なしの互換性と、未検証claim・task不一致・着想/状態/手順/証明/境界/全体計算量の不足を診断するケースを追加する。実行コード検証は残す。
-- [ ] T028 [US1] `src/lib/domain/schema-parts/authoring-unit.ts`でskill manifest/digest・review mode・固定の独立演習を新規必須から除き、旧欄を型検証して読めるようにする。Source Revision・fingerprint・task identity・claim根拠の契約を保持する。
-- [ ] T029 [P] [US1] `src/lib/authoring/explanation-authoring-skill.ts`、`src/lib/authoring/problem-authoring-document.ts`、`scripts/update-abc/author.ts`と関係する訂正consumerをT028の契約へ揃え、新しい承認modeや全本文変換を導入せず、公式根拠と完全解説の品質診断を残す。
-- [ ] T030 [P] [US1] `.agents/skills/abc-explanation-author/SKILL.md`、同`references/input-output-contract.md`・`review-policy.md`・`writing-policy.md`、同`templates/full-explanation.md`・`abbreviated-explanation.md`をT028の契約と憲章へ同期する。人間/別エージェント承認、毎回のmanifest/digest、固定演習要求を除き、出典・論証・保留理由の手順を維持する。
-- [ ] T031 [US1] T027とschema/checkを実行し、`scripts/generate-json-schemas.ts`の登録対象に変更があれば生成schemaを同時更新する。`docs/operations/update-manual.md`へ新しい執筆/訂正手順と旧本文読込を記し、既存教材・sourceの差分0を確認する。
+- [X] T027 [US1] `tests/contract/explanation-authoring-skill.test.ts`、`tests/unit/problem-authoring-document.test.ts`、`tests/unit/problem-authoring-details.test.ts`に旧skill欄あり/なしの互換性と、未検証claim・task不一致・着想/状態/手順/証明/境界/全体計算量の不足を診断するケースを追加する。実行コード検証は残す。
+- [X] T028 [US1] `src/lib/domain/schema-parts/authoring-unit.ts`でskill manifest/digest・review mode・固定の独立演習を新規必須から除き、旧欄を型検証して読めるようにする。Source Revision・fingerprint・task identity・claim根拠の契約を保持する。
+- [X] T029 [P] [US1] `src/lib/authoring/explanation-authoring-skill.ts`、`src/lib/authoring/problem-authoring-document.ts`、`scripts/update-abc/author.ts`と関係する訂正consumerをT028の契約へ揃え、新しい承認modeや全本文変換を導入せず、公式根拠と完全解説の品質診断を残す。
+- [X] T030 [P] [US1] `.agents/skills/abc-explanation-author/SKILL.md`、同`references/input-output-contract.md`・`review-policy.md`・`writing-policy.md`、同`templates/full-explanation.md`・`abbreviated-explanation.md`をT028の契約と憲章へ同期する。人間/別エージェント承認、毎回のmanifest/digest、固定演習要求を除き、出典・論証・保留理由の手順を維持する。
+- [X] T031 [US1] T027とschema/checkを実行し、`scripts/generate-json-schemas.ts`の登録対象に変更があれば生成schemaを同時更新する。`docs/operations/update-manual.md`へ新しい執筆/訂正手順と旧本文読込を記し、既存教材・sourceの差分0を確認する。
 
 **完了条件**: 旧本文を変換せず読め、新規出力に承認証跡を要求しない。公式根拠と完全解説の不足が検出され、skillとconsumerが同じ契約に従う。
 

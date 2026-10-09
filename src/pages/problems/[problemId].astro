@@ -123,10 +123,15 @@ const base = import.meta.env.BASE_URL;
       )
     }
   </section>
-  <p>
-    執筆: {document.unit.skill.name}
-    {document.unit.skill.version} / revision {document.unit.revision}
-  </p>
+  {
+    document.unit.skill && (
+      <p>
+        執筆: {document.unit.skill.name}
+        {document.unit.skill.version} / revision {document.unit.revision}
+      </p>
+    )
+  }
+
   <section id="explanation">
     <h2>解説</h2>
     <div class="authored-content" set:html={body} />

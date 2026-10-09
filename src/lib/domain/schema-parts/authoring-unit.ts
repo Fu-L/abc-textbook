@@ -97,19 +97,37 @@ export const LearningUnitInlineExerciseSchema = strictObject({
   ...inlineExerciseFields,
 });
 
+/** Catch unfinished outlines without guessing mathematical meaning from keywords. */
+export const ExplanationTextSchema = text.superRefine((value, context) => {
+  const prose = value.replace(/```[\s\S]*?```|~~~[\s\S]*?~~~/gu, '[code]');
+  const headings = [...prose.matchAll(/^#{1,6}\s+(.+)$/gmu)];
+  for (const [index, heading] of headings.entries()) {
+    const start = heading.index + heading[0].length;
+    const end = headings[index + 1]?.index ?? prose.length;
+    const next = headings[index + 1];
+    const hasSubsection = next !== undefined && next[0].indexOf(' ') > heading[0].indexOf(' ');
+    if (!prose.slice(start, end).trim() && !hasSubsection) {
+      context.addIssue({
+        code: 'custom',
+        message: `Explanation part has no content: ${heading[1] ?? ''}`,
+      });
+    }
+  }
+});
+
 const FullExplanationSectionsSchema = strictObject({
-  reasoning: text,
-  technique: text,
-  problemSpecificElements: text,
-  reviewAdvice: text,
-  correctness: text,
-  complexity: strictObject({ time: text, space: text }),
-  constraintConsistency: text,
-  implementationNotes: text,
+  reasoning: ExplanationTextSchema,
+  technique: ExplanationTextSchema,
+  problemSpecificElements: ExplanationTextSchema,
+  reviewAdvice: ExplanationTextSchema,
+  correctness: ExplanationTextSchema,
+  complexity: strictObject({ time: ExplanationTextSchema, space: ExplanationTextSchema }),
+  constraintConsistency: ExplanationTextSchema,
+  implementationNotes: ExplanationTextSchema,
 });
 const AbbreviatedExplanationSectionsSchema = strictObject({
-  differences: text,
-  implementationNotes: text,
+  differences: ExplanationTextSchema,
+  implementationNotes: ExplanationTextSchema,
 });
 export const ProblemAuthoringSectionKeySchema = z.enum([
   ...FullExplanationSectionsSchema.keyof().options,
@@ -130,7 +148,7 @@ const authoringUnitCommon = {
     name: text,
     version: z.string().regex(/^\d+\.\d+\.\d+$/u),
     digest: Sha256Schema,
-  }),
+  }).optional(),
   revision: z.number().int().positive(),
   claims: uniqueArray(InlineClaimSchema).min(1),
   examples: uniqueArray(InlineExampleSchema),
@@ -155,14 +173,24 @@ export const ProblemAuthoringUnitSchema = strictObject({
     const validIdentity = full
       ? unit.primaryProblemId === null && unit.differenceSummary === null
       : unit.primaryProblemId !== null && unit.differenceSummary !== null;
-    const validSections = full
-      ? FullExplanationSectionsSchema.safeParse(unit.sections).success
-      : AbbreviatedExplanationSectionsSchema.safeParse(unit.sections).success;
-    if (!validIdentity || !validSections) {
+    const parsedSections = full
+      ? FullExplanationSectionsSchema.safeParse(unit.sections)
+      : AbbreviatedExplanationSectionsSchema.safeParse(unit.sections);
+    if (!validIdentity) {
       context.addIssue({
         code: 'custom',
-        message: 'Authoring unit kind, primary Problem, and section shape conflict.',
+        path: ['primaryProblemId'],
+        message: 'Authoring unit kind and primary Problem conflict.',
       });
+    }
+    if (!parsedSections.success) {
+      for (const issue of parsedSections.error.issues) {
+        context.addIssue({
+          code: 'custom',
+          path: ['sections', ...issue.path],
+          message: issue.message,
+        });
+      }
     }
     for (const field of ['claims', 'examples', 'exercises'] as const) {
       const keys = unit[field].map(({ key }) => key);

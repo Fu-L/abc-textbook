@@ -18,6 +18,37 @@ describe('complete problem explanation input', () => {
     ).toBe(false);
   });
 
+  it('allows proof and classification checks without review mode or independent exercises', () => {
+    const details = {
+      ...metadataOnly,
+      reasoning: 'Define dp[0]=1; update dp[i]; return dp[N].',
+      riskReasons: ['independent_proof', 'major_classification_change'],
+    };
+    expect(ProblemAuthoringDetailsSchema.parse(details)).toEqual(details);
+    expect(
+      ProblemAuthoringDetailsSchema.safeParse({ ...details, reviewMode: 'third_party' }).success,
+    ).toBe(true);
+    expect(
+      ProblemAuthoringDetailsSchema.safeParse({ ...details, reviewMode: 'approved' }).success,
+    ).toBe(false);
+    expect(ProblemAuthoringDetailsSchema.safeParse({ ...details, reviewMode: 42 }).success).toBe(
+      false,
+    );
+  });
+
+  it.each(['reasoning', 'correctness', 'time', 'space'] as const)(
+    'rejects blank %s rather than treating it as authored',
+    (field) => {
+      expect(
+        ProblemAuthoringDetailsSchema.safeParse({
+          ...metadataOnly,
+          reasoning: 'Construct states and transitions.',
+          [field]: '   ',
+        }).success,
+      ).toBe(false);
+    },
+  );
+
   // This integration with the frozen corpus reads all 868 problems and their sources.
   // Give this corpus integration an explicit I/O budget when the full suite runs in CI.
   it('generates the complete manuscript without appending inventory prose or exercises', async () => {
