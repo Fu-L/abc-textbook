@@ -1,6 +1,6 @@
 # Compatibility Contract: 既存の公開・保存・更新入口を維持する
 
-この契約は移行後の条件を定義する。現行CLI・workflowは移行前のため、ここに書いた簡素化をすでに実装済みとは扱わない。既存schemaの複写や新しいAPIは作らない。
+この契約は移行後の条件を定義する。段階ごとの実装状況はtasksと更新マニュアルを参照し、未移行のworkflow等を実装済みとは扱わない。既存schemaの複写や新しいAPIは作らない。
 
 ## 公開URLと本文
 
@@ -76,12 +76,27 @@ IDでjoinし、unknown/orphanの値と日時を保持する。reload、旧DB読�
 
 | 入口                                             | 現行                                        | 目標/移行条件                                                                                                  |
 | ------------------------------------------------ | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `catalog:build`                                  | `--input --output --evidence-inventory`必須 | 同じコマンドでinput/outputを維持し、inventoryは不要へ。移行中は旧指定も検証して受理。出力上書き防止を維持      |
-| `catalog:validate`                               | `--input --evidence-inventory`必須          | 通常inputのschema・意味検証を証跡なしで行える。指定済み旧inputの型検証は維持                                   |
+| `catalog:build`                                  | `--input --output`必須、inventory任意       | 同じコマンドでinput/outputを維持し、inventoryは不要へ。移行中は旧指定も検証して受理。出力上書き防止を維持      |
+| `catalog:validate`                               | `--input`必須、inventory任意                | 通常inputのschema・意味検証を証跡なしで行える。指定済み旧inputの型検証は維持                                   |
 | `verify:fast`                                    | preview/全shard/全テスト/3browserを順次実行 | 既存runnerを通常検証へ縮小し、CIでは差分に応じた対象を選ぶ。未知差分は広い検査。失敗exitを伝播                 |
 | `abc:update`                                     | `initial-v1` fixture専用                    | 既存取得/編集で通常小batchを成立させる。専用CLI拡張が必要なら既存入口を改修。fixture専用をlive完成と報告しない |
 | `release:history`                                | host metadataと旧update/release情報を要求   | 既存writerを実Pages/Actions成功と既存indexの追記に縮小。過去entryの書換え・duplicate拒否を維持                 |
 | `abc:review` / `verify:release` / `abc:deploy`等 | 旧承認・台帳・adapterに依存                 | 全consumer移行後にpackage入口と専用実装を削除。成功のno-opに置換しない                                         |
+
+PR-05でcatalog
+CLIの通常経路を移行した。repository内のstaging以外にある、現行正本と一致するJSONを入力する。
+
+```sh
+npm run catalog:validate -- --input docs/verification/releases/catalog.json
+mkdir -p build
+npm run catalog:build -- --input docs/verification/releases/catalog.json --output build/validated-catalog.json
+```
+
+schema・ID・参照・出典/claim・配置と本文、Tag/Outcome/Unitの3DAG・読書順の検証を維持する。型違反・重複ID・未知参照・循環・欠落本文・正本との差を拒否し、既存outputのbytesを上書きしない。未知・重複・値欠落の引数は64、意味検証失敗は2、実行失敗は70を維持する。旧欄の値を保持し、存在するsnapshot
+digestは照合する。`prepared`の検証成功を公開成功に数えない。
+
+`--evidence-inventory`はPR-07の公開consumer移行後、PR-10の旧consumer整理まで残す。指定時は従来のprotected-base/manifest・inventory全体・check/review・実行例証跡を検証し、不正な旧指定を成功扱いしない。旧release/deploy
+consumerと通常buildのprepared版照合はまだ残る。新しい訂正では変更前後のcatalogと前提を`scope`として影響先の完全性を検査し、証跡登録を要求しない。具体的な入力と復旧は[更新マニュアル](../../../docs/operations/update-manual.md#catalog-cliの移行002--pr-05)を参照する。
 
 公開CLIを黙って無視する引数に変えない。互換引数を残す期間と削除はマニュアルに記載する。新しい通常CLI仕様の詳細は、その必要が判明した実装PRで既存契約に追記し、今回新しい汎用CLI群を設計しない。
 

@@ -1,43 +1,24 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 
-import { buildCatalog, CatalogBuildError } from '../src/lib/catalog/build-catalog.js';
-import {
-  CatalogEvidenceInventoryError,
-  loadCatalogEvidenceCanonicalSources,
-  loadTrustedCatalogReleaseEvidenceInventory,
-} from '../src/lib/catalog/evidence-inventory.js';
-import {
-  CatalogPublicationBoundaryError,
-  resolvePublicCatalogInput,
-} from '../src/lib/catalog/publication-boundary.js';
+import { CatalogBuildError } from '../src/lib/catalog/build-catalog.js';
+import { CatalogEvidenceInventoryError } from '../src/lib/catalog/evidence-inventory.js';
+import { CatalogPublicationBoundaryError } from '../src/lib/catalog/publication-boundary.js';
 
-const valueAfter = (args: readonly string[], flag: string): string | undefined => {
-  const index = args.indexOf(flag);
-  return index < 0 ? undefined : args[index + 1];
-};
+import { loadCatalogInput, parseCatalogArgs } from './catalog-input.js';
 
-const args = process.argv.slice(2);
-const inputPath = valueAfter(args, '--input');
-const outputPath = valueAfter(args, '--output');
-const evidencePath = valueAfter(args, '--evidence-inventory');
-if (!inputPath || !outputPath || !evidencePath || args.length !== 6) {
+let args: ReturnType<typeof parseCatalogArgs> | undefined;
+try {
+  args = parseCatalogArgs(process.argv.slice(2), true);
+} catch {
   console.error(
-    'Usage: catalog-build --input CATALOG.json --output PATH --evidence-inventory INVENTORY.json',
+    'Usage: catalog-build --input CATALOG.json --output PATH [--evidence-inventory INVENTORY.json]',
   );
   process.exitCode = 64;
-} else {
+}
+if (args?.input && args.output) {
   try {
-    const resolvedInputPath = await resolvePublicCatalogInput(inputPath);
-    const input = JSON.parse(await readFile(resolvedInputPath, 'utf8')) as unknown;
-    const canonicalSources = await loadCatalogEvidenceCanonicalSources(input, process.cwd(), {
-      catalogPath: resolvedInputPath,
-    });
-    const trustedEvidence = await loadTrustedCatalogReleaseEvidenceInventory(
-      evidencePath,
-      canonicalSources,
-    );
-    const catalog = buildCatalog(input, [], trustedEvidence);
-    await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`, { flag: 'wx' });
+    const catalog = await loadCatalogInput(args.input, args['evidence-inventory']);
+    await writeFile(args.output, `${JSON.stringify(catalog, null, 2)}\n`, { flag: 'wx' });
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode =

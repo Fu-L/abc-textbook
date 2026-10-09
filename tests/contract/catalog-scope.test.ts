@@ -8,6 +8,7 @@ import {
 } from '../../src/lib/catalog/advanced-slot-registry.js';
 import {
   buildCatalog,
+  buildCanonicalCatalog,
   validateCatalogSemantics,
   type CatalogLike,
 } from '../../src/lib/catalog/build-catalog.js';
@@ -18,6 +19,7 @@ import {
   type PreviewCohortRules,
 } from '../../src/lib/preview/cohort-selection.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
+import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
 import {
   frozenInitialV1RulesDigest,
@@ -50,6 +52,45 @@ const readJson = async <T>(filePath: string): Promise<T> =>
   JSON.parse(await readFile(filePath, 'utf8')) as T;
 
 describe('US2 catalog scope contract', () => {
+  it('builds content without release ledgers while keeping semantic diagnostics', () => {
+    const catalog = CatalogSchema.parse(
+      JSON.parse(JSON.stringify(makeTrustedCatalog({})).replaceAll('abc212-x45', 'abc212-e')),
+    );
+    const problem = catalog.problems[0];
+    if (!problem) throw new Error('Missing Problem fixture.');
+    problem.placementId = 'placement-abc212-e';
+    catalog.placements = [
+      {
+        id: problem.placementId,
+        problemId: problem.id,
+        policyVersion: '1.0.0',
+        kind: 'full',
+        primaryProblemId: null,
+        sharedOutcomeIds: [],
+        additionalElement: null,
+        comparison: {
+          method: 'Fixture method.',
+          proof: 'Fixture proof.',
+          complexity: 'O(1).',
+          constraints: 'Fixture constraints.',
+          prerequisites: 'Fixture prerequisites.',
+          implementation: 'Fixture implementation.',
+        },
+        rationale: 'Fixture placement.',
+        evidenceIds: ['evidence-official-analysis'],
+      },
+    ];
+    Reflect.deleteProperty(catalog.release, 'manifestDigest');
+    Reflect.deleteProperty(catalog.release, 'contentFileInventoryDigest');
+    Reflect.deleteProperty(catalog.release, 'contentSnapshotDigest');
+    Reflect.deleteProperty(catalog.release, 'validationSummary');
+    Reflect.deleteProperty(catalog.release, 'humanContentReviewEvidenceRefs');
+    expect(buildCanonicalCatalog(catalog).problems.length).toBe(catalog.problems.length);
+    expect(() => buildCatalog(catalog)).toThrow('RELEASE_EVIDENCE_INVENTORY_REQUIRED');
+    catalog.problems.push(structuredClone(problem));
+    expect(() => buildCanonicalCatalog(catalog)).toThrow('DUPLICATE_PROBLEM_ID');
+  });
+
   it('freezes valid, non-overlapping learning-outcome review units before story changes', async () => {
     const manifest = await readJson<unknown>('docs/work-manifests/initial/us2/manifest.json');
     expect(() => {

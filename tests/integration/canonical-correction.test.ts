@@ -6,16 +6,127 @@ import {
   CatalogSchema,
   LearningUnitSchema,
   SourceRevisionSchema,
+  CanonicalLearningPrerequisitesSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import { readProblemAuthoringDocument } from '../../src/lib/authoring/problem-authoring-document.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
+import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
 import {
   enumerateCanonicalCorrectionImpact,
   verifyCanonicalCorrectionTargets,
 } from '../../src/lib/catalog/correction-targets.js';
 
 describe('canonical correction target validation', () => {
+  it('rejects omitted before/after home, related, claim-source, prerequisite and index targets without registering evidence', async () => {
+    const catalog = CatalogSchema.parse(makeTrustedCatalog({}));
+    const home = catalog.learningUnits[0];
+    const problem = catalog.authoringUnits[0];
+    const source = catalog.sources[0];
+    if (!home || !problem || !source) throw new Error('Missing fixture.');
+    catalog.learningUnits.push({
+      ...structuredClone(home),
+      id: 'unit-old-home',
+      docPath: 'old.md',
+      problemIds: [],
+      sourceRevisionIds: [],
+    });
+    catalog.learningUnits.push({
+      ...structuredClone(home),
+      id: 'unit-dependent',
+      docPath: 'dependent.md',
+      problemIds: [],
+      sourceRevisionIds: [],
+    });
+    catalog.learningUnits.push({
+      ...structuredClone(home),
+      id: 'unit-prerequisite',
+      docPath: 'prerequisite.md',
+      problemIds: [],
+      sourceRevisionIds: [],
+    });
+    const previousCatalog = structuredClone(catalog);
+    const oldHome = previousCatalog.learningUnits[1];
+    const oldProblem = previousCatalog.authoringUnits[0];
+    const oldClaim = oldProblem?.claims[0];
+    if (!oldHome || !oldProblem || !oldClaim) throw new Error('Missing previous fixture.');
+    oldHome.relatedProblemIds = [problem.problemId];
+    oldProblem.additionalPrerequisiteUnitIds = ['unit-prerequisite'];
+    // The changed source is used only by a claim, rather than the document's top-level references.
+    const claimSource = 'source-claim';
+    const previousSource = 'source-previous-claim';
+    catalog.sources.push({ ...source, id: claimSource }, { ...source, id: previousSource });
+    const currentClaim = problem.claims[0];
+    if (!currentClaim) throw new Error('Missing current claim.');
+    currentClaim.sourceRevisionIds = [claimSource];
+    oldClaim.sourceRevisionIds = [previousSource];
+    const policy = (edges: { nodeId: string; prerequisiteId: string }[]) =>
+      CanonicalLearningPrerequisitesSchema.parse({
+        schemaVersion: '1.0.0',
+        sourceBuild: {
+          id: 'build-test',
+          digest: 'a'.repeat(64),
+          acceptedAt: '2026-10-05T00:00:00Z',
+        },
+        tagPrerequisites: [],
+        learningOutcomePrerequisites: [],
+        learningUnitPrerequisites: edges,
+        tagDagDigest: canonicalDigest([]),
+        learningOutcomeDagDigest: canonicalDigest([]),
+        learningUnitDagDigest: canonicalDigest(edges),
+      });
+    const scope = {
+      previousCatalog,
+      correctionId: 'correction-test',
+      sourceRevisionId: claimSource,
+      sourceRevisionIds: [previousSource],
+      problemIds: [],
+      changeSummary: 'Correct claim and placement.',
+      derivedIndexPaths: ['index.json'],
+      prerequisites: policy([]),
+      previousPrerequisites: policy([{ nodeId: 'unit-dependent', prerequisiteId: home.id }]),
+    };
+    const impact = enumerateCorrectionImpacts({ ...scope, catalog });
+    expect(impact.affectedContentLocators).toContainEqual({
+      ownerType: 'learning_unit',
+      learningUnitId: 'unit-old-home',
+      path: 'content',
+    });
+    expect(impact.affectedContentLocators).toContainEqual({
+      ownerType: 'learning_unit',
+      learningUnitId: 'unit-dependent',
+      path: 'content',
+    });
+    expect(impact.affectedContentLocators).toContainEqual({
+      ownerType: 'learning_unit',
+      learningUnitId: 'unit-prerequisite',
+      path: 'content',
+    });
+    const verify = (value: unknown) =>
+      verifyCanonicalCorrectionTargets({
+        impact: value,
+        catalog,
+        scope,
+        readTarget: () => Promise.reject(new Error('TARGET_READING_REACHED')),
+        indexProjections: new Map(),
+      });
+    for (const locator of impact.affectedContentLocators)
+      await expect(
+        verify({
+          ...impact,
+          affectedContentLocators: impact.affectedContentLocators.filter(
+            (item) => canonicalDigest(item) !== canonicalDigest(locator),
+          ),
+        }),
+      ).rejects.toThrow('CORRECTION_TARGET_OMITTED');
+    await expect(verify({ ...impact, sourceRevisionIds: [claimSource] })).rejects.toThrow(
+      'CORRECTION_SOURCE_OMITTED',
+    );
+    await expect(verify({ ...impact, derivedIndexPaths: [] })).rejects.toThrow(
+      'CORRECTION_INDEX_OMITTED',
+    );
+    await expect(verify(impact)).rejects.toThrow('TARGET_READING_REACHED');
+  });
   it('enumerates full owners and actual optional blocks without the retired standard order', () => {
     const catalog = CatalogSchema.parse(makeTrustedCatalog({}));
     const source = catalog.sources[0];
@@ -246,6 +357,12 @@ describe('canonical correction target validation', () => {
     expect(unit.problemIds).not.toContain(problemId);
     expect(unit.sourceRevisionIds.some((id) => problem.sourceRevisionIds.includes(id))).toBe(false);
     catalog.learningUnits = [unit];
+    for (const id of problem.additionalPrerequisiteUnitIds.filter((id) => id !== unit.id))
+      catalog.learningUnits.push(
+        LearningUnitSchema.parse(
+          JSON.parse(await readFile(`src/content/learning-units/${id}.json`, 'utf8')) as unknown,
+        ),
+      );
     catalog.authoringUnits = [problem];
     catalog.sources = await Promise.all(
       problem.sourceRevisionIds.map(async (id) =>

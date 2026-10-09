@@ -1,5 +1,6 @@
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { CorrectionImpactSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import { enumerateCanonicalCorrectionImpact } from '../../src/lib/catalog/correction-targets.js';
 
 export interface CorrectionLocator {
   readonly problemId: string;
@@ -9,13 +10,18 @@ export interface CorrectionLocator {
   readonly indexPaths: readonly string[];
 }
 
-export const enumerateCorrectionImpacts = (input: {
-  readonly correctionId: string;
-  readonly sourceRevisionId: string;
-  readonly problemIds: readonly string[];
-  readonly changedBlocks: readonly string[];
-  readonly locators: readonly CorrectionLocator[];
-}) => {
+export const enumerateCorrectionImpacts = (
+  input:
+    | Parameters<typeof enumerateCanonicalCorrectionImpact>[0]
+    | {
+        readonly correctionId: string;
+        readonly sourceRevisionId: string;
+        readonly problemIds: readonly string[];
+        readonly changedBlocks: readonly string[];
+        readonly locators: readonly CorrectionLocator[];
+      },
+) => {
+  if ('catalog' in input) return enumerateCanonicalCorrectionImpact(input);
   const locators = input.problemIds.map((problemId) => {
     const locator = input.locators.find((candidate) => candidate.problemId === problemId);
     if (!locator) throw new Error(`CORRECTION_LOCATOR_MISSING:${problemId}`);

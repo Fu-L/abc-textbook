@@ -421,7 +421,8 @@ export const projectCatalogContent = (catalog: CatalogLike): Readonly<Record<str
   const projection: Record<string, unknown> = {};
   for (const key of catalogContentKeys) projection[key] = catalog[key];
   const immutableReleaseScope: Record<string, unknown> = {};
-  for (const key of immutableReleaseScopeKeys) immutableReleaseScope[key] = catalog.release[key];
+  for (const key of immutableReleaseScopeKeys)
+    if (catalog.release[key] !== undefined) immutableReleaseScope[key] = catalog.release[key];
   if (catalog.release.publicationStatus !== undefined)
     immutableReleaseScope.publicationStatus = catalog.release.publicationStatus;
   projection.release = immutableReleaseScope;
@@ -513,26 +514,8 @@ export const buildCatalog = (
   return Object.freeze(catalog);
 };
 
-export const validateCatalogSemantics = (
-  catalog: CatalogLike,
-  trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
-  options: { readonly allowPreparedRelease?: boolean } = {},
-): ValidationDiagnostic[] => {
+export const validateCatalogContentSemantics = (catalog: CatalogLike): ValidationDiagnostic[] => {
   const diagnostics: ValidationDiagnostic[] = [];
-  if (catalog.release.publicationStatus === 'prepared' && !options.allowPreparedRelease)
-    diagnostics.push({
-      code: 'PUBLIC_PROJECTION_NOT_RELEASE',
-      message:
-        'Prepared T160 projections must pass the later production release gate before publication.',
-    });
-  const expectedContentSnapshotDigest = catalogContentDigest(catalog);
-  if (catalog.release.contentSnapshotDigest !== expectedContentSnapshotDigest) {
-    diagnostics.push({
-      code: 'CONTENT_SNAPSHOT_DIGEST_MISMATCH',
-      message:
-        'release.contentSnapshotDigest must match the normalized public catalog content projection.',
-    });
-  }
   const contestIds = new Set(catalog.contests.map(({ id }) => id));
   if (contestIds.size !== catalog.contests.length) {
     diagnostics.push({ code: 'DUPLICATE_CONTEST_ID', message: 'Contest IDs must be unique.' });
@@ -906,121 +889,6 @@ export const validateCatalogSemantics = (
     }
   };
   const scopeTargets = new Set([...tagIds, ...unitIds, ...problemIds]);
-  const validationSummary = catalog.release.validationSummary;
-  const releaseChecks = validationSummary?.checks ?? [];
-  const releaseEvidenceDigests = validationSummary?.evidenceDigests ?? [];
-  const releaseCheckIds = releaseChecks.map(({ checkId }) => checkId);
-  const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
-  const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs ?? [];
-  const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
-  const agentReview = catalog.release.agentQualityReviewEvidenceRef;
-  const trustedAgentReview = trustedEvidence?.agentQualityReview;
-  const agentReviewComplete =
-    agentReview !== undefined &&
-    trustedAgentReview !== undefined &&
-    canonicalDigest(agentReview) === canonicalDigest(trustedAgentReview) &&
-    agentReview.subjectDigest === catalog.release.contentFileInventoryDigest &&
-    catalog.release.releaseKind === 'initial' &&
-    catalog.release.firstContestId === 'abc212' &&
-    catalog.release.lastContestId === 'abc466' &&
-    catalog.release.problemCount === 868 &&
-    catalog.release.cutoffAt === '2026-07-12T00:00:00+09:00' &&
-    catalog.release.updateIds.length === 1 &&
-    catalog.release.updateIds[0] === 'update-bootstrap-full-corpus' &&
-    reviewEvidenceRefs.length === 0;
-  const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
-    const sortedLeft = [...left].sort();
-    const sortedRight = [...right].sort();
-    return (
-      sortedLeft.length === sortedRight.length &&
-      sortedLeft.every((item, index) => item === sortedRight[index])
-    );
-  };
-  const sameCheck = (
-    left: (typeof releaseChecks)[number],
-    right: TrustedCatalogReleaseEvidenceInventory['checks'][number],
-  ): boolean =>
-    left.checkId === right.checkId &&
-    left.command === right.command &&
-    left.subjectDigest === right.subjectDigest &&
-    left.resultPath === right.resultPath &&
-    left.resultDigest === right.resultDigest &&
-    left.exitCode === right.exitCode &&
-    left.passed === right.passed &&
-    left.completedAt === right.completedAt;
-  const sameReview = (
-    left: (typeof reviewEvidenceRefs)[number],
-    right: TrustedCatalogReleaseEvidenceInventory['reviews'][number],
-  ): boolean =>
-    left.evidenceId === right.evidenceId &&
-    left.path === right.path &&
-    left.digest === right.digest &&
-    left.subjectDigest === right.subjectDigest &&
-    left.aggregatePassed === right.aggregatePassed &&
-    left.reviewMode === right.reviewMode &&
-    sameStringSet(left.authorIds, right.authorIds) &&
-    sameStringSet(left.reviewerIds, right.reviewerIds);
-  const releaseEvidenceComplete =
-    validationSummary !== undefined &&
-    validationSummary.checkCount > 0 &&
-    validationSummary.passedCheckCount === validationSummary.checkCount &&
-    validationSummary.blockingFindingCount === 0 &&
-    releaseChecks.length === validationSummary.checkCount &&
-    new Set(releaseCheckIds).size === releaseCheckIds.length &&
-    new Set(releaseResultDigests).size === releaseResultDigests.length &&
-    sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
-    (reviewEvidenceRefs.length > 0 || agentReviewComplete) &&
-    (agentReview === undefined ? trustedAgentReview === undefined : agentReviewComplete) &&
-    new Set(reviewEvidenceIds).size === reviewEvidenceIds.length &&
-    reviewEvidenceRefs.every(
-      (review) =>
-        review.aggregatePassed &&
-        review.subjectDigest === catalog.release.contentFileInventoryDigest &&
-        review.reviewerIds.length > 0 &&
-        review.authorIds.length > 0 &&
-        (review.reviewMode === 'self' ||
-          !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId))),
-    ) &&
-    releaseChecks.every(
-      (check) =>
-        check.subjectDigest === catalog.release.contentFileInventoryDigest &&
-        check.exitCode === 0 &&
-        check.passed,
-    ) &&
-    trustedEvidence !== undefined &&
-    trustedEvidence.subjectDigest === catalog.release.contentFileInventoryDigest &&
-    trustedEvidence.checks.length === releaseChecks.length &&
-    trustedEvidence.reviews.length === reviewEvidenceRefs.length &&
-    sameStringSet(
-      trustedEvidence.checks.map(({ checkId }) => checkId),
-      releaseCheckIds,
-    ) &&
-    trustedEvidence.checks.every((trustedCheck) => {
-      const releaseCheck = releaseChecks.find(({ checkId }) => checkId === trustedCheck.checkId);
-      return releaseCheck !== undefined && sameCheck(releaseCheck, trustedCheck);
-    }) &&
-    sameStringSet(
-      trustedEvidence.reviews.map(({ evidenceId }) => evidenceId),
-      reviewEvidenceIds,
-    ) &&
-    trustedEvidence.reviews.every((trustedReview) => {
-      const review = reviewEvidenceRefs.find(
-        ({ evidenceId }) => evidenceId === trustedReview.evidenceId,
-      );
-      return review !== undefined && sameReview(review, trustedReview);
-    });
-  if (!trustedEvidence) {
-    diagnostics.push({
-      code: 'RELEASE_EVIDENCE_INVENTORY_REQUIRED',
-      message: 'Catalog publication requires the trusted release check and review inventory.',
-    });
-  } else if (!releaseEvidenceComplete) {
-    diagnostics.push({
-      code: 'RELEASE_EVIDENCE_INCOMPLETE',
-      message:
-        'Every release check and policy-selected review must match the trusted current subject before publication.',
-    });
-  }
   for (const inventory of catalog.techniqueInventory) {
     requireRefs(inventory.problemId, 'problemId', [inventory.problemId], problemIds);
     requireRefs(inventory.problemId, 'sourceRevisionIds', inventory.sourceRevisionIds, sourceIds);
@@ -1447,46 +1315,6 @@ export const validateCatalogSemantics = (
       }
     }
   }
-  const expectedExecutableExamples = deriveExecutableExampleInventory(catalog);
-  const expectedExecutableExampleKeys = expectedExecutableExamples.map(
-    executableExampleEvidenceLocatorKey,
-  );
-  const trustedExecutableEvidence = trustedEvidence?.executableExampleEvidence?.evidence;
-  if (expectedExecutableExamples.length === 0) {
-    if (trustedExecutableEvidence) {
-      diagnostics.push({
-        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_UNEXPECTED',
-        message: 'Executable example evidence exists but the Catalog has no executable examples.',
-      });
-    }
-  } else if (!trustedExecutableEvidence) {
-    diagnostics.push({
-      code: 'EXECUTABLE_EXAMPLE_EVIDENCE_REQUIRED',
-      message: 'Publication requires evidence for every executable example.',
-    });
-  } else {
-    const actualExecutableExampleKeys = trustedExecutableEvidence.items.map(
-      executableExampleEvidenceLocatorKey,
-    );
-    const expectedSubjectDigest = catalog.release.contentSnapshotDigest;
-    const evidenceMatchesInventory =
-      trustedExecutableEvidence.subjectDigest === expectedSubjectDigest &&
-      trustedExecutableEvidence.inventoryDigest === executableExampleInventoryDigest(catalog) &&
-      trustedExecutableEvidence.inventoryCount === expectedExecutableExamples.length &&
-      trustedExecutableEvidence.checkedCount === expectedExecutableExamples.length &&
-      trustedExecutableEvidence.aggregatePassed &&
-      trustedExecutableEvidence.items.every(
-        (item) => item.passed && item.subjectDigest === expectedSubjectDigest,
-      ) &&
-      sameStringSet(actualExecutableExampleKeys, expectedExecutableExampleKeys);
-    if (!evidenceMatchesInventory) {
-      diagnostics.push({
-        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH',
-        message:
-          'Executable example evidence must exactly match the Catalog locator inventory and subject digest.',
-      });
-    }
-  }
   const problemContentPathExists = (
     unit: CatalogLike['authoringUnits'][number],
     path: string,
@@ -1689,4 +1517,211 @@ export const validateCatalogSemantics = (
     (left, right) =>
       left.code.localeCompare(right.code) || left.message.localeCompare(right.message),
   );
+};
+
+const sameStringSet = (left: readonly string[], right: readonly string[]): boolean => {
+  const sortedLeft = [...left].sort();
+  const sortedRight = [...right].sort();
+  return (
+    sortedLeft.length === sortedRight.length &&
+    sortedLeft.every((item, index) => item === sortedRight[index])
+  );
+};
+
+/** Legacy publication gate retained for release/deploy consumers and explicit inventory calls. */
+export const validateCatalogReleaseEvidence = (
+  catalog: CatalogLike,
+  trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
+): ValidationDiagnostic[] => {
+  const diagnostics: ValidationDiagnostic[] = [];
+  if (catalog.release.publicationStatus === 'prepared' && !options.allowPreparedRelease)
+    diagnostics.push({
+      code: 'PUBLIC_PROJECTION_NOT_RELEASE',
+      message:
+        'Prepared T160 projections must pass the later production release gate before publication.',
+    });
+  const expectedContentSnapshotDigest = catalogContentDigest(catalog);
+  if (catalog.release.contentSnapshotDigest !== expectedContentSnapshotDigest) {
+    diagnostics.push({
+      code: 'CONTENT_SNAPSHOT_DIGEST_MISMATCH',
+      message:
+        'release.contentSnapshotDigest must match the normalized public catalog content projection.',
+    });
+  }
+  const validationSummary = catalog.release.validationSummary;
+  const releaseChecks = validationSummary?.checks ?? [];
+  const releaseEvidenceDigests = validationSummary?.evidenceDigests ?? [];
+  const releaseCheckIds = releaseChecks.map(({ checkId }) => checkId);
+  const releaseResultDigests = releaseChecks.map(({ resultDigest }) => resultDigest);
+  const reviewEvidenceRefs = catalog.release.humanContentReviewEvidenceRefs ?? [];
+  const reviewEvidenceIds = reviewEvidenceRefs.map(({ evidenceId }) => evidenceId);
+  const agentReview = catalog.release.agentQualityReviewEvidenceRef;
+  const trustedAgentReview = trustedEvidence?.agentQualityReview;
+  const agentReviewComplete =
+    agentReview !== undefined &&
+    trustedAgentReview !== undefined &&
+    canonicalDigest(agentReview) === canonicalDigest(trustedAgentReview) &&
+    agentReview.subjectDigest === catalog.release.contentFileInventoryDigest &&
+    catalog.release.releaseKind === 'initial' &&
+    catalog.release.firstContestId === 'abc212' &&
+    catalog.release.lastContestId === 'abc466' &&
+    catalog.release.problemCount === 868 &&
+    catalog.release.cutoffAt === '2026-07-12T00:00:00+09:00' &&
+    catalog.release.updateIds.length === 1 &&
+    catalog.release.updateIds[0] === 'update-bootstrap-full-corpus' &&
+    reviewEvidenceRefs.length === 0;
+  const sameCheck = (
+    left: (typeof releaseChecks)[number],
+    right: TrustedCatalogReleaseEvidenceInventory['checks'][number],
+  ): boolean =>
+    left.checkId === right.checkId &&
+    left.command === right.command &&
+    left.subjectDigest === right.subjectDigest &&
+    left.resultPath === right.resultPath &&
+    left.resultDigest === right.resultDigest &&
+    left.exitCode === right.exitCode &&
+    left.passed === right.passed &&
+    left.completedAt === right.completedAt;
+  const sameReview = (
+    left: (typeof reviewEvidenceRefs)[number],
+    right: TrustedCatalogReleaseEvidenceInventory['reviews'][number],
+  ): boolean =>
+    left.evidenceId === right.evidenceId &&
+    left.path === right.path &&
+    left.digest === right.digest &&
+    left.subjectDigest === right.subjectDigest &&
+    left.aggregatePassed === right.aggregatePassed &&
+    left.reviewMode === right.reviewMode &&
+    sameStringSet(left.authorIds, right.authorIds) &&
+    sameStringSet(left.reviewerIds, right.reviewerIds);
+  const releaseEvidenceComplete =
+    validationSummary !== undefined &&
+    validationSummary.checkCount > 0 &&
+    validationSummary.passedCheckCount === validationSummary.checkCount &&
+    validationSummary.blockingFindingCount === 0 &&
+    releaseChecks.length === validationSummary.checkCount &&
+    new Set(releaseCheckIds).size === releaseCheckIds.length &&
+    new Set(releaseResultDigests).size === releaseResultDigests.length &&
+    sameStringSet(releaseEvidenceDigests, releaseResultDigests) &&
+    (reviewEvidenceRefs.length > 0 || agentReviewComplete) &&
+    (agentReview === undefined ? trustedAgentReview === undefined : agentReviewComplete) &&
+    new Set(reviewEvidenceIds).size === reviewEvidenceIds.length &&
+    reviewEvidenceRefs.every(
+      (review) =>
+        review.aggregatePassed &&
+        review.subjectDigest === catalog.release.contentFileInventoryDigest &&
+        review.reviewerIds.length > 0 &&
+        review.authorIds.length > 0 &&
+        (review.reviewMode === 'self' ||
+          !review.authorIds.some((authorId) => review.reviewerIds.includes(authorId))),
+    ) &&
+    releaseChecks.every(
+      (check) =>
+        check.subjectDigest === catalog.release.contentFileInventoryDigest &&
+        check.exitCode === 0 &&
+        check.passed,
+    ) &&
+    trustedEvidence !== undefined &&
+    trustedEvidence.subjectDigest === catalog.release.contentFileInventoryDigest &&
+    trustedEvidence.checks.length === releaseChecks.length &&
+    trustedEvidence.reviews.length === reviewEvidenceRefs.length &&
+    sameStringSet(
+      trustedEvidence.checks.map(({ checkId }) => checkId),
+      releaseCheckIds,
+    ) &&
+    trustedEvidence.checks.every((trustedCheck) => {
+      const releaseCheck = releaseChecks.find(({ checkId }) => checkId === trustedCheck.checkId);
+      return releaseCheck !== undefined && sameCheck(releaseCheck, trustedCheck);
+    }) &&
+    sameStringSet(
+      trustedEvidence.reviews.map(({ evidenceId }) => evidenceId),
+      reviewEvidenceIds,
+    ) &&
+    trustedEvidence.reviews.every((trustedReview) => {
+      const review = reviewEvidenceRefs.find(
+        ({ evidenceId }) => evidenceId === trustedReview.evidenceId,
+      );
+      return review !== undefined && sameReview(review, trustedReview);
+    });
+  if (!trustedEvidence) {
+    diagnostics.push({
+      code: 'RELEASE_EVIDENCE_INVENTORY_REQUIRED',
+      message: 'Catalog publication requires the trusted release check and review inventory.',
+    });
+  } else if (!releaseEvidenceComplete) {
+    diagnostics.push({
+      code: 'RELEASE_EVIDENCE_INCOMPLETE',
+      message:
+        'Every release check and policy-selected review must match the trusted current subject before publication.',
+    });
+  }
+  const expectedExecutableExamples = deriveExecutableExampleInventory(catalog);
+  const expectedExecutableExampleKeys = expectedExecutableExamples.map(
+    executableExampleEvidenceLocatorKey,
+  );
+  const trustedExecutableEvidence = trustedEvidence?.executableExampleEvidence?.evidence;
+  if (expectedExecutableExamples.length === 0) {
+    if (trustedExecutableEvidence) {
+      diagnostics.push({
+        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_UNEXPECTED',
+        message: 'Executable example evidence exists but the Catalog has no executable examples.',
+      });
+    }
+  } else if (!trustedExecutableEvidence) {
+    diagnostics.push({
+      code: 'EXECUTABLE_EXAMPLE_EVIDENCE_REQUIRED',
+      message: 'Publication requires evidence for every executable example.',
+    });
+  } else {
+    const actualExecutableExampleKeys = trustedExecutableEvidence.items.map(
+      executableExampleEvidenceLocatorKey,
+    );
+    const expectedSubjectDigest = catalog.release.contentSnapshotDigest;
+    const evidenceMatchesInventory =
+      trustedExecutableEvidence.subjectDigest === expectedSubjectDigest &&
+      trustedExecutableEvidence.inventoryDigest === executableExampleInventoryDigest(catalog) &&
+      trustedExecutableEvidence.inventoryCount === expectedExecutableExamples.length &&
+      trustedExecutableEvidence.checkedCount === expectedExecutableExamples.length &&
+      trustedExecutableEvidence.aggregatePassed &&
+      trustedExecutableEvidence.items.every(
+        (item) => item.passed && item.subjectDigest === expectedSubjectDigest,
+      ) &&
+      sameStringSet(actualExecutableExampleKeys, expectedExecutableExampleKeys);
+    if (!evidenceMatchesInventory) {
+      diagnostics.push({
+        code: 'EXECUTABLE_EXAMPLE_EVIDENCE_MISMATCH',
+        message:
+          'Executable example evidence must exactly match the Catalog locator inventory and subject digest.',
+      });
+    }
+  }
+  return diagnostics;
+};
+
+/** Compatibility entry point: existing release consumers still receive both sets of diagnostics. */
+export const validateCatalogSemantics = (
+  catalog: CatalogLike,
+  trustedEvidence?: TrustedCatalogReleaseEvidenceInventory,
+  options: { readonly allowPreparedRelease?: boolean } = {},
+): ValidationDiagnostic[] =>
+  [
+    ...validateCatalogContentSemantics(catalog),
+    ...validateCatalogReleaseEvidence(catalog, trustedEvidence, options),
+  ].sort((a, b) => a.code.localeCompare(b.code) || a.message.localeCompare(b.message));
+
+/** Normal catalog generation validates content independently of legacy publication receipts. */
+export const buildCanonicalCatalog = (input: unknown): CatalogLike => {
+  const catalog = assembleCatalog(input);
+  const diagnostics = validateCatalogContentSemantics(catalog);
+  if (
+    catalog.release.contentSnapshotDigest !== undefined &&
+    catalog.release.contentSnapshotDigest !== catalogContentDigest(catalog)
+  )
+    diagnostics.push({
+      code: 'CONTENT_SNAPSHOT_DIGEST_MISMATCH',
+      message: 'Catalog snapshot does not match its content.',
+    });
+  if (diagnostics.length) throw new CatalogBuildError(diagnostics);
+  return Object.freeze(catalog);
 };
