@@ -5,6 +5,8 @@ import { z } from 'zod';
 
 import { isOffsetDateTime } from '../domain/date-time.js';
 import { ProblemIdSchema } from '../domain/schema-parts/content-common.js';
+import type { CorpusMetadataBatch } from './types.js';
+import { verifyCorpusMetadataBatch } from './verification.js';
 
 export const ATCODER_PROBLEMS_METRICS_PATH = 'src/content/problem-metrics/atcoder-problems.json';
 export const ATCODER_PROBLEMS_SOURCES = Object.freeze({
@@ -142,6 +144,32 @@ export const loadCanonicalProblemIdentities = async (
     identities.push(parseCanonicalProblemJson(value, filePath));
   }
   return parseCanonicalProblemIdentities(identities);
+};
+
+/** Select new Problems from a complete official artifact before canonical insertion. */
+export const loadMetadataBatchProblemIdentities = async (
+  filePath: string,
+): Promise<readonly CanonicalProblemIdentity[]> => {
+  const value: unknown = JSON.parse(await readFile(filePath, 'utf8'));
+  const header = z
+    .object({
+      batchId: z.string().min(1),
+      firstContestNumber: z.number().int().positive(),
+      lastContestNumber: z.number().int().positive(),
+    })
+    .safeParse(value);
+  if (!header.success || header.data.firstContestNumber > header.data.lastContestNumber) {
+    return fail('METADATA_BATCH_INVALID', filePath);
+  }
+  verifyCorpusMetadataBatch(value, {
+    id: header.data.batchId,
+    firstContestNumber: header.data.firstContestNumber,
+    lastContestNumber: header.data.lastContestNumber,
+  });
+  const artifact = value as CorpusMetadataBatch;
+  return parseCanonicalProblemIdentities(
+    artifact.problems.map(({ id, officialTaskId }) => ({ id, officialTaskId })),
+  );
 };
 
 const parseProblemModels = (value: unknown): Readonly<Record<string, unknown>> => {

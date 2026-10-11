@@ -1,4 +1,4 @@
-import { access, realpath } from 'node:fs/promises';
+import { access } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -24,6 +24,7 @@ import {
 import { discoverMetadataBatch } from '../update-abc/discover.js';
 import { metadataAcquisitionHold } from '../update-abc/acquire.js';
 import {
+  assertTemporaryOutput,
   parseKeyValueArguments,
   CorpusCliError,
   readJson,
@@ -44,22 +45,6 @@ const pathExists = async (filePath: string): Promise<boolean> => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false;
     throw error;
   }
-};
-
-/** Prevent accidental canonical writes, including a symlink into the checkout. */
-const assertTemporaryOutput = async (directory: string, repositoryRoot: string) => {
-  let parent = directory;
-  while (!(await pathExists(parent))) parent = path.dirname(parent);
-  const resolved = path.join(await realpath(parent), path.relative(parent, directory));
-  const relative = path.relative(await realpath(repositoryRoot), resolved);
-  if (
-    relative === '' ||
-    (!relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative))
-  )
-    throw new CorpusCliError(
-      'OUTPUT_INSIDE_REPOSITORY',
-      'Use a temporary acquisition directory outside the checkout.',
-    );
 };
 
 /** The same entry point serves bootstrap and bounded published-base acquisition. */

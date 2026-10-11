@@ -60,6 +60,26 @@ ID/fingerprintは既存契約を維持する。raw
 HTMLは明示した一時cacheだけに置き、取得JSONや本文を`src/content/`へcommitしない。専用live
 CLIやqueueは追加せず、既存の直列取得・timeout・HTTP再試行を使う。
 
+問題配置を検討する補助指標も、正本追加前に取得できる。既存の`corpus:acquire-atcoder-problems-metrics`へ完成したmetadata
+batchを渡すと、その問題だけを公式task
+IDで照合し、配点（`point`）・推定difficulty（`difficulty`）・実験段階の推定かどうか（`difficultyExperimental`）を既存snapshot形式で保存する。Exもmetadataの公式task
+IDを使い、表示記号から推測しない。
+
+```sh
+metrics_checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+npm run corpus:acquire-atcoder-problems-metrics -- --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --checked-at "$metrics_checked_at" --output "$acquisition_dir/metrics/abc467-abc467.json"
+npm run corpus:verify-atcoder-problems-metrics -- --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --snapshot "$acquisition_dir/metrics/abc467-abc467.json"
+```
+
+配点の取得元はAtCoder
+Problemsの`merged-problems.json`、difficultyの取得元は`problem-models.json`であり、出典URLと指標の`checkedAt`も保存する。difficultyは公式配点とは別の推定値で、取得時の値を変換せず保持する。配点・difficultyだけで分類や読書順を自動決定せず、学習成果と前提を踏まえるための材料として使う。提供元の[API文書](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md)に従い、直列のアクセス間に1秒より長い間隔を置く。
+
+metadata
+batchのschema・公式task対応を既存検証で確認し、応答にない値は`null`、値が0なら0を保持する。HTTP・接続・JSON・schemaの失敗はexit
+2で止め、欠測扱いの成功snapshotを作らない。両応答の検証が終わってから一時snapshotを置換するため、失敗時には既存snapshotを保持する。指標は変化するので、再取得は新しい`checkedAt`で同じ一時出力を更新できる。これは公式metadataの上書きしない再実行とは異なる。
+
+`--metadata-batch`を使う取得ではcheckout外の`--output`を必須とし、`src/content/`への書込みを防ぐ。引数を省略した従来の取得・検証は収録済みProblem全体を対象とする。小batchの指標を全体の正本snapshotに置換しない。取得済み指標を対象問題分だけ正本へ反映する作業はPR-09のT049で行う。
+
 | 保留                                      | 再試行                                                                                                             |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `CONTEST_NOT_ENDED`                       | 公式終了時刻を過ぎてから、新しい確認日時・一時領域で取得する。未終了を対象から黙って落とさない。                   |

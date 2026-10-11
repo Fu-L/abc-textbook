@@ -284,9 +284,9 @@ ABC466を含む公開済みbaseと別の終了済み対象から、公式順でD
 identity/将来I/ABC316欠番を扱い、取得失敗・未終了・D欠落を保留する。
 
 <!-- prettier-ignore -->
-- [X] T042 [US1] `tests/integration/update-discovery.test.ts`と`tests/contract/corpus-metadata.test.ts`へ公開済みbaseからの1 Contest/小batch、Exの公式task、将来I、ABC316公式欠番、取得失敗、未終了・D欠落・順序矛盾の回帰を追加する。固定E〜H/`initial-v1`だけを通すテストにしない。
+- [X] T042 [US1] `tests/integration/update-discovery.test.ts`と`tests/contract/corpus-metadata.test.ts`へ公開済みbaseからの1 Contest/小batch、Exの公式task、将来I、ABC316公式欠番、取得失敗、未終了・D欠落・順序矛盾の回帰を追加する。固定E〜H/`initial-v1`だけを通すテストにしない。`tests/integration/live-metrics.test.ts`で新規batchの配点・difficulty取得、公式task照合、欠測・0値、失敗時の既存snapshot保持・正本不変を確認する。
 - [X] T043 [US1] `scripts/update-abc/discover.ts`と`src/lib/corpus/acquisition.ts`の既存対象判定を、初版batch固定ではなく公開済みbaseと指定範囲へ接続する。終了判定・公式task orderと再試行を再利用し、Dより後の全対象を選ぶ。新しいqueue/状態機械を追加しない。
-- [X] T044 [US1] `scripts/update-abc/acquire.ts`と`src/lib/corpus/metadata.ts`のparser/取得利用側をT043へ接続し、Source Revision/task/fingerprint/確認日を保つ。既存取得手段だけで成立すればlive専用CLIを増やさず、取得結果を一時作業領域へ置く。失敗を公式欠番と同一視しない。
+- [X] T044 [US1] `scripts/update-abc/acquire.ts`と`src/lib/corpus/metadata.ts`のparser/取得利用側をT043へ接続し、Source Revision/task/fingerprint/確認日を保つ。既存取得手段だけで成立すればlive専用CLIを増やさず、取得結果を一時作業領域へ置く。失敗を公式欠番と同一視しない。既存AtCoder Problems metrics取得・検証CLIにも完成metadata batchの入力を接続し、配点・推定difficulty・experimental flag・出典URL・確認日を一時snapshotに保持する。
 - [X] T045 [US1] T042と実際の公式取得入力経路を確認し、`docs/operations/update-manual.md`へ公開済みbase・指定小batch・保留/再試行の取得手順を記す。fixture transportと実ネットワーク取得の実行範囲を分けて報告し、`src/content/`に取得結果・本文差分をcommitしない。
 
 **完了条件**: 初版fixture専用でない公式入力経路と失敗診断が成立する。取得だけの成功を正本追加・公開・M5完成とは数えない。
@@ -304,7 +304,7 @@ Contestと複数Contest小catch-upを通し、完成範囲のみcandidateに含�
 - [ ] T046 [US1] `tests/integration/update-prepare.test.ts`と`tests/integration/update-validation.test.ts`へ実入力経路を使う小batch・再実行差分0・対象外不変・部分未完成/取得失敗の保留・実収録範囲/上限の一致ケースを追加する。`tests/fixtures/weekly-update/`等を再利用し、最新までの全件catch-upを要求しない。
 - [ ] T047 [US1] `scripts/update-abc/index.ts`、`scripts/update-abc/types.ts`、`scripts/update-abc/stage.ts`の`initial-v1`/fixture専用制限と旧release transaction依存を通常更新から除く。必要な部分だけ既存入口へ接続し、既存コマンドとCodex編集で成立する場合はそれを一本化する。正本全bootstrapを通常追加の前提にしない。
 - [ ] T048 [US1] `scripts/update-abc/classify.ts`、`scripts/update-abc/author.ts`、`scripts/update-abc/validate.ts`で既存taxonomyとsemantic primary Outcome/owner Unitを使い、対象batchの本文・source/claim・配置・関連先・前提を検証する。未完成・未検証・保留が同batchに残る間は完成/公開可能とせず、理由・再試行条件を短く報告する。
-- [ ] T049 [US1] T047〜T048の一時コピーへの追加経路で`src/content/`のProblem/Source/metrics/配置/関連Unit/索引の必要差分だけを作り、欠測metricsは`null`、公式task対応・実対象範囲・cutoffを保つ。既存本文の再生成・difficulty分類を行わず、既存ID/取得入力比較で未変更項目を追加しない。
+- [ ] T049 [US1] T047〜T048の一時コピーへの追加経路で`src/content/`のProblem/Source/metrics/配置/関連Unit/索引の必要差分だけを作り、欠測metricsは`null`、公式task対応・実対象範囲・cutoffを保つ。T044で取得した対象batchのmetricsを全体snapshotへ必要分だけ反映し、対象外の指標を落とさない。既存本文の再生成・difficulty分類を行わず、既存ID/取得入力比較で未変更項目を追加しない。
 - [ ] T050 [US1] T046、schema/ID/参照/3DAG/配置/索引、build・リンク・対象検索/関連導線E2Eを一時コピーで実行する。同じ追加を二度実行して差分0、対象外bytes不変、追加/取消後の`tests/integration/learning-record-backup.test.ts`と`tests/e2e/learning-records.spec.ts`で旧/未知ID・各日時保持を確認する。
 - [ ] T051 [US1] `docs/operations/update-manual.md`と`docs/operations/weekly-update.md`へ4段階の本文訂正/ABC追加/小catch-up、冪等性、保留、対象batchのGit revertを記す。`specs/002-simplify-maintenance/quickstart.md`と`contracts/compatibility.md`へ実装した既存CLIのコマンドを反映する。実教材の訂正/1 Contest追加/公開は未実施、SC-004とM5受入は別依頼まで未達と報告する。
 
