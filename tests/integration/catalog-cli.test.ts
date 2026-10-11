@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import { catalogContentDigest } from '../../src/lib/catalog/build-catalog.js';
 import type { z } from 'zod';
@@ -185,6 +185,8 @@ describe('catalog validation CLI evidence boundary', () => {
   let repositoryRoot: string;
 
   beforeEach(async () => {
+    // Child CLIs validate this fixture's main ref, not the enclosing PR branch.
+    vi.stubEnv('GITHUB_BASE_REF', 'main');
     repositoryRoot = await mkdtemp(path.join(tmpdir(), 'abc-textbook-cli-evidence-'));
     await mkdir(path.join(repositoryRoot, 'staging'));
   });

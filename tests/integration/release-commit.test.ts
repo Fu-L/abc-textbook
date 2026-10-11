@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { withReleaseCommit } from '../../scripts/release/commit-snapshot.js';
 import { loadGitReleaseHistory } from '../../scripts/release/build-history.js';
 import { verifyPreviewReleaseSimulation } from '../../scripts/verify-release.js';
@@ -28,6 +28,8 @@ describe('read-only exact release commit', () => {
   let commit: string;
   const git = async (...args: string[]) => (await exec('git', args, { cwd: root })).stdout.trim();
   beforeEach(async () => {
+    // This disposable repository defines its own main base, independent of the PR base.
+    vi.stubEnv('GITHUB_BASE_REF', 'main');
     root = await mkdtemp(path.join(tmpdir(), 'abc-release-commit-'));
     await git('init', '-q');
     await git('config', 'user.email', 'fixture@example.invalid');

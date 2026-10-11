@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { calculateContentWorkManifestScopeDigest } from '../../src/lib/validation/content-work-manifest.js';
@@ -36,6 +36,8 @@ describe('catalog release evidence inventory', () => {
   let repositoryRoot: string;
 
   beforeEach(async () => {
+    // The fixture's trusted ref is main even when CI validates a stacked PR.
+    vi.stubEnv('GITHUB_BASE_REF', 'main');
     repositoryRoot = await mkdtemp(path.join(tmpdir(), 'abc-textbook-evidence-'));
     await mkdir(path.join(repositoryRoot, 'docs/verification'), { recursive: true });
     await mkdir(path.join(repositoryRoot, 'docs/reviews/human-content'), { recursive: true });
