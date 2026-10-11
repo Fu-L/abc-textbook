@@ -264,7 +264,10 @@ PR-07bの実deploy成功・公開確認。writer/triggerは既に配信済みで
 Test**: 最後の成功配信SHAとの差が既存履歴indexと非公開運用文書だけであり、実配信成功順の追記・旧entry不変・過去URL到達が成立する。その配信自体の追記は要求されない。
 
 <!-- prettier-ignore -->
-- [ ] T041 [US4] PR-07aとPR-07bで実際に配信成功・公開確認できた各版の同一artifact/catalog/metadataをT038で照合し、`src/content/indexes/release-history.json`へ実配信成功順に追記する。実metadata/run/SHAだけを用い、旧entryを変更しない。commit差分は既存indexと非公開運用文書に限定し、コード/workflow変更を混在させない。最後の成功配信SHAとの差を確認してbuild・リンク・対象履歴テストを通し、実main配信と過去版への到達を確認する。この配信自体の履歴追記は要求せず、metadataの別版/SHA/runと標準公開履歴を報告する。未配信の他差分があれば通常公開として必要検証を行い、その成功版の追記を別のindexだけの変更で完了する。入力取得不能な版は追記だけ保留し、履歴移行未完了と報告する。
+- [X] T041 [US4] PR-07aとPR-07bで実際に配信成功・公開確認できた各版の同一artifact/catalog/metadataをT038で照合し、`src/content/indexes/release-history.json`へ実配信成功順に追記する。実metadata/run/SHAだけを用い、旧entryを変更しない。commit差分は既存indexと非公開運用文書に限定し、コード/workflow変更を混在させない。最後の成功配信SHAとの差を確認してbuild・リンク・対象履歴テストを通し、実main配信と過去版への到達を確認する。この配信自体の履歴追記は要求せず、metadataの別版/SHA/runと標準公開履歴を報告する。未配信の他差分があれば通常公開として必要検証を行い、その成功版の追記を別のindexだけの変更で完了する。入力取得不能な版は追記だけ保留し、履歴移行未完了と報告する。
+
+**PR-07cの実施結果**:
+[PR #100](https://github.com/Fu-L/abc-textbook/pull/100)で両先行版を実入力から追記し、[main run 38111788536](https://github.com/Fu-L/abc-textbook/actions/runs/38111788536)の検証・履歴だけの配信と公開確認を2026-10-11に完了した。公開2版の履歴URLと既存URL/anchor、教材不変、metadataの別版/SHA/runを確認し、writerの`history-only`判定とindexのbytes差分0も確認したためT041を完了とする。詳細は[更新マニュアルの公開結果](../../docs/operations/update-manual.md#実配信済み版を履歴へ追記する002--pr-07b)を参照する。完了記録は非公開文書だけに反映し、配信自体のindex追記は行わない。
 
 **完了条件**:
 PR-07a/07bの成功済み版が実入力から反映され、履歴だけの配信成功・公開確認と旧URL到達が成立する。追記のための追加追記を連鎖させない。
