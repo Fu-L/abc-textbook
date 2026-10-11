@@ -187,6 +187,8 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 
 初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
 
+小batchの分類回帰では執筆済みの開始fixtureだけを共有し、各異常ケースは元のpolicy・本文から編集して独立したテストとして実行する。複数回の全量検証を1本の5分制限へ詰め込まず、各ケースの保留理由と候補のbytes不変を確認する。
+
 `check`でAstro/各TypeScript環境を検査した同runは`build:checked`でbuildする。単独`build`にはAstro
 checkを保持する。build出力は`:built`へ渡して再利用する。通常CIはE2Eを選んだときだけChromiumを準備する。他browserは`test:e2e:install`、Linuxでは`test:e2e:install:all:ci`で準備し、`test:e2e:built -- --project=firefox`等で必要なspecを実行する。
 

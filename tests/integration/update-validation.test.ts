@@ -2,7 +2,7 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
 import {
@@ -471,27 +471,43 @@ describe('normal batch holds', () => {
     }
   }, 300_000);
 
-  it('holds role mismatches and lost analysis without applying derived content', async () => {
-    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-'));
-    try {
-      const input = await smallBatchInput(root);
+  describe('placement role and analysis regressions', () => {
+    let root: string;
+    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    let policyFile: string;
+    let originalPolicy: Buffer;
+    let documentFile: string;
+    let originalDocument: string;
+
+    // Share only the authored starting fixture. Each case restores it before editing
+    // and checks its own unchanged bytes; eight full validations cannot share one deadline.
+    beforeAll(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-'));
+      input = await smallBatchInput(root);
       await runSmallBatchUpdate({ ...input, mode: 'prepare' });
       await authorSmallBatch(input);
-      const policyFile = path.join(root, 'src/content/policies/problem-placements.json');
-      const originalPolicy = await readFile(policyFile);
-      const documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
-      const originalDocument = await readFile(documentFile, 'utf8');
-      const scenarios = [
-        'primary-role',
-        'supporting-role',
-        'typical',
-        'prerequisite',
-        'insight',
-        'evidence',
-        'conflict',
-        'review-reproduction',
-      ] as const;
-      for (const scenario of scenarios) {
+      policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      originalPolicy = await readFile(policyFile);
+      documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
+      originalDocument = await readFile(documentFile, 'utf8');
+    }, 300_000);
+
+    afterAll(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    }, 300_000);
+
+    it.each([
+      'primary-role',
+      'supporting-role',
+      'typical',
+      'prerequisite',
+      'insight',
+      'evidence',
+      'conflict',
+      'review-reproduction',
+    ] as const)(
+      'holds %s without applying derived content',
+      async (scenario) => {
         const policy = CanonicalProblemPlacementPolicySchema.parse(
           JSON.parse(originalPolicy.toString('utf8')),
         );
@@ -560,11 +576,10 @@ describe('normal batch holds', () => {
           holds: [expect.objectContaining({ code: expectedCode })],
         });
         expect(await contentHashes(root), scenario).toEqual(before);
-      }
-    } finally {
-      await rm(root, { recursive: true, force: true });
-    }
-  }, 300_000);
+      },
+      300_000,
+    );
+  });
 
   it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
