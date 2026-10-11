@@ -6,7 +6,8 @@ import {
   auditOptionalBlocks,
 } from '../../scripts/verify/initial-release-audits.js';
 
-const projection = await loadFullPublicProjection();
+// Audit current canonical input independently of the retained initial release receipts.
+const projection = await loadFullPublicProjection({ usePreparedRelease: false });
 
 describe('independent initial-release audit', () => {
   it('uses a complete design-limit fixture with unique routes and an extra advanced label', () => {

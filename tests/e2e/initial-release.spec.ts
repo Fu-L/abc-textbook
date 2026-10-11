@@ -3,7 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { expect, test } from './fixtures.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 
-const projection = await loadFullPublicProjection();
+// The browser exercises the current site, whose history may postdate the initial receipts.
+const projection = await loadFullPublicProjection({ usePreparedRelease: false });
 const routes = [
   '/',
   '/learn/',
