@@ -612,6 +612,18 @@ export const advancedTasks = (
 ): readonly (OfficialTaskMetadata & { readonly problemId: string })[] => {
   const dPosition = contest.officialTaskOrder.indexOf('D');
   if (dPosition < 0) throw new OfficialMetadataError('D_TASK_NOT_FOUND', contest.id);
+  if (
+    contest.tasks.length !== contest.officialTaskOrder.length ||
+    new Set(contest.officialTaskOrder.map((label) => label.toLowerCase())).size !==
+      contest.tasks.length ||
+    new Set(contest.tasks.map(({ officialTaskId }) => officialTaskId)).size !==
+      contest.tasks.length ||
+    contest.tasks.some(
+      (task, index) =>
+        task.officialOrder !== index || task.label !== contest.officialTaskOrder[index],
+    )
+  )
+    throw new OfficialMetadataError('TASK_ORDER_CONFLICT', contest.id);
   return Object.freeze(
     contest.tasks.slice(dPosition + 1).map((task) =>
       Object.freeze({

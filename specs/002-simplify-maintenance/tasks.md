@@ -284,10 +284,10 @@ ABC466を含む公開済みbaseと別の終了済み対象から、公式順でD
 identity/将来I/ABC316欠番を扱い、取得失敗・未終了・D欠落を保留する。
 
 <!-- prettier-ignore -->
-- [ ] T042 [US1] `tests/integration/update-discovery.test.ts`と`tests/contract/corpus-metadata.test.ts`へ公開済みbaseからの1 Contest/小batch、Exの公式task、将来I、ABC316公式欠番、取得失敗、未終了・D欠落・順序矛盾の回帰を追加する。固定E〜H/`initial-v1`だけを通すテストにしない。
-- [ ] T043 [US1] `scripts/update-abc/discover.ts`と`src/lib/corpus/acquisition.ts`の既存対象判定を、初版batch固定ではなく公開済みbaseと指定範囲へ接続する。終了判定・公式task orderと再試行を再利用し、Dより後の全対象を選ぶ。新しいqueue/状態機械を追加しない。
-- [ ] T044 [US1] `scripts/update-abc/acquire.ts`と`src/lib/corpus/metadata.ts`のparser/取得利用側をT043へ接続し、Source Revision/task/fingerprint/確認日を保つ。既存取得手段だけで成立すればlive専用CLIを増やさず、取得結果を一時作業領域へ置く。失敗を公式欠番と同一視しない。
-- [ ] T045 [US1] T042と実際の公式取得入力経路を確認し、`docs/operations/update-manual.md`へ公開済みbase・指定小batch・保留/再試行の取得手順を記す。fixture transportと実ネットワーク取得の実行範囲を分けて報告し、`src/content/`に取得結果・本文差分をcommitしない。
+- [X] T042 [US1] `tests/integration/update-discovery.test.ts`と`tests/contract/corpus-metadata.test.ts`へ公開済みbaseからの1 Contest/小batch、Exの公式task、将来I、ABC316公式欠番、取得失敗、未終了・D欠落・順序矛盾の回帰を追加する。固定E〜H/`initial-v1`だけを通すテストにしない。
+- [X] T043 [US1] `scripts/update-abc/discover.ts`と`src/lib/corpus/acquisition.ts`の既存対象判定を、初版batch固定ではなく公開済みbaseと指定範囲へ接続する。終了判定・公式task orderと再試行を再利用し、Dより後の全対象を選ぶ。新しいqueue/状態機械を追加しない。
+- [X] T044 [US1] `scripts/update-abc/acquire.ts`と`src/lib/corpus/metadata.ts`のparser/取得利用側をT043へ接続し、Source Revision/task/fingerprint/確認日を保つ。既存取得手段だけで成立すればlive専用CLIを増やさず、取得結果を一時作業領域へ置く。失敗を公式欠番と同一視しない。
+- [X] T045 [US1] T042と実際の公式取得入力経路を確認し、`docs/operations/update-manual.md`へ公開済みbase・指定小batch・保留/再試行の取得手順を記す。fixture transportと実ネットワーク取得の実行範囲を分けて報告し、`src/content/`に取得結果・本文差分をcommitしない。
 
 **完了条件**: 初版fixture専用でない公式入力経路と失敗診断が成立する。取得だけの成功を正本追加・公開・M5完成とは数えない。
 

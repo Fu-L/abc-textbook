@@ -1,5 +1,10 @@
 import { load } from 'cheerio';
 
+import {
+  buildAdvancedSlotRegistry,
+  type AdvancedSlotRegistry,
+} from '../catalog/advanced-slot-registry.js';
+
 import { canonicalDigest, digestWithoutField } from '../domain/canonical-json.js';
 import { compareOffsetDateTimes, parseOffsetDateTime } from '../domain/date-time.js';
 import {
@@ -189,7 +194,7 @@ export class SerialOfficialPageClient {
         clearTimeout(timeout);
       }
     }
-    throw new CorpusAcquisitionError('OFFICIAL_REQUEST_FAILED', lastFailure);
+    throw new CorpusAcquisitionError('OFFICIAL_REQUEST_FAILED', `${url}: ${lastFailure}`);
   }
 }
 
@@ -294,6 +299,7 @@ export const acquireCorpusMetadataBatch = async (input: {
   readonly client: SerialOfficialPageClient;
   readonly policyApproval: PolicyApprovalManifest;
   readonly checkedAt: string;
+  readonly existingRegistry?: AdvancedSlotRegistry;
 }): Promise<CorpusMetadataBatch> => {
   parseOffsetDateTime(input.checkedAt);
   const policy = await verifyApprovedPolicies({
@@ -359,6 +365,16 @@ export const acquireCorpusMetadataBatch = async (input: {
     sourceRevisions.push(parsed.sourceRevision);
 
     const advanced = advancedTasks(parsed.contest);
+    // Check against the published order and earlier contests in this batch
+    // before requesting any task sources. The base registry stays unchanged.
+    buildAdvancedSlotRegistry({
+      ...(input.existingRegistry ? { existingRegistry: input.existingRegistry } : {}),
+      contests: contests.map((contest) => ({
+        contestId: contest.id,
+        advancedLabels: advancedTasks(contest).map(({ label }) => label),
+        sourceRevisionId: contest.taskOrderSourceRevisionId,
+      })),
+    });
     for (const task of advanced) {
       const taskResponse = await input.client.get(`${task.officialUrl}?lang=en`);
       if (!taskResponse.contentType.toLocaleLowerCase('en-US').includes('text/html')) {
