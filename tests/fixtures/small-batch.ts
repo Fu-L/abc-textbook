@@ -82,8 +82,17 @@ export const authorSmallBatch = async (input: Awaited<ReturnType<typeof smallBat
     const unit = replace(template.unit);
     const batchPlacement = replace(placement);
     if (problem.id === 'abc467-e') {
-      batchPlacement.supportingOutcomeIds.push('outcome-linearize-static-range-information');
-      unit.learningOutcomeIds.push('outcome-linearize-static-range-information');
+      // Exercise a related Unit with a claim actually present in the borrowed analysis.
+      batchPlacement.supportingTagIds.push('tag-modular-arithmetic');
+      batchPlacement.supportingOutcomeIds.push('outcome-compute-in-modular-arithmetic');
+      unit.learningOutcomeIds.push('outcome-compute-in-modular-arithmetic');
+      const prerequisite = batchPlacement.claimDispositions.find(
+        (d) => d.claimRef.claimPath === '/prerequisiteCandidates/1',
+      );
+      if (!prerequisite) throw new Error('Missing modular subtraction claim');
+      prerequisite.kind = 'supporting';
+      prerequisite.tagIds = ['tag-modular-arithmetic'];
+      prerequisite.rationale = '法を取る減算の正規化を剰余演算の補助学習成果へ対応させるfixture。';
     }
     delete unit.skill;
     unit.docPath = `src/content/docs/problems/${problem.id}.md`;

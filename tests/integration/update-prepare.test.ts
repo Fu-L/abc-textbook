@@ -114,7 +114,7 @@ describe('normal small-batch editing', () => {
         );
         expect(
           projection.mapping.find((p) => p.problemId === 'abc467-e')?.relatedUnitIds,
-        ).toContain('unit-prefix-aggregate');
+        ).toContain('unit-modular-arithmetic');
         const mergedMetrics = AtCoderProblemsSnapshotSchema.parse(
           JSON.parse(await readFile(metricsFile, 'utf8')),
         );

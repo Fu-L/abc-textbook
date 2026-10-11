@@ -1,7 +1,11 @@
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import { buildCanonicalCatalog } from '../../src/lib/catalog/build-catalog.js';
-import { validateClaimReference } from '../../src/lib/taxonomy/final-taxonomy-build.js';
+import {
+  validateClaimReference,
+  validatePlacementAnalysisCoverage,
+  validatePlacementOutcomeRoles,
+} from '../../src/lib/taxonomy/final-taxonomy-build.js';
 
 /** Reuse the public reader and content validator, including all three DAGs. */
 export const validateSmallBatchCandidate = async (input: {
@@ -20,6 +24,7 @@ export const validateSmallBatchCandidate = async (input: {
     projection.catalog.release.lastContestId !== input.lastContestId
   )
     throw new Error('BATCH_RANGE_MISMATCH');
+  const outcomes = new Map(projection.catalog.learningOutcomes.map((o) => [o.id, o]));
   for (const problemId of input.targetProblemIds) {
     const analysis = projection.catalog.techniqueInventory.find((p) => p.problemId === problemId);
     if (analysis?.reviewStatus !== 'reviewed' || analysis.reviewFindings.length)
@@ -41,23 +46,12 @@ export const validateSmallBatchCandidate = async (input: {
       const finding = validateClaimReference(reference, records)[0];
       if (finding) throw new Error(`${finding.code}:${finding.message}`);
     }
-    for (const disposition of placement.claimDispositions) {
-      const tags =
-        disposition.kind === 'supporting' ? placement.supportingTagIds : placement.primaryTagIds;
-      if (disposition.tagIds.some((id) => !tags.includes(id)))
-        throw new Error(`PLACEMENT_CLAIM_TAG:${problemId}`);
-    }
-    for (const [kind, tags] of [
-      ['primary', placement.primaryTagIds],
-      ['supporting', placement.supportingTagIds],
-    ] as const)
-      if (
-        tags.some(
-          (id) =>
-            !placement.claimDispositions.some((d) => d.kind === kind && d.tagIds.includes(id)),
-        )
-      )
-        throw new Error(`PLACEMENT_CLAIM_TAG:${problemId}`);
+    const findings = [
+      ...validatePlacementOutcomeRoles(placement, outcomes),
+      ...validatePlacementAnalysisCoverage(placement, analysis),
+    ];
+    const finding = findings[0];
+    if (finding) throw new Error(`${finding.code}:${problemId}:${finding.message}`);
   }
   buildCanonicalCatalog(projection.catalog);
   return projection;

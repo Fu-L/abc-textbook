@@ -125,7 +125,9 @@ npm run abc:update -- --mode validate --candidate-root "$candidate_dir" --base-c
 ```
 
 `prepare`は問題・Contest・slot・Sourceとmetricsを必要分だけ追加する。完了本文を自動生成せず、`AUTHORING_REQUIRED`の`on_hold`・exit
-2を返す。この診断だけを執筆開始として扱い、その他の保留は理由を解消してから進む。`validate`は完成した解説のfrontmatter、分析の出典・解法・学習成果、既存taxonomyの配置を読み、生成差分を内部の一時コピーで検証してからcandidateへ反映する。配置policyの`placementDigest`は編集したplacementsから既存`canonicalDigest`で再計算する。旧sourceBuildや過去の訂正・判断は書き換えない。新しいmanifest/reviewや承認は不要。
+2を返す。この診断だけを執筆開始として扱い、その他の保留は理由を解消してから進む。`validate`は完成した解説のfrontmatter、分析の出典・解法・学習成果、既存taxonomyの配置を読み、生成差分を内部の一時コピーで検証してからcandidateへ反映する。配置policyの`placementDigest`は編集したplacementsから既存`canonicalDigest`で再計算する。旧sourceBuildや過去の訂正・判断は書き換えない。新しいmanifest/reviewや承認は不要。主・追加主Outcomeとprimary
+Tag、補助Outcomeとsupporting
+Tagは各役割内で双方向の対応を検査する。分析の全typicalTechniques・prerequisiteCandidatesには既習・同一Tag・主・補助・問題固有の分類判断を残し、各判断をanalysisEvidenceRefsに含める。重複判断や既習／問題固有とTag付き役割の矛盾を拒否し、problemSpecificInsightsの洞察と再利用可能な見方はadHocElementsへ保持する。これらは初版分類と小batchで共通の内容検証を使う。
 
 新規本文は既存parserの`draft: true`表現を維持し、未検証claimを`verified`へ機械的に昇格させない。分析はCodexによる内容確認を済ませ、既存の`reviewStatus: reviewed`・未解決指摘0として入力する。これは人間承認の記録ではない。Unitの必要な問題集合・導線とtaxonomy
 indexはCLIが更新するため、通常追加で既存Unit本文を再生成しない。既存の解説・Unit文章も訂正したい場合は別の訂正差分として検証する。

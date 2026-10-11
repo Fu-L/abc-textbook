@@ -471,6 +471,101 @@ describe('normal batch holds', () => {
     }
   }, 300_000);
 
+  it('holds role mismatches and lost analysis without applying derived content', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-'));
+    try {
+      const input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      const policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      const originalPolicy = await readFile(policyFile);
+      const documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
+      const originalDocument = await readFile(documentFile, 'utf8');
+      const scenarios = [
+        'primary-role',
+        'supporting-role',
+        'typical',
+        'prerequisite',
+        'insight',
+        'evidence',
+        'conflict',
+        'review-reproduction',
+      ] as const;
+      for (const scenario of scenarios) {
+        const policy = CanonicalProblemPlacementPolicySchema.parse(
+          JSON.parse(originalPolicy.toString('utf8')),
+        );
+        const placement = policy.placements.find((p) => p.problemId === 'abc467-e');
+        if (!placement) throw new Error('Missing batch placement');
+        let document = originalDocument;
+        let expectedCode: string;
+        if (scenario === 'primary-role') {
+          placement.primaryOutcomeId = 'outcome-compute-convolution-or-correlation';
+          document = document.replaceAll(
+            'outcome-subtract-exception-transitions',
+            placement.primaryOutcomeId,
+          );
+          expectedCode = 'PLACEMENT_OUTCOME_ROLE_MISMATCH';
+        } else if (scenario === 'supporting-role') {
+          placement.supportingTagIds = [];
+          // Remove the Tag-bearing decision too, isolating the missing role check.
+          const claim = placement.claimDispositions.find((d) => d.kind === 'supporting');
+          if (!claim) throw new Error('Missing supporting claim');
+          claim.kind = 'baseline';
+          claim.tagIds = [];
+          expectedCode = 'PLACEMENT_OUTCOME_ROLE_MISMATCH';
+        } else if (scenario === 'typical' || scenario === 'prerequisite') {
+          const claimPath =
+            scenario === 'typical' ? '/typicalTechniques/1' : '/prerequisiteCandidates/0';
+          placement.claimDispositions = placement.claimDispositions.filter(
+            (d) => d.claimRef.claimPath !== claimPath,
+          );
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath !== claimPath,
+          );
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE';
+        } else if (scenario === 'insight') {
+          placement.adHocElements = [];
+          expectedCode = 'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE';
+        } else if (scenario === 'evidence') {
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath !== '/prerequisiteCandidates/0',
+          );
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_EVIDENCE_INCOMPLETE';
+        } else if (scenario === 'conflict') {
+          const claim = structuredClone(placement.claimDispositions[0]);
+          if (!claim) throw new Error('Missing disposition fixture');
+          claim.kind = 'baseline';
+          claim.tagIds = [];
+          placement.claimDispositions.push(claim);
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_CONFLICT';
+        } else {
+          placement.claimDispositions = placement.claimDispositions.filter(
+            (d) => d.claimRef.claimPath === '/typicalTechniques/0',
+          );
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath === '/typicalTechniques/0',
+          );
+          placement.adHocElements = [];
+          expectedCode = 'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE';
+        }
+        policy.placementDigest = canonicalDigest(policy.placements);
+        await writeFile(policyFile, JSON.stringify(policy));
+        await writeFile(documentFile, document);
+        const before = await contentHashes(root);
+        const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+        expect(result, scenario).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code: expectedCode })],
+        });
+        expect(await contentHashes(root), scenario).toEqual(before);
+      }
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }, 300_000);
+
   it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
     try {
