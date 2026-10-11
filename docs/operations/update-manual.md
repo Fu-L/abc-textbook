@@ -216,6 +216,11 @@ npm run release:history -- --run SUCCESSFUL_MAIN_RUN_ID --public-output src/cont
 
 PR-07bはwriter/workflowの通常変更として検証・配信し、実indexを変更せず完了した。PR-07cはPR-07a/07bの両成功後に実入力を照合し、indexと非公開運用文書だけを更新する。両版の入力は標準artifactから取得し、必要なら同じ作業内の一時領域に置く。専用保管庫は作らず、取得不能な版は追記未完了として残す。履歴だけの配信もbuild・リンク・対象検査を通すが、その配信自体の次の追記は要求しない。
 
+**PR-07cの公開結果**:
+[PR #100](https://github.com/Fu-L/abc-textbook/pull/100)で両先行版を成功順に追記し、[main run 38111788536](https://github.com/Fu-L/abc-textbook/actions/runs/38111788536)の検証・標準Pages配信と公開確認を2026-10-11に完了した（T041）。最新metadataは別版`2026.10.11-r38111788536`、SHAは`4e53b7d9ccb85fe96c5317653ddec7d7ef123efe`を示す。公開catalog/metadataは同一artifactとbytes一致し、教材14項目・868問・232単元と収録範囲は不変。既存公開URL
+1,583件とanchor
+20,595件、追記した2版の履歴ページ、代表教材・検索・復習・設定・狭い画面・キーボード操作を確認した。mainの対象113テストと内部リンク4,659件が成功した。この配信はwriterでも`history-only`となり、indexは2件のままbytes差分0である。公開結果の完了記録は非公開文書だけに反映し、履歴の追加追記や新たな配信を要求しない。
+
 GitHub APIのrun/jobとdeployment
 status、artifactの取得は[公式run API](https://docs.github.com/en/rest/actions/workflow-runs)、[deployment status API](https://docs.github.com/en/rest/deployments/statuses)、[artifact取得手順](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts)を確認した（2026-10-09）。成功判定の組合せと追記条件は本教科書の運用契約である。
 
