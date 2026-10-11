@@ -1,4 +1,24 @@
 import type { AuthoringSkillSubject } from '../../src/lib/authoring/explanation-authoring-skill.js';
+import { readProblemAuthoringDocument } from '../../src/lib/authoring/problem-authoring-document.js';
+
+export const requireBatchDocuments = (
+  files: ReadonlyMap<string, Buffer>,
+  problemIds: readonly string[],
+) => {
+  const documents = [...files]
+    .filter(([file]) => file.startsWith('src/content/docs/problems/') && /\.mdx?$/u.test(file))
+    .map(([file, bytes]) => ({
+      file,
+      unit: readProblemAuthoringDocument(bytes.toString('utf8')).unit,
+    }));
+  for (const problemId of problemIds) {
+    const matches = documents.filter((d) => d.unit.problemId === problemId);
+    if (matches.length !== 1) throw new Error(`AUTHORING_REQUIRED:${problemId}`);
+    if (matches[0]?.unit.docPath !== matches[0]?.file)
+      throw new Error(`AUTHORING_PATH:${problemId}`);
+  }
+  return documents.filter((document) => problemIds.includes(document.unit.problemId));
+};
 
 interface AuthoringTarget {
   readonly problemId: string;

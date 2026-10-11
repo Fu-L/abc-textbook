@@ -301,14 +301,20 @@ identity/将来I/ABC316欠番を扱い、取得失敗・未終了・D欠落を�
 Contestと複数Contest小catch-upを通し、完成範囲のみcandidateに含める。二度目の差分0、対象外本文/分類差分0、旧/未知ID記録保持を確認する。
 
 <!-- prettier-ignore -->
-- [ ] T046 [US1] `tests/integration/update-prepare.test.ts`と`tests/integration/update-validation.test.ts`へ実入力経路を使う小batch・再実行差分0・対象外不変・部分未完成/取得失敗の保留・実収録範囲/上限の一致ケースを追加する。`tests/fixtures/weekly-update/`等を再利用し、最新までの全件catch-upを要求しない。
-- [ ] T047 [US1] `scripts/update-abc/index.ts`、`scripts/update-abc/types.ts`、`scripts/update-abc/stage.ts`の`initial-v1`/fixture専用制限と旧release transaction依存を通常更新から除く。必要な部分だけ既存入口へ接続し、既存コマンドとCodex編集で成立する場合はそれを一本化する。正本全bootstrapを通常追加の前提にしない。
-- [ ] T048 [US1] `scripts/update-abc/classify.ts`、`scripts/update-abc/author.ts`、`scripts/update-abc/validate.ts`で既存taxonomyとsemantic primary Outcome/owner Unitを使い、対象batchの本文・source/claim・配置・関連先・前提を検証する。未完成・未検証・保留が同batchに残る間は完成/公開可能とせず、理由・再試行条件を短く報告する。
-- [ ] T049 [US1] T047〜T048の一時コピーへの追加経路で`src/content/`のProblem/Source/metrics/配置/関連Unit/索引の必要差分だけを作り、欠測metricsは`null`、公式task対応・実対象範囲・cutoffを保つ。T044で取得した対象batchのmetricsを全体snapshotへ必要分だけ反映し、対象外の指標を落とさない。既存本文の再生成・difficulty分類を行わず、既存ID/取得入力比較で未変更項目を追加しない。
-- [ ] T050 [US1] T046、schema/ID/参照/3DAG/配置/索引、build・リンク・対象検索/関連導線E2Eを一時コピーで実行する。同じ追加を二度実行して差分0、対象外bytes不変、追加/取消後の`tests/integration/learning-record-backup.test.ts`と`tests/e2e/learning-records.spec.ts`で旧/未知ID・各日時保持を確認する。
-- [ ] T051 [US1] `docs/operations/update-manual.md`と`docs/operations/weekly-update.md`へ4段階の本文訂正/ABC追加/小catch-up、冪等性、保留、対象batchのGit revertを記す。`specs/002-simplify-maintenance/quickstart.md`と`contracts/compatibility.md`へ実装した既存CLIのコマンドを反映する。実教材の訂正/1 Contest追加/公開は未実施、SC-004とM5受入は別依頼まで未達と報告する。
+- [X] T046 [US1] `tests/integration/update-prepare.test.ts`と`tests/integration/update-validation.test.ts`へ実入力経路を使う小batch・再実行差分0・対象外不変・部分未完成/取得失敗の保留・実収録範囲/上限の一致ケースを追加する。`tests/fixtures/weekly-update/`等を再利用し、最新までの全件catch-upを要求しない。
+- [X] T047 [US1] `scripts/update-abc/index.ts`、`scripts/update-abc/types.ts`、`scripts/update-abc/stage.ts`の`initial-v1`/fixture専用制限と旧release transaction依存を通常更新から除く。必要な部分だけ既存入口へ接続し、既存コマンドとCodex編集で成立する場合はそれを一本化する。正本全bootstrapを通常追加の前提にしない。
+- [X] T048 [US1] `scripts/update-abc/classify.ts`、`scripts/update-abc/author.ts`、`scripts/update-abc/validate.ts`で既存taxonomyとsemantic primary Outcome/owner Unitを使い、対象batchの本文・source/claim・配置・関連先・前提を検証する。未完成・未検証・保留が同batchに残る間は完成/公開可能とせず、理由・再試行条件を短く報告する。
+- [X] T049 [US1] T047〜T048の一時コピーへの追加経路で`src/content/`のProblem/Source/metrics/配置/関連Unit/索引の必要差分だけを作り、欠測metricsは`null`、公式task対応・実対象範囲・cutoffを保つ。T044で取得した対象batchのmetricsを全体snapshotへ必要分だけ反映し、対象外の指標を落とさない。既存本文の再生成・difficulty分類を行わず、既存ID/取得入力比較で未変更項目を追加しない。
+- [X] T050 [US1] T046、schema/ID/参照/3DAG/配置/索引、build・リンク・対象検索/関連導線E2Eを一時コピーで実行する。同じ追加を二度実行して差分0、対象外bytes不変、追加/取消後の`tests/integration/learning-record-backup.test.ts`と`tests/e2e/learning-records.spec.ts`で旧/未知ID・各日時保持を確認する。
+- [X] T051 [US1] `docs/operations/update-manual.md`と`docs/operations/weekly-update.md`へ4段階の本文訂正/ABC追加/小catch-up、冪等性、保留、対象batchのGit revertを記す。`specs/002-simplify-maintenance/quickstart.md`と`contracts/compatibility.md`へ実装した既存CLIのコマンドを反映する。実教材の訂正/1 Contest追加/公開は未実施、SC-004とM5受入は別依頼まで未達と報告する。
 
 **完了条件**: 初版fixture専用でない同じ経路の小batch・再実行・保留が試験でき、教材commit差分0。機能実装の検証成功と実数学本文の執筆/公開成功を区別する。
+
+**PR-09実装結果**: 取得済みmetadata/metricsとCodexの本文・分析・配置を既存`abc:update`の`--mode prepare / validate`へ接続した。使い捨ての1/2
+Contest
+fixtureで再実行差分0・対象外bytes保持・未完成/取得不整合/古いclaim参照の保留を確認した。型・schema/参照/3DAG/配置/索引と既存868問の保持を検証し、一時候補の本番subpath
+build（1,588ページ）を同じリンク検査（4,691件）とChromium検索/学習記録E2E（32件）へ渡した。390px幅の表示とキーボード導線、追加/取消後の旧/未知ID・独立日時のbackup保持も確認した。教材のcommit差分は0で、実教材の訂正・1
+Contest追加・公開およびSC-004/M5全体の受入は未実施・未達のまま。
 
 **Revert**: 更新処理の変更を戻す。将来の教材batch取消は対象だけGit
 revertし、追加IDの記録はunknown/orphanとして保持する。

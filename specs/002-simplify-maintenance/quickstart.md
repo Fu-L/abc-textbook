@@ -128,10 +128,11 @@ adapterをテストのために新設しない。
 ## PR-08〜09: live小batchと再実行
 
 ```sh
-npm test -- tests/contract/corpus-metadata.test.ts tests/integration/update-discovery.test.ts tests/integration/update-prepare.test.ts tests/integration/update-validation.test.ts
+npm test -- --maxWorkers=1 tests/contract/corpus-metadata.test.ts tests/integration/update-discovery.test.ts tests/integration/update-prepare.test.ts tests/integration/update-validation.test.ts tests/integration/learning-record-backup.test.ts
 ```
 
-公開済みbaseを持つ一時copyへ、取得済み公式入力を使って対象全件を追加する。現行の`abc:update --preview initial-v1`の成功をこのシナリオの代用にしない。接続後の実コマンドは実装PRで確定し、更新マニュアルへ記す。専用CLIを増やすことは必須ではない。
+公開済みbaseを持つ一時copyへ、取得済み公式入力を使って対象全件を追加する。現行の`abc:update --preview initial-v1`の成功をこのシナリオの代用にしない。実装済みの`abc:update --mode prepare|validate`を同じ取得入力と一時コピーへ使う。必須引数・具体例は[更新マニュアル](../../docs/operations/update-manual.md#小batchの編集と再実行002--pr-09)を参照する。`prepare`のAUTHORING_REQUIRED/exit
+2は執筆待ちであり、`validate`の成功だけで公開済みとは扱わない。
 
 - 1終了済みContestと小catch-upで、Dより後の全問題・source・配置・metrics・索引が整合する。
 - Ex identity/将来I/ABC316欠番と取得失敗を区別し、D欠落・未終了・不完成は保留する。

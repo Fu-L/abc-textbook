@@ -16,6 +16,37 @@ const record = (index: number, overrides: Partial<LearningRecord> = {}): Learnin
 });
 
 describe('learning record backup and restore', () => {
+  it('keeps old, added and unknown IDs and independent dates across a batch cancellation', async () => {
+    const records = ['abc212-e', 'abc467-e', 'abc999-i'].map((problemId) => ({
+      ...record(0),
+      problemId,
+      needsReview: true,
+      needsReviewUpdatedAt: '2026-07-30T21:30:00+09:00',
+    }));
+    const database = new InMemoryLearningRecordDatabase(records);
+    for (const ids of [
+      new Set(['abc212-e']),
+      new Set(['abc212-e', 'abc467-e']),
+      new Set(['abc212-e']),
+    ]) {
+      const backup = await exportLearningRecords(database, {
+        catalogVersion: '2026.10.11-r52',
+        catalogProblemIds: ids,
+        exportedAt: '2026-10-11T12:00:00+09:00',
+      });
+      expect(backup.records).toEqual(records);
+      expect(backup.orphanedProblemIds).toEqual(
+        records.filter((r) => !ids.has(r.problemId)).map((r) => r.problemId),
+      );
+      const restored = new InMemoryLearningRecordDatabase();
+      await applyLearningRecordImport(
+        restored,
+        previewLearningRecordImport(backup, [], ids),
+        'newer-wins',
+      );
+      expect([...restored.records.values()]).toEqual(records);
+    }
+  });
   it.each(['2026.07.1', '2026.10.09-r10'])(
     'exports and restores 100+ records with catalog %s',
     async (catalogVersion) => {

@@ -31,7 +31,7 @@ modeを作らず、独立した演習・評価・解答の節を一律に増や�
 
 ### 公開済みbaseからの公式小batch取得（002 / PR-08）
 
-既存の`corpus:acquire-metadata`に、公開済みcatalog/metadataと指定範囲を渡す。取得だけの入口であり、分類・本文・正本追加・公開は行わない。`abc:update --preview initial-v1`の成功をlive追加の確認に使わない。取得後の小batch編集・再実行はPR-09へ残る。
+既存の`corpus:acquire-metadata`に、公開済みcatalog/metadataと指定範囲を渡す。取得だけの入口であり、分類・本文・正本追加・公開は行わない。`abc:update --preview initial-v1`の成功をlive追加の確認に使わない。取得後の小batch編集・再実行は下のPR-09手順へ進む。
 
 1. 公開先の`data/catalog.json`と`release-metadata.json`、または成功した同じPages
    artifactの両JSONを一時領域に取得し、metadataのSHA/runが実成功した配信を指すことを確認する。CLIは両schema、版・cutoff・変更概要、収録範囲と件数を照合する。配信artifactは公開後も`prepared`を保持するため、この欄だけで公開済みか判定しない。ローカルcandidateや旧Git
@@ -78,7 +78,7 @@ metadata
 batchのschema・公式task対応を既存検証で確認し、応答にない値は`null`、値が0なら0を保持する。HTTP・接続・JSON・schemaの失敗はexit
 2で止め、欠測扱いの成功snapshotを作らない。両応答の検証が終わってから一時snapshotを置換するため、失敗時には既存snapshotを保持する。指標は変化するので、再取得は新しい`checkedAt`で同じ一時出力を更新できる。これは公式metadataの上書きしない再実行とは異なる。
 
-`--metadata-batch`を使う取得ではcheckout外の`--output`を必須とし、`src/content/`への書込みを防ぐ。引数を省略した従来の取得・検証は収録済みProblem全体を対象とする。小batchの指標を全体の正本snapshotに置換しない。取得済み指標を対象問題分だけ正本へ反映する作業はPR-09のT049で行う。
+`--metadata-batch`を使う取得ではcheckout外の`--output`を必須とし、`src/content/`への書込みを防ぐ。引数を省略した従来の取得・検証は収録済みProblem全体を対象とする。小batchの指標を全体の正本snapshotに置換しない。取得済み指標はPR-09の準備で対象問題分だけ正本snapshotへ併合する。
 
 | 保留                                      | 再試行                                                                                                             |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -95,6 +95,53 @@ batchのschema・公式task対応を既存検証で確認し、応答にない�
 
 検証ではfixture
 transportによるEx/将来I/公式欠番・失敗の網羅と、実公式ネットワークで取得した範囲を分けて報告する。取得成功は本文執筆・正本追加・公開の成功ではなく、SC-004/M5の実運用受入は別の教材変更依頼まで未達とする。復旧は取得consumerをrevertし、今回の一時領域だけを破棄する。
+
+### 小batchの編集と再実行（002 / PR-09）
+
+通常更新は次の4段階で進める。本文だけの訂正は既存正本を直接編集し、追加用CLIを使う必要はない。
+
+1. **対象確認**: 訂正する問題と関連先を確認する。ABC追加では上記PR-08で公開済みbaseと終了済みの1
+   Contestまたは連続する小範囲を取得し、同batchのmetricsも取得する。公開catalogと一致するcheckoutをbaseとし、最新回までの追加を要求しない。
+2. **正本編集**:
+   checkout外の一時コピーへmetadataを準備し、Codexが全対象の解説Markdown、分析JSON、配置を執筆する。主題は未知問で再利用する能力からsemantic
+   primary Outcomeを選び、そのowner
+   Unitへ置く。共通手法だけで短縮解説にせず、成立条件・証明・全体計算量を比較する。
+3. **必要検証**: 同じ入力で`--mode validate`を実行する。対象全件の本文・source/claim・分析・配置・前提と3DAGを確認し、主配置・関連Unit・親Unitの必要差分とtaxonomy
+   indexを作る。既存本文・分類・読書順を保持し、候補をbuildして内部リンク・対象検索/関連導線・記録のテストを行う。
+4. **報告／必要なら公開**: 一時コピーの`src/content/`差分を確認して対象batchだけcheckoutへ取り込む。検証結果・変更概要・未解決事項をPRへまとめ、公開を依頼された場合だけ標準Pagesの公開手順へ進む。fixture成功を数学本文の執筆や実公開の成功に数えない。
+
+base
+checkoutから次を実行する。`acquisition_dir`は上記取得時の一時領域で、`metadata/abc467-abc467.json`と`metrics.json`はそれぞれ完成したmetadata
+batch・同batchだけのmetrics
+snapshotである。小catch-upは取得時の上限とbatchファイルを同じ範囲へ変える。
+
+```sh
+candidate_dir=$(mktemp -d)
+mkdir -p "$candidate_dir/src"
+cp -R src/content "$candidate_dir/src/content"
+npm run abc:update -- --mode prepare --candidate-root "$candidate_dir" --base-catalog "$acquisition_dir/catalog.json" --base-metadata "$acquisition_dir/metadata.json" --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --metrics "$acquisition_dir/metrics.json"
+# Codexがcandidateのsrc/content/docs/problems/、technique-inventory/と配置policyを編集する。
+npm run abc:update -- --mode validate --candidate-root "$candidate_dir" --base-catalog "$acquisition_dir/catalog.json" --base-metadata "$acquisition_dir/metadata.json" --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --metrics "$acquisition_dir/metrics.json"
+```
+
+`prepare`は問題・Contest・slot・Sourceとmetricsを必要分だけ追加する。完了本文を自動生成せず、`AUTHORING_REQUIRED`の`on_hold`・exit
+2を返す。この診断だけを執筆開始として扱い、その他の保留は理由を解消してから進む。`validate`は完成した解説のfrontmatter、分析の出典・解法・学習成果、既存taxonomyの配置を読み、生成差分を内部の一時コピーで検証してからcandidateへ反映する。配置policyの`placementDigest`は編集したplacementsから既存`canonicalDigest`で再計算する。旧sourceBuildや過去の訂正・判断は書き換えない。新しいmanifest/reviewや承認は不要。
+
+新規本文は既存parserの`draft: true`表現を維持し、未検証claimを`verified`へ機械的に昇格させない。分析はCodexによる内容確認を済ませ、既存の`reviewStatus: reviewed`・未解決指摘0として入力する。これは人間承認の記録ではない。Unitの必要な問題集合・導線とtaxonomy
+indexはCLIが更新するため、通常追加で既存Unit本文を再生成しない。既存の解説・Unit文章も訂正したい場合は別の訂正差分として検証する。
+
+同じ公開base・取得入力・執筆済みcandidateで`validate`を二度実行すると`writtenPaths: []`となる。既存の取得metadataと異なる入力、対象外の本文/分類/指標変更、未知の追加は保留する。metricsは対象分だけ併合し、欠測`null`と0値、対象外の値・旧snapshotの確認日時を保持する。対象の新しい確認日時はProblemの`difficultyEvidence`へ記す。新記号の公式欠席slotは公式順から公開projectionで導出し、旧Contestのファイルを書き換えない。cutoffは初版cutoffと実収録Contestの終了時刻の最大値で、後続未着手Contestへ拡大しない。
+
+未完成・取得不整合・source/claim不一致・配置/前提不整合は`on_hold`・理由・再試行条件・exit
+2を返し、`validate`の生成差分をcandidateへ適用しない。全対象が完成するまで同batchを部分公開しない。使用法違反は64、読み書き等の実行失敗は70。候補への適用中にIO失敗が起きた場合はコピーを作り直して同じ取得入力から再実行する。候補の失敗は公開済み版を変えない。
+
+通常追加のbuildでは、同じGit版の一時worktreeへ検証済みcandidateの`src/content/`をコピーし、既存のNode/npm依存を準備して、本番base
+pathでbuildする。出力をリンク・E2Eで再利用する。`ABC_BATCH_TEST_PROBLEM=abc467-e`を指定した検索・学習記録E2Eは使い捨て追加fixture用であり、実教材の受入結果ではない。
+
+batch取消は追加PRだけを`git revert <batch_commit>`し、必要な検証と標準Pagesで新SHAを公開する。後続の本文訂正や別batchをまとめて巻き戻さず、競合は対象IDと関連先で解決する。IndexedDBを削除・初期化しない。取消IDの学習記録はunknown/orphanとして値と各独立日時を保持し、再追加時に同じIDへ再接続する。
+
+PR-09は実装と一時コピーの試験に限定する。実教材の訂正・1
+Contest追加・公開は別依頼まで未実施で、SC-004とM5全体の実運用受入は未達である。
 
 ## 3. 変更に必要な検証を選ぶ
 
@@ -447,6 +494,6 @@ PR-07aで[ローカルbuildとActionsの入力契約](../../specs/002-simplify-m
 | `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる                                        | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
 | `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                                                       | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
 | `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する                                                     | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
-| live新規問題追加・catch-up                                                                                                            | PR-08で公式小batch取得を接続。取得後の正本追加・再実行はPR-09へ残る                                                | 既存本文・配置・記録。取得の成功を執筆・公開・M5完成に数えない                                |
+| live新規問題追加・catch-up                                                                                                            | PR-08で公式小batch取得、PR-09で一時コピーの編集・再実行を接続。実教材受入は別依頼                                  | 既存本文・配置・記録。取得の成功を執筆・公開・M5完成に数えない                                |
 
 通常更新のCIは単一の基準環境を基本とし、変更に必要なschema・テスト・buildを残す。追加・維持する検査ごとに検出する不具合と実行時間を評価する。約20分かかる現状からの短縮は、後続変更のActions実測で確認する。憲章と文書の改訂だけでCI短縮やlive更新機能の完成を報告しない。

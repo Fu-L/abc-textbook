@@ -18,7 +18,10 @@ import {
 } from '../../scripts/update-abc/index.js';
 import { validatePreparedUpdate } from '../../scripts/update-abc/validate.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
-import { CorrectionImpactSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import {
+  CanonicalProblemPlacementPolicySchema,
+  CorrectionImpactSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
@@ -27,6 +30,8 @@ import {
   type ComponentEvidence,
 } from '../../src/lib/preview/preview-snapshot.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
+import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
+import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
 
 const json = async (relativePath: string): Promise<unknown> =>
   JSON.parse(await readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8')) as unknown;
@@ -418,4 +423,113 @@ describe('US5 update validation', () => {
       'OPERATION_ARTIFACT_UNREADABLE:staging/previews/initial-v1/missing.json',
     );
   });
+});
+
+describe('normal batch holds', () => {
+  it('holds incomplete/source-failed input without applying part of a batch', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-hold-'));
+    try {
+      const input = await smallBatchInput(root);
+      const snapshot = () => contentHashes(root);
+      const before = await snapshot();
+      const failed = {
+        ...input.metadataBatch,
+        sourceRevisions: input.metadataBatch.sourceRevisions.slice(1),
+      };
+      expect(
+        await runSmallBatchUpdate({ ...input, metadataBatch: failed, mode: 'prepare' }),
+      ).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(await snapshot()).toEqual(before);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      const prepared = await snapshot();
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [
+          expect.objectContaining({
+            code: 'AUTHORING_REQUIRED',
+            retryCondition: expect.any(String) as unknown,
+          }),
+        ],
+        writtenPaths: [],
+      });
+      expect(await snapshot()).toEqual(prepared);
+      await authorSmallBatch(input);
+      const file = path.join(root, 'src/content/docs/problems/abc467-i.md');
+      const text = await readFile(file, 'utf8');
+      await writeFile(
+        file,
+        text.replaceAll('"verificationStatus":"verified"', '"verificationStatus":"unverified"'),
+      );
+      const authored = await snapshot();
+      const held = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+      expect(held).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(held.holds[0]?.reason).toContain('CLAIM_HOLD');
+      expect(await snapshot()).toEqual(authored);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }, 120_000);
+
+  it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
+    try {
+      const input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      const source = input.metadataBatch.sourceRevisions[0];
+      if (!source) throw new Error('Missing source fixture');
+      const sourceFile = path.join(
+        root,
+        `src/content/sources/${input.metadataBatch.batchId}/${source.id}.json`,
+      );
+      const sourceBytes = await readFile(sourceFile);
+      await writeFile(sourceFile, JSON.stringify({ ...source, fingerprint: 'f'.repeat(64) }));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [expect.objectContaining({ code: 'ACQUIRED_INPUT_CONFLICT' })],
+      });
+      await writeFile(sourceFile, sourceBytes);
+      for (const docPath of [
+        'src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md',
+        'src/content/docs/learn/dynamic-programming/index.md',
+      ]) {
+        const proseFile = path.join(root, docPath);
+        const prose = await readFile(proseFile);
+        await writeFile(proseFile, Buffer.concat([prose, Buffer.from('\n対象外の変更\n')]));
+        expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code: 'OUTSIDE_BATCH_CHANGE' })],
+        });
+        await writeFile(proseFile, prose);
+      }
+      const policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      const policy = CanonicalProblemPlacementPolicySchema.parse(
+        JSON.parse(await readFile(policyFile, 'utf8')),
+      );
+      const placement = policy.placements.find((p) => p.problemId === 'abc467-e');
+      if (!placement) throw new Error('Missing placement fixture');
+      const reference = placement.analysisEvidenceRefs[0];
+      if (!reference) throw new Error('Missing claim reference fixture');
+      const originalPath = reference.claimPath;
+      reference.claimPath = '/typicalTechniques/999';
+      policy.placementDigest = canonicalDigest(policy.placements);
+      await writeFile(policyFile, JSON.stringify(policy));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        writtenPaths: [],
+        holds: [expect.objectContaining({ code: 'ANALYSIS_CLAIM_POINTER_STALE' })],
+      });
+      reference.claimPath = originalPath;
+      placement.primaryOutcomeId = 'outcome-missing';
+      policy.placementDigest = canonicalDigest(policy.placements);
+      await writeFile(policyFile, JSON.stringify(policy));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [expect.objectContaining({ code: 'OUTCOME_OWNER_MISSING' })],
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }, 120_000);
 });

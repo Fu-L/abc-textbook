@@ -14,6 +14,20 @@ Issue #49で用意するのは更新の検証、履歴生成、運用手順で�
 catch-upの実装は#54完了後の#52が所有する。実装開始点は[先行公開の手順](deploy-before-catch-up.md)。`initial-v1`のsimulationをproduction更新へ流用しない。`abc:update --fixture initial-v1`と`abc:review`はpreview用の入口であり、PR
 #70の初回専用`--contest`経路も公開済みbaseからのlive更新完成とは扱わない。
 
+## 通常更新の4段階（002 / PR-09）
+
+1. 対象確認: 本文訂正の問題・関連先、または公開済みbaseから追加する終了済みABCの小範囲を確認する。
+2. 正本編集: 訂正は既存本文を直接編集する。ABC追加・小catch-upは`abc:update --mode prepare`で一時コピーへ公式metadataとmetricsを追加し、Codexが対象全件の本文・分析・semantic
+   primary Outcomeの配置を執筆する。
+3. 必要検証: 追加は同じ入力の`abc:update --mode validate`で、本文・出典・配置・前提・関連Unit・索引を検証する。本番subpathのbuildを一度作り、同じ出力でリンク・対象検索・学習記録を確認する。
+4. 報告／必要なら公開: 対象差分をPRへまとめ、公開を含む依頼なら標準Pagesへ進む。取消は対象batchのGit
+   revertと新SHAの検証・公開で行い、取消IDの学習記録と各日時を保持する。
+
+実コマンド、執筆対象、再実行差分0、保留と復旧は[小batchの編集手順](update-manual.md#小batchの編集と再実行002--pr-09)を正本とする。未完成/未検証/取得不整合が同batchに残る間は全体を保留し、部分公開しない。最新回までのcatch-upや全bootstrapは前提にしない。開催順・difficultyから主題や読書順を決めない。
+
+PR-09の一時コピー試験は実教材の訂正・1
+Contest追加・公開を行う依頼ではない。SC-004とM5全体の実運用受入は別依頼まで未達として報告する。
+
 ## 通常配信・履歴・復旧
 
 正本を編集し、[変更に必要な検証](update-manual.md#3-変更に必要な検証を選ぶ)を通したPRをmainへ反映すると、CIの同run/SHAで検証したartifactを標準Pagesへ配信する。requiredは`Verify (release baseline)`。PRや非公開文書だけの変更は配信しない。公開後はmetadataの版/SHA/runと代表導線を確認する。旧手動`production-deploy.yml`はPR-07aの実成功後にPR-07bで撤去した。
@@ -24,6 +38,9 @@ catch-upの実装は#54完了後の#52が所有する。実装開始点は[先�
 revertによる新main SHA/runの別版で復旧し、origin/baseと学習記録を保持する。
 
 以下は旧pipelineの履歴資料であり、通常更新の入口ではない。
+
+<details>
+<summary>旧pipelineの技術資料（履歴・残る旧consumer専用）</summary>
 
 ## 1. Prepare：正本と差分を用意する
 
@@ -167,3 +184,5 @@ commitでretryする。失敗したmetadataを成功履歴へ追加しない。a
 object、履歴とcommitが違うmetadataは副作用なしで拒否する。rollback成功後はrouteと検索を確認し、ブラウザーの学習記録を維持する。
 
 教材や分類の修正が必要なら、rollback後に新しいPublicationUpdateをprepareする。旧releaseを書き換えることで訂正しない。
+
+</details>

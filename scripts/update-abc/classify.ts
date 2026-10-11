@@ -1,4 +1,9 @@
+import type { z } from 'zod';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+import type {
+  CanonicalProblemPlacementPolicySchema,
+  LearningUnitSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 
 export interface TechniqueCandidate {
   readonly problemId: string;
@@ -225,4 +230,40 @@ export const classifyTechniques = (
     else proposals.push({ ...candidate, status: 'preview_only', publishable: false });
   }
   return { mappings, proposals };
+};
+/** A semantic Outcome selects its existing owner; metrics never enter this choice. */
+export const batchUnitMembership = (input: {
+  placements: z.infer<typeof CanonicalProblemPlacementPolicySchema>['placements'];
+  units: readonly z.infer<typeof LearningUnitSchema>[];
+  problemIds: readonly string[];
+}) => {
+  const owners = new Map(
+    input.units.flatMap((unit) =>
+      (unit.ownedLearningOutcomeIds ?? []).map((id) => [id, unit.id] as const),
+    ),
+  );
+  const byId = new Map(input.units.map((unit) => [unit.id, unit]));
+  return input.problemIds.map((problemId) => {
+    const placement = input.placements.find((p) => p.problemId === problemId);
+    if (!placement) throw new Error(`PLACEMENT_MISSING:${problemId}`);
+    const home = owners.get(placement.primaryOutcomeId);
+    if (!home) throw new Error(`OUTCOME_OWNER_MISSING:${problemId}`);
+    const coverage = [home];
+    let parent = byId.get(home)?.parentId;
+    while (parent) {
+      if (coverage.includes(parent)) throw new Error('DEPENDENCY_CYCLE');
+      coverage.push(parent);
+      parent = byId.get(parent)?.parentId;
+    }
+    const related = [
+      ...new Set(
+        [...placement.additionalPrimaryOutcomeIds, ...placement.supportingOutcomeIds].map((id) => {
+          const owner = owners.get(id);
+          if (!owner) throw new Error(`OUTCOME_OWNER_MISSING:${id}`);
+          return owner;
+        }),
+      ),
+    ].filter((id) => !coverage.includes(id));
+    return { problemId, home, coverage, related, placement };
+  });
 };

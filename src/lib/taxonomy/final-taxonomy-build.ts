@@ -2471,7 +2471,7 @@ const valueAtClaimPath = (record: ProblemAnalysisRecord, claimPath: string): unk
   return current;
 };
 
-const validateClaimReference = (
+export const validateClaimReference = (
   reference: ProblemAnalysisClaimRef,
   recordsById: ReadonlyMap<string, ProblemAnalysisRecord>,
 ): FinalTaxonomyDiagnostic[] => {

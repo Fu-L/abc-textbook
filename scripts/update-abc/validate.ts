@@ -1,4 +1,67 @@
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
+import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import { buildCanonicalCatalog } from '../../src/lib/catalog/build-catalog.js';
+import { validateClaimReference } from '../../src/lib/taxonomy/final-taxonomy-build.js';
+
+/** Reuse the public reader and content validator, including all three DAGs. */
+export const validateSmallBatchCandidate = async (input: {
+  repositoryRoot: string;
+  targetProblemIds: readonly string[];
+  lastContestId: string;
+  problemCount: number;
+}) => {
+  const projection = await loadFullPublicProjection({
+    repositoryRoot: input.repositoryRoot,
+    usePreparedRelease: false,
+    verifyDerivedFiles: false,
+  });
+  if (
+    projection.catalog.problems.length !== input.problemCount ||
+    projection.catalog.release.lastContestId !== input.lastContestId
+  )
+    throw new Error('BATCH_RANGE_MISMATCH');
+  for (const problemId of input.targetProblemIds) {
+    const analysis = projection.catalog.techniqueInventory.find((p) => p.problemId === problemId);
+    if (analysis?.reviewStatus !== 'reviewed' || analysis.reviewFindings.length)
+      throw new Error(`ANALYSIS_INCOMPLETE:${problemId}`);
+    const document = projection.problemDocuments.get(problemId);
+    const placement = projection.policy.placements.find((p) => p.problemId === problemId);
+    if (
+      !document ||
+      !placement ||
+      !document.unit.learningOutcomeIds.includes(placement.primaryOutcomeId)
+    )
+      throw new Error(`AUTHORING_OUTCOME_MISMATCH:${problemId}`);
+    const records = new Map([[problemId, analysis]]);
+    for (const reference of [
+      ...placement.analysisEvidenceRefs,
+      ...placement.claimDispositions.map((d) => d.claimRef),
+    ]) {
+      if (reference.problemId !== problemId) throw new Error(`PLACEMENT_CLAIM_OWNER:${problemId}`);
+      const finding = validateClaimReference(reference, records)[0];
+      if (finding) throw new Error(`${finding.code}:${finding.message}`);
+    }
+    for (const disposition of placement.claimDispositions) {
+      const tags =
+        disposition.kind === 'supporting' ? placement.supportingTagIds : placement.primaryTagIds;
+      if (disposition.tagIds.some((id) => !tags.includes(id)))
+        throw new Error(`PLACEMENT_CLAIM_TAG:${problemId}`);
+    }
+    for (const [kind, tags] of [
+      ['primary', placement.primaryTagIds],
+      ['supporting', placement.supportingTagIds],
+    ] as const)
+      if (
+        tags.some(
+          (id) =>
+            !placement.claimDispositions.some((d) => d.kind === kind && d.tagIds.includes(id)),
+        )
+      )
+        throw new Error(`PLACEMENT_CLAIM_TAG:${problemId}`);
+  }
+  buildCanonicalCatalog(projection.catalog);
+  return projection;
+};
 
 interface ProblemValidationInput {
   readonly problemId: string;
