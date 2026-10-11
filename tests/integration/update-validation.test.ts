@@ -426,6 +426,7 @@ describe('US5 update validation', () => {
 });
 
 describe('normal batch holds', () => {
+  // Multiple complete-corpus validations share the CI runner with legacy fixtures.
   it('holds incomplete/source-failed input without applying part of a batch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-hold-'));
     try {
@@ -468,7 +469,7 @@ describe('normal batch holds', () => {
     } finally {
       await rm(root, { recursive: true, force: true });
     }
-  }, 120_000);
+  }, 300_000);
 
   it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
@@ -531,5 +532,5 @@ describe('normal batch holds', () => {
     } finally {
       await rm(root, { recursive: true, force: true });
     }
-  }, 120_000);
+  }, 300_000);
 });

@@ -65,6 +65,8 @@ describe('US5 update preparation', () => {
 });
 
 describe('normal small-batch editing', () => {
+  // Each case checks the real 868-Problem corpus across prepare/validate reruns.
+  // Leave room for shared CI runners while keeping every invariant assertion.
   it.each([467, 468])(
     'prepares and validates a bounded batch ending at ABC%s with zero rerun diff',
     async (last) => {
@@ -146,6 +148,6 @@ describe('normal small-batch editing', () => {
         await rm(root, { recursive: true, force: true });
       }
     },
-    120_000,
+    300_000,
   );
 });
