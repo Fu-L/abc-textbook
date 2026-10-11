@@ -9,6 +9,7 @@ import {
   acquireCorpusMetadataBatch,
   normalizedPolicyFingerprint,
   SerialOfficialPageClient,
+  createFetchTransport,
 } from '../../src/lib/corpus/acquisition.js';
 import type { CorpusAcquisitionError } from '../../src/lib/corpus/acquisition.js';
 import { corpusBatches } from '../../src/lib/corpus/batches.js';
@@ -27,6 +28,7 @@ import {
   parseOfficialEditorialIndex,
   parseOfficialEditorialItemRevision,
   parseOfficialProblemMetadata,
+  advancedTasks,
 } from '../../src/lib/corpus/metadata.js';
 import type {
   CorpusMetadataBatch,
@@ -42,6 +44,12 @@ import {
   frozenInitialV1RulesDigest,
   frozenInitialV1SelectionRules,
 } from '../fixtures/preview-selection-rules.js';
+import {
+  liveCheckedAt,
+  livePolicyApproval,
+  liveTaskList,
+  liveTransport,
+} from '../fixtures/live-metadata.js';
 
 const checkedAt = '2026-07-24T12:00:00+09:00';
 const batch = {
@@ -699,6 +707,88 @@ describe('T032-T037 official metadata corpus contract', () => {
       await rm(temporaryRoot, { recursive: true, force: true });
       await rm(outsideRoot, { recursive: true, force: true });
     }
+  });
+
+  it('acquires a non-bootstrap small batch, preserving Ex identity and all source fingerprints', async () => {
+    const requests: string[] = [];
+    const liveBatch = { id: 'abc467-abc468', firstContestNumber: 467, lastContestNumber: 468 };
+    const artifact = await acquireCorpusMetadataBatch({
+      batch: liveBatch,
+      client: new SerialOfficialPageClient({
+        transport: liveTransport({ requests, failOnce: 'abc467_i' }),
+        userAgent: 'abc-textbook/0.1.0 (contact: fixture-test)',
+        minimumStartIntervalMs: 0,
+      }),
+      policyApproval: livePolicyApproval,
+      checkedAt: liveCheckedAt,
+    });
+    expect(() => {
+      verifyCorpusMetadataBatch(artifact, liveBatch);
+    }).not.toThrow();
+    expect(artifact.problems.map(({ slotLabel }) => slotLabel)).toEqual([
+      'E',
+      'F',
+      'I',
+      'Ex',
+      'E',
+      'F',
+      'I',
+      'Ex',
+    ]);
+    expect(artifact.problems.find(({ id }) => id === 'abc467-ex')?.officialTaskId).toBe('abc467_h');
+    expect(requests.filter((url) => url.includes('/tasks/abc467_i'))).toHaveLength(2);
+    for (const problem of artifact.problems) {
+      expect(problem.sourceRevisionIds).toHaveLength(2);
+      for (const id of problem.sourceRevisionIds)
+        expect(artifact.sourceRevisions.find((source) => source.id === id)).toMatchObject({
+          officialTaskId: problem.officialTaskId,
+          checkedAt: liveCheckedAt,
+          termsCheckedAt: liveCheckedAt,
+          fingerprint: expect.stringMatching(/^[a-f0-9]{64}$/u) as unknown,
+        });
+    }
+    expect(JSON.stringify(artifact)).not.toMatch(
+      /<div|<html|Fixture statement|Fixture explanation/u,
+    );
+  });
+
+  it('rejects contradictions between task order and task metadata instead of slicing the wrong tasks', () => {
+    const parsed = parseOfficialContestMetadata({
+      contestNumber: 467,
+      officialTaskListUrl: 'https://atcoder.jp/contests/abc467/tasks',
+      html: liveTaskList(467, ['A', 'D', 'E', 'I', 'Ex']),
+      checkedAt: liveCheckedAt,
+      termsCheckedAt: liveCheckedAt,
+    });
+    expect(() =>
+      advancedTasks({ ...parsed.contest, officialTaskOrder: ['A', 'D', 'I', 'E', 'Ex'] }),
+    ).toThrow(/TASK_ORDER_CONFLICT/u);
+  });
+
+  it('passes real Fetch response metadata, headers, and cancellation to the official client transport', async () => {
+    const calls: { url: string; init: RequestInit | undefined }[] = [];
+    const fetchStub: typeof fetch = (url, init) => {
+      const requestedUrl = url instanceof Request ? url.url : String(url);
+      calls.push({ url: requestedUrl, init });
+      const response = new Response('official page', { headers: { 'content-type': 'text/html' } });
+      Object.defineProperty(response, 'url', { value: requestedUrl });
+      return Promise.resolve(response);
+    };
+    const client = new SerialOfficialPageClient({
+      transport: createFetchTransport(fetchStub),
+      userAgent: 'abc-textbook/0.1.0 (contact: fixture-test)',
+      minimumStartIntervalMs: 0,
+    });
+    expect(await client.get('https://atcoder.jp/contests/abc467/tasks')).toMatchObject({
+      status: 200,
+      contentType: 'text/html',
+      body: 'official page',
+    });
+    expect(calls[0]?.init).toMatchObject({
+      redirect: 'follow',
+      headers: { 'User-Agent': 'abc-textbook/0.1.0 (contact: fixture-test)' },
+      signal: expect.any(AbortSignal) as unknown,
+    });
   });
 
   it('rejects declared batch IDs whose artifacts do not contain their complete ranges', async () => {

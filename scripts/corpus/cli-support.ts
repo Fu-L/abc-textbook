@@ -1,5 +1,14 @@
 import { randomUUID } from 'node:crypto';
-import { link, lstat, mkdir, readFile, rename, unlink, writeFile } from 'node:fs/promises';
+import {
+  link,
+  lstat,
+  mkdir,
+  readFile,
+  realpath,
+  rename,
+  unlink,
+  writeFile,
+} from 'node:fs/promises';
 import path from 'node:path';
 
 export class CorpusCliError extends Error {
@@ -54,6 +63,25 @@ const inspectPath = async (filePath: string): Promise<Awaited<ReturnType<typeof 
     if (isNodeError(error) && error.code === 'ENOENT') return null;
     throw error;
   }
+};
+
+/** Prevent acquisition output from accidentally changing the checkout. */
+export const assertTemporaryOutput = async (
+  outputPath: string,
+  repositoryRoot: string,
+): Promise<void> => {
+  let parent = outputPath;
+  while (!(await inspectPath(parent))) parent = path.dirname(parent);
+  const resolved = path.join(await realpath(parent), path.relative(parent, outputPath));
+  const relative = path.relative(await realpath(repositoryRoot), resolved);
+  if (
+    relative === '' ||
+    (!relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative))
+  )
+    throw new CorpusCliError(
+      'OUTPUT_INSIDE_REPOSITORY',
+      'Use a temporary acquisition directory outside the checkout.',
+    );
 };
 
 /** Create missing parents one segment at a time and reject every symlink hop. */

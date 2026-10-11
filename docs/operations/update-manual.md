@@ -29,6 +29,73 @@ identity、主配置、関連先、metrics、索引、導線を整合させる�
 通常の執筆・訂正は、対象確認→正本編集→検証→報告で進める。管理用のmanifest/digestやreview
 modeを作らず、独立した演習・評価・解答の節を一律に増やさない。一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧初版・release/deployの残る依存は「既存実装からの移行」を参照する。
 
+### 公開済みbaseからの公式小batch取得（002 / PR-08）
+
+既存の`corpus:acquire-metadata`に、公開済みcatalog/metadataと指定範囲を渡す。取得だけの入口であり、分類・本文・正本追加・公開は行わない。`abc:update --preview initial-v1`の成功をlive追加の確認に使わない。取得後の小batch編集・再実行はPR-09へ残る。
+
+1. 公開先の`data/catalog.json`と`release-metadata.json`、または成功した同じPages
+   artifactの両JSONを一時領域に取得し、metadataのSHA/runが実成功した配信を指すことを確認する。CLIは両schema、版・cutoff・変更概要、収録範囲と件数を照合する。配信artifactは公開後も`prepared`を保持するため、この欄だけで公開済みか判定しない。ローカルcandidateや旧Git
+   catalogを公開baseの代用にしない。
+2. 取得する開始・終了番号を明示する。baseの末尾以前は除き、残った連続範囲を一つのbatchとする。全範囲が収録済みなら`unchanged`で取得・出力を行わない。指定終了番号を最新回へ自動拡大しない。
+3. 公式のrobots・利用規約・生成AI方針をCodexが確認する。既存policy入力が現行fingerprintと一致すれば再利用できる。不一致なら公式本文とリンク先の方針を読み、既存`corpus:policy-fingerprints`で一時入力を作る。人間承認は要求しない。正本の旧policyを今回の取得のために書き換えない。
+4. checkout外の一時領域へ取得する。終了時刻、Dの位置、公式task
+   orderとbaseのregistryとの整合を確認し、Dより後の全taskについて問題文・公式解説のSource
+   Revisionを取得する。Exは表示記号から`_ex`を推測せず、公式リンクのtask
+   IDを保持する。将来のI等も同じ規則で扱う。
+
+ABC466までを収録する公開baseからABC467だけを取得する例（小batchなら`--last-contest 468`）。各コマンドが失敗したらそこで止め、古い一時入力で続行しない。
+
+```sh
+acquisition_dir=$(mktemp -d)
+curl --fail --silent --show-error https://fu-l.github.io/abc-textbook/data/catalog.json -o "$acquisition_dir/catalog.json"
+curl --fail --silent --show-error https://fu-l.github.io/abc-textbook/release-metadata.json -o "$acquisition_dir/metadata.json"
+# 公式方針を確認してから、一時policy入力を作る。
+npm run corpus:policy-fingerprints -- --generative-ai-url https://atcoder.jp/posts/1567 --user-agent 'abc-textbook/0.1.0 (contact: https://github.com/Fu-L/abc-textbook)' --output "$acquisition_dir/policy.json"
+acquisition_checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+npm run corpus:acquire-metadata -- --base-catalog "$acquisition_dir/catalog.json" --base-metadata "$acquisition_dir/metadata.json" --first-contest 467 --last-contest 467 --policy-approval "$acquisition_dir/policy.json" --output-dir "$acquisition_dir/metadata" --cache-dir "$acquisition_dir/responses" --user-agent 'abc-textbook/0.1.0 (contact: https://github.com/Fu-L/abc-textbook)' --checked-at "$acquisition_checked_at"
+```
+
+完成した範囲だけを`abc467-abc467.json`等へ書き、失敗時は部分batchを出力しない。`checkedAt`、`termsCheckedAt`、公式task、source
+ID/fingerprintは既存契約を維持する。raw
+HTMLは明示した一時cacheだけに置き、取得JSONや本文を`src/content/`へcommitしない。専用live
+CLIやqueueは追加せず、既存の直列取得・timeout・HTTP再試行を使う。
+
+問題配置を検討する補助指標も、正本追加前に取得できる。既存の`corpus:acquire-atcoder-problems-metrics`へ完成したmetadata
+batchを渡すと、その問題だけを公式task
+IDで照合し、配点（`point`）・推定difficulty（`difficulty`）・実験段階の推定かどうか（`difficultyExperimental`）を既存snapshot形式で保存する。Exもmetadataの公式task
+IDを使い、表示記号から推測しない。
+
+```sh
+metrics_checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+npm run corpus:acquire-atcoder-problems-metrics -- --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --checked-at "$metrics_checked_at" --output "$acquisition_dir/metrics/abc467-abc467.json"
+npm run corpus:verify-atcoder-problems-metrics -- --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --snapshot "$acquisition_dir/metrics/abc467-abc467.json"
+```
+
+配点の取得元はAtCoder
+Problemsの`merged-problems.json`、difficultyの取得元は`problem-models.json`であり、出典URLと指標の`checkedAt`も保存する。difficultyは公式配点とは別の推定値で、取得時の値を変換せず保持する。配点・difficultyだけで分類や読書順を自動決定せず、学習成果と前提を踏まえるための材料として使う。提供元の[API文書](https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md)に従い、直列のアクセス間に1秒より長い間隔を置く。
+
+metadata
+batchのschema・公式task対応を既存検証で確認し、応答にない値は`null`、値が0なら0を保持する。HTTP・接続・JSON・schemaの失敗はexit
+2で止め、欠測扱いの成功snapshotを作らない。両応答の検証が終わってから一時snapshotを置換するため、失敗時には既存snapshotを保持する。指標は変化するので、再取得は新しい`checkedAt`で同じ一時出力を更新できる。これは公式metadataの上書きしない再実行とは異なる。
+
+`--metadata-batch`を使う取得ではcheckout外の`--output`を必須とし、`src/content/`への書込みを防ぐ。引数を省略した従来の取得・検証は収録済みProblem全体を対象とする。小batchの指標を全体の正本snapshotに置換しない。取得済み指標を対象問題分だけ正本へ反映する作業はPR-09のT049で行う。
+
+| 保留                                      | 再試行                                                                                                             |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `CONTEST_NOT_ENDED`                       | 公式終了時刻を過ぎてから、新しい確認日時・一時領域で取得する。未終了を対象から黙って落とさない。                   |
+| `D_TASK_NOT_FOUND`・`TASK_ORDER_CONFLICT` | 公式一覧と公開registryを照合し、parser/inputの矛盾を直して新しい一時領域で取得する。順序を推測して補完しない。     |
+| `OFFICIAL_REQUEST_FAILED/REJECTED`等      | 報告されたURL/HTTP・接続を確認し、同じ範囲で再試行する。408/429/5xx等は既存client内でも既定2回まで再試行する。     |
+| `POLICY_FINGERPRINT_CHANGED`              | 現行の公式方針をCodexが確認し、一時policy入力と確認日時を更新して再試行する。旧fingerprintを成功扱いで流用しない。 |
+
+保留は`on_hold`・理由・再試行条件とexit
+2で報告する。ABC316は既知の公式根拠（[ABC350 A](https://atcoder.jp/contests/abc350/tasks/abc350_a)）をその取得時に確認して欠番を記録する。404・timeout・根拠本文の欠落だけで公式欠番を作らない。欠番の根拠取得失敗もbatch全体を保留する。
+
+同じbase・範囲・`checkedAt`・policyで再実行すると、既存の完成artifactをschema/意味検証し、`verified_existing`としてbytesを保持する。cacheは確認日時とpolicyに結び付き、policy確認はcacheを迂回する。未終了・parser/方針変更・内容の再確認では日時と作業領域を新しくする。同じ出力pathの異なる日時・不正artifactは拒否し、上書きしない。旧`--batch all|abc212-abc263`等の初版入口は保持し、live範囲引数との混在はexit
+64で拒否する。
+
+検証ではfixture
+transportによるEx/将来I/公式欠番・失敗の網羅と、実公式ネットワークで取得した範囲を分けて報告する。取得成功は本文執筆・正本追加・公開の成功ではなく、SC-004/M5の実運用受入は別の教材変更依頼まで未達とする。復旧は取得consumerをrevertし、今回の一時領域だけを破棄する。
+
 ## 3. 変更に必要な検証を選ぶ
 
 依存の準備が必要なら`.nvmrc`・`package.json`・lockfileを参照して`npm ci`する。既存scriptの意味と引数を確認して使う。`schema:check`は生成schemaとの一致の確認であり、教材データ自体の検証には対象のschema・catalogテストも使う。
@@ -68,6 +135,8 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 
 ローカル`--base REF`はtrackedの作業差分と未追跡ファイルも含める。ActionsではcheckoutしたSHAとのcommit差分を使う。`--all`またはローカル差分未指定は広い検査。未知引数は使用法違反で停止する。失敗はexit
 2、使用法違反64、signal/実行不能70で後続を止める。非公開文書だけは書式・リンク・見出し・feature選択を検証し、build・E2E・browser準備を実行しない。
+
+初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
 
 `check`でAstro/各TypeScript環境を検査した同runは`build:checked`でbuildする。単独`build`にはAstro
 checkを保持する。build出力は`:built`へ渡して再利用する。通常CIはE2Eを選んだときだけChromiumを準備する。他browserは`test:e2e:install`、Linuxでは`test:e2e:install:all:ci`で準備し、`test:e2e:built -- --project=firefox`等で必要なspecを実行する。
@@ -378,6 +447,6 @@ PR-07aで[ローカルbuildとActionsの入力契約](../../specs/002-simplify-m
 | `scripts/verify-release.ts`、`scripts/review-update.ts`、`scripts/release/`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | 人間review・manifest・digest連鎖の依存を減らし、通常更新をCodexで完結させる                                        | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
 | `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                                                               | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                                                       | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
 | `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約                                                 | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する                                                     | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
-| live新規問題追加・catch-up                                                                                                            | 公開済みbaseからの小batch追加手順を実装後に確定する                                                                | 既存本文・配置・記録。初回専用fixtureの成功をlive機能完成に数えない                           |
+| live新規問題追加・catch-up                                                                                                            | PR-08で公式小batch取得を接続。取得後の正本追加・再実行はPR-09へ残る                                                | 既存本文・配置・記録。取得の成功を執筆・公開・M5完成に数えない                                |
 
 通常更新のCIは単一の基準環境を基本とし、変更に必要なschema・テスト・buildを残す。追加・維持する検査ごとに検出する不具合と実行時間を評価する。約20分かかる現状からの短縮は、後続変更のActions実測で確認する。憲章と文書の改訂だけでCI短縮やlive更新機能の完成を報告しない。

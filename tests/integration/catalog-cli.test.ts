@@ -19,6 +19,7 @@ import {
   executableExampleInventoryDigest,
 } from '../../src/lib/catalog/build-catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
+import { withLegacySeedRepository } from '../fixtures/legacy-seed.js';
 
 const execFileAsync = promisify(execFile);
 const sha = (character: string): string => character.repeat(64);
@@ -203,85 +204,44 @@ describe('catalog validation CLI evidence boundary', () => {
   // This compatibility test reconstructs the full legacy release twice.
   // Allow for the slower disk and CPU of the release-baseline CI runner.
   it('accepts the retained legacy inventory and rejects an invalid legacy field', async () => {
-    // Clone existing inputs into a disposable Git repository; no new review/check receipts.
-    const snapshot = path.join(repositoryRoot, 'snapshot');
-    await execFileAsync('git', ['clone', '--shared', '--quiet', '--no-checkout', '.', snapshot]);
-    await execFileAsync('git', ['reset', '--mixed', '--quiet', 'HEAD'], { cwd: snapshot });
-    // Only materialize inputs read by the old consumer; historical build artifacts are unnecessary.
-    await execFileAsync(
-      'git',
-      [
-        'restore',
-        '--source=HEAD',
-        '--worktree',
-        '--',
-        'src/content',
-        'docs/work-manifests',
-        'docs/verification/releases',
-        'docs/reviews/agent-content/initial-release',
-        'docs/verification/initial-release',
-        'docs/verification/bootstrap/us1.json',
-        'docs/verification/bootstrap/learning-unit-content.json',
-        'docs/verification/bootstrap/problem-authoring-units.json',
-        '.specify/memory/constitution.md',
-        '.specify/templates',
-        'staging/updates',
-      ],
-      { cwd: snapshot },
-    );
-    await execFileAsync('git', ['update-ref', 'refs/remotes/origin/main', 'HEAD'], {
-      cwd: snapshot,
-    });
-    await execFileAsync(
-      'git',
-      [
-        '-c',
-        'user.name=Fixture',
-        '-c',
-        'user.email=fixture@example.com',
-        'commit',
-        '--allow-empty',
-        '-m',
-        'Legacy validation fixture',
-      ],
-      { cwd: snapshot },
-    );
-    const inputPath = 'docs/verification/releases/catalog.json';
-    const evidencePath = 'docs/verification/releases/evidence-inventory.json';
-    const original = CatalogSchema.parse(
-      JSON.parse(await readFile(path.join(snapshot, inputPath), 'utf8')) as unknown,
-    );
-    // The legacy CLI never accepted a prepared projection as a published release.
-    // Remove that marker in the fixture while retaining the old actual evidence values.
-    Reflect.deleteProperty(original.release, 'publicationStatus');
-    original.release.contentSnapshotDigest = catalogContentDigest(original);
-    await writeFile(path.join(snapshot, inputPath), JSON.stringify(original));
-    const invoke = (script: string, extra: string[] = []) =>
-      execFileAsync(
-        process.execPath,
-        [
-          '--import',
-          path.resolve('node_modules/tsx/dist/loader.mjs'),
-          path.resolve(`scripts/catalog-${script}.ts`),
-          '--input',
-          inputPath,
-          '--evidence-inventory',
-          evidencePath,
-          ...extra,
-        ],
-        { cwd: snapshot },
+    await withLegacySeedRepository(async (snapshot) => {
+      const inputPath = 'docs/verification/releases/catalog.json';
+      const evidencePath = 'docs/verification/releases/evidence-inventory.json';
+      const original = CatalogSchema.parse(
+        JSON.parse(await readFile(path.join(snapshot, inputPath), 'utf8')) as unknown,
       );
-    expect((await invoke('validate')).stdout).toBe('CATALOG_VALID\n');
-    const evidence = JSON.parse(
-      await readFile(path.join(snapshot, evidencePath), 'utf8'),
-    ) as Record<string, unknown>;
-    evidence.checks = 'invalid';
-    await writeFile(path.join(snapshot, evidencePath), JSON.stringify(evidence));
-    const error = await invoke('validate').catch(
-      (value: unknown) => value as { code: number; stderr: string },
-    );
-    expect(error).toMatchObject({ code: 2 });
-    expect(error.stderr).toContain('EVIDENCE_INVENTORY_SCHEMA_INVALID');
+      // The legacy CLI never accepted a prepared projection as a published release.
+      // Remove that marker in the fixture while retaining the old actual evidence values.
+      Reflect.deleteProperty(original.release, 'publicationStatus');
+      original.release.contentSnapshotDigest = catalogContentDigest(original);
+      await writeFile(path.join(snapshot, inputPath), JSON.stringify(original));
+      const invoke = (script: string, extra: string[] = []) =>
+        execFileAsync(
+          process.execPath,
+          [
+            '--import',
+            path.resolve('node_modules/tsx/dist/loader.mjs'),
+            path.resolve(`scripts/catalog-${script}.ts`),
+            '--input',
+            inputPath,
+            '--evidence-inventory',
+            evidencePath,
+            ...extra,
+          ],
+          { cwd: snapshot },
+        );
+      expect((await invoke('validate')).stdout).toBe('CATALOG_VALID\n');
+      const evidence = JSON.parse(
+        await readFile(path.join(snapshot, evidencePath), 'utf8'),
+      ) as Record<string, unknown>;
+      evidence.checks = 'invalid';
+      await writeFile(path.join(snapshot, evidencePath), JSON.stringify(evidence));
+      const error = await invoke('validate').catch(
+        (value: unknown) => value as { code: number; stderr: string },
+      );
+      expect(error).toMatchObject({ code: 2 });
+      expect(error.stderr).toContain('EVIDENCE_INVENTORY_SCHEMA_INVALID');
+    });
   }, 180_000);
 
   it('fails closed for a normal weekly-update fixture when evidence omits a required check', async () => {

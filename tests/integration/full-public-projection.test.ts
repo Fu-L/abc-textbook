@@ -6,7 +6,11 @@ import path from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
-import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import {
+  loadFullPublicProjection,
+  PUBLIC_HISTORY_PATH,
+} from '../../src/lib/catalog/full-public-projection.js';
+import { PublicReleaseHistorySchema } from '../../src/lib/catalog/build-release-history.js';
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
@@ -477,14 +481,30 @@ describe('accepted canonical full public projection', () => {
     expect(checkedIds.size).toBe(12);
     expect(checkedLines).toBe(15);
   });
-  it('joins all accepted content without leaking the preview or learner state', () => {
+  it('joins all accepted content without leaking the preview or learner state', async () => {
     const { ui, catalog } = projection;
     expect(ui.publicationBoundary).toBe('public');
     expect(ui.problems).toHaveLength(868);
     expect(ui.contests).toHaveLength(254);
     expect(ui.learningUnits).toHaveLength(232);
     expect(catalog.authoringUnits).toHaveLength(868);
-    expect(ui.releaseHistory).toEqual([]);
+    const recordedHistory = PublicReleaseHistorySchema.parse(
+      JSON.parse(await readFile(PUBLIC_HISTORY_PATH, 'utf8')) as unknown,
+    );
+    expect(ui.releaseHistory.map(({ version }) => version)).toEqual(
+      recordedHistory.map(({ version }) => version),
+    );
+    for (const [index, release] of ui.releaseHistory.entries()) {
+      const entry = recordedHistory[index];
+      if (!entry) throw new Error('Unknown public release');
+      expect(release).toMatchObject({
+        state: 'public',
+        route: `/updates/${entry.version}/`,
+        problemCount: entry.problemCount,
+        evidencePaths: [entry.changelogPath],
+        subjectDigest: canonicalDigest(entry),
+      });
+    }
     expect(ui.problems.every((problem) => problem.similarProblemIds.length === 0)).toBe(true);
     const serialized = JSON.stringify(ui);
     for (const forbidden of ['provisional-', 'initial-v1', 'staging/', 'needsReview', 'fixture'])
