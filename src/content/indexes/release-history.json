@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "schemaVersion": "1.0.0",
+    "version": "2026.10.09-r37924546170",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "commit": "8eb07c12c66efdf7cfe7d890425bc7d0aab7d94c",
+    "changeSummary": {
+      "updateIds": ["update-2026-10-09-r37924546170"],
+      "addedProblemIds": [],
+      "changedProblemIds": [],
+      "withdrawnProblemIds": [],
+      "taxonomyChanges": []
+    },
+    "validationResultsUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37924546170",
+    "validatedAt": "2026-10-09T11:34:15Z",
+    "firstContestId": "abc212",
+    "lastContestId": "abc466",
+    "contestCount": 254,
+    "problemCount": 868,
+    "changelogPath": "docs/verification/bootstrap/us4/full-projections.json"
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "version": "2026.10.09-r37936055365",
+    "cutoffAt": "2026-07-12T00:00:00+09:00",
+    "commit": "9c20103ec77e91a6d105f79ff44bf401ce0806d3",
+    "changeSummary": {
+      "updateIds": ["update-2026-10-09-r37936055365"],
+      "addedProblemIds": [],
+      "changedProblemIds": [],
+      "withdrawnProblemIds": [],
+      "taxonomyChanges": []
+    },
+    "validationResultsUrl": "https://github.com/Fu-L/abc-textbook/actions/runs/37936055365",
+    "validatedAt": "2026-10-09T13:19:46Z",
+    "firstContestId": "abc212",
+    "lastContestId": "abc466",
+    "contestCount": 254,
+    "problemCount": 868,
+    "changelogPath": "docs/verification/bootstrap/us4/full-projections.json"
+  }
+]

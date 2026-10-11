@@ -177,7 +177,7 @@ IDによる`YYYY.MM.DD-r<run_id>`。日を跨ぐ同run再実行でも同版、�
 deploymentのSHAとの差を、push直前との差へ合流して検査する。同run自身の配信を比較元から外し、再実行の概要を保つ。配信履歴の取得・Git差分が不明なら広い通常検査を行い、metadataの訂正影響範囲も全収録問題へ保守的に広げる。差分不明を教材変更0件や履歴だけの配信として記録しない。非公開文書だけでも未配信の教材変更があれば検査・配信し、実際に非公開文書しか差がなければ配信しない。
 
 履歴indexと非公開運用文書だけの差分は、履歴・metadataの対象テスト、build、リンク確認を行って配信する。教材の追加・訂正・削除・taxonomy差分集合は空、cutoff/収録範囲は不変。その配信自体の履歴追記は要求しない。`/updates/`の公開後に記録した履歴と最新metadataを区別し、candidateをpublished
-entry/pageへ登録しない。writerはPR-07bで実配信入力の追記へ移行した。実indexの追記はPR-07bの実main配信・公開確認後のPR-07cに残る。
+entry/pageへ登録しない。writerはPR-07bで実配信入力の追記へ移行した。実indexは実main配信・公開確認後の独立した履歴PRで更新する。
 
 通常のローカルbuildはrun入力を要求せず、履歴末尾の版、空indexなら`docs/verification/releases/catalog.json`の`release.version`識別子だけを使う。基準版不足は失敗。正本から`publicationStatus: prepared`のcandidateを作り、旧snapshot/review/check結果を流用せず、metadataを生成・コピーしない。build終了時に古いmetadataも除去する。ローカルcandidateを配信済み版のartifactとしてupload・履歴登録しない。
 
@@ -214,7 +214,7 @@ npm run release:history -- --run 37924546170 --public-output /tmp/abc-release-hi
 npm run release:history -- --run SUCCESSFUL_MAIN_RUN_ID --public-output src/content/indexes/release-history.json
 ```
 
-PR-07bはwriter/workflowの通常変更として検証・配信し、実indexを変更しない。merge後のmain配信・公開確認はPR作成時点では未実施。PR-07cはPR-07a/07bの両成功後に実入力を照合し、indexと非公開運用文書だけを更新する。両版の入力は成功後すぐに標準artifactから取得し、必要なら同じ作業内の一時領域に置く。専用保管庫は作らず、取得不能な版は追記未完了として残す。履歴だけの配信もbuild・リンク・対象検査を通すが、その配信自体の次の追記は要求しない。
+PR-07bはwriter/workflowの通常変更として検証・配信し、実indexを変更せず完了した。PR-07cはPR-07a/07bの両成功後に実入力を照合し、indexと非公開運用文書だけを更新する。両版の入力は標準artifactから取得し、必要なら同じ作業内の一時領域に置く。専用保管庫は作らず、取得不能な版は追記未完了として残す。履歴だけの配信もbuild・リンク・対象検査を通すが、その配信自体の次の追記は要求しない。
 
 GitHub APIのrun/jobとdeployment
 status、artifactの取得は[公式run API](https://docs.github.com/en/rest/actions/workflow-runs)、[deployment status API](https://docs.github.com/en/rest/deployments/statuses)、[artifact取得手順](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/download-workflow-artifacts)を確認した（2026-10-09）。成功判定の組合せと追記条件は本教科書の運用契約である。
@@ -248,7 +248,11 @@ URLも保持した。
 37717648084は配信step成功後の公開確認失敗であり、配信前失敗と区別した。mainでの674テスト・Chromium
 80件・内部リンク4,653件が成功し、environmentのprotected branch限定・reviewer必須なしとrequired
 baseline/strict/Actions app
-IDを読戻した。配信済みの両JSONは取得済み。T037時点では旧trigger撤去・履歴writer/index切替をPR-07b/07cへ残した。PR-07bでwriterと旧workflowを移行し、実indexは未変更。SC-004の実教材訂正/追加公開は未達とする。
+IDを読戻した。配信済みの両JSONは取得済み。T037時点では旧trigger撤去・履歴writer/index切替をPR-07b/07cへ残した。SC-004の実教材訂正/追加公開は未達とする。
+
+PR-07bの[PR #99](https://github.com/Fu-L/abc-textbook/pull/99)はmerge済みで、[main run 37936055365](https://github.com/Fu-L/abc-textbook/actions/runs/37936055365)の検証・標準Pages配信が成功した。SHAは`9c20103ec77e91a6d105f79ff44bf401ce0806d3`、版は`2026.10.09-r37936055365`。2026-10-11に公開catalog/metadataと同一artifactのbytes一致、教材14項目・868問・232単元と収録範囲の不変を確認した。代表問題・単元・検索・要復習・設定・更新履歴、狭い画面とキーボード操作も確認した。mainに旧手動workflowはなく、標準Pagesの成功deploymentは同runの1件だけである。required
+baseline/strict/Actions app ID、active rulesetのstatus check重複なし、environmentのprotected
+branch限定・reviewer必須なしを読戻した。PR-07a/07bの配信済み両JSONは標準artifactから一時領域へ取得済み（T040）。
 
 ## 既存実装からの移行
 
