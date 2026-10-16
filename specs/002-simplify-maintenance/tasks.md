@@ -101,7 +101,8 @@ Test**: 文書・本文・追加/構造化データ・UI/記録・共通/未知�
 protectionを切り替えて読戻し、active rulesetにstatus
 check指定がないことも確認した。失敗・cancel・未完了checkを公開側が拒否する回帰と、文書リンク不備の実process失敗を確認した。実行結果は対応PRへ集約する。
 
-T012の分類別手順・script引数・残る制約・復旧順とPR checkの検証は実施済み。PR-10cの横断確認で、新workflowの[main run 37803347343](https://github.com/Fu-L/abc-textbook/actions/runs/37803347343)のbaseline成功と実required設定を読戻したためT012を完了にした。通常更新5runの時間目標は、下記T062の比較対象不足により未達。
+T012の分類別手順・script引数・残る制約・復旧順とPR
+checkの検証は実施済み。PR-10cの横断確認で、新workflowの[main run 37803347343](https://github.com/Fu-L/abc-textbook/actions/runs/37803347343)のbaseline成功と実required設定を読戻したためT012を完了にした。通常更新5runの時間目標は、下記T062の比較対象不足により未達。
 
 **完了条件**: 単一基準環境、文書required検査、必要な失敗検出、GitHub実設定読戻しが成立し、廃止check待ちがない。CI短縮の目標達成は5回実測まで未確認。
 
@@ -366,8 +367,9 @@ Test**: 通常入口から旧承認/台帳consumerへの到達0、削除した�
 
 **Revert**: 削除したproducer・生成物・リンクをGit revertで復元する。
 
-**PR-10cの整理結果**: T058〜T059でprivate review-packet exporterとtaxonomy承認CLI、未使用の固定投影証跡比較と専用テスト、bytesが同じ無参照の統合履歴複製1件を削除した。初版監査・shard/旧catalogの互換consumerが参照する生成物とlibraryは保持する。手動初版監査、数学、他browserの入口は残した。最終検証で、現行build検査CLIに残った旧prepared catalog依存と、教材訂正テストが移行後の履歴URLまで旧版へ要求していた問題も修正した。旧catalogの互換検証・初版監査の判定は変更しない。
-
+**PR-10cの整理結果**: T058〜T059でprivate review-packet
+exporterとtaxonomy承認CLI、未使用の固定投影証跡比較と専用テスト、bytesが同じ無参照の統合履歴複製1件を削除した。初版監査・shard/旧catalogの互換consumerが参照する生成物とlibraryは保持する。手動初版監査、数学、他browserの入口は残した。最終検証で、現行build検査CLIに残った旧prepared
+catalog依存と、教材訂正テストが移行後の履歴URLまで旧版へ要求していた問題も修正した。旧catalogの互換検証・初版監査の判定は変更しない。
 
 ## Phase 16: 横断確認と完了報告（新しい証跡PRは作らない）
 
@@ -380,11 +382,18 @@ Test**: 通常入口から旧承認/台帳consumerへの到達0、削除した�
 
 **完了条件**: 対象検証と互換性の結果が説明でき、実測と実公開の事実だけを報告する。SC-001〜008未達があれば移行実装の完了範囲と機能全体の未完了範囲を分ける。教材変更禁止を解除するための承認タスクは作らない。
 
-**PR-10cの横断確認結果（2026-10-16）**: T060〜T061はNode 24.18.0/npm 11.16.0で型/schema、残す全suite、旧版比較の対象6 file・55 test、Chromium 40 test（新規batch専用2件は対象外skip）、内部リンク4,657件を確認した。初回全suiteの履歴比較1件とsandbox待受制限による3件の失敗は、修正と対象再実行で全て解消した。全旧1,583 URL・20,593 anchorを保持し、120件の旧DB/backup・未知ID・独立日時・原子的復元を確認した。正本比較元は`7ac7e057582d47259332b717a188bd946ad3b856`、独立旧buildは`5bdb87a59c9d0a0929748b210d0a696532fe2a61`。metadata URL比較は取得した実公開JSONを両一時出力へ置くfixtureであり、新しい配信成功ではない。今回の教材/保存実装/公開設定のcommit差分は0。
+**PR-10cの横断確認結果（2026-10-16）**: T060〜T061はNode 24.18.0/npm
+11.16.0で型/schema、残す全suite、旧版比較の対象6 file・55 test、Chromium 40
+test（新規batch専用2件は対象外skip）、内部リンク4,657件を確認した。初回全suiteの履歴比較1件とsandbox待受制限による3件の失敗は、修正と対象再実行で全て解消した。全旧1,583
+URL・20,593
+anchorを保持し、120件の旧DB/backup・未知ID・独立日時・原子的復元を確認した。正本比較元は`7ac7e057582d47259332b717a188bd946ad3b856`、独立旧buildは`5bdb87a59c9d0a0929748b210d0a696532fe2a61`。metadata
+URL比較は取得した実公開JSONを両一時出力へ置くfixtureであり、新しい配信成功ではない。今回の教材/保存実装/公開設定のcommit差分は0。
 
-T062はT006の旧基準16分48秒と、直近の成功PR run 5件のjob/stepを読み取った。5件の参考中央値は17分45秒だが、PR-09/10a/10bの共通処理移行であり、同種・同規模の通常教材更新5件ではない。文書だけのrun、queue・deploy待ちを混ぜず、比較対象不足としてSC-005を未達と判定した。計測run・台帳は増やしていない。
+T062はT006の旧基準16分48秒と、直近の成功PR run
+5件のjob/stepを読み取った。5件の参考中央値は17分45秒だが、PR-09/10a/10bの共通処理移行であり、同種・同規模の通常教材更新5件ではない。文書だけのrun、queue・deploy待ちを混ぜず、比較対象不足としてSC-005を未達と判定した。計測run・台帳は増やしていない。
 
-T063の実設定読戻しではrequired baseline/strict、必須承認数0、Pages reviewer要求なしを確認し、設定は変更していない。SC-001〜003/007は対象比較と現行手順で確認、SC-006の不正入力・欠落・記録回帰検出とSC-008の成功/失敗/復旧の参照は既存テスト・実Actions/PagesとPR本文へ集約する。SC-004/M5実教材受入とSC-005は未達、旧初版監査は既知のprepared照合失敗を保持する。今回の依頼はPR作成までであり、merge・新main配信は未実施。T058〜T063の作業完了を002全体の完成としない。
+T063の実設定読戻しではrequired baseline/strict、必須承認数0、Pages
+reviewer要求なしを確認し、設定は変更していない。SC-001〜003/007は対象比較と現行手順で確認、SC-006の不正入力・欠落・記録回帰検出とSC-008の成功/失敗/復旧の参照は既存テスト・実Actions/PagesとPR本文へ集約する。SC-004/M5実教材受入とSC-005は未達、旧初版監査は既知のprepared照合失敗を保持する。今回の依頼はPR作成までであり、merge・新main配信は未実施。T058〜T063の作業完了を002全体の完成としない。
 
 ## Dependencies & Execution Order
 

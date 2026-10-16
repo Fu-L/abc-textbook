@@ -1,6 +1,7 @@
 # Quickstart: ABC上級問題体系化教科書
 
-> 002 / PR-10c: `corpus:export-inventory-review-packets`は廃止済み。以下の同コマンドの説明は履歴資料であり、再現には当時のGit版を使う。現行の執筆・取得手順は[更新マニュアル](../../docs/operations/update-manual.md)を参照する。
+> 002 / PR-10c:
+> `corpus:export-inventory-review-packets`は廃止済み。以下の同コマンドの説明は履歴資料であり、再現には当時のGit版を使う。現行の執筆・取得手順は[更新マニュアル](../../docs/operations/update-manual.md)を参照する。
 
 > **初期構築の検証契約**: 現行作業では [Constitution 4.0.0](../../.specify/memory/constitution.md)と
 > [更新マニュアル](../../docs/operations/update-manual.md)を先に読む。旧review
