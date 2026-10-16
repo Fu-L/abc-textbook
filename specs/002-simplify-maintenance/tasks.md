@@ -95,15 +95,14 @@ Test**: 文書・本文・追加/構造化データ・UI/記録・共通/未知�
 - [X] T009 [P] [US3] `package.json`の`check`/`build`とブラウザー準備の既存scriptを整理し、同runで`astro check`とbuildを重複実行しない。単独build時の必要検査を保ち、通常CIでは必要なChromiumだけを準備し、他browserの既存手動入口を残す。依存versionは変更しない。
 - [X] T010 [US3] `.github/workflows/ci.yml`に単一Node 24.18.0/npm 11.16.0の`Verify (release baseline)`を用意する。文書差分でもrequired jobを起動し、job内で検査範囲を選ぶ。切替前のcommitでは旧4jobを残し、後続consumer移行を縛るrelease/review監査を除去するための検出範囲をT006に対応付ける。
 - [X] T011 [US3] T010の同名baselineの実check成功後、`docs/operations/protected-main.json`に対応する実branch protection/rulesetから`Verify (supported range)`・`Initial corpus audit`・`Release validation`・`Production review`を外して読戻す。`.github/workflows/production-deploy.yml`のrequired参照を同名baselineに揃え、実設定整合を確認してから`ci.yml`/`initial-release-audit.yml`の旧必須jobを削除または対象変更時の手動入口へ移す。権限不足なら旧job削除を保留する。
-- [ ] T012 [US3] T007のcontract、実PR/mainチェックと失敗時の停止を確認し、`docs/operations/update-manual.md`と`docs/operations/development.md`へ分類別検証、変更したscript引数、残る移行制約、設定切替と戻し順を反映する。ローカルJSONの変更を外部反映済みと報告しない。
+- [X] T012 [US3] T007のcontract、実PR/mainチェックと失敗時の停止を確認し、`docs/operations/update-manual.md`と`docs/operations/development.md`へ分類別検証、変更したscript引数、残る移行制約、設定切替と戻し順を反映する。ローカルJSONの変更を外部反映済みと報告しない。
 
 **PR-02の実装状況**: T007〜T011は実装・対象検証済み。旧4jobを残したbaselineの実成功後に実branch
 protectionを切り替えて読戻し、active rulesetにstatus
 check指定がないことも確認した。失敗・cancel・未完了checkを公開側が拒否する回帰と、文書リンク不備の実process失敗を確認した。実行結果は対応PRへ集約する。
 
 T012の分類別手順・script引数・残る制約・復旧順とPR
-checkの検証は実施済み。今回の依頼はPR作成までのためmerge/deployは実行していない。新workflowをmergeした後のmain
-check確認を残してT012は未完了とする。先行mainの旧baseline成功は新workflowのmain成功に数えない。通常更新5runの時間目標も未確認。
+checkの検証は実施済み。PR-10cの横断確認で、新workflowの[main run 37803347343](https://github.com/Fu-L/abc-textbook/actions/runs/37803347343)のbaseline成功と実required設定を読戻したためT012を完了にした。通常更新5runの時間目標は、下記T062の比較対象不足により未達。
 
 **完了条件**: 単一基準環境、文書required検査、必要な失敗検出、GitHub実設定読戻しが成立し、廃止check待ちがない。CI短縮の目標達成は5回実測まで未確認。
 
@@ -360,24 +359,41 @@ revertだけで公開・復旧でき、旧adapter/schemaなしでも旧JSON/記�
 Test**: 通常入口から旧承認/台帳consumerへの到達0、削除した生成物へのruntime/schema/test/文書リンク0、旧公開情報/出典到達を確認する。
 
 <!-- prettier-ignore -->
-- [ ] T058 `scripts/corpus/`、`scripts/verify/initial-release-evidence.ts`、`full-projection-evidence.ts`、`.github/workflows/production-deploy.yml`・`initial-release-audit.yml`の残るproducer/consumerを追い、不要な専用入口・workflowだけを削除する。初版監査/数学/他browserを関係する変更で使う手動入口まで一括削除しない。
-- [ ] T059 `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`をruntime/script/workflow/schema/test/文書リンクと照合し、参照不要な重複生成物だけを削除する。公式Source Revision・参照されるfingerprint/digest・過去の成功/保留/失敗・既存公開URLの情報を保持し、ディレクトリを一括削除しない。
-- [ ] T060 `docs/operations/update-manual.md`、`docs/operations/development.md`、`docs/operations/weekly-update.md`、`docs/README.md`の現行入口とローカルリンクを整合させ、型/schema・残すunit/contract/integration・build・リンク・必要なE2Eを確認する。削除後の参照検索で現行consumer0と履歴参照の保持を区別して報告する。
+- [X] T058 `scripts/corpus/`、`scripts/verify/initial-release-evidence.ts`、`full-projection-evidence.ts`、`.github/workflows/production-deploy.yml`・`initial-release-audit.yml`の残るproducer/consumerを追い、不要な専用入口・workflowだけを削除する。初版監査/数学/他browserを関係する変更で使う手動入口まで一括削除しない。
+- [X] T059 `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`をruntime/script/workflow/schema/test/文書リンクと照合し、参照不要な重複生成物だけを削除する。公式Source Revision・参照されるfingerprint/digest・過去の成功/保留/失敗・既存公開URLの情報を保持し、ディレクトリを一括削除しない。
+- [X] T060 `docs/operations/update-manual.md`、`docs/operations/development.md`、`docs/operations/weekly-update.md`、`docs/README.md`の現行入口とローカルリンクを整合させ、型/schema・残すunit/contract/integration・build・リンク・必要なE2Eを確認する。削除後の参照検索で現行consumer0と履歴参照の保持を区別して報告する。
 
 **完了条件**: 正本と過去の公開事実を残して重複生成物を減らし、通常手順から旧承認・多重証跡要求が消えている。
 
 **Revert**: 削除したproducer・生成物・リンクをGit revertで復元する。
+
+**PR-10cの整理結果**: T058〜T059でprivate review-packet
+exporterとtaxonomy承認CLI、未使用の固定投影証跡比較と専用テスト、bytesが同じ無参照の統合履歴複製1件を削除した。初版監査・shard/旧catalogの互換consumerが参照する生成物とlibraryは保持する。手動初版監査、数学、他browserの入口は残した。最終検証で、現行build検査CLIに残った旧prepared
+catalog依存と、教材訂正テストが移行後の履歴URLまで旧版へ要求していた問題も修正した。旧catalogの互換検証・初版監査の判定は変更しない。
 
 ## Phase 16: 横断確認と完了報告（新しい証跡PRは作らない）
 
 **Goal**: 実装済み・実測済み・未実施を区別して最終報告する。新しい成果台帳は作らない。
 
 <!-- prettier-ignore -->
-- [ ] T061 T003〜T005の`tests/integration/full-public-projection.test.ts`、`tests/integration/internal-links.test.ts`、`tests/integration/learning-record-backup.test.ts`と対象E2Eで移行前後を最終比較し、全既存本文/ID/taxonomy/配置/前提/読書順/URL/anchor、100件以上の旧記録と各日時、未知ID/原子的復元を確認する。`src/content/`の履歴追記以外のcommit差分0を確認する。
-- [ ] T062 `.github/workflows/ci.yml`の同種・同規模の正常な通常更新5runから、依存準備開始〜必須検証完了の経過時間中央値をT006の移行前実測と比較する。queue/deploy待ちを分け、10分以下かつ50%以上短縮の両方を確認する。ログ不足/未達ならSC-005未達とPR本文または完了報告へ記し、計測専用台帳や数合わせの教材変更を作らない。
-- [ ] T063 `specs/002-simplify-maintenance/tasks.md`の実行状態と`docs/operations/update-manual.md`の4変更分類/公開/再実行/復旧を実コード・実GitHub設定へ照合し、SC-001〜008ごとの達成・未実施・失敗・接続不足をPR本文または完了報告へまとめる。別教材依頼待ちのSC-004/M5受入、実deploy未確認やSC-005ログ不足があれば機能全体を完了と報告しない。
+- [X] T061 T003〜T005の`tests/integration/full-public-projection.test.ts`、`tests/integration/internal-links.test.ts`、`tests/integration/learning-record-backup.test.ts`と対象E2Eで移行前後を最終比較し、全既存本文/ID/taxonomy/配置/前提/読書順/URL/anchor、100件以上の旧記録と各日時、未知ID/原子的復元を確認する。`src/content/`の履歴追記以外のcommit差分0を確認する。
+- [X] T062 `.github/workflows/ci.yml`の同種・同規模の正常な通常更新5runから、依存準備開始〜必須検証完了の経過時間中央値をT006の移行前実測と比較する。queue/deploy待ちを分け、10分以下かつ50%以上短縮の両方を確認する。ログ不足/未達ならSC-005未達とPR本文または完了報告へ記し、計測専用台帳や数合わせの教材変更を作らない。
+- [X] T063 `specs/002-simplify-maintenance/tasks.md`の実行状態と`docs/operations/update-manual.md`の4変更分類/公開/再実行/復旧を実コード・実GitHub設定へ照合し、SC-001〜008ごとの達成・未実施・失敗・接続不足をPR本文または完了報告へまとめる。別教材依頼待ちのSC-004/M5受入、実deploy未確認やSC-005ログ不足があれば機能全体を完了と報告しない。
 
 **完了条件**: 対象検証と互換性の結果が説明でき、実測と実公開の事実だけを報告する。SC-001〜008未達があれば移行実装の完了範囲と機能全体の未完了範囲を分ける。教材変更禁止を解除するための承認タスクは作らない。
+
+**PR-10cの横断確認結果（2026-10-16）**: T060〜T061はNode 24.18.0/npm
+11.16.0で型/schema、残す全suite、旧版比較の対象6 file・55 test、Chromium 40
+test（新規batch専用2件は対象外skip）、内部リンク4,657件を確認した。初回全suiteの履歴比較1件とsandbox待受制限による3件の失敗は、修正と対象再実行で全て解消した。全旧1,583
+URL・20,593
+anchorを保持し、120件の旧DB/backup・未知ID・独立日時・原子的復元を確認した。正本比較元は`7ac7e057582d47259332b717a188bd946ad3b856`、独立旧buildは`5bdb87a59c9d0a0929748b210d0a696532fe2a61`。metadata
+URL比較は取得した実公開JSONを両一時出力へ置くfixtureであり、新しい配信成功ではない。今回の教材/保存実装/公開設定のcommit差分は0。
+
+T062はT006の旧基準16分48秒と、直近の成功PR run
+5件のjob/stepを読み取った。5件の参考中央値は17分45秒だが、PR-09/10a/10bの共通処理移行であり、同種・同規模の通常教材更新5件ではない。文書だけのrun、queue・deploy待ちを混ぜず、比較対象不足としてSC-005を未達と判定した。計測run・台帳は増やしていない。
+
+T063の実設定読戻しではrequired baseline/strict、必須承認数0、Pages
+reviewer要求なしを確認し、設定は変更していない。SC-001〜003/007は対象比較と現行手順で確認、SC-006の不正入力・欠落・記録回帰検出とSC-008の成功/失敗/復旧の参照は既存テスト・実Actions/PagesとPR本文へ集約する。SC-004/M5実教材受入とSC-005は未達、旧初版監査は既知のprepared照合失敗を保持する。今回の依頼はPR作成までであり、merge・新main配信は未実施。T058〜T063の作業完了を002全体の完成としない。
 
 ## Dependencies & Execution Order
 

@@ -5,7 +5,6 @@ import path from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { z } from 'zod';
 
-import { parseFinalTaxonomyReviewArguments } from '../../scripts/corpus/review-final-taxonomy.js';
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { FinalTaxonomyBuildSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import type { FinalTaxonomyCandidateSchema } from '../../src/lib/domain/schema-parts/catalog.js';
@@ -580,26 +579,7 @@ describe('T159 policy-selected taxonomy review', () => {
     }
   });
 
-  it('requires explicit approval, a supplied person ID, and exactly one nonempty basis source', async () => {
-    expect(() =>
-      parseFinalTaxonomyReviewArguments([
-        '--reviewer-id',
-        'person-independent-reviewer',
-        '--review-basis',
-        'Reviewed all decisions.',
-      ]),
-    ).toThrow(/FINAL_TAXONOMY_REVIEW_ARGUMENTS_INVALID/u);
-    expect(() =>
-      parseFinalTaxonomyReviewArguments([
-        '--reviewer-id',
-        'person-independent-reviewer',
-        '--approve',
-        '--review-basis',
-        'Reviewed all decisions.',
-        '--review-basis-file',
-        'review.md',
-      ]),
-    ).toThrow(/FINAL_TAXONOMY_REVIEW_ARGUMENTS_INVALID/u);
+  it('keeps the historical writer approval and basis validation', async () => {
     await expect(
       reviewFinalTaxonomy({
         reviewerId: 'person-independent-reviewer',

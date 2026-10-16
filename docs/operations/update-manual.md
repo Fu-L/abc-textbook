@@ -447,6 +447,34 @@ Actions app ID付きであることと、active rulesetに別のstatus
 check指定がないことを読戻した。設定変更は行っていない。未使用生成物・旧workflowの整理とSC-005の時間実測は後続タスクに残し、SC-004の実教材公開も本PRの完了に含めない。復旧は今回のadapter・schema登録・生成contract・専用テストと利用側をまとめてGit
 revertする。
 
+### 参照不要のproducerと重複生成物の整理（002 / PR-10c）
+
+通常の入口は本書の4段階、`abc:update --mode prepare|validate`、catalogの正本検証、標準Pages、`release:history`とGit
+revertを使う。初版の承認・台帳を通常更新の完了条件へ戻さない。参照検索では次を整理した。
+
+- `corpus:export-inventory-review-packets`と`corpus:final-taxonomy:review`のpackage入口・専用CLIを削除した。前者の利用側は専用テストと001の履歴説明だけで、後者の利用側はCLI引数のテストだけだった。専用テストも整理し、taxonomyの互換reader・残存producerが使うlibraryと意味検証は残す。旧CLIの再現は削除前のGit版を使う。
+- `verifyProjectionEvidence`は通常build・検証・初版監査から呼ばれておらず、専用の旧固定証跡比較とテストを削除した。`full-projection-evidence.ts`のdigest関数は`corpus:verify-full-projections`の明示的な旧report
+  writerが使うため保持する。通常の`--check`は現行正本とbuildを直接検査する。
+- 2026-09-25のtaxonomy統合履歴の同一ディレクトリにあった重複JSONだけを削除した。保持した`taxonomy-integration.json`とbytesが完全一致し、削除した複製へのruntime・schema・テスト・文書リンクはなかった。過去の統合結果は保持側から引き続き読める。
+
+`initial-release-evidence.ts`と手動`initial-release-audit.yml`、corpusの凍結・初版検査は依存が残るため保持する。通常CIからは呼ばない。初版監査の既知の失敗は下記のとおり未解消であり、通常検証の成功で置き換えない。数学の検算・他browserの手動入口も保持する。
+
+`docs/work-manifests/`・`docs/reviews/`はdirectory走査、動的なshard
+path、旧catalogの互換引数、初版検査から参照される。個々のliteral
+pathが見つからないことだけを理由に削除しない。`docs/verification/`の過去の成功・保留・失敗、公式Source
+Revision・fingerprint/digest、公開情報・URLは保持する。旧生成物のdigestを現行実装へ合わせて書き直さない。
+
+削除の復旧は専用CLI・テスト・複製JSONを同じGit revertで戻す。教材・学習記録の移行は不要。
+
+2026-10-16の実設定読戻しではrequiredは`Verify (release baseline)`だけでstrictが有効、active
+rulesetの必須承認数は0、Pages
+environmentにreviewer要求はなかった。PR-02の[main run 37803347343](https://github.com/Fu-L/abc-textbook/actions/runs/37803347343)も成功しており、T012のmain確認を完了した。設定を変更したという意味ではない。
+
+CI時間のT006基準は[旧run 37723463301](https://github.com/Fu-L/abc-textbook/actions/runs/37723463301)の依存準備開始から最後の必須検証完了まで16分48秒。直近の成功PR
+run
+5件はPR-09/10a/10bの広範囲な移行実装であり、同種・同規模の通常更新5件ではない。文書だけのrun、queue・deploy待ちを混ぜず、SC-005は比較対象不足で未達とする。実教材の訂正・1
+Contest追加公開のSC-004/M5受入も別依頼まで未達。今回の削除・互換性検証の完了を002全体の完成としない。
+
 ### 公開loaderの移行（002 / PR-04）
 
 公開projectionはstructured
@@ -462,17 +490,19 @@ metadata、Problemの例情報は本文frontmatterに置く。環境・入力・
 
 現行の公開projectionは通常の`verify:fast`と、本節の本文・分類の互換テストで検証する。build・リンク・Chromiumも同じ`dist`を使う。
 
-`corpus:verify-full-projections`と`ABC_COMPAT_NEW_DIST`で有効化する任意のbuilt-projectionテストには、旧prepared
-catalogのinventory/snapshot
-digest照合が残る。標準Pagesの候補catalogはこれらの旧欄を持たないため、現在は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`になる。2026-10-16にPR-10bの変更前main
-`3b3f6d37`でも同じ失敗を再現した。この旧監査consumerはPR-10cの確認対象として残し、通常buildの成功やschema一致で任意監査も成功したとは扱わない。旧catalogの互換検証を省略して回避しない。
+PR-10b時点では`corpus:verify-full-projections`と任意のbuilt-projectionテストに旧prepared
+catalogのinventory/snapshot照合が残り、標準Pagesの候補catalogで`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`になった。PR-10cでこの検査CLIを現行正本のprojectionへ切り替え、旧prepared
+catalogを差し替えずに現在のbuildを検証するよう修正した。catalog本文全体、schema、収録範囲・件数・ID等の意味検証とcutoffの一致を確認する。runの版識別と変更概要の生成は既存のpublicationテストと標準Actions側が担当する。
+
+旧catalogの互換引数と初版監査自体の旧prepared照合は維持する。`verify:initial-release -- --check`は2026-10-16の横断確認でも同じ旧照合で失敗しており、現行build検証の成功を旧監査の成功と報告しない。
 
 ```sh
 ABC_COMPAT_BASE_REF="$compat_base_sha" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm test -- tests/integration/full-public-projection.test.ts
 ```
 
 `--check`は旧`us4/full-projections.json`を読まず、正本とのcatalog一致、公開route、タグの発動条件・Outcome・問題導線、Contestのタグ配置、sitemap・feed・Pagefindを検査する。検査だけでは報告ファイルを書かない。`ABC_COMPAT_NEW_DIST`指定時は、旧台帳のない一時copyでCLIの成功とstale
-catalog・欠落page・発動条件欠落の拒否も確認する。旧監査consumer向けの明示的な`--write`・`--write-evidence`と台帳ファイル自体はまだ保持し、通常更新でその再生成を要求しない。
+catalog・収録範囲/件数・未知の変更Problem
+ID・欠落page・発動条件欠落の拒否も確認する。旧監査consumer向けの明示的な`--write`・`--write-evidence`と台帳ファイル自体はまだ保持し、通常更新でその再生成を要求しない。
 
 通常サイトbuildはPR-07aで旧prepared
 snapshot/inventory照合を外し、現行正本からcandidateを生成する。catalog
@@ -563,7 +593,7 @@ PR-07aで[ローカルbuildとActionsの入力契約](../../specs/002-simplify-m
 | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
 | `.github/workflows/ci.yml`、`initial-release-audit.yml`                                      | 通常CIは単一環境の変更選択へ移行済み。初版監査は手動のみ                                                           | 削除する検査の検出範囲、残る回帰検査、Actionsの実行時間比較                                   |
 | `.github/workflows/ci.yml`、required checks、`docs/operations/protected-main.json`           | check名と実required設定はbaselineへ統一済み。PR-07aの標準Pages実main配信・公開確認は完了。PR-07bで旧workflowを撤去 | origin・base path・配信導線、実際のcheck/deploy成功。ローカルJSONだけでGitHub設定済みとしない |
-| `scripts/release/build-history.ts`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | PR-10aで旧review/release CLIを削除済み。残存adapter/schemaはPR-10bで参照確認する                                   | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
+| `scripts/release/build-history.ts`、`src/lib/domain/schema-parts/review-evidence.ts`と利用側 | PR-10aで旧review/release CLI、PR-10bで未使用adapter/schema、PR-10cで無参照producerと重複JSONを整理済み             | 出典・ID・参照・本文品質の検証、既存catalogと公開metadataの互換性                             |
 | `docs/work-manifests/`、`docs/reviews/`、`docs/verification/`の既存成果                      | 消費する処理を先に移行し、参照不要になった生成物だけ整理する                                                       | 参照済み出典と公開履歴。過去の判断を改変して成功扱いしない                                    |
 | `.agents/skills/abc-explanation-author/`、`specs/001-build-abc-textbook/`の設計・契約        | 通常執筆の移行済み契約を維持し、残る初版専用consumerを整理する                                                     | 解説の品質・公式根拠・入出力整合。既存契約の検証を黙って迂回しない                            |
 | live新規問題追加・catch-up                                                                   | PR-08で公式小batch取得、PR-09で一時コピーの編集・再実行を接続。実教材受入は別依頼                                  | 既存本文・配置・記録。取得の成功を執筆・公開・M5完成に数えない                                |

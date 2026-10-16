@@ -114,3 +114,10 @@ sourceに含めません。
 - Pagefindは静的build後に生成され、CSPはStarlightの既知inline script
   hash、layout用style属性、WebAssembly、同一origin workerだけを許可します。
 - `.env*`、browser report、coverage、build outputはGitへ追加しません。
+
+## 初版専用の入口と履歴資料
+
+002 /
+PR-10cで、使われなくなった`corpus:export-inventory-review-packets`と`corpus:final-taxonomy:review`を削除しました。通常の執筆は更新マニュアルの正本編集と小batch手順を使います。残す手動初版監査は`verify:initial-release`と`initial-release-audit.yml`、数学検算は既存Python、他browserは上記のPlaywright入口です。これらを通常更新の必須検査に戻しません。
+
+過去のspec・runbookのコマンドは当時のGit版の契約です。[削除範囲と残る依存](update-manual.md#参照不要のproducerと重複生成物の整理002--pr-10c)と、初版監査の既知の失敗を確認してから使ってください。現行の通常検証が通ることと、旧固定証跡が現行実装に一致することを混同しません。

@@ -1,5 +1,9 @@
 # 全コーパスの公開投影（T160）
 
+> この文書はT160時点の履歴資料。通常の`--check`は現行正本とbuildを直接検査し、以下の固定証跡照合は行わない。旧比較関数は002
+> /
+> PR-10cで削除した。現行の[検証手順](update-manual.md#3-変更に必要な検証を選ぶ)と[公開loaderの移行](update-manual.md#公開loaderの移行002--pr-04)を参照する。
+
 公開ページは `src/lib/catalog/public-catalog.ts` から受理済みの正本を読み込む。
 `assembleCatalog`、`buildUiCatalog`、検索文書・マトリクスの生成は既存previewと共通である。previewの入力と検証は保持し、公開ページからpreview
 fixtureへの依存を除く。
