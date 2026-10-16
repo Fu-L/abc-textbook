@@ -2,7 +2,7 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
 import {
@@ -18,7 +18,11 @@ import {
 } from '../../scripts/update-abc/index.js';
 import { validatePreparedUpdate } from '../../scripts/update-abc/validate.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
-import { CorrectionImpactSchema } from '../../src/lib/domain/schema-parts/catalog.js';
+import {
+  CanonicalProblemPlacementPolicySchema,
+  CorrectionImpactSchema,
+  LearningUnitSchema,
+} from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import {
@@ -27,6 +31,8 @@ import {
   type ComponentEvidence,
 } from '../../src/lib/preview/preview-snapshot.js';
 import { validateContentWorkManifest } from '../../src/lib/validation/content-work-manifest.js';
+import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
+import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
 
 const json = async (relativePath: string): Promise<unknown> =>
   JSON.parse(await readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8')) as unknown;
@@ -418,4 +424,307 @@ describe('US5 update validation', () => {
       'OPERATION_ARTIFACT_UNREADABLE:staging/previews/initial-v1/missing.json',
     );
   });
+});
+
+describe('normal batch holds', () => {
+  describe('editorial order regressions', () => {
+    let root: string;
+    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    const homePath = 'src/content/learning-units/unit-dp-transition-optimization.json';
+    const relatedPath = 'src/content/learning-units/unit-modular-arithmetic.json';
+    let originalHome: ReturnType<typeof LearningUnitSchema.parse>;
+    let homeFile: string;
+    let relatedFile: string;
+    let docFile: string;
+    let homeBytes: Buffer;
+    let relatedBytes: Buffer;
+    let docBytes: Buffer;
+
+    beforeAll(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-order-'));
+      input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      originalHome = LearningUnitSchema.parse(JSON.parse(await readFile(homePath, 'utf8')));
+      homeFile = path.join(root, homePath);
+      relatedFile = path.join(root, relatedPath);
+      homeBytes = await readFile(homeFile);
+      relatedBytes = await readFile(relatedFile);
+      docFile = path.join(root, originalHome.docPath);
+      docBytes = await readFile(docFile);
+    }, 300_000);
+
+    afterAll(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    }, 300_000);
+
+    it.each([
+      'missing-direct',
+      'missing-related',
+      'reordered',
+      'foreign',
+      'metadata',
+      'prose',
+      'stale-list',
+    ] as const)(
+      'holds %s without writing derived content',
+      async (scenario) => {
+        await writeFile(homeFile, homeBytes);
+        await writeFile(relatedFile, relatedBytes);
+        await writeFile(docFile, docBytes);
+        const home = LearningUnitSchema.parse(JSON.parse(homeBytes.toString('utf8')));
+        let code = 'UNIT_PROBLEM_ORDER_CONFLICT';
+        if (scenario === 'missing-direct') {
+          home.directProblemIds = originalHome.directProblemIds;
+          code = 'UNIT_PROBLEM_ORDER_REQUIRED';
+        } else if (scenario === 'missing-related') {
+          await writeFile(relatedFile, await readFile(relatedPath));
+          code = 'UNIT_PROBLEM_ORDER_REQUIRED';
+        } else if (scenario === 'reordered') {
+          home.directProblemIds?.reverse();
+        } else if (scenario === 'foreign') {
+          home.directProblemIds?.push('abc212-f');
+        } else if (scenario === 'metadata') {
+          home.learningRationale += '対象外の編集';
+          code = 'UNIT_CONTENT_CONFLICT';
+        } else {
+          let text = docBytes.toString('utf8');
+          if (scenario === 'stale-list') {
+            const inserted = '- [ABC467 E「fixture」](/problems/abc467-e/) — 主題: fixture\n';
+            text = text.replace('\n## 関連問題\n', `\n${inserted}\n## 関連問題\n`);
+          } else text += '\n対象外の本文編集\n';
+          await writeFile(docFile, text);
+          code = 'UNIT_CONTENT_CONFLICT';
+        }
+        await writeFile(homeFile, JSON.stringify(home));
+        const before = await contentHashes(root);
+        const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+        expect(result, scenario).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code })],
+        });
+        expect(await contentHashes(root), scenario).toEqual(before);
+      },
+      300_000,
+    );
+  });
+
+  // Multiple complete-corpus validations share the CI runner with legacy fixtures.
+  it('holds incomplete/source-failed input without applying part of a batch', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-hold-'));
+    try {
+      const input = await smallBatchInput(root);
+      const snapshot = () => contentHashes(root);
+      const before = await snapshot();
+      const failed = {
+        ...input.metadataBatch,
+        sourceRevisions: input.metadataBatch.sourceRevisions.slice(1),
+      };
+      expect(
+        await runSmallBatchUpdate({ ...input, metadataBatch: failed, mode: 'prepare' }),
+      ).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(await snapshot()).toEqual(before);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      const prepared = await snapshot();
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [
+          expect.objectContaining({
+            code: 'AUTHORING_REQUIRED',
+            retryCondition: expect.any(String) as unknown,
+          }),
+        ],
+        writtenPaths: [],
+      });
+      expect(await snapshot()).toEqual(prepared);
+      await authorSmallBatch(input);
+      const file = path.join(root, 'src/content/docs/problems/abc467-i.md');
+      const text = await readFile(file, 'utf8');
+      await writeFile(
+        file,
+        text.replaceAll('"verificationStatus":"verified"', '"verificationStatus":"unverified"'),
+      );
+      const authored = await snapshot();
+      const held = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+      expect(held).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(held.holds[0]?.reason).toContain('CLAIM_HOLD');
+      expect(await snapshot()).toEqual(authored);
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }, 300_000);
+
+  describe('placement role and analysis regressions', () => {
+    let root: string;
+    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    let policyFile: string;
+    let originalPolicy: Buffer;
+    let documentFile: string;
+    let originalDocument: string;
+
+    // Share only the authored starting fixture. Each case restores it before editing
+    // and checks its own unchanged bytes; eight full validations cannot share one deadline.
+    beforeAll(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-'));
+      input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      originalPolicy = await readFile(policyFile);
+      documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
+      originalDocument = await readFile(documentFile, 'utf8');
+    }, 300_000);
+
+    afterAll(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    }, 300_000);
+
+    it.each([
+      'primary-role',
+      'supporting-role',
+      'typical',
+      'prerequisite',
+      'insight',
+      'evidence',
+      'conflict',
+      'review-reproduction',
+    ] as const)(
+      'holds %s without applying derived content',
+      async (scenario) => {
+        const policy = CanonicalProblemPlacementPolicySchema.parse(
+          JSON.parse(originalPolicy.toString('utf8')),
+        );
+        const placement = policy.placements.find((p) => p.problemId === 'abc467-e');
+        if (!placement) throw new Error('Missing batch placement');
+        let document = originalDocument;
+        let expectedCode: string;
+        if (scenario === 'primary-role') {
+          placement.primaryOutcomeId = 'outcome-compute-convolution-or-correlation';
+          document = document.replaceAll(
+            'outcome-subtract-exception-transitions',
+            placement.primaryOutcomeId,
+          );
+          expectedCode = 'PLACEMENT_OUTCOME_ROLE_MISMATCH';
+        } else if (scenario === 'supporting-role') {
+          placement.supportingTagIds = [];
+          // Remove the Tag-bearing decision too, isolating the missing role check.
+          const claim = placement.claimDispositions.find((d) => d.kind === 'supporting');
+          if (!claim) throw new Error('Missing supporting claim');
+          claim.kind = 'baseline';
+          claim.tagIds = [];
+          expectedCode = 'PLACEMENT_OUTCOME_ROLE_MISMATCH';
+        } else if (scenario === 'typical' || scenario === 'prerequisite') {
+          const claimPath =
+            scenario === 'typical' ? '/typicalTechniques/1' : '/prerequisiteCandidates/0';
+          placement.claimDispositions = placement.claimDispositions.filter(
+            (d) => d.claimRef.claimPath !== claimPath,
+          );
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath !== claimPath,
+          );
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE';
+        } else if (scenario === 'insight') {
+          placement.adHocElements = [];
+          expectedCode = 'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE';
+        } else if (scenario === 'evidence') {
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath !== '/prerequisiteCandidates/0',
+          );
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_EVIDENCE_INCOMPLETE';
+        } else if (scenario === 'conflict') {
+          const claim = structuredClone(placement.claimDispositions[0]);
+          if (!claim) throw new Error('Missing disposition fixture');
+          claim.kind = 'baseline';
+          claim.tagIds = [];
+          placement.claimDispositions.push(claim);
+          expectedCode = 'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_CONFLICT';
+        } else {
+          placement.claimDispositions = placement.claimDispositions.filter(
+            (d) => d.claimRef.claimPath === '/typicalTechniques/0',
+          );
+          placement.analysisEvidenceRefs = placement.analysisEvidenceRefs.filter(
+            (r) => r.claimPath === '/typicalTechniques/0',
+          );
+          placement.adHocElements = [];
+          expectedCode = 'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE';
+        }
+        policy.placementDigest = canonicalDigest(policy.placements);
+        await writeFile(policyFile, JSON.stringify(policy));
+        await writeFile(documentFile, document);
+        const before = await contentHashes(root);
+        const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+        expect(result, scenario).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code: expectedCode })],
+        });
+        expect(await contentHashes(root), scenario).toEqual(before);
+      },
+      300_000,
+    );
+  });
+
+  it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
+    try {
+      const input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      const source = input.metadataBatch.sourceRevisions[0];
+      if (!source) throw new Error('Missing source fixture');
+      const sourceFile = path.join(
+        root,
+        `src/content/sources/${input.metadataBatch.batchId}/${source.id}.json`,
+      );
+      const sourceBytes = await readFile(sourceFile);
+      await writeFile(sourceFile, JSON.stringify({ ...source, fingerprint: 'f'.repeat(64) }));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [expect.objectContaining({ code: 'ACQUIRED_INPUT_CONFLICT' })],
+      });
+      await writeFile(sourceFile, sourceBytes);
+      for (const docPath of [
+        'src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md',
+        'src/content/docs/learn/dynamic-programming/index.md',
+      ]) {
+        const proseFile = path.join(root, docPath);
+        const prose = await readFile(proseFile);
+        await writeFile(proseFile, Buffer.concat([prose, Buffer.from('\n対象外の変更\n')]));
+        expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code: 'OUTSIDE_BATCH_CHANGE' })],
+        });
+        await writeFile(proseFile, prose);
+      }
+      const policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      const policy = CanonicalProblemPlacementPolicySchema.parse(
+        JSON.parse(await readFile(policyFile, 'utf8')),
+      );
+      const placement = policy.placements.find((p) => p.problemId === 'abc467-e');
+      if (!placement) throw new Error('Missing placement fixture');
+      const reference = placement.analysisEvidenceRefs[0];
+      if (!reference) throw new Error('Missing claim reference fixture');
+      const originalPath = reference.claimPath;
+      reference.claimPath = '/typicalTechniques/999';
+      policy.placementDigest = canonicalDigest(policy.placements);
+      await writeFile(policyFile, JSON.stringify(policy));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        writtenPaths: [],
+        holds: [expect.objectContaining({ code: 'ANALYSIS_CLAIM_POINTER_STALE' })],
+      });
+      reference.claimPath = originalPath;
+      placement.primaryOutcomeId = 'outcome-missing';
+      policy.placementDigest = canonicalDigest(policy.placements);
+      await writeFile(policyFile, JSON.stringify(policy));
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'on_hold',
+        holds: [expect.objectContaining({ code: 'OUTCOME_OWNER_MISSING' })],
+      });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+    }
+  }, 300_000);
 });

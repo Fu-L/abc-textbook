@@ -1,5 +1,34 @@
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { stableCompare, type StagedOperationInput } from './types.js';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+
+/** Only content bytes are copied/applied. Existing prose is never regenerated. */
+export const readContentFiles = async (root: string): Promise<Map<string, Buffer>> => {
+  const directory = path.join(root, 'src/content');
+  const entries = await readdir(directory, { recursive: true, withFileTypes: true });
+  const files = new Map<string, Buffer>();
+  for (const entry of entries.filter((entry) => entry.isFile())) {
+    const file = path.relative(root, path.join(entry.parentPath, entry.name));
+    files.set(file, await readFile(path.join(root, file)));
+  }
+  return files;
+};
+
+export const writeChangedContent = async (
+  root: string,
+  files: ReadonlyMap<string, Buffer>,
+): Promise<string[]> => {
+  const previous = await readContentFiles(root);
+  const changed: string[] = [];
+  for (const [file, bytes] of files) {
+    if (previous.get(file)?.equals(bytes)) continue;
+    await mkdir(path.dirname(path.join(root, file)), { recursive: true });
+    await writeFile(path.join(root, file), bytes);
+    changed.push(file);
+  }
+  return changed.sort();
+};
 
 export interface StageInput {
   readonly previewId: string;

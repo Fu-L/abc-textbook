@@ -263,6 +263,32 @@ export const loadFullPublicProjection = async (
       sourceRevisionId: contest.taskOrderSourceRevisionId,
     })),
   });
+  // New labels do not require rewriting old contest-slot files. Only a proven
+  // absence is derived; a missing observed task remains a validation failure.
+  const slotKeys = new Set(slots.map((slot) => `${slot.contestId}:${slot.label}`));
+  for (const contest of contests)
+    for (const label of registry.labels) {
+      if (!slotKeys.has(`${contest.id}:${label}`) && !contest.officialTaskOrder.includes(label))
+        slots.push(
+          ContestSlotRecordSchema.parse({
+            contestId: contest.id,
+            label,
+            officialTaskId: null,
+            officialOrder: null,
+            availability: 'official_absent',
+            catalogStatus: 'uncollected',
+            holdReason: null,
+            problemId: null,
+            sourceRevisionId: contest.taskOrderSourceRevisionId,
+            checkedAt: contest.checkedAt,
+          }),
+        );
+    }
+  const cutoffAt = contests.reduce(
+    (cutoff, contest) =>
+      Date.parse(contest.endedAt) > Date.parse(cutoff) ? contest.endedAt : cutoff,
+    INITIAL_RELEASE_CUTOFF,
+  );
   const retiredTargets: {
     impactId: string;
     locator: unknown;
@@ -311,7 +337,7 @@ export const loadFullPublicProjection = async (
       publicationStatus: 'prepared',
       version: completedAt.slice(0, 10).replaceAll('-', '.'),
       releaseKind: 'initial',
-      cutoffAt: INITIAL_RELEASE_CUTOFF,
+      cutoffAt,
       validatedAt: completedAt,
       publicationEffectiveAt: completedAt,
       manifestDigest: policy.sourceBuild.digest,

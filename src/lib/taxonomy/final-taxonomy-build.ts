@@ -2471,7 +2471,7 @@ const valueAtClaimPath = (record: ProblemAnalysisRecord, claimPath: string): unk
   return current;
 };
 
-const validateClaimReference = (
+export const validateClaimReference = (
   reference: ProblemAnalysisClaimRef,
   recordsById: ReadonlyMap<string, ProblemAnalysisRecord>,
 ): FinalTaxonomyDiagnostic[] => {
@@ -2548,6 +2548,199 @@ const allBuildClaimReferences = (build: FinalTaxonomyBuild): ProblemAnalysisClai
     surfaceAssessments.flatMap(({ evidenceRefs }) => evidenceRefs),
   ),
 ];
+
+/** Content-only placement checks shared by initial taxonomy and normal batches. */
+export const validatePlacementAnalysisCoverage = (
+  placement: Pick<
+    FinalProblemPlacementProjection,
+    | 'problemId'
+    | 'analysisEvidenceRefs'
+    | 'adHocElements'
+    | 'claimDispositions'
+    | 'primaryTagIds'
+    | 'supportingTagIds'
+  >,
+  record: ProblemAnalysisRecord | undefined,
+): FinalTaxonomyDiagnostic[] => {
+  const diagnostics: FinalTaxonomyDiagnostic[] = [];
+  const add = (code: string, message: string, entityId: string): void => {
+    diagnostics.push({ code, message, entityId });
+  };
+  if (
+    placement.analysisEvidenceRefs.some((reference) => reference.problemId !== placement.problemId)
+  ) {
+    add(
+      'PLACEMENT_EVIDENCE_OWNER_MISMATCH',
+      'Placement evidence must be owned by the placed Problem.',
+      placement.problemId,
+    );
+  }
+  const expectedAdHoc = sortedUnique(
+    record?.problemSpecificInsights.map(({ insight, reusablePerspective }) =>
+      adHocProjectionText({ text: insight, reusablePerspective }),
+    ) ?? [],
+  );
+  if (!sameOrderedValues(expectedAdHoc, sortedUnique(placement.adHocElements))) {
+    add(
+      'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE',
+      'Every problem-specific insight must remain visible as an ad-hoc element.',
+      placement.problemId,
+    );
+  }
+  const expectedDispositionPaths = sortedUnique([
+    ...(record?.typicalTechniques.map((_, index) => `/typicalTechniques/${String(index)}`) ?? []),
+    ...(record?.prerequisiteCandidates.map(
+      (_, index) => `/prerequisiteCandidates/${String(index)}`,
+    ) ?? []),
+  ]);
+  const dispositionPaths = sortedUnique(
+    placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath),
+  );
+  const missingDispositionPaths = expectedDispositionPaths.filter(
+    (claimPath) => !dispositionPaths.includes(claimPath),
+  );
+  const invalidExtraDispositionPaths = dispositionPaths.filter(
+    (claimPath) =>
+      !expectedDispositionPaths.includes(claimPath) &&
+      !/^\/implementationConcerns\/(0|[1-9]\d*)$/u.test(claimPath),
+  );
+  if (missingDispositionPaths.length > 0 || invalidExtraDispositionPaths.length > 0) {
+    add(
+      'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE',
+      'Every typical Technique and prerequisite claim requires an explicit disposition; only explicit implementation-concern dispositions may be added.',
+      placement.problemId,
+    );
+  }
+  const dispositionIdentityKeys = placement.claimDispositions.map(
+    ({ claimRef, kind, tagIds }) =>
+      `${claimRef.claimPath}\u0000${kind}\u0000${sortedUnique(tagIds).join('\u0000')}`,
+  );
+  const dispositionKindsByPath = new Map<string, Set<string>>();
+  for (const { claimRef, kind } of placement.claimDispositions) {
+    const kinds = dispositionKindsByPath.get(claimRef.claimPath) ?? new Set<string>();
+    kinds.add(kind);
+    dispositionKindsByPath.set(claimRef.claimPath, kinds);
+  }
+  if (
+    new Set(dispositionIdentityKeys).size !== dispositionIdentityKeys.length ||
+    [...dispositionKindsByPath.values()].some(
+      (kinds) => kinds.size > 1 && (kinds.has('baseline') || kinds.has('problem_specific')),
+    )
+  ) {
+    add(
+      'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_CONFLICT',
+      'A claim cannot repeat a disposition or mix a terminal role with Tag-bearing roles.',
+      placement.problemId,
+    );
+  }
+  const assignedTagIds = new Set([...placement.primaryTagIds, ...placement.supportingTagIds]);
+  if (
+    placement.claimDispositions.some(
+      ({ claimRef, kind, tagIds }) =>
+        claimRef.problemId !== placement.problemId ||
+        tagIds.some((tagId) => !assignedTagIds.has(tagId)) ||
+        ((kind === 'primary' || kind === 'same_tag') &&
+          tagIds.some((tagId) => !placement.primaryTagIds.includes(tagId))) ||
+        (kind === 'supporting' &&
+          tagIds.some((tagId) => !placement.supportingTagIds.includes(tagId))) ||
+        ((kind === 'baseline' || kind === 'problem_specific') && tagIds.length > 0),
+    )
+  ) {
+    add(
+      'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INVALID',
+      'Claim dispositions must be owned by the Problem and use its declared primary/supporting Tags.',
+      placement.problemId,
+    );
+  }
+  const primaryDispositionTagIds = new Set(
+    placement.claimDispositions.flatMap(({ kind, tagIds }) => (kind === 'primary' ? tagIds : [])),
+  );
+  if (placement.primaryTagIds.some((tagId) => !primaryDispositionTagIds.has(tagId))) {
+    add(
+      'PLACEMENT_PRIMARY_TAG_DISPOSITION_MISSING',
+      'Every primary Tag must be justified by an explicit primary inventory-claim disposition.',
+      placement.problemId,
+    );
+  }
+  const supportingDispositionTagIds = new Set(
+    placement.claimDispositions.flatMap(({ kind, tagIds }) =>
+      kind === 'supporting' ? tagIds : [],
+    ),
+  );
+  if (placement.supportingTagIds.some((tagId) => !supportingDispositionTagIds.has(tagId))) {
+    add(
+      'PLACEMENT_SUPPORTING_TAG_DISPOSITION_MISSING',
+      'Every supporting Tag must be justified by an explicit supporting inventory-claim disposition.',
+      placement.problemId,
+    );
+  }
+  const evidenceRefKeys = new Set(
+    placement.analysisEvidenceRefs.map(
+      ({ problemId, claimPath }) => `${problemId}\u0000${claimPath}`,
+    ),
+  );
+  if (
+    placement.claimDispositions.some(
+      ({ claimRef }) => !evidenceRefKeys.has(`${claimRef.problemId}\u0000${claimRef.claimPath}`),
+    )
+  ) {
+    add(
+      'PLACEMENT_INVENTORY_CLAIM_EVIDENCE_INCOMPLETE',
+      'Every claim disposition must remain in the placement evidence closure.',
+      placement.problemId,
+    );
+  }
+  return diagnostics;
+};
+
+/** Each role must have both Outcome-to-Tag and Tag-to-Outcome coverage. */
+export const validatePlacementOutcomeRoles = (
+  placement: Pick<
+    FinalProblemPlacementProjection,
+    | 'problemId'
+    | 'primaryOutcomeId'
+    | 'additionalPrimaryOutcomeIds'
+    | 'supportingOutcomeIds'
+    | 'primaryTagIds'
+    | 'supportingTagIds'
+  >,
+  outcomeById: ReadonlyMap<string, { readonly scopeIds: readonly string[] }>,
+): FinalTaxonomyDiagnostic[] => {
+  const diagnostics: FinalTaxonomyDiagnostic[] = [];
+  const add = (code: string, message: string, entityId: string): void => {
+    diagnostics.push({ code, message, entityId });
+  };
+  const primaryOutcomeIds = [placement.primaryOutcomeId, ...placement.additionalPrimaryOutcomeIds];
+  if (
+    primaryOutcomeIds.some(
+      (outcomeId) =>
+        !outcomeById
+          .get(outcomeId)
+          ?.scopeIds.some((tagId) => placement.primaryTagIds.includes(tagId)),
+    ) ||
+    placement.primaryTagIds.some((tagId) =>
+      primaryOutcomeIds.every((outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId)),
+    ) ||
+    placement.supportingOutcomeIds.some(
+      (outcomeId) =>
+        !outcomeById
+          .get(outcomeId)
+          ?.scopeIds.some((tagId) => placement.supportingTagIds.includes(tagId)),
+    ) ||
+    placement.supportingTagIds.some((tagId) =>
+      placement.supportingOutcomeIds.every(
+        (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
+      ),
+    )
+  ) {
+    add(
+      'PLACEMENT_OUTCOME_ROLE_MISMATCH',
+      'Primary and supporting Outcomes must cover exactly their respective assigned Tags.',
+      placement.problemId,
+    );
+  }
+  return diagnostics;
+};
 
 export const validateFinalTaxonomyBuildAgainstContext = (
   context: LoadedFinalTaxonomySourceContext,
@@ -2703,132 +2896,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         placement.problemId,
       );
     }
-    if (
-      placement.analysisEvidenceRefs.some(
-        (reference) => reference.problemId !== placement.problemId,
-      )
-    ) {
-      add(
-        'PLACEMENT_EVIDENCE_OWNER_MISMATCH',
-        'Placement evidence must be owned by the placed Problem.',
-        placement.problemId,
-      );
-    }
-    const expectedAdHoc = sortedUnique(
-      record?.problemSpecificInsights.map(({ insight, reusablePerspective }) =>
-        adHocProjectionText({ text: insight, reusablePerspective }),
-      ) ?? [],
-    );
-    if (!sameOrderedValues(expectedAdHoc, sortedUnique(placement.adHocElements))) {
-      add(
-        'PLACEMENT_AD_HOC_ELEMENTS_INCOMPLETE',
-        'Every problem-specific insight must remain visible as an ad-hoc element.',
-        placement.problemId,
-      );
-    }
-    const expectedDispositionPaths = sortedUnique([
-      ...(record?.typicalTechniques.map((_, index) => `/typicalTechniques/${String(index)}`) ?? []),
-      ...(record?.prerequisiteCandidates.map(
-        (_, index) => `/prerequisiteCandidates/${String(index)}`,
-      ) ?? []),
-    ]);
-    const dispositionPaths = sortedUnique(
-      placement.claimDispositions.map(({ claimRef }) => claimRef.claimPath),
-    );
-    const missingDispositionPaths = expectedDispositionPaths.filter(
-      (claimPath) => !dispositionPaths.includes(claimPath),
-    );
-    const invalidExtraDispositionPaths = dispositionPaths.filter(
-      (claimPath) =>
-        !expectedDispositionPaths.includes(claimPath) &&
-        !/^\/implementationConcerns\/(0|[1-9]\d*)$/u.test(claimPath),
-    );
-    if (missingDispositionPaths.length > 0 || invalidExtraDispositionPaths.length > 0) {
-      add(
-        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INCOMPLETE',
-        'Every typical Technique and prerequisite claim requires an explicit disposition; only explicit implementation-concern dispositions may be added.',
-        placement.problemId,
-      );
-    }
-    const dispositionIdentityKeys = placement.claimDispositions.map(
-      ({ claimRef, kind, tagIds }) =>
-        `${claimRef.claimPath}\u0000${kind}\u0000${sortedUnique(tagIds).join('\u0000')}`,
-    );
-    const dispositionKindsByPath = new Map<string, Set<string>>();
-    for (const { claimRef, kind } of placement.claimDispositions) {
-      const kinds = dispositionKindsByPath.get(claimRef.claimPath) ?? new Set<string>();
-      kinds.add(kind);
-      dispositionKindsByPath.set(claimRef.claimPath, kinds);
-    }
-    if (
-      new Set(dispositionIdentityKeys).size !== dispositionIdentityKeys.length ||
-      [...dispositionKindsByPath.values()].some(
-        (kinds) => kinds.size > 1 && (kinds.has('baseline') || kinds.has('problem_specific')),
-      )
-    ) {
-      add(
-        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_CONFLICT',
-        'A claim cannot repeat a disposition or mix a terminal role with Tag-bearing roles.',
-        placement.problemId,
-      );
-    }
-    const assignedTagIds = new Set([...placement.primaryTagIds, ...placement.supportingTagIds]);
-    if (
-      placement.claimDispositions.some(
-        ({ claimRef, kind, tagIds }) =>
-          claimRef.problemId !== placement.problemId ||
-          tagIds.some((tagId) => !assignedTagIds.has(tagId)) ||
-          ((kind === 'primary' || kind === 'same_tag') &&
-            tagIds.some((tagId) => !placement.primaryTagIds.includes(tagId))) ||
-          (kind === 'supporting' &&
-            tagIds.some((tagId) => !placement.supportingTagIds.includes(tagId))) ||
-          ((kind === 'baseline' || kind === 'problem_specific') && tagIds.length > 0),
-      )
-    ) {
-      add(
-        'PLACEMENT_INVENTORY_CLAIM_DISPOSITION_INVALID',
-        'Claim dispositions must be owned by the Problem and use its declared primary/supporting Tags.',
-        placement.problemId,
-      );
-    }
-    const primaryDispositionTagIds = new Set(
-      placement.claimDispositions.flatMap(({ kind, tagIds }) => (kind === 'primary' ? tagIds : [])),
-    );
-    if (placement.primaryTagIds.some((tagId) => !primaryDispositionTagIds.has(tagId))) {
-      add(
-        'PLACEMENT_PRIMARY_TAG_DISPOSITION_MISSING',
-        'Every primary Tag must be justified by an explicit primary inventory-claim disposition.',
-        placement.problemId,
-      );
-    }
-    const supportingDispositionTagIds = new Set(
-      placement.claimDispositions.flatMap(({ kind, tagIds }) =>
-        kind === 'supporting' ? tagIds : [],
-      ),
-    );
-    if (placement.supportingTagIds.some((tagId) => !supportingDispositionTagIds.has(tagId))) {
-      add(
-        'PLACEMENT_SUPPORTING_TAG_DISPOSITION_MISSING',
-        'Every supporting Tag must be justified by an explicit supporting inventory-claim disposition.',
-        placement.problemId,
-      );
-    }
-    const evidenceRefKeys = new Set(
-      placement.analysisEvidenceRefs.map(
-        ({ problemId, claimPath }) => `${problemId}\u0000${claimPath}`,
-      ),
-    );
-    if (
-      placement.claimDispositions.some(
-        ({ claimRef }) => !evidenceRefKeys.has(`${claimRef.problemId}\u0000${claimRef.claimPath}`),
-      )
-    ) {
-      add(
-        'PLACEMENT_INVENTORY_CLAIM_EVIDENCE_INCOMPLETE',
-        'Every claim disposition must remain in the placement evidence closure.',
-        placement.problemId,
-      );
-    }
+    diagnostics.push(...validatePlacementAnalysisCoverage(placement, record));
     const primaryHomeUnitIds = ownerUnitIdsByOutcomeId.get(placement.primaryOutcomeId) ?? [];
     if (primaryHomeUnitIds.length !== 1) {
       add(
@@ -3120,40 +3188,7 @@ export const validateFinalTaxonomyBuildAgainstContext = (
         );
       }
     }
-    const primaryOutcomeIds = [
-      placement.primaryOutcomeId,
-      ...placement.additionalPrimaryOutcomeIds,
-    ];
-    if (
-      primaryOutcomeIds.some(
-        (outcomeId) =>
-          !outcomeById
-            .get(outcomeId)
-            ?.scopeIds.some((tagId) => placement.primaryTagIds.includes(tagId)),
-      ) ||
-      placement.primaryTagIds.some((tagId) =>
-        primaryOutcomeIds.every(
-          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
-        ),
-      ) ||
-      placement.supportingOutcomeIds.some(
-        (outcomeId) =>
-          !outcomeById
-            .get(outcomeId)
-            ?.scopeIds.some((tagId) => placement.supportingTagIds.includes(tagId)),
-      ) ||
-      placement.supportingTagIds.some((tagId) =>
-        placement.supportingOutcomeIds.every(
-          (outcomeId) => !outcomeById.get(outcomeId)?.scopeIds.includes(tagId),
-        ),
-      )
-    ) {
-      add(
-        'PLACEMENT_OUTCOME_ROLE_MISMATCH',
-        'Primary and supporting Outcomes must cover exactly their respective assigned Tags.',
-        placement.problemId,
-      );
-    }
+    diagnostics.push(...validatePlacementOutcomeRoles(placement, outcomeById));
   }
   for (const { entity: tag } of tagCandidates) {
     const assignedProblems = build.placements.filter((placement) =>

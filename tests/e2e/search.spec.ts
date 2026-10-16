@@ -1,5 +1,48 @@
 import { expect, test } from './fixtures.js';
 
+test('connects an added batch Problem through Pagefind and semantic Unit links', async ({
+  page,
+  request,
+}) => {
+  const problemId = process.env.ABC_BATCH_TEST_PROBLEM;
+  test.skip(!problemId, 'Set ABC_BATCH_TEST_PROBLEM for a disposable batch build.');
+  await page.setViewportSize({ width: 390, height: 844 });
+  const id = problemId ?? '';
+  const response = await request.get('./data/catalog.json');
+  const catalog = (await response.json()) as {
+    problems: { id: string; officialTaskId: string }[];
+    learningUnits: {
+      id: string;
+      docPath: string;
+      directProblemIds?: string[];
+      relatedProblemIds?: string[];
+    }[];
+  };
+  expect(catalog.problems.find((p) => p.id === id)?.officialTaskId).toBe(
+    `${id.split('-')[0] ?? ''}_e`,
+  );
+  await page.goto(`./problems/${id}/`);
+  await expect(page.getByRole('heading', { name: '正当性', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '検索' }).click();
+  const dialog = page.getByRole('dialog', { name: '検索' });
+  await dialog.locator('.pagefind-ui__search-input').fill(id);
+  await expect(
+    dialog.locator(`.pagefind-ui__result-link[href$="/problems/${id}/"]`).first(),
+  ).toBeVisible();
+  for (const unit of catalog.learningUnits.filter(
+    (u) =>
+      (u.directProblemIds?.includes(id) ?? false) || (u.relatedProblemIds?.includes(id) ?? false),
+  )) {
+    const route = unit.docPath.replace('src/content/docs/', '').replace(/\.md$/u, '/');
+    await page.goto(`./${route}`);
+    const link = page.locator(`main a[href$="/problems/${id}/"]`).first();
+    await expect(link).toBeVisible();
+    await link.focus();
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(new RegExp(`/problems/${id}/$`, 'u'));
+  }
+});
+
 test('keeps search metadata out of the visible tag introduction and in the Pagefind index', async ({
   page,
 }) => {

@@ -18,6 +18,27 @@ export interface UpdateHold {
   readonly problemId?: string;
 }
 
+/** Normal editing uses acquired data and an editable copy, without a release transaction. */
+export interface SmallBatchOptions {
+  readonly mode: 'prepare' | 'validate';
+  readonly repositoryRoot: string;
+  readonly candidateRoot: string;
+  readonly baseCatalog: unknown;
+  readonly baseMetadata: unknown;
+  readonly metadataBatch: unknown;
+  readonly metrics: unknown;
+}
+
+export interface SmallBatchResult {
+  readonly command: 'abc:update';
+  readonly status: 'passed' | 'unchanged' | 'on_hold';
+  readonly addedProblemIds: readonly string[];
+  readonly lastContestId: string;
+  readonly cutoffAt: string;
+  readonly writtenPaths: readonly string[];
+  readonly holds: readonly UpdateHold[];
+}
+
 export interface StagedOperationInput {
   readonly entityType:
     | 'contest'

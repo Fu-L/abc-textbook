@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { loadCatalogEvidenceCanonicalSources } from '../../src/lib/catalog/evidence-inventory.js';
@@ -14,6 +14,10 @@ import { validatePublicationUpdate } from '../../src/lib/validation/publication-
 import { LEGACY_SEED_CATALOG_PATH, withLegacySeedRepository } from '../fixtures/legacy-seed.js';
 
 describe('accepted seed initial publication', () => {
+  beforeEach(() => {
+    // The historical snapshot seals a main base in its temporary repository.
+    vi.stubEnv('GITHUB_BASE_REF', 'main');
+  });
   it('continues unchanged bootstrap publication after its prepared catalog has merged', async () => {
     await withLegacySeedRepository(async (root) => {
       const catalogPath = LEGACY_SEED_CATALOG_PATH;

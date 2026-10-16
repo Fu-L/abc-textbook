@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { load } from 'cheerio';
 import type { Page } from '@playwright/test';
 import { expect, test } from './fixtures.js';
 import type { LearningRecord } from '../../src/lib/learning-records/types.js';
@@ -66,6 +67,63 @@ async function selectBackup(page: Page, records: LearningRecord[]) {
   await expect(page.getByRole('heading', { name: '復元前プレビュー' })).toBeVisible();
   await page.getByLabel('backup-wins', { exact: true }).check();
 }
+
+test('preserves old, newly added and unknown records in a disposable batch build', async ({
+  page,
+}) => {
+  const id = process.env.ABC_BATCH_TEST_PROBLEM;
+  test.skip(!id, 'Set ABC_BATCH_TEST_PROBLEM for a disposable batch build.');
+  const records: LearningRecord[] = ['abc212-g', id ?? 'abc467-e', 'abc999-i'].map((problemId) => ({
+    problemId,
+    status: 'completed',
+    statusUpdatedAt: '2026-07-29T08:00:00-04:00',
+    needsReview: true,
+    needsReviewUpdatedAt: '2026-07-30T21:30:00+09:00',
+  }));
+  await page.goto('./settings/learning-records/');
+  await selectBackup(page, records);
+  await page.getByRole('button', { name: '方針を確認して適用' }).click();
+  await expect(page.getByText('3件を復元しました。', { exact: true })).toBeVisible();
+  await page.goto(`./problems/${id ?? ''}/`);
+  await expect(page.getByLabel('学習状況')).toHaveValue('completed');
+  await expect(page.getByLabel('要復習')).toBeChecked();
+  await page.reload();
+  const stored = (await browserRecordState(page)).records;
+  expect(stored).toEqual([...records].sort((a, b) => a.problemId.localeCompare(b.problemId)));
+  // Serve the same settings consumer with the reverted catalog's IDs. Keep the
+  // origin and IndexedDB intact while the added Problem becomes an orphan.
+  await page.route('**/settings/learning-records/', async (route) => {
+    const response = await route.fetch();
+    const html = load(await response.text());
+    const island = html('astro-island[props*="catalogProblemIds"]');
+    const props = JSON.parse(island.attr('props') ?? '{}') as {
+      catalogProblemIds: [number, [number, string][]];
+    };
+    expect(props.catalogProblemIds[1].some(([, value]) => value === id)).toBe(true);
+    props.catalogProblemIds[1] = props.catalogProblemIds[1].filter(([, value]) => value !== id);
+    island.attr('props', JSON.stringify(props));
+    await route.fulfill({ response, body: html.html() });
+  });
+  await page.goto('./settings/learning-records/');
+  await selectBackup(page, records);
+  await expect(page.getByText('unknown_problem_id: 2件', { exact: true })).toBeVisible();
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'JSONバックアップを保存' }).click();
+  const file = await (await downloading).path();
+  if (!file) throw new Error('Missing batch-cancellation backup');
+  const backup = JSON.parse(await readFile(file, 'utf8')) as {
+    records: LearningRecord[];
+    orphanedProblemIds: string[];
+  };
+  expect(backup.records).toEqual(stored);
+  expect(backup.orphanedProblemIds).toEqual([id, 'abc999-i'].sort());
+  expect((await browserRecordState(page)).records).toEqual(stored);
+  await page.unroute('**/settings/learning-records/');
+  await page.goto(`./problems/${id ?? ''}/`);
+  await expect(page.getByLabel('学習状況')).toHaveValue('completed');
+  await expect(page.getByLabel('要復習')).toBeChecked();
+  expect((await browserRecordState(page)).records).toEqual(stored);
+});
 
 const problemIds = [
   'abc212-g',
