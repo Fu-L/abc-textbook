@@ -9,6 +9,7 @@ import {
   FULL_PROJECTION_PATH,
   TAXONOMY_INDEX_PATH,
 } from '../../src/lib/catalog/full-public-projection.js';
+import { validateCatalogContentSemantics } from '../../src/lib/catalog/build-catalog.js';
 import { buildSearchDocuments } from '../../src/lib/catalog/search-documents.js';
 import { canonicalUiRoutes, withBase } from '../../src/lib/catalog/ui-catalog.js';
 import { normalizeBasePath, resolveSite } from '../config/publication.js';
@@ -22,11 +23,14 @@ try {
   if (process.argv.length > 3 || !['--check', '--write', '--write-evidence'].includes(mode))
     throw new Error('Usage: verify-full-projections [--check | --write | --write-evidence]');
   if (mode === '--write') {
-    const prepared = await loadFullPublicProjection({ verifyDerivedFiles: false });
+    const prepared = await loadFullPublicProjection({
+      verifyDerivedFiles: false,
+      usePreparedRelease: false,
+    });
     await mkdir(path.dirname(TAXONOMY_INDEX_PATH), { recursive: true });
     await writeFile(TAXONOMY_INDEX_PATH, `${JSON.stringify(prepared.taxonomyIndex, null, 2)}\n`);
   }
-  const projection = await loadFullPublicProjection();
+  const projection = await loadFullPublicProjection({ usePreparedRelease: false });
   const routes = canonicalUiRoutes(projection.ui);
   const base = normalizeBasePath(process.env.BASE_PATH ?? '/');
   const site = resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example');
@@ -40,7 +44,15 @@ try {
   const endpoint = CatalogSchema.parse(
     JSON.parse(await readFile('dist/data/catalog.json', 'utf8')) as unknown,
   );
-  if (canonicalJson(endpoint) !== canonicalJson(projection.catalog))
+  // Build/run identity and change summaries belong to the publication candidate.
+  // Check all canonical content and its release scope without requiring the old
+  // prepared catalog's acceptance inventory or copying it into the current build.
+  if (
+    canonicalJson({ ...endpoint, release: projection.catalog.release }) !==
+      canonicalJson(projection.catalog) ||
+    endpoint.release.cutoffAt !== projection.catalog.release.cutoffAt ||
+    validateCatalogContentSemantics(endpoint).length > 0
+  )
     throw new Error('FULL_PROJECTION_ENDPOINT_STALE');
   const routeSet = new Set(routes);
   const indexedEntities = buildSearchDocuments(projection.ui);

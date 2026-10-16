@@ -695,6 +695,10 @@ describe('current canonical prose without bootstrap acceptance ledgers', () => {
 
   it('projects small Unit and Problem corrections from a content-only copy', async () => {
     await withGitBaseline(async (root) => {
+      const before = await loadFullPublicProjection({
+        repositoryRoot: root,
+        usePreparedRelease: false,
+      });
       const unit = projection.catalog.learningUnits.find(
         (item) => item.id === 'unit-xor-linear-basis',
       );
@@ -734,7 +738,7 @@ describe('current canonical prose without bootstrap acceptance ledgers', () => {
         corrected.problemDocuments.get('abc212-e')?.unit.sections.implementationNotes,
       ).toContain('添字と状態の対応');
       expect(corrected.mapping).toEqual(projection.mapping);
-      expect(canonicalUiRoutes(corrected.ui)).toEqual(canonicalUiRoutes(projection.ui));
+      expect(canonicalUiRoutes(corrected.ui)).toEqual(canonicalUiRoutes(before.ui));
       expect(corrected.digest).not.toBe(projection.digest);
       expect(corrected.catalog.release.validationSummary).toBeUndefined();
       await expect(loadFullPublicProjection({ repositoryRoot: root })).rejects.toThrow(
@@ -899,7 +903,12 @@ it.skipIf(!process.env.ABC_COMPAT_NEW_DIST)(
       const endpointPath = path.join(root, 'dist/data/catalog.json');
       const endpoint = await readFile(endpointPath, 'utf8');
       await mkdir(path.join(root, 'docs/verification/releases'), { recursive: true });
-      await writeFile(path.join(root, 'docs/verification/releases/catalog.json'), endpoint);
+      // Keep a real legacy prepared catalog: the current-build checker must not
+      // require rewriting its old content inventory or acceptance digests.
+      await cp(
+        'docs/verification/releases/catalog.json',
+        path.join(root, 'docs/verification/releases/catalog.json'),
+      );
       const execute = promisify(execFile);
       const verify = () =>
         execute(
@@ -920,6 +929,21 @@ it.skipIf(!process.env.ABC_COMPAT_NEW_DIST)(
       ).rejects.toThrow(/ENOENT/);
       await writeFile(endpointPath, endpoint.replace('Safety Journey', 'Stale title'));
       await expect(verify()).rejects.toThrow('FULL_PROJECTION_ENDPOINT_STALE');
+      const validEndpoint = CatalogSchema.parse(JSON.parse(endpoint) as unknown);
+      for (const releaseChange of [
+        { cutoffAt: '2026-07-13T00:00:00+09:00' },
+        { problemCount: validEndpoint.release.problemCount - 1 },
+        { changedProblemIds: ['abc999-e'] },
+      ]) {
+        await writeFile(
+          endpointPath,
+          JSON.stringify({
+            ...validEndpoint,
+            release: { ...validEndpoint.release, ...releaseChange },
+          }),
+        );
+        await expect(verify()).rejects.toThrow('FULL_PROJECTION_ENDPOINT_STALE');
+      }
       await writeFile(endpointPath, endpoint);
       const page = path.join(root, 'dist/problems/abc212-e/index.html');
       const html = await readFile(page);
@@ -930,7 +954,7 @@ it.skipIf(!process.env.ABC_COMPAT_NEW_DIST)(
       const tagHtml = await readFile(tagPage, 'utf8');
       await writeFile(tagPage, tagHtml.replaceAll('絶対値costを順次追加', '失われた発動条件'));
       await expect(verify()).rejects.toThrow('FULL_PROJECTION_TAG_RECALL');
-    });
+    }, 'HEAD');
   },
   60_000,
 );

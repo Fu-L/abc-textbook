@@ -39,6 +39,9 @@ Contest追加・公開を行う依頼ではない。SC-004とM5全体の実運�
 失敗・cancel時はupload/deployへ進めず、配信後の確認失敗は「配信済み・確認未完了」と報告する。同runの再実行は同版で、artifact消失時は同SHA/runでbaselineから再検証する。公開後の不具合はGit
 revertによる新main SHA/runの別版で復旧し、origin/baseと学習記録を保持する。
 
+通常入口が使わない専用CLI・重複生成物は[PR-10cの整理範囲](update-manual.md#参照不要のproducerと重複生成物の整理002--pr-10c)を参照する。旧taxonomy承認CLIとprivate
+review-packet exporterも廃止済みであり、初版監査の依存と過去の結果は保持している。
+
 以下は旧pipelineの履歴資料であり、通常更新の入口ではない。
 
 <details>

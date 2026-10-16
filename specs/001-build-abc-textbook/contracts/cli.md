@@ -1,5 +1,7 @@
 # CLI Contract: ABC上級問題体系化教科書
 
+> 002 / PR-10c: `corpus:export-inventory-review-packets`は廃止済み。以下の同コマンドの説明は履歴資料であり、再現には当時のGit版を使う。現行の執筆・取得手順は[更新マニュアル](../../../docs/operations/update-manual.md)を参照する。
+
 **Scope**: PublicationUpdateの準備、merge前検証、人間review取込、Git commit単位の静的デプロイ。
 
 **Delivery boundary（2026-10-07）**: 初版はABC212〜466の868問、`cutoffAt=2026-07-12T00:00:00+09:00`で先に公開する。公開後baseを使うlive `abc:update` / `release:catch-up`は#54完了後の#52/T163で実装する契約であり、初版の必須入口ではない。PR #70の固定初回cutoff/入力directoryを使う経路と区別する。初版bootstrapのproduction接続は#53/T162、実deploy入口はT150で確定する。現在使える検証とsimulationを、存在しないlive commandの成功として案内しない。
