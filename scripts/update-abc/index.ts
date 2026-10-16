@@ -39,6 +39,8 @@ import { discoverMetadataBatch } from './discover.js';
 import { readContentFiles, writeChangedContent } from './stage.js';
 import { requireBatchDocuments } from './author.js';
 import { batchUnitMembership } from './classify.js';
+import { insertUnitProblemLinks, validateInsertedProblemOrder } from './unit-order.js';
+import { validatePlacementOutcomeRoles } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import type { SmallBatchOptions, SmallBatchResult } from './types.js';
 import {
   parseKeyValueArguments,
@@ -246,8 +248,10 @@ export async function runSmallBatchUpdate(options: SmallBatchOptions): Promise<S
         holds: [
           {
             code: 'AUTHORING_REQUIRED',
-            reason: 'Metadata is ready; complete every batch explanation, analysis and placement.',
-            retryCondition: 'Edit the candidate copy, then run abc:update with --mode validate.',
+            reason:
+              'Metadata is ready; complete every batch explanation, analysis, placement and Unit problem order.',
+            retryCondition:
+              'Edit the candidate copy, including directProblemIds/relatedProblemIds in affected Units, then run abc:update with --mode validate.',
           },
         ],
       };
@@ -276,6 +280,14 @@ export async function runSmallBatchUpdate(options: SmallBatchOptions): Promise<S
       units: baseline.catalog.learningUnits,
       problemIds: summary.addedProblemIds,
     });
+    // Diagnose an invalid semantic role before asking for order in its alleged home.
+    const outcomes = new Map(
+      baseline.catalog.learningOutcomes.map((outcome) => [outcome.id, outcome]),
+    );
+    for (const { placement } of memberships) {
+      const finding = validatePlacementOutcomeRoles(placement, outcomes)[0];
+      if (finding) throw new Error(`${finding.code}:${placement.problemId}:${finding.message}`);
+    }
     const allowed = new Set([
       policyPath,
       ATCODER_PROBLEMS_METRICS_PATH,
@@ -324,23 +336,49 @@ export async function runSmallBatchUpdate(options: SmallBatchOptions): Promise<S
           (decode(before.get(file)) as { id: string }).id === original.id,
       );
       if (!file) throw new Error(`UNIT_MISSING:${original.id}`);
+      const authoredInput = decode(files.get(file));
+      const authored = LearningUnitSchema.parse(authoredInput);
+      const context = (unit: object) =>
+        Object.fromEntries(
+          Object.entries(unit).filter(
+            ([key]) => !['problemIds', 'directProblemIds', 'relatedProblemIds'].includes(key),
+          ),
+        );
+      if (canonicalDigest(context(authoredInput as object)) !== canonicalDigest(context(original)))
+        throw new Error(`UNIT_CONTENT_CONFLICT:${file}`);
+      const directOrder = validateInsertedProblemOrder(
+        original.directProblemIds ?? [],
+        direct,
+        authored.directProblemIds ?? [],
+        `${original.id}:directProblemIds`,
+      );
+      const relatedOrder = validateInsertedProblemOrder(
+        original.relatedProblemIds ?? [],
+        related,
+        authored.relatedProblemIds ?? [],
+        `${original.id}:relatedProblemIds`,
+      );
       const unit = LearningUnitSchema.parse({
         ...original,
-        problemIds: [...original.problemIds, ...coverage],
-        directProblemIds: [...(original.directProblemIds ?? []), ...direct],
-        relatedProblemIds: [...(original.relatedProblemIds ?? []), ...related],
+        // Coverage is a derived membership closure, not the Unit's reading order.
+        problemIds:
+          canonicalDigest(authored.problemIds) === canonicalDigest(original.problemIds)
+            ? [...original.problemIds, ...coverage]
+            : validateInsertedProblemOrder(
+                original.problemIds,
+                coverage,
+                authored.problemIds,
+                `${original.id}:problemIds`,
+              ),
+        ...(direct.length ? { directProblemIds: directOrder } : {}),
+        ...(related.length ? { relatedProblemIds: relatedOrder } : {}),
       });
       const unitBytes = jsonBytes(unit);
-      if (
-        !files.get(file)?.equals(before.get(file) ?? Buffer.alloc(0)) &&
-        canonicalDigest(decode(files.get(file))) !== canonicalDigest(unit)
-      )
-        throw new Error(`UNIT_CONTENT_CONFLICT:${file}`);
       files.set(file, unitBytes);
       allowed.add(file);
       const links = (ids: readonly string[], role: string) =>
-        ids
-          .map((id) => {
+        new Map(
+          ids.map((id) => {
             const problem = observed.problems.find((p) => p.id === id);
             const placement = memberships.find((m) => m.problemId === id)?.placement;
             const outcomeId =
@@ -351,25 +389,34 @@ export async function runSmallBatchUpdate(options: SmallBatchOptions): Promise<S
                     ...(placement?.supportingOutcomeIds ?? []),
                   ].find((id) => original.ownedLearningOutcomeIds?.includes(id));
             const outcome = baseline.catalog.learningOutcomes.find((o) => o.id === outcomeId);
-            return `- [${id.toUpperCase().replace('-', ' ')}「${problem?.title ?? id}」](/problems/${id}/) — ${role}: ${outcome?.statement ?? ''}`;
-          })
-          .join('\n');
+            return [
+              id,
+              `- [${id.toUpperCase().replace('-', ' ')}「${problem?.title ?? id}」](/problems/${id}/) — ${role}: ${outcome?.statement ?? ''}`,
+            ];
+          }),
+        );
       if (direct.length || related.length) {
         const originalText = before.get(unit.docPath)?.toString('utf8');
         if (!originalText) throw new Error(`UNIT_DOCUMENT_MISSING:${original.id}`);
         let text = originalText;
-        const insert = (heading: string, body: string) => {
-          const position = text.indexOf(`\n## ${heading}`);
-          if (position < 0) throw new Error(`UNIT_DOCUMENT_SECTION:${original.id}`);
-          text = `${text.slice(0, position)}\n${body}\n${text.slice(position)}`;
-        };
         if (direct.length)
-          insert(text.includes('\n## 関連問題') ? '関連問題' : '根拠', links(direct, '主題'));
+          text = insertUnitProblemLinks({
+            text,
+            heading: '問題一覧',
+            previous: original.directProblemIds ?? [],
+            ordered: directOrder,
+            links: links(direct, '主題'),
+            unitId: original.id,
+          });
         if (related.length)
-          insert(
-            '根拠',
-            `${text.includes('\n## 関連問題') ? '' : '## 関連問題\n\n'}${links(related, '関連')}`,
-          );
+          text = insertUnitProblemLinks({
+            text,
+            heading: '関連問題',
+            previous: original.relatedProblemIds ?? [],
+            ordered: relatedOrder,
+            links: links(related, '関連'),
+            unitId: original.id,
+          });
         const textBytes = Buffer.from(text);
         if (
           !files.get(unit.docPath)?.equals(before.get(unit.docPath) ?? Buffer.alloc(0)) &&

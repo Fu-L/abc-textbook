@@ -120,6 +120,36 @@ export const authorSmallBatch = async (input: Awaited<ReturnType<typeof smallBat
     path.join(input.candidateRoot, 'src/content/policies/problem-placements.json'),
     JSON.stringify(policy),
   );
+  // Explicit editorial input for this synthetic contract fixture: choose an
+  // order different from contest/slot order. This is not real problem ranking.
+  const addedIds = new Set(input.metadataBatch.problems.map((problem) => problem.id));
+  const fixtureOrder = [
+    'abc468-i',
+    'abc467-e',
+    'abc468-f',
+    'abc467-i',
+    'abc468-e',
+    'abc467-ex',
+    'abc468-ex',
+    'abc467-f',
+  ].filter((id) => addedIds.has(id));
+  const homeFile = path.join(input.candidateRoot, `src/content/learning-units/${home.id}.json`);
+  const authoredHome = structuredClone(home);
+  authoredHome.directProblemIds?.splice(
+    authoredHome.directProblemIds.indexOf('abc212-e') + 1,
+    0,
+    ...fixtureOrder,
+  );
+  await writeFile(homeFile, JSON.stringify(authoredHome));
+  const related = structuredClone(
+    base.catalog.learningUnits.find((unit) => unit.id === 'unit-modular-arithmetic'),
+  );
+  if (!related) throw new Error('Missing related Unit fixture');
+  related.relatedProblemIds?.splice(1, 0, 'abc467-e');
+  await writeFile(
+    path.join(input.candidateRoot, `src/content/learning-units/${related.id}.json`),
+    JSON.stringify(related),
+  );
 };
 
 export const contentHashes = async (root: string) => {

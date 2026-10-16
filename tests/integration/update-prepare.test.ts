@@ -93,6 +93,12 @@ describe('normal small-batch editing', () => {
         expect(reprepared.size).toBe(prepared.size);
         for (const [file, bytes] of prepared) expect(reprepared.get(file), file).toBe(bytes);
         await authorSmallBatch(input);
+        const authoredHome = JSON.parse(
+          await readFile(
+            path.join(root, 'src/content/learning-units/unit-dp-transition-optimization.json'),
+            'utf8',
+          ),
+        ) as { directProblemIds: string[] };
         const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
         expect(result.holds).toEqual([]);
         expect(result).toMatchObject({
@@ -115,6 +121,45 @@ describe('normal small-batch editing', () => {
         expect(
           projection.mapping.find((p) => p.problemId === 'abc467-e')?.relatedUnitIds,
         ).toContain('unit-modular-arithmetic');
+        // Reproduce Medium 2: the authored sequence inserts new Problems right
+        // after ABC212 E, preserving all old relative order and old list prose.
+        const home = projection.catalog.learningUnits.find(
+          (unit) => unit.id === 'unit-dp-transition-optimization',
+        );
+        expect(home?.directProblemIds).toEqual(authoredHome.directProblemIds);
+        const idsInSection = (text: string, heading: string) => {
+          const section = text.split(`\n## ${heading}\n`)[1]?.split('\n## ')[0] ?? '';
+          return [...section.matchAll(/^- \[(ABC\d+) ([A-Za-z]+)「/gmu)].map(
+            (match) => `${match[1]?.toLowerCase() ?? ''}-${match[2]?.toLowerCase() ?? ''}`,
+          );
+        };
+        for (const id of ['unit-dp-transition-optimization', 'unit-modular-arithmetic']) {
+          const unit = projection.catalog.learningUnits.find((unit) => unit.id === id);
+          if (!unit) throw new Error(`Missing Unit ${id}`);
+          const text = await readFile(path.join(root, unit.docPath), 'utf8');
+          expect(idsInSection(text, '問題一覧')).toEqual(unit.directProblemIds);
+          expect(idsInSection(text, '関連問題')).toEqual(unit.relatedProblemIds);
+          const oldText = await readFile(unit.docPath, 'utf8');
+          const oldLines = text
+            .split('\n')
+            .filter((line) => !/^- \[ABC46[78] /u.test(line))
+            .join('\n');
+          expect(oldLines).toBe(oldText);
+          expect(
+            projection.ui.learningUnits.find((projected) => projected.id === id)?.problemIds,
+          ).toEqual(unit.directProblemIds);
+        }
+        const oldHome = JSON.parse(
+          await readFile('src/content/learning-units/unit-dp-transition-optimization.json', 'utf8'),
+        ) as { directProblemIds: string[] };
+        expect(
+          home?.directProblemIds?.filter((id) => !result.addedProblemIds.includes(id)),
+        ).toEqual(oldHome.directProblemIds);
+        expect(home?.directProblemIds?.[3]).toBe(last === 467 ? 'abc467-e' : 'abc468-i');
+        // No metrics (including 0/null) or contest/slot order may override this choice.
+        expect(home?.directProblemIds?.indexOf('abc467-i')).toBeLessThan(
+          home?.directProblemIds?.indexOf('abc467-f') ?? 0,
+        );
         const mergedMetrics = AtCoderProblemsSnapshotSchema.parse(
           JSON.parse(await readFile(metricsFile, 'utf8')),
         );

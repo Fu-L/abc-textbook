@@ -29,6 +29,20 @@ identity、主配置、関連先、metrics、索引、導線を整合させる�
 通常の執筆・訂正は、対象確認→正本編集→検証→報告で進める。管理用のmanifest/digestやreview
 modeを作らず、独立した演習・評価・解答の節を一律に増やさない。一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧初版・release/deployの残る依存は「既存実装からの移行」を参照する。
 
+### Unit内の問題の挿入順
+
+本教科書はABCの過去問を通じて典型知識を網羅的に身につけ、ARC・AGC・CF Div.
+1・UCUPなどの難関コンテストへ挑むための教材である。Unit内の問題は**総合的な難易度の易しい順**に置く。分類先の選択と、選んだUnit内での挿入位置の判断はそれぞれ行う。
+
+1. 新問と配置先Unitの既存問題・同時追加問題について、**配点、difficulty、出題位置（E/F/G/Ex等）、解法概要のすべて**を確認する。配点・difficultyは正本snapshotとその確認日、出題位置は公式task順、解法は検証済み分析・解説を読む。difficultyの`null`は不明であって易しさ0ではなく、実験値や開催時期による配点・出題位置の違いも考慮する。
+2. 解法を未知問で発見するための観察、状態・式の導出、正当性の証明、必要な前提と複合手法、計算量の評価、実装・境界処理の負担を具体的に比較する。Unit全体の流れと挿入候補の前後を読み、より基本的な問題から応用・複合問題へ無理なく進める位置を各問について決める。指標が食い違う場合は解法のどこが難しいかまで確認する。
+3. **単一指標、重み付き合計、辞書式キー等の1次元的な比較関数へ圧縮したソートは禁止**する。開催順、slot順、difficulty順、技能数順、常に末尾へ追加する処理で判断を代用しない。末尾が適切な場合も、既存問題との総合比較をした上で明示的に選ぶ。新問同士も取得順に置かない。
+4. 小batchではcandidateの`src/content/learning-units/<Unit ID>.json`の`directProblemIds`へ主配置問題、`relatedProblemIds`へ関連問題の挿入位置を直接記す。新問を除くと元の配列と完全に一致するようにし、既存問題の相対順・所属を保つ。配置の理由と比較した前後の問題をPR本文または完了報告へ短く記す。別の証跡台帳は不要。
+
+`abc:update --mode validate`はこの配列を編集結果として使う。主配置・関連先で必要な新問が未挿入なら`UNIT_PROBLEM_ORDER_REQUIRED`、重複・過不足・既存順や所属の変更ならschemaエラーまたは`UNIT_PROBLEM_ORDER_CONFLICT`として保留し、末尾へ補完しない。`problemIds`はhomeと子孫のcoverage集合であり、読書順の入力ではない。通常は編集不要でCLIが必要分だけ追加する。既に編集した場合も集合と既存相対順を検査する。
+
+本文の「問題一覧」「関連問題」には、配列の順で新規リンクを挿入する。既存項目・説明・その他の本文はそのまま保持し、最初の主配置問題を追加する場合だけ定型の「この単元に直接配置する問題はありません」という案内を外す。candidateのUnit本文は元のままにするか、CLIが生成する挿入結果と一致させる。JSONと本文が異なる順序、既存文の編集、対象外のmetadata変更は`UNIT_CONTENT_CONFLICT`等で保留する。修復は元の本文へ戻して配列の新問位置を直し、同じ入力で再実行する。自動検証は順序の指定・整合性・互換性を確認するものであり、難易度判断はCodexが上の手順で行う。
+
 ### 公開済みbaseからの公式小batch取得（002 / PR-08）
 
 既存の`corpus:acquire-metadata`に、公開済みcatalog/metadataと指定範囲を渡す。取得だけの入口であり、分類・本文・正本追加・公開は行わない。`abc:update --preview initial-v1`の成功をlive追加の確認に使わない。取得後の小batch編集・再実行は下のPR-09手順へ進む。
@@ -105,7 +119,7 @@ transportによるEx/将来I/公式欠番・失敗の網羅と、実公式ネッ
 2. **正本編集**:
    checkout外の一時コピーへmetadataを準備し、Codexが全対象の解説Markdown、分析JSON、配置を執筆する。主題は未知問で再利用する能力からsemantic
    primary Outcomeを選び、そのowner
-   Unitへ置く。共通手法だけで短縮解説にせず、成立条件・証明・全体計算量を比較する。
+   Unitへ置く。[Unit内の問題の挿入順](#unit内の問題の挿入順)に従い、主配置・関連先の問題配列へ新問の位置を明示する。共通手法だけで短縮解説にせず、成立条件・証明・全体計算量を比較する。
 3. **必要検証**: 同じ入力で`--mode validate`を実行する。対象全件の本文・source/claim・分析・配置・前提と3DAGを確認し、主配置・関連Unit・親Unitの必要差分とtaxonomy
    indexを作る。既存本文・分類・読書順を保持し、候補をbuildして内部リンク・対象検索/関連導線・記録のテストを行う。
 4. **報告／必要なら公開**: 一時コピーの`src/content/`差分を確認して対象batchだけcheckoutへ取り込む。検証結果・変更概要・未解決事項をPRへまとめ、公開を依頼された場合だけ標準Pagesの公開手順へ進む。fixture成功を数学本文の執筆や実公開の成功に数えない。
@@ -120,7 +134,7 @@ candidate_dir=$(mktemp -d)
 mkdir -p "$candidate_dir/src"
 cp -R src/content "$candidate_dir/src/content"
 npm run abc:update -- --mode prepare --candidate-root "$candidate_dir" --base-catalog "$acquisition_dir/catalog.json" --base-metadata "$acquisition_dir/metadata.json" --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --metrics "$acquisition_dir/metrics.json"
-# Codexがcandidateのsrc/content/docs/problems/、technique-inventory/と配置policyを編集する。
+# Codexがcandidateの解説・分析・配置policyと、対象UnitのdirectProblemIds / relatedProblemIdsを編集する。
 npm run abc:update -- --mode validate --candidate-root "$candidate_dir" --base-catalog "$acquisition_dir/catalog.json" --base-metadata "$acquisition_dir/metadata.json" --metadata-batch "$acquisition_dir/metadata/abc467-abc467.json" --metrics "$acquisition_dir/metrics.json"
 ```
 

@@ -21,6 +21,7 @@ import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/relea
 import {
   CanonicalProblemPlacementPolicySchema,
   CorrectionImpactSchema,
+  LearningUnitSchema,
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
@@ -426,6 +427,89 @@ describe('US5 update validation', () => {
 });
 
 describe('normal batch holds', () => {
+  describe('editorial order regressions', () => {
+    let root: string;
+    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    const homePath = 'src/content/learning-units/unit-dp-transition-optimization.json';
+    const relatedPath = 'src/content/learning-units/unit-modular-arithmetic.json';
+    let originalHome: ReturnType<typeof LearningUnitSchema.parse>;
+    let homeFile: string;
+    let relatedFile: string;
+    let docFile: string;
+    let homeBytes: Buffer;
+    let relatedBytes: Buffer;
+    let docBytes: Buffer;
+
+    beforeAll(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-order-'));
+      input = await smallBatchInput(root);
+      await runSmallBatchUpdate({ ...input, mode: 'prepare' });
+      await authorSmallBatch(input);
+      originalHome = LearningUnitSchema.parse(JSON.parse(await readFile(homePath, 'utf8')));
+      homeFile = path.join(root, homePath);
+      relatedFile = path.join(root, relatedPath);
+      homeBytes = await readFile(homeFile);
+      relatedBytes = await readFile(relatedFile);
+      docFile = path.join(root, originalHome.docPath);
+      docBytes = await readFile(docFile);
+    }, 300_000);
+
+    afterAll(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    }, 300_000);
+
+    it.each([
+      'missing-direct',
+      'missing-related',
+      'reordered',
+      'foreign',
+      'metadata',
+      'prose',
+      'stale-list',
+    ] as const)(
+      'holds %s without writing derived content',
+      async (scenario) => {
+        await writeFile(homeFile, homeBytes);
+        await writeFile(relatedFile, relatedBytes);
+        await writeFile(docFile, docBytes);
+        const home = LearningUnitSchema.parse(JSON.parse(homeBytes.toString('utf8')));
+        let code = 'UNIT_PROBLEM_ORDER_CONFLICT';
+        if (scenario === 'missing-direct') {
+          home.directProblemIds = originalHome.directProblemIds;
+          code = 'UNIT_PROBLEM_ORDER_REQUIRED';
+        } else if (scenario === 'missing-related') {
+          await writeFile(relatedFile, await readFile(relatedPath));
+          code = 'UNIT_PROBLEM_ORDER_REQUIRED';
+        } else if (scenario === 'reordered') {
+          home.directProblemIds?.reverse();
+        } else if (scenario === 'foreign') {
+          home.directProblemIds?.push('abc212-f');
+        } else if (scenario === 'metadata') {
+          home.learningRationale += '対象外の編集';
+          code = 'UNIT_CONTENT_CONFLICT';
+        } else {
+          let text = docBytes.toString('utf8');
+          if (scenario === 'stale-list') {
+            const inserted = '- [ABC467 E「fixture」](/problems/abc467-e/) — 主題: fixture\n';
+            text = text.replace('\n## 関連問題\n', `\n${inserted}\n## 関連問題\n`);
+          } else text += '\n対象外の本文編集\n';
+          await writeFile(docFile, text);
+          code = 'UNIT_CONTENT_CONFLICT';
+        }
+        await writeFile(homeFile, JSON.stringify(home));
+        const before = await contentHashes(root);
+        const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+        expect(result, scenario).toMatchObject({
+          status: 'on_hold',
+          writtenPaths: [],
+          holds: [expect.objectContaining({ code })],
+        });
+        expect(await contentHashes(root), scenario).toEqual(before);
+      },
+      300_000,
+    );
+  });
+
   // Multiple complete-corpus validations share the CI runner with legacy fixtures.
   it('holds incomplete/source-failed input without applying part of a batch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-hold-'));
