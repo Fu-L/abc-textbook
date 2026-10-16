@@ -20,7 +20,7 @@ test('only added or modified nonpublic documentation takes the documentation rou
     'docs/verification/initial-release/schema-contracts.json',
     '.github/workflows/ci.yml',
     '.github/actions/nonpublic-docs/check.mjs',
-    'scripts/verify-release.ts',
+    'scripts/release/build-history.ts',
     'package-lock.json',
     'unknown.md',
   ]) {

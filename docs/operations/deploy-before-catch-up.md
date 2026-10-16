@@ -1,5 +1,7 @@
 # 検証済み教材の先行公開と公開後のキャッチアップ
 
+> **PR-10aで旧CLIを削除済み**: 以下に残る`release:bootstrap`、`release:accept-*`、`abc:review`、`verify:release`、`abc:deploy`は当時のGit版の歴史資料であり、現在は実行できない。現行の入口と残す互換引数は[更新マニュアル](update-manual.md#旧reviewrelease-cliの削除002--pr-10a)を参照する。
+
 2026-10-07のowner指示で、ABC212〜466の検証済み教材を先にデプロイし、その後にキャッチアップ機能を追加する。これは実装・公開順の変更であり、既存教材の品質検査や公開reviewの免除ではない。仕様の正本は[spec.md](../../specs/001-build-abc-textbook/spec.md)、設計は[plan.md](../../specs/001-build-abc-textbook/plan.md)、実装順は[tasks.md](../../specs/001-build-abc-textbook/tasks.md)。
 
 ## 固定する初版

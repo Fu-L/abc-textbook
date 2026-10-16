@@ -328,9 +328,9 @@ PR-01〜09のconsumer移行が成功し、旧入口への通常経路の参照�
 CLIを呼ばず、残す意味検証が成功する。
 
 <!-- prettier-ignore -->
-- [ ] T052 `package.json`、`scripts/review-update.ts`、`scripts/verify-release.ts`、`scripts/deploy-release.ts`、`scripts/release/accept-seed-review.ts`・`accept-seed-agent-review.ts`・`commit-snapshot.ts`のruntime/script/workflow/テスト/文書参照を`rg`で追い、通常consumerと履歴readerを区別して削除候補と残す検出手段をPR本文へまとめる。
-- [ ] T053 T052で利用不要と確認した旧CLI・accept/transaction専用実装と`package.json`入口だけを削除する。`scripts/release/build-history.ts`等の現行履歴処理は保持し、`tests/integration/release-commit.test.ts`、`tests/unit/seed-agent-review.test.ts`等から旧機構だけを検査するケースをconsumerと同時に整理する。
-- [ ] T054 `tests/integration/catalog-cli.test.ts`、`tests/integration/update-validation.test.ts`、`tests/unit/release-history.test.ts`と型/schema、build・リンクを確認し、`docs/operations/update-manual.md`へ削除した入口と残す互換引数を反映する。旧CLI成功no-opや必須検査skipがないことを確認する。
+- [X] T052 `package.json`、`scripts/review-update.ts`、`scripts/verify-release.ts`、`scripts/deploy-release.ts`、`scripts/release/accept-seed-review.ts`・`accept-seed-agent-review.ts`・`commit-snapshot.ts`のruntime/script/workflow/テスト/文書参照を`rg`で追い、通常consumerと履歴readerを区別して削除候補と残す検出手段をPR本文へまとめる。
+- [X] T053 T052で利用不要と確認した旧CLI・accept/transaction専用実装と`package.json`入口だけを削除する。`scripts/release/build-history.ts`等の現行履歴処理は保持し、`tests/integration/release-commit.test.ts`、`tests/unit/seed-agent-review.test.ts`等から旧機構だけを検査するケースをconsumerと同時に整理する。
+- [X] T054 `tests/integration/catalog-cli.test.ts`、`tests/integration/update-validation.test.ts`、`tests/unit/release-history.test.ts`と型/schema、build・リンクを確認し、`docs/operations/update-manual.md`へ削除した入口と残す互換引数を反映する。旧CLI成功no-opや必須検査skipがないことを確認する。
 
 **完了条件**: 削除対象のconsumerが0で通常入口が成立し、旧公開データ/履歴・本文/source品質の検査を失っていない。
 

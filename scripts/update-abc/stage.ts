@@ -80,3 +80,33 @@ export const stagePublicationUpdate = (input: StageInput): StagedUpdate => {
   const inputDigest = canonicalDigest(normalized);
   return { ...normalized, updateId: `update-${inputDigest.slice(0, 24)}`, inputDigest };
 };
+
+export const bootstrapPreviewSeed = (input: {
+  readonly previewId: string;
+  readonly problemIds: readonly string[];
+  readonly snapshotDigest: string;
+  readonly artifacts: readonly {
+    readonly entityType:
+      'contest' | 'problem' | 'source' | 'technique_inventory' | 'learning_unit' | 'placement';
+    readonly entityId: string;
+    readonly path: string;
+    readonly digest: string;
+    readonly affectedProblemIds: readonly string[];
+  }[];
+}) =>
+  stagePublicationUpdate({
+    previewId: input.previewId,
+    contestId: null,
+    sourceSetFingerprint: input.snapshotDigest,
+    allowRepositoryPaths: true,
+    targetProblemIds: input.problemIds,
+    operations: input.artifacts.map((artifact) => ({
+      entityType: artifact.entityType,
+      entityId: artifact.entityId,
+      action: 'add' as const,
+      path: artifact.path,
+      beforeDigest: null,
+      afterDigest: artifact.digest,
+      affectedProblemIds: artifact.affectedProblemIds,
+    })),
+  });
