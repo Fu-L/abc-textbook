@@ -231,7 +231,8 @@ catalog/deployの復旧は[公開引継ぎ](deploy-before-catch-up.md)を参照�
 
 旧seed agent結果の更新・読込は、現行憲章の「III. Codex-Only Work Guided by a
 Manual」を運用方針として認識する。削除済みのIssue
-#53限定見出しを復活させない。憲章3.0.0固定の照合は旧human merge-review形式に限定し、seed
+#53限定見出しを復活させない。憲章3.0.0固定の照合を持っていた旧human merge-review
+validatorはPR-10bで削除した。seed
 agent経路では既存結果に結び付いた現行憲章の方針・bytesを確認する。既存schemaとseedの対象制限、本文・check・監査結果との照合は保ち、人間承認を表す結果は作らない。
 
 ## 4. 互換性と見やすさを確認する
@@ -417,11 +418,34 @@ revert、履歴追記は`release:history`を使う。
 出典・本文・ID/参照・3DAG・配置・読書順は正本loaderとcatalog検証、小batchの保留/再実行はupdate-validation、実配信のartifact/SHA対応と失敗停止は標準Pagesのworkflow回帰、公開履歴はrelease-historyで検出する。旧CLIだけを検査するtransaction・review・simulationのケースと使われなくなったfixtureを削除し、旧Git履歴・残存adapterのテストは残した。
 
 独自deployment
-adapterと専用schemaの整理はPR-10b、未使用生成物はPR-10cへ残す。初版監査、数学回帰、他browserの手動入口、参照中の旧証跡や公式Source
+adapterと専用schemaは下記PR-10bで整理した。未使用生成物はPR-10cへ残す。初版監査、数学回帰、他browserの手動入口、参照中の旧証跡や公式Source
 Revisionは削除しない。過去runbookの旧コマンドを再現する場合は当時のGit版を参照する。今回の削除の復旧は、専用テスト・package入口と実装をまとめてGit
 revertする。
 
 SC-004（実教材の訂正・1 Contest追加・公開）は別依頼まで未実施であり、PR-10aの成功に含めない。
+
+### 未使用deployment adapterと専用schemaの削除（002 / PR-10b）
+
+`src/lib/deployment/`の`git-deployment-adapter.ts`と`cloudflare-pages-target.ts`、両者だけを検査するテストを削除した。配信・復旧は本書の標準PagesとGit
+revertを使う。旧Git履歴readerと`release-commit`の履歴読込テストは保持する。標準Pagesのartifact/SHA対応、検証失敗・cancel時の停止は既存workflow回帰で確認する。
+
+初版監査の52週シミュレーションは、独自adapterの任意旧commit配信から、一時Git
+repositoryでの`git revert`、新しいHEADの静的出力、revertの取消による再適用へ変更した。120件の記録のbackup・復元も引き続き検査する。これはオフラインfixtureであり、実Pagesの配信・復旧や実教材追加の成功を表さない。監査出力のgeneratorは`zero-cost-year-v2`とし、過去の監査結果を書き換えない。
+
+参照がなくなったmerge承認・利用時間・性能証跡・client bundle証跡・instruction
+quality証跡のZod定義、生成contract登録・JSON
+Schema、専用validatorとテストを削除した。保存形式や公開URLは変更しない。次の参照中の処理は保持する。
+
+- `evidence-inventory.ts`と`--evidence-inventory PATH`指定時の旧manifest・check/review・protected-base・fingerprint検証。
+- `review-evidence.ts`のwork manifest・human content
+  review、および初版の学習成果の歴史schema。初版shard・taxonomy監査・旧catalogの互換検証が参照する。通常更新に承認を要求する入口として使わない。
+- `verification-evidence.ts`の実行コード証跡と手動の学習記録E2E証跡。公式Source
+  Revision、本文claim、実行例のschema・fingerprint・digest、catalog/metadata/history・backupの互換readerと生成contract。
+
+2026-10-16に実branch protectionの必須checkが`Verify (release baseline)`のみ、`strict: true`・GitHub
+Actions app ID付きであることと、active rulesetに別のstatus
+check指定がないことを読戻した。設定変更は行っていない。未使用生成物・旧workflowの整理とSC-005の時間実測は後続タスクに残し、SC-004の実教材公開も本PRの完了に含めない。復旧は今回のadapter・schema登録・生成contract・専用テストと利用側をまとめてGit
+revertする。
 
 ### 公開loaderの移行（002 / PR-04）
 
@@ -436,11 +460,15 @@ Problem・Unitとも、実行例は既存の`examples`で`verificationStatus: pa
 code blockには、同じ`language`の実行例を一件ずつ登録する。Unitの例情報はUnit
 metadata、Problemの例情報は本文frontmatterに置く。環境・入力・実行手順・期待結果を記し、コードを実行してから成功を記録する。非実行の擬似コード・図・数式は`pseudo`、`pseudocode`、`text`、`plaintext`、`math`で明示する。未登録・未検証・失敗した実行コードは公開projectionで拒否し、旧digest台帳の再生成で代用しない。
 
-build後の現行projection検査は同じ`dist`を使う。
+現行の公開projectionは通常の`verify:fast`と、本節の本文・分類の互換テストで検証する。build・リンク・Chromiumも同じ`dist`を使う。
+
+`corpus:verify-full-projections`と`ABC_COMPAT_NEW_DIST`で有効化する任意のbuilt-projectionテストには、旧prepared
+catalogのinventory/snapshot
+digest照合が残る。標準Pagesの候補catalogはこれらの旧欄を持たないため、現在は`FULL_PROJECTION_PREPARED_RELEASE_DRIFT`になる。2026-10-16にPR-10bの変更前main
+`3b3f6d37`でも同じ失敗を再現した。この旧監査consumerはPR-10cの確認対象として残し、通常buildの成功やschema一致で任意監査も成功したとは扱わない。旧catalogの互換検証を省略して回避しない。
 
 ```sh
-SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run corpus:verify-full-projections
-ABC_COMPAT_NEW_DIST="$PWD/dist" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm test -- tests/integration/full-public-projection.test.ts
+ABC_COMPAT_BASE_REF="$compat_base_sha" SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm test -- tests/integration/full-public-projection.test.ts
 ```
 
 `--check`は旧`us4/full-projections.json`を読まず、正本とのcatalog一致、公開route、タグの発動条件・Outcome・問題導線、Contestのタグ配置、sitemap・feed・Pagefindを検査する。検査だけでは報告ファイルを書かない。`ABC_COMPAT_NEW_DIST`指定時は、旧台帳のない一時copyでCLIの成功とstale

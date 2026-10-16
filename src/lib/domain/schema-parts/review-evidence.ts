@@ -6,7 +6,6 @@ import {
   ContentReviewRiskReasonSchema,
   EntityIdSchema,
   OffsetDateTimeSchema,
-  ProblemIdSchema,
   ProblemLabelSchema,
   SafePathSchema,
   Sha256Schema,
@@ -284,97 +283,6 @@ const fileEntry = strictObject({
   sha256: Sha256Schema,
   byteLength: z.number().int().nonnegative(),
 });
-export const MergeReviewEvidenceSchema = strictObject({
-  schemaVersion: z.literal('3.0.0'),
-  id: EntityIdSchema,
-  changeId: EntityIdSchema,
-  logicalChangeSubjectDigest: Sha256Schema,
-  subjectFiles: z.array(fileEntry).min(1),
-  excludedArtifacts: z.array(fileEntry),
-  workManifestPath: SafePathSchema,
-  workManifestDigest: Sha256Schema,
-  learningOutcomeIds: unique(EntityIdSchema),
-  outcomeImpact,
-  reviewMode: ContentReviewModeSchema,
-  reviewerId: EntityIdSchema,
-  applicableChecks: z
-    .array(
-      strictObject({
-        checkId: EntityIdSchema,
-        executedByReviewerId: EntityIdSchema,
-        command: text,
-        subjectDigest: Sha256Schema,
-        resultPath: SafePathSchema,
-        resultDigest: Sha256Schema,
-        rawResultPath: SafePathSchema,
-        rawResultDigest: Sha256Schema,
-        exitCode: z.number().int(),
-        completedAt: OffsetDateTimeSchema,
-      }),
-    )
-    .min(1),
-  notApplicableChecks: z.array(strictObject({ checkId: EntityIdSchema, rationale: text })),
-  humanContentReviewEvidenceId: EntityIdSchema,
-  humanContentReviewEvidencePath: SafePathSchema,
-  humanContentReviewEvidenceDigest: Sha256Schema,
-  constitutionCheck: strictObject({
-    constitutionPath: z.literal('.specify/memory/constitution.md'),
-    constitutionVersion: z.literal('3.0.0'),
-    constitutionDigest: Sha256Schema,
-    dependentTemplates: z.array(fileEntry).min(1),
-    violationCount: z.number().int().nonnegative(),
-    passed: z.boolean(),
-    checkedAt: OffsetDateTimeSchema,
-  }),
-  unresolvedBlockingFindingCount: z.number().int().nonnegative(),
-  mergeApproved: z.boolean(),
-  reviewedAt: OffsetDateTimeSchema,
-  evidenceDigest: Sha256Schema,
-})
-  .superRefine((evidence, context) => {
-    const applicableIds = evidence.applicableChecks.map(({ checkId }) => checkId);
-    const notApplicableIds = evidence.notApplicableChecks.map(({ checkId }) => checkId);
-    if (
-      new Set(applicableIds).size !== applicableIds.length ||
-      new Set(notApplicableIds).size !== notApplicableIds.length ||
-      applicableIds.some((id) => notApplicableIds.includes(id))
-    ) {
-      context.addIssue({
-        code: 'custom',
-        message: 'Check classifications must be unique and disjoint.',
-      });
-    }
-    if (
-      evidence.mergeApproved &&
-      (evidence.applicableChecks.some((check) => check.exitCode !== 0) ||
-        !evidence.constitutionCheck.passed ||
-        evidence.constitutionCheck.violationCount !== 0 ||
-        evidence.unresolvedBlockingFindingCount !== 0)
-    ) {
-      context.addIssue({
-        code: 'custom',
-        path: ['mergeApproved'],
-        message: 'Merge approval requires all checks and findings to pass.',
-      });
-    }
-  })
-  .meta({
-    allOf: [
-      {
-        if: { properties: { mergeApproved: { const: true } }, required: ['mergeApproved'] },
-        then: {
-          properties: {
-            applicableChecks: { items: { properties: { exitCode: { const: 0 } } } },
-            constitutionCheck: {
-              properties: { passed: { const: true }, violationCount: { const: 0 } },
-            },
-            unresolvedBlockingFindingCount: { const: 0 },
-          },
-        },
-      },
-    ],
-  });
-
 const learnerRubricItem = strictObject({ itemId: EntityIdSchema, description: text });
 const learnerProtocol = strictObject({
   protocolId: EntityIdSchema,
@@ -505,146 +413,6 @@ export const LearnerOutcomeEvidenceSchema = z.discriminatedUnion('schemaVersion'
   }),
 ]);
 
-const directActions = z
-  .array(z.enum(['set_status_completed', 'set_needs_review_true']))
-  .length(2)
-  .refine((items) => new Set(items).size === 2);
-const componentFile = strictObject({
-  path: z.string().regex(/^(?:src\/components|src\/lib\/learning-records)\/.+\.(?:astro|ts|tsx)$/u),
-  digest: Sha256Schema,
-  byteLength: z.number().int().positive(),
-});
-const actionContract = strictObject({
-  contractId: z.literal('learning-record-direct-actions'),
-  version: z.string().regex(/^\d+\.\d+\.\d+$/u),
-  path: portablePath,
-  digest: Sha256Schema,
-  requiredActions: directActions,
-});
-const routeEquivalenceProtocol = strictObject({
-  inventoryPath: portablePath,
-  inventoryDigest: Sha256Schema,
-  inventoryCount: z.number().int().positive(),
-  sharedComponents: z.array(componentFile).min(1),
-  sharedComponentSetDigest: Sha256Schema,
-  actionContract,
-  representativeProblemId: ProblemIdSchema,
-  expectedCheckedRouteCount: z.number().int().positive(),
-});
-const routeCheck = strictObject({
-  problemId: ProblemIdSchema,
-  routePath: text,
-  routeDigest: Sha256Schema,
-  sharedComponentSetDigest: Sha256Schema,
-  actionContractDigest: Sha256Schema,
-  sharedComponentRendered: z.boolean(),
-  requiredActions: directActions,
-  checkResultPath: portablePath,
-  checkResultDigest: Sha256Schema,
-  status: z.enum(['passed', 'failed']),
-  checkedAt: OffsetDateTimeSchema,
-});
-const routeEquivalenceResult = strictObject({
-  inventoryPath: portablePath,
-  inventoryDigest: Sha256Schema,
-  inventoryCount: z.number().int().positive(),
-  sharedComponents: z.array(componentFile).min(1),
-  sharedComponentSetDigest: Sha256Schema,
-  actionContract,
-  representativeProblemId: ProblemIdSchema,
-  routeChecks: z.array(routeCheck).min(1),
-  checkedRouteCount: z.number().int().nonnegative(),
-  passedRouteCount: z.number().int().nonnegative(),
-  failedRouteCount: z.number().int().nonnegative(),
-  aggregatePassed: z.boolean(),
-  failureReasons: unique(text),
-});
-const timingBase = {
-  schemaVersion: z.literal('1.1.0'),
-  criterionId: z.literal('SC-012'),
-  releaseVersion: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/u),
-  releaseDigest: Sha256Schema,
-  revision: z.number().int().positive(),
-  actorRole: z.literal('sole_operator_learner'),
-  problemId: ProblemIdSchema,
-};
-const timingProtocol = strictObject({
-  ...timingBase,
-  documentKind: z.literal('user_timing_protocol'),
-  artifactPath: portablePath,
-  routeEquivalence: routeEquivalenceProtocol,
-  fixedAt: OffsetDateTimeSchema,
-  measurementStartsAfter: OffsetDateTimeSchema,
-  startMarker: z.literal('problem-detail-render-complete'),
-  endMarker: z.literal('both-save-confirmations-visible'),
-  requiredOperations: directActions,
-  additionalNavigationAllowed: z.literal(false),
-  externalInstructionsAllowed: z.literal(false),
-  clockKind: z.literal('monotonic'),
-  maximumDurationMs: z.literal(30000),
-  reloadAssertions: z
-    .array(
-      z.enum([
-        'status_completed',
-        'needs_review_true',
-        'status_updated_at_preserved',
-        'review_updated_at_preserved',
-      ]),
-    )
-    .length(4),
-  protocolDigest: Sha256Schema,
-});
-const timingResult = strictObject({
-  ...timingBase,
-  documentKind: z.literal('user_timing_result'),
-  artifactPath: portablePath,
-  protocolPath: portablePath,
-  protocolDigest: Sha256Schema,
-  routeEquivalence: routeEquivalenceResult,
-  startMarker: z.literal('problem-detail-render-complete'),
-  endMarker: z.literal('both-save-confirmations-visible'),
-  startedMonotonicMs: z.number().nonnegative(),
-  completedMonotonicMs: z.number().nonnegative(),
-  durationMs: z.number().nonnegative(),
-  operations: z
-    .array(
-      strictObject({
-        operation: z.enum(['set_status_completed', 'set_needs_review_true']),
-        completedMonotonicMs: z.number().nonnegative(),
-        saveConfirmationObserved: z.boolean(),
-        persistedUpdatedAt: OffsetDateTimeSchema,
-      }),
-    )
-    .length(2),
-  additionalNavigationCount: z.number().int().nonnegative(),
-  externalInstructionUsed: z.boolean(),
-  reloadCompleted: z.boolean(),
-  reloadedStatus: z.enum(['not_started', 'in_progress', 'completed']),
-  reloadedNeedsReview: z.boolean(),
-  reloadedStatusUpdatedAt: OffsetDateTimeSchema,
-  reloadedReviewUpdatedAt: OffsetDateTimeSchema,
-  statusUpdatedAtPreserved: z.boolean(),
-  reviewUpdatedAtPreserved: z.boolean(),
-  passed: z.boolean(),
-  failureReasons: unique(text),
-  rawFiles: z
-    .array(
-      strictObject({
-        path: portablePath,
-        sha256: Sha256Schema,
-        byteLength: z.number().int().nonnegative(),
-      }),
-    )
-    .min(1),
-  rawEvidenceDigest: Sha256Schema,
-  generatedAt: OffsetDateTimeSchema,
-  resultDigest: Sha256Schema,
-});
-export const UserTimingEvidenceSchema = z.discriminatedUnion('documentKind', [
-  timingProtocol,
-  timingResult,
-]);
-
 const contract = (fileName: `${string}.schema.json`, schema: z.ZodType, title: string) =>
   defineZodContractSchema(fileName, schema, {
     $id: `https://abc-textbook.local/schemas/${fileName}`,
@@ -660,18 +428,8 @@ export const HumanContentReviewEvidenceContract = contract(
   HumanContentReviewEvidenceSchema,
   'ABC Textbook Self or Third-Party Content Review Evidence',
 );
-export const MergeReviewEvidenceContract = contract(
-  'merge-review.schema.json',
-  MergeReviewEvidenceSchema,
-  'ABC Textbook Merge Review Evidence',
-);
 export const LearnerOutcomeEvidenceContract = contract(
   'learner-outcome-evidence.schema.json',
   LearnerOutcomeEvidenceSchema,
   'ABC Textbook Learner Outcome Evidence',
-);
-export const UserTimingEvidenceContract = contract(
-  'user-timing-evidence.schema.json',
-  UserTimingEvidenceSchema,
-  'ABC Textbook Sole User Timing Evidence',
 );

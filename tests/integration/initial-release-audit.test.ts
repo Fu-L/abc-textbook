@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import { designLimitCatalog } from '../../scripts/verify/initial-release-performance.js';
+import { simulateZeroCostYear } from '../../scripts/verify/initial-release-zero-cost.js';
 import {
   auditCompleteness,
   auditOptionalBlocks,
@@ -10,6 +11,21 @@ import {
 const projection = await loadFullPublicProjection({ usePreparedRelease: false });
 
 describe('independent initial-release audit', () => {
+  it('restores the previous content with Git revert and preserves 120 records for 52 weeks', async () => {
+    const simulation = await simulateZeroCostYear(projection);
+    expect(simulation.generatorVersion).toBe('zero-cost-year-v2');
+    expect(simulation.weeks).toHaveLength(52);
+    expect(simulation.weeks.every((week) => week.restoredRecordCount === 120)).toBe(true);
+    expect(simulation.weeks[0]?.rollbackPassed).toBe(false);
+    expect(simulation.weeks[0]?.rollbackCommit).toBeNull();
+    expect(simulation.weeks.slice(1).every((week) => week.rollbackPassed)).toBe(true);
+    for (const week of simulation.weeks.slice(1)) {
+      expect(week.rollbackCommit).toMatch(/^[a-f0-9]{40}$/u);
+    }
+    expect(simulation.totalRequiredCostJPY).toBe(0);
+    expect(simulation.productionApproval).toBe(false);
+  }, 120_000);
+
   it('uses a complete design-limit fixture with unique routes and an extra advanced label', () => {
     const fixture = designLimitCatalog(projection.ui);
     expect(fixture.problems).toHaveLength(1500);

@@ -344,9 +344,9 @@ CLIを呼ばず、残す意味検証が成功する。
 revertだけで公開・復旧でき、旧adapter/schemaなしでも旧JSON/記録の互換性と必要な失敗検出を保つ。
 
 <!-- prettier-ignore -->
-- [ ] T055 `src/lib/deployment/git-deployment-adapter.ts`、`cloudflare-pages-target.ts`と未使用のdeployment利用側を参照確認後に削除し、`tests/integration/git-deployment-adapter.test.ts`・`tests/unit/cloudflare-pages-target.test.ts`の専用ケースを同時整理する。標準Pages workflowのartifact/SHA・失敗停止回帰はT032の検査に残す。
-- [ ] T056 `src/lib/domain/schema-parts/review-evidence.ts`、`verification-evidence.ts`、`src/lib/catalog/evidence-inventory.ts`、`scripts/generate-json-schemas.ts`と利用側を確認し、旧専用validator/schema/export/testの参照不要部分だけを削除する。旧catalog/metadata/history読込と公式source/実行コードに必要なschema・fingerprint・digest・生成contractは保持する。残す`--evidence-inventory`指定の検証を壊す削除は行わない。
-- [ ] T057 `tests/contract/schema-parity.test.ts`、`tests/unit/domain-invariants.test.ts`、旧公開データ読込、型/schema・build・リンク・必要な記録E2Eを実行する。`docs/operations/update-manual.md`へ残す歴史readerと削除済みadapterを記し、保存形式と公開URL不変を確認する。
+- [X] T055 `src/lib/deployment/git-deployment-adapter.ts`、`cloudflare-pages-target.ts`と未使用のdeployment利用側を参照確認後に削除し、`tests/integration/git-deployment-adapter.test.ts`・`tests/unit/cloudflare-pages-target.test.ts`の専用ケースを同時整理する。標準Pages workflowのartifact/SHA・失敗停止回帰はT032の検査に残す。
+- [X] T056 `src/lib/domain/schema-parts/review-evidence.ts`、`verification-evidence.ts`、`src/lib/catalog/evidence-inventory.ts`、`scripts/generate-json-schemas.ts`と利用側を確認し、旧専用validator/schema/export/testの参照不要部分だけを削除する。旧catalog/metadata/history読込と公式source/実行コードに必要なschema・fingerprint・digest・生成contractは保持する。残す`--evidence-inventory`指定の検証を壊す削除は行わない。
+- [X] T057 `tests/contract/schema-parity.test.ts`、`tests/unit/domain-invariants.test.ts`、旧公開データ読込、型/schema・build・リンク・必要な記録E2Eを実行する。`docs/operations/update-manual.md`へ残す歴史readerと削除済みadapterを記し、保存形式と公開URL不変を確認する。
 
 **完了条件**: 旧専用処理のための新しい管理層がなく、互換readerと不具合検出が残る。実Github設定に廃止名がない。
 

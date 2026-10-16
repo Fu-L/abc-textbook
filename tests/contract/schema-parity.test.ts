@@ -80,9 +80,9 @@ describe('canonical Zod and JSON Schema parity', () => {
         canonicalJson(intentionallyEdited),
       );
     }
-    expect(contractSchemaEntries).toHaveLength(18);
+    expect(contractSchemaEntries).toHaveLength(13);
     expect(contractSchemaEntries.map(({ semanticValidation }) => semanticValidation)).toEqual(
-      Array.from({ length: 18 }, () => 'canonical-zod'),
+      Array.from({ length: 13 }, () => 'canonical-zod'),
     );
   });
 
