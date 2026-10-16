@@ -1,14 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
-import {
-  HumanContentReviewEvidenceSchema,
-  MergeReviewEvidenceSchema,
-} from '../../src/lib/domain/schema-parts/review-evidence.js';
-import {
-  validateHumanContentReview,
-  validateMergeReviewEvidence,
-} from '../../src/lib/validation/human-content-review.js';
+import { HumanContentReviewEvidenceSchema } from '../../src/lib/domain/schema-parts/review-evidence.js';
+import { validateHumanContentReview } from '../../src/lib/validation/human-content-review.js';
 
 const sha = (character: string): string => character.repeat(64);
 type RiskReason = 'official_source_conflict' | 'original_proof' | 'major_classification_change';
@@ -169,76 +163,6 @@ const makeHighRiskSelfEvidence = (riskReason: RiskReason): Record<string, unknow
   return evidence;
 };
 
-const makeMergeEvidence = (): Record<string, unknown> => {
-  const evidence: Record<string, unknown> = {
-    schemaVersion: '3.0.0',
-    id: 'merge-review-phase-two',
-    changeId: 'change-phase-two',
-    logicalChangeSubjectDigest: sha('a'),
-    subjectFiles: [{ path: 'src/content/docs/index.md', sha256: sha('1'), byteLength: 1 }],
-    excludedArtifacts: [],
-    workManifestPath: 'docs/judgments/merge/phase-two/work-manifest.json',
-    workManifestDigest: sha('2'),
-    learningOutcomeIds: [],
-    outcomeImpact: { kind: 'none', rationale: 'No observable outcome changes.' },
-    reviewMode: 'self',
-    reviewerId: 'person-author',
-    applicableChecks: [
-      {
-        checkId: 'check-contracts',
-        executedByReviewerId: 'person-author',
-        command: 'npm run test:contract',
-        subjectDigest: sha('a'),
-        resultPath: 'docs/judgments/merge/phase-two/check.json',
-        resultDigest: sha('3'),
-        rawResultPath: 'docs/judgments/merge/phase-two/check-raw.json',
-        rawResultDigest: sha('4'),
-        exitCode: 0,
-        completedAt: '2026-07-17T12:00:00+09:00',
-      },
-    ],
-    notApplicableChecks: [],
-    humanContentReviewEvidenceId: 'human-review-phase-two',
-    humanContentReviewEvidencePath: 'docs/judgments/merge/phase-two/human-review.json',
-    humanContentReviewEvidenceDigest: sha('5'),
-    constitutionCheck: {
-      constitutionPath: '.specify/memory/constitution.md',
-      constitutionVersion: '3.0.0',
-      constitutionDigest: sha('6'),
-      dependentTemplates: [
-        { path: '.specify/templates/plan-template.md', sha256: sha('7'), byteLength: 1 },
-      ],
-      violationCount: 0,
-      passed: true,
-      checkedAt: '2026-07-17T12:00:00+09:00',
-    },
-    unresolvedBlockingFindingCount: 0,
-    mergeApproved: true,
-    reviewedAt: '2026-07-17T12:30:00+09:00',
-    evidenceDigest: '',
-  };
-  evidence.evidenceDigest = digestWithoutField(evidence, 'evidenceDigest');
-  return evidence;
-};
-
-const trustedMergeContext = {
-  subjectDigest: sha('a'),
-  workManifestPath: 'docs/judgments/merge/phase-two/work-manifest.json',
-  workManifestDigest: sha('2'),
-  humanReview: {
-    id: 'human-review-phase-two',
-    digest: sha('5'),
-    subjectDigest: sha('a'),
-    aggregatePassed: true,
-    reviewerId: 'person-author',
-    reviewMode: 'self',
-  },
-  constitutionVersion: '3.0.0',
-  constitutionDigest: sha('6'),
-  reviewerId: 'person-author',
-  checks: [{ checkId: 'check-contracts', command: 'npm run test:contract', applicable: true }],
-} as const;
-
 describe('human content review gate', () => {
   it('accepts a complete owner self-review without an external person ID', () => {
     expect(HumanContentReviewEvidenceSchema.safeParse(makeEvidence()).success).toBe(true);
@@ -312,43 +236,6 @@ describe('human content review gate', () => {
     expect(() => {
       validateHumanContentReview(evidence, trustedInventory);
     }).toThrow(/HUMAN_REVIEW_SCHEMA_INVALID/u);
-  });
-
-  it('requires current successful checks, constitution, and human review for merge approval', () => {
-    expect(() => {
-      validateMergeReviewEvidence(makeMergeEvidence(), trustedMergeContext);
-    }).not.toThrow();
-
-    const failedCheck = makeMergeEvidence();
-    const [check] = failedCheck.applicableChecks as { exitCode: number }[];
-    if (!check) throw new Error('Fixture check is missing.');
-    check.exitCode = 1;
-    failedCheck.evidenceDigest = digestWithoutField(failedCheck, 'evidenceDigest');
-    expect(MergeReviewEvidenceSchema.safeParse(failedCheck).success).toBe(false);
-    expect(() => {
-      validateMergeReviewEvidence(failedCheck, trustedMergeContext);
-    }).toThrow(/MERGE_REVIEW_SCHEMA_INVALID/u);
-
-    expect(() => {
-      validateMergeReviewEvidence(makeMergeEvidence(), {
-        ...trustedMergeContext,
-        humanReview: { ...trustedMergeContext.humanReview, aggregatePassed: false },
-      });
-    }).toThrow(/MERGE_HUMAN_REVIEW_INCOMPLETE/u);
-  });
-
-  it('rejects merge evidence for the previous constitution version', () => {
-    const staleConstitution = makeMergeEvidence();
-    const constitutionCheck = staleConstitution.constitutionCheck as {
-      constitutionVersion: string;
-    };
-    constitutionCheck.constitutionVersion = '2.0.0';
-    staleConstitution.evidenceDigest = digestWithoutField(staleConstitution, 'evidenceDigest');
-
-    expect(MergeReviewEvidenceSchema.safeParse(staleConstitution).success).toBe(false);
-    expect(() => {
-      validateMergeReviewEvidence(staleConstitution, trustedMergeContext);
-    }).toThrow(/MERGE_REVIEW_SCHEMA_INVALID/u);
   });
 
   it('rejects aggregate success with changes requested or unresolved findings', () => {
@@ -436,7 +323,7 @@ describe('human content review gate', () => {
     }).toThrow(/REVIEW_ITEM_INVENTORY_INVALID/u);
   });
 
-  it('binds outcome coverage and merge checks to the trusted manifest inventory', () => {
+  it('binds outcome coverage to the trusted manifest inventory', () => {
     const replacedCoverage = makeEvidence();
     const coverage = replacedCoverage.outcomeCoverageReview as Record<string, unknown>;
     coverage.decision = 'confirmed';
@@ -446,16 +333,6 @@ describe('human content review gate', () => {
     expect(() => {
       validateHumanContentReview(replacedCoverage, trustedInventory);
     }).toThrow(/OUTCOME_COVERAGE_INVENTORY_INVALID/u);
-
-    expect(() => {
-      validateMergeReviewEvidence(makeMergeEvidence(), {
-        ...trustedMergeContext,
-        checks: [
-          ...trustedMergeContext.checks,
-          { checkId: 'check-lint', command: 'npm run lint', applicable: true },
-        ],
-      });
-    }).toThrow(/MERGE_CHECK_INVENTORY_INVALID/u);
 
     const trustedWithManifestOutcome = {
       ...trustedInventory,

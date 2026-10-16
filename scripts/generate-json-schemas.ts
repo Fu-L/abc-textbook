@@ -18,15 +18,10 @@ import {
   ContentWorkManifestContract,
   HumanContentReviewEvidenceContract,
   LearnerOutcomeEvidenceContract,
-  MergeReviewEvidenceContract,
-  UserTimingEvidenceContract,
 } from '../src/lib/domain/schema-parts/review-evidence.js';
 import {
-  ClientBundleEvidenceContract,
   ExecutableExampleEvidenceContract,
-  InstructionQualityEvidenceContract,
   LearningRecordE2eEvidenceContract,
-  PerformanceEvidenceContract,
 } from '../src/lib/domain/schema-parts/verification-evidence.js';
 import type {
   ContractSchemaDefinition,
@@ -37,22 +32,17 @@ import { canonicalJson } from '../src/lib/domain/canonical-json.js';
 export const contractSchemaEntries: readonly ContractSchemaDefinition[] = [
   AnswerMaterialEvidenceContract,
   CatalogContract,
-  ClientBundleEvidenceContract,
   ExecutableExampleEvidenceContract,
   ContentWorkManifestContract,
   GlossaryContract,
   HumanContentReviewEvidenceContract,
-  InstructionQualityEvidenceContract,
   LearnerOutcomeEvidenceContract,
   LearningRecordE2eEvidenceContract,
   LearningRecordContract,
-  MergeReviewEvidenceContract,
-  PerformanceEvidenceContract,
   PrerequisiteBaselineContract,
   ProblemPlacementDecisionTableContract,
   ReleaseMetadataContract,
   UpdateManifestContract,
-  UserTimingEvidenceContract,
 ].sort((left, right) => left.fileName.localeCompare(right.fileName));
 
 export const generateContractJsonSchemas = (): Record<string, JsonSchemaDocument> =>

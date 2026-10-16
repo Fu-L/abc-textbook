@@ -9,8 +9,6 @@ import { acquireOfficialMetadata } from '../update-abc/acquire.js';
 import { prepareAuthoringResults } from '../update-abc/author.js';
 import { stagePublicationUpdate } from '../update-abc/stage.js';
 import { validatePreparedUpdate } from '../update-abc/validate.js';
-import { GitDeploymentAdapter } from '../../src/lib/deployment/git-deployment-adapter.js';
-import type { ReleaseMetadata } from '../../src/lib/domain/schema-parts/release.js';
 import { exportLearningRecords } from '../../src/lib/learning-records/export.js';
 import { applyLearningRecordImport } from '../../src/lib/learning-records/import-apply.js';
 import { previewLearningRecordImport } from '../../src/lib/learning-records/import-preview.js';
@@ -19,8 +17,8 @@ import { assertAudit, type FullProjection } from './initial-release-audits.js';
 
 const exec = promisify(execFile);
 
-/** Uses real shared update and backup functions and real temporary Git commits.
- * Source acquisition and the hosting target are offline fixtures; neither is production. */
+/** Uses shared update/backup functions and temporary Git commits/reverts.
+ * Source acquisition and static output are offline fixtures, not production Pages. */
 export const simulateZeroCostYear = async (projection: FullProjection) => {
   const root = await mkdtemp(path.join(tmpdir(), 'abc-zero-cost-year-'));
   const git = async (args: string[]) => (await exec('git', args, { cwd: root })).stdout.trim();
@@ -33,23 +31,16 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
   }));
   const ids = new Set(projection.ui.problems.map((problem) => problem.id));
   const database = new InMemoryLearningRecordDatabase(records);
-  const histories = new Map<string, ReleaseMetadata>();
   let deployed = '';
-  const adapter = new GitDeploymentAdapter(root, {
-    getDeployment: (commit) => Promise.resolve(histories.get(commit)),
-    deployCommit: async ({ release }) => {
-      deployed = await git(['show', `${release.commit}:site.json`]);
-      await writeFile(path.join(root, 'served.json'), deployed);
-      histories.set(release.commit, release);
-      return { deploymentUrl: `https://localhost/simulation/${release.commit}` };
-    },
-  });
+  const serveHead = async () => {
+    deployed = await git(['show', 'HEAD:site.json']);
+    await writeFile(path.join(root, 'served.json'), deployed);
+  };
   const weeks = [];
   try {
     await git(['init']);
     await git(['config', 'user.name', 'Offline simulation']);
     await git(['config', 'user.email', 'simulation@example.test']);
-    let previousCommit: string | undefined;
     let previousContent: string | undefined;
     for (let week = 0; week < 52; week++) {
       const endedAt = new Date(Date.UTC(2027, 0, 2 + 7 * week, 13, 40)).toISOString();
@@ -130,33 +121,25 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
         `simulation week ${String(week + 1)}`,
       ]);
       const commit = await git(['rev-parse', 'HEAD']);
-      const release: ReleaseMetadata = {
-        schemaVersion: '1.0.0',
-        version: endedAt.slice(0, 10).replaceAll('-', '.'),
-        cutoffAt: endedAt,
-        commit,
-        changeSummary: {
-          updateIds: [staged.updateId],
-          addedProblemIds: [...acquired.problemIds],
-          changedProblemIds: [],
-          withdrawnProblemIds: [],
-          taxonomyChanges: [],
-        },
-        validationResultsUrl: 'https://localhost/simulation/checks',
-      };
-      await adapter.deploy(release);
+      await serveHead();
       assertAudit(
         deployed === content &&
           (await readFile(path.join(root, 'served.json'), 'utf8')) === content,
         'AUDIT_WEEKLY_STATIC_DEPLOY',
       );
-      if (previousCommit) {
-        await adapter.rollback(previousCommit);
+      let rollbackCommit: string | null = null;
+      if (previousContent !== undefined) {
+        await git(['revert', '--no-edit', commit]);
+        rollbackCommit = await git(['rev-parse', 'HEAD']);
+        assertAudit(rollbackCommit !== commit, 'AUDIT_WEEKLY_REVERT_COMMIT');
+        await serveHead();
         assertAudit(deployed === previousContent, 'AUDIT_WEEKLY_ROLLBACK');
-        await adapter.deploy(release);
+        await git(['revert', '--no-edit', rollbackCommit]);
+        await serveHead();
+        assertAudit(deployed === content, 'AUDIT_WEEKLY_REAPPLY');
       }
       const backup = await exportLearningRecords(database, {
-        catalogVersion: release.version,
+        catalogVersion: endedAt.slice(0, 10).replaceAll('-', '.'),
         catalogProblemIds: ids,
         exportedAt: endedAt,
       });
@@ -184,20 +167,20 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
         inputDigest: staged.inputDigest,
         validationDigest: validation.resultDigest,
         servedDigest: canonicalDigest(deployed),
+        rollbackCommit,
         backupDigest: canonicalDigest(backup),
         restoredRecordCount: restored.records.size,
         rollbackPassed: week > 0,
         requiredCostJPY: 0,
       });
-      previousCommit = commit;
       previousContent = content;
     }
     assertAudit(
-      histories.size === 52 && new Set(weeks.map((week) => week.updateId)).size === 52,
+      weeks.length === 52 && new Set(weeks.map((week) => week.updateId)).size === 52,
       'AUDIT_52_WEEKS',
     );
     return {
-      generatorVersion: 'zero-cost-year-v1',
+      generatorVersion: 'zero-cost-year-v2',
       weeks,
       totalRequiredCostJPY: 0,
       model: {
@@ -206,14 +189,14 @@ export const simulateZeroCostYear = async (projection: FullProjection) => {
         review:
           'maintainer time; automatic validation plus simulated review, no human approval asserted',
         merge: 'temporary local Git commits',
-        deployment: 'local static target, no hosting subscription',
+        deployment: 'local HEAD snapshot after Git revert/reapply, no hosting subscription',
         backup: 'local JSON',
       },
       excludedExistingCosts: ['existing computer', 'electricity', 'ordinary internet access'],
       optionalServicesRequired: false,
       productionApproval: false,
       limitations:
-        'This deterministic simulation verifies the local zero-cost path and rollback/backup interfaces. It does not guarantee future hosting prices, live source availability, or completion of new prose by a paid generator.',
+        'This deterministic simulation verifies local Git revert/reapply and backup. It does not verify production Pages delivery, future hosting prices, live source availability, or completion of new prose by a paid generator.',
     };
   } finally {
     await rm(root, { recursive: true, force: true });

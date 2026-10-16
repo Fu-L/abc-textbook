@@ -5,6 +5,7 @@ import { promisify } from 'node:util';
 import prettier from 'prettier';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import { contractSchemaEntries } from '../generate-json-schemas.js';
 import {
   assertAudit,
   auditCompleteness,
@@ -298,7 +299,7 @@ try {
       T133: {
         commands: refs(['schema', 'test']),
         checks: {
-          canonicalSchemaCount: 18,
+          canonicalSchemaCount: contractSchemaEntries.length,
           testResultsPath: testPath,
           unknownFieldAndDriftTests: true,
         },

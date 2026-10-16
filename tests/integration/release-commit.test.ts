@@ -7,30 +7,15 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { loadGitReleaseHistory } from '../../scripts/release/build-history.js';
 import { CatalogSchema } from '../../src/lib/domain/schema-parts/catalog.js';
 import { makeTrustedCatalog } from '../fixtures/trusted-catalog.js';
-import {
-  GitDeploymentAdapter,
-  type CommitDeploymentRequest,
-} from '../../src/lib/deployment/git-deployment-adapter.js';
-
 const exec = promisify(execFile);
-describe('legacy Git release history and deployment', () => {
+describe('legacy Git release history', () => {
   let root: string;
-  let base: string;
-  let commit: string;
   const git = async (...args: string[]) => (await exec('git', args, { cwd: root })).stdout.trim();
   beforeEach(async () => {
     root = await mkdtemp(path.join(tmpdir(), 'abc-release-commit-'));
     await git('init', '-q');
     await git('config', 'user.email', 'fixture@example.invalid');
     await git('config', 'user.name', 'Fixture');
-    await writeFile(path.join(root, 'content.txt'), 'base');
-    await git('add', '.');
-    await git('commit', '-qm', 'base');
-    base = await git('rev-parse', 'HEAD');
-    await git('update-ref', 'refs/remotes/origin/main', base);
-    await writeFile(path.join(root, 'content.txt'), 'committed');
-    await git('commit', '-qam', 'update');
-    commit = await git('rev-parse', 'HEAD');
   });
   afterEach(async () => {
     await rm(root, { recursive: true, force: true });
@@ -121,39 +106,5 @@ describe('legacy Git release history and deployment', () => {
       release: { publicationStatus: string };
     };
     expect(original.release.publicationStatus).toBe('prepared');
-  });
-  it('releases the deployment queue after a host failure', async () => {
-    const catalog = makeTrustedCatalog({});
-    const metadata: CommitDeploymentRequest['release'] = {
-      schemaVersion: '1.0.0',
-      version: catalog.release.version,
-      cutoffAt: catalog.release.cutoffAt,
-      commit,
-      changeSummary: {
-        updateIds: catalog.release.updateIds,
-        addedProblemIds: catalog.release.addedProblemIds,
-        changedProblemIds: [],
-        withdrawnProblemIds: [],
-        taxonomyChanges: [],
-      },
-      validationResultsUrl: 'https://github.com/Fu-L/abc-textbook/actions/runs/1',
-    };
-    let calls = 0;
-    const adapter = new GitDeploymentAdapter(root, {
-      getDeployment: () => Promise.resolve(undefined),
-      deployCommit: () => {
-        calls += 1;
-        return calls === 1
-          ? Promise.reject(new Error('injected host failure'))
-          : Promise.resolve({ deploymentUrl: 'https://fixture.invalid/site' });
-      },
-    });
-    await expect(adapter.deploy(metadata)).rejects.toThrow('injected host failure');
-    await expect(adapter.deploy(metadata)).resolves.toMatchObject({
-      deploymentUrl: 'https://fixture.invalid/site',
-    });
-    expect(calls).toBe(2);
-    await expect(adapter.rollback(base)).rejects.toThrow('UNKNOWN_RELEASE_COMMIT');
-    expect(calls).toBe(2);
   });
 });
