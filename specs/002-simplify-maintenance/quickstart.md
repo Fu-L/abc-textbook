@@ -150,6 +150,13 @@ rg -n 'verify:release|abc:review|abc:deploy|evidence-inventory|accept-seed|work-
 
 検索結果の存在だけで削除可否を判定せず、現行consumer、履歴読込、文書リンクを区別する。公式source・参照されるdigest・公開履歴を残し、参照不要の専用producer/consumer/テストだけを削除する。削除PRはschema・型・残すテスト・build・リンクと必要なE2Eを再確認する。
 
+PR-10aでは旧`abc:review` / `verify:release` /
+`abc:deploy`、`release:accept-*`、`release:bootstrap`と専用実装を削除した。現行履歴reader、catalogの`--evidence-inventory`互換検証、通常`abc:update`と初版fixture入口は保持する。残す依存・復旧は[更新マニュアル](../../docs/operations/update-manual.md#旧reviewrelease-cliの削除002--pr-10a)を参照する。対象検証は次を使い、型/schema・本番subpathのbuildと同じ出力のリンク検査も行う。
+
+```sh
+npm test -- tests/integration/catalog-cli.test.ts tests/integration/update-validation.test.ts tests/integration/release-commit.test.ts tests/unit/release-history.test.ts tests/unit/seed-agent-review.test.ts tests/unit/publication-config.test.ts tests/contract/verify-fast.test.ts tests/contract/schema-parity.test.ts tests/unit/domain-invariants.test.ts
+```
+
 同種/同規模の通常更新の正常な必須検証5回から中央値を算出し、移行前の同じ計測境界と比較する。10分以下かつ50%以上短縮の双方を満たさなければSC-005未達として原因を確認する。結果はPR本文または完了報告へ集約し、独立した計測台帳を追加しない。SC-001〜008の未実施・失敗・外部設定未完了を明記する。
 
 ## 計画文書だけの確認

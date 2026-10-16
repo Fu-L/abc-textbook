@@ -11,7 +11,6 @@ import {
   type FrozenTaxonomyIndex,
 } from './classify.js';
 import { discoverContests } from './discover.js';
-import { bootstrapPreviewSeed } from './bootstrap.js';
 import { validatePreparedUpdate, validateSmallBatchCandidate } from './validate.js';
 import { canonicalDigest, digestWithoutField } from '../../src/lib/domain/canonical-json.js';
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
@@ -36,7 +35,7 @@ import {
 } from '../../src/lib/catalog/full-public-projection.js';
 import { projectCatalogContent } from '../../src/lib/catalog/build-catalog.js';
 import { discoverMetadataBatch } from './discover.js';
-import { readContentFiles, writeChangedContent } from './stage.js';
+import { bootstrapPreviewSeed, readContentFiles, writeChangedContent } from './stage.js';
 import { requireBatchDocuments } from './author.js';
 import { batchUnitMembership } from './classify.js';
 import { insertUnitProblemLinks, validateInsertedProblemOrder } from './unit-order.js';

@@ -95,8 +95,8 @@ npm run catalog:build -- --input docs/verification/releases/catalog.json --outpu
 schema・ID・参照・出典/claim・配置と本文、Tag/Outcome/Unitの3DAG・読書順の検証を維持する。型違反・重複ID・未知参照・循環・欠落本文・正本との差を拒否し、既存outputのbytesを上書きしない。未知・重複・値欠落の引数は64、意味検証失敗は2、実行失敗は70を維持する。旧欄の値を保持し、存在するsnapshot
 digestは照合する。`prepared`の検証成功を公開成功に数えない。
 
-`--evidence-inventory`はPR-07の公開consumer移行後、PR-10の旧consumer整理まで残す。指定時は従来のprotected-base/manifest・inventory全体・check/review・実行例証跡を検証し、不正な旧指定を成功扱いしない。旧release/deploy
-consumerと通常buildのprepared版照合はまだ残る。新しい訂正では変更前後のcatalogと前提を`scope`として影響先の完全性を検査し、証跡登録を要求しない。具体的な入力と復旧は[更新マニュアル](../../../docs/operations/update-manual.md#catalog-cliの移行002--pr-05)を参照する。
+`--evidence-inventory`はPR-10aの旧CLI削除後も互換引数として残す。指定時は従来のprotected-base/manifest・inventory全体・check/review・実行例証跡を検証し、不正な旧指定を成功扱いしない。旧release/deploy
+CLIと通常buildの旧prepared照合は撤去済みで、指定した旧inventoryの検証は保持する。新しい訂正では変更前後のcatalogと前提を`scope`として影響先の完全性を検査し、証跡登録を要求しない。具体的な入力と復旧は[更新マニュアル](../../../docs/operations/update-manual.md#catalog-cliの移行002--pr-05)を参照する。
 
 PR-09の通常`abc:update`は`--mode prepare|validate --candidate-root PATH --base-catalog PATH --base-metadata PATH --metadata-batch PATH --metrics PATH`を受理し、任意の`--repository-root PATH`をbase
 checkoutとする。baseとcandidateは独立したディレクトリで、candidateは執筆用の`src/content/`コピーを持つ。取得batchは公開上限直後からの連続範囲とし、baseの内容、公式task/source、既存本文・配置・3DAG・読書順・対象外指標を保持する。新規差分だけを作り、再実行は差分0。未完成/不整合は理由・再試行条件付き`on_hold`/2、引数違反64、IO等の実行失敗70で報告する。検証済みcandidateも配信前は未公開であり、旧release

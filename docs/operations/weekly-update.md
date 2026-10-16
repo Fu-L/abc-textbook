@@ -1,8 +1,10 @@
 # 全カタログの週次更新と復旧
 
+> **PR-10aで旧CLIを削除済み**: 以下に残る`release:bootstrap`、`release:accept-*`、`abc:review`、`verify:release`、`abc:deploy`は当時のGit版の歴史資料であり、現在は実行できない。現行の入口と残す互換引数は[更新マニュアル](update-manual.md#旧reviewrelease-cliの削除002--pr-10a)を参照する。
+
 > **旧更新pipelineの技術資料**: 現行方針と通常更新の入口は
 > [Codexの更新マニュアル](update-manual.md)と
-> [Constitution 4.0.0](../../.specify/memory/constitution.md)。以下の人間承認・self/third-party選択・毎回の全件審査は新しい作業の必須条件ではない。manifest・digest・release検証への実装依存は残っているため、既存CLIを使う際の技術的制約として参照する。公開先はGitHub
+> [Constitution 4.0.0](../../.specify/memory/constitution.md)。以下の人間承認・self/third-party選択・毎回の全件審査は新しい作業の必須条件ではない。旧catalogの互換引数にはmanifest・digest検証が残るが、以下の旧公開CLIは廃止済み。公開先はGitHub
 > Pagesに確定済み。撤去・簡素化の対象と互換性確認は更新マニュアルの移行欄に従う。
 
 この手順は、ABCの新しい問題や訂正を、既存の典型・学習成果・本文へ一つの更新として取り込むためのもの。ABCの回次やdifficulty順に教科書を組み替えない。終了済みContestの公式task

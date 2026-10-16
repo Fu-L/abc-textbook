@@ -1,5 +1,7 @@
 # ABC212〜466 初版公開手順
 
+> **PR-10aで旧CLIを削除済み**: 以下に残る`release:bootstrap`、`release:accept-*`、`abc:review`、`verify:release`、`abc:deploy`は当時のGit版の歴史資料であり、現在は実行できない。現行の入口と残す互換引数は[更新マニュアル](update-manual.md#旧reviewrelease-cliの削除002--pr-10a)を参照する。
+
 > **初版の過去手順と復旧資料**: 通常配信は[更新マニュアルの標準Pages手順](update-manual.md#5-標準pagesで公開する)に従う。PR-07aではCIの同run/SHAで一度build・検証したdistを標準Pages
 > Actionsへ渡す。以下の初版監査・旧review/台帳・独自配信は通常更新の条件にしない。PR-07aの実成功・公開確認後、PR-07bで旧`production-deploy.yml`を撤去した。以下の旧起動コマンドは履歴資料であり実行できない。
 
