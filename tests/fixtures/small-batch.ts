@@ -11,7 +11,11 @@ import { liveBase, liveCheckedAt, livePolicyApproval, liveTransport } from './li
 
 export const smallBatchInput = async (root: string, last = 467) => {
   await cp('src/content', path.join(root, 'src/content'), { recursive: true });
-  const base = await liveBase();
+  // Editing tests must pair the candidate with the same current manuscripts.
+  // The frozen acquisition catalog predates normal textbook corrections.
+  const base = await liveBase(
+    (await loadFullPublicProjection({ usePreparedRelease: false })).catalog,
+  );
   const acquired = await acquireMetadataRange({
     ...base,
     firstContestNumber: 467,

@@ -39,15 +39,17 @@ export const livePolicyApproval: PolicyApprovalManifest = {
 };
 
 /** The real existing ABC212–466 catalog, with explicit fixture publication identity. */
-export const liveBase = async () => {
-  const catalog = CatalogSchema.parse(
-    JSON.parse(
-      await readFile(
-        new URL('../../docs/verification/releases/catalog.json', import.meta.url),
-        'utf8',
-      ),
-    ) as unknown,
-  );
+export const liveBase = async (currentCatalog?: ReturnType<typeof CatalogSchema.parse>) => {
+  const catalog =
+    currentCatalog ??
+    CatalogSchema.parse(
+      JSON.parse(
+        await readFile(
+          new URL('../../docs/verification/releases/catalog.json', import.meta.url),
+          'utf8',
+        ),
+      ) as unknown,
+    );
   const metadata = {
     schemaVersion: '1.0.0',
     version: catalog.release.version,
