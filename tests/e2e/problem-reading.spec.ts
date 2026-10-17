@@ -19,8 +19,9 @@ for (const colorScheme of ['light', 'dark'] as const) {
       });
       const page = await context.newPage();
       await page.goto('./problems/abc391-f/');
-      await expect(page.locator('.problem-summary')).toContainText('各列を降順sort');
-      await expect(page.locator('.problem-summary')).toBeInViewport();
+      await expect(page.locator('#考察 + p')).toContainText('三つの配列をそれぞれ降順');
+      await expect(page.locator('#考察 + p')).toBeInViewport();
+      await expect(page.locator('.problem-summary')).toHaveCount(0);
       await expect(page.locator('#考察')).toBeVisible();
       await expect(page.locator('#problem-context')).not.toHaveAttribute('open', '');
       await expect(page.getByText('掲載状態: 収録済み')).not.toBeVisible();
@@ -72,7 +73,13 @@ test('uses the shared layout and record controls on other Problem IDs', async ({
   await page.setViewportSize({ width: 320, height: 844 });
   for (const id of ['abc213-g', 'abc466-g']) {
     await page.goto(`./problems/${id}/`);
-    await expect(page.locator('.problem-summary')).toBeVisible();
+    await expect(page.locator('#考察')).toBeVisible();
+    // An unedited manuscript starts with its own reasoning, without an analysis fallback.
+    await expect(page.locator('.problem-summary')).toHaveCount(0);
+    await expect(page.locator('#explanation .authored-content > h2').first()).toHaveAttribute(
+      'id',
+      '考察',
+    );
     await expect(page.locator('.problem-reading-links')).toContainText('完全解説');
     await page
       .getByRole('navigation', { name: '問題の学習' })
@@ -93,11 +100,50 @@ test('uses the shared layout and record controls on other Problem IDs', async ({
   }
 });
 
-test('keeps algorithm-summary notation as text rather than accidental links', async ({ page }) => {
-  await page.goto('./problems/abc321-g/');
-  await expect(page.locator('.problem-summary')).toContainText('g[S](M-m)!/M!');
-  await expect(page.locator('.problem-summary a')).toHaveCount(0);
-});
+for (const [id, introduction] of [
+  ['abc330-g', '転倒数を、確定位置同士・未確定位置同士・両者をまたぐ組の三つに分ける。'],
+  ['abc321-g', '連結成分数の期待値は、各頂点集合が一つの連結成分になる確率の和で求められる。'],
+] as const) {
+  for (const colorScheme of ['light', 'dark'] as const) {
+    for (const width of [390, 1440]) {
+      test(`starts ${id} with authored intuition at ${String(width)} px in ${colorScheme} without JS`, async ({
+        browser,
+        baseURL,
+      }) => {
+        if (!baseURL) throw new Error('Playwright baseURL is required.');
+        const context = await browser.newContext({
+          baseURL,
+          javaScriptEnabled: false,
+          colorScheme,
+          viewport: { width, height: width === 390 ? 844 : 1000 },
+        });
+        const page = await context.newPage();
+        await page.goto(`./problems/${id}/`);
+        await expect(page.locator('.problem-summary')).toHaveCount(0);
+        await expect(page.locator('#考察')).toBeInViewport();
+        const opening = page.locator('#考察 + p');
+        await expect(opening).toContainText(introduction);
+        // The whole introduction fits before detailed states and equations are introduced.
+        expect(await opening.evaluate((node) => node.getBoundingClientRect().bottom)).toBeLessThan(
+          width === 390 ? 844 : 1000,
+        );
+        await expect(opening.locator('math, code, a')).toHaveCount(0);
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+          true,
+        );
+        await expect(page.locator('#正当性')).toBeVisible();
+        await expect(page.locator('#計算量と制約')).toBeVisible();
+        await expect(page.locator('#出典 + ul a')).toHaveCount(2);
+        if (process.env.PROBLEM_READING_CAPTURE === '1') {
+          const dir = 'docs/operations/problem-reading';
+          await mkdir(dir, { recursive: true });
+          await page.screenshot({ path: `${dir}/${id}-${String(width)}-${colorScheme}.png` });
+        }
+        await context.close();
+      });
+    }
+  }
+}
 
 for (const kind of ['similar', 'supplement'] as const) {
   test(`unpublished ${kind} body explains its scope and links to the full explanation without JS`, async ({
@@ -119,7 +165,6 @@ for (const kind of ['similar', 'supplement'] as const) {
       const $ = load(await response.text());
       $('#explanation .authored-content').html(reading.body);
       // This fixture exercises abbreviated prose in the common page shell; no catalog is changed.
-      $('.problem-summary').remove();
       $('.problem-reading-links > span').text(kind === 'similar' ? '差分解説' : '補足解説');
       await route.fulfill({ response, body: $.html() });
     });

@@ -5,7 +5,7 @@ import { publicProjection } from '../../src/lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 
 describe('problem reading order', () => {
-  for (const id of ['abc391-f', 'abc213-g', 'abc466-g']) {
+  for (const id of ['abc391-f', 'abc330-g', 'abc321-g', 'abc213-g', 'abc466-g']) {
     it(`preserves every paragraph, anchor, link and equation when moving classification: ${id}`, async () => {
       const document = publicProjection.problemDocuments.get(id);
       if (!document) throw new Error(id);

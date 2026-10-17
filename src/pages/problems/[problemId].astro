@@ -25,10 +25,6 @@ export function getStaticPaths() {
 const { problem } = Astro.props;
 const document = publicProjection.problemDocuments.get(problem.id);
 if (!document) throw new Error(`Missing accepted explanation: ${problem.id}`);
-const analysis = publicProjection.catalog.techniqueInventory.find(
-  (record) => record.problemId === problem.id,
-);
-if (!analysis) throw new Error(`Missing accepted analysis: ${problem.id}`);
 const studyPreview = isStudyPreview(import.meta.env.STUDY_UX_PREVIEW, problem.route);
 const originalBody = await renderPublicDocument(document.text, import.meta.env.BASE_URL);
 const body = studyPreview
@@ -43,12 +39,7 @@ const base = import.meta.env.BASE_URL;
   description={problem.explanationSummary}
   breadcrumbs={[{ href: '/problems/', label: '問題一覧' }, { label: problem.id.toUpperCase() }]}
 >
-  <ProblemExplanation
-    problem={problem}
-    authoringUnit={document.unit}
-    solutionSummary={analysis.reasoningPath.algorithmConnection.text}
-    body={body}
-  />
+  <ProblemExplanation problem={problem} authoringUnit={document.unit} body={body} />
   <section class="problem-record" aria-labelledby="learning-record-heading">
     <h2 id="learning-record-heading">学習記録</h2>
     <noscript data-pagefind-ignore>

@@ -8,9 +8,8 @@ interface Props {
   problem: UiProblem;
   authoringUnit: ProblemAuthoringUnit;
   body: string;
-  solutionSummary: string;
 }
-const { problem, authoringUnit, body, solutionSummary } = Astro.props;
+const { problem, authoringUnit, body } = Astro.props;
 const reading = splitProblemContext(body);
 const kindLabel = { full: '完全解説', similar: '差分解説', supplement: '補足解説' }[
   authoringUnit.kind
@@ -26,16 +25,6 @@ const kindLabel = { full: '完全解説', similar: '差分解説', supplement: '
   <a href="#learning-record-heading">学習記録</a>
   <a href="#problem-context">分類と前提</a>
 </nav>
-{
-  authoringUnit.kind === 'full' && (
-    <div class="problem-summary">
-      <p>
-        <strong>解法の核心</strong>
-      </p>
-      <p>{solutionSummary}</p>
-    </div>
-  )
-}
 <section id="explanation" aria-label="解説">
   <div class="authored-content" set:html={reading.body} />
 </section>
