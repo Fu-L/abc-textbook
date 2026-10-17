@@ -186,6 +186,9 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -
 
 buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を使う。E2Eの環境・fixtureは`playwright.config.ts`と対象テストに合わせる。変更で検出すべき不具合に合わせてテストを選び、無関係な数学回帰や全件監査を繰り返さない。他ブラウザー固有の挙動、広範囲のschema・共通処理・依存変更では必要な検証を追加する。必須検査が失敗したら原因を修正し、影響する検査を再実行する。
 
+文字組み・配色の正本は`src/styles/global.css`、配置・狭い画面の指定は`src/styles/accessibility.css`。独自の`TextbookLayout`には`body.textbook`で本文スタイルを適用し、Starlight向けの変数定義だけで表示を確認したことにしない。初期配色はOSの明暗設定にCSSで追従する。変更時は`tests/e2e/accessibility.spec.ts`で文字組み、両配色のコントラスト、JS無効の本文、狭い画面のreflowを確認し、
+[代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
+
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
 
 `verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain
