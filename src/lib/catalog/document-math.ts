@@ -44,7 +44,7 @@ export const remarkRenderDocumentMath = () => (tree: DocumentNode, file: { value
         type: 'html',
         value: display
           ? `<div class="math-display" tabindex="0" role="group" aria-label="数式">${html}</div>`
-          : html,
+          : `<span class="math-inline" tabindex="0" role="group" aria-label="数式">${html}</span>`,
         data: undefined,
       });
     } else node.children?.forEach(visit);

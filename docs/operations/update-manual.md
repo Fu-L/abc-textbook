@@ -44,7 +44,9 @@ modeを作らず、独立した演習・評価・解答の節を一律に増や�
 
 単独の `$` はダミー文字や通貨にも使うため数式として解釈しない。数式内の日本語は `\text{…}`
 で囲む。長い式は独立させ、必要なら `aligned`
-で関係を揃える。独立した式は狭い画面で局所スクロールでき、Tabで移動して矢印キーでも読める。
+で関係を揃える。幅を超える式はインライン・独立形式とも局所スクロールでき、Tabで移動して矢印キーでも読める。長い式は独立させる方を優先する。
+
+コード・擬似コードの枠は原稿の改行と字下げを保ち、長い行を枠内で横スクロールする。Tab文字の表示幅は4文字分で、原稿のTabを空白へ置換しない。文章中のインラインコードは狭い画面で折り返す。表は日本語のセルを自然に折り返し、識別子などを含んで幅が必要なら表の枠内でスクロールする。表とコード枠もTab・矢印キーで操作できる。比較画面とトレードオフは[コード・数式・表の横幅](content-widths.md)を参照する。
 
 従来の未区切りの
 `*`、`_`、集合差、係数抽出式は文字として保持する。意味・式の範囲を確かめず、一括で区切りを付けたりバックスラッシュを削ったりしない。修正は公式出典と照合した少数の正本へ行う。原稿生成器は明示した数式内の係数抽出をMarkdownリンク用にエスケープしない。
@@ -217,6 +219,8 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 
 文字組み・配色の正本は`src/styles/global.css`、配置・狭い画面の指定は`src/styles/accessibility.css`。独自の`TextbookLayout`には`body.textbook`で本文スタイルを適用し、Starlight向けの変数定義だけで表示を確認したことにしない。初期配色はOSの明暗設定にCSSで追従する。変更時は`tests/e2e/accessibility.spec.ts`で文字組み、両配色のコントラスト、JS無効の本文、狭い画面のreflowを確認し、
 [代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
+
+コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
 

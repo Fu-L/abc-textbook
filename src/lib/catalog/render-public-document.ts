@@ -83,6 +83,9 @@ export const renderPublicDocument = async (
   const rendered = await (await processor).render(`${introduction}${content}`);
   const $ = load(rendered.code, null, false);
   if (omitTitle) $('h1').remove();
+  // Focusable local viewports work without JS; keep code bytes and native table semantics.
+  $('pre').attr({ tabindex: '0', role: 'group', 'aria-label': 'コードブロック' });
+  $('table').wrap('<div class="table-scroll" tabindex="0" role="group" aria-label="表"></div>');
   $('a[href]').each((_index, element) => {
     const link = $(element);
     const href = link.attr('href') ?? '';
