@@ -83,6 +83,19 @@ export const renderPublicDocument = async (
   const rendered = await (await processor).render(`${introduction}${content}`);
   const $ = load(rendered.code, null, false);
   if (omitTitle) $('h1').remove();
+  $('h2[id], h3[id], h4[id], h5[id], h6[id]').each((_, element) => {
+    const heading = $(element);
+    const label = heading.clone();
+    label.find('annotation').remove();
+    // Keep Astro's existing slugs (including duplicate-heading suffixes) intact.
+    heading.attr({ tabindex: '-1', 'aria-label': label.text().trim() });
+    heading.append(
+      $('<a class="heading-link" aria-label="この節へのリンク" data-pagefind-ignore></a>').attr(
+        'href',
+        `#${encodeURIComponent(heading.attr('id') ?? '')}`,
+      ),
+    );
+  });
   // Focusable local viewports work without JS; keep code bytes and native table semantics.
   $('pre').attr({ tabindex: '0', role: 'group', 'aria-label': 'コードブロック' });
   $('table').wrap('<div class="table-scroll" tabindex="0" role="group" aria-label="表"></div>');

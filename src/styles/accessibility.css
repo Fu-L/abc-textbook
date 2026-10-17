@@ -426,13 +426,6 @@ footer {
   border-block-end: 1px solid var(--abc-border);
   padding-block-end: 0.5rem;
 }
-.preview-toc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  margin-block: 1rem 1.5rem;
-  font-size: 0.9375rem;
-}
 .chapter-jump {
   margin-block: 1.5rem;
 }
@@ -441,4 +434,103 @@ footer {
 }
 .chapter-jump li {
   break-inside: avoid;
+}
+
+/* Page-local navigation follows the authored reading order, separate from chapter contents. */
+.document-reading,
+.document-body {
+  min-inline-size: 0;
+}
+.page-contents {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  align-self: start;
+  background: var(--abc-background);
+  border-block-end: 1px solid var(--abc-border);
+  margin-block-end: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.page-contents-panel > summary {
+  padding-block: 0.6rem;
+  cursor: pointer;
+  color: var(--abc-muted);
+}
+.page-contents nav {
+  max-block-size: 55dvh;
+  overflow-y: auto;
+  padding: 0.25rem 0.5rem 0.75rem;
+}
+.textbook main .page-contents ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.textbook main .page-contents li {
+  margin: 0;
+  padding-inline-start: calc(var(--heading-depth) * 0.75rem);
+}
+.page-contents a {
+  display: block;
+  padding-block: 0.4rem;
+  text-decoration: none;
+}
+.page-contents a:hover {
+  text-decoration: underline;
+}
+.heading-link {
+  display: inline-block;
+  margin-inline-start: 0.5em;
+  padding-inline: 0.2em;
+  font-size: 0.8em;
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  scroll-margin-block: 5rem;
+}
+.heading-link::after {
+  content: '#';
+}
+:is(h2, h3, h4, h5, h6):is(:hover, :focus, :focus-within) > .heading-link {
+  opacity: 1;
+}
+@media (hover: none) {
+  .heading-link {
+    opacity: 1;
+  }
+}
+@media (max-width: 79.999rem) {
+  /* Without JS, an open menu scrolls away instead of covering the selected prose. */
+  .page-contents:has(details[open]) {
+    position: static;
+  }
+}
+@media (min-width: 80rem) {
+  .problem-page:has(.page-contents) .page-shell {
+    max-inline-size: 62rem;
+  }
+  .unit-page:has(.page-contents) .page-shell {
+    max-inline-size: 96rem;
+  }
+  .with-page-contents {
+    display: grid;
+    grid-template-columns: minmax(0, var(--abc-content-measure)) 12rem;
+    gap: 2rem;
+  }
+  .page-contents {
+    grid-column: 2;
+    grid-row: 1;
+    inset-block-start: 1rem;
+    border-block-end: 0;
+    border-inline-start: 1px solid var(--abc-border);
+    padding-inline-start: 1rem;
+  }
+  .document-body {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .page-contents nav {
+    max-block-size: calc(100dvh - 6rem);
+  }
 }

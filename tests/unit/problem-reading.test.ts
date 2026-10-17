@@ -44,7 +44,7 @@ describe('problem reading order', () => {
       expect(reading.context).toBe('');
       expect(reading.body).toBe(html);
       const $ = load(reading.body);
-      if (kind === 'full') expect($('a')).toHaveLength(0);
+      if (kind === 'full') expect($('a:not(.heading-link)')).toHaveLength(0);
       else {
         expect($('a').first().attr('href')).toBe('/abc-textbook/problems/abc391-f/');
         expect($('p').first().text()).toContain(kind === 'similar' ? '差分解説' : '補足解説');

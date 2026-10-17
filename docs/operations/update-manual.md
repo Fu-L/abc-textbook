@@ -221,7 +221,7 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 [代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
 
 代表ページで情報順・文章を比較するときは[読みやすさの試作](study-ux-prototype.md)を参照する。
-`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを試作用にする。問題ページの情報順は#113、単元の情報順と代表2単元の文章は#114、問題一覧は#115で通常buildにも採用済み。試作変数による本文の差し替えは問題の代表原稿・解説内ナビゲーションに残り、単元の一覧は通常表示と共通である。残る試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
+`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを試作用にする。問題ページの情報順は#113、単元の情報順と代表2単元の文章は#114、問題一覧は#115、ページ内目次は#117で通常buildにも採用済み。試作変数による本文の差し替えは問題の代表原稿に残り、単元の一覧とページ内目次は通常表示と共通である。残る試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
 `tests/e2e/study-preview.spec.ts`で対象限定、旧anchor・情報・問題順、導線を確認する。試作を変更したときだけ通常・試作の両モードで対象E2Eを実行し、採用候補と保留点をPRに記す。
 
 問題詳細は`src/components/ProblemExplanation.astro`を共用し、公式問題→問題固有の解法の核心→考察本文を先に置く。[問題ページの情報順](problem-reading.md)を参照する。核心は正本Markdownの「考察」の冒頭に、未定義の記号を使わず、着想と必要な理由を伝える短い段落として執筆する。内部分析の`reasoningPath.algorithmConnection.text`や分類用Outcomeを自動転用・切り詰めして導入にしない。導入を改稿していない問題も、その原稿の考察から読み始める。分類・既習技能・執筆情報と原稿の「学習の位置」は末尾の開閉欄へ保持する。この移動は表示処理で行い、正本本文へ反映しない。fullは完全解説、similarは差分解説、supplementは補足解説として案内し、短縮形式は共通rendererが冒頭へ参照元fullのリンクを出す。新問にも通常の公開フローでこの表示が適用され、個別のHTML/CSSは不要である。
@@ -234,6 +234,11 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 detailsを手で開く。JSはPCの初期展開・画面幅変更と目次内の現在位置へのスクロールだけを補助し、保存領域を使わない。旧`#unit-contents`は保持する。詳細と比較画像は[章・単元のナビゲーション](textbook-navigation.md)を参照する。
 
 目次を変えたら`tests/unit/textbook-navigation.test.ts`で全232単元の掲載順・章境界・先頭末尾と概念上の親との区別、`tests/e2e/textbook-navigation.spec.ts`で現在位置、長い章のスクロール、JS無効、キーボード、狭い画面と前後移動を確認する。両方をUI変更の`verify:fast`に含める。既存の単元・アクセシビリティ・検索E2Eも同じ本番subpathのbuildで確認し、正本本文や学習記録形式は変更しない。
+
+本文内の目次は共通の`DocumentReading.astro`が表示後のh2〜h6から作り、分類・前提などの開閉欄を除く。見出しが3個以上のときだけ表示する。80rem以上は本文右、狭い画面では開閉式の一行とし、章と単元の目次とは区別する。JSはPCでの展開と狭い画面での選択後の折り畳みだけを補助する。JS無効時もnative
+detailsとfragmentリンクを使え、開いた目次は本文へ重ならずスクロールで退く。新しい見出しも原稿の順で反映されるので、手書きの目次を本文へ重ねない。
+
+見出しの節リンクは`render-public-document.ts`で付ける。既存のslug・重複見出しのsuffixは変更せず、通常のfragment遷移・履歴とキーボードfocusを使う。`tests/unit/document-contents.test.ts`と`tests/e2e/document-contents.spec.ts`をUI変更の`verify:fast`に含め、見出し順、旧anchor、直接リンク・戻る/進む、JS無効、狭い画面とキーボードを確認する。比較画像と配置のトレードオフは[本文のページ内目次](document-contents.md)を参照する。
 
 新しい単元も既存のtaxonomy生成と通常の執筆・公開フローを使う。`renderLearningUnitDocument`は概念の定義を先に置くdraftを作り、内容に合う導入・小例・操作・成立条件を正本Markdownへ執筆する。分類用Outcomeや対象色の理由を導入へ自動転用しない。生成器が完全な教材本文を自動執筆するわけではない。表示の開閉・配置は共通処理が担当し、生成物だけのHTML手修正やUnit
 IDごとの分岐は不要である。詳細とトレードオフは[単元ページの情報順](unit-reading.md)を参照する。

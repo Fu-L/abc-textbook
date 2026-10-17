@@ -214,7 +214,7 @@ describe('concept-first Unit reading', () => {
     expect($.root().children().first().text()).toBe('まず、この例から考える。');
     expect($('#手順と証明').next().text()).toBe('学習上必要な条件はここに置く。');
     expect($('#補足の反例').next().text()).toBe('結合順を逆にしてはいけない。');
-    expect($('.unit-context a').first().attr('href')).toBe(
+    expect($('.unit-context a:not(.heading-link)').first().attr('href')).toBe(
       `${base}learn/query/range-monoid-aggregation/`,
     );
     expect($('.unit-context').text()).toContain('必要な状態を導く。');

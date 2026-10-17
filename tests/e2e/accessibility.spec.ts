@@ -34,7 +34,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
     const styles = await page.evaluate(() => {
       const body = getComputedStyle(document.body);
       const paragraph = document.querySelector('.authored-content p');
-      const link = document.querySelector('.authored-content a');
+      const link = document.querySelector('.authored-content a:not(.heading-link)');
       const note = document.querySelector('.breadcrumbs');
       if (!paragraph || !link || !note) throw new Error('Missing published prose');
       const text = getComputedStyle(paragraph);

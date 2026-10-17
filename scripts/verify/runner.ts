@@ -210,6 +210,7 @@ export function selectVerificationSteps(
     tests.add('tests/unit/problem-reading.test.ts');
     tests.add('tests/unit/unit-reading.test.ts');
     tests.add('tests/unit/textbook-navigation.test.ts');
+    tests.add('tests/unit/document-contents.test.ts');
   }
   if (skill) for (const test of skillTests) tests.add(test);
   if (history) {
@@ -233,6 +234,7 @@ export function selectVerificationSteps(
       e2e.add('tests/e2e/problem-reading.spec.ts');
       e2e.add('tests/e2e/unit-reading.spec.ts');
       e2e.add('tests/e2e/textbook-navigation.spec.ts');
+      e2e.add('tests/e2e/document-contents.spec.ts');
       e2e.add('tests/e2e/contest-matrix.spec.ts');
     }
     if (records || data) e2e.add('tests/e2e/learning-records.spec.ts');

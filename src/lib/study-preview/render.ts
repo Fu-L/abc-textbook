@@ -30,11 +30,5 @@ export async function previewProblem(body: string, id: string, base: string): Pr
       heading.after(replacement(`[id="${name}"]`).nextUntil('h2'));
     }
   }
-  const navigation = $('<nav class="preview-toc" aria-label="解説内の移動"></nav>');
-  for (const name of ['考察', '正当性', '計算量と制約', '復習の核', '出典']) {
-    if ($(`[id="${name}"]`).length)
-      navigation.append($('<a></a>').attr('href', `#${name}`).text(name));
-  }
-  if (navigation.children().length) $.root().prepend(navigation);
   return $.html();
 }

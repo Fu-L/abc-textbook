@@ -3,6 +3,7 @@ import type { UiProblem } from '../lib/catalog/public-catalog.js';
 import type { ProblemAuthoringUnit } from '../lib/domain/schema-parts/authoring-unit.js';
 import { splitProblemContext } from './problem-reading.js';
 import ProblemContext from './ProblemContext.astro';
+import DocumentReading from './DocumentReading.astro';
 
 interface Props {
   problem: UiProblem;
@@ -26,7 +27,7 @@ const kindLabel = { full: '完全解説', similar: '差分解説', supplement: '
   <a href="#problem-context">分類と前提</a>
 </nav>
 <section id="explanation" aria-label="解説">
-  <div class="authored-content" set:html={reading.body} />
+  <DocumentReading body={reading.body} />
 </section>
 <details id="problem-context" class="problem-context" data-pagefind-ignore>
   <summary>分類・前提・執筆情報</summary>
