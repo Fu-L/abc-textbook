@@ -191,6 +191,11 @@ test('contents and heading links have accessible names and do not obscure focuse
   for (const width of [1440, 1920]) {
     await page.setViewportSize({ width, height: 1000 });
     await page.goto(unit);
+    await expect(
+      page.getByRole('complementary', { name: '章と単元の目次', exact: true }),
+    ).toBeVisible();
+    await expect(page.getByRole('complementary', { name: contents, exact: true })).toBeVisible();
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
     const prose = await page.locator('.authored-content').boundingBox();
     const menu = await page.locator('.page-contents').boundingBox();
     if (!prose || !menu) throw new Error('Missing prose or page contents');

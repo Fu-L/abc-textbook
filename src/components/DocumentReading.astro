@@ -14,7 +14,7 @@ const firstLevel = Math.min(...headings.map(({ level }) => level));
 <div class:list={['document-reading', { 'with-page-contents': showContents }]}>
   {
     showContents && (
-      <aside class="page-contents" data-pagefind-ignore>
+      <aside class="page-contents" aria-label="このページの目次" data-pagefind-ignore>
         <details id="page-contents" class="page-contents-panel">
           <summary>このページの目次</summary>
           <nav aria-label="このページの目次">
