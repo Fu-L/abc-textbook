@@ -93,7 +93,11 @@ const list = (items: readonly string[]) => items.map((s) => `- ${s}`).join('\n')
 const readerFacingExclusions = (topics: readonly string[]): string[] =>
   topics.filter((topic) => !topic.includes('実装部品だけを偶然共有する解法'));
 const protectMathematicalLinks = (text: string): string =>
-  text.replace(/(?<!\\)(\[[^\]\n]+\])\((?!https?:|src\/|#)/gu, '\\$1(');
+  text.replace(
+    /(\$\$[^\n]*?\$\$|^\$\$[ \t]*\n[\s\S]*?\n\$\$[ \t]*$)|(?<!\\)(\[[^\]\n]+\])\((?!https?:|src\/|#)/gmu,
+    (_match, math: string | undefined, bracket: string | undefined) =>
+      math ?? `\\${bracket ?? ''}(`,
+  );
 export const renderProblemAuthoringDocument = (
   value: ProblemAuthoringUnit,
   title: string,

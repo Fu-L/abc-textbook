@@ -12,7 +12,13 @@ authoringUnit: {"problemId":"abc391-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-A,B,Cを降順にすると目的f(i,j,k)=A_iB_j+B_jC_k+C_kA_iは各indexについて単調非増加である。
+A,B,Cを降順にすると、目的式
+
+$$
+f(i,j,k)=A_iB_j+B_jC_k+C_kA_i
+$$
+
+は各indexについて単調非増加である。
 
 三次元gridの点(i,j,k)が列挙された後にだけ、各軸を1増やした三近傍が次の候補になり得る。
 
@@ -68,7 +74,12 @@ O(N+K)。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 2\times 10^5; 1\leq K \leq \min(N^3,5\times 10^5); 1\leq A_i,B_i,C_i \leq 10^9; All input values are integers.
+公式制約の確認範囲（時間制限3秒、メモリ制限1024 MiB）:
+
+- $$1\leq N \leq 2\times 10^5$$
+- $$1\leq K \leq \min(N^3,5\times 10^5)$$
+- $$1\leq A_i,B_i,C_i \leq 10^9$$
+- 入力はすべて整数
 
 ## 出典
 

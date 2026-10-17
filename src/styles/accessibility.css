@@ -187,6 +187,21 @@ footer {
   white-space: pre-wrap;
 }
 
+/* Keep a formula together; only a wide display equation scrolls locally. */
+.authored-content math {
+  overflow-wrap: normal;
+}
+.math-display {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  padding-block: 0.5em;
+  margin-block: 0 1.1em;
+}
+.math-display math {
+  inline-size: max-content;
+  min-inline-size: 100%;
+}
+
 .with-sidebar {
   display: grid;
   grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
