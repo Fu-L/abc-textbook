@@ -12,6 +12,9 @@ const base = '/abc-textbook/';
 const routes = new Map(
   publicCatalog.problems.map((problem) => [problem.officialUrl, problem.route]),
 );
+const problemsByRoute = new Map(
+  publicCatalog.problems.map((problem) => [`${base}${problem.route.slice(1)}`, problem]),
+);
 
 describe('concept-first Unit reading', () => {
   it('compacts every Unit without losing problems, order, authored context or references', async () => {
@@ -39,12 +42,14 @@ describe('concept-first Unit reading', () => {
             .sort(),
         );
       }
+      const retainedLinks = new Set(
+        after('a[href]')
+          .map((_, anchor) => anchor.attribs.href)
+          .get(),
+      );
       for (const anchor of before('a[href]').toArray()) {
-        expect(
-          after('a[href]')
-            .map((_, a) => a.attribs.href)
-            .get(),
-        ).toContain(anchor.attribs.href);
+        const href = anchor.attribs.href ?? '';
+        expect(retainedLinks.has(href), `${unit.id}: ${href}`).toBe(true);
       }
       for (const id of ['問題一覧', '関連問題']) {
         const oldList =
@@ -62,7 +67,7 @@ describe('concept-first Unit reading', () => {
           const original = before(row);
           const result = after(newRows[index]);
           const href = original.children('a').first().attr('href');
-          const problem = publicCatalog.problems.find((p) => `${base}${p.route.slice(1)}` === href);
+          const problem = problemsByRoute.get(href ?? '');
           if (!problem) throw new Error(`${unit.id}: ${String(href)}`);
           if (id === '問題一覧') directIds.add(problem.id);
           expect(result.children('a').first().attr('href')).toBe(href);
