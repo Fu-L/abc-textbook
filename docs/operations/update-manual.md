@@ -235,6 +235,8 @@ IDごとの分岐は不要である。詳細とトレードオフは[単元ペ�
 
 単元の共通表示や生成器を変えたら`tests/unit/unit-reading.test.ts`、`tests/contract/canonical-taxonomy-materialization.test.ts`、`tests/e2e/unit-reading.spec.ts`で本文・数式・旧anchor/リンク・問題順、生成draftの情報順、章・案内節・未改稿単元、JS無効とキーボードでの開閉を確認する。unit/E2EはUI変更の`verify:fast`に含む。build・リンク確認は本番subpathで行い、同じ出力を再利用する。
 
+単元本文へ出典を追記した場合は`tests/integration/full-learning-path.test.ts`も実行する。導線検証は「根拠」節の既存出典とtaxonomy識別行の保持を確認し、執筆に必要な出典の追記を許容する。章目次・主配置問題・関連問題は引き続き受理済みの内容と順序を照合する。出典を追加するために既存本文を生成draftへ戻したり、過去の証跡を再生成したりしない。
+
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
