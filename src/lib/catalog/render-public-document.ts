@@ -78,7 +78,7 @@ export const renderPublicDocument = async (
       : null;
   const introduction =
     typeof primaryProblemId === 'string'
-      ? `参照元の完全解説: [${primaryProblemId}](/problems/${primaryProblemId}/)。先に参照元の着想・成立条件・正当性・全体計算量を確認し、以下ではこの問題で変わる点を読む。\n\n`
+      ? `${authoring?.kind === 'similar' ? '差分解説' : '補足解説'}です。参照元の完全解説: [${primaryProblemId}](/problems/${primaryProblemId}/)。先に参照元の着想・成立条件・正当性・全体計算量を確認し、以下では${authoring?.kind === 'similar' ? 'この問題で変わる点' : 'この問題で追加する要素'}を読む。\n\n`
       : '';
   const rendered = await (await processor).render(`${introduction}${content}`);
   const $ = load(rendered.code, null, false);

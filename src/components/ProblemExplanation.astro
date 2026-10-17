@@ -1,0 +1,46 @@
+---
+import type { UiProblem } from '../lib/catalog/public-catalog.js';
+import type { ProblemAuthoringUnit } from '../lib/domain/schema-parts/authoring-unit.js';
+import { splitProblemContext } from './problem-reading.js';
+import ProblemContext from './ProblemContext.astro';
+
+interface Props {
+  problem: UiProblem;
+  authoringUnit: ProblemAuthoringUnit;
+  body: string;
+  solutionSummary: string;
+}
+const { problem, authoringUnit, body, solutionSummary } = Astro.props;
+const reading = splitProblemContext(body);
+const kindLabel = { full: '完全解説', similar: '差分解説', supplement: '補足解説' }[
+  authoringUnit.kind
+];
+---
+
+<span hidden data-pagefind-meta="entity-kind">問題</span>
+<span hidden data-pagefind-meta="contest">ABC {problem.contestNumber}</span>
+<h1>ABC {problem.contestNumber} {problem.label} — {problem.title}</h1>
+<nav class="problem-reading-links" aria-label="問題の学習" data-pagefind-ignore>
+  <span>{kindLabel}</span>
+  <a href={problem.officialUrl} rel="external">公式問題を読む</a>
+  <a href="#learning-record-heading">学習記録</a>
+  <a href="#problem-context">分類と前提</a>
+</nav>
+{
+  authoringUnit.kind === 'full' && (
+    <div class="problem-summary">
+      <p>
+        <strong>解法の核心</strong>
+      </p>
+      <p>{solutionSummary}</p>
+    </div>
+  )
+}
+<section id="explanation" aria-label="解説">
+  <div class="authored-content" set:html={reading.body} />
+</section>
+<details id="problem-context" class="problem-context" data-pagefind-ignore>
+  <summary>分類・前提・執筆情報</summary>
+  <ProblemContext problem={problem} authoringUnit={authoringUnit} />
+  <div class="problem-learning-position" set:html={reading.context} />
+</details>

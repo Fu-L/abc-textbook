@@ -2,6 +2,7 @@ import { load } from 'cheerio';
 import { describe, expect, it } from 'vitest';
 import { publicProjection, publicCatalog } from '../../src/lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
+import { splitProblemContext } from '../../src/components/problem-reading.js';
 import {
   isStudyPreview,
   previewUnit,
@@ -85,7 +86,9 @@ describe('representative reading prototype', () => {
       const $ = load(after, null, false);
       expect($.root().children().first().is('nav')).toBe(true);
       expect($('#考察').parents('details')).toHaveLength(0);
-      expect($('#学習の位置').parents('details')).toHaveLength(1);
+      const reading = splitProblemContext(after);
+      expect(load(reading.body)('#学習の位置')).toHaveLength(0);
+      expect(load(reading.context)('#学習の位置')).toHaveLength(1);
       expect($('math').length).toBeGreaterThan(0);
     });
   }

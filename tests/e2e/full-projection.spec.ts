@@ -173,6 +173,7 @@ test('serves a non-preview Problem with accepted reasoning and the shared record
   await page.goto('./problems/abc466-g/');
   await expect(page.getByRole('heading', { name: '考察', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: '正当性', exact: true })).toBeVisible();
+  await page.locator('#problem-context > summary').click();
   await expect(page.getByText('掲載状態: 収録済み')).toBeVisible();
   await expect(page.getByLabel('学習状況')).toBeVisible();
   await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);

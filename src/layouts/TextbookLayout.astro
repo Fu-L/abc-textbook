@@ -63,7 +63,14 @@ const navItems = [
   </head>
   <body
     data-pagefind-ignore={studyPreview ? 'all' : undefined}
-    class:list={['textbook', { 'study-preview': studyPreview }]}
+    class:list={[
+      'textbook',
+      {
+        'study-preview': studyPreview,
+        'problem-page':
+          canonicalLogicalPath.startsWith('/problems/') && canonicalLogicalPath !== '/problems/',
+      },
+    ]}
   >
     <a class="skip-link" href="#main-content">本文へ移動</a>
     <header class="site-header">
