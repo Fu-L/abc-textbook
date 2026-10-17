@@ -5,6 +5,8 @@ validationで確認します。通常更新はCodexのみで完結し、人間�
 
 - `operations/update-manual.md`: 毎回読む更新・確認・公開・復旧手順
 - `operations/development.md`: 既存の開発環境とコマンドの説明
+- [読書体験の診断と比較基準](operations/study-ux-baseline.md): Study UX
+  #108の改善前画面、読み取りタスク、後続PRの比較条件
 - `operations/initial-release-runbook.md`: 現行公開実装の制約と初版の公開実績
 - `work-manifests/`, `reviews/`, `verification/`: 旧実装が参照する証跡と過去の記録
 
