@@ -220,6 +220,10 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 文字組み・配色の正本は`src/styles/global.css`、配置・狭い画面の指定は`src/styles/accessibility.css`。独自の`TextbookLayout`には`body.textbook`で本文スタイルを適用し、Starlight向けの変数定義だけで表示を確認したことにしない。初期配色はOSの明暗設定にCSSで追従する。変更時は`tests/e2e/accessibility.spec.ts`で文字組み、両配色のコントラスト、JS無効の本文、狭い画面のreflowを確認し、
 [代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
 
+代表ページで情報順・文章を比較するときは[読みやすさの試作](study-ux-prototype.md)を参照する。
+`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを差し替え、通常buildは正本の表示を維持する。試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
+`tests/e2e/study-preview.spec.ts`で対象限定、旧anchor・情報・問題順、導線を確認する。試作を変更したときだけ通常・試作の両モードで対象E2Eを実行し、採用候補と保留点をPRに記す。
+
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。

@@ -1,10 +1,11 @@
 ---
+import { isStudyPreview, previewProblem } from '../../lib/study-preview/render.js';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import ProblemContext from '../../components/ProblemContext.astro';
 import LearningRecordControl from '../../components/LearningRecordControl.tsx';
 import LearningRecordTimestamp from '../../components/LearningRecordTimestamp.astro';
 import {
   publicCatalog,
-  requireCatalogEntity,
   publicProjection,
   withBase,
   type UiProblem,
@@ -28,114 +29,54 @@ const group = {
 };
 const document = publicProjection.problemDocuments.get(problem.id);
 if (!document) throw new Error(`Missing accepted explanation: ${problem.id}`);
-const body = await renderPublicDocument(document.text, import.meta.env.BASE_URL);
+const studyPreview = isStudyPreview(import.meta.env.STUDY_UX_PREVIEW, problem.route);
+const originalBody = await renderPublicDocument(document.text, import.meta.env.BASE_URL);
+const body = studyPreview
+  ? await previewProblem(originalBody, problem.id, import.meta.env.BASE_URL)
+  : originalBody;
 const base = import.meta.env.BASE_URL;
 ---
 
 <TextbookLayout
+  studyPreview={studyPreview}
   title={`${problem.id.toUpperCase()} — ${problem.title}`}
   description={problem.explanationSummary}
   breadcrumbs={[{ href: '/problems/', label: '問題一覧' }, { label: problem.id.toUpperCase() }]}
 >
-  <span data-pagefind-meta="entity-kind">問題</span>
+  <span hidden={studyPreview} data-pagefind-meta="entity-kind">問題</span>
   <span hidden data-pagefind-meta="contest">ABC {problem.contestNumber}</span>
   <h1>ABC {problem.contestNumber} {problem.label} — {problem.title}</h1>
-  <p><strong>掲載状態: 収録済み</strong></p>
-  <p>
-    <a href={problem.officialUrl} rel="external">{problem.title} の公式問題ページ（外部リンク）</a>
-  </p>
-  <p>最終確認: <time datetime={problem.checkedAt}>{problem.checkedAt}（Asia/Tokyo）</time></p>
-  <section>
-    <h2>学習上の位置付け</h2>
-    {
-      group.unit && (
-        <p>
-          主題の単元: <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
-        </p>
-      )
-    }
-    <dl>
-      {
-        (
-          [
-            ['主題', [problem.learningOutcomeId]],
-            ['追加で学ぶ技能', problem.additionalPrimaryOutcomeIds],
-            ['既習技能', problem.supportingOutcomeIds],
-          ] as const
-        ).map(([role, ids]) => (
-          <>
-            <>
-              <dt>{role}</dt>
-              <dd>
-                <ul>
-                  {ids.map((id) => {
-                    const outcome = requireCatalogEntity(
-                      publicProjection.catalog.learningOutcomes.find((item) => item.id === id),
-                      id,
-                    );
-                    const owner = requireCatalogEntity(
-                      publicProjection.catalog.learningUnits.find((item) =>
-                        item.ownedLearningOutcomeIds?.includes(id),
-                      ),
-                      id,
-                    );
-                    const unit = requireCatalogEntity(
-                      publicCatalog.learningUnits.find((item) => item.id === owner.id),
-                      owner.id,
-                    );
-                    return (
-                      <li>
-                        <a href={withBase(unit.route, base)}>{unit.title}</a>: {outcome.statement}
-                      </li>
-                    );
-                  })}
-                </ul>
-                {!ids.length && 'なし'}
-              </dd>
-            </>
-          </>
-        ))
-      }
-    </dl>
-    <p>
-      主タグ: {
-        problem.primaryTagIds.map((id) => {
-          const tag = requireCatalogEntity(
-            publicCatalog.tags.find((item) => item.id === id),
-            id,
-          );
-          return <a href={withBase(tag.route, base)}>{tag.name} </a>;
-        })
-      }
-    </p>
-    {
-      problem.supportingTagIds.length > 0 && (
-        <p>
-          補助タグ:{' '}
-          {problem.supportingTagIds.map((id) => {
-            const tag = requireCatalogEntity(
-              publicCatalog.tags.find((item) => item.id === id),
-              id,
-            );
-            return <a href={withBase(tag.route, base)}>{tag.name} </a>;
-          })}
-        </p>
-      )
-    }
-  </section>
   {
-    document.unit.skill && (
-      <p>
-        執筆: {document.unit.skill.name}
-        {document.unit.skill.version} / revision {document.unit.revision}
+    studyPreview && (
+      <p class="preview-reading-links" data-pagefind-ignore>
+        <a href={problem.officialUrl} rel="external">
+          公式問題を読む
+        </a>
+        {' / '}
+        <a href="#learning-record-heading">学習記録</a>
+        {group.unit && (
+          <>
+            {' '}
+            / <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
+          </>
+        )}
       </p>
     )
   }
+  {!studyPreview && <ProblemContext problem={problem} />}
 
   <section id="explanation">
-    <h2>解説</h2>
+    <h2 hidden={studyPreview}>解説</h2>
     <div class="authored-content" set:html={body} />
   </section>
+  {
+    studyPreview && (
+      <details class="preview-context" data-pagefind-ignore>
+        <summary>学習上の位置付け・タグ・執筆情報</summary>
+        <ProblemContext problem={problem} />
+      </details>
+    )
+  }
   <section>
     <h2>同じ単元の問題</h2><ul>
       {

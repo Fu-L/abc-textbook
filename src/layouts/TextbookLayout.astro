@@ -1,10 +1,9 @@
 ---
 import SearchControl from '../components/SearchControl.astro';
-import { publicCatalog, requireCatalogEntity, withBase } from '../lib/catalog/public-catalog.js';
+import { publicCatalog, withBase } from '../lib/catalog/public-catalog.js';
 import { buildSearchDocuments } from '../lib/catalog/search-documents.js';
 import '../styles/global.css';
-import { unitLearningTarget } from '../lib/taxonomy/unit-learning-targets.js';
-import { TEXTBOOK_CHAPTERS } from '../lib/taxonomy/textbook-order.js';
+import TextbookContents from '../components/TextbookContents.astro';
 
 interface Crumb {
   href?: string;
@@ -12,6 +11,7 @@ interface Crumb {
 }
 
 interface Props {
+  studyPreview?: boolean;
   title: string;
   description: string;
   searchTerms?: readonly string[];
@@ -22,6 +22,7 @@ interface Props {
 
 const {
   title,
+  studyPreview = false,
   description,
   breadcrumbs = [],
   previous,
@@ -32,7 +33,8 @@ const base = import.meta.env.BASE_URL;
 const canonical = new URL(withBase(Astro.url.pathname.slice(base.length - 1), base), Astro.site);
 const logicalPath = `/${Astro.url.pathname.slice(base.length).replace(/^\/+|\/+$/gu, '')}`;
 const canonicalLogicalPath = logicalPath === '/' ? '/' : `${logicalPath}/`;
-const indexContent = !['/review/', '/settings/learning-records/'].includes(canonicalLogicalPath);
+const indexContent =
+  !studyPreview && !['/review/', '/settings/learning-records/'].includes(canonicalLogicalPath);
 const searchDocuments = buildSearchDocuments(publicCatalog).filter(
   ({ route }) => route === canonicalLogicalPath,
 );
@@ -56,9 +58,13 @@ const navItems = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/atom+xml" href={withBase('/feed.xml', base)} />
+    {studyPreview && <meta name="robots" content="noindex" />}
     <title>{title} | ABC上級問題体系化教科書</title>
   </head>
-  <body class="textbook">
+  <body
+    data-pagefind-ignore={studyPreview ? 'all' : undefined}
+    class:list={['textbook', { 'study-preview': studyPreview }]}
+  >
     <a class="skip-link" href="#main-content">本文へ移動</a>
     <header class="site-header">
       <a class="site-title" href={withBase('/', base)}>ABC上級問題体系化教科書</a>
@@ -76,57 +82,14 @@ const navItems = [
       </ul>
     </nav>
     <div
-      class:list={['page-shell', { 'with-sidebar': canonicalLogicalPath.startsWith('/learn/') }]}
+      class:list={[
+        'page-shell',
+        { 'with-sidebar': !studyPreview && canonicalLogicalPath.startsWith('/learn/') },
+      ]}
     >
       {
-        canonicalLogicalPath.startsWith('/learn/') && (
-          <nav class="textbook-sidebar" aria-label="教科書の目次" data-pagefind-ignore>
-            {TEXTBOOK_CHAPTERS.map((chapter) => {
-              const root = requireCatalogEntity(
-                publicCatalog.learningUnits.find((unit) => unit.id === chapter.id),
-                chapter.id,
-              );
-              return (
-                <details
-                  open={
-                    chapter.id ===
-                      publicCatalog.learningUnits.find(
-                        (item) => item.route === canonicalLogicalPath,
-                      )?.id ||
-                    chapter.unitIds.some(
-                      (id) =>
-                        publicCatalog.learningUnits.find((item) => item.id === id)?.route ===
-                        canonicalLogicalPath,
-                    )
-                  }
-                >
-                  <summary>{root.title}</summary>
-                  <p>
-                    <a href={withBase(root.route, base)}>章を読む</a>
-                  </p>
-                  <ol>
-                    {chapter.unitIds.map((id) => {
-                      const unit = requireCatalogEntity(
-                        publicCatalog.learningUnits.find((item) => item.id === id),
-                        id,
-                      );
-                      return (
-                        <li>
-                          <a
-                            href={withBase(unit.route, base)}
-                            aria-current={canonicalLogicalPath === unit.route ? 'page' : undefined}
-                          >
-                            {unit.title}
-                          </a>{' '}
-                          — {unitLearningTarget(id).color}
-                        </li>
-                      );
-                    })}
-                  </ol>
-                </details>
-              );
-            })}
-          </nav>
+        !studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
+          <TextbookContents currentRoute={canonicalLogicalPath} />
         )
       }
       <div class="page-content">
@@ -159,7 +122,22 @@ const navItems = [
               </span>
             )
           }
+          {
+            studyPreview && (
+              <p class="preview-notice" data-pagefind-ignore>
+                読みやすさの試作 · 代表4ページのみ。本文・情報順序の比較用です。
+              </p>
+            )
+          }
           <slot />
+          {
+            studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
+              <details class="preview-context" data-pagefind-ignore>
+                <summary>章と単元の目次</summary>
+                <TextbookContents currentRoute={canonicalLogicalPath} />
+              </details>
+            )
+          }
         </main>
         {
           (previous ?? next) && (

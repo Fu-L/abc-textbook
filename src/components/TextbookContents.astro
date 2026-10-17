@@ -1,0 +1,58 @@
+---
+import { publicCatalog, requireCatalogEntity, withBase } from '../lib/catalog/public-catalog.js';
+import { unitLearningTarget } from '../lib/taxonomy/unit-learning-targets.js';
+import { TEXTBOOK_CHAPTERS } from '../lib/taxonomy/textbook-order.js';
+interface Props {
+  currentRoute: string;
+}
+const { currentRoute: canonicalLogicalPath } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav class="textbook-sidebar" aria-label="教科書の目次" data-pagefind-ignore>
+  {
+    TEXTBOOK_CHAPTERS.map((chapter) => {
+      const root = requireCatalogEntity(
+        publicCatalog.learningUnits.find((unit) => unit.id === chapter.id),
+        chapter.id,
+      );
+      return (
+        <details
+          open={
+            chapter.id ===
+              publicCatalog.learningUnits.find((item) => item.route === canonicalLogicalPath)?.id ||
+            chapter.unitIds.some(
+              (id) =>
+                publicCatalog.learningUnits.find((item) => item.id === id)?.route ===
+                canonicalLogicalPath,
+            )
+          }
+        >
+          <summary>{root.title}</summary>
+          <p>
+            <a href={withBase(root.route, base)}>章を読む</a>
+          </p>
+          <ol>
+            {chapter.unitIds.map((id) => {
+              const unit = requireCatalogEntity(
+                publicCatalog.learningUnits.find((item) => item.id === id),
+                id,
+              );
+              return (
+                <li>
+                  <a
+                    href={withBase(unit.route, base)}
+                    aria-current={canonicalLogicalPath === unit.route ? 'page' : undefined}
+                  >
+                    {unit.title}
+                  </a>{' '}
+                  — {unitLearningTarget(id).color}
+                </li>
+              );
+            })}
+          </ol>
+        </details>
+      );
+    })
+  }
+</nav>
