@@ -50,7 +50,7 @@ test('lets the keyboard reach and scroll a wide display equation', async ({ page
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./problems/abc391-f/');
   // Stress the published display with a long expression while retaining its MathML.
-  const display = page.locator('.math-display');
+  const display = page.locator('.math-display').first();
   await display.evaluate((element) => {
     const row = element.querySelector('mrow');
     if (!row) throw new Error('Missing MathML row');
@@ -58,7 +58,8 @@ test('lets the keyboard reach and scroll a wide display equation', async ({ page
     for (let i = 0; i < 8; i++) for (const node of nodes) row.append(node.cloneNode(true));
   });
   await display.scrollIntoViewIfNeeded();
-  await page.locator('.authored-content a').first().focus();
+  await display.focus();
+  await page.keyboard.press('Shift+Tab');
   await page.keyboard.press('Tab');
   await expect(display).toBeFocused();
   expect(await display.evaluate((element) => element.scrollWidth > element.clientWidth)).toBe(true);

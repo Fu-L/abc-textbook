@@ -247,3 +247,35 @@ footer {
     display: block;
   }
 }
+
+/* #112: opt-in representative prototype only. */
+.study-preview .page-shell {
+  max-inline-size: 48rem;
+}
+.preview-notice {
+  color: var(--abc-muted);
+  font-size: 0.875rem;
+  border-block-end: 1px solid var(--abc-border);
+  padding-block-end: 0.5rem;
+}
+.preview-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-block: 1rem 1.5rem;
+  font-size: 0.9375rem;
+}
+.preview-context {
+  max-inline-size: var(--abc-content-measure);
+  margin-block: 1.5rem;
+}
+.preview-context > summary {
+  cursor: pointer;
+  color: var(--abc-muted);
+}
+.preview-context[open] > summary {
+  margin-block-end: 1rem;
+}
+.study-preview .preview-problems li + li {
+  margin-block-start: 0.3rem;
+}
