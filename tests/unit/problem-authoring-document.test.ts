@@ -115,4 +115,14 @@ describe('co-located full Problem document', () => {
     expect(parsed.body).not.toContain('この解説で扱わないこと:');
     expect(parsed.body).not.toContain('実装部品だけを偶然共有する解法');
   });
+  it('does not insert Markdown link escapes into explicit coefficient formulas', () => {
+    const unit = structuredClone(fixture);
+    unit.sections.reasoning = '係数 $$[x^k](F)$$。\n\n$$\n[x^n](G)\n$$\n\n旧式 [x^k](H)。';
+    const document = renderProblemAuthoringDocument(unit, '係数の記法', links);
+    expect(document).toContain('$$[x^k](F)$$');
+    expect(document).toContain('$$\n[x^n](G)\n$$');
+    expect(document).toContain('旧式 \\[x^k](H)');
+    const parsed = readProblemAuthoringDocument(document);
+    expect(renderProblemAuthoringDocument(parsed.unit, parsed.title, links)).toBe(document);
+  });
 });

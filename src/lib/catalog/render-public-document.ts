@@ -1,13 +1,8 @@
-import { createMarkdownProcessor, parseFrontmatter, type Node } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, parseFrontmatter } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { learningUnitRoute } from './build-learning-path.js';
 import { withBase } from './ui-catalog.js';
-
-interface DocumentNode extends Node {
-  value?: string;
-  lang?: string | null | undefined;
-  children?: DocumentNode[];
-}
+import { parseDocumentMath, remarkRenderDocumentMath, type DocumentNode } from './document-math.js';
 
 const mathematicalLinkEscape = /(?<!\\)\\(?=\[[^\]\n]+(?<!\\)\]\((?!https?:|src\/|#))/gu;
 
@@ -62,7 +57,7 @@ const remarkPreserveNotation = () => (tree: DocumentNode, file: { value: unknown
 const processor = createMarkdownProcessor({
   syntaxHighlight: 'prism',
   smartypants: false,
-  remarkPlugins: [remarkPreserveNotation],
+  remarkPlugins: [[...parseDocumentMath], remarkPreserveNotation, remarkRenderDocumentMath],
 });
 
 /** Resolve canonical file references only in the rendered projection; source bytes stay intact. */

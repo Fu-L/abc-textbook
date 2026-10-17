@@ -1,4 +1,5 @@
 import react from '@astrojs/react';
+import { unified } from '@astrojs/markdown-remark';
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import { execFileSync } from 'node:child_process';
@@ -9,6 +10,7 @@ import {
   resolveBuildPublication,
 } from './scripts/config/publication.ts';
 import { writeBuildReleaseMetadata } from './scripts/release/build-history.ts';
+import { parseDocumentMath, remarkRenderDocumentMath } from './src/lib/catalog/document-math.ts';
 
 const base = normalizeBasePath(process.env.BASE_PATH ?? '/');
 const site = resolveSite(process.env.SITE_URL ?? 'https://abc-textbook.example');
@@ -30,6 +32,7 @@ export default defineConfig({
   trailingSlash: 'always',
   markdown: {
     syntaxHighlight: 'prism',
+    processor: unified({ remarkPlugins: [[...parseDocumentMath], remarkRenderDocumentMath] }),
   },
   integrations: [
     {

@@ -442,6 +442,14 @@ describe('accepted canonical full public projection', () => {
       const source = parseFrontmatter(document.text).content;
       const $ = load(await renderPublicDocument(document.text, '/'));
       expect($('em, expr, term'), id).toHaveLength(0);
+      // Explicit math is typeset. Reconstruct only its delimiters from the
+      // retained TeX annotation before checking the surrounding literal prose.
+      $('math').each((_index, element) => {
+        const formula = $(element).find('annotation[encoding="application/x-tex"]').text();
+        const delimited =
+          $(element).attr('display') === 'block' ? `$$\n${formula}\n$$` : `$$${formula}$$`;
+        $(element).replaceWith($('<span>').text(delimited));
+      });
       // Compare plain source paragraphs independently of the Markdown parser.
       // Skip formatted/code blocks, whose syntax intentionally disappears.
       let inCode = false;
