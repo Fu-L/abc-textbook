@@ -144,8 +144,9 @@ test('prototype supports fragment links, keyboard disclosure and a compact probl
   await page.goto('./learn/query/range-monoid-aggregation/#前提と範囲');
   await expect(page.locator('#前提と範囲')).toBeVisible();
   await page.goto('./problems/abc391-f/');
+  await page.locator('#page-contents > summary').click();
   await page
-    .getByRole('navigation', { name: '解説内の移動' })
+    .getByRole('navigation', { name: 'このページの目次' })
     .getByRole('link', { name: '正当性', exact: true })
     .click();
   await expect(page.locator('#正当性')).toBeInViewport();

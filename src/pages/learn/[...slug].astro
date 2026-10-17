@@ -9,6 +9,7 @@ import {
 import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
 import { arrangeUnitReading } from '../../components/unit-reading.js';
 import { compactUnitProblemLists } from '../../components/problem-list.js';
+import DocumentReading from '../../components/DocumentReading.astro';
 interface Props {
   unit: UiCatalog['learningUnits'][number];
 }
@@ -53,5 +54,5 @@ const body = compactUnitProblemLists(
     <a href="#前提と範囲">前提を確認</a>
     <a href="#unit-contents">章と単元の目次</a>
   </nav>
-  <div class="authored-content" set:html={body} />
+  <DocumentReading body={body} />
 </TextbookLayout>

@@ -1,0 +1,40 @@
+---
+import { documentHeadings } from './document-contents.js';
+
+interface Props {
+  body: string;
+}
+const { body } = Astro.props;
+const headings = documentHeadings(body);
+// One or two sections need no additional navigation.
+const showContents = headings.length >= 3;
+const firstLevel = Math.min(...headings.map(({ level }) => level));
+---
+
+<div class:list={['document-reading', { 'with-page-contents': showContents }]}>
+  {
+    showContents && (
+      <aside class="page-contents" aria-label="このページの目次" data-pagefind-ignore>
+        <details id="page-contents" class="page-contents-panel">
+          <summary>このページの目次</summary>
+          <nav aria-label="このページの目次">
+            <ol>
+              {headings.map(({ id, label, level }) => (
+                <li style={`--heading-depth: ${String(level - firstLevel)}`}>
+                  <a href={`#${encodeURIComponent(id)}`}>{label}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </details>
+      </aside>
+    )
+  }
+  <div class="document-body">
+    <div class="authored-content" set:html={body} />
+  </div>
+</div>
+
+<script>
+  import '../client/document-contents.js';
+</script>

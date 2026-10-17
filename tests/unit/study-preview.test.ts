@@ -95,7 +95,7 @@ describe('representative reading prototype', () => {
       for (const anchor of anchors(original)) expect(anchors(after)).toContain(anchor);
       expect(new Set(anchors(after)).size).toBe(anchors(after).length);
       const $ = load(after, null, false);
-      expect($.root().children().first().is('nav')).toBe(true);
+      expect($('.preview-toc')).toHaveLength(0);
       expect($('#考察').parents('details')).toHaveLength(0);
       const reading = splitProblemContext(after);
       expect(load(reading.body)('#学習の位置')).toHaveLength(0);
