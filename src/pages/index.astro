@@ -9,24 +9,34 @@ const base = import.meta.env.BASE_URL;
   description="ABCの過去問から難関コンテストへ進むための典型知識を体系的に学ぶ教科書"
 >
   <h1>ABC上級問題体系化教科書</h1>
-  <p>
-    ABCの過去問を通して、ARC・AGC・CF Div. 1・UCUPへ応用できる典型知識を学びます。
-    状態の定義、発動条件、正当性、計算量を言葉にし、初見問題で手法を選ぶ力を養います。
-  </p>
-  <p>
-    収録範囲はABC 212〜466の{publicCatalog.contests.length}コンテスト、{
-      publicCatalog.problems.length
-    }問です。 ABC 316は公式に未開催です。Dより後に並ぶ問題を、{
-      publicCatalog.learningUnits.length
-    }単元・9章に整理しています。
-  </p>
-  <p>初版の収録基準日時は2026年7月12日0時（日本時間）です。</p>
-  <ul>
-    <li>
-      <a href={withBase('/learn/', base)}>分野別の教科書目次</a> — 対象色と前提から読む範囲を選ぶ
-    </li>
-    <li><a href={withBase('/problems/', base)}>問題一覧</a> — 条件を組み合わせて問題を探す</li>
-    <li><a href={withBase('/contests/', base)}>コンテスト索引</a> — 各問題の解説と単元へ進む</li>
-    <li><a href={withBase('/review/', base)}>要復習一覧</a> — 端末に保存した復習対象を読む</li>
-  </ul>
+  <p>ABCの過去問を通して、ARC・AGC・CF Div. 1・UCUPへ応用できる典型知識を学びます。</p>
+  <nav aria-label="学び方を選ぶ" class="study-entries">
+    <ul>
+      <li>
+        <a href={withBase('/learn/', base)}>体系的に学ぶ</a>
+        <p>分野別目次から単元を選び、考え方を読んでから問題に取り組みます。</p>
+      </li>
+      <li>
+        <a href={withBase('/problems/', base)}>問題から学ぶ</a>
+        <p>問題一覧で探し、解説から必要な単元へ戻って理解を深めます。</p>
+      </li>
+      <li>
+        <a href={withBase('/review/', base)}>復習する</a>
+        <p>この端末で「要復習」にした問題を読み直します。</p>
+      </li>
+    </ul>
+  </nav>
+  <p>状態の定義、発動条件、正当性、計算量を言葉にし、初見問題で手法を選ぶ力を養います。</p>
+  <p>問題番号が分かっているときは、<a href={withBase('/contests/', base)}>コンテスト索引</a>へ。</p>
+  <details class="collection-details">
+    <summary>収録範囲と基準日時</summary>
+    <p>
+      収録範囲はABC 212〜466の{publicCatalog.contests.length}コンテスト、{
+        publicCatalog.problems.length
+      }問です。 ABC 316は公式に未開催です。Dより後に並ぶ問題を、{
+        publicCatalog.learningUnits.length
+      }単元・9章に整理しています。
+    </p>
+    <p>初版の収録基準日時は2026年7月12日0時（日本時間）です。</p>
+  </details>
 </TextbookLayout>

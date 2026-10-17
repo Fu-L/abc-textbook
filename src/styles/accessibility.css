@@ -436,6 +436,61 @@ footer {
   break-inside: avoid;
 }
 
+.study-entries,
+.collection-details,
+.chapter-outline {
+  max-inline-size: var(--abc-content-measure);
+}
+.textbook main nav.study-entries > ul {
+  list-style: none;
+  padding: 0;
+  margin-block: 1.75rem;
+}
+.textbook main .study-entries li {
+  margin: 0;
+  padding-block: 0.85rem;
+  border-block-start: 1px solid var(--abc-border);
+}
+.study-entries li > a {
+  display: inline-block;
+  padding-block: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.textbook main .study-entries li > p {
+  margin-block: 0.15rem 0;
+}
+.collection-details,
+.chapter-context,
+.contents-guide,
+.unit-target {
+  color: var(--abc-muted);
+  font-size: 0.9375rem;
+}
+.collection-details > summary,
+.chapter-context > summary {
+  cursor: pointer;
+  padding-block: 0.5rem;
+}
+.collection-details[open] > summary,
+.chapter-context[open] > summary {
+  margin-block-end: 0.5rem;
+}
+.collection-details p,
+.chapter-context p {
+  color: var(--abc-text);
+}
+.chapter-context {
+  margin-block-end: 1.5rem;
+}
+.unit-target {
+  display: inline-block;
+  margin-inline-start: 0.75em;
+}
+.unit-index {
+  line-height: 1.65;
+}
+
 /* Page-local navigation follows the authored reading order, separate from chapter contents. */
 .document-reading,
 .document-body {

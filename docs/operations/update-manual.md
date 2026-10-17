@@ -235,6 +235,8 @@ detailsを手で開く。JSはPCの初期展開・画面幅変更と目次内の
 
 目次を変えたら`tests/unit/textbook-navigation.test.ts`で全232単元の掲載順・章境界・先頭末尾と概念上の親との区別、`tests/e2e/textbook-navigation.spec.ts`で現在位置、長い章のスクロール、JS無効、キーボード、狭い画面と前後移動を確認する。両方をUI変更の`verify:fast`に含める。既存の単元・アクセシビリティ・検索E2Eも同じ本番subpathのbuildで確認し、正本本文や学習記録形式は変更しない。
 
+ホームの3入口と収録情報は`src/pages/index.astro`、分野別目次は`src/pages/learn/index.astro`を編集する。章の短い狙いは既存catalogの`learningRationale`（UIの`outcome`）、単元順と詳しい読書案内は`TEXTBOOK_CHAPTERS`、対象色と理由は`unitLearningTarget`を使う。表示のために本文を再生成しない。詳しい読書案内・対象色の理由・概念上の親は章ごとの開閉欄に残す。`tests/e2e/study-entry-points.spec.ts`をUI変更の`verify:fast`に含め、3入口、保存した要復習問題への導線、全章のanchorと単元順、JS無効での開閉を確認する。[入口画面の比較](study-entry-points.md)に表示上の判断とトレードオフを記す。
+
 本文内の目次は共通の`DocumentReading.astro`が表示後のh2〜h6から作り、分類・前提などの開閉欄を除く。見出しが3個以上のときだけ表示する。80rem以上は本文右、狭い画面では開閉式の一行とし、章と単元の目次とは区別する。JSはPCでの展開と狭い画面での選択後の折り畳みを補助する。狭い画面の固定表示は選択後に閉じる処理の初期化後に有効にし、深い節で開いても選択肢を画面内へ保つ。JS無効時は冒頭の通常配置でnative
 detailsとfragmentリンクを使い、開閉で配置を切り替えず、移動先の本文を覆わない。回帰テストでは320・390・720pxの深い節でsummaryを実座標でタップし、リンクを操作する前にメニュー全体がviewport内にあることを検査する。リンクのclickやfocusによる自動スクロールだけで表示確認を済ませない。新しい見出しも原稿の順で反映されるので、手書きの目次を本文へ重ねない。
 
