@@ -75,8 +75,19 @@ main {
   gap: 1rem;
   margin-block: 2rem;
 }
-.previous-next :last-child {
+.previous-next > :last-child {
   text-align: end;
+}
+.previous-next a {
+  min-inline-size: 0;
+  padding-block: 0.75rem;
+  border-block-start: 1px solid var(--abc-border);
+}
+.previous-next a > span {
+  display: block;
+  color: var(--abc-muted);
+  font-size: 0.875rem;
+  margin-block-end: 0.25rem;
 }
 .matrix-scroll {
   max-inline-size: 100%;
@@ -229,29 +240,101 @@ footer {
 
 .with-sidebar {
   display: grid;
-  grid-template-columns: minmax(12rem, 18rem) minmax(0, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+  gap: 2.5rem;
+  max-inline-size: 80rem;
 }
 .page-content,
-.textbook-sidebar {
+.contents-aside {
   min-inline-size: 0;
 }
+.contents-aside {
+  align-self: start;
+  position: sticky;
+  inset-block-start: 1rem;
+}
+.contents-panel > summary {
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.contents-panel > summary > span {
+  display: block;
+  font-weight: 400;
+  color: var(--abc-muted);
+  font-size: 0.875rem;
+}
 .textbook-sidebar {
+  max-block-size: calc(100dvh - 7rem);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
   overflow-wrap: anywhere;
+  padding: 0.5rem 0.75rem 0.5rem 0.25rem;
+  margin-block-start: 0.5rem;
 }
-.textbook-sidebar details {
-  margin-block-end: 1rem;
+.contents-chapter {
+  margin-block-end: 0.5rem;
 }
-@media (max-width: 50rem) {
+.contents-chapter > summary {
+  padding-block: 0.4rem;
+  cursor: pointer;
+}
+.contents-chapter > summary > span {
+  font-size: 0.8125rem;
+}
+.current-chapter > summary {
+  font-weight: 700;
+  color: var(--abc-text);
+}
+.contents-chapter > p {
+  margin: 0.25rem 0 0.25rem 1rem;
+}
+.contents-chapter > ol {
+  list-style: none;
+  border-inline-start: 1px solid var(--abc-border);
+  margin: 0 0 0.75rem 1rem;
+  padding: 0;
+}
+.textbook-sidebar a {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  text-decoration: none;
+}
+.textbook-sidebar a:hover {
+  text-decoration: underline;
+}
+.textbook-sidebar [aria-current='page'] {
+  font-weight: 700;
+  background: var(--abc-surface);
+  border-inline-start: 0.2rem solid var(--abc-link);
+  text-decoration: underline;
+}
+@media (max-width: 63.999rem) {
   .with-sidebar {
     display: block;
+    max-inline-size: 48rem;
+  }
+  .contents-aside {
+    position: static;
+    margin-block-end: 1rem;
+    padding-block-end: 0.75rem;
+    border-block-end: 1px solid var(--abc-border);
+  }
+  .textbook-sidebar {
+    max-block-size: 60dvh;
+  }
+  .contents-panel > summary > span {
+    display: none;
+  }
+  .previous-next {
+    gap: 0.75rem;
   }
 }
 
 .problem-page .page-shell {
   max-inline-size: 48rem;
 }
-.unit-page .page-shell {
+.unit-page .page-shell:not(.with-sidebar) {
   max-inline-size: 48rem;
 }
 .unit-context,
@@ -334,7 +417,7 @@ footer {
 }
 
 /* #112: opt-in representative manuscript and unit prototype. */
-.study-preview .page-shell {
+.study-preview .page-shell:not(.with-sidebar) {
   max-inline-size: 48rem;
 }
 .preview-notice {
@@ -349,4 +432,13 @@ footer {
   gap: 0.5rem 1rem;
   margin-block: 1rem 1.5rem;
   font-size: 0.9375rem;
+}
+.chapter-jump {
+  margin-block: 1.5rem;
+}
+.chapter-jump > ol {
+  columns: 2 15rem;
+}
+.chapter-jump li {
+  break-inside: avoid;
 }

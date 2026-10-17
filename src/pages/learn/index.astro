@@ -17,11 +17,24 @@ const byId = new Map(publicCatalog.learningUnits.map((unit) => [unit.id, unit]))
     掲載順は読書の案内です。直接の前提は各単元で確認し、必要なら後の節や章へ進んでください。
     対象色は基本形を学ぶ目安で、各問題の難易度や公式の履修基準とは別です。
   </p>
+  <nav aria-label="章へ移動" class="chapter-jump" data-pagefind-ignore>
+    <ol>
+      {
+        TEXTBOOK_CHAPTERS.map((chapter) => (
+          <li>
+            <a href={`#${chapter.id}`}>
+              {requireCatalogEntity(byId.get(chapter.id), chapter.id).title}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
   {
     TEXTBOOK_CHAPTERS.map((chapter) => {
       const root = requireCatalogEntity(byId.get(chapter.id), chapter.id);
       return (
-        <section>
+        <section id={chapter.id}>
           <h2>
             <a href={withBase(root.route, base)}>{root.title}</a>
           </h2>
