@@ -228,7 +228,12 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 
 共通問題レイアウトを変えたら`tests/unit/problem-reading.test.ts`と`tests/e2e/problem-reading.spec.ts`で本文・全anchor/リンク・計算量・出典の保持、旧fragmentへの移動、JS無効時の開閉、学習記録への移動を確認する。両テストはUI変更の`verify:fast`に含む。学習記録の見出しはAstro側に置き、JSの初期化前にも冒頭リンクから到達できるようにする。保存処理やIndexedDB・backup形式は別の正本を維持する。
 
-単元ページは正本Markdownの概要・考え方・成立条件と計算量から読み、問題一覧へ進む。共通の`src/components/unit-reading.ts`が対象色・学習成果・前提・出典と内部識別子を末尾の開閉欄へ移し、関連問題も開閉式にする。本文に必要な仮定・証明・計算量は折り畳まない。章目次は本文末尾から開け、冒頭リンクと旧fragmentで前提へ戻れる。表示のために232単元のMarkdownを並べ替えない。
+単元ページは正本Markdownの概要・考え方・成立条件と計算量から読み、問題一覧へ進む。共通の`src/components/unit-reading.ts`が対象色・学習成果・前提・出典と内部識別子を末尾の開閉欄へ移し、関連問題も開閉式にする。本文に必要な仮定・証明・計算量は折り畳まない。章目次はPCで本文横、狭い画面では冒頭の開閉欄から使う。冒頭リンクと旧fragmentで前提へ戻れる。表示のために232単元のMarkdownを並べ替えない。
+
+章・単元の目次と前後移動は`TextbookLayout.astro`、`TextbookContents.astro`、`src/components/textbook-navigation.ts`を共用する。`TEXTBOOK_CHAPTERS`の掲載順だけを使い、章をまたぐ前後ページも同じ順にする。パンくずは掲載章と現在単元を示し、概念上の親や前提DAGを変更しない。現在章だけを初期展開し、現在リンクを文字の太さ・下線・背景・線で示す。64rem未満は目次を閉じ、JS無効時は画面幅によらずnative
+detailsを手で開く。JSはPCの初期展開・画面幅変更と目次内の現在位置へのスクロールだけを補助し、保存領域を使わない。旧`#unit-contents`は保持する。詳細と比較画像は[章・単元のナビゲーション](textbook-navigation.md)を参照する。
+
+目次を変えたら`tests/unit/textbook-navigation.test.ts`で全232単元の掲載順・章境界・先頭末尾と概念上の親との区別、`tests/e2e/textbook-navigation.spec.ts`で現在位置、長い章のスクロール、JS無効、キーボード、狭い画面と前後移動を確認する。両方をUI変更の`verify:fast`に含める。既存の単元・アクセシビリティ・検索E2Eも同じ本番subpathのbuildで確認し、正本本文や学習記録形式は変更しない。
 
 新しい単元も既存のtaxonomy生成と通常の執筆・公開フローを使う。`renderLearningUnitDocument`は概念の定義を先に置くdraftを作り、内容に合う導入・小例・操作・成立条件を正本Markdownへ執筆する。分類用Outcomeや対象色の理由を導入へ自動転用しない。生成器が完全な教材本文を自動執筆するわけではない。表示の開閉・配置は共通処理が担当し、生成物だけのHTML手修正やUnit
 IDごとの分岐は不要である。詳細とトレードオフは[単元ページの情報順](unit-reading.md)を参照する。

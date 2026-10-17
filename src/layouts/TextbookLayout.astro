@@ -4,6 +4,7 @@ import { publicCatalog, withBase } from '../lib/catalog/public-catalog.js';
 import { buildSearchDocuments } from '../lib/catalog/search-documents.js';
 import '../styles/global.css';
 import TextbookContents from '../components/TextbookContents.astro';
+import { textbookNavigation } from '../components/textbook-navigation.js';
 
 interface Crumb {
   href?: string;
@@ -27,14 +28,32 @@ const {
   unitPage = false,
   description,
   breadcrumbs = [],
-  previous,
-  next,
+  previous: suppliedPrevious,
+  next: suppliedNext,
   searchTerms: additionalSearchTerms = [],
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const canonical = new URL(withBase(Astro.url.pathname.slice(base.length - 1), base), Astro.site);
 const logicalPath = `/${Astro.url.pathname.slice(base.length).replace(/^\/+|\/+$/gu, '')}`;
 const canonicalLogicalPath = logicalPath === '/' ? '/' : `${logicalPath}/`;
+const learningPage = canonicalLogicalPath.startsWith('/learn/');
+const navigation = textbookNavigation(publicCatalog.learningUnits, canonicalLogicalPath);
+const previous =
+  suppliedPrevious ??
+  (navigation.previous && { href: navigation.previous.route, label: navigation.previous.title });
+const next =
+  suppliedNext ??
+  (navigation.next && { href: navigation.next.route, label: navigation.next.title });
+const pageBreadcrumbs =
+  navigation.current && navigation.chapter
+    ? [
+        { href: '/learn/', label: '分野別目次' },
+        ...(navigation.current.id === navigation.chapter.root.id
+          ? []
+          : [{ href: navigation.chapter.root.route, label: navigation.chapter.root.title }]),
+        { label: navigation.current.title },
+      ]
+    : breadcrumbs;
 const indexContent =
   !studyPreview && !['/review/', '/settings/learning-records/'].includes(canonicalLogicalPath);
 const searchDocuments = buildSearchDocuments(publicCatalog).filter(
@@ -95,13 +114,25 @@ const navItems = [
       class:list={[
         'page-shell',
         {
-          'with-sidebar': !unitPage && !studyPreview && canonicalLogicalPath.startsWith('/learn/'),
+          'with-sidebar': learningPage,
         },
       ]}
     >
       {
-        !unitPage && !studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
-          <TextbookContents currentRoute={canonicalLogicalPath} />
+        learningPage && (
+          <aside class="contents-aside" data-pagefind-ignore>
+            <details id="unit-contents" class="contents-panel">
+              <summary>
+                章と単元の目次
+                <span>
+                  {navigation.chapter
+                    ? `第${String(navigation.chapter.number)}章 · ${navigation.chapter.root.title}`
+                    : '全9章'}
+                </span>
+              </summary>
+              <TextbookContents currentRoute={canonicalLogicalPath} />
+            </details>
+          </aside>
         )
       }
       <div class="page-content">
@@ -109,7 +140,7 @@ const navItems = [
           <ol>
             <li><a href={withBase('/', base)}>ホーム</a></li>
             {
-              breadcrumbs.map((crumb) => (
+              pageBreadcrumbs.map((crumb) => (
                 <li>
                   {crumb.href ? (
                     <a href={withBase(crumb.href, base)}>{crumb.label}</a>
@@ -142,28 +173,22 @@ const navItems = [
             )
           }
           <slot />
-          {
-            (unitPage || studyPreview) && canonicalLogicalPath.startsWith('/learn/') && (
-              <details id="unit-contents" class="unit-context" data-pagefind-ignore>
-                <summary>章と単元の目次</summary>
-                <TextbookContents currentRoute={canonicalLogicalPath} />
-              </details>
-            )
-          }
         </main>
         {
           (previous ?? next) && (
             <nav class="previous-next" aria-label="前後のページ">
               {previous ? (
                 <a rel="prev" href={withBase(previous.href ?? '/', base)}>
-                  ← {previous.label}
+                  <span>← 前のページ</span>
+                  {previous.label}
                 </a>
               ) : (
                 <span />
               )}
               {next ? (
                 <a rel="next" href={withBase(next.href ?? '/', base)}>
-                  {next.label} →
+                  <span>次のページ →</span>
+                  {next.label}
                 </a>
               ) : (
                 <span />
@@ -178,3 +203,7 @@ const navItems = [
     </footer>
   </body>
 </html>
+
+<script>
+  import '../client/textbook-navigation.js';
+</script>

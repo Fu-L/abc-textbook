@@ -195,7 +195,14 @@ test('keeps the complete contents, semantic links, and prose accessible at a nar
       .getByText(/概念上の親:/u)
       .first(),
   ).toBeVisible();
-  await expect(page.locator('a[rel="prev"], a[rel="next"]')).toHaveCount(0);
+  await expect(page.locator('a[rel="prev"]')).toHaveAttribute(
+    'href',
+    /\/learn\/combinatorics-algebra\/linear-system-rank\/$/u,
+  );
+  await expect(page.locator('a[rel="next"]')).toHaveAttribute(
+    'href',
+    /\/learn\/combinatorics-algebra\/separable-linear-transform\/$/u,
+  );
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
