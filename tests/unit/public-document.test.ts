@@ -1,8 +1,29 @@
 import { load } from 'cheerio';
+import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 
 describe('accepted document rendering', () => {
+  it('preserves code characters, table structure, links, and math in local scroll viewports', async () => {
+    const source = await readFile('tests/fixtures/documents/widths.md', 'utf8');
+    const $ = load(await renderPublicDocument(source, '/abc-textbook/'));
+    const fences = [...source.matchAll(/```(?:cpp|text)\n([\s\S]*?)```/gu)];
+    expect(
+      $('pre code')
+        .map((_index, code) => $(code).text())
+        .get(),
+    ).toEqual(fences.map((match) => match[1]));
+    expect($('pre[tabindex="0"][role="group"]')).toHaveLength(2);
+    expect($('.table-scroll[tabindex="0"] > table')).toHaveLength(2);
+    expect($('table').first().find('thead th')).toHaveLength(5);
+    expect($('table').first().find('tbody tr')).toHaveLength(2);
+    expect($('table').first().find('tbody td').first().text()).toBe('remaining_resource_count');
+    expect($('.math-inline math')).toHaveLength(2);
+    expect($('.math-display math mtable')).toHaveLength(1);
+    expect(decodeURIComponent($('a').attr('href') ?? '')).toBe('#確認後');
+    expect($('#確認後')).toHaveLength(1);
+    expect($('script, button')).toHaveLength(0);
+  });
   it('preserves Lagrange coefficient notation without creating a mathematical-expression URL', async () => {
     const source = "第一項は[t^(n−1)]Φ^n、第二項は[t^(n−2)](Φ^n)'/n。";
     const $ = load(await renderPublicDocument(source, '/'));

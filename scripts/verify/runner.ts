@@ -224,6 +224,7 @@ export function selectVerificationSteps(
     if (data || ui) e2e.add('tests/e2e/search.spec.ts');
     if (ui) {
       e2e.add('tests/e2e/accessibility.spec.ts');
+      e2e.add('tests/e2e/document-widths.spec.ts');
       e2e.add('tests/e2e/contest-matrix.spec.ts');
     }
     if (records || data) e2e.add('tests/e2e/learning-records.spec.ts');

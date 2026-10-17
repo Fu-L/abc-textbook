@@ -177,19 +177,44 @@ footer {
   max-inline-size: var(--abc-content-measure);
   overflow-wrap: anywhere;
 }
-.authored-content table {
-  display: block;
+.table-scroll {
   max-inline-size: 100%;
   overflow-x: auto;
+  margin-block: 0 1.1em;
+}
+.authored-content .table-scroll table {
+  margin-block: 0;
+  overflow-wrap: normal;
 }
 .authored-content pre {
   max-inline-size: 100%;
-  white-space: pre-wrap;
+  overflow-x: auto;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
+}
+.authored-content pre code {
+  white-space: inherit;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.authored-content :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+.authored-content table code {
+  overflow-wrap: normal;
 }
 
-/* Keep a formula together; only a wide display equation scrolls locally. */
+/* Keep each formula together; wide inline and display equations scroll locally. */
 .authored-content math {
   overflow-wrap: normal;
+}
+.math-inline {
+  display: inline-block;
+  max-inline-size: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
 }
 .math-display {
   max-inline-size: 100%;

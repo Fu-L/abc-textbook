@@ -196,6 +196,7 @@ describe('verify:fast change selection', () => {
         '--project=chromium',
         'tests/e2e/learning-records.spec.ts',
         'tests/e2e/search.spec.ts',
+        'tests/e2e/document-widths.spec.ts',
       ]),
     );
     expect(steps.map((s) => s.id)).toContain('docs');
