@@ -13,4 +13,6 @@ if (panel) {
       if (!desktop.matches) panel.open = false;
     });
   });
+  // Keep the mobile menu within reach only when selecting a section can close it.
+  panel.dataset.enhanced = '';
 }

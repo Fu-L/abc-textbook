@@ -501,9 +501,13 @@ footer {
   }
 }
 @media (max-width: 79.999rem) {
-  /* Without JS, an open menu scrolls away instead of covering the selected prose. */
-  .page-contents:has(details[open]) {
+  /* Native details stays in document flow without JS, including while closed. */
+  .page-contents {
     position: static;
+  }
+  /* Opening must not move the menu offscreen; JS closes it after section selection. */
+  .page-contents:has([data-enhanced]) {
+    position: sticky;
   }
 }
 @media (min-width: 80rem) {

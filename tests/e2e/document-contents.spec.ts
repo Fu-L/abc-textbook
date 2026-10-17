@@ -52,7 +52,8 @@ for (const javaScriptEnabled of [true, false]) {
       await expect(permalink).toHaveCSS('opacity', '1');
       await expect(permalink).toHaveAttribute('href', `#${encodeURIComponent('復習の核')}`);
       // The mobile contents stays within reach even after a deep fragment jump.
-      if (width === 390) await expect(panel.locator('summary')).toBeInViewport();
+      if (javaScriptEnabled && width === 390)
+        await expect(panel.locator('summary')).toBeInViewport();
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
       );
@@ -102,6 +103,84 @@ test('mobile page contents can be reopened from deep prose and closed by keyboar
   await expect(page.locator('#page-contents')).not.toHaveAttribute('open', '');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+for (const width of [320, 390, 720]) {
+  test(`touch opens page contents within the viewport from deep prose: ${String(width)} px`, async ({
+    browser,
+    baseURL,
+  }) => {
+    if (!baseURL) throw new Error('Playwright baseURL is required.');
+    const context = await browser.newContext({
+      baseURL,
+      viewport: { width, height: width === 720 ? 500 : 844 },
+      hasTouch: true,
+    });
+    const page = await context.newPage();
+    for (const [route, section, destination] of [
+      [problem, '復習の核', '考察'],
+      [unit, '問題一覧', '考え方'],
+    ] as const) {
+      await page.goto(`${route}#${encodeURIComponent(section)}`);
+      await expect(page.locator(`[id="${section}"]`)).toBeInViewport();
+      const toggle = page.locator('#page-contents > summary');
+      await expect(toggle).toBeInViewport();
+      const bounds = await toggle.boundingBox();
+      if (!bounds) throw new Error('Missing page contents summary');
+      // Tap the actual on-screen control without Playwright scrolling it into view.
+      await page.touchscreen.tap(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+      const menu = page.getByRole('navigation', { name: contents });
+      await expect(page.locator('#page-contents')).toHaveAttribute('open', '');
+      // Check before any link action: click()/focus() would hide a regression by scrolling.
+      await expect(menu).toBeInViewport({ ratio: 1 });
+      const menuBounds = await menu.boundingBox();
+      if (!menuBounds) throw new Error('Missing page contents menu');
+      expect(menuBounds.y).toBeGreaterThanOrEqual(0);
+      expect(menuBounds.y + menuBounds.height).toBeLessThanOrEqual(width === 720 ? 500 : 844);
+      const link = menu.getByRole('link', { name: destination, exact: true });
+      await expect(link).toBeInViewport({ ratio: 1 });
+      await link.tap();
+      await expect(page.locator('#page-contents')).not.toHaveAttribute('open', '');
+      await expect(page.locator(`[id="${destination}"]`)).toBeInViewport();
+    }
+    await context.close();
+  });
+
+  test(`without JS the page contents stays in document flow: ${String(width)} px`, async ({
+    browser,
+    baseURL,
+  }) => {
+    if (!baseURL) throw new Error('Playwright baseURL is required.');
+    const context = await browser.newContext({
+      baseURL,
+      javaScriptEnabled: false,
+      viewport: { width, height: width === 720 ? 500 : 844 },
+    });
+    const page = await context.newPage();
+    await page.goto(problem);
+    const panel = page.locator('#page-contents');
+    await expect(page.locator('.page-contents')).toHaveCSS('position', 'static');
+    await panel.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    await expect(panel).toHaveAttribute('open', '');
+    await page
+      .getByRole('navigation', { name: contents })
+      .getByRole('link', {
+        name: '復習の核',
+        exact: true,
+      })
+      .focus();
+    await page.keyboard.press('Enter');
+    const heading = page.locator('#復習の核');
+    await expect(heading).toBeInViewport();
+    await expect(heading).toBeFocused();
+    await expect(panel).toHaveAttribute('open', '');
+    await expect(panel).not.toBeInViewport();
+    await page.reload();
+    await expect(heading).toBeInViewport();
+    await expect(panel).not.toBeInViewport();
+    await context.close();
+  });
+}
 
 test('contents and heading links have accessible names and do not obscure focused prose', async ({
   page,
