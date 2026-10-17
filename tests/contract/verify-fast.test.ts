@@ -197,10 +197,12 @@ describe('verify:fast change selection', () => {
         'tests/e2e/learning-records.spec.ts',
         'tests/e2e/search.spec.ts',
         'tests/e2e/document-widths.spec.ts',
+        'tests/e2e/problem-reading.spec.ts',
       ]),
     );
     expect(steps.map((s) => s.id)).toContain('docs');
     expect(testArgs(...files)).toContain('tests/integration/learning-record-backup.test.ts');
+    expect(testArgs(...files)).toContain('tests/unit/problem-reading.test.ts');
     expect(
       testArgs(...files).filter(
         (file) => file === 'tests/integration/full-public-projection.test.ts',

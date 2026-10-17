@@ -20,6 +20,8 @@ authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
+連結成分数の期待値は、各頂点集合が一つの連結成分になる確率の和で求められる。集合内で完結する配線の総数から、複数の成分に分かれる配線を引こう。特定の一頂点を含む成分に着目すると、重複なく場合分けして部分集合DPを組める。
+
 最終graphの各connected componentの頂点集合Sについてindicatorを置くと、component数は非空Sのindicator和なので期待値の線形性を使える。
 
 S内のred端子数とblue端子数が異なればSだけでcableを閉じられず、等しくmならS内端子の全matching数f(S)はm!である。

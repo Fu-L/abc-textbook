@@ -1,7 +1,7 @@
 ---
 import { isStudyPreview, previewProblem } from '../../lib/study-preview/render.js';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
-import ProblemContext from '../../components/ProblemContext.astro';
+import ProblemExplanation from '../../components/ProblemExplanation.astro';
 import LearningRecordControl from '../../components/LearningRecordControl.tsx';
 import LearningRecordTimestamp from '../../components/LearningRecordTimestamp.astro';
 import {
@@ -23,10 +23,6 @@ export function getStaticPaths() {
   }));
 }
 const { problem } = Astro.props;
-const group = {
-  unit: publicCatalog.learningUnits.find((unit) => unit.id === problem.learningUnitId),
-  tag: publicCatalog.tags.find((tag) => tag.id === problem.primaryTagId),
-};
 const document = publicProjection.problemDocuments.get(problem.id);
 if (!document) throw new Error(`Missing accepted explanation: ${problem.id}`);
 const studyPreview = isStudyPreview(import.meta.env.STUDY_UX_PREVIEW, problem.route);
@@ -43,41 +39,22 @@ const base = import.meta.env.BASE_URL;
   description={problem.explanationSummary}
   breadcrumbs={[{ href: '/problems/', label: '問題一覧' }, { label: problem.id.toUpperCase() }]}
 >
-  <span hidden={studyPreview} data-pagefind-meta="entity-kind">問題</span>
-  <span hidden data-pagefind-meta="contest">ABC {problem.contestNumber}</span>
-  <h1>ABC {problem.contestNumber} {problem.label} — {problem.title}</h1>
-  {
-    studyPreview && (
-      <p class="preview-reading-links" data-pagefind-ignore>
-        <a href={problem.officialUrl} rel="external">
-          公式問題を読む
-        </a>
-        {' / '}
-        <a href="#learning-record-heading">学習記録</a>
-        {group.unit && (
-          <>
-            {' '}
-            / <a href={withBase(group.unit.route, base)}>{group.unit.title}</a>
-          </>
-        )}
-      </p>
-    )
-  }
-  {!studyPreview && <ProblemContext problem={problem} />}
-
-  <section id="explanation">
-    <h2 hidden={studyPreview}>解説</h2>
-    <div class="authored-content" set:html={body} />
+  <ProblemExplanation problem={problem} authoringUnit={document.unit} body={body} />
+  <section class="problem-record" aria-labelledby="learning-record-heading">
+    <h2 id="learning-record-heading">学習記録</h2>
+    <noscript data-pagefind-ignore>
+      <p>学習状況の保存にはJavaScriptが必要です。教材本文はそのまま読めます。</p>
+      <p><LearningRecordTimestamp value={null} label="状況更新" /></p>
+      <p><LearningRecordTimestamp value={null} label="復習設定更新" /></p>
+    </noscript>
+    <LearningRecordControl client:load problemId={problem.id} />
+    <p data-pagefind-ignore>
+      <a href={withBase('/review/', base)}>要復習一覧</a> / <a
+        href={withBase('/settings/learning-records/', base)}>学習記録のバックアップ</a
+      > / <a href="#explanation">解説に戻る</a>
+    </p>
   </section>
-  {
-    studyPreview && (
-      <details class="preview-context" data-pagefind-ignore>
-        <summary>学習上の位置付け・タグ・執筆情報</summary>
-        <ProblemContext problem={problem} />
-      </details>
-    )
-  }
-  <section>
+  <section data-pagefind-ignore>
     <h2>同じ単元の問題</h2><ul>
       {
         problem.relatedProblemIds.map((id) => {
@@ -95,15 +72,4 @@ const base = import.meta.env.BASE_URL;
       }
     </ul>
   </section>
-  <noscript data-pagefind-ignore>
-    <p>学習状況の保存にはJavaScriptが必要です。教材本文はそのまま読めます。</p>
-    <p><LearningRecordTimestamp value={null} label="状況更新" /></p>
-    <p><LearningRecordTimestamp value={null} label="復習設定更新" /></p>
-  </noscript>
-  <LearningRecordControl client:load problemId={problem.id} />
-  <p>
-    <a href={withBase('/review/', base)}>要復習一覧</a> / <a
-      href={withBase('/settings/learning-records/', base)}>学習記録のバックアップ</a
-    >
-  </p>
 </TextbookLayout>

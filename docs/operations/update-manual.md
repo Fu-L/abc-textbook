@@ -221,8 +221,12 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 [代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
 
 代表ページで情報順・文章を比較するときは[読みやすさの試作](study-ux-prototype.md)を参照する。
-`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを差し替え、通常buildは正本の表示を維持する。試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
+`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを差し替える。問題ページの情報順は#113で通常buildにも採用済みであり、試作変数は代表原稿・単元の比較用である。試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
 `tests/e2e/study-preview.spec.ts`で対象限定、旧anchor・情報・問題順、導線を確認する。試作を変更したときだけ通常・試作の両モードで対象E2Eを実行し、採用候補と保留点をPRに記す。
+
+問題詳細は`src/components/ProblemExplanation.astro`を共用し、公式問題→問題固有の解法の核心→考察本文を先に置く。[問題ページの情報順](problem-reading.md)を参照する。核心は正本Markdownの「考察」の冒頭に、未定義の記号を使わず、着想と必要な理由を伝える短い段落として執筆する。内部分析の`reasoningPath.algorithmConnection.text`や分類用Outcomeを自動転用・切り詰めして導入にしない。導入を改稿していない問題も、その原稿の考察から読み始める。分類・既習技能・執筆情報と原稿の「学習の位置」は末尾の開閉欄へ保持する。この移動は表示処理で行い、正本本文へ反映しない。fullは完全解説、similarは差分解説、supplementは補足解説として案内し、短縮形式は共通rendererが冒頭へ参照元fullのリンクを出す。新問にも通常の公開フローでこの表示が適用され、個別のHTML/CSSは不要である。
+
+共通問題レイアウトを変えたら`tests/unit/problem-reading.test.ts`と`tests/e2e/problem-reading.spec.ts`で本文・全anchor/リンク・計算量・出典の保持、旧fragmentへの移動、JS無効時の開閉、学習記録への移動を確認する。両テストはUI変更の`verify:fast`に含む。学習記録の見出しはAstro側に置き、JSの初期化前にも冒頭リンクから到達できるようにする。保存処理やIndexedDB・backup形式は別の正本を維持する。
 
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 

@@ -205,7 +205,10 @@ export function selectVerificationSteps(
   if (prose || data || ui) for (const test of contentTests) tests.add(test);
   if (data) for (const test of dataTests) tests.add(test);
   if (records) for (const test of recordTests) tests.add(test);
-  if (ui) tests.add('tests/contract/ui-routes.test.ts');
+  if (ui) {
+    tests.add('tests/contract/ui-routes.test.ts');
+    tests.add('tests/unit/problem-reading.test.ts');
+  }
   if (skill) for (const test of skillTests) tests.add(test);
   if (history) {
     tests.add('tests/unit/release-history.test.ts');
@@ -225,6 +228,7 @@ export function selectVerificationSteps(
     if (ui) {
       e2e.add('tests/e2e/accessibility.spec.ts');
       e2e.add('tests/e2e/document-widths.spec.ts');
+      e2e.add('tests/e2e/problem-reading.spec.ts');
       e2e.add('tests/e2e/contest-matrix.spec.ts');
     }
     if (records || data) e2e.add('tests/e2e/learning-records.spec.ts');

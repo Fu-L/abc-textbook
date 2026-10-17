@@ -248,7 +248,47 @@ footer {
   }
 }
 
-/* #112: opt-in representative prototype only. */
+.problem-page .page-shell {
+  max-inline-size: 48rem;
+}
+.problem-reading-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-block: 0 1.25rem;
+  font-size: 0.9375rem;
+}
+.problem-reading-links > span {
+  color: var(--abc-muted);
+}
+.problem-context {
+  max-inline-size: var(--abc-content-measure);
+  margin-block: 1.5rem;
+}
+.problem-context > summary {
+  cursor: pointer;
+  color: var(--abc-muted);
+}
+.problem-context[open] > summary {
+  margin-block-end: 1rem;
+}
+.problem-record {
+  max-inline-size: var(--abc-content-measure);
+  margin-block: 2rem;
+  padding-block: 0.5rem;
+  border-block: 1px solid var(--abc-border);
+}
+.problem-record p {
+  font-size: 0.9375rem;
+}
+.problem-record label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* #112: opt-in representative manuscript and unit prototype. */
 .study-preview .page-shell {
   max-inline-size: 48rem;
 }

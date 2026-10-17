@@ -94,13 +94,11 @@ export default function LearningRecordControl({ problemId }: Props) {
   };
 
   return (
-    <section
+    <div
       data-pagefind-ignore
       aria-labelledby="learning-record-heading"
       data-learning-record-control={problemId}
     >
-      <h2 id="learning-record-heading">学習記録</h2>
-      <p>Problem ID（{problemId}）をキーに、この端末へ保存します。</p>
       <label>
         学習状況
         <select
@@ -130,6 +128,6 @@ export default function LearningRecordControl({ problemId }: Props) {
       <p role={unavailable ? 'alert' : 'status'} aria-live="polite">
         {message}
       </p>
-    </section>
+    </div>
   );
 }

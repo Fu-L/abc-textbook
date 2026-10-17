@@ -245,7 +245,7 @@ test('storage failure leaves the textbook readable and disables only the control
     Object.defineProperty(globalThis, 'indexedDB', { value: undefined });
   });
   await page.goto('problems/abc212-g/');
-  await expect(page.getByRole('heading', { name: '解説' })).toBeVisible();
+  await expect(page.locator('#explanation .authored-content')).toBeVisible();
   await expect(page.getByLabel('学習状況')).toBeDisabled();
   await expect(page.getByRole('alert')).toContainText('利用できません');
 });

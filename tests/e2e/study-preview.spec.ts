@@ -7,7 +7,7 @@ import { expect, test } from './fixtures.js';
 const preview = process.env.STUDY_UX_PREVIEW === '1';
 const phase = preview ? 'after' : 'before';
 const capture = process.env.STUDY_UX_CAPTURE === '1';
-const captureDir = 'docs/operations/study-ux-prototype';
+const captureDir = 'build/study-ux-prototype';
 const samples = [
   {
     name: 'unit-desktop-light',
@@ -155,7 +155,7 @@ test('prototype supports fragment links, keyboard disclosure and a compact probl
     .click();
   await expect(page.locator('#正当性')).toBeInViewport();
   await page
-    .locator('.preview-reading-links')
+    .locator('.problem-reading-links')
     .getByRole('link', { name: '学習記録', exact: true })
     .click();
   await expect(page.getByRole('heading', { name: '学習記録', exact: true })).toBeInViewport();
