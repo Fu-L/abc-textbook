@@ -1,5 +1,6 @@
 ---
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
+import { renderTagProblemList } from '../../components/problem-list.js';
 import {
   publicCatalog,
   requireCatalogEntity,
@@ -159,21 +160,7 @@ const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
         <h2>{title}</h2>
         <p>{description}</p>
         {ids.length ? (
-          <ul>
-            {ids.map((id) => {
-              const problem = requireCatalogEntity(
-                publicCatalog.problems.find((item) => item.id === id),
-                id,
-              );
-              return (
-                <li>
-                  <a href={withBase(problem.route, base)}>
-                    {problem.id.toUpperCase()} — {problem.title}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <Fragment set:html={renderTagProblemList(ids, publicCatalog, base, tag.id)} />
         ) : (
           <p>この典型を直接付けた問題はありません。代表問題から考え方を確かめてください。</p>
         )}
