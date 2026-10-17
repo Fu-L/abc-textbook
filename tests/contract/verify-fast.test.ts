@@ -200,6 +200,7 @@ describe('verify:fast change selection', () => {
         'tests/e2e/problem-reading.spec.ts',
         'tests/e2e/unit-reading.spec.ts',
         'tests/e2e/textbook-navigation.spec.ts',
+        'tests/e2e/study-entry-points.spec.ts',
         'tests/e2e/document-contents.spec.ts',
       ]),
     );

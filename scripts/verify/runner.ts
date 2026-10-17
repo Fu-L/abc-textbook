@@ -234,6 +234,7 @@ export function selectVerificationSteps(
       e2e.add('tests/e2e/problem-reading.spec.ts');
       e2e.add('tests/e2e/unit-reading.spec.ts');
       e2e.add('tests/e2e/textbook-navigation.spec.ts');
+      e2e.add('tests/e2e/study-entry-points.spec.ts');
       e2e.add('tests/e2e/document-contents.spec.ts');
       e2e.add('tests/e2e/contest-matrix.spec.ts');
     }

@@ -5,17 +5,20 @@ import { TEXTBOOK_CHAPTERS } from '../../lib/taxonomy/textbook-order.js';
 import { unitLearningTarget } from '../../lib/taxonomy/unit-learning-targets.js';
 const base = import.meta.env.BASE_URL;
 const byId = new Map(publicCatalog.learningUnits.map((unit) => [unit.id, unit]));
+const firstUnitId = TEXTBOOK_CHAPTERS[0].unitIds[0];
+const firstUnit = requireCatalogEntity(byId.get(firstUnitId), firstUnitId);
 ---
 
 <TextbookLayout
   title="分野別目次"
-  description="9章の掲載順、概念上の親、対象色とその理由から読む単元を選ぶ"
+  description="9章の狙いと単元の読書順から、典型知識の学習を始める"
   breadcrumbs={[{ label: '分野別目次' }]}
 >
   <h1>分野別目次</h1>
   <p>
-    掲載順は読書の案内です。直接の前提は各単元で確認し、必要なら後の節や章へ進んでください。
-    対象色は基本形を学ぶ目安で、各問題の難易度や公式の履修基準とは別です。
+    初めてなら<a href={withBase(firstUnit.route, base)}>第1章の最初の単元</a>から。
+    学びたい分野があれば、その章から読めます。
+    単元で考え方を学び、問題に取り組み、分からない前提へ戻って読み進めてください。
   </p>
   <nav aria-label="章へ移動" class="chapter-jump" data-pagefind-ignore>
     <ol>
@@ -30,20 +33,42 @@ const byId = new Map(publicCatalog.learningUnits.map((unit) => [unit.id, unit]))
       }
     </ol>
   </nav>
+  <p class="contents-guide">
+    単元は読書順です。対象色は基本形を学ぶ目安で、問題の難易度や公式の履修基準とは別です。
+    直接の前提は各単元で確認できます。
+  </p>
   {
-    TEXTBOOK_CHAPTERS.map((chapter) => {
+    TEXTBOOK_CHAPTERS.map((chapter, index) => {
       const root = requireCatalogEntity(byId.get(chapter.id), chapter.id);
       return (
-        <section id={chapter.id}>
+        <section id={chapter.id} class="chapter-outline">
           <h2>
-            <a href={withBase(root.route, base)}>{root.title}</a>
+            <a href={withBase(root.route, base)}>
+              第{index + 1}章 {root.title}
+            </a>
           </h2>
-          <>
+          <p>{root.outcome}</p>
+          <ol class="unit-index">
+            {chapter.unitIds.map((id) => {
+              const unit = requireCatalogEntity(byId.get(id), id);
+              const target = unitLearningTarget(id);
+              return (
+                <li>
+                  <a href={withBase(unit.route, base)}>{unit.title}</a>
+                  <span class="unit-target">
+                    {target.color}（{target.rating}）
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+          <details class="chapter-context">
+            <summary>読書順の考え方・対象色の理由</summary>
+            <p>{chapter.introduction}</p>
             <p>
               導入対象の目安: {unitLearningTarget(chapter.id).color}（
               {unitLearningTarget(chapter.id).rating}）。{unitLearningTarget(chapter.id).reason}
             </p>
-            <p>{chapter.introduction}</p>
             <ol>
               {chapter.unitIds.map((id) => {
                 const unit = requireCatalogEntity(byId.get(id), id);
@@ -62,7 +87,7 @@ const byId = new Map(publicCatalog.learningUnits.map((unit) => [unit.id, unit]))
                 );
               })}
             </ol>
-          </>
+          </details>
         </section>
       );
     })
