@@ -66,6 +66,22 @@ for (const colorScheme of ['light', 'dark'] as const) {
         await page.keyboard.press('Enter');
         await expect(page.locator('#unit-contents [aria-current="page"]')).toBeVisible();
         await page.goto(`./learn/query/${slug}/#問題一覧`);
+        const list = page.locator('#問題一覧 + ul.problem-list');
+        await expect(list.locator(':scope > li')).toHaveCount(slug.startsWith('priority') ? 7 : 16);
+        const row = list.locator(':scope > li').first();
+        await expect(row.locator('.problem-list-roles')).not.toBeVisible();
+        await expect(row.locator('a.problem-list-official')).toBeVisible();
+        await expect(row.locator('a.problem-list-official')).toHaveAttribute(
+          'href',
+          /^https:\/\/atcoder.jp\/contests\//u,
+        );
+        const rowSummary = row.locator('details > summary');
+        await rowSummary.focus();
+        await page.keyboard.press('Enter');
+        await expect(row.locator('.problem-list-roles')).toBeVisible();
+        await expect(row.locator('details a[href*="/tags/"]').first()).toBeVisible();
+        await page.keyboard.press('Enter');
+        await expect(row.locator('.problem-list-roles')).not.toBeVisible();
         const first = page.locator('#問題一覧 + ul > li > a').first();
         await expect(first).toHaveAttribute(
           'href',
@@ -107,5 +123,52 @@ test('keeps chapters, guide Units, unedited concepts and 320/720 px reflow reada
         true,
       );
     }
+  }
+});
+
+test('tag lists disclose skills without JS and retain representative and related problem links', async ({
+  browser,
+  baseURL,
+}) => {
+  if (!baseURL) throw new Error('Playwright baseURL is required.');
+  for (const [width, colorScheme] of [
+    [320, 'light'],
+    [720, 'dark'],
+  ] as const) {
+    const context = await browser.newContext({
+      baseURL,
+      javaScriptEnabled: false,
+      colorScheme,
+      viewport: { width, height: 900 },
+    });
+    const page = await context.newPage();
+    await page.goto('./tags/tag-range-monoid-aggregation/');
+    for (const heading of ['代表問題', '関連問題']) {
+      const section = page
+        .locator('section')
+        .filter({ has: page.getByRole('heading', { name: heading, exact: true }) });
+      const first = section.locator('ul.problem-list > li').first();
+      await expect(first.locator(':scope > a').first()).toHaveAttribute(
+        'href',
+        /\/problems\/abc[0-9]+-[a-z]+\/$/u,
+      );
+      await expect(first.locator('.problem-list-official')).toHaveAttribute(
+        'href',
+        /^https:\/\/atcoder.jp\/contests\//u,
+      );
+      await expect(first.locator('.problem-list-connections')).toContainText('主題:');
+      const details = first.locator('details');
+      await expect(details).not.toHaveAttribute('open', '');
+      await details.locator('summary').focus();
+      await page.keyboard.press('Enter');
+      await expect(details).toHaveAttribute('open', '');
+      await expect(details.locator('a[href*="/tags/"]').first()).toBeVisible();
+      await page.keyboard.press('Enter');
+      await expect(details).not.toHaveAttribute('open', '');
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await context.close();
   }
 });

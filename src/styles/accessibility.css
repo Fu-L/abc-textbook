@@ -268,6 +268,33 @@ footer {
 .unit-related[open] > summary {
   margin-block-end: 1rem;
 }
+.textbook main .problem-list > li + li {
+  margin-block-start: 1rem;
+}
+.problem-list-official,
+.problem-list-connections,
+.problem-list-context > summary {
+  font-size: 0.9375rem;
+}
+.problem-list-official {
+  display: inline-block;
+  margin-inline-start: 0.5em;
+}
+.problem-list-connections,
+.problem-list-context > summary {
+  color: var(--abc-muted);
+}
+.problem-list-context > summary {
+  cursor: pointer;
+}
+.problem-list-context[open] {
+  margin-block-start: 0.5rem;
+  padding-inline-start: 0.75rem;
+  border-inline-start: 1px solid var(--abc-border);
+}
+.problem-list-roles {
+  margin-block: 0.5rem;
+}
 .problem-reading-links,
 .unit-reading-links {
   display: flex;
@@ -322,18 +349,4 @@ footer {
   gap: 0.5rem 1rem;
   margin-block: 1rem 1.5rem;
   font-size: 0.9375rem;
-}
-.preview-context {
-  max-inline-size: var(--abc-content-measure);
-  margin-block: 1.5rem;
-}
-.preview-context > summary {
-  cursor: pointer;
-  color: var(--abc-muted);
-}
-.preview-context[open] > summary {
-  margin-block-end: 1rem;
-}
-.study-preview .preview-problems li + li {
-  margin-block-start: 0.3rem;
 }

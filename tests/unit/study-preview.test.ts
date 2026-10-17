@@ -4,9 +4,9 @@ import { publicProjection, publicCatalog } from '../../src/lib/catalog/public-ca
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 import { splitProblemContext } from '../../src/components/problem-reading.js';
 import { arrangeUnitReading } from '../../src/components/unit-reading.js';
+import { compactUnitProblemLists } from '../../src/components/problem-list.js';
 import {
   isStudyPreview,
-  previewUnit,
   previewProblem,
   STUDY_PREVIEW_ROUTES,
 } from '../../src/lib/study-preview/render.js';
@@ -44,11 +44,14 @@ describe('representative reading prototype', () => {
         true,
         new Map(publicCatalog.problems.map((p) => [p.officialUrl, p.route])),
       );
-      const after = previewUnit(
+      const after = compactUnitProblemLists(
         arrangeUnitReading(
           original,
           publicCatalog.learningUnits.find((unit) => unit.id === id)?.title ?? id,
         ),
+        publicCatalog,
+        base,
+        id,
       );
       const $ = load(after, null, false);
       for (const link of links(original)) expect(links(after)).toContain(link);

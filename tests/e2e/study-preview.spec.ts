@@ -133,12 +133,7 @@ test('prototype supports fragment links, keyboard disclosure and a compact probl
   await page.goto('./learn/query/range-monoid-aggregation/');
   const compact = page.locator('#問題一覧 + ul');
   await expect(compact.locator('li')).toHaveCount(16);
-  const detail = page
-    .locator('#問題一覧')
-    .locator('..')
-    .locator('details')
-    .filter({ hasText: '各問題の主題' })
-    .first();
+  const detail = compact.locator(':scope > li > details').first();
   const summary = detail.locator('summary');
   await summary.focus();
   await page.keyboard.press('Enter');

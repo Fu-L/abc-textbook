@@ -16,29 +16,6 @@ export const STUDY_PREVIEW_ROUTES = [
 export const isStudyPreview = (flag: unknown, route: string): boolean =>
   flag === '1' && STUDY_PREVIEW_ROUTES.some((item) => item === route);
 
-/** The accepted Unit layout owns prose and context; only list compaction remains a prototype. */
-export function previewUnit(body: string): string {
-  const $ = load(body, null, false);
-  for (const id of ['問題一覧', '関連問題']) {
-    const heading = $(`[id="${id}"]`);
-    const list =
-      id === '関連問題'
-        ? heading.next('.unit-related').children('ul').first()
-        : heading.nextAll('ul').first();
-    const compact = $('<ul class="preview-problems"></ul>');
-    for (const row of list.children('li').toArray()) {
-      const link = $(row).find('a').first().clone();
-      compact.append($('<li></li>').append(link));
-    }
-    const detail = $(
-      '<details class="preview-context"><summary>各問題の主題・前提と補足を読む</summary></details>',
-    );
-    list.before(compact, detail);
-    detail.append(list);
-  }
-  return $.html();
-}
-
 export async function previewProblem(body: string, id: string, base: string): Promise<string> {
   const $ = load(body, null, false);
   if (id === 'abc391-f') {

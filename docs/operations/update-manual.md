@@ -221,7 +221,7 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 [代表画面の比較](typography.md)のように本文と見出しを実際に読む。画像の全件更新は不要。
 
 代表ページで情報順・文章を比較するときは[読みやすさの試作](study-ux-prototype.md)を参照する。
-`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを差し替える。問題ページの情報順は#113、単元の情報順と代表2単元の文章は#114で通常buildにも採用済み。試作変数は問題の代表原稿と単元の一覧圧縮の比較用である。残る試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
+`STUDY_UX_PREVIEW=1`はローカルbuildで4ページだけを試作用にする。問題ページの情報順は#113、単元の情報順と代表2単元の文章は#114、問題一覧は#115で通常buildにも採用済み。試作変数による本文の差し替えは問題の代表原稿・解説内ナビゲーションに残り、単元の一覧は通常表示と共通である。残る試作原稿を`src/content/docs/`へコピーしたり、公開workflowへ試作変数を追加したりしない。比較には同じ本番subpath・画面条件を使い、`tests/unit/study-preview.test.ts`と
 `tests/e2e/study-preview.spec.ts`で対象限定、旧anchor・情報・問題順、導線を確認する。試作を変更したときだけ通常・試作の両モードで対象E2Eを実行し、採用候補と保留点をPRに記す。
 
 問題詳細は`src/components/ProblemExplanation.astro`を共用し、公式問題→問題固有の解法の核心→考察本文を先に置く。[問題ページの情報順](problem-reading.md)を参照する。核心は正本Markdownの「考察」の冒頭に、未定義の記号を使わず、着想と必要な理由を伝える短い段落として執筆する。内部分析の`reasoningPath.algorithmConnection.text`や分類用Outcomeを自動転用・切り詰めして導入にしない。導入を改稿していない問題も、その原稿の考察から読み始める。分類・既習技能・執筆情報と原稿の「学習の位置」は末尾の開閉欄へ保持する。この移動は表示処理で行い、正本本文へ反映しない。fullは完全解説、similarは差分解説、supplementは補足解説として案内し、短縮形式は共通rendererが冒頭へ参照元fullのリンクを出す。新問にも通常の公開フローでこの表示が適用され、個別のHTML/CSSは不要である。
@@ -234,6 +234,8 @@ buildは一度行い、同じ出力へのリンク・E2E確認には`:built`を�
 IDごとの分岐は不要である。詳細とトレードオフは[単元ページの情報順](unit-reading.md)を参照する。
 
 単元の共通表示や生成器を変えたら`tests/unit/unit-reading.test.ts`、`tests/contract/canonical-taxonomy-materialization.test.ts`、`tests/e2e/unit-reading.spec.ts`で本文・数式・旧anchor/リンク・問題順、生成draftの情報順、章・案内節・未改稿単元、JS無効とキーボードでの開閉を確認する。unit/E2EはUI変更の`verify:fast`に含む。build・リンク確認は本番subpathで行い、同じ出力を再利用する。
+
+単元の「問題一覧」「関連問題」とタグページの問題列は`src/components/problem-list.ts`を使う。問題名は内部解説へ、「公式問題」は出題元へ進む。主配置では他単元との組合せ、関連問題では主題の単元を短く示し、元の主題・追加技能・既習技能・補足は各行の「技能・出典」で開く。掲載順・所属・本文の正本は変えず、`canonical-taxonomy-materialization.ts`や追加CLIの出力を表示用に一括再生成しない。新問も既存のMarkdownリンクと分類から同じ表示になる。タグの代表問題は既存metadataの選択だけを使い、導入タグの代表例を誤って主タグ・補助タグと表示しない。新しい代表・発展ランクは作らない。比較画像とトレードオフは[問題一覧の表示](problem-lists.md)を参照する。上記のUnitテストは全232単元・868問と全タグの問題集合・順序、元の説明・補足・参照の保持を確認し、E2Eは両導線と行単位の開閉も確認する。
 
 単元本文へ出典を追記した場合は`tests/integration/full-learning-path.test.ts`も実行する。導線検証は「根拠」節の既存出典とtaxonomy識別行の保持を確認し、執筆に必要な出典の追記を許容する。章目次・主配置問題・関連問題は引き続き受理済みの内容と順序を照合する。出典を追加するために既存本文を生成draftへ戻したり、過去の証跡を再生成したりしない。
 

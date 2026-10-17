@@ -1,5 +1,5 @@
 ---
-import { isStudyPreview, previewUnit } from '../../lib/study-preview/render.js';
+import { isStudyPreview } from '../../lib/study-preview/render.js';
 import TextbookLayout from '../../layouts/TextbookLayout.astro';
 import {
   publicCatalog,
@@ -8,6 +8,7 @@ import {
 } from '../../lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
 import { arrangeUnitReading } from '../../components/unit-reading.js';
+import { compactUnitProblemLists } from '../../components/problem-list.js';
 interface Props {
   unit: UiCatalog['learningUnits'][number];
 }
@@ -30,7 +31,12 @@ const originalBody = arrangeUnitReading(
   ),
   unit.title,
 );
-const body = studyPreview ? previewUnit(originalBody) : originalBody;
+const body = compactUnitProblemLists(
+  originalBody,
+  publicCatalog,
+  import.meta.env.BASE_URL,
+  unit.id,
+);
 ---
 
 <TextbookLayout
