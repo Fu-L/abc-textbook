@@ -11,6 +11,7 @@ interface Crumb {
 }
 
 interface Props {
+  unitPage?: boolean;
   studyPreview?: boolean;
   title: string;
   description: string;
@@ -23,6 +24,7 @@ interface Props {
 const {
   title,
   studyPreview = false,
+  unitPage = false,
   description,
   breadcrumbs = [],
   previous,
@@ -67,6 +69,7 @@ const navItems = [
       'textbook',
       {
         'study-preview': studyPreview,
+        'unit-page': unitPage,
         'problem-page':
           canonicalLogicalPath.startsWith('/problems/') && canonicalLogicalPath !== '/problems/',
       },
@@ -91,11 +94,13 @@ const navItems = [
     <div
       class:list={[
         'page-shell',
-        { 'with-sidebar': !studyPreview && canonicalLogicalPath.startsWith('/learn/') },
+        {
+          'with-sidebar': !unitPage && !studyPreview && canonicalLogicalPath.startsWith('/learn/'),
+        },
       ]}
     >
       {
-        !studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
+        !unitPage && !studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
           <TextbookContents currentRoute={canonicalLogicalPath} />
         )
       }
@@ -138,8 +143,8 @@ const navItems = [
           }
           <slot />
           {
-            studyPreview && canonicalLogicalPath.startsWith('/learn/') && (
-              <details class="preview-context" data-pagefind-ignore>
+            (unitPage || studyPreview) && canonicalLogicalPath.startsWith('/learn/') && (
+              <details id="unit-contents" class="unit-context" data-pagefind-ignore>
                 <summary>章と単元の目次</summary>
                 <TextbookContents currentRoute={canonicalLogicalPath} />
               </details>

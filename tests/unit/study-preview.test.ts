@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { publicProjection, publicCatalog } from '../../src/lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 import { splitProblemContext } from '../../src/components/problem-reading.js';
+import { arrangeUnitReading } from '../../src/components/unit-reading.js';
 import {
   isStudyPreview,
   previewUnit,
@@ -43,7 +44,12 @@ describe('representative reading prototype', () => {
         true,
         new Map(publicCatalog.problems.map((p) => [p.officialUrl, p.route])),
       );
-      const after = await previewUnit(original, id, base);
+      const after = previewUnit(
+        arrangeUnitReading(
+          original,
+          publicCatalog.learningUnits.find((unit) => unit.id === id)?.title ?? id,
+        ),
+      );
       const $ = load(after, null, false);
       for (const link of links(original)) expect(links(after)).toContain(link);
       for (const anchor of anchors(original)) expect(anchors(after)).toContain(anchor);
@@ -61,9 +67,11 @@ describe('representative reading prototype', () => {
           .children('li')
           .map((_, row) => originalDocument(row).find('a').first().attr('href'))
           .get();
-        const compact = $(`[id="${heading}"]`)
-          .nextAll('ul')
-          .first()
+        const list =
+          heading === '関連問題'
+            ? $(`[id="${heading}"]`).next('.unit-related').children('ul').first()
+            : $(`[id="${heading}"]`).nextAll('ul').first();
+        const compact = list
           .children('li')
           .map((_, row) => $(row).find('a').first().attr('href'))
           .get();

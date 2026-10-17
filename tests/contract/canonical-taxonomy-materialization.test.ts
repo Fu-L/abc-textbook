@@ -57,6 +57,10 @@ describe('T047–T050 canonical taxonomy materialization', () => {
       expect(byId.get(id)?.document).toContain(`**${target.color}（${target.rating}）**`);
       expect(target.reason.length).toBeGreaterThan(0);
       expect(byId.get(id)?.document).toContain(target.reason);
+      const document = byId.get(id)?.document ?? '';
+      // New drafts start with learning content. Shared rendering handles disclosure,
+      // including for previously authored manuscripts with the old metadata order.
+      expect(document.indexOf('## 概要')).toBeLessThan(document.indexOf(target.reason));
     }
 
     expect(byId.get('unit-dp-transition-optimization')?.document).toContain('全体から例外を引く');

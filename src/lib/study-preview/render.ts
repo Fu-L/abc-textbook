@@ -16,28 +16,15 @@ export const STUDY_PREVIEW_ROUTES = [
 export const isStudyPreview = (flag: unknown, route: string): boolean =>
   flag === '1' && STUDY_PREVIEW_ROUTES.some((item) => item === route);
 
-export async function previewUnit(body: string, unitId: string, base: string): Promise<string> {
+/** The accepted Unit layout owns prose and context; only list compaction remains a prototype. */
+export function previewUnit(body: string): string {
   const $ = load(body, null, false);
-  const text = await manuscript(
-    unitId === 'unit-priority-queue-best-first' ? 'priority-queue' : 'monoid',
-  );
-  const replacement = load(await renderPublicDocument(text, base), null, false);
-  // Retain every original section, anchor, source and detailed classification.
-  const reference = $(
-    '<details class="preview-context"><summary>単元の概要・前提と範囲</summary></details>',
-  );
-  reference.append($('h2').first().prevAll().get().reverse());
-  for (const id of ['概要', '考え方', '成立条件と計算量', '前提と範囲']) {
-    const heading = $(`[id="${id}"]`);
-    reference.append(heading.nextUntil('h2').addBack());
-  }
-  // The new explanation owns these two existing anchors. Retained prose stays readable.
-  reference.find('[id="考え方"], [id="成立条件と計算量"]').removeAttr('id');
-  $.root().prepend(replacement.root().contents());
-  $('#問題一覧').before(reference);
   for (const id of ['問題一覧', '関連問題']) {
     const heading = $(`[id="${id}"]`);
-    const list = heading.nextAll('ul').first();
+    const list =
+      id === '関連問題'
+        ? heading.next('.unit-related').children('ul').first()
+        : heading.nextAll('ul').first();
     const compact = $('<ul class="preview-problems"></ul>');
     for (const row of list.children('li').toArray()) {
       const link = $(row).find('a').first().clone();
