@@ -132,9 +132,21 @@ export const buildLearningPath = (
       const expectedLine = expected?.document.split('\n').find((text) => text.startsWith(prefix));
       if (!line || line !== expectedLine) diagnostics.push(`PREREQUISITE_NAVIGATION:${unit.id}`);
     }
-    for (const title of ['章の構成', '問題一覧', '関連問題', '根拠']) {
+    for (const title of ['章の構成', '問題一覧', '関連問題']) {
       if (expected && section(document, title) !== section(expected.document, title))
         diagnostics.push(`ACCEPTED_NAVIGATION_DRIFT:${unit.id}:${title}`);
+    }
+    // Authored explanations may add sources while retaining every accepted reference
+    // and the taxonomy identity. Navigation sections above still require exact order.
+    if (expected) {
+      const referenceLines = new Set(section(document, '根拠').split('\n'));
+      if (
+        section(expected.document, '根拠')
+          .split('\n')
+          .filter((line) => line.trim())
+          .some((line) => !referenceLines.has(line))
+      )
+        diagnostics.push(`ACCEPTED_NAVIGATION_DRIFT:${unit.id}:根拠`);
     }
     for (const match of document.matchAll(/\]\((\/learn\/[^)\s]*)\)/gu)) {
       if (!routes.has(match[1] ?? ''))

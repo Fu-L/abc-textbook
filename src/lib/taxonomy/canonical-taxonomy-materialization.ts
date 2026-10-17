@@ -244,6 +244,7 @@ const sourceRevisionLabel = (source: SourceRevision): string => {
   return `${subject} ${SOURCE_KIND_LABEL[source.sourceKind]}`;
 };
 
+/** Draft Markdown owns teaching content and references; the shared Unit view owns disclosure. */
 const renderLearningUnitDocument = (input: {
   readonly unit: LearningUnit;
   readonly tags: readonly TechniqueTag[];
@@ -278,10 +279,6 @@ const renderLearningUnitDocument = (input: {
     '---',
     '',
     `# ${unit.title}`,
-    '',
-    `${targetLabel}: **${target.color}（${target.rating}）**。${target.reason}`,
-    '',
-    '対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。',
     '',
     ...(unit.id === 'unit-chapter-modeling'
       ? [
@@ -324,6 +321,10 @@ const renderLearningUnitDocument = (input: {
     ...(input.outcomeStatements.length === 0
       ? []
       : ['### 習得する技能', '', markdownList(input.outcomeStatements), '']),
+    `${targetLabel}: **${target.color}（${target.rating}）**。${target.reason}`,
+    '',
+    '対象色の読み方は[本書の読み方](/learn/modeling/)を参照してください。',
+    '',
     '## 前提と範囲',
     '',
     `共通前提: ${unit.baselineId} (${unit.baselineVersion})。`,

@@ -146,6 +146,7 @@ test('renders accepted canonical Unit prose and links at the canonical route', a
   await page.goto('./learn/number-theory/dynamic-modular-product/');
   await expect(page.getByRole('heading', { name: '考え方', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: '成立条件と計算量', exact: true })).toBeVisible();
+  await page.locator('.unit-related > summary').click();
   await expect(page.getByRole('link', { name: /ABC405 G/u }).first()).toHaveAttribute(
     'href',
     /\/problems\/abc405-g\//u,

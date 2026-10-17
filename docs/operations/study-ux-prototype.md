@@ -1,7 +1,7 @@
 # 代表単元・問題の読みやすさの試作
 
 この文書と画像は #112 / PR
-#128 時点の比較記録である。#113以降、問題ページの情報順は[共通レイアウト](problem-reading.md)へ採用した。現在の通常buildも解説を先に表示し、試作変数は代表原稿と単元の表示を比較するために使う。現在の撮影テストは`build/study-ux-prototype/`へ出力し、この文書の旧Before/After画像を上書きしない。
+#128 時点の比較記録である。#113で問題ページの情報順を[共通レイアウト](problem-reading.md)、#114で単元の情報順と代表2単元の文章を[通常表示](unit-reading.md)へ採用した。単元の試作文章は正本Markdownへ統合し、重複する試作ファイルを削除した。現在の試作変数は問題の代表原稿と単元の一覧圧縮を比較するために使う。撮影テストは`build/study-ux-prototype/`へ出力し、この文書の旧Before/After画像を上書きしない。以下の比較・判断は#128時点の記録である。
 
 [Issue #112](https://github.com/Fu-L/abc-textbook/issues/112)、背景は[Study UX #107](https://github.com/Fu-L/abc-textbook/issues/107)。確認日:
 2026-10-17。[比較基準](study-ux-baseline.md)の「単元を理解する」「問題を解く」「長い単元で復習する」を、#109〜#111の文字組み・数式・横幅改善後の画面で試した。

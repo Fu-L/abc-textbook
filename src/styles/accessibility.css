@@ -251,7 +251,25 @@ footer {
 .problem-page .page-shell {
   max-inline-size: 48rem;
 }
-.problem-reading-links {
+.unit-page .page-shell {
+  max-inline-size: 48rem;
+}
+.unit-context,
+.unit-related {
+  max-inline-size: var(--abc-content-measure);
+  margin-block: 1.5rem;
+}
+.unit-context > summary,
+.unit-related > summary {
+  cursor: pointer;
+  color: var(--abc-muted);
+}
+.unit-context[open] > summary,
+.unit-related[open] > summary {
+  margin-block-end: 1rem;
+}
+.problem-reading-links,
+.unit-reading-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1rem;

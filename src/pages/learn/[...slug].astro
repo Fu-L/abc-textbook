@@ -7,6 +7,7 @@ import {
   type UiCatalog,
 } from '../../lib/catalog/public-catalog.js';
 import { renderPublicDocument } from '../../lib/catalog/render-public-document.js';
+import { arrangeUnitReading } from '../../components/unit-reading.js';
 interface Props {
   unit: UiCatalog['learningUnits'][number];
 }
@@ -20,24 +21,31 @@ const { unit } = Astro.props;
 const document = publicProjection.unitDocuments.get(unit.id);
 if (!document) throw new Error(`Missing accepted Unit: ${unit.id}`);
 const studyPreview = isStudyPreview(import.meta.env.STUDY_UX_PREVIEW, unit.route);
-const originalBody = await renderPublicDocument(
-  document.text,
-  import.meta.env.BASE_URL,
-  true,
-  new Map(publicCatalog.problems.map((problem) => [problem.officialUrl, problem.route])),
+const originalBody = arrangeUnitReading(
+  await renderPublicDocument(
+    document.text,
+    import.meta.env.BASE_URL,
+    true,
+    new Map(publicCatalog.problems.map((problem) => [problem.officialUrl, problem.route])),
+  ),
+  unit.title,
 );
-const body = studyPreview
-  ? await previewUnit(originalBody, unit.id, import.meta.env.BASE_URL)
-  : originalBody;
+const body = studyPreview ? previewUnit(originalBody) : originalBody;
 ---
 
 <TextbookLayout
+  unitPage
   studyPreview={studyPreview}
   title={unit.title}
   description={unit.outcome}
   breadcrumbs={[{ href: '/learn/', label: '分野別目次' }, { label: unit.title }]}
 >
-  <span hidden={studyPreview} data-pagefind-meta="entity-kind">学習単位</span>
+  <span hidden data-pagefind-meta="entity-kind">学習単位</span>
   <h1>{unit.title}</h1>
+  <nav class="unit-reading-links" aria-label="単元の学習" data-pagefind-ignore>
+    <a href="#問題一覧">問題へ進む</a>
+    <a href="#前提と範囲">前提を確認</a>
+    <a href="#unit-contents">章と単元の目次</a>
+  </nav>
   <div class="authored-content" set:html={body} />
 </TextbookLayout>

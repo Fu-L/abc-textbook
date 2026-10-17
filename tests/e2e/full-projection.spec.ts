@@ -180,13 +180,15 @@ test('serves a non-preview Problem with accepted reasoning and the shared record
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 });
 
-test('keeps the complete sidebar, semantic links, and prose accessible at a narrow viewport', async ({
+test('keeps the complete contents, semantic links, and prose accessible at a narrow viewport', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto('./learn/combinatorics-algebra/xor-linear-basis/');
+  await page.locator('#unit-contents > summary').click();
   const navigation = page.getByRole('navigation', { name: '教科書の目次' });
   await expect(navigation.getByRole('link', { includeHidden: true })).toHaveCount(232);
+  await page.getByRole('link', { name: '前提を確認', exact: true }).click();
   await expect(
     page
       .locator('main')

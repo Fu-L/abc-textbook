@@ -56,6 +56,54 @@ describe('full authored LearningUnit navigation', () => {
     expect(result.problemHomeById.size).toBe(868);
   });
 
+  it.each(['remove source', 'replace source URL', 'remove taxonomy identity'])(
+    'rejects reference drift while allowing authored additions: %s',
+    (change) => {
+      const output = actual.learningUnits.find(
+        ({ value }) => value.id === 'unit-priority-queue-best-first',
+      );
+      const accepted = expected.learningUnits.find(({ value }) => value.id === output?.value.id);
+      const prefix = change === 'remove taxonomy identity' ? 'Canonical taxonomy:' : '- [';
+      const line = accepted?.document
+        .split('\n## 根拠\n')[1]
+        ?.split('\n')
+        .find((text) => text.startsWith(prefix));
+      if (!output || !line) throw new Error('Missing reference fixture');
+      const document = output.document.replace(
+        line,
+        change === 'replace source URL' ? line.replace(/\]\(.*\)/u, '](https://atcoder.jp/)') : '',
+      );
+      const changed = {
+        ...actual,
+        learningUnits: actual.learningUnits.map((unit) =>
+          unit === output ? { ...unit, document } : unit,
+        ),
+      };
+      expect(() => buildLearningPath(changed, expected)).toThrow(
+        'ACCEPTED_NAVIGATION_DRIFT:unit-priority-queue-best-first:根拠',
+      );
+    },
+  );
+
+  it.each(['章の構成', '問題一覧', '関連問題'])(
+    'still rejects changes to accepted navigation: %s',
+    (title) => {
+      const heading = `\n## ${title}\n`;
+      const output = actual.learningUnits.find(({ document }) => document.includes(heading));
+      if (!output) throw new Error('Missing navigation fixture');
+      const document = output.document.replace(heading, `${heading}\nUnexpected entry.\n`);
+      const changed = {
+        ...actual,
+        learningUnits: actual.learningUnits.map((unit) =>
+          unit === output ? { ...unit, document } : unit,
+        ),
+      };
+      expect(() => buildLearningPath(changed, expected)).toThrow(
+        `ACCEPTED_NAVIGATION_DRIFT:${output.value.id}:${title}`,
+      );
+    },
+  );
+
   it('rejects a handoff that changes accepted reading order', () => {
     const changed = structuredClone(actual);
     const output = changed.learningUnits.find(({ value }) => value.id === 'unit-xor-linear-basis');
