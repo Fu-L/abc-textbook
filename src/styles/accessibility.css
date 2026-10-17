@@ -37,7 +37,7 @@ footer {
   padding: 1rem;
 }
 .site-title {
-  font-weight: 800;
+  font-weight: 700;
 }
 .section-navigation {
   border-block: 1px solid var(--sl-color-gray-5, GrayText);
@@ -52,9 +52,15 @@ footer {
   padding: 0.75rem 1rem;
   margin: 0;
 }
+.section-navigation ul {
+  margin-inline: auto;
+}
 .breadcrumbs li + li::before {
   content: '›';
   margin-inline-end: 0.5rem;
+}
+.breadcrumbs ol {
+  padding-inline: 0;
 }
 .page-shell {
   padding: 1rem;
@@ -170,6 +176,11 @@ footer {
 .authored-content {
   max-inline-size: var(--abc-content-measure);
   overflow-wrap: anywhere;
+}
+.authored-content table {
+  display: block;
+  max-inline-size: 100%;
+  overflow-x: auto;
 }
 .authored-content pre {
   max-inline-size: 100%;
