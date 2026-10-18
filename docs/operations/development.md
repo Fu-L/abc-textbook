@@ -67,7 +67,9 @@ identity取得、検証後のartifact保存・cleanup・deployは除く。runner
 ログ追加自身のPRはrunner変更により広い検査となる。計測前後のオーバーヘッドは同じ検査集合・環境で区別して報告し、処理時間の変動をログの費用や高速化の効果と決めつけない。#142の28分01秒は広い検査の単独参考値であり、通常更新5件の中央値ではない。測定結果はActionsログとPR本文に記し、計測台帳を追加しない。
 
 小batchの検証は`update-prepare.test.ts`・`update-validation.test.ts`・`full-public-projection.test.ts`を使う。実868問から作る1
-Contestと連続小batchの編集・再実行差分0、索引の実ファイル照合、異常時のcandidate不変を確認する。validate成功経路の全量loaderはbaseと一時candidateの各1回で、索引書込み後は共通の派生値照合だけを行う。正本を変更しない区間での境界は[小batch手順](update-manual.md#小batchの編集と再実行002--pr-09)を参照する。処理時間を比較するときは同じfixture・ケース・並行度・環境を用い、fixture準備やテスト並行度の改善を混ぜない。ファイル別時間は並列なので合算せず、Actionsのtest
+Contestと連続小batchの編集・再実行差分0、索引の実ファイル照合、異常時のcandidate不変を確認する。validate成功経路の全量loaderはbaseと一時candidateの各1回で、索引書込み後は共通の派生値照合だけを行う。正本を変更しない区間での境界は[小batch手順](update-manual.md#小batchの編集と再実行002--pr-09)を参照する。fixture準備にはsuiteごとの`createSmallBatchFixture`を使い、現行base・範囲別の合成取得・執筆素材だけを再利用する。各入力の入れ子とcandidateは複製し、実CLIの読込や判定は毎回行う。`small-batch-fixture.test.ts`で入力とファイルの汚染を検出し、異常群は執筆済み開始点を`copySmallBatchCandidate`でケースごとに複製する。helperの変更時は新教材E2Eも実行する。具体的なコマンド・計測範囲は[更新マニュアル](update-manual.md#3-変更に必要な検証を選ぶ)を参照する。
+
+処理時間を比較するときは同じfixture・ケース・並行度・環境を用い、validator改善とfixture準備の改善を区別する。ファイル別時間は並列なので合算せず、Actionsのtest
 step・依存準備から検証完了までのwall timeと分けて報告する。
 
 ## Toolchain policy

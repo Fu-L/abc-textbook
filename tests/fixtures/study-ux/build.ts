@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
 import { runSmallBatchUpdate } from '../../../scripts/update-abc/index.js';
-import { smallBatchInput, authorSmallBatch } from '../small-batch.js';
+import { createSmallBatchFixture } from '../small-batch.js';
 
 const execute = promisify(execFile);
 
@@ -33,6 +33,7 @@ export async function withNewMaterialBuild(inspect: (dist: string) => Promise<vo
     }
   };
   try {
+    const { smallBatchInput, authorSmallBatch } = await createSmallBatchFixture();
     const input = await smallBatchInput(candidate);
     assert.equal((await runSmallBatchUpdate({ ...input, mode: 'prepare' })).status, 'on_hold');
     await authorSmallBatch(input);

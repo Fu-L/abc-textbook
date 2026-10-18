@@ -1,9 +1,13 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
-import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
+import {
+  createSmallBatchFixture,
+  contentHashes,
+  type SmallBatchFixture,
+} from '../fixtures/small-batch.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
 import * as publicProjection from '../../src/lib/catalog/full-public-projection.js';
 import { AtCoderProblemsSnapshotSchema } from '../../src/lib/corpus/atcoder-problems-metrics.js';
@@ -66,6 +70,11 @@ describe('US5 update preparation', () => {
 });
 
 describe('normal small-batch editing', () => {
+  let fixture: SmallBatchFixture;
+  beforeAll(async () => {
+    fixture = await createSmallBatchFixture();
+  }, 300_000);
+
   // Each case checks the real 868-Problem corpus across prepare/validate reruns.
   // Leave room for shared CI runners while keeping every invariant assertion.
   it.each([467, 468])(
@@ -73,7 +82,7 @@ describe('normal small-batch editing', () => {
     async (last) => {
       const root = await mkdtemp(path.join(tmpdir(), 'abc-small-batch-'));
       try {
-        const input = await smallBatchInput(root, last);
+        const input = await fixture.smallBatchInput(root, last);
         const metricsFile = path.join(root, 'src/content/problem-metrics/atcoder-problems.json');
         const previousMetrics = AtCoderProblemsSnapshotSchema.parse(
           JSON.parse(await readFile(metricsFile, 'utf8')),
@@ -93,7 +102,7 @@ describe('normal small-batch editing', () => {
         const reprepared = await contentHashes(root);
         expect(reprepared.size).toBe(prepared.size);
         for (const [file, bytes] of prepared) expect(reprepared.get(file), file).toBe(bytes);
-        await authorSmallBatch(input);
+        await fixture.authorSmallBatch(input);
         const authoredHome = JSON.parse(
           await readFile(
             path.join(root, 'src/content/learning-units/unit-dp-transition-optimization.json'),

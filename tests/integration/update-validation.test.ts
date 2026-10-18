@@ -2,7 +2,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
 import { deriveFrozenClassification } from '../../scripts/update-abc/classify.js';
@@ -20,7 +20,13 @@ import {
 } from '../../src/lib/domain/schema-parts/catalog.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
-import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
+import {
+  createSmallBatchFixture,
+  copySmallBatchCandidate,
+  contentHashes,
+  type SmallBatchFixture,
+  type SmallBatchInput,
+} from '../fixtures/small-batch.js';
 import * as publicProjection from '../../src/lib/catalog/full-public-projection.js';
 
 describe('US5 update validation', () => {
@@ -212,9 +218,16 @@ describe('US5 update validation', () => {
 });
 
 describe('normal batch holds', () => {
+  let fixture: SmallBatchFixture;
+  beforeAll(async () => {
+    fixture = await createSmallBatchFixture();
+  }, 300_000);
+
   describe('editorial order regressions', () => {
     let root: string;
-    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    let input: SmallBatchInput;
+    let authoredInput: SmallBatchInput | undefined;
+    let authoredRoot: string | undefined;
     const homePath = 'src/content/learning-units/unit-dp-transition-optimization.json';
     const relatedPath = 'src/content/learning-units/unit-modular-arithmetic.json';
     let originalHome: ReturnType<typeof LearningUnitSchema.parse>;
@@ -222,26 +235,38 @@ describe('normal batch holds', () => {
     let relatedFile: string;
     let docFile: string;
     let homeBytes: Buffer;
-    let relatedBytes: Buffer;
     let docBytes: Buffer;
 
     beforeAll(async () => {
       root = await mkdtemp(path.join(tmpdir(), 'abc-batch-order-'));
-      input = await smallBatchInput(root);
+      authoredRoot = root;
+      input = await fixture.smallBatchInput(root);
       await runSmallBatchUpdate({ ...input, mode: 'prepare' });
-      await authorSmallBatch(input);
+      await fixture.authorSmallBatch(input);
+      authoredInput = input;
       originalHome = LearningUnitSchema.parse(JSON.parse(await readFile(homePath, 'utf8')));
       homeFile = path.join(root, homePath);
       relatedFile = path.join(root, relatedPath);
       homeBytes = await readFile(homeFile);
-      relatedBytes = await readFile(relatedFile);
       docFile = path.join(root, originalHome.docPath);
       docBytes = await readFile(docFile);
     }, 300_000);
 
     afterAll(async () => {
-      if (root) await rm(root, { recursive: true, force: true });
+      if (authoredRoot) await rm(authoredRoot, { recursive: true, force: true });
     }, 300_000);
+
+    beforeEach(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-order-case-'));
+      if (!authoredInput) throw new Error('Missing authored starting fixture');
+      input = await copySmallBatchCandidate(authoredInput, root);
+      homeFile = path.join(root, homePath);
+      relatedFile = path.join(root, relatedPath);
+      docFile = path.join(root, originalHome.docPath);
+    });
+    afterEach(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    });
 
     it.each([
       'missing-direct',
@@ -254,9 +279,6 @@ describe('normal batch holds', () => {
     ] as const)(
       'holds %s without writing derived content',
       async (scenario) => {
-        await writeFile(homeFile, homeBytes);
-        await writeFile(relatedFile, relatedBytes);
-        await writeFile(docFile, docBytes);
         const home = LearningUnitSchema.parse(JSON.parse(homeBytes.toString('utf8')));
         let code = 'UNIT_PROBLEM_ORDER_CONFLICT';
         if (scenario === 'missing-direct') {
@@ -299,7 +321,7 @@ describe('normal batch holds', () => {
   it('holds incomplete/source-failed input without applying part of a batch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-hold-'));
     try {
-      const input = await smallBatchInput(root);
+      const input = await fixture.smallBatchInput(root);
       const snapshot = () => contentHashes(root);
       const before = await snapshot();
       const failed = {
@@ -323,7 +345,7 @@ describe('normal batch holds', () => {
         writtenPaths: [],
       });
       expect(await snapshot()).toEqual(prepared);
-      await authorSmallBatch(input);
+      await fixture.authorSmallBatch(input);
       const file = path.join(root, 'src/content/docs/problems/abc467-i.md');
       const text = await readFile(file, 'utf8');
       await writeFile(
@@ -342,19 +364,23 @@ describe('normal batch holds', () => {
 
   describe('placement role and analysis regressions', () => {
     let root: string;
-    let input: Awaited<ReturnType<typeof smallBatchInput>>;
+    let input: SmallBatchInput;
+    let authoredInput: SmallBatchInput | undefined;
+    let authoredRoot: string | undefined;
     let policyFile: string;
     let originalPolicy: Buffer;
     let documentFile: string;
     let originalDocument: string;
 
-    // Share only the authored starting fixture. Each case restores it before editing
-    // and checks its own unchanged bytes; eight full validations cannot share one deadline.
+    // Prepare once, then fork a complete candidate per case. Even the successful
+    // validation case must not leave generated files for a later corrupt case.
     beforeAll(async () => {
       root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-'));
-      input = await smallBatchInput(root);
+      authoredRoot = root;
+      input = await fixture.smallBatchInput(root);
       await runSmallBatchUpdate({ ...input, mode: 'prepare' });
-      await authorSmallBatch(input);
+      await fixture.authorSmallBatch(input);
+      authoredInput = input;
       policyFile = path.join(root, 'src/content/policies/problem-placements.json');
       originalPolicy = await readFile(policyFile);
       documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
@@ -362,8 +388,19 @@ describe('normal batch holds', () => {
     }, 300_000);
 
     afterAll(async () => {
-      if (root) await rm(root, { recursive: true, force: true });
+      if (authoredRoot) await rm(authoredRoot, { recursive: true, force: true });
     }, 300_000);
+
+    beforeEach(async () => {
+      root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-case-'));
+      if (!authoredInput) throw new Error('Missing authored starting fixture');
+      input = await copySmallBatchCandidate(authoredInput, root);
+      policyFile = path.join(root, 'src/content/policies/problem-placements.json');
+      documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
+    });
+    afterEach(async () => {
+      if (root) await rm(root, { recursive: true, force: true });
+    });
 
     it.each([
       'primary-role',
@@ -450,8 +487,6 @@ describe('normal batch holds', () => {
     );
 
     it('rejects a stale generated index without applying any candidate bytes', async () => {
-      await writeFile(policyFile, originalPolicy);
-      await writeFile(documentFile, originalDocument);
       const before = await contentHashes(root);
       const verify = publicProjection.verifyFullPublicProjectionDerivedFiles;
       const checks = vi
@@ -469,8 +504,6 @@ describe('normal batch holds', () => {
     }, 300_000);
 
     it('revalidates edited canonical input after a successful call on the same candidate', async () => {
-      await writeFile(policyFile, originalPolicy);
-      await writeFile(documentFile, originalDocument);
       expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
         status: 'passed',
       });
@@ -488,9 +521,9 @@ describe('normal batch holds', () => {
   it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {
     const root = await mkdtemp(path.join(tmpdir(), 'abc-batch-conflict-'));
     try {
-      const input = await smallBatchInput(root);
+      const input = await fixture.smallBatchInput(root);
       await runSmallBatchUpdate({ ...input, mode: 'prepare' });
-      await authorSmallBatch(input);
+      await fixture.authorSmallBatch(input);
       const source = input.metadataBatch.sourceRevisions[0];
       if (!source) throw new Error('Missing source fixture');
       const sourceFile = path.join(
