@@ -1,5 +1,6 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { readFileSync } from 'node:fs';
+import { performance } from 'node:perf_hooks';
 
 import { normalizeBasePath, resolvePort, resolveSite, UsageError } from '../config/publication.js';
 
@@ -57,10 +58,19 @@ export function mergePublicationChanges(
   changes: readonly VerificationChange[] | null,
   env: NodeJS.ProcessEnv,
   git?: GitReader,
+  report?: (message: string) => void,
 ): readonly VerificationChange[] | null {
   if (env.GITHUB_EVENT_NAME !== 'push' || env.GITHUB_REF !== 'refs/heads/main') return changes;
-  if (!env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA || !changes) return null;
-  const pending = readVerificationChanges(env, env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA, git);
+  if (!env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA || !changes) {
+    report?.(
+      'Verification comparison unavailable: main requires both the push diff and last successful deployment SHA.',
+    );
+    return null;
+  }
+  report?.(
+    `Verification includes undeployed changes since ${env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA}.`,
+  );
+  const pending = readVerificationChanges(env, env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA, git, report);
   return pending ? [...changes, ...pending] : null;
 }
 
@@ -69,14 +79,20 @@ export function readVerificationChanges(
   env: NodeJS.ProcessEnv,
   baseRef?: string,
   git: GitReader = (args) => execFileSync('git', [...args], { encoding: 'utf8' }),
+  report?: (message: string) => void,
 ): VerificationChange[] | null {
+  const unavailable = (reason: string): null => {
+    report?.(`Verification comparison unavailable: ${reason}.`);
+    return null;
+  };
   try {
     const head = git(['rev-parse', 'HEAD']).trim();
     let comparison: string;
     if (baseRef) {
       comparison = git(['rev-parse', '--verify', `${baseRef}^{commit}`]).trim();
     } else {
-      if (!env.GITHUB_EVENT_PATH || head !== env.GITHUB_SHA) return null;
+      if (!env.GITHUB_EVENT_PATH || head !== env.GITHUB_SHA)
+        return unavailable('event path missing or checkout HEAD differs from GITHUB_SHA');
       const event = JSON.parse(readFileSync(env.GITHUB_EVENT_PATH, 'utf8')) as {
         before?: string;
         pull_request?: { base?: { sha?: string } };
@@ -87,12 +103,14 @@ export function readVerificationChanges(
           : env.GITHUB_EVENT_NAME === 'push'
             ? event.before
             : undefined;
-      if (!base || !/^[a-f0-9]{40}$/u.test(base) || /^0+$/u.test(base)) return null;
+      if (!base || !/^[a-f0-9]{40}$/u.test(base) || /^0+$/u.test(base))
+        return unavailable('event has no usable comparison SHA');
       git(['rev-parse', '--verify', `${base}^{commit}`]);
       comparison =
         env.GITHUB_EVENT_NAME === 'pull_request' ? git(['merge-base', base, head]).trim() : base;
     }
-    if (!/^[a-f0-9]{40}$/u.test(comparison)) return null;
+    if (!/^[a-f0-9]{40}$/u.test(comparison)) return unavailable('invalid comparison SHA');
+    report?.(`Verification comparison: base=${comparison} head=${head}.`);
     // Explicit local --base includes tracked working-tree edits. Actions compares exact commits.
     const fields = git([
       'diff',
@@ -102,12 +120,14 @@ export function readVerificationChanges(
       comparison,
       ...(baseRef && !env.CI ? [] : [head]),
     ]).split('\0');
-    if (fields.pop() !== '' || fields.length % 2 !== 0) return null;
+    if (fields.pop() !== '' || fields.length % 2 !== 0)
+      return unavailable('malformed Git name-status output');
     const changes: VerificationChange[] = [];
     for (let i = 0; i < fields.length; i += 2) {
       const status = fields[i],
         file = fields[i + 1];
-      if (!status || !file || !/^[AMD]$/u.test(status)) return null;
+      if (!status || !file || !/^[AMD]$/u.test(status))
+        return unavailable('unsupported Git change status or missing path');
       changes.push({ status, file });
     }
     if (baseRef && !env.CI) {
@@ -117,8 +137,10 @@ export function readVerificationChanges(
         changes.push({ status: 'A', file });
     }
     return changes;
-  } catch {
-    return null;
+  } catch (error) {
+    return unavailable(
+      `Git/event lookup failed: ${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 }
 
@@ -161,7 +183,13 @@ export function selectVerificationSteps(
   changes: readonly VerificationChange[] | null,
   env: NodeJS.ProcessEnv = {},
 ): VerificationStep[] {
-  let broad = !changes?.length;
+  return planVerification(changes, env).steps;
+}
+
+function planVerification(changes: readonly VerificationChange[] | null, env: NodeJS.ProcessEnv) {
+  const broadReasons = new Set<string>();
+  if (changes === null) broadReasons.add('change set unavailable');
+  else if (!changes.length) broadReasons.add('empty change set');
   let prose = false,
     data = false,
     ui = false,
@@ -171,11 +199,12 @@ export function selectVerificationSteps(
   const docs: string[] = [];
   for (const { status, file } of changes ?? []) {
     if (!['A', 'M', 'D'].includes(status)) {
-      broad = true;
+      broadReasons.add(`unsupported change status: ${JSON.stringify({ status, file })}`);
       continue;
     }
     if (documentationPath(file)) {
-      if (status === 'D') broad = true;
+      if (status === 'D')
+        broadReasons.add(`nonpublic documentation deleted: ${JSON.stringify(file)}`);
       else docs.push(file);
     } else if (file === 'src/content/indexes/release-history.json') history = true;
     else if (file.startsWith('src/content/docs/')) prose = true;
@@ -186,8 +215,9 @@ export function selectVerificationSteps(
       ui = true;
       records = true;
     } else if (file.startsWith('.agents/skills/abc-explanation-author/')) skill = true;
-    else broad = true;
+    else broadReasons.add(`common code/configuration or unknown path: ${JSON.stringify(file)}`);
   }
+  const broad = broadReasons.size > 0;
   const steps: VerificationStep[] = [];
   if (docs.length)
     steps.push({
@@ -251,7 +281,7 @@ export function selectVerificationSteps(
         args: ['--project=chromium', ...(broad ? [] : [...e2e])],
       });
   }
-  return steps;
+  return { steps, broadReasons: [...broadReasons] };
 }
 
 export async function runVerification(options: {
@@ -293,15 +323,46 @@ export async function runVerification(options: {
   const changes = all
     ? null
     : options.changes === undefined
-      ? mergePublicationChanges(readVerificationChanges(options.env, base), options.env)
+      ? mergePublicationChanges(
+          readVerificationChanges(options.env, base, undefined, report),
+          options.env,
+          undefined,
+          report,
+        )
       : options.changes;
-  const steps = selectVerificationSteps(changes, options.env);
+  const { steps, broadReasons } = planVerification(changes, options.env);
   const execute =
     options.execute ?? ((step: VerificationStep) => executeVerificationStep(step, options.env));
   report(`Verification scope: ${steps.map((step) => step.id).join(', ')}.`);
+  report(
+    `Verification input: ${all ? '--all' : base ? `--base ${JSON.stringify(base)}` : 'event/local diff'}; ` +
+      `changes=${changes === null ? 'unavailable' : String(changes.length)}; ` +
+      `publication_base=${JSON.stringify(options.env.ABC_TEXTBOOK_PUBLICATION_BASE_SHA ?? null)}.`,
+  );
+  for (const reason of all ? ['explicit --all'] : broadReasons)
+    report(`Verification broad scope reason: ${reason}.`);
+  for (const step of steps) {
+    const { command, args } = verificationCommand(step);
+    report(
+      `Verification planned: id=${step.id} command=${JSON.stringify(command)} args=${JSON.stringify(args)}.`,
+    );
+  }
   try {
     for (const step of steps) {
-      const exitCode = await execute(step);
+      const started = performance.now();
+      report(`Verification started: id=${step.id} at=${new Date().toISOString()}.`);
+      let exitCode: number;
+      try {
+        exitCode = await execute(step);
+      } catch (error) {
+        report(
+          `Verification finished: id=${step.id} at=${new Date().toISOString()} elapsed_ms=${(performance.now() - started).toFixed(3)} result=error.`,
+        );
+        throw error;
+      }
+      report(
+        `Verification finished: id=${step.id} at=${new Date().toISOString()} elapsed_ms=${(performance.now() - started).toFixed(3)} result=${exitCode === EXIT_CODE.success ? 'passed' : 'failed'} native_exit_code=${String(exitCode)}.`,
+      );
       if (exitCode !== EXIT_CODE.success) {
         report(`${step.script} failed with native exit code ${String(exitCode)}.`);
         return exitCode === EXIT_CODE.usage || exitCode === EXIT_CODE.internal
@@ -323,16 +384,21 @@ export async function runVerification(options: {
   return EXIT_CODE.success;
 }
 
-export function executeVerificationStep(
-  step: VerificationStep,
-  env: NodeJS.ProcessEnv,
-): Promise<number> {
+function verificationCommand(step: VerificationStep) {
   const command =
     step.command === 'node' ? process.execPath : process.platform === 'win32' ? 'npm.cmd' : 'npm';
   const args =
     step.command === 'node'
       ? [step.script, ...(step.args ?? [])]
       : ['run', step.script, ...(step.args?.length ? ['--', ...step.args] : [])];
+  return { command, args };
+}
+
+export function executeVerificationStep(
+  step: VerificationStep,
+  env: NodeJS.ProcessEnv,
+): Promise<number> {
+  const { command, args } = verificationCommand(step);
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, { env, stdio: 'inherit' });
     child.once('error', reject);

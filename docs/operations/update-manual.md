@@ -311,6 +311,10 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 ローカル`--base REF`はtrackedの作業差分と未追跡ファイルも含める。ActionsではcheckoutしたSHAとのcommit差分を使う。`--all`またはローカル差分未指定は広い検査。未知引数は使用法違反で停止する。失敗はexit
 2、使用法違反64、signal/実行不能70で後続を止める。非公開文書だけは書式・リンク・見出し・feature選択を検証し、build・E2E・browser準備を実行しない。
 
+Actionsログには比較元と未配信差分、選択したstepのコマンド・全引数、広い検査へ戻った理由を出す。`Verification planned`は予定、`Verification started/finished`は実際に実行した処理である。終了行の`elapsed_ms`は単調時計による計測で、失敗・signal・実行不能でも記録する。後続の未実行stepを成功として扱わない。
+
+CI全体の比較は既存Actionsの`Set up Node.js 24.18.0`開始から`Verify changed scope`完了までとし、runner内の時間とは区別する。queue・checkout、検証後のartifact保存・cleanup・deployは除外し、並列テストの時間を合算しない。ログの読み方と計測の限界は[開発手順](development.md#actionsで検証時間を読む)を参照する。実測はPR本文とActionsログへまとめ、計測専用の台帳を作らない。
+
 初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
 
 小batchの分類回帰では執筆済みの開始fixtureだけを共有し、各異常ケースは元のpolicy・本文から編集して独立したテストとして実行する。複数回の全量検証を1本の5分制限へ詰め込まず、各ケースの保留理由と候補のbytes不変を確認する。
