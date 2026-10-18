@@ -28,6 +28,19 @@ CIは既存文書checkerのfixtureも確認する。変更選択のcontractはru
 切替中は旧4jobも残している。新baselineの実成功後に実branch
 protection/rulesetを読んで旧4checkを外し、deploy参照を揃えてから旧jobを手動入口へ移す。実設定の切替状況と復旧順は[更新マニュアル](update-manual.md#ci必須設定の切替と復旧)を参照する。
 
+## Actionsで検証時間を読む
+
+`Verify changed scope`内の`verify:fast`は、比較元・比較先SHA、mainで合流した未配信差分、選択したstep
+IDとコマンド・全引数をログへ出す。`Verification planned`は実行予定であり、テストの絞り込みはその`args`で確認する。Vitestのファイル指定がなければ全体、E2Eが`--project=chromium`だけならChromium全体である。`Verification broad scope reason`は`--all`、差分取得不能、空差分、非公開文書の削除、不明status、共通処理・設定または未知pathの理由を示す。差分取得不能時は直前の`Verification comparison unavailable`も確認する。
+
+実行したstepだけに`Verification started`と`Verification finished`を出す。`at`はUTCの開始・終了日時、`elapsed_ms`は単調時計による経過時間であり、時計の補正に影響されない。終了行は`result=passed/failed/error`と、通常終了なら`native_exit_code`を示す。signal・実行不能は`error`の時間に続いて理由を出し、後続を止める。予定行だけのstepを成功と数えない。Actionsによる強制終了で終了行を残せない場合も成功とは扱わない。
+
+比較の主指標は、Actionsの既存step時刻で**`Set up Node.js 24.18.0`の開始から`Verify changed scope`の完了まで**のwall
+timeを取る。queue・checkout・run
+identity取得、検証後のartifact保存・cleanup・deployは除く。runnerの処理別時間は依存準備・npm選択・`npm ci`・文書checker自身の検査を含まず、この主指標と境界が異なる。Vitest内の並列ファイル時間や処理別時間を足して全体時間や短縮量を求めない。
+
+ログ追加自身のPRはrunner変更により広い検査となる。計測前後のオーバーヘッドは同じ検査集合・環境で区別して報告し、処理時間の変動をログの費用や高速化の効果と決めつけない。#142の28分01秒は広い検査の単独参考値であり、通常更新5件の中央値ではない。測定結果はActionsログとPR本文に記し、計測台帳を追加しない。
+
 ## Toolchain policy
 
 依存パッケージは`package-lock.json`で完全版を固定します。Node.jsとnpmは、通常開発で利用できる対応範囲と、リリース検証で再現する基準版を分けて管理します。

@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { performance } from 'node:perf_hooks';
 import { pathToFileURL } from 'node:url';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -462,5 +463,198 @@ describe('verify:fast failure propagation and script contract', () => {
     expect(pkg.scripts['build:checked']).not.toContain('astro check');
     expect(pkg.scripts['test:e2e:install:ci']).toBe('playwright install --with-deps chromium');
     expect(pkg.scripts['test:e2e:install']).toContain('chromium firefox webkit');
+  });
+});
+
+describe('verify:fast Actions diagnostics', () => {
+  it('explains unavailable comparisons and the undeployed main union', () => {
+    const report = vi.fn();
+    expect(
+      readVerificationChanges(
+        {},
+        'HEAD',
+        () => {
+          throw Error('missing history');
+        },
+        report,
+      ),
+    ).toBeNull();
+    expect(report).toHaveBeenCalledWith(
+      'Verification comparison unavailable: Git/event lookup failed: missing history.',
+    );
+    const env = { CI: 'true', GITHUB_EVENT_NAME: 'push', GITHUB_REF: 'refs/heads/main' };
+    expect(mergePublicationChanges(changed('README.md'), env, undefined, report)).toBeNull();
+    expect(report).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'main requires both the push diff and last successful deployment SHA',
+      ),
+    );
+    const git = (args: readonly string[]) =>
+      args[0] === 'diff' ? 'M\0scripts/verify/runner.ts\0' : 'a'.repeat(40);
+    const union = mergePublicationChanges(
+      changed('README.md'),
+      { ...env, ABC_TEXTBOOK_PUBLICATION_BASE_SHA: 'a'.repeat(40) },
+      git,
+      report,
+    );
+    expect(union).toEqual(changed('README.md', 'scripts/verify/runner.ts'));
+    expect(report).toHaveBeenCalledWith(
+      `Verification includes undeployed changes since ${'a'.repeat(40)}.`,
+    );
+  });
+
+  it.each([
+    'docs/operations/development.md',
+    'src/content/docs/problems/abc212-g.md',
+    'src/content/problems/abc212-g.json',
+    'src/components/ProblemExplanation.astro',
+    'scripts/verify/runner.ts',
+  ])('reports the selected commands, arguments and serial execution for %s', async (file) => {
+    const root = mkdtempSync(path.join(os.tmpdir(), 'verify-logs-'));
+    try {
+      const output = path.join(root, 'output');
+      const env = { ...validEnvironment, CI: 'true', GITHUB_OUTPUT: output };
+      const steps = selectVerificationSteps(changed(file), env);
+      const messages: string[] = [];
+      const executed: string[] = [];
+      let monotonic = 100;
+      vi.spyOn(performance, 'now').mockImplementation(() => monotonic);
+      expect(
+        await runVerification({
+          args: [],
+          env,
+          changes: changed(file),
+          report: (message) => messages.push(message),
+          execute: (step) => {
+            expect(messages.at(-1)).toMatch(`Verification started: id=${step.id} at=`);
+            executed.push(step.id);
+            // Wall-clock adjustments must not change elapsed time.
+            vi.spyOn(Date.prototype, 'toISOString').mockReturnValue('2000-01-01T00:00:00.000Z');
+            monotonic += 12.5;
+            return Promise.resolve(0);
+          },
+        }),
+      ).toBe(0);
+      expect(executed).toEqual(steps.map(({ id }) => id));
+      const planned = messages.filter((message) => message.startsWith('Verification planned:'));
+      const finished = messages.filter((message) => message.startsWith('Verification finished:'));
+      expect(planned).toHaveLength(steps.length);
+      expect(finished).toHaveLength(steps.length);
+      for (const [i, step] of steps.entries()) {
+        const args =
+          step.command === 'node'
+            ? [step.script, ...(step.args ?? [])]
+            : ['run', step.script, ...(step.args?.length ? ['--', ...step.args] : [])];
+        expect(planned[i]).toContain(`id=${step.id} command=`);
+        expect(planned[i]).toContain(`args=${JSON.stringify(args)}`);
+        expect(finished[i]).toContain(`id=${step.id} at=`);
+        expect(finished[i]).toContain('elapsed_ms=12.500 result=passed native_exit_code=0');
+      }
+      expect(readFileSync(output, 'utf8')).toBe(
+        `publication=${String(steps.some(({ id }) => id === 'build'))}\n`,
+      );
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it.each([
+    { args: ['--all'], changes: null, reason: 'explicit --all' },
+    { args: [], changes: null, reason: 'change set unavailable' },
+    { args: [], changes: [], reason: 'empty change set' },
+    {
+      args: [],
+      changes: changed('new/path'),
+      reason: 'common code/configuration or unknown path: "new/path"',
+    },
+    {
+      args: [],
+      changes: [{ status: 'D', file: 'README.md' }],
+      reason: 'nonpublic documentation deleted: "README.md"',
+    },
+    {
+      args: [],
+      changes: [{ status: 'T', file: 'README.md' }],
+      reason: 'unsupported change status:',
+    },
+  ])('explains broad selection: $reason', async ({ args, changes, reason }) => {
+    const report = vi.fn();
+    await runVerification({
+      args,
+      changes,
+      env: validEnvironment,
+      report,
+      execute: () => Promise.resolve(0),
+    });
+    expect(report).toHaveBeenCalledWith(
+      expect.stringContaining(`Verification broad scope reason: ${reason}`),
+    );
+    expect(report).toHaveBeenCalledWith(
+      'Verification planned: id=test command="npm" args=["run","test"].',
+    );
+    expect(report).toHaveBeenCalledWith(
+      'Verification planned: id=e2e command="npm" args=["run","test:e2e:built","--","--project=chromium"].',
+    );
+  });
+
+  it.each([1, 64, 70, 'signal', 'unavailable'] as const)(
+    'times a stopped step without publishing or completing later steps: %s',
+    async (failure) => {
+      const root = mkdtempSync(path.join(os.tmpdir(), 'verify-stop-'));
+      try {
+        const output = path.join(root, 'output');
+        writeFileSync(output, 'existing=value\n');
+        const report = vi.fn();
+        const execute = vi.fn(async (step: { id: string }) => {
+          if (step.id !== 'test') return 0;
+          if (failure === 'signal')
+            return executeVerificationStep(
+              {
+                id: 'test',
+                command: 'node',
+                script: '-e',
+                args: ['process.kill(process.pid,"SIGTERM")'],
+              },
+              process.env,
+            );
+          if (failure === 'unavailable')
+            return executeVerificationStep(
+              { id: 'test', script: 'test' },
+              { ...process.env, PATH: root },
+            );
+          return failure;
+        });
+        expect(
+          await runVerification({
+            args: ['--all'],
+            env: { ...validEnvironment, GITHUB_OUTPUT: output },
+            execute,
+            report,
+          }),
+        ).toBe(failure === 1 ? 2 : typeof failure === 'number' ? failure : 70);
+        const messages = report.mock.calls.map(([message]) => String(message));
+        expect(messages).toContainEqual(
+          expect.stringMatching(
+            /^Verification finished: id=test at=\S+ elapsed_ms=\d+\.\d{3} result=(failed|error)/u,
+          ),
+        );
+        expect(messages).not.toContainEqual(
+          expect.stringMatching(/^Verification (started|finished): id=(build|links|e2e)/u),
+        );
+        if (failure === 'signal')
+          expect(messages).toContainEqual(expect.stringContaining('SIGTERM'));
+        if (failure === 'unavailable')
+          expect(messages).toContainEqual(expect.stringContaining('ENOENT'));
+        expect(readFileSync(output, 'utf8')).toBe('existing=value\n');
+      } finally {
+        rmSync(root, { recursive: true, force: true });
+      }
+    },
+  );
+
+  it('does not log planned or completed steps on usage errors', async () => {
+    const report = vi.fn();
+    expect(await runVerification({ args: ['--unknown'], env: validEnvironment, report })).toBe(64);
+    expect(report.mock.calls).toEqual([['Usage: verify:fast [--all | --base REF]']]);
   });
 });
