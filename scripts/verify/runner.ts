@@ -2,6 +2,7 @@ import { execFileSync, spawn } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
 
+import { documentationPath } from '../../.github/actions/nonpublic-docs/paths.mjs';
 import { normalizeBasePath, resolvePort, resolveSite, UsageError } from '../config/publication.js';
 
 export const EXIT_CODE = { success: 0, verificationFailure: 2, usage: 64, internal: 70 } as const;
@@ -28,18 +29,6 @@ export interface VerificationStep {
 }
 export type VerificationExecutor = (step: VerificationStep) => Promise<number>;
 type GitReader = (args: readonly string[]) => string;
-
-const documentationPath = (file: string): boolean =>
-  [
-    'AGENTS.md',
-    'README.md',
-    'docs/README.md',
-    '.specify/feature.json',
-    '.specify/memory/constitution.md',
-  ].includes(file) ||
-  /^\.specify\/templates\/[^/]+\.md$/u.test(file) ||
-  /^docs\/operations\/[^/]+\.md$/u.test(file) ||
-  /^specs\/\d{3}-[^/]+\/(?:[^/]+\/)*[^/]+\.md$/u.test(file);
 
 /** Only a known index + nonpublic documentation diff stops the append chain. */
 export function isHistoryOnlyPublication(changes: readonly VerificationChange[] | null): boolean {
@@ -197,12 +186,14 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
     skill = false,
     history = false;
   const docs: string[] = [];
+  let checkDocs = false;
   for (const { status, file } of changes ?? []) {
     if (!['A', 'M', 'D'].includes(status)) {
       broadReasons.add(`unsupported change status: ${JSON.stringify({ status, file })}`);
       continue;
     }
     if (documentationPath(file)) {
+      checkDocs = true;
       if (status === 'D')
         broadReasons.add(`nonpublic documentation deleted: ${JSON.stringify(file)}`);
       else docs.push(file);
@@ -219,7 +210,7 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
   }
   const broad = broadReasons.size > 0;
   const steps: VerificationStep[] = [];
-  if (docs.length)
+  if (checkDocs)
     steps.push({
       id: 'docs',
       command: 'node',

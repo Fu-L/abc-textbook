@@ -238,6 +238,12 @@ Contest追加・公開は別依頼まで未実施で、SC-004とM5全体の実�
 | 学習記録・backup                   | 既存データの読み込み、値と日時、reload保持、export/importの対象テスト                    |
 | 依存・公開設定                     | lockfileと対象環境、build、subpathと公開導線、必要な互換性検証                           |
 
+非公開の比較画像は、`docs/operations/`の次の既存ディレクトリ直下にある`.png`だけを文書assetとして扱う。
+`content-readability`、`content-widths`、`document-contents`、`explanation-writing`、`problem-lists`、`problem-reading`、
+`study-entry-points`、`study-indexes`、`study-ux-baseline`、`study-ux-math`、`study-ux-prototype`、`textbook-navigation`、`typography`、`unit-reading`。判定は`.github/actions/nonpublic-docs/paths.mjs`をrunnerと文書checkerで共用する。別の配置・拡張子は未知pathとして広い検査へ戻す。
+
+これらの画像と既知の非公開文書の追加・修正だけなら、文書checkerで完了し、build・E2E・配信を選ばない。PNGは存在する通常ファイルかを確認し、Prettierには本文・JSONだけを渡す。変更Markdownのローカルリンク・画像・見出し参照に加え、既知の非公開Markdown全体から比較PNGへの参照も確認する。画像だけの変更や、未変更の文書からの通常リンク・画像記法・参照形式による参照切れも検出する。画像の削除・renameは広い検査を維持し、削除したpathをPrettierへ渡さずに参照検査も行う。画像を移動・削除するときは参照元も同じ変更で直す。教材・データ・UIとの混在は検査の和集合とし、mainでは最後の成功配信以降の未配信差分も合流する。文書画像だけのpushでも未配信の教材変更があれば必要な検証・配信を行う。空差分・差分取得不能・未知pathのfallbackは従来どおり維持する。
+
 既存コマンドの例（すべてを毎回実行する一覧ではない）:
 
 ```sh
@@ -299,6 +305,8 @@ detailsで開ける。公式順・欠番・状態・既存anchorを表示都合�
 fence・anchorを軽量に検査し、`tests/e2e/study-readability.spec.ts`は代表3ページの200%文字拡大・reflow・両配色のaxe・キーボードを確認する。`tests/e2e/new-material.spec.ts`は隔離した新Unit/Problemを生成・執筆・公開投影・通常の静的ページへ通し、PCとJS無効のスマホで本文・出典・学習位置・内部リンク・学習記録への移動を確認する。教材・データ・UI・執筆skillの変更で新教材E2Eを選び、UI変更では拡大検査も選ぶ。全ページのブラウザー撮影や画像snapshotの一括更新は追加しない。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
+
+新教材E2Eの隔離buildは、`src`・`scripts`に加えて、runnerが参照する`.github/actions/nonpublic-docs/paths.mjs`もコピーする。共通モジュールの依存先を追加・移動した場合は`tests/fixtures/study-ux/build.ts`のコピー対象も確認し、`new-material.spec.ts`で実際のbuildと表示を検証する。
 
 `verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain
 push前のSHAとの差から必要な検査を選ぶ。複数分類は和集合、renameは削除・追加の両pathを扱う。未知path・取得不能・空差分・非公開文書の削除は広い検査へ進む。通常経路からpreview凍結・全shard再join・毎回の初版監査・release/review照合・一律の数学回帰を外した。既存の正本loaderのschema、ID・参照・3DAG・配置・本文・リンクと対象挙動の検証は残る。

@@ -1,5 +1,13 @@
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
+import {
+  globSync,
+  mkdtempSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
@@ -17,6 +25,7 @@ import {
 } from '../../scripts/verify/runner.js';
 
 const validEnvironment = { BASE_PATH: '/abc-textbook', SITE_URL: 'https://example.invalid' };
+const comparisonImage = 'docs/operations/content-readability/after.png';
 const changed = (...files: string[]): VerificationChange[] =>
   files.map((file) => ({ status: 'M', file }));
 const plan = (...files: string[]) => selectVerificationSteps(changed(...files));
@@ -25,6 +34,170 @@ const testArgs = (...files: string[]) =>
   plan(...files).find((step) => step.id === 'test')?.args ?? [];
 
 describe('verify:fast change selection', () => {
+  it('checks every existing comparison PNG through documentation without build, E2E or publication', async () => {
+    const images = globSync('docs/operations/**/*.png');
+    expect(images.length).toBeGreaterThan(0);
+    for (const file of [...images, comparisonImage]) {
+      expect(ids(file)).toEqual(['docs']);
+      expect(ids(file, 'docs/operations/content-readability.md')).toEqual(['docs']);
+    }
+    const root = mkdtempSync(path.join(os.tmpdir(), 'verify-image-publication-'));
+    try {
+      const output = path.join(root, 'output');
+      const execute = vi.fn(() => Promise.resolve(0));
+      expect(
+        await runVerification({
+          args: [],
+          env: { ...validEnvironment, CI: 'true', GITHUB_OUTPUT: output },
+          changes: [{ status: 'A', file: comparisonImage }],
+          execute,
+          report: vi.fn(),
+        }),
+      ).toBe(0);
+      expect(execute).toHaveBeenCalledTimes(1);
+      expect(readFileSync(output, 'utf8')).toBe('publication=false\n');
+    } finally {
+      rmSync(root, { recursive: true });
+    }
+  });
+
+  it.each([
+    'src/content/docs/problems/abc212-e.md',
+    'src/content/problems/abc212-e.json',
+    'src/components/ProblemExplanation.astro',
+  ])('unions comparison image validation with required checks for %s', (file) => {
+    const steps = plan(comparisonImage, file);
+    expect(steps[0]).toEqual({
+      id: 'docs',
+      command: 'node',
+      script: '.github/actions/nonpublic-docs/check.mjs',
+      args: ['--files', comparisonImage],
+    });
+    expect(steps.slice(1)).toEqual(plan(file));
+  });
+
+  it.each([
+    'docs/operations/content-readability/after.svg',
+    'docs/operations/content-readability/after.jpg',
+    'docs/operations/content-readability/after.png.js',
+    'docs/operations/content-readability/after.PNG',
+    'docs/operations/unknown/after.png',
+    'docs/operations/after.png',
+    'docs/operations/content-readability/nested/after.png',
+    'public/after.png',
+  ])('retains broad verification for an unknown image path or extension: %s', (file) => {
+    expect(plan(comparisonImage, file).slice(1)).toEqual(selectVerificationSteps(null));
+  });
+
+  it('retains broad deletion/rename verification and checks references without formatting deleted images', () => {
+    const removed = { status: 'D', file: comparisonImage };
+    const renamed = 'docs/operations/content-readability/renamed.png';
+    const deletion = selectVerificationSteps([removed]);
+    expect(deletion[0]?.args).toEqual(['--files']);
+    expect(deletion.slice(1)).toEqual(selectVerificationSteps(null));
+    const rename = selectVerificationSteps([removed, { status: 'A', file: renamed }]);
+    expect(rename[0]?.args).toEqual(['--files', renamed]);
+    expect(rename.slice(1)).toEqual(selectVerificationSteps(null));
+    expect(selectVerificationSteps([{ status: 'R100', file: comparisonImage }])).toEqual(
+      selectVerificationSteps(null),
+    );
+  });
+
+  it.each(['prose', 'common'] as const)(
+    'unions image-only main pushes with undeployed %s changes and still publishes',
+    async (kind) => {
+      const pending =
+        kind === 'prose'
+          ? 'src/content/docs/problems/abc212-e.md'
+          : 'src/lib/catalog/full-public-projection.ts';
+      const env = {
+        ...validEnvironment,
+        CI: 'true',
+        GITHUB_EVENT_NAME: 'push',
+        GITHUB_REF: 'refs/heads/main',
+        GITHUB_SHA: 'a'.repeat(40),
+        ABC_TEXTBOOK_PUBLICATION_BASE_SHA: 'b'.repeat(40),
+      };
+      const union = mergePublicationChanges(changed(comparisonImage), env, (args) =>
+        args[0] === 'diff'
+          ? `M\0${pending}\0`
+          : args[0] === 'rev-parse' && args[1] === 'HEAD'
+            ? 'a'.repeat(40)
+            : 'b'.repeat(40),
+      );
+      expect(selectVerificationSteps(union)).toEqual(plan(comparisonImage, pending));
+      const root = mkdtempSync(path.join(os.tmpdir(), 'verify-pending-image-'));
+      try {
+        const output = path.join(root, 'output');
+        await runVerification({
+          args: [],
+          env: { ...env, GITHUB_OUTPUT: output },
+          changes: union,
+          execute: () => Promise.resolve(0),
+          report: vi.fn(),
+        });
+        expect(readFileSync(output, 'utf8')).toBe('publication=true\n');
+      } finally {
+        rmSync(root, { recursive: true });
+      }
+    },
+  );
+
+  it.each(['missing image', 'inline reference', 'reference definition', 'deletion', 'rename'])(
+    'stops the required runner on a real comparison image failure: %s',
+    async (failure) => {
+      const root = mkdtempSync(path.join(os.tmpdir(), 'verify-image-failure-'));
+      try {
+        mkdirSync(path.join(root, 'docs/operations/content-readability'), { recursive: true });
+        const renamed = 'docs/operations/content-readability/renamed.png';
+        const changes: VerificationChange[] =
+          failure === 'deletion' || failure === 'rename'
+            ? [{ status: 'D', file: comparisonImage }]
+            : changed(comparisonImage);
+        if (failure !== 'missing image' && failure !== 'deletion')
+          writeFileSync(
+            path.join(root, failure === 'rename' ? renamed : comparisonImage),
+            Buffer.from([137, 80, 78, 71, 0]),
+          );
+        if (failure === 'rename') changes.push({ status: 'A', file: renamed });
+        const target = failure.includes('reference') ? 'absent.png' : 'after.png';
+        writeFileSync(
+          path.join(root, 'docs/operations/content-readability.md'),
+          failure === 'reference definition'
+            ? `![After][image]\n\n[image]: content-readability/${target}\n`
+            : `![After](content-readability/${target})\n`,
+        );
+        const helper = path.join(root, 'check.mjs');
+        const moduleUrl = pathToFileURL(
+          path.resolve('.github/actions/nonpublic-docs/check.mjs'),
+        ).href;
+        writeFileSync(
+          helper,
+          `import { checkDocumentation } from ${JSON.stringify(moduleUrl)}; try { checkDocumentation(process.argv.slice(2).map(file => ({file})), process.env.ABC_TEST_DOC_ROOT); } catch (error) { console.error(error.message); process.exit(1); }`,
+        );
+        const executed: string[] = [];
+        expect(
+          await runVerification({
+            args: [],
+            env: validEnvironment,
+            changes,
+            report: vi.fn(),
+            execute: (step) => {
+              executed.push(step.id);
+              return executeVerificationStep(
+                { ...step, script: helper, args: step.args?.slice(1) ?? [] },
+                { ...process.env, ABC_TEST_DOC_ROOT: root },
+              );
+            },
+          }),
+        ).toBe(EXIT_CODE.verificationFailure);
+        expect(executed).toEqual(['docs']);
+      } finally {
+        rmSync(root, { recursive: true });
+      }
+    },
+  );
+
   it('verifies history-only publications without another history append or the full data suite', () => {
     expect(
       ids('src/content/indexes/release-history.json', 'docs/operations/update-manual.md'),
