@@ -1,8 +1,11 @@
 # UI and Route Contract
 
-**Version**: 2.0.0 **Rendering**:
+**Version**: 2.1.0 **Rendering**:
 Astro/Starlight の静的出力。本文と主要ナビゲーションは JavaScript なしでも読める。Pagefind 検索と学習記録操作は JavaScript が必要であり、利用不能時は理由を隣接テキストと accessible
 name で示す。
+
+Study UX
+#107〜#123で採用した読書表示を含む。保守・公開の旧証跡義務は[002の置換規則](../../002-simplify-maintenance/spec.md#conflicts-with-existing-specifications)に従う。
 
 ## 1. Routes
 
@@ -14,7 +17,7 @@ name で示す。
 | `/problems/`                  | catalog + IndexedDB                          | 全問題一覧と静的属性・学習状態の複合絞り込み                                                       |
 | `/problems/<problemId>/`      | Problem + ProblemAuthoringUnit               | 問題情報、公式参照、解説、タグ、学習単位、類題、学習記録                                           |
 | `/tags/`                      | TechniqueTag                                 | 深さ可変のタグ木、前提関係、同義語・旧名称検索                                                     |
-| `/tags/<tag-slug>/`           | TechniqueTag + ProblemPlacement              | 定義、学習成果、親・子・前提、代表・基本・発展問題                                                 |
+| `/tags/<tag-slug>/`           | TechniqueTag + ProblemPlacement              | 定義と発動条件、代表問題、主タグ・補助タグの問題、分類・前提への導線                               |
 | `/contests/`                  | Contest + AdvancedSlotRegistry               | ABC を行、D より後に確認された問題記号の和集合を列とする表と代替一覧                               |
 | `/review/`                    | catalog + IndexedDB                          | 要復習だけを初期表示し、追加条件で絞り込み                                                         |
 | `/updates/`                   | Release history                              | 公開版の対象範囲、変更、検証、レビュー、公開日時                                                   |
@@ -27,7 +30,7 @@ HTML route は末尾 slash を正規形とし、GitHub Pages の project base pa
 分野別の章目次は編集上の掲載順を平坦な読書案内として表示する。全Unitをちょうど一度含み、所属章を意味階層と一致させるが、親子subtreeの連続性は要求しない。章直下でないUnitには概念上の親をリンクし、親Unitのページでは`parentId`に基づく下位単元を表示する。3つの前提DAGは別のcanonical
 policyに保持し、直接の前提・依存Unitリンクとして表示する。後に掲載する前提は「後の節/後の章」と明示し、DAGから全体履修順、前後リンク、順位は生成しない。各Problemのhome
 Unitはprimary Outcomeの唯一のownerであり、problem
-listでは主題・追加で学ぶ技能・既習技能を区別する。Unit内問題順は受理済みの配列を維持する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。このcanonical表示契約を公開routeへ反映するのはT160であり、それまではcanonical文書をdraftのまま保持する。T160では受理済みfull_authoring本文の公開状態とmaterialization検証の契約を合わせて切り替える。
+listでは主題・追加で学ぶ技能・既習技能を区別する。Unit内問題順は受理済みの配列を維持する。全Unitの対象色は色名と数値帯と理由を文字で示し、章・構造Unitは「導入対象の目安」、学習Unitは「習得対象の目安」とする。全問題を解く難易度や公式の履修基準ではないことを読み方に示す。公開loaderは執筆済みの正本を読み、新規生成のdraftは本文・出典・分類の検証を済ませてから公開する。初版のT160までの凍結工程を通常追加の必須条件にはしない。
 
 ## 2. Common page contract
 
@@ -43,6 +46,18 @@ listでは主題・追加で学ぶ技能・既習技能を区別する。Unit内
 - 学習指示、演習、UI 操作説明は `src/content/glossary/terms.json` の正式名と alias を一貫して使う。
 - 共通 layout だけがパンくず、前後移動、主要 section navigation の route
   mapping を所有し、本文は正本 entity の安定 ID だけを参照する。
+
+### 読書表示の原則（Study UX #123）
+
+- 学習本文を先に読み、分類・識別子・執筆情報は必要なときに開ける。成立条件・証明・計算量と本文の出典は読書の流れへ残す。
+- 本文・主要リンク・native
+  detailsはJSなしでも使え、旧fragmentへの移動で必要な開閉欄も開く。検索・学習記録の操作にJSが必要な理由は該当箇所で示す。
+- 日本語を長時間読める文字組み・幅・余白と明暗両配色を共通CSSで定める。色だけに依存せず、狭い画面・200%文字拡大・キーボードでも本文と導線を保つ。具体的なCSS値は本契約へ重複記載しない。
+- 長いコードは字下げと改行を保ち、コード・数式・表の横溢れはその枠内で扱う。ページ全体を横スクロールさせず、枠はキーボードでも操作できる。
+- 章・単元の目次と前後移動は編集上の読書順に従い、現在位置を示す。本文内目次は表示後の見出しから生成し、補助的な開閉欄を除く。狭い画面で目次が移動先の本文を覆い続けない。
+- 問題一覧は問題名から内部解説へ、別の「公式問題」から出題元へ進む。技能・出典の詳細は行ごとに開け、主配置・関連参照・問題順を変えない。表示のために新しい難易度ランクを作らない。
+
+記法・数式parserと共通renderer、各画面の正本、変更に必要なテストは[更新マニュアル](../../../docs/operations/update-manual.md#3-変更に必要な検証を選ぶ)を参照する。新しいProblem/Unitにも同じ表示を適用し、個別ページのHTML/CSS補修を追加手順にしない。
 
 ### Release history
 
@@ -68,7 +83,7 @@ checksを通過したprotected mainのcommitだけを許可する。
 
 通常の単元routeは正本Markdownの概念説明・操作・成立条件と計算量を展開し、問題一覧へ接続する。対象色・学習成果・前提・依存先・根拠・内部識別子は本文末尾のnative
 detailsへ保持し、関連問題は別のnative
-detailsに置く。学習に必要な条件や証明をmetadataと一緒に隠さない。旧節anchorと全リンク、問題の所属・掲載順は保持する。章目次は本文末尾から開け、冒頭から前提・問題一覧・目次へ移動できる。JSなしでも本文・開閉・fragment移動を利用できる。
+detailsに置く。学習に必要な条件や証明をmetadataと一緒に隠さない。旧節anchorと全リンク、問題の所属・掲載順は保持する。章・単元の目次はPCで本文横、狭い画面で冒頭の開閉欄から使い、冒頭から前提・問題一覧へ移動できる。旧`#unit-contents`も保持する。JSなしでも本文・開閉・fragment移動を利用できる。
 
 `renderLearningUnitDocument`はdraftのMarkdownを生成し、概念の定義を対象色などの編集情報より前に置く。具体的な導入・小例・論証はそのMarkdownの執筆責務であり、分類metadataから自動要約しない。開閉と情報の配置は共通表示処理が担当する。既存・新規Unitとも個別のHTML修正を必要とせず、公開loaderは執筆済み本文を再生成しない。
 
@@ -76,16 +91,17 @@ detailsに置く。学習に必要な条件や証明をmetadataと一緒に隠�
 
 表示順は次とする。
 
-1. `ABC NNN <problemLabel> — 問題名` と掲載状態
-2. 公式問題への外部リンク、出典、最終確認日時
-3. 学習記録 control
-4. 前提 LearningUnit、主・補助 TechniqueTag、LearningOutcome
-5. 解説本文または公開保留理由
-6. 類題・補充問題の場合は主要解説との差分と再利用根拠
-7. 関連問題、学習単位、タグ
-8. authoring skill 名・版と revision
+1. `ABC NNN <problemLabel> — 問題名`
+2. 解説形式、公式問題への外部リンク、学習記録・分類と前提へのページ内リンク
+3. 解説本文。fullは「考察」の核心から読み、similar/supplementは参照元fullへのリンクと差分から読む
+4. 「分類・前提・執筆情報」のnative
+   details。掲載状態、最終確認日時、LearningUnit・Tag・Outcome、元原稿の「学習の位置」、存在する旧skill情報を保持する
+5. 学習記録 control、要復習一覧・backupへのリンク
+6. 同じ単元の問題
 
-完全解説は「自然な考察手順」「典型と問題固有要素の分解」「正当性」「計算量と制約整合」「実装上の注意」「例または検証手順」「復習時の助言」「出典と確認日」を持つ。公式問題文や公式解説本文は転載しない。
+完全解説は自然な考察手順、典型と問題固有要素の分解、正当性、計算量と制約整合、実装上の注意、復習時の助言、出典と確認日を持つ。必要な小例・反例は本文へ組み込み、独立した例題・演習節を全問へ要求しない。公式問題文や公式解説本文は転載しない。
+
+本文は正本Markdownから共通rendererで表示する。「考察」の核心は執筆する内容であり、内部分析や分類から生成・切り詰めしない。外側の節名・全anchor・出典リンクを保ち、表示のための節移動を元原稿へ書き戻さない。新規執筆のfull/similar/supplementの使い分けは[執筆方針](../../../.agents/skills/abc-explanation-author/references/writing-policy.md#placementごとの適用)に従う。
 
 ## 4. Learning-record control
 
@@ -196,6 +212,8 @@ contract、表示完了 marker、IndexedDB transaction、reload 復元 semantics
 | `/review/` へ移動して追加 filter                             | 2操作以内で到達し、要復習でない問題の混入0件（SC-017）                         |
 | 新 catalog へ更新                                            | 既存 record は byte-equivalent、新 Problem は既定値・日時なし（SC-013）        |
 | table を keyboard と Playwright の accessibility tree で操作 | row/column 見出し、問題、状態、要復習を識別可能                                |
-| 320 CSS px の reflow                                         | 本文機能を失わず、二次元表だけ scroll 可能                                     |
+| 320 CSS px の reflow                                         | 本文機能を失わず、長いコード・数式・表は枠内だけ横scroll可能                   |
 | 100件以上を export、DB clear、preview、import                | 差分と方針を適用前に確認し、成功時100%一致、失敗注入時の部分反映0件（SC-018）  |
 | IndexedDB 拒否                                               | 成功と誤表示せず、元の状態と対処案を示す                                       |
+
+読書表示・新教材追加の回帰は[既存の検査表](../../../docs/operations/study-ux-regressions.md)に従う。既存画面の表示、新規原稿の教育品質、新教材への共通デザイン適用は[更新時の完了条件](../../../docs/operations/update-manual.md#新しい教材を追加するときの共通フロー)として別々に確認する。テスト成功だけから学習効率の向上を主張しない。

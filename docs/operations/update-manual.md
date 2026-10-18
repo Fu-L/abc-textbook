@@ -29,6 +29,34 @@ identity、主配置、関連先、metrics、索引、導線を整合させる�
 通常の執筆・訂正は、対象確認→正本編集→検証→報告で進める。管理用のmanifest/digestやreview
 modeを作らず、独立した演習・評価・解答の節を一律に増やさない。一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧初版・release/deployの残る依存は「既存実装からの移行」を参照する。
 
+### 新しい教材を追加するときの共通フロー
+
+Study UX
+#123で確定した追加の入口は次のとおり。本文・分類の正本を編集し、既存の共通表示へ通す。生成済みHTMLやページごとのCSSを補修して追加を完了させない。
+
+| 追加対象         | 準備・執筆する正本                                                                                                   | 生成・表示の入口                                                                                                                                    |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ContestとProblem | 公開済みbaseから公式metadata・Source Revisionとmetricsを取得し、candidateで解説・分析・主配置・関連先・問題順を編集  | 下のPR-08取得→PR-09の`abc:update --mode prepare`→執筆→`--mode validate`。問題本文は`renderProblemAuthoringDocument`で生成                           |
+| Problemの本文    | `abc-explanation-author`の`SKILL.md`・執筆方針・full/similar/supplementテンプレートを読み、公式根拠から執筆          | `prepareExplanationAuthoring`が方針とtemplateのpathを返す。`validateAuthoringInput`・`validateAuthoringOutput`とreaderの往復で入出力を確認          |
+| Unit             | taxonomyの所属・前提・問題集合と明示的な読書順・対象色を整合させ、概念・小例・操作・成立条件・計算量をMarkdownへ執筆 | `canonical-taxonomy-materialization.ts`の`renderLearningUnitDocument`でdraftを生成。`textbook-order.ts`・`unit-learning-targets.ts`も必要分だけ編集 |
+
+小batch
+CLIは既存taxonomyへの問題追加を扱い、新Unitの設計・登録や本文執筆を自動では行わない。新しい典型が必要なときは既存のTag/Outcome/Unitのschemaと3DAG・owner・関連先を確認して編集する。既存232単元・868問を表示のために一括再生成しない。
+
+公開は`src/lib/catalog/full-public-projection.ts`の`loadFullPublicProjection`、`render-public-document.ts`、`TextbookLayout.astro`を共用する。問題は`ProblemExplanation.astro`、単元は`unit-reading.ts`、本文目次は`DocumentReading.astro`を通り、文字組みと横幅は`global.css`・`accessibility.css`を使う。数式は下の[記法](#数式とコードの記法)に従い、共通parserから静的MathMLへ変換する。分類や内部分析を冒頭文へ自動転用せず、表示上の節移動を元原稿へ書き戻さない。
+
+追加・修正の完了では次の3点を別々に確認し、変更概要・検証結果・未解決事項をPRへ短くまとめる。別の台帳や人間承認は増やさない。
+
+| 完了条件                     | 確認すること                                                                                                                         | 既存の検証・確認方法                                                                                                                                                           |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 既存本文の表示               | 対象ページの本文・数式・出典・旧anchor/リンク・問題順と必要な開閉・導線が保たれる                                                    | buildと内部リンク、対象の表示E2E。共通UI変更は`study-ux-documents.test.ts`・`study-readability.spec.ts`等を選び、代表画面と本文も読む                                          |
+| 新規原稿の教育品質           | 核心→観察→次の一手の理由→手順を追え、成立条件・正当性・境界・全体計算量・復習の核が揃う                                              | Codexが公式根拠と本文を照合・検算し、schemaとauthoringの入出力・往復を確認。方針・テンプレート変更には#120の`explanation-writing.test.ts`・`explanation-writing.spec.ts`を使う |
+| 新規原稿への共通デザイン適用 | 新Unit/Problemも通常の生成・執筆→公開投影→静的ページへ通り、本文・数式・コード・出典・学習位置・内部リンク・学習記録への移動を使える | #122の`new-material.spec.ts`。隔離fixtureをPCとJS無効のスマホで確認し、実際の追加ページも対象E2E・表示確認で確かめる                                                           |
+
+自動テストは論証や文章の良さ、学習効率の向上を保証しない。新教材fixtureの成功を実公式取得・実教材の完成・公開成功に数えず、未改稿の既存本文まで執筆方針へ適合済みとしない。
+
+最小検証は下の「変更に必要な検証を選ぶ」と[CIの分類表](development.md#変更範囲に応じたci検証)に従う。`verify:fast -- --base origin/main`は本文・データ・UI・執筆skillの変更で新教材E2Eを選び、skill変更では#120の執筆contractも選ぶ。方針・テンプレート変更時の`explanation-writing.spec.ts`は手動で追加する。UI変更時の拡大・配色検査、記録の保存形式を変えた場合のbackup検査などは該当変更だけに加える。同じ本番subpathのbuildをリンク・E2Eで再利用し、非公開文書だけの変更ではbuild/E2Eを要求しない。
+
 問題解説の新規執筆では[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)の執筆方針と形式別テンプレートを毎回読む。`prepareExplanationAuthoring`も`writingPolicyPath`と`templatePath`を返す。冒頭の核心から、観察→次の一手の理由→必要な定義→手順と進み、正当性・全体計算量・典型の発動条件・復習の核を残す。既存の外側の節名は維持し、その内側へ定型の小見出しを一律に増やさない。完成unitを検証して`renderProblemAuthoringDocument`で生成し、readerで往復を確認する。[執筆例の比較](explanation-writing.md)と未公開fixtureは全問再生成の指示ではない。
 
 方針・テンプレートの変更では`tests/contract/explanation-writing.test.ts`で新規のfull・差分解説を準備・生成し、schema・往復・共通rendererの数式と導線を検証する。`tests/e2e/explanation-writing.spec.ts`で同じ原稿を現行レイアウトへ置き、狭い画面・明暗・JS無効・参照元への移動を確認する。fixtureは教材・公開catalog・検索indexへ追加しない。通常buildと内部リンク確認には本番subpathを使う。
