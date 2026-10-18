@@ -246,7 +246,7 @@ detailsを手で開く。JSはPCの初期展開・画面幅変更と目次内の
 本文内の目次は共通の`DocumentReading.astro`が表示後のh2〜h6から作り、分類・前提などの開閉欄を除く。見出しが3個以上のときだけ表示する。80rem以上は本文右、狭い画面では開閉式の一行とし、章と単元の目次とは区別する。JSはPCでの展開と狭い画面での選択後の折り畳みを補助する。狭い画面の固定表示は選択後に閉じる処理の初期化後に有効にし、深い節で開いても選択肢を画面内へ保つ。JS無効時は冒頭の通常配置でnative
 detailsとfragmentリンクを使い、開閉で配置を切り替えず、移動先の本文を覆わない。回帰テストでは320・390・720pxの深い節でsummaryを実座標でタップし、リンクを操作する前にメニュー全体がviewport内にあることを検査する。リンクのclickやfocusによる自動スクロールだけで表示確認を済ませない。新しい見出しも原稿の順で反映されるので、手書きの目次を本文へ重ねない。
 
-見出しの節リンクは`render-public-document.ts`で付ける。既存のslug・重複見出しのsuffixは変更せず、通常のfragment遷移・履歴とキーボードfocusを使う。`tests/unit/document-contents.test.ts`と`tests/e2e/document-contents.spec.ts`をUI変更の`verify:fast`に含め、見出し順、旧anchor、直接リンク・戻る/進む、JS無効、狭い画面とキーボードを確認する。比較画像と配置のトレードオフは[本文のページ内目次](document-contents.md)を参照する。
+見出しの節リンクは`render-public-document.ts`で付ける。既存のslug・重複見出しのsuffixは変更せず、通常のfragment遷移・履歴とキーボードfocusを使う。`tests/unit/document-contents.test.ts`と`tests/e2e/document-contents.spec.ts`をUI変更の`verify:fast`に含め、見出し順、旧anchor、直接リンク・戻る/進む、JS無効、狭い画面とキーボードを確認する。本文の見出しを追加・変更したときも目次E2Eを実行し、項目数を固定せず、本文の対象見出しと目次のリンク先が順序も含めて一致することを検査する。比較画像と配置のトレードオフは[本文のページ内目次](document-contents.md)を参照する。
 
 新しい単元も既存のtaxonomy生成と通常の執筆・公開フローを使う。`renderLearningUnitDocument`は概念の定義を先に置くdraftを作り、内容に合う導入・小例・操作・成立条件を正本Markdownへ執筆する。分類用Outcomeや対象色の理由を導入へ自動転用しない。生成器が完全な教材本文を自動執筆するわけではない。表示の開閉・配置は共通処理が担当し、生成物だけのHTML手修正やUnit
 IDごとの分岐は不要である。詳細とトレードオフは[単元ページの情報順](unit-reading.md)を参照する。

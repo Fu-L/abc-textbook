@@ -31,7 +31,19 @@ for (const javaScriptEnabled of [true, false]) {
         await page.keyboard.press('Enter');
       }
       const menu = page.getByRole('navigation', { name: contents });
-      await expect(menu.getByRole('link')).toHaveCount(13);
+      const headingIds = await page
+        .locator('#explanation .authored-content :is(h2, h3, h4, h5, h6)[id]')
+        .evaluateAll((headings) =>
+          headings
+            .filter((heading) => !heading.closest('details, [data-pagefind-ignore]'))
+            .map((heading) => heading.id),
+        );
+      await expect(menu.getByRole('link')).toHaveCount(headingIds.length);
+      expect(
+        await menu
+          .getByRole('link')
+          .evaluateAll((links) => links.map((link) => link.getAttribute('href'))),
+      ).toEqual(headingIds.map((id) => `#${encodeURIComponent(id)}`));
       await expect(menu).not.toContainText('学習の位置');
       const proof = menu.getByRole('link', { name: '正当性', exact: true });
       await proof.focus();
