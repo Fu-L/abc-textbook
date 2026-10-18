@@ -33,6 +33,8 @@ modeを作らず、独立した演習・評価・解答の節を一律に増や�
 
 方針・テンプレートの変更では`tests/contract/explanation-writing.test.ts`で新規のfull・差分解説を準備・生成し、schema・往復・共通rendererの数式と導線を検証する。`tests/e2e/explanation-writing.spec.ts`で同じ原稿を現行レイアウトへ置き、狭い画面・明暗・JS無効・参照元への移動を確認する。fixtureは教材・公開catalog・検索indexへ追加しない。通常buildと内部リンク確認には本番subpathを使う。
 
+既存教材の文章改善は[読みにくさと最初の修正](content-readability.md)の症状・未修正箇所から小batchを選ぶ。未区切りTeXの候補数だけで優先順位を決めず、条件・状態・式を読めるか、着想から手順へつながるかを本文で確認する。生成器起因ならその正本を先に直し、執筆済み本文は一括再生成しない。正当性節を改稿するときは同居するclaimも一致させ、旧anchor・学習の位置・出典リンクを保持する。別の棚卸し台帳は作らず、修正前後・検証と未修正をPRまたは既存の比較文書へ短く残す。
+
 ### 数式とコードの記法
 
 数式は本文中で `$$1\leq N\leq 2\times 10^5$$` のように明示する。独立した式は、 `$$`
@@ -244,7 +246,7 @@ detailsを手で開く。JSはPCの初期展開・画面幅変更と目次内の
 本文内の目次は共通の`DocumentReading.astro`が表示後のh2〜h6から作り、分類・前提などの開閉欄を除く。見出しが3個以上のときだけ表示する。80rem以上は本文右、狭い画面では開閉式の一行とし、章と単元の目次とは区別する。JSはPCでの展開と狭い画面での選択後の折り畳みを補助する。狭い画面の固定表示は選択後に閉じる処理の初期化後に有効にし、深い節で開いても選択肢を画面内へ保つ。JS無効時は冒頭の通常配置でnative
 detailsとfragmentリンクを使い、開閉で配置を切り替えず、移動先の本文を覆わない。回帰テストでは320・390・720pxの深い節でsummaryを実座標でタップし、リンクを操作する前にメニュー全体がviewport内にあることを検査する。リンクのclickやfocusによる自動スクロールだけで表示確認を済ませない。新しい見出しも原稿の順で反映されるので、手書きの目次を本文へ重ねない。
 
-見出しの節リンクは`render-public-document.ts`で付ける。既存のslug・重複見出しのsuffixは変更せず、通常のfragment遷移・履歴とキーボードfocusを使う。`tests/unit/document-contents.test.ts`と`tests/e2e/document-contents.spec.ts`をUI変更の`verify:fast`に含め、見出し順、旧anchor、直接リンク・戻る/進む、JS無効、狭い画面とキーボードを確認する。比較画像と配置のトレードオフは[本文のページ内目次](document-contents.md)を参照する。
+見出しの節リンクは`render-public-document.ts`で付ける。既存のslug・重複見出しのsuffixは変更せず、通常のfragment遷移・履歴とキーボードfocusを使う。`tests/unit/document-contents.test.ts`と`tests/e2e/document-contents.spec.ts`をUI変更の`verify:fast`に含め、見出し順、旧anchor、直接リンク・戻る/進む、JS無効、狭い画面とキーボードを確認する。本文の見出しを追加・変更したときも目次E2Eを実行し、項目数を固定せず、本文の対象見出しと目次のリンク先が順序も含めて一致することを検査する。比較画像と配置のトレードオフは[本文のページ内目次](document-contents.md)を参照する。
 
 新しい単元も既存のtaxonomy生成と通常の執筆・公開フローを使う。`renderLearningUnitDocument`は概念の定義を先に置くdraftを作り、内容に合う導入・小例・操作・成立条件を正本Markdownへ執筆する。分類用Outcomeや対象色の理由を導入へ自動転用しない。生成器が完全な教材本文を自動執筆するわけではない。表示の開閉・配置は共通処理が担当し、生成物だけのHTML手修正やUnit
 IDごとの分岐は不要である。詳細とトレードオフは[単元ページの情報順](unit-reading.md)を参照する。
