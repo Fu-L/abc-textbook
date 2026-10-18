@@ -1,7 +1,8 @@
 import { execFile } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
-import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
@@ -9,6 +10,8 @@ import { describe, expect, it } from 'vitest';
 import {
   loadFullPublicProjection,
   PUBLIC_HISTORY_PATH,
+  TAXONOMY_INDEX_PATH,
+  verifyFullPublicProjectionDerivedFiles,
 } from '../../src/lib/catalog/full-public-projection.js';
 import { PublicReleaseHistorySchema } from '../../src/lib/catalog/build-release-history.js';
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
@@ -156,6 +159,43 @@ describe('maintenance compatibility against a Git commit', () => {
   }, 60_000);
 });
 describe('accepted canonical full public projection', () => {
+  it('checks actual derived files per root and expected value without caching previous success', async () => {
+    const root = await mkdtemp(path.join(tmpdir(), 'abc-derived-index-'));
+    const otherRoot = await mkdtemp(path.join(tmpdir(), 'abc-derived-index-other-'));
+    try {
+      const file = path.join(root, TAXONOMY_INDEX_PATH);
+      await mkdir(path.dirname(file), { recursive: true });
+      const check = (repositoryRoot = root, taxonomyIndex: unknown = projection.taxonomyIndex) =>
+        verifyFullPublicProjectionDerivedFiles({ repositoryRoot, taxonomyIndex });
+      await expect(check()).rejects.toThrow(/ENOENT/);
+      await writeFile(file, JSON.stringify(projection.taxonomyIndex, null, 2));
+      await expect(check()).resolves.toMatchObject({ path: TAXONOMY_INDEX_PATH });
+      await expect(check(otherRoot)).rejects.toThrow(/ENOENT/);
+      const changed = { ...projection.taxonomyIndex, placements: [] };
+      await expect(check(root, changed)).rejects.toThrow('CORRECTION_INDEX_STALE');
+      for (const text of ['', '{', JSON.stringify(changed)]) {
+        await writeFile(file, text);
+        await expect(check()).rejects.toThrow();
+      }
+      await writeFile(file, JSON.stringify(projection.taxonomyIndex));
+      await expect(check()).resolves.toMatchObject({ path: TAXONOMY_INDEX_PATH });
+    } finally {
+      await rm(root, { recursive: true, force: true });
+      await rm(otherRoot, { recursive: true, force: true });
+    }
+  });
+
+  it('keeps the public loader strict about stale and missing actual indexes', async () => {
+    await withGitBaseline(async (root) => {
+      const project = () =>
+        loadFullPublicProjection({ repositoryRoot: root, usePreparedRelease: false });
+      await writeFile(path.join(root, TAXONOMY_INDEX_PATH), '{}');
+      await expect(project()).rejects.toThrow('CORRECTION_INDEX_STALE');
+      await rm(path.join(root, TAXONOMY_INDEX_PATH));
+      await expect(project()).rejects.toThrow(/ENOENT/);
+    });
+  }, 60_000);
+
   it.each(['similar', 'supplement'] as const)(
     'publishes %s through the authoring reader, public loader and production-subpath HTML',
     async (kind) => {

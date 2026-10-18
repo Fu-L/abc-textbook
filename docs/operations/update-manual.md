@@ -211,6 +211,11 @@ Tagは各役割内で双方向の対応を検査する。分析の全typicalTech
 新規本文は既存parserの`draft: true`表現を維持し、未検証claimを`verified`へ機械的に昇格させない。分析はCodexによる内容確認を済ませ、既存の`reviewStatus: reviewed`・未解決指摘0として入力する。これは人間承認の記録ではない。Unitの必要な問題集合・導線とtaxonomy
 indexはCLIが更新するため、通常追加で既存Unit本文を再生成しない。既存の解説・Unit文章も訂正したい場合は別の訂正差分として検証する。
 
+`validate`はbaseと内部の一時candidateをそれぞれ読み、candidateの全正本検証後はtaxonomy
+indexだけを書き込む。その実ファイルの非空・JSON構文・正本から導いた値との一致を公開loaderと共通の関数で確認してから、candidateへ生成差分を適用する。索引確認のための全教材再読込は行わない。全量再読込が担っていたschema・ID/参照、本文/claim・出典、配置・3DAG・問題順、訂正対象・履歴の検証は書込み前の公開loaderと小batch検証に残す。通常の公開loaderは実索引の照合を既定で行う。
+
+この再利用は同じCLI呼出しの同じ一時candidateで、検証後に正本を変更しない区間だけに限る。base・別root・次のCLI呼出しへ検証結果をcacheしない。次の実行では編集後の正本を読み直す。索引不一致・不正JSONは保留、欠落などのIO失敗は実行失敗として停止し、どちらも適用前のcandidateのbytesを保持する。
+
 同じ公開base・取得入力・執筆済みcandidateで`validate`を二度実行すると`writtenPaths: []`となる。既存の取得metadataと異なる入力、対象外の本文/分類/指標変更、未知の追加は保留する。metricsは対象分だけ併合し、欠測`null`と0値、対象外の値・旧snapshotの確認日時を保持する。対象の新しい確認日時はProblemの`difficultyEvidence`へ記す。新記号の公式欠席slotは公式順から公開projectionで導出し、旧Contestのファイルを書き換えない。cutoffは初版cutoffと実収録Contestの終了時刻の最大値で、後続未着手Contestへ拡大しない。
 
 未完成・取得不整合・source/claim不一致・配置/前提不整合は`on_hold`・理由・再試行条件・exit

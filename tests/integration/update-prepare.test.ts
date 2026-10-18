@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
 import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
 import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-projection.js';
+import * as publicProjection from '../../src/lib/catalog/full-public-projection.js';
 import { AtCoderProblemsSnapshotSchema } from '../../src/lib/corpus/atcoder-problems-metrics.js';
 
 import { prepareAuthoringResults } from '../../scripts/update-abc/author.js';
@@ -99,7 +100,21 @@ describe('normal small-batch editing', () => {
             'utf8',
           ),
         ) as { directProblemIds: string[] };
+        const loads = vi.spyOn(publicProjection, 'loadFullPublicProjection');
         const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+        // One strict base load and one candidate load. Checking the written index
+        // must not parse the complete candidate a second time.
+        expect(loads.mock.calls).toEqual([
+          [{ repositoryRoot: process.cwd(), usePreparedRelease: false }],
+          [
+            {
+              repositoryRoot: expect.stringContaining('abc-update-validation-') as string,
+              usePreparedRelease: false,
+              verifyDerivedFiles: false,
+            },
+          ],
+        ]);
+        loads.mockRestore();
         expect(result.holds).toEqual([]);
         expect(result).toMatchObject({
           status: 'passed',

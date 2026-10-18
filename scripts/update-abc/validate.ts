@@ -7,7 +7,8 @@ import {
   validatePlacementOutcomeRoles,
 } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 
-/** Reuse the public reader and content validator, including all three DAGs. */
+/** Validate all canonical input, including the three DAGs, before deriving the index.
+ * The caller must write and check that index without changing this temporary input. */
 export const validateSmallBatchCandidate = async (input: {
   repositoryRoot: string;
   targetProblemIds: readonly string[];
