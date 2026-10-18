@@ -127,6 +127,7 @@ const contentTests = [
   'tests/unit/public-document.test.ts',
   'tests/unit/problem-content-projection.test.ts',
   'tests/unit/problem-authoring-document.test.ts',
+  'tests/unit/study-ux-documents.test.ts',
 ];
 const dataTests = [
   'tests/contract/schema-parity.test.ts',
@@ -196,7 +197,7 @@ export function selectVerificationSteps(
       args: ['--files', ...docs],
     });
   const runtime = broad || ui || records || skill;
-  const publish = broad || prose || data || ui || records || history;
+  const publish = broad || prose || data || ui || records || history || skill;
   if (runtime) steps.push({ id: 'lint', script: 'lint' });
   if (broad || prose || data || runtime || history)
     steps.push({ id: 'format', script: 'format:check' });
@@ -224,13 +225,15 @@ export function selectVerificationSteps(
   if (publish) {
     steps.push({ id: 'build', script: runtime ? 'build:checked' : 'build' });
     steps.push({ id: 'links', script: 'link:check:built' });
-    if (env.CI && (broad || prose || data || ui || records))
+    if (env.CI && (broad || prose || data || ui || records || skill))
       steps.push({ id: 'browsers', script: 'test:e2e:install:ci' });
     const e2e = new Set<string>();
     if (prose || data || ui || records) e2e.add('tests/e2e/full-projection.spec.ts');
+    if (prose || data || ui || skill) e2e.add('tests/e2e/new-material.spec.ts');
     if (data || ui) e2e.add('tests/e2e/search.spec.ts');
     if (ui) {
       e2e.add('tests/e2e/accessibility.spec.ts');
+      e2e.add('tests/e2e/study-readability.spec.ts');
       e2e.add('tests/e2e/document-widths.spec.ts');
       e2e.add('tests/e2e/problem-reading.spec.ts');
       e2e.add('tests/e2e/unit-reading.spec.ts');

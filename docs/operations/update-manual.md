@@ -267,6 +267,9 @@ detailsで開ける。公式順・欠番・状態・既存anchorを表示都合�
 
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
+表示回帰の検査範囲と実行方法は[読書表示の回帰検査](study-ux-regressions.md)を参照する。`tests/unit/study-ux-documents.test.ts`は代表原稿の数式・code
+fence・anchorを軽量に検査し、`tests/e2e/study-readability.spec.ts`は代表3ページの200%文字拡大・reflow・両配色のaxe・キーボードを確認する。`tests/e2e/new-material.spec.ts`は隔離した新Unit/Problemを生成・執筆・公開投影・通常の静的ページへ通し、PCとJS無効のスマホで本文・出典・学習位置・内部リンク・学習記録への移動を確認する。教材・データ・UI・執筆skillの変更で新教材E2Eを選び、UI変更では拡大検査も選ぶ。全ページのブラウザー撮影や画像snapshotの一括更新は追加しない。
+
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
 
 `verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain

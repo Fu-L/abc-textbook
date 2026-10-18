@@ -128,7 +128,7 @@ describe('verify:fast change selection', () => {
       plan('src/content/docs/problems/abc212-g.md').find((s) => s.id === 'build')?.script,
     ).toBe('build');
     expect(plan('src/content/docs/problems/abc212-g.md').find((s) => s.id === 'e2e')?.args).toEqual(
-      ['--project=chromium', 'tests/e2e/full-projection.spec.ts'],
+      ['--project=chromium', 'tests/e2e/full-projection.spec.ts', 'tests/e2e/new-material.spec.ts'],
     );
   });
 
@@ -180,6 +180,19 @@ describe('verify:fast change selection', () => {
     expect(ids('.agents/skills/speckit-implement/SKILL.md')).toContain('schema');
   });
 
+  it.each([
+    'src/content/docs/learn/a.md',
+    'src/content/problems/abc999-e.json',
+    'src/components/ProblemExplanation.astro',
+    '.agents/skills/abc-explanation-author/references/writing-policy.md',
+    'src/lib/taxonomy/canonical-taxonomy-materialization.ts',
+  ])('runs the isolated new-material regression for %s', (file) => {
+    const args = plan(file).find((step) => step.id === 'e2e')?.args ?? [];
+    // An empty spec list after the project flag means the complete E2E suite.
+    expect(args).toContain('--project=chromium');
+    expect(args.length === 1 || args.includes('tests/e2e/new-material.spec.ts')).toBe(true);
+  });
+
   it('unions prose, UI, records, and documentation checks without duplicate build/check steps', () => {
     const files = [
       'src/content/docs/learn/a.md',
@@ -197,6 +210,8 @@ describe('verify:fast change selection', () => {
         'tests/e2e/learning-records.spec.ts',
         'tests/e2e/search.spec.ts',
         'tests/e2e/document-widths.spec.ts',
+        'tests/e2e/study-readability.spec.ts',
+        'tests/e2e/new-material.spec.ts',
         'tests/e2e/problem-reading.spec.ts',
         'tests/e2e/unit-reading.spec.ts',
         'tests/e2e/textbook-navigation.spec.ts',

@@ -245,7 +245,7 @@ const sourceRevisionLabel = (source: SourceRevision): string => {
 };
 
 /** Draft Markdown owns teaching content and references; the shared Unit view owns disclosure. */
-const renderLearningUnitDocument = (input: {
+export const renderLearningUnitDocument = (input: {
   readonly unit: LearningUnit;
   readonly tags: readonly TechniqueTag[];
   readonly childUnits: readonly ChildLearningUnitLink[];
