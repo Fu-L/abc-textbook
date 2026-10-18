@@ -1,7 +1,7 @@
 ---
 title: "ABC391-F — K-th Largest Triplet"
 draft: true
-authoringUnit: {"problemId":"abc391-f","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc391-f.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928","source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。 同じ点は複数の親から生成されるのでvisited setで一度だけpushする。 上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。","sourceRevisionIds":["source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928","source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc391-f","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc391-f.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928","source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"任意の未出力の組 $$x$$ へ、原点から添字を一つずつ増やして進む経路を取る。その経路で最初の未出力状態を $$y$$ とする。原点なら初期登録され、それ以外なら直前の状態を取り出した際に登録されている。未出力なので、どちらもキューに残っている。\n\n経路上で値は増えないから $$f(y)\\geq f(x)$$。従ってキューの最大値は、すべての未出力状態の最大値でもある。この操作を繰り返すと $$K$$ 回目が答えになる。同じ組は一度だけ登録し、値が等しい別の組は区別するので、同値の順位も正しく数える。","sourceRevisionIds":["source-abc391-editorial-12085-f9ada4466df96ec457b67df1120398f082965da3bcdfda4427208c7f131ee928","source-abc391-f-problem-747d848d57208246abe4cce1daeaa586525b51cc2160fae1ec9403b71e801dd0"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,76 +12,79 @@ authoringUnit: {"problemId":"abc391-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-三つの配列をそれぞれ降順に並べると、選ぶ位置を一つ先へ進めても式の値は増えない。この単調性を使い、最大の組から優先度付きキューで候補を広げ、必要な順位まで取り出す。同じ位置の組を重複して追加しないことが要点となる。
+三つの配列を降順に並べると、選ぶ位置を先へ進めても値は増えない。最大の組から候補を広げれば、全組を作らずに必要な順位まで調べられる。同じ位置の組を重複登録せず、値が等しい別の組は残す。
 
-A,B,Cを降順にすると、目的式
+全組を並べると $$N^3$$ 個になるが、必要なのは上位の高々 $$5\times 10^5$$ 個だけだ。大きい組から順に作れないだろうか。各配列の要素は正なので、一要素を大きくすると式の値は小さくならない。そこで三つの配列を降順に並べる。
+
+以後、添字は0から始める。選んだ位置の組を $$(i,j,k)$$、その範囲を $$0\leq i,j,k<N$$ とし、その値を定義する。
 
 $$
 f(i,j,k)=A_iB_j+B_jC_k+C_kA_i
 $$
 
-は各indexについて単調非増加である。
+$$0\leq i<N-1$$ なら、一方向の変化は次の式で確認できる。
 
-三次元gridの点(i,j,k)が列挙された後にだけ、各軸を1増やした三近傍が次の候補になり得る。
+$$
+f(i,j,k)-f(i+1,j,k)=(A_i-A_{i+1})(B_j+C_k)\geq 0
+$$
 
-採用する候補: (1,1,1)からmax-heapで単調三次元gridの値をbest-first列挙する
+前半は降順なので非負、後半は要素が正なので正である。他の二方向も同様に、添字を増やしても値は増えない。最大の組の一つは $$(0,0,0)$$ だと分かる。この状態を原点と呼ぶ。
 
-棄却する候補: N^3個のtriplet値を全て生成してsortする
+### なぜ以前の候補も残すのか
 
-N=2×10^5で候補数が巨大で、Kが小さい制約を活用していない。
+降順の独自例 $$A=(3,1),B=(4,2),C=(5,1)$$ を見る。最大値47から添字を一つ増やした三つの候補は29、31、19である。次に31を選んだ後、その隣に追加できる値は17、11だが、以前の候補29はまだ残っている。直前の組の隣だけを見てはいけない。
 
-各列を降順sortし、(value,0,0,0)をmax-heapへ入れる。K回popし、範囲内の(i+1,j,k),(i,j+1,k),(i,j,k+1)を未訪問なら計算してpushする。K回目のvalueを出力する。
+生成済みで未出力の候補全体を、最大値を取り出せる優先度付きキュー（max-heap）へ残す。この候補集合が探索境界（frontier）となる。
+
+1. 値と組 $$(f(0,0,0),0,0,0)$$ をキューへ入れ、組 $$(0,0,0)$$ を登録済み集合へ記録する。
+2. 最大値の組を取り出す。これが $$K$$ 回目なら、その値を答えて終了する。
+3. 取り出した組の各添字を一つ増やした三つの組のうち、範囲内かつ未登録のものを集合へ記録してキューへ入れ、手順2へ戻る。
+
+同じ組へは複数方向から到達するので、登録は追加時に行う。一方、全要素が1なら値はすべて3でも、組の数だけ順位がある。集合のキーは値ではなく添字の組にする。
 
 ## 典型の発動条件
 
 ### monotone multidimensional best-first search
 
-発動条件: 各座標増加でscoreが悪化し、上位少数だけ欲しいとき。
-
-原点からpriority queueでfrontierを展開する。
+全状態が多くても上位の少数だけが必要で、最大の出発点と値が悪化する向きが分かるなら、探索境界を優先度付きキューで管理する。未出力状態への経路上に、値がそれ以上の候補が残ることを確認する。
 
 ### implicit graphの重複排除
 
-発動条件: 複数経路から同じ状態へ到達するheap探索をするとき。
-
-tupleをhash setへ登録して一回だけ追加する。
+複数の経路から同じ状態へ到達する場合は、追加時に状態を登録する。何を同一視するかは問題の数え方で決める。この問題では値が等しくても添字の組が違えば別の順位を占める。
 
 ## 問題固有の要素
 
-三項式にcross termがあっても全値が正なので各配列index方向の単調性が保たれ、一般の三次元上位列挙として扱える。
-
-別の問題へ持ち帰る視点: 複雑なscoreでも各変数をsortした後の偏微分的な単調性を確認し、K-best grid探索へ落とす。
+交差項を含む式でも、他の二要素の和が正なので各方向に単調となる。一つの変数だけ動かした差を因数分解すると、この制約の役割が見える。
 
 ## 正当性
 
-未列挙点へ至るindex減少path上には必ずfrontier点があり、単調性によりheap最大が全未列挙中の最大である。 同じ点は複数の親から生成されるのでvisited setで一度だけpushする。 上位K≤5×10^5点だけをpopし、各点から三近傍を一度だけpushすればO(N log N+K log K)でK番目へ到達する。
+任意の未出力の組 $$x$$ へ、原点から添字を一つずつ増やして進む経路を取る。その経路で最初の未出力状態を $$y$$ とする。原点なら初期登録され、それ以外なら直前の状態を取り出した際に登録されている。未出力なので、どちらもキューに残っている。
+
+経路上で値は増えないから $$f(y)\geq f(x)$$。従ってキューの最大値は、すべての未出力状態の最大値でもある。この操作を繰り返すと $$K$$ 回目が答えになる。同じ組は一度だけ登録し、値が等しい別の組は区別するので、同値の順位も正しく数える。
 
 ## 実装上の注意
 
-- 積と和は最大3×10^18付近なので符号付き64 bit境界を確認する。visited keyのpackingでcollisionやoverflowを起こさない。
+添字が $$N$$ に達する候補は追加しない。$$K=1$$ なら初回で終了し、$$K=N^3$$ なら全組を数える。要素は最大 $$10^9$$、答えは最大 $$3\times 10^{18}$$ なので、乗算前に符号付き64 bit整数へ変換する。組のキーも整数幅を確認する。
 
 ## 復習の核
 
-- N≤8で全triplet sortと比較し、同値が多く同一点が三方向から生成されるcaseで重複countを確認する。
+- 全状態が多く上位だけが少ないとき、最大の出発点と単調な向きを探す。
+- 未出力状態への経路を描き、最初の未出力状態がキューに残る理由を説明する。
+- 同じ値と同じ状態の重複を区別する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N+K log K)、三列の長さN、上位K点。
+三列の整列が $$O(N\log N)$$。一回の取り出しにつき追加は高々三件で、全体の候補は $$O(K)$$ 件。優先度付きキューと、登録済み集合に使う平衡二分探索木の各操作は $$O(\log(K+1))$$ なので、全体は $$O(N\log N+K\log(K+1))$$ 時間。
 
 ### 空間
 
-O(N+K)。
+入力が $$O(N)$$、キューと登録済み集合が $$O(K)$$ なので、合計 $$O(N+K)$$。全組は保持しない。
 
 ### 制約との対応
 
-公式制約の確認範囲（時間制限3秒、メモリ制限1024 MiB）:
-
-- $$1\leq N \leq 2\times 10^5$$
-- $$1\leq K \leq \min(N^3,5\times 10^5)$$
-- $$1\leq A_i,B_i,C_i \leq 10^9$$
-- 入力はすべて整数
+$$1\leq N\leq 2\times 10^5$$、$$1\leq K\leq\min(N^3,5\times 10^5)$$、$$1\leq A_i,B_i,C_i\leq 10^9$$。列挙量を $$N^3$$ から $$K$$ に抑える。要素が正という条件は単調性に使い、順位の範囲は答えに到達できることを保証する。
 
 ## 出典
 

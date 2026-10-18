@@ -19,7 +19,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
       });
       const page = await context.newPage();
       await page.goto('./problems/abc391-f/');
-      await expect(page.locator('#考察 + p')).toContainText('三つの配列をそれぞれ降順');
+      await expect(page.locator('#考察 + p')).toContainText('三つの配列を降順');
       await expect(page.locator('#考察 + p')).toBeInViewport();
       await expect(page.locator('.problem-summary')).toHaveCount(0);
       await expect(page.locator('#考察')).toBeVisible();
@@ -50,7 +50,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await expect(page.getByText('掲載状態: 収録済み')).toBeVisible();
       await expect(page.locator('#学習の位置')).toBeVisible();
       await expect(page.getByText('既習技能', { exact: true })).toBeVisible();
-      await expect(page.getByText(/revision 1/u)).toBeVisible();
+      await expect(page.getByText(/revision 2/u)).toBeVisible();
       await page.goto('./problems/abc391-f/#学習の位置');
       await expect(page.locator('#学習の位置')).toBeInViewport();
       await page.goto('./problems/abc391-f/#explanation');

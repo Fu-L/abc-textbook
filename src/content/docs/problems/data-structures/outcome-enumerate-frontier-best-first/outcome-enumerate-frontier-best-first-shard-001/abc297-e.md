@@ -1,7 +1,7 @@
 ---
 title: "ABC297-E — Kth Takoyaki Set"
 draft: true
-authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。","sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data-structures/outcome-enumerate-frontier-best-first/outcome-enumerate-frontier-best-first-shard-001/abc297-e.md","learningOutcomeIds":["outcome-enumerate-frontier-best-first"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["priority queue・best-first列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-priority-queue-best-first","tag-shortest-path"],"sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"まだ確定していない到達可能な最小の金額を $$x>0$$ とする。その買い方から一個を取り除いた金額 $$y$$ は、価格が正なので $$0\\leq y<x$$ となる。0円を含め、$$x$$ より小さい到達可能な金額はすべて確定済みである。従って $$y$$ を処理したときに $$x$$ はキューへ追加されている。\n\nキューに入る金額もすべて到達可能なので、既に確定した値の重複を読み飛ばした後の最小値は $$x$$ である。これを繰り返すと正の金額を小さい順に漏れなく確定でき、$$K$$ 個目が答えとなる。同額の状態では追加できる価格も同じなので、二度目以降の候補生成を省いても到達可能性は変わらない。","sourceRevisionIds":["source-abc297-e-problem-c2bdfd3a97f8ac4edb44e2f8d2f6b4b51f4c118a1bfdd81ba9c479e80d3305d8","source-abc297-editorial-6167-210ab57043c1914bb3db0109bee8e686beeed0306098c0c93ca075a0bdc30886"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,61 +16,66 @@ authoringUnit: {"problemId":"abc297-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-既知の安い金額vへたこ焼き一個A_jを足した値の中に、次に安い未出金額が必ず存在する。
+買い方の数は膨大でも、求めたいのは安い方から限られた個数の金額だけだ。既に分かった安い金額へたこ焼きを一個足し、次の候補を作ろう。同じ金額の買い方は、その先に作れる金額も同じなので一つにまとめられる。
 
-採用する候補: 最小heapで金額グラフをDijkstra風列挙
+種類ごとに買う個数を決めると、組合せは指数的に増える。一方、種類数は高々10であり、一つの金額から一個足して作る候補は高々10個しかない。この違いを使い、金額そのものを状態にする。
 
-棄却する候補: 各種類0..K個の個数全探索
+何も買わない0円から始める。ある到達可能な金額を $$v$$、種類 $$j$$ の価格を $$A_j$$ とすると、一個追加して $$v+A_j$$ 円へ進める。$$A_j>0$$ なので、進むたびに金額は必ず増える。金額を頂点、一個の追加を辺とみなせば、無限にある頂点のうち小さいものから順に調べる探索となる。
 
-K^Nで指数的。
+例えば価格が $$A=(2,3)$$ なら、0円から2円と3円を候補にする。2円を取り出すと4円・5円、3円を取り出すと5円・6円が候補になる。5円は二度現れるが、支払える金額としては一回だけ数える。残っていた候補も含めて最小値を選ぶため、最小値を取り出せる優先度付きキュー（min-heap）を使う。
 
-heapへ0を入れ、最小値を取り出して直前確定値と異なる時だけ順位を進め、そのv+A_jを全j挿入する。0を含む順位補正後のK番目を返す。
+1. キューに0を入れ、直前に確定した金額は「なし」、確定した正の金額の個数は0とする。
+2. 最小の金額 $$v$$ を取り出す。直前に確定した金額と等しければ、順位を進めず、候補も追加せずに手順2へ戻る。
+3. 新しい金額なら直前の確定値を $$v$$ に更新する。$$v>0$$ のときだけ個数を一つ増やし、それが $$K$$ 個目なら $$v$$ を答えて終了する。
+4. 全種類 $$j=1,\ldots,N$$ について $$v+A_j$$ を追加し、手順2へ戻る。
+
+0円は候補生成の出発点としてだけ使い、順位には含めない。上の例で数える金額は $$2,3,4,5,6,\ldots$$ となり、4番目は5円である。値の異なる金額を昇順に確定するので、重複の判定には直前の確定値だけを覚えればよい。
 
 ## 典型の発動条件
 
 ### 暗黙グラフのbest-first search
 
-発動条件: 非負加算で生成される半群の小さい値を順に列挙する。
-
-min-heapから確定値を取り出し各generatorを足す。
+状態を一つ処理すると少数の次候補を作れ、遷移先の値が必ず大きくなるなら、小さい状態から必要な順位まで列挙できる。全状態の範囲を先に確保する必要はない。
 
 ### 重複除去
 
-発動条件: 異なる買い方が同額になる。
-
-同じheap値は順位で一度だけ数える。
+異なる作り方でも、その後の遷移と数えたい対象が同じなら一つの状態へまとめる。昇順に取り出す場合は、直前の確定値と比較して重複を除ける。重複した状態から子を再生成しないことが、候補数の上限にも必要になる。
 
 ## 問題固有の要素
 
-買い方ではなく到達金額を頂点とみなすと、無限状態でも先頭K個だけDijkstra風に生成できる。
-
-別の問題へ持ち帰る視点: 非負generatorのK小値はbest-firstで列挙する。
+支払い方法ではなく、支払う金額の種類を数えることが要点となる。例えば6円を $$2+2+2$$ 円で作っても $$3+3$$ 円で作っても、その後に一個追加して作れる金額は同じである。問題文の「同じ金額は1回だけ数える」という条件から、状態を金額へまとめる。
 
 ## 正当性
 
-次の金額の買い方から一個外せば既に確定済み以下の金額になるため、確定集合から一手足した候補だけ見れば十分。 0からv→v+A_jを生成し、最小値を重複除去しながらK個確定すれば買い方を列挙せず順位値を得られる。
+まだ確定していない到達可能な最小の金額を $$x>0$$ とする。その買い方から一個を取り除いた金額 $$y$$ は、価格が正なので $$0\leq y<x$$ となる。0円を含め、$$x$$ より小さい到達可能な金額はすべて確定済みである。従って $$y$$ を処理したときに $$x$$ はキューへ追加されている。
+
+キューに入る金額もすべて到達可能なので、既に確定した値の重複を読み飛ばした後の最小値は $$x$$ である。これを繰り返すと正の金額を小さい順に漏れなく確定でき、$$K$$ 個目が答えとなる。同額の状態では追加できる価格も同じなので、二度目以降の候補生成を省いても到達可能性は変わらない。
 
 ## 実装上の注意
 
-- 0円を含めるためKを一つずらし、同額popでは子生成を重複させない実装方針を統一する。
+- 0円は順位に含めず、一度だけ候補生成する。同額を取り出したときは、順位の更新と次候補の生成を両方省く。
+- 最小価格を $$a$$ とすると、$$a,2a,\ldots,Ka$$ は相異なる候補なので答えは $$Ka$$ 以下。この手順で生成する値も高々 $$Ka+\max_j A_j$$ であり、最大で $$2\times 10^{14}+10^9$$ となる。加算前から符号付き64 bit整数を使う。
+- 同じ価格の種類が複数あっても、この重複処理で正しく数えられる。
 
 ## 復習の核
 
-- 小Kの個数全探索と比較し、A重複、同額を複数和で作る例、N=1を確認する。
+- 作り方を列挙する前に、答えが「方法の数」か「値の種類」かを読む。
+- 無限の状態でも、増える方向と少数の次候補が分かれば先頭だけを列挙できる。
+- 重複した値を数えないだけでなく、そこから候補を増やさない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(NK log(NK))、Nは種類数、Kは求める順位。重複popを含め高々O(NK)候補。
+0円と答えより小さい正の金額を合わせて $$K$$ 個処理し、それぞれから $$N$$ 個の候補を追加する。重複の取り出しを含めても追加・取り出しは $$O(NK)$$ 回で、キューの大きさも $$O(NK)$$。全体で $$O(NK\log(NK+1))$$ 時間となる。
 
 ### 空間
 
-O(NK)、heap。
+価格配列に $$O(N)$$、キューに $$O(NK)$$ を使うので、合計 $$O(NK)$$。全金額分の配列は持たない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10; 1 \le K \le 2 \times 10^5; 1 \le A_i \le 10^9; All values in the input are integers.
+$$1\leq N\leq 10$$、$$1\leq K\leq 2\times 10^5$$、$$1\leq A_i\leq 10^9$$。追加する候補は高々 $$NK\leq 2\times 10^6$$ 個である。価格が正という条件は、小さい順の確定と、0円を正の金額から区別するために使う。$$N=1$$ なら金額は $$A_1,2A_1,\ldots$$ となり、同じ手順で $$KA_1$$ を得る。
 
 ## 出典
 

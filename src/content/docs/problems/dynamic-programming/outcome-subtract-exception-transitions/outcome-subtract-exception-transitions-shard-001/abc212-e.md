@@ -1,7 +1,7 @@
 ---
 title: "ABC212-E — Safety Journey"
 draft: true
-authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc212-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"初期値は、移動前に都市1にいる一通りの旅を表す。$$dp_t$$ が $$t$$ 回移動した旅を正しく数えると仮定し、翌日の到着都市 $$v$$ を固定する。\n\n全体和 $$S_t$$ は、前日の各旅を出発都市によらず一度ずつ含む。このうち最後の一歩が許されないのは、出発都市が $$v$$ 自身か、集合 $$B(v)$$ に属する場合だけである。壊れた道路は異なる二都市を結び、入力に重複もないため、これらを引くと、許可された移動を一度ずつ数えた和になる。\n\n従って遷移後の配列も正しい旅の数を表す。これを $$K$$ 回繰り返した $$dp_K[1]$$ が、都市1へ戻る旅の数となる。","sourceRevisionIds":["source-abc212-e-problem-70d83985aae32c41e40c182e1f2c9800667a7e4b7106a19f9ea61b0cd85fc0a0","source-abc212-editorial-2357-e6909ba27957b7cf8a9986f14ea4ee3b5813f7d28b6303464500a50de64f973e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,65 +20,80 @@ authoringUnit: {"problemId":"abc212-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-各晩は今いる街にも壊れた道路の相手にも移動できず、それ以外のほぼ全ての街へ移動できる。使えない組だけが M 本の道路として疎に与えられている。翌日のある街への到達数は、前日の全街への到達数の総和から、その街自身と壊れた道路で隣接する街からの分を除けば得られる。密な許可関係をそのまま扱うのでなく、「全候補から疎な禁止集合を引く」という補集合側の表現に反転する。同じ街に留まることも禁止されるため、入力された壊れた道路だけでなく dp の同じ添字の値も必ず総和から除く。
+ある都市へ来られる旅の数は、前日の全都市の総和から、来られない都市の分だけ引けば求められる。使える道路が多くても、使えない道路が少ないなら、例外を引く方が速い。同じ都市に留まる移動も禁止なので、その分も忘れずに除く。
 
-棄却する候補: 各日について全ての出発街と到着街の組を調べ、移動可能なら到達数を加える。
+まず日数と現在地を状態にする。$$dp_t[v]$$ を「都市1から出発し、$$t$$ 回移動して都市 $$v$$ にいる旅の数」と定義する。都市番号は問題文と同じ1始まりとし、$$1\leq v\leq N$$ とする。まだ移動していないときは $$dp_0[1]=1$$、他は0であり、求める答えは $$dp_K[1]$$ である。以後の計算はすべて法998244353で行う。
 
-移動可能な組が密なので、街の組を直接列挙すると N の二乗に日数を掛けた回数の遷移が必要になる。
+素直な遷移では、各到着都市について、道でつながった全出発都市の値を足す。しかし使える道路は最大で $$N(N-1)/2$$ 本あり、毎日走査すると $$O(KN^2)$$ 時間かかる。入力が列挙しているのは高々5000本の「使えない道路」である。許可された移動を足す代わりに、全体から禁止された移動を引こう。
 
-採用する候補: 前日の到達数の総和を先に求め、各到着街について自己ループと壊れた道路の端点に由来する寄与だけを引く。
+$$B(v)$$ を都市 $$v$$ と壊れた道路で結ばれた都市の集合とする。前日の全体和を $$S_t$$ とおくと、遷移は次のように書ける。
 
-全ての許可辺を列挙せず、各日につき街と壊れた道路だけを走査して同じ遷移を計算できる。
+$$
+S_t=\sum_{u=1}^{N}dp_t[u]
+$$
 
-日ごとの街別到達数を DP とし、全成分和を基準値にして禁止辺の両端からの寄与を差し引くことで、完全グラフの補グラフ上の遷移を疎な更新へ変換する。
+$$
+dp_{t+1}[v]=S_t-dp_t[v]-\sum_{u\in B(v)}dp_t[u]
+$$
+
+第2項は同じ都市に留まる旅、第3項は壊れた道路を使う旅を除く。例えば4都市で、都市2と3の間だけ道が壊れているなら、都市2へ来られるのは都市1と4からだけである。式も $$S_t-dp_t[2]-dp_t[3]=dp_t[1]+dp_t[4]$$ となる。
+
+実装では、前日用の配列を読むだけにして、翌日用の配列を別に作る。
+
+1. 前日用の配列の総和 $$S_t$$ を一度求める。
+2. 全都市 $$v$$ の翌日値を $$S_t-dp_t[v]$$ で初期化する。
+3. 壊れた道路 $$(u,v)$$ ごとに、翌日の都市 $$u$$ から前日の $$dp_t[v]$$ を、翌日の都市 $$v$$ から前日の $$dp_t[u]$$ を引く。
+4. 翌日値を法の非負範囲へ戻し、前日用と翌日用の配列を交換する。
+
+これを $$t=0,\ldots,K-1$$ の順に行う。毎日、都市と壊れた道路を一度ずつ走査するだけでよい。
 
 ## 典型の発動条件
 
 ### 補集合を使う遷移高速化
 
-発動条件: 許される遷移がほぼ全てで、禁止される遷移だけが少数列挙されているとき。
-
-全状態の値の総和から自己遷移と壊れた道路に対応する値を引き、許可辺の走査を省く。
+許される遷移が多く、禁止される遷移だけが少数列挙されているとき、まず全体の寄与をまとめて足し、例外だけを引く。入力が疎でも、入力された辺が使える辺とは限らない。
 
 ### ローリング DP
 
-発動条件: 次の段が直前の段だけに依存し、段数分の履歴を保持する必要がないとき。
-
-前日と翌日の街別配列を分け、各晩の遷移後に交換して K 日目の街 1 の値を得る。
+次の日の値が直前の日だけに依存するなら、二つの配列を交換して履歴を省ける。同じ配列を読み書きすると、今日と明日の値が混ざるので注意する。
 
 ## 問題固有の要素
 
-この問題の入力は道路を列挙しているが、道路は移動可能辺ではなく移動禁止辺であり、実際の遷移グラフは非常に密である。
-
-別の問題へ持ち帰る視点: 入力が関係の例外だけを表す問題では、例外を足す発想だけでなく、全集合から例外を引く集約式を検討する。
+入力された壊れた道路に加えて、自己遷移も禁止されている。問題文の「相異なる都市」を式の $$-dp_t[v]$$ に対応付ける。この項は壊れた道路の一覧には現れないので、入力だけを見て遷移を決めない。
 
 ## 正当性
 
-完全graphから自分と禁止neighborへの遷移を引けば許可全neighbor和と一致する。各日の旧dp総和を共有し禁止辺両端を一回ずつ減算して通常のwalk DPを再現する。K日後開始都市の値が帰還数。
+初期値は、移動前に都市1にいる一通りの旅を表す。$$dp_t$$ が $$t$$ 回移動した旅を正しく数えると仮定し、翌日の到着都市 $$v$$ を固定する。
+
+全体和 $$S_t$$ は、前日の各旅を出発都市によらず一度ずつ含む。このうち最後の一歩が許されないのは、出発都市が $$v$$ 自身か、集合 $$B(v)$$ に属する場合だけである。壊れた道路は異なる二都市を結び、入力に重複もないため、これらを引くと、許可された移動を一度ずつ数えた和になる。
+
+従って遷移後の配列も正しい旅の数を表す。これを $$K$$ 回繰り返した $$dp_K[1]$$ が、都市1へ戻る旅の数となる。
 
 ## 実装上の注意
 
-- 壊れた道路の各端点について相手側の前日値を引き、同じ道路の寄与を逆向きにも忘れず更新する。
-- 総和から複数の値を引く途中で負になり得るため、各日の更新値を法 998244353 の非負範囲へ戻す。
+- 壊れた道路は双方向なので、両端の翌日値から相手側の前日値を引く。減算の途中でも前日用の配列は変更しない。
+- 減算後は法998244353の非負範囲へ戻す。総和や減算をまとめて計算するなら、途中の値に符号付き64 bit整数を使う。
+- 壊れた道路が0本なら自己遷移だけを除く。全道路が壊れた小入力では、一度移動した後の値はすべて0になる。
 
 ## 復習の核
 
-- 辺数が少ないのに「辺のない組へ移動する」と書かれていたら、入力辺ではなくその補集合が本体だと読み替える。
-- 全体和から引く対象を、入力の禁止辺だけで終えず、問題文が別に禁じる自己遷移まで列挙して確認する。
+- 遷移が多すぎるときは、全体をまとめた後、少ない例外を引けないか考える。
+- 禁止条件は入力された道路だけでなく、問題文の自己遷移禁止まで拾う。
+- 遷移先の値を計算し終えるまで、遷移元の配列を保つ。
 
 ## 計算量と制約
 
 ### 時間
 
-都市N、壊れた道路M、日数K。補graphDP O(K(N+M))。
+一日につき総和と翌日値の初期化が $$O(N)$$、壊れた道路の両端の減算が $$O(M)$$。入力の読み込みを含め、全体で $$O(K(N+M))$$ 時間。使える道路を列挙する処理は不要である。
 
 ### 空間
 
-rolling都市DP O(N)、禁止隣接O(N+M)。
+前日・翌日用の二配列に $$O(N)$$、壊れた道路の端点の保存に $$O(M)$$ を使い、合計 $$O(N+M)$$。日数分の配列は保持しない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 5000; 0 \leq M \leq \min\left( \frac{N(N-1)}{2},5000 \right); 2 \leq K \leq 5000; 1 \leq U_i<V_i \leq N; All pairs (U_i, V_i) are pairwise distinct.; All values in input are integers.
+$$2\leq N\leq 5000$$、$$2\leq K\leq 5000$$、壊れた道路は重複のない異なる二都市の組で、$$0\leq M\leq\min(N(N-1)/2,5000)$$ 本である。$$K(N+M)\leq 5\times 10^7$$ に抑えられる一方、全都市対を毎日調べると $$KN^2$$ は最大 $$1.25\times 10^{11}$$ となる。
 
 ## 出典
 
