@@ -32,6 +32,36 @@ const plan = (...files: string[]) => selectVerificationSteps(changed(...files));
 const ids = (...files: string[]) => plan(...files).map((step) => step.id);
 const testArgs = (...files: string[]) =>
   plan(...files).find((step) => step.id === 'test')?.args ?? [];
+const readingCases = [
+  {
+    files: [
+      'tests/contract/content-readability.test.ts',
+      'tests/unit/problem-reading.test.ts',
+      'tests/e2e/problem-reading.spec.ts',
+    ],
+    tests: ['tests/contract/content-readability.test.ts', 'tests/unit/problem-reading.test.ts'],
+    e2e: ['tests/e2e/problem-reading.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+  {
+    files: ['tests/unit/unit-reading.test.ts', 'tests/e2e/unit-reading.spec.ts'],
+    tests: ['tests/unit/unit-reading.test.ts'],
+    e2e: ['tests/e2e/unit-reading.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+  {
+    files: ['tests/unit/document-contents.test.ts', 'tests/e2e/document-contents.spec.ts'],
+    tests: [
+      'tests/unit/document-contents.test.ts',
+      'tests/unit/problem-reading.test.ts',
+      'tests/unit/unit-reading.test.ts',
+    ],
+    e2e: ['tests/e2e/document-contents.spec.ts'],
+  },
+  {
+    files: ['tests/unit/study-ux-documents.test.ts', 'tests/e2e/study-readability.spec.ts'],
+    tests: ['tests/unit/study-ux-documents.test.ts'],
+    e2e: ['tests/e2e/study-readability.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+];
 
 describe('verify:fast change selection', () => {
   it('checks every existing comparison PNG through documentation without build, E2E or publication', async () => {
@@ -302,7 +332,12 @@ describe('verify:fast change selection', () => {
       plan('src/content/docs/problems/abc212-g.md').find((s) => s.id === 'build')?.script,
     ).toBe('build');
     expect(plan('src/content/docs/problems/abc212-g.md').find((s) => s.id === 'e2e')?.args).toEqual(
-      ['--project=chromium', 'tests/e2e/full-projection.spec.ts', 'tests/e2e/new-material.spec.ts'],
+      [
+        '--project=chromium',
+        'tests/e2e/full-projection.spec.ts',
+        'tests/e2e/new-material.spec.ts',
+        'tests/e2e/document-contents.spec.ts',
+      ],
     );
   });
 
@@ -473,6 +508,143 @@ describe('verify:fast change selection', () => {
       selectVerificationSteps(null, { CI: 'true' }).find((s) => s.id === 'browsers')?.script,
     ).toBe('test:e2e:install:ci');
   });
+});
+
+describe('known reading regression selection', () => {
+  const common = [
+    'tests/integration/full-public-projection.test.ts',
+    'tests/unit/public-document.test.ts',
+    'tests/unit/problem-content-projection.test.ts',
+    'tests/unit/problem-authoring-document.test.ts',
+    'tests/unit/study-ux-documents.test.ts',
+  ];
+  const cases = readingCases.flatMap((group) => group.files.map((file) => ({ ...group, file })));
+
+  it.each(cases)('runs $file itself with its explicit reading checks', ({ file, tests, e2e }) => {
+    expect(readFileSync(file, 'utf8').length).toBeGreaterThan(0);
+    for (const status of ['A', 'M']) {
+      const steps = selectVerificationSteps([{ status, file }], { CI: 'true' });
+      expect(steps.map(({ id }) => id)).toEqual([
+        'lint',
+        'format',
+        'check',
+        'test',
+        'build',
+        'links',
+        'browsers',
+        'e2e',
+      ]);
+      const selectedTests = steps.find(({ id }) => id === 'test')?.args;
+      const selectedE2e = steps.find(({ id }) => id === 'e2e')?.args;
+      expect(selectedTests).toEqual([...new Set([...common, ...tests])]);
+      expect(selectedE2e).toEqual(['--project=chromium', ...e2e]);
+      expect([...(selectedTests ?? []), ...(selectedE2e ?? [])]).toContain(file);
+      expect(steps.find(({ id }) => id === 'build')?.script).toBe('build:checked');
+      expect(steps.find(({ id }) => id === 'browsers')?.script).toBe('test:e2e:install:ci');
+    }
+  });
+
+  it.each(cases)('keeps the prose checks when $file accompanies a heading edit', ({ file }) => {
+    const prose = 'src/content/docs/problems/abc391-f.md';
+    const steps = plan(file, prose);
+    for (const id of ['test', 'e2e'] as const) {
+      const args = steps.find((step) => step.id === id)?.args ?? [];
+      const expected = new Set([
+        ...(plan(file).find((step) => step.id === id)?.args ?? []),
+        ...(plan(prose).find((step) => step.id === id)?.args ?? []),
+      ]);
+      expect(new Set(args)).toEqual(expected);
+      expect(args).toHaveLength(expected.size);
+    }
+    expect(steps.find(({ id }) => id === 'e2e')?.args).toContain(
+      'tests/e2e/document-contents.spec.ts',
+    );
+    expect(steps.filter(({ id }) => id === 'build')).toHaveLength(1);
+    expect(steps.filter(({ id }) => id === 'links')).toHaveLength(1);
+  });
+
+  it('unions known regressions, data, records and documentation without duplicate checks', () => {
+    const files = [
+      ...cases.map(({ file }) => file),
+      'src/content/problems/abc391-f.json',
+      'src/lib/learning-records/filter.ts',
+      'docs/operations/development.md',
+    ];
+    const steps = plan(...files);
+    for (const id of ['test', 'e2e'] as const) {
+      const args = steps.find((step) => step.id === id)?.args ?? [];
+      expect(new Set(args)).toEqual(
+        new Set(files.flatMap((file) => plan(file).find((step) => step.id === id)?.args ?? [])),
+      );
+      expect(new Set(args).size).toBe(args.length);
+    }
+    expect(steps.map(({ id }) => id)).toContain('schema');
+    expect(steps.map(({ id }) => id)).toContain('docs');
+  });
+
+  it.each(cases)('falls back broadly for deletion or rename of $file', ({ file }) => {
+    const deletion: VerificationChange = { status: 'D', file };
+    expect(selectVerificationSteps([deletion])).toEqual(selectVerificationSteps(null));
+    for (const destination of ['tests/e2e/problem-reading.spec.ts', 'tests/e2e/renamed.spec.ts']) {
+      expect(selectVerificationSteps([deletion, { status: 'A', file: destination }])).toEqual(
+        selectVerificationSteps(null),
+      );
+      expect(
+        selectVerificationSteps([
+          { status: 'D', file: destination },
+          { status: 'A', file },
+        ]),
+      ).toEqual(selectVerificationSteps(null));
+    }
+  });
+
+  it.each([
+    'tests/fixtures/documents/widths.md',
+    'tests/fixtures/study-ux/build.ts',
+    'tests/setup/fixed-clock.ts',
+    'tests/e2e/fixtures.ts',
+    'playwright.config.ts',
+    'vitest.config.ts',
+    'tests/unit/public-document.test.ts',
+    'tests/e2e/document-widths.spec.ts',
+    'tests/unit/unknown.test.ts',
+    'tests/e2e/unknown.spec.ts',
+    'src/lib/domain/schema.ts',
+    'src/lib/study-preview/manuscripts.ts',
+    'package-lock.json',
+    '.github/workflows/ci.yml',
+  ])('keeps broad checks for %s alone or mixed with known tests', (file) => {
+    expect(plan(file)).toEqual(selectVerificationSteps(null));
+    expect(plan('tests/e2e/problem-reading.spec.ts', file)).toEqual(selectVerificationSteps(null));
+  });
+
+  it.each(['src/content/docs/problems/abc391-f.md', 'src/lib/catalog/full-public-projection.ts'])(
+    'keeps undeployed %s changes on a main push of a known test',
+    (pending) => {
+      const env = {
+        CI: 'true',
+        GITHUB_EVENT_NAME: 'push',
+        GITHUB_REF: 'refs/heads/main',
+        ABC_TEXTBOOK_PUBLICATION_BASE_SHA: 'b'.repeat(40),
+      };
+      const changes = changed('tests/e2e/problem-reading.spec.ts');
+      const union = mergePublicationChanges(changes, env, (args) =>
+        args[0] === 'diff' ? `M\0${pending}\0` : 'b'.repeat(40),
+      );
+      expect(union).toEqual([...changes, ...changed(pending)]);
+      expect(selectVerificationSteps(union)).toEqual(
+        plan('tests/e2e/problem-reading.spec.ts', pending),
+      );
+      expect(
+        selectVerificationSteps(
+          mergePublicationChanges(changes, {
+            ...env,
+            ABC_TEXTBOOK_PUBLICATION_BASE_SHA: undefined,
+          }),
+        ),
+      ).toEqual(selectVerificationSteps(null));
+    },
+  );
 });
 
 describe('Git change selection', () => {

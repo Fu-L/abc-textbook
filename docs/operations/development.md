@@ -8,21 +8,41 @@
 `Verify (release baseline)`はNode 24.18.0/npm 11.16.0の単一環境で、PRのmerge-base、main
 pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動し、書式・ローカルリンク・見出し参照・feature選択を検証する。
 
-| 変更                                                                       | 検査                                                                                                                |
-| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| AGENTS/README、憲章・テンプレート・feature選択、operations/specsのMarkdown | 変更文書の書式・ローカル参照のみ                                                                                    |
-| 既知のoperations比較画像（限定ディレクトリ内のPNG）                        | 画像の存在と非公開文書からの画像参照。PNGはPrettierへ渡さず、build・E2E・配信は不要                                 |
-| 公開本文                                                                   | 本文parser・実projection・内部参照・代表原稿のテスト、build、内部リンク、Chromiumのprojection・新教材E2E            |
-| `src/content/`のデータ、教科書順                                           | schema、実データのID/参照/3DAG/配置/順序/metrics/履歴・訂正テスト、build、リンク、projection/search/記録・新教材E2E |
-| UI/学習記録                                                                | lint・型、対象挙動のテスト、build、リンク、Chromiumの対象E2E。UI変更は読書表示・拡大・新教材も確認                  |
-| 解説執筆skill                                                              | lint・型、skill/本文/執筆例/実行コードのcontractと利用側テスト、build、リンク、新教材E2E                            |
-| 共通コード・schema・依存・workflow・未知path、差分取得不能                 | schema・lint・型、既存Vitest全体、build、リンク、Chromium全体                                                       |
+| 変更                                                                       | 検査                                                                                                                 |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| AGENTS/README、憲章・テンプレート・feature選択、operations/specsのMarkdown | 変更文書の書式・ローカル参照のみ                                                                                     |
+| 既知のoperations比較画像（限定ディレクトリ内のPNG）                        | 画像の存在と非公開文書からの画像参照。PNGはPrettierへ渡さず、build・E2E・配信は不要                                  |
+| 公開本文                                                                   | 本文parser・実projection・内部参照・代表原稿のテスト、build、内部リンク、Chromiumのprojection・新教材・ページ目次E2E |
+| `src/content/`のデータ、教科書順                                           | schema、実データのID/参照/3DAG/配置/順序/metrics/履歴・訂正テスト、build、リンク、projection/search/記録・新教材E2E  |
+| UI/学習記録                                                                | lint・型、対象挙動のテスト、build、リンク、Chromiumの対象E2E。UI変更は読書表示・拡大・新教材も確認                   |
+| 解説執筆skill                                                              | lint・型、skill/本文/執筆例/実行コードのcontractと利用側テスト、build、リンク、新教材E2E                             |
+| 下表の既知の本文・読書表示テスト（追加・修正）                             | lint・型、変更テスト自身と対応する本文/表示検証、build・リンク、対象Chromium E2E                                     |
+| 共通コード・schema・依存・workflow・未知path、差分取得不能                 | schema・lint・型、既存Vitest全体、build、リンク、Chromium全体                                                        |
 
 複数分類は検査の和集合を実行する。renameは削除と追加に分解し、両pathを判定する。本文・データの削除も検査対象にする。非公開文書・比較PNGの削除、空差分、不正なGit出力は広い検査へ戻る。削除・renameでも文書の比較PNG参照を確認する。検査の失敗・signalは非zeroで後続を止め、cancelを成功へ置き換えない。
 
 比較PNGの許可配置は[更新マニュアル](update-manual.md#3-変更に必要な検証を選ぶ)を参照する。runnerと文書checkerは`.github/actions/nonpublic-docs/paths.mjs`の分類を共用し、未知のディレクトリ・拡張子は広い検査へ戻す。Markdownの画像記法もローカル参照検査に含め、画像だけの差分でも既知の非公開Markdownから比較PNGへの参照を調べる。mainは画像だけのpushでも未配信差分を合流するため、未配信の教材・共通変更に必要な検査と配信は残る。
 
 この分類改善自身のPRはrunner変更により広い検査となる。文書経路の所要時間は自然に発生した画像付き文書変更のActionsで確認し、計測専用の画像変更・runは作らない。
+
+### 既知の本文・読書表示テストの対応表
+
+次の9ファイルの追加・修正だけを明示的に対応付ける。各行は変更したテスト自身を含み、すべての行で既存の本文検証5本（`full-public-projection.test.ts`、`public-document.test.ts`、`problem-content-projection.test.ts`、`problem-authoring-document.test.ts`、`study-ux-documents.test.ts`）も実行する。対応表は`scripts/verify/runner.ts`の`readingRegressionByPath`で管理し、任意の`tests/`を依存解析して除外する仕組みは作らない。
+
+| 変更するテスト（repository rootからのpath）                                                                             | 共通5本へ加えるVitest                                                                                           | Chromium E2E                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `tests/contract/content-readability.test.ts`、`tests/unit/problem-reading.test.ts`、`tests/e2e/problem-reading.spec.ts` | `tests/contract/content-readability.test.ts`、`tests/unit/problem-reading.test.ts`                              | `tests/e2e/problem-reading.spec.ts`、`tests/e2e/document-contents.spec.ts`   |
+| `tests/unit/unit-reading.test.ts`、`tests/e2e/unit-reading.spec.ts`                                                     | `tests/unit/unit-reading.test.ts`                                                                               | `tests/e2e/unit-reading.spec.ts`、`tests/e2e/document-contents.spec.ts`      |
+| `tests/unit/document-contents.test.ts`、`tests/e2e/document-contents.spec.ts`                                           | `tests/unit/document-contents.test.ts`、`tests/unit/problem-reading.test.ts`、`tests/unit/unit-reading.test.ts` | `tests/e2e/document-contents.spec.ts`                                        |
+| `tests/unit/study-ux-documents.test.ts`、`tests/e2e/study-readability.spec.ts`                                          | 共通5本のみ                                                                                                     | `tests/e2e/study-readability.spec.ts`、`tests/e2e/document-contents.spec.ts` |
+
+全行でlint・format・型検査を行い、同じrunの`build:checked`の成果物をリンクとE2Eへ渡す。CIではChromiumだけを準備する。本文を伴う場合は従来のprojection・新教材E2Eも和集合で残す。公開本文だけの変更でも見出しの編集を取りこぼさないよう、`document-contents.spec.ts`を選ぶ。目次と最終本文のanchor一致、JS無効・狭い画面・キーボードの既存検出は維持する。
+
+対応済みテストの削除・renameは広い検査に戻す。renameは両pathを判定し、削除したファイルを個別実行の引数に残さない。`tests/fixtures/`、`tests/setup/`、`tests/e2e/fixtures.ts`、Playwright/Vitest設定、表にないテスト（共通検証5本のうち表の入力にないものも含む）、schema・共通処理・依存・workflowを単独または混在で変更した場合も広い検査を維持する。mainの未配信差分も合流する。
+
+たとえば本文と`content-readability.test.ts`・`problem-reading.spec.ts`・`document-contents.spec.ts`だけの差分は、Vitest
+9本とE2E 4本になる。変更前はテストpathが未知のため全量だった。PR
+#137は`src/lib/study-preview/manuscripts`等の共通変更も含むため、同PR全体は今回の変更後も全量になる。実時間は自然な同種・同規模の教材更新のActionsで比較し、このrunner変更自身の全量runを選択改善の短縮実績へ流用しない。
 
 教材追加は[共通フローと3つの完了条件](update-manual.md#新しい教材を追加するときの共通フロー)に従う。既存表示を保つこと、新規原稿の内容をCodexが確認すること、新教材へ共通デザインが適用されることを混同しない。#120の`explanation-writing.test.ts`はskill変更で、#122の`new-material.spec.ts`は本文・データ・UI・skill変更で自動選択する。執筆方針・テンプレートを変更したときは`explanation-writing.spec.ts`も手動で加える。各テストの範囲と限界は[執筆例](explanation-writing.md)と[表示回帰](study-ux-regressions.md)を参照する。
 

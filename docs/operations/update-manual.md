@@ -319,6 +319,10 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 ローカル`--base REF`はtrackedの作業差分と未追跡ファイルも含める。ActionsではcheckoutしたSHAとのcommit差分を使う。`--all`またはローカル差分未指定は広い検査。未知引数は使用法違反で停止する。失敗はexit
 2、使用法違反64、signal/実行不能70で後続を止める。非公開文書だけは書式・リンク・見出し・feature選択を検証し、build・E2E・browser準備を実行しない。
 
+既知の本文・読書表示テスト9本の追加・修正は[開発手順の対応表](development.md#既知の本文読書表示テストの対応表)で検査を選ぶ。対象は`content-readability.test.ts`、`problem-reading.test.ts`/`.spec.ts`、`unit-reading.test.ts`/`.spec.ts`、`document-contents.test.ts`/`.spec.ts`、`study-ux-documents.test.ts`、`study-readability.spec.ts`。変更したテスト自身と対応する本文・表示・導線検証を実行する。公開本文の変更ではページ目次E2Eも選び、最終本文の見出しと目次・anchorの一致を確認する。
+
+対応済みテストの削除・rename、共有fixture・setup・Playwright/Vitest設定、未対応テスト、schema・共通処理・依存・workflowを含む場合は広い検査を維持する。複数分類とmainの未配信差分は和集合で扱う。同じrunで型検査した後に一度だけbuildし、その成果物をリンクと対象E2Eへ再利用する。対象一覧と選択契約を変えたら、`tests/contract/verify-fast.test.ts`と上の対応表も更新し、対応する実テストを実行する。
+
 Actionsログには比較元と未配信差分、選択したstepのコマンド・全引数、広い検査へ戻った理由を出す。`Verification planned`は予定、`Verification started/finished`は実際に実行した処理である。終了行の`elapsed_ms`は単調時計による計測で、失敗・signal・実行不能でも記録する。後続の未実行stepを成功として扱わない。
 
 CI全体の比較は既存Actionsの`Set up Node.js 24.18.0`開始から`Verify changed scope`完了までとし、runner内の時間とは区別する。queue・checkout、検証後のartifact保存・cleanup・deployは除外し、並列テストの時間を合算しない。ログの読み方と計測の限界は[開発手順](development.md#actionsで検証時間を読む)を参照する。実測はPR本文とActionsログへまとめ、計測専用の台帳を作らない。

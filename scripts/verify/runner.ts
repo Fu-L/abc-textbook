@@ -167,6 +167,43 @@ const skillTests = [
   'tests/unit/executable-example-evidence.test.ts',
 ];
 
+// Explicit reading regressions only. Fixtures, setup and all other tests stay broad.
+// Each group runs its changed test plus the existing manuscript/projection checks.
+const readingRegressions = {
+  problem: {
+    tests: ['tests/contract/content-readability.test.ts', 'tests/unit/problem-reading.test.ts'],
+    e2e: ['tests/e2e/problem-reading.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+  unit: {
+    tests: ['tests/unit/unit-reading.test.ts'],
+    e2e: ['tests/e2e/unit-reading.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+  contents: {
+    tests: [
+      'tests/unit/document-contents.test.ts',
+      'tests/unit/problem-reading.test.ts',
+      'tests/unit/unit-reading.test.ts',
+    ],
+    e2e: ['tests/e2e/document-contents.spec.ts'],
+  },
+  readability: {
+    tests: ['tests/unit/study-ux-documents.test.ts'],
+    e2e: ['tests/e2e/study-readability.spec.ts', 'tests/e2e/document-contents.spec.ts'],
+  },
+};
+// List the inputs separately: supporting tests in a group must not expand the allowlist.
+const readingRegressionByPath = new Map([
+  ['tests/contract/content-readability.test.ts', readingRegressions.problem],
+  ['tests/unit/problem-reading.test.ts', readingRegressions.problem],
+  ['tests/e2e/problem-reading.spec.ts', readingRegressions.problem],
+  ['tests/unit/unit-reading.test.ts', readingRegressions.unit],
+  ['tests/e2e/unit-reading.spec.ts', readingRegressions.unit],
+  ['tests/unit/document-contents.test.ts', readingRegressions.contents],
+  ['tests/e2e/document-contents.spec.ts', readingRegressions.contents],
+  ['tests/unit/study-ux-documents.test.ts', readingRegressions.readability],
+  ['tests/e2e/study-readability.spec.ts', readingRegressions.readability],
+]);
+
 /** Short path branches, no persisted plan or policy engine. Unknown scope stays broad. */
 export function selectVerificationSteps(
   changes: readonly VerificationChange[] | null,
@@ -186,6 +223,8 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
     skill = false,
     history = false;
   const docs: string[] = [];
+  const readingTests = new Set<string>();
+  const readingE2e = new Set<string>();
   let checkDocs = false;
   for (const { status, file } of changes ?? []) {
     if (!['A', 'M', 'D'].includes(status)) {
@@ -206,7 +245,13 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
       ui = true;
       records = true;
     } else if (file.startsWith('.agents/skills/abc-explanation-author/')) skill = true;
-    else broadReasons.add(`common code/configuration or unknown path: ${JSON.stringify(file)}`);
+    else {
+      const regression = readingRegressionByPath.get(file);
+      if (regression && status !== 'D') {
+        for (const test of regression.tests) readingTests.add(test);
+        for (const spec of regression.e2e) readingE2e.add(spec);
+      } else broadReasons.add(`common code/configuration or unknown path: ${JSON.stringify(file)}`);
+    }
   }
   const broad = broadReasons.size > 0;
   const steps: VerificationStep[] = [];
@@ -217,15 +262,17 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
       script: '.github/actions/nonpublic-docs/check.mjs',
       args: ['--files', ...docs],
     });
-  const runtime = broad || ui || records || skill;
-  const publish = broad || prose || data || ui || records || history || skill;
+  const reading = readingTests.size > 0;
+  const runtime = broad || ui || records || skill || reading;
+  const publish = broad || prose || data || ui || records || history || skill || reading;
   if (runtime) steps.push({ id: 'lint', script: 'lint' });
   if (broad || prose || data || runtime || history)
     steps.push({ id: 'format', script: 'format:check' });
   if (broad || data) steps.push({ id: 'schema', script: 'schema:check' });
   if (runtime) steps.push({ id: 'check', script: 'check' });
   const tests = new Set<string>();
-  if (prose || data || ui) for (const test of contentTests) tests.add(test);
+  if (prose || data || ui || reading) for (const test of contentTests) tests.add(test);
+  for (const test of readingTests) tests.add(test);
   if (data) for (const test of dataTests) tests.add(test);
   if (records) for (const test of recordTests) tests.add(test);
   if (ui) {
@@ -246,11 +293,14 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
   if (publish) {
     steps.push({ id: 'build', script: runtime ? 'build:checked' : 'build' });
     steps.push({ id: 'links', script: 'link:check:built' });
-    if (env.CI && (broad || prose || data || ui || records || skill))
+    if (env.CI && (broad || prose || data || ui || records || skill || reading))
       steps.push({ id: 'browsers', script: 'test:e2e:install:ci' });
     const e2e = new Set<string>();
     if (prose || data || ui || records) e2e.add('tests/e2e/full-projection.spec.ts');
     if (prose || data || ui || skill) e2e.add('tests/e2e/new-material.spec.ts');
+    // Heading edits must exercise contents against the final rendered body.
+    if (prose) e2e.add('tests/e2e/document-contents.spec.ts');
+    for (const spec of readingE2e) e2e.add(spec);
     if (data || ui) e2e.add('tests/e2e/search.spec.ts');
     if (ui) {
       e2e.add('tests/e2e/accessibility.spec.ts');
