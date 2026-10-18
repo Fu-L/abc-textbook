@@ -41,6 +41,8 @@ export async function withNewMaterialBuild(inspect: (dist: string) => Promise<vo
     for (const entry of [
       'src',
       'scripts',
+      // The verification runner imports this shared path classifier.
+      '.github/actions/nonpublic-docs/paths.mjs',
       'astro.config.mjs',
       'package.json',
       'tsconfig.json',

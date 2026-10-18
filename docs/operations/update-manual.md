@@ -306,6 +306,8 @@ fence・anchorを軽量に検査し、`tests/e2e/study-readability.spec.ts`は�
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
 
+新教材E2Eの隔離buildは、`src`・`scripts`に加えて、runnerが参照する`.github/actions/nonpublic-docs/paths.mjs`もコピーする。共通モジュールの依存先を追加・移動した場合は`tests/fixtures/study-ux/build.ts`のコピー対象も確認し、`new-material.spec.ts`で実際のbuildと表示を検証する。
+
 `verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain
 push前のSHAとの差から必要な検査を選ぶ。複数分類は和集合、renameは削除・追加の両pathを扱う。未知path・取得不能・空差分・非公開文書の削除は広い検査へ進む。通常経路からpreview凍結・全shard再join・毎回の初版監査・release/review照合・一律の数学回帰を外した。既存の正本loaderのschema、ID・参照・3DAG・配置・本文・リンクと対象挙動の検証は残る。
 
