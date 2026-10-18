@@ -29,6 +29,10 @@ identity、主配置、関連先、metrics、索引、導線を整合させる�
 通常の執筆・訂正は、対象確認→正本編集→検証→報告で進める。管理用のmanifest/digestやreview
 modeを作らず、独立した演習・評価・解答の節を一律に増やさない。一括執筆・取得CLIを使う場合だけ、その入出力契約と詳細手順を読む。旧初版・release/deployの残る依存は「既存実装からの移行」を参照する。
 
+問題解説の新規執筆では[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)の執筆方針と形式別テンプレートを毎回読む。`prepareExplanationAuthoring`も`writingPolicyPath`と`templatePath`を返す。冒頭の核心から、観察→次の一手の理由→必要な定義→手順と進み、正当性・全体計算量・典型の発動条件・復習の核を残す。既存の外側の節名は維持し、その内側へ定型の小見出しを一律に増やさない。完成unitを検証して`renderProblemAuthoringDocument`で生成し、readerで往復を確認する。[執筆例の比較](explanation-writing.md)と未公開fixtureは全問再生成の指示ではない。
+
+方針・テンプレートの変更では`tests/contract/explanation-writing.test.ts`で新規のfull・差分解説を準備・生成し、schema・往復・共通rendererの数式と導線を検証する。`tests/e2e/explanation-writing.spec.ts`で同じ原稿を現行レイアウトへ置き、狭い画面・明暗・JS無効・参照元への移動を確認する。fixtureは教材・公開catalog・検索indexへ追加しない。通常buildと内部リンク確認には本番subpathを使う。
+
 ### 数式とコードの記法
 
 数式は本文中で `$$1\leq N\leq 2\times 10^5$$` のように明示する。独立した式は、 `$$`

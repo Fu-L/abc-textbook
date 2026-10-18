@@ -186,11 +186,11 @@ describe('explanation authoring skill contract', () => {
     expect(writingPolicy).toContain('`full`');
     expect(writingPolicy).toContain('`similar`');
     expect(writingPolicy).toContain('`supplement`');
-    expect(fullTemplate).toContain('## 自然な考察ロードマップ');
-    expect(fullTemplate).toContain('## 典型要素');
-    expect(fullTemplate).toContain('## 問題固有の要素と見抜き方');
-    expect(abbreviatedTemplate).toContain('## 差分に気づくまでの考察');
-    expect(abbreviatedTemplate).toContain('## コーチからの復習メッセージ');
+    expect(fullTemplate).toContain('<!-- sections.reasoning');
+    expect(fullTemplate).toContain('## 典型の発動条件');
+    expect(fullTemplate).toContain('## 復習の核');
+    expect(abbreviatedTemplate).toContain('<!-- sections.differences');
+    expect(abbreviatedTemplate).toContain('復習の核');
     expect(combinedSkill).not.toMatch(/(?:^|[\s`/])prompt\.md(?:$|[\s`])/m);
   });
 
@@ -207,6 +207,8 @@ describe('explanation authoring skill contract', () => {
         expect(result.explanationKind, fixture.fixtureId).toBe(fixture.expectedKind);
       }
       if (fixture.expectedDiagnosticCodes !== undefined) {
+        expect(result.writingPolicyPath).toBeNull();
+        expect(result.templatePath).toBeNull();
         expect(
           result.diagnostics.map(({ code }) => code),
           fixture.fixtureId,

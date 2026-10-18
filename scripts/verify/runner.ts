@@ -149,6 +149,7 @@ const recordTests = [
 ];
 const skillTests = [
   'tests/contract/explanation-authoring-skill.test.ts',
+  'tests/contract/explanation-writing.test.ts',
   'tests/unit/problem-authoring-document.test.ts',
   'tests/unit/problem-authoring-details.test.ts',
   'tests/unit/executable-example-evidence.test.ts',

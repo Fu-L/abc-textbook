@@ -30,4 +30,6 @@ claimへ対応し、対象taskと用途許可を満たす。Claimはverified、�
 
 `skill`は出力でも任意。旧値を現在のdigestへ書き換えず、存在する旧欄は型検証する。旧`ProblemAuthoringDetails.reviewMode`は`self`/`third_party`の型で読めるが、承認要件を発生させない。
 
+`prepareExplanationAuthoring`の`authoring_required`は、執筆前に読む`writingPolicyPath`と形式ごとの`templatePath`を返す。両方を読んでから内容を執筆し、完成unitを`renderProblemAuthoringDocument`でMarkdownへ変換する。準備関数・生成器は説明内容を自動で執筆しない。入力不足の`blocked`では両pathは`null`である。
+
 空の必須節・計算量、本文のない小見出しはfieldと理由を持つ診断で保留する。自動検証は構造的な不足を検出するものであり、論証・状態の十分性・計算量の正しさは`review-policy.md`に従ってCodexが確認する。

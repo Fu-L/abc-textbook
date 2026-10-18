@@ -1,7 +1,7 @@
 ---
 name: abc-explanation-author
 description: 検証済みの公式Source RevisionからABC上級問題の解説草案または具体的な保留診断を作る。
-version: 2.0.0
+version: 2.1.0
 ---
 
 # ABC Explanation Author
@@ -30,12 +30,14 @@ ABC上級問題の `ProblemAuthoringUnit`
 3. `references/placement-policy.md` に従ってfull / similar /
    supplementを決める。比較の一要素でも不一致ならfullへ戻す。
 4. `references/writing-policy.md`
-   に従い、後知恵で直線化しない考察、典型／問題固有要素、復習助言をplacementに応じた粒度で執筆する。
+   を毎回読み、同文書の良い例・悪い例と照らして執筆する。冒頭は未定義の記号を使わず、解法の核心とその理由を短く伝える。問題文の観察から次の一手を選ぶ理由、必要な定義、具体的な手順へ進み、後知恵で直線化しない。
 5. fullは `templates/full-explanation.md`、similar/supplementは
-   `templates/abbreviated-explanation.md` を使う。
+   `templates/abbreviated-explanation.md`
+   を使う。テンプレートの節と既存の`sections`欄を対応させ、本文は`renderProblemAuthoringDocument`で生成する。説明の順序を見出しの数で代用せず、任意の小見出しは問題に合わせる。短縮形式でも差分の導出・根拠・全体計算量への接続・復習の核を残す。
 6. Claimを本文と同じauthoring
    unitへ置き、sourceと学習成果を明示する。必要な短い例・反例は本文へ組み込む。掲載するコードは実行可能／擬似コード／省略を区別し、実行可能コードを実行して期待結果を確認する。
-7. `references/review-policy.md` に従って公式根拠、独自の論証、境界と分類への影響をCodexが確認する。
+7. `references/review-policy.md`
+   に従って公式根拠、独自の論証、境界と分類への影響をCodexが確認する。明示数式は`$$…$$`または独立した`$$`行で囲み、最小の具体例・図表は理解を助ける箇所だけに置く。数式の定義・文章による説明を省かず、生成Markdownと公開rendererの両方を確認する。
 8. output
    contractと再現可能性を検証する。出力のProblem、学習成果、baseline、前提、対象外、Tag、placementは入力packetと一致させ、Claimのsourceは入力technical
    claimと同じsource集合を参照し、対象Problemのofficial taskと用途許可を満たすことを確認する。
