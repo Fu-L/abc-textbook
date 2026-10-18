@@ -104,21 +104,10 @@ main {
   vertical-align: top;
 }
 .contest-cell {
+  position: relative;
   display: grid;
   gap: 0.35rem;
   min-inline-size: 12rem;
-}
-.contest-cell > strong::before {
-  content: '状態: ';
-}
-.state-preview > strong {
-  text-decoration: underline;
-  text-decoration-thickness: 0.18em;
-}
-.state-official_absent > strong,
-.state-unpublished > strong {
-  border: 1px dashed currentColor;
-  padding: 0.15rem;
 }
 .cell-links {
   display: grid;

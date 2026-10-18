@@ -124,10 +124,12 @@ contract、表示完了 marker、IndexedDB transaction、reload 復元 semantics
 - ABC212からreleaseが宣言した収録上限までの連続行を表示し、`cutoffAt`との一致を確認する。初版はABC466まで・2026-07-12T00:00:00+09:00に固定し、公開日現在の最新回まで収録したと表示しない。
 - Contest に当該記号がない cell も `公式問題なし` と理由を明示し、空欄にしない。
 - 各 cell は問題識別子・名前、解答状況、要復習、掲載状態を示す。
-- 収録済み cell には問題詳細、解説 anchor、対応 LearningUnit、主・各補助 TechniqueTag、各類題への区別可能な直接 link を置き、各 destination へ一回の操作で移動できるようにする。
+- 収録済み cell は問題名から問題詳細へ進める。解説 anchor、対応 LearningUnit、主・各補助 TechniqueTag、各類題への区別可能な直接 link は「学習のつながり」のnative
+  details内に置く。開閉とリンクはJavaScriptなしでも使える（Study UX #119）。
 - 掲載表示は `収録済み`, `未収録`, `作成中`, `公開保留`, `訂正確認中`, `公式問題なし`,
   `公式取り下げ` のいずれかとする。
-- 二次元表だけを横 scroll 可能にし、同じ filter 結果の contest 別 list 表示を併設する。
+- 二次元表だけを横 scroll 可能にし、同じ filter 結果の contest 別 list 表示を併設する。list全体をnative
+  detailsで開閉してもよい。
 
 ## 6. Search and filters
 

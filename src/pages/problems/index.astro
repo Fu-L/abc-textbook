@@ -14,8 +14,7 @@ const tagNames = Object.fromEntries(publicCatalog.tags.map(({ id, name }) => [id
   <span data-pagefind-meta="entity-kind">問題索引</span>
   <h1>問題一覧</h1>
   <p>
-    表示ラベルで条件を組み合わせ、適用した静的条件を URL query に保存します。端末内の学習状態はこの
-    公開カタログ に含めません。
+    問題名・典型・単元から探し、問題名を選ぶと解説へ進めます。条件を選んで「適用」を押してください。
   </p>
   <p>
     <a href={`${base === '/' ? '' : base.replace(/\/$/u, '')}/review/`}>要復習一覧</a> / <a
@@ -31,6 +30,10 @@ const tagNames = Object.fromEntries(publicCatalog.tags.map(({ id, name }) => [id
     {base}
     problems={publicCatalog.problems}
     {tagNames}
-    learningUnits={publicCatalog.learningUnits}
+    learningUnits={publicCatalog.learningUnits.map(({ id, title, coverageProblemIds }) => ({
+      id,
+      title,
+      coverageProblemIds,
+    }))}
   />
 </TextbookLayout>

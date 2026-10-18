@@ -74,7 +74,14 @@ const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
   <span data-pagefind-meta="entity-kind">典型タグ</span>
   <h1>{tag.name}</h1>
   <p>{tag.definition}</p>
-  <p>検索別名: {tag.aliases.join('、')}</p>
+  {
+    unit && (
+      <p>
+        この典型を扱う単元: <a href={withBase(unit.route, base)}>{unit.title}</a>
+      </p>
+    )
+  }
+  {tag.aliases.length > 0 && <p class="tag-aliases">検索別名: {tag.aliases.join('、')}</p>}
   <section>
     <h2>未知問からこの典型を見つける手掛かり</h2>
     <dl>
@@ -98,62 +105,58 @@ const outcomes = canonicalTag.learningOutcomeIds.map((id) => {
       }
     </dl>
   </section>
-  <section>
-    <h2>分類と直接の前提</h2>
-    {
-      canonicalTag.parentId && (
-        <p>
-          概念上の親:{' '}
-          <a href={withBase(`/tags/${canonicalTag.parentId}/`, base)}>
-            {publicCatalog.tags.find((item) => item.id === canonicalTag.parentId)?.name}
-          </a>
-        </p>
-      )
-    }
-    <ul>
+  <details class="tag-classification">
+    <summary>分類・前提・学習成果</summary>
+    <section>
+      <h2>分類と直接の前提</h2>
       {
-        canonicalTag.prerequisiteTagIds.map((id) => (
-          <li>
-            <a href={withBase(`/tags/${id}/`, base)}>
-              {publicCatalog.tags.find((item) => item.id === id)?.name}
+        canonicalTag.parentId && (
+          <p>
+            概念上の親:{' '}
+            <a href={withBase(`/tags/${canonicalTag.parentId}/`, base)}>
+              {publicCatalog.tags.find((item) => item.id === canonicalTag.parentId)?.name}
             </a>
-          </li>
-        ))
+          </p>
+        )
       }
-    </ul>
-    <h3>関連する典型</h3><ul>
-      {
-        canonicalTag.relatedTags.map((relation) => (
-          <li>
-            <a href={withBase(`/tags/${relation.tagId}/`, base)}>
-              {publicCatalog.tags.find((item) => item.id === relation.tagId)?.name}
-            </a>
-            : {relation.rationale}
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-  <section>
-    <h2>学習成果と学習単位</h2>
-    <ul>
-      {
-        outcomes.map(({ outcome, owner }) => (
-          <li>
-            <p>{outcome.statement}</p>
-            <a href={withBase(owner.route, base)}>{owner.title}で学ぶ</a>
-          </li>
-        ))
-      }
-    </ul>
-    {
-      unit && (
-        <p>
-          この典型を扱う単元: <a href={withBase(unit.route, base)}>{unit.title}</a>
-        </p>
-      )
-    }
-  </section>
+      <ul>
+        {
+          canonicalTag.prerequisiteTagIds.map((id) => (
+            <li>
+              <a href={withBase(`/tags/${id}/`, base)}>
+                {publicCatalog.tags.find((item) => item.id === id)?.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <h3>関連する典型</h3><ul>
+        {
+          canonicalTag.relatedTags.map((relation) => (
+            <li>
+              <a href={withBase(`/tags/${relation.tagId}/`, base)}>
+                {publicCatalog.tags.find((item) => item.id === relation.tagId)?.name}
+              </a>
+              : {relation.rationale}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+    <section>
+      <h2>学習成果と学習単位</h2>
+      <ul>
+        {
+          outcomes.map(({ outcome, owner }) => (
+            <li>
+              <p>{outcome.statement}</p>
+              <a href={withBase(owner.route, base)}>{owner.title}で学ぶ</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </details>
   {
     problemGroups.map(({ title, description, ids }) => (
       <section>

@@ -251,6 +251,14 @@ IDごとの分岐は不要である。詳細とトレードオフは[単元ペ�
 
 単元本文へ出典を追記した場合は`tests/integration/full-learning-path.test.ts`も実行する。導線検証は「根拠」節の既存出典とtaxonomy識別行の保持を確認し、執筆に必要な出典の追記を許容する。章目次・主配置問題・関連問題は引き続き受理済みの内容と順序を照合する。出典を追加するために既存本文を生成draftへ戻したり、過去の証跡を再生成したりしない。
 
+問題検索・タグ・コンテスト索引の表示は`ProblemFilters.tsx`、`src/pages/tags/`、`ContestMatrixView.astro`、`ContestProblemCell.astro`と`study-indexes.css`を編集する。検索の条件・query値・適用と解除の意味は維持し、学習記録の条件は開閉欄に置く。queryで学習状況・要復習を指定した場合は初めから開く。JS無効時はフォームを無効にし、全問題の静的リンクを使う。タグの定義と手掛かりは常時表示し、分類・前提・学習成果はnative
+detailsに保持する。コンテスト表は問題名から解説へ進み、各セルの「学習のつながり」で本文anchor・単元・全主タグと補助タグ・類題へ進む。縦の代替表示もnative
+detailsで開ける。公式順・欠番・状態・既存anchorを表示都合で再計算しない。
+
+これらを変更したら`tests/e2e/study-indexes.spec.ts`、既存の`contest-matrix.spec.ts`・`search.spec.ts`・`full-projection.spec.ts`で複合条件・URL復元・学習記録・JS無効・狭い画面・Pagefind・表と代替表示を確認する。新しい索引E2EもUI変更の`verify:fast`に含む。定義・問題集合・内部/公式リンクを保持し、正本教材の再生成は行わない。[索引の比較とトレードオフ](study-indexes.md)を参照する。
+
+索引の表示幅検査は配色・幅ごと、axe検査は配色・ページごとの独立したテストにする。複数画面の巡回と全ページのaxe検査を一つの30秒制限へ詰め込まず、検査範囲と各テストの制限を維持する。
+
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。

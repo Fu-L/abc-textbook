@@ -11,8 +11,8 @@ const base = import.meta.env.BASE_URL;
 >
   <span data-pagefind-meta="entity-kind">典型タグ索引</span>
   <h1>典型タグ</h1>
-  <p>発動条件・対象・不変量から典型を探し、対応する単元と問題へ進めます。</p>
-  <ul>
+  <p>定義から使う場面を確かめ、タグ名から手掛かり・単元・問題へ進めます。</p>
+  <ul class="tag-index">
     {
       publicCatalog.tags.map((tag) => (
         <li>
