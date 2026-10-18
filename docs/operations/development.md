@@ -8,16 +8,18 @@
 `Verify (release baseline)`はNode 24.18.0/npm 11.16.0の単一環境で、PRのmerge-base、main
 pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動し、書式・ローカルリンク・見出し参照・feature選択を検証する。
 
-| 変更                                                                       | 検査                                                                                                        |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| AGENTS/README、憲章・テンプレート・feature選択、operations/specsのMarkdown | 変更文書の書式・ローカル参照のみ                                                                            |
-| 公開本文                                                                   | 本文parser・実projection・内部参照のテスト、build、内部リンク、Chromiumのprojection E2E                     |
-| `src/content/`のデータ、教科書順                                           | schema、実データのID/参照/3DAG/配置/順序/metrics/履歴・訂正テスト、build、リンク、projection/search/記録E2E |
-| UI/学習記録                                                                | lint・型、対象挙動のテスト、build、リンク、Chromiumの対象E2E                                                |
-| 解説執筆skill                                                              | lint・型、skill/本文/実行コードのcontractと利用側テスト                                                     |
-| 共通コード・schema・依存・workflow・未知path、差分取得不能                 | schema・lint・型、既存Vitest全体、build、リンク、Chromium全体                                               |
+| 変更                                                                       | 検査                                                                                                                |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| AGENTS/README、憲章・テンプレート・feature選択、operations/specsのMarkdown | 変更文書の書式・ローカル参照のみ                                                                                    |
+| 公開本文                                                                   | 本文parser・実projection・内部参照・代表原稿のテスト、build、内部リンク、Chromiumのprojection・新教材E2E            |
+| `src/content/`のデータ、教科書順                                           | schema、実データのID/参照/3DAG/配置/順序/metrics/履歴・訂正テスト、build、リンク、projection/search/記録・新教材E2E |
+| UI/学習記録                                                                | lint・型、対象挙動のテスト、build、リンク、Chromiumの対象E2E。UI変更は読書表示・拡大・新教材も確認                  |
+| 解説執筆skill                                                              | lint・型、skill/本文/執筆例/実行コードのcontractと利用側テスト、build、リンク、新教材E2E                            |
+| 共通コード・schema・依存・workflow・未知path、差分取得不能                 | schema・lint・型、既存Vitest全体、build、リンク、Chromium全体                                                       |
 
 複数分類は検査の和集合を実行する。renameは削除と追加に分解し、両pathを判定する。本文・データの削除も検査対象にする。非公開文書の削除、空差分、不正なGit出力は広い検査へ戻る。検査の失敗・signalは非zeroで後続を止め、cancelを成功へ置き換えない。
+
+教材追加は[共通フローと3つの完了条件](update-manual.md#新しい教材を追加するときの共通フロー)に従う。既存表示を保つこと、新規原稿の内容をCodexが確認すること、新教材へ共通デザインが適用されることを混同しない。#120の`explanation-writing.test.ts`はskill変更で、#122の`new-material.spec.ts`は本文・データ・UI・skill変更で自動選択する。執筆方針・テンプレートを変更したときは`explanation-writing.spec.ts`も手動で加える。各テストの範囲と限界は[執筆例](explanation-writing.md)と[表示回帰](study-ux-regressions.md)を参照する。
 
 学習記録の変更には保存・日時・backupのテストに加え、既存の`full-public-projection.test.ts`と`full-projection.spec.ts`を選ぶ。`src/lib/learning-records/filter.ts`だけの変更でも、葉単元・親単元・章の配下にある問題を問題一覧と復習一覧で絞り込む挙動を検証する。問題の主配置単元だけに絞る回帰を検出し、複数分類で選ばれても同じテストは重複実行しない。
 

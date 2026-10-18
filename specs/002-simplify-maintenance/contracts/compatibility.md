@@ -12,6 +12,15 @@
 
 route組立は既存`ui-catalog.ts`、`build-learning-path.ts`、各`src/pages/`を使う。全URLとanchorの保持はPR-01の一時比較で、内部リンク切れは既存validatorで検出する。リンク元とリンク先を一緒に消すと内部リンク検査だけでは検出できないため、移行前後の集合比較も必要。
 
+### 教材追加と共通表示（Study UX #123）
+
+新Contest/Problemは既存の小batch取得・`abc:update`でmetadataを準備し、本文は`abc-explanation-author`の方針・形式別テンプレートを読んで執筆する。完成unitを既存の検証器と`renderProblemAuthoringDocument`へ渡す。新Unitはtaxonomyの所属・前提・読書順・対象色を編集し、`renderLearningUnitDocument`のdraftへ概念と成立理由を執筆する。小batch
+CLIが新しいtaxonomyや本文を自動設計する契約ではない。
+
+両者は通常の公開projection、Markdown/数式renderer、共通layout・CSSを通す。表示用のHTML/CSSを原稿や生成物へ個別追記せず、分類・保存schema・URL/anchorは維持する。数式記法・操作手順・対象テストは[更新マニュアル](../../../docs/operations/update-manual.md#新しい教材を追加するときの共通フロー)へ一本化する。schema・生成器を変える場合だけ対応する既存contractも更新し、UI-onlyの調整でschemaを変更しない。
+
+既存表示の保持、新規原稿の内容確認、隔離fixtureでの新教材表示をそれぞれ確かめる。fixtureの成功は実Contestの公式取得・数学本文の完成・公開成功やM5の実運用受入を意味しない。
+
 ## 公開JSON・出典
 
 既存catalog/metadata/historyの読込を継続する。教材entityの識別・参照・公開routeは変えない。新規出力に旧review・work
