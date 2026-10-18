@@ -1,40 +1,28 @@
----
-problemId: ''
-docPath: ''
-kind: similar
-primaryProblemId: ''
-differenceSummary: ''
-learningOutcomeIds: []
-baselineId: ''
-baselineVersion: ''
-additionalPrerequisiteUnitIds: []
-excludedTopics: []
-tagIds: []
-sourceRevisionIds: []
-revision: 1
-claims: []
-examples: []
-exercises: []
----
+# similar / supplementの執筆テンプレート
 
-## Primary Problemとの差分
+まず[執筆方針と比較例](../references/writing-policy.md)と[分類条件](../references/placement-policy.md)を読む。共通するfullの学習成果・前提・主解法・証明着眼点・漸近計算量を比較してから使う。
 
-## 差分に気づくまでの考察
+入力packetのmetadataを引き継ぎ、`primaryProblemId`と`differenceSummary`を指定する。新しい独立要素がなければ`kind: similar`、一つの補強要素なら`kind: supplement`。主成果などが異なる場合はfullへ戻す。Claimは差分と同じtextを持ち、対象問題の公式根拠を参照する。`examples`・`exercises`は必要なければ`[]`。
 
-## 学ぶべき要素
+完成unitを`validateAuthoringOutput`で検証し、`renderProblemAuthoringDocument`で本文にする。下記は既存の`sections`に対応する。外側の節名は維持し、小見出しは必要なときだけ置く。参照元fullへの冒頭リンクは共通rendererが生成する。共通の考察・証明・手順を本文へ丸ごと再掲しない。コメントは完成原稿に残さない。
 
-### Primaryで復習する典型
+## 差分
 
-### 追加要素
+<!-- sections.differences
+冒頭で、既習のどの考え方を使い、何が変わるかを伝える。
+対象問題の観察→差分の理由→変わる定義・手順と進み、単なる「同じ」「式を変えるだけ」で済ませない。
+similar: 差分が共通の成立条件を保つ理由、実装影響、参照元で復習する着目点を書く。「追加要素なし」という節は不要。
+supplement: 上記に加え、一つの追加観察をどこから導くか、何を持ち帰るかを書く。
+参照元の正当性がどの仮定により適用できるかを示す。
+全体の時間・空間計算量は記号と前処理を含め対象問題へ対応付ける。変わるならfullへ戻すべきか再確認する。
+最後に、次の未知問で差分を見抜くための短い復習の核を置く。
+数式は $$…$$ または独立した $$ 行。記号は初出で定義する。
+-->
 
-`similar` で追加要素がない場合は、その旨と理由を短く書く。
+## 実装上の注意
 
-## 差分の実装影響
-
-変わる状態・遷移・手順・境界を説明する。証明・全体計算量が同じならprimaryの根拠へ結び付け、異なるなら差分の理由を示す。
-
-## コーチからの復習メッセージ
-
-## Claims
-
-必要な短い例・反例は本文へ組み込む。コードを掲載する場合だけExamplesの契約に従って環境・入力・手順・期待結果を示し、実行可能コードを実行する。独立した演習・評価・解答の節は一律に追加しない。
+<!-- sections.implementationNotes
+変わる境界・出力・型などを理由付きで示す。
+同値と同一状態を区別するなど、参照元と共有する重要な注意は簡潔に残す。
+実行可能コードを載せる場合だけ、環境・入力・実行方法・期待結果を示して実行する。
+-->

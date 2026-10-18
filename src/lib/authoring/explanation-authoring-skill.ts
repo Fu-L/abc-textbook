@@ -104,6 +104,7 @@ export interface AuthoringPreparationResult {
   readonly problemId: string | null;
   readonly explanationKind: 'full' | 'similar' | 'supplement' | null;
   readonly templatePath: string | null;
+  readonly writingPolicyPath: string | null;
   readonly diagnostics: readonly AuthoringDiagnostic[];
 }
 
@@ -240,6 +241,7 @@ export const prepareExplanationAuthoring = (value: unknown): AuthoringPreparatio
       problemId: parsedProblemId.success ? parsedProblemId.data.problemId : null,
       explanationKind: null,
       templatePath: null,
+      writingPolicyPath: null,
       diagnostics: validation.diagnostics,
     };
   }
@@ -253,6 +255,7 @@ export const prepareExplanationAuthoring = (value: unknown): AuthoringPreparatio
       explanationKind === 'full'
         ? '.agents/skills/abc-explanation-author/templates/full-explanation.md'
         : '.agents/skills/abc-explanation-author/templates/abbreviated-explanation.md',
+    writingPolicyPath: '.agents/skills/abc-explanation-author/references/writing-policy.md',
     diagnostics: [],
   };
 };
