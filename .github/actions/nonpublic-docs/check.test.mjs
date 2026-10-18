@@ -1,9 +1,134 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  globSync,
+  mkdirSync,
+  mkdtempSync,
+  renameSync,
+  rmSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
-import { isDocumentationDiff, readChanges, validateLinks } from './check.mjs';
+import { checkDocumentation, isDocumentationDiff, readChanges, validateLinks } from './check.mjs';
+
+const comparisonImage = 'docs/operations/content-readability/after.png';
+
+test('existing comparison PNGs alone or with Markdown use the documentation route', () => {
+  const images = globSync('docs/operations/**/*.png');
+  assert.ok(images.length > 0);
+  for (const file of [...images, comparisonImage]) {
+    assert.equal(isDocumentationDiff([{ status: 'A', file }]), true, file);
+    assert.equal(
+      isDocumentationDiff([
+        { status: 'M', file: 'docs/operations/content-readability.md' },
+        { status: 'M', file },
+      ]),
+      true,
+      file,
+    );
+  }
+  for (const file of [
+    'docs/operations/unknown/after.png',
+    'docs/operations/after.png',
+    'docs/operations/content-readability/nested/after.png',
+    'docs/operations/content-readability/after.svg',
+    'docs/operations/content-readability/after.jpg',
+    'docs/operations/content-readability/after.png.js',
+    'docs/operations/content-readability/after.PNG',
+    'docs/operations/content-readability/script.mjs',
+    'docs/other/after.png',
+    'public/after.png',
+    'src/content/docs/problems/a.md',
+    'src/content/problems/a.json',
+    'src/components/ProblemExplanation.astro',
+  ]) {
+    assert.equal(
+      isDocumentationDiff([
+        { status: 'M', file: comparisonImage },
+        { status: 'M', file },
+      ]),
+      false,
+      file,
+    );
+  }
+  for (const changes of [
+    [{ status: 'D', file: comparisonImage }],
+    [{ status: 'R100', file: comparisonImage }],
+    [
+      { status: 'D', file: comparisonImage },
+      { status: 'A', file: 'docs/operations/content-readability/renamed.png' },
+    ],
+  ])
+    assert.equal(isDocumentationDiff(changes), false);
+});
+
+test('PNG-only checks skip Prettier but check existence and unchanged Markdown references', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'abc-docs-images-'));
+  try {
+    mkdirSync(path.dirname(path.join(root, comparisonImage)), { recursive: true });
+    writeFileSync(path.join(root, comparisonImage), Buffer.from([137, 80, 78, 71, 0]));
+    const document = path.join(root, 'docs/operations/content-readability.md');
+    writeFileSync(document, '# Comparison\n\n![After](content-readability/after.png)\n');
+    // There is deliberately no node_modules/Prettier in this fixture.
+    checkDocumentation([{ status: 'M', file: comparisonImage }], root);
+    assert.throws(
+      () => checkDocumentation([{ file: comparisonImage.replace('after', 'absent') }], root),
+      /Missing comparison image/u,
+    );
+    writeFileSync(document, '# Comparison\n\n![Missing](content-readability/absent.png)\n');
+    assert.throws(
+      () => checkDocumentation([{ file: comparisonImage }], root),
+      /missing local target/u,
+    );
+    // References outside operations are checked too; an external image is ignored.
+    writeFileSync(document, '# Comparison\n');
+    writeFileSync(
+      path.join(root, 'README.md'),
+      '[Comparison][image]\n\n[image]: docs/operations/content-readability/absent.png\n',
+    );
+    assert.throws(
+      () => checkDocumentation([{ file: comparisonImage }], root),
+      /README.md: missing local target/u,
+    );
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});
+
+test('deletion and rename check old references and allow a correctly updated document', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'abc-docs-image-removal-'));
+  try {
+    mkdirSync(path.dirname(path.join(root, comparisonImage)), { recursive: true });
+    writeFileSync(path.join(root, comparisonImage), Buffer.from([137, 80, 78, 71, 0]));
+    const document = path.join(root, 'docs/operations/content-readability.md');
+    writeFileSync(document, '# Comparison\n\n[After](content-readability/after.png)\n');
+    const renamed = 'docs/operations/content-readability/renamed.png';
+    renameSync(path.join(root, comparisonImage), path.join(root, renamed));
+    const changes = [
+      { status: 'D', file: comparisonImage },
+      { status: 'A', file: renamed },
+    ];
+    assert.throws(() => checkDocumentation(changes, root), /missing local target/u);
+    symlinkSync(path.resolve('node_modules'), path.join(root, 'node_modules'), 'dir');
+    changes.push({ status: 'M', file: 'docs/operations/content-readability.md' });
+    writeFileSync(document, '# Comparison\n\n![After](content-readability/renamed.png)\n');
+    checkDocumentation(changes, root);
+    writeFileSync(document, '#  Unformatted\n');
+    assert.throws(() => checkDocumentation(changes, root));
+    writeFileSync(document, '# Comparison\n\n![After](content-readability/renamed.png)\n');
+    rmSync(path.join(root, renamed));
+    assert.throws(
+      () => checkDocumentation([{ status: 'D', file: renamed }], root),
+      /missing local target/u,
+    );
+    writeFileSync(document, '# Comparison\n');
+    checkDocumentation([{ status: 'D', file: renamed }], root);
+  } finally {
+    rmSync(root, { recursive: true });
+  }
+});
 
 test('only added or modified nonpublic documentation takes the documentation route', () => {
   assert.equal(
@@ -108,5 +233,27 @@ test('local links, duplicate heading anchors, and explicit anchors are checked',
     assert.throws(() => validateLinks(['document.md'], directory), /missing local target/u);
   } finally {
     rmSync(directory, { recursive: true });
+  }
+});
+
+test('Markdown inline images and image definitions detect missing files', () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'abc-docs-markdown-images-'));
+  try {
+    writeFileSync(path.join(root, 'image space.png'), Buffer.from([137, 80, 78, 71, 0]));
+    const document = path.join(root, 'document.md');
+    writeFileSync(
+      document,
+      '![inline](image%20space.png?raw=true#preview)\n\n![reference][screen]\n\n[screen]: image%20space.png\n\n![external](https://example.com/absent.png)\n',
+    );
+    assert.equal(validateLinks(['document.md'], root), 2);
+    for (const source of [
+      '![inline](absent.png)\n',
+      '![reference][screen]\n\n[screen]: absent.png\n',
+    ]) {
+      writeFileSync(document, source);
+      assert.throws(() => validateLinks(['document.md'], root), /missing local target/u);
+    }
+  } finally {
+    rmSync(root, { recursive: true });
   }
 });

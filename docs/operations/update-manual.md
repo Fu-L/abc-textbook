@@ -238,6 +238,12 @@ Contest追加・公開は別依頼まで未実施で、SC-004とM5全体の実�
 | 学習記録・backup                   | 既存データの読み込み、値と日時、reload保持、export/importの対象テスト                    |
 | 依存・公開設定                     | lockfileと対象環境、build、subpathと公開導線、必要な互換性検証                           |
 
+非公開の比較画像は、`docs/operations/`の次の既存ディレクトリ直下にある`.png`だけを文書assetとして扱う。
+`content-readability`、`content-widths`、`document-contents`、`explanation-writing`、`problem-lists`、`problem-reading`、
+`study-entry-points`、`study-indexes`、`study-ux-baseline`、`study-ux-math`、`study-ux-prototype`、`textbook-navigation`、`typography`、`unit-reading`。判定は`.github/actions/nonpublic-docs/paths.mjs`をrunnerと文書checkerで共用する。別の配置・拡張子は未知pathとして広い検査へ戻す。
+
+これらの画像と既知の非公開文書の追加・修正だけなら、文書checkerで完了し、build・E2E・配信を選ばない。PNGは存在する通常ファイルかを確認し、Prettierには本文・JSONだけを渡す。変更Markdownのローカルリンク・画像・見出し参照に加え、既知の非公開Markdown全体から比較PNGへの参照も確認する。画像だけの変更や、未変更の文書からの通常リンク・画像記法・参照形式による参照切れも検出する。画像の削除・renameは広い検査を維持し、削除したpathをPrettierへ渡さずに参照検査も行う。画像を移動・削除するときは参照元も同じ変更で直す。教材・データ・UIとの混在は検査の和集合とし、mainでは最後の成功配信以降の未配信差分も合流する。文書画像だけのpushでも未配信の教材変更があれば必要な検証・配信を行う。空差分・差分取得不能・未知pathのfallbackは従来どおり維持する。
+
 既存コマンドの例（すべてを毎回実行する一覧ではない）:
 
 ```sh
