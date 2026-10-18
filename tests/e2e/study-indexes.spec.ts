@@ -61,9 +61,11 @@ test('uses saved review state with the same problem conditions', async ({ page }
 });
 
 for (const colorScheme of ['light', 'dark'] as const) {
-  test(`keeps indexes readable at narrow widths in ${colorScheme}`, async ({ page }) => {
-    await page.emulateMedia({ colorScheme });
-    for (const width of [320, 390, 720, 1440]) {
+  for (const width of [320, 390, 720, 1440]) {
+    test(`keeps indexes readable at ${String(width)} CSS px in ${colorScheme}`, async ({
+      page,
+    }) => {
+      await page.emulateMedia({ colorScheme });
       await page.setViewportSize({ width, height: 844 });
       for (const route of ['./problems/', './tags/', './tags/tag-slope-trick/', './contests/']) {
         await page.goto(route);
@@ -72,13 +74,21 @@ for (const colorScheme of ['light', 'dark'] as const) {
           `${route} at ${String(width)}`,
         ).toBe(true);
       }
-    }
-    await page.goto('./problems/');
-    await expect(page.getByRole('button', { name: '適用' })).toBeEnabled();
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-    await page.goto('./tags/');
-    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
-  });
+    });
+  }
+
+  // Give each full-page axe audit its own budget, separate from the reflow checks.
+  for (const route of ['./problems/', './tags/']) {
+    test(`keeps ${route} accessible in ${colorScheme}`, async ({ page }) => {
+      await page.emulateMedia({ colorScheme });
+      await page.setViewportSize({ width: 1440, height: 844 });
+      await page.goto(route);
+      if (route === './problems/') {
+        await expect(page.getByRole('button', { name: '適用' })).toBeEnabled();
+      }
+      expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+    });
+  }
 }
 
 test('preserves definitions, every problem link, and native disclosure without JS', async ({

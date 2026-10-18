@@ -257,6 +257,8 @@ detailsで開ける。公式順・欠番・状態・既存anchorを表示都合�
 
 これらを変更したら`tests/e2e/study-indexes.spec.ts`、既存の`contest-matrix.spec.ts`・`search.spec.ts`・`full-projection.spec.ts`で複合条件・URL復元・学習記録・JS無効・狭い画面・Pagefind・表と代替表示を確認する。新しい索引E2EもUI変更の`verify:fast`に含む。定義・問題集合・内部/公式リンクを保持し、正本教材の再生成は行わない。[索引の比較とトレードオフ](study-indexes.md)を参照する。
 
+索引の表示幅検査は配色・幅ごと、axe検査は配色・ページごとの独立したテストにする。複数画面の巡回と全ページのaxe検査を一つの30秒制限へ詰め込まず、検査範囲と各テストの制限を維持する。
+
 コード・数式・表の幅を変えた場合は`tests/unit/public-document.test.ts`と`tests/e2e/document-widths.spec.ts`で原稿の文字保持、狭い画面での局所スクロール、表の構造、Tab・矢印キー、JS無効の表示を確認する。後者はUI変更の`verify:fast`にも含む。テスト用原稿は`tests/fixtures/documents/widths.md`に置き、教材や検索indexへ追加しない。数式の配置変更では既存の`tests/e2e/document-math.spec.ts`も使う。
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
