@@ -99,7 +99,7 @@ for (const { unit, problemId, count } of [
     await expect(control.getByText('復習設定を保存しました。')).toBeVisible();
 
     await page.goto('./problems/');
-    await expect(page.getByText('学習状態はこの端末内だけで絞り込みます。')).toBeVisible();
+    await expect(page.getByRole('button', { name: '適用', exact: true })).toBeEnabled();
     await page.getByLabel('学習単位').selectOption(unit);
     await page.getByRole('button', { name: '適用', exact: true }).click();
     await expect(page.locator('main [aria-live="polite"]')).toHaveText(
@@ -155,6 +155,7 @@ test('connects unknown-problem recall cues to the actual slope-trick learning ou
   const main = page.locator('main');
   for (const cue of ['絶対値costを順次追加', '傾き単調', '左右heap balance', '最適解復元'])
     await expect(main.getByText(cue, { exact: true })).toBeVisible();
+  await main.locator('.tag-classification > summary').click();
   await expect(
     main.getByText(
       '区分線形凸関数を左右breakpointのheapと定数項で表し、|x-a|追加・平行移動・prefix minimumを更新する。その発動条件、正当性、計算量を説明し、未知問へ実装できる。',

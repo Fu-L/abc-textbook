@@ -19,6 +19,7 @@ const {
   showAlternative = true,
   indexContent = false,
 } = Astro.props;
+const cells = new Map(catalog.cells.map((cell) => [`${cell.contestId}:${cell.label}`, cell]));
 ---
 
 <section
@@ -27,7 +28,15 @@ const {
   data-pagefind-ignore={indexContent ? undefined : true}
 >
   <h2 id={headingId}>{heading}</h2>
-  <p>列は各コンテストの公式問題順で D より後に現れる記号の安定和集合です。</p>
+  <p>問題名から解説へ進めます。単元・タグ・類題は各問題の「学習のつながり」で確認できます。</p>
+  {
+    showAlternative && (
+      <p>
+        横に長い表は枠内でスクロールできます。縦に読む場合は
+        <a href={`#${headingId}-alternative`}>コンテスト別リスト</a>へ。
+      </p>
+    )
+  }
   <div
     class="matrix-scroll"
     data-matrix-scroll
@@ -35,7 +44,7 @@ const {
     aria-label={`${heading}のスクロール領域`}
   >
     <table>
-      <caption>{heading}。空欄は使わず、各セルの状態をテキストで示します。</caption>
+      <caption>{heading} · Dより後の公式問題。記号のない回は「公式問題なし」と表示します。</caption>
       <thead>
         <tr>
           <th scope="col">コンテスト</th>
@@ -47,14 +56,16 @@ const {
           catalog.contests.map((contest) => (
             <tr id={`${headingId}-${contest.id}`}>
               <th scope="row">
-                <a href={contest.officialUrl} rel="external">
-                  ABC {contest.number}（外部公式サイト）
+                <a
+                  href={contest.officialUrl}
+                  rel="external"
+                  aria-label={`ABC ${String(contest.number)}（外部公式サイト）`}
+                >
+                  ABC {contest.number}
                 </a>
               </th>
               {catalog.registry.labels.map((label) => {
-                const cell = catalog.cells.find(
-                  (item) => item.contestId === contest.id && item.label === label,
-                );
+                const cell = cells.get(`${contest.id}:${label}`);
                 return (
                   <td>
                     {cell && <ContestProblemCell base={base} catalog={catalog} cell={cell} />}
@@ -76,29 +87,29 @@ const {
       data-pagefind-ignore={indexContent ? undefined : true}
     >
       <h2 id={`${headingId}-alternative`}>コンテスト別リスト</h2>
-      <p>表と同じ結果を縦方向だけで読める代替表示です。</p>
-      {catalog.contests.map((contest) => (
-        <article>
-          <h3>ABC {contest.number}</h3>
-          <dl>
-            {catalog.registry.labels.map((label) => {
-              const cell = catalog.cells.find(
-                (item) => item.contestId === contest.id && item.label === label,
-              );
-              return (
-                cell && (
-                  <>
-                    <dt>{label}</dt>
-                    <dd>
-                      <ContestProblemCell base={base} catalog={catalog} cell={cell} />
-                    </dd>
-                  </>
-                )
-              );
-            })}
-          </dl>
-        </article>
-      ))}
+      <details class="contest-alternative">
+        <summary>表と同じ問題を縦に読む</summary>
+        {catalog.contests.map((contest) => (
+          <article class="contest-list-entry">
+            <h3>ABC {contest.number}</h3>
+            <dl>
+              {catalog.registry.labels.map((label) => {
+                const cell = cells.get(`${contest.id}:${label}`);
+                return (
+                  cell && (
+                    <>
+                      <dt>{label}</dt>
+                      <dd>
+                        <ContestProblemCell base={base} catalog={catalog} cell={cell} />
+                      </dd>
+                    </>
+                  )
+                );
+              })}
+            </dl>
+          </article>
+        ))}
+      </details>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 @import './accessibility.css';
+@import './study-indexes.css';
 
 :root {
   color-scheme: light dark;
@@ -107,7 +108,7 @@ body {
   max-inline-size: var(--abc-content-measure);
 }
 
-.textbook main :is(ul, ol):not(.cell-links) {
+.textbook main :is(ul, ol):not(.cell-links, .tag-index, .problem-search-results) {
   padding-inline-start: 1.5em;
 }
 

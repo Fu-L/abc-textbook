@@ -1,0 +1,134 @@
+/* Search and indexes share the textbook's type, colors, and reading measure. */
+.problem-browser {
+  max-inline-size: var(--abc-content-measure);
+}
+.problem-filter-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0.75rem 0 0;
+  border: 0;
+  border-block-start: 1px solid var(--abc-border);
+}
+.problem-filter-fields legend {
+  padding-inline: 0 0.75rem;
+  font-weight: 600;
+}
+.record-filter-options > summary {
+  cursor: pointer;
+  padding-block: 0.35rem;
+}
+.record-filter-options[open] > summary {
+  margin-block-end: 0.75rem;
+}
+.problem-filter-name,
+.filter-storage-message {
+  grid-column: 1 / -1;
+}
+.problem-filter-fields :is(input, select) {
+  inline-size: 100%;
+}
+.textbook main .filter-storage-message,
+.textbook main .filter-pending {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--abc-muted);
+}
+.filter-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.filter-actions button {
+  padding-inline: 1rem;
+}
+.textbook main .filter-result-count {
+  margin-block: 1.5rem 0.5rem;
+}
+.textbook main .problem-search-results {
+  padding: 0;
+  list-style: none;
+}
+.textbook main .problem-search-results li {
+  margin: 0;
+  border-block-start: 1px solid var(--abc-border);
+}
+.problem-search-results a {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 0.65rem;
+}
+.problem-search-identity {
+  color: var(--abc-muted);
+}
+.textbook main .tag-index {
+  list-style: none;
+  padding: 0;
+}
+.textbook main .tag-index li {
+  margin: 0;
+  padding-block: 1rem;
+  border-block-start: 1px solid var(--abc-border);
+}
+.textbook main .tag-index h2 {
+  font-size: 1.125rem;
+  margin: 0 0 0.3rem;
+}
+.textbook main .tag-index p {
+  margin: 0;
+}
+.tag-aliases {
+  font-size: 0.9375rem;
+  color: var(--abc-muted);
+}
+.tag-classification,
+.contest-alternative {
+  margin-block: 1.5rem;
+}
+.tag-classification > summary,
+.contest-alternative > summary {
+  cursor: pointer;
+  padding-block: 0.5rem;
+}
+.matrix-scroll th:first-child {
+  min-inline-size: 7.5rem;
+  white-space: nowrap;
+}
+.contest-state {
+  color: var(--abc-muted);
+  font-size: 0.875rem;
+}
+.contest-problem-title {
+  font-weight: 600;
+}
+.contest-cell-context > summary {
+  padding-block: 0.35rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+}
+.contest-cell .cell-links {
+  display: block;
+  font-size: 0.9375rem;
+}
+.textbook main .cell-links p {
+  margin-block: 0.5rem;
+}
+.textbook main .contest-list-entry dl {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1rem 0.5rem;
+}
+.textbook main .contest-list-entry dd {
+  margin: 0;
+}
+@media (max-width: 30rem) {
+  .problem-filter-wide {
+    grid-column: 1 / -1;
+  }
+  .record-filter-options .problem-filter-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -25,7 +25,10 @@ export default function ProblemFilters({ base, problems, tagNames, learningUnits
   const [status, setStatus] = useState<LearningStatus | ''>('');
   const [needsReview, setNeedsReview] = useState<'' | 'yes' | 'no'>('');
   const [records, setRecords] = useState<LearningRecord[]>([]);
-  const [storageMessage, setStorageMessage] = useState('端末内の学習状態を読み込んでいます。');
+  const [ready, setReady] = useState(false);
+  const [storageMessage, setStorageMessage] = useState(
+    '学習状態の絞り込みにはJavaScriptが必要です。',
+  );
   const [applied, setApplied] = useState({
     name: '',
     contest: '',
@@ -65,6 +68,7 @@ export default function ProblemFilters({ base, problems, tagNames, learningUnits
     setStatus(next.status);
     setNeedsReview(next.needsReview);
     setApplied(next);
+    setReady(true);
   }, []);
   useEffect(() => {
     let active = true;
@@ -138,7 +142,7 @@ export default function ProblemFilters({ base, problems, tagNames, learningUnits
   };
 
   return (
-    <section>
+    <section className="problem-browser" aria-label="問題検索">
       <form
         data-pagefind-ignore
         role="search"
@@ -148,122 +152,148 @@ export default function ProblemFilters({ base, problems, tagNames, learningUnits
           apply();
         }}
       >
-        <label>
-          問題名
-          <input
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-        </label>
-        <label>
-          コンテスト
-          <select
-            value={contest}
-            onChange={(event) => {
-              setContest(event.target.value);
-            }}
-          >
-            <option value="">すべて</option>
-            {[...new Set(problems.map(({ contestId }) => contestId))].map((value) => (
-              <option key={value}>{value}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          問題記号
-          <select
-            value={slot}
-            onChange={(event) => {
-              setSlot(event.target.value);
-            }}
-          >
-            <option value="">すべて</option>
-            {[...new Set(problems.map(({ label }) => label))].map((value) => (
-              <option key={value}>{value}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          典型タグ
-          <select
-            value={tag}
-            onChange={(event) => {
-              setTag(event.target.value);
-            }}
-          >
-            <option value="">すべて</option>
-            {Object.entries(tagNames).map(([id, title]) => (
-              <option key={id} value={id}>
-                {title}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          学習単位
-          <select
-            value={unit}
-            onChange={(event) => {
-              setUnit(event.target.value);
-            }}
-          >
-            <option value="">すべて</option>
-            {learningUnits.map(({ id, title }) => (
-              <option key={id} value={id}>
-                {title}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          学習状況
-          <select
-            value={status}
-            onChange={(event) => {
-              setStatus(event.target.value as LearningStatus | '');
-            }}
-          >
-            <option value="">すべて</option>
-            <option value="unstarted">未着手</option>
-            <option value="in_progress">学習中</option>
-            <option value="completed">修了</option>
-          </select>
-        </label>
-        <label>
-          要復習
-          <select
-            value={needsReview}
-            onChange={(event) => {
-              setNeedsReview(event.target.value as '' | 'yes' | 'no');
-            }}
-          >
-            <option value="">すべて</option>
-            <option value="yes">要復習のみ</option>
-            <option value="no">要復習でないもの</option>
-          </select>
-        </label>
-        <div>
-          <button type="submit">適用</button>
-          <button type="button" onClick={reset}>
+        <fieldset disabled={!ready} className="problem-filter-fields">
+          <legend>問題の条件</legend>
+          <label className="problem-filter-name">
+            問題名
+            <input
+              type="search"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
+            />
+          </label>
+          <label>
+            コンテスト
+            <select
+              value={contest}
+              onChange={(event) => {
+                setContest(event.target.value);
+              }}
+            >
+              <option value="">すべて</option>
+              {[...new Set(problems.map(({ contestId }) => contestId))].map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            問題記号
+            <select
+              value={slot}
+              onChange={(event) => {
+                setSlot(event.target.value);
+              }}
+            >
+              <option value="">すべて</option>
+              {[...new Set(problems.map(({ label }) => label))].map((value) => (
+                <option key={value}>{value}</option>
+              ))}
+            </select>
+          </label>
+          <label className="problem-filter-wide">
+            典型タグ
+            <select
+              value={tag}
+              onChange={(event) => {
+                setTag(event.target.value);
+              }}
+            >
+              <option value="">すべて</option>
+              {Object.entries(tagNames).map(([id, title]) => (
+                <option key={id} value={id}>
+                  {title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="problem-filter-wide">
+            学習単位
+            <select
+              value={unit}
+              onChange={(event) => {
+                setUnit(event.target.value);
+              }}
+            >
+              <option value="">すべて</option>
+              {learningUnits.map(({ id, title }) => (
+                <option key={id} value={id}>
+                  {title}
+                </option>
+              ))}
+            </select>
+          </label>
+        </fieldset>
+        <details className="record-filter-options" open={Boolean(status || needsReview)}>
+          <summary>学習記録で絞る</summary>
+          <fieldset disabled={!ready} className="problem-filter-fields">
+            <legend>端末内の学習記録</legend>
+            <label>
+              学習状況
+              <select
+                value={status}
+                onChange={(event) => {
+                  setStatus(event.target.value as LearningStatus | '');
+                }}
+              >
+                <option value="">すべて</option>
+                <option value="unstarted">未着手</option>
+                <option value="in_progress">学習中</option>
+                <option value="completed">修了</option>
+              </select>
+            </label>
+            <label>
+              要復習
+              <select
+                value={needsReview}
+                onChange={(event) => {
+                  setNeedsReview(event.target.value as '' | 'yes' | 'no');
+                }}
+              >
+                <option value="">すべて</option>
+                <option value="yes">要復習のみ</option>
+                <option value="no">要復習でないもの</option>
+              </select>
+            </label>
+            <p className="filter-storage-message">{storageMessage}</p>
+          </fieldset>
+        </details>
+        <div className="filter-actions">
+          <button type="submit" disabled={!ready}>
+            適用
+          </button>
+          <button type="button" onClick={reset} disabled={!ready}>
             すべて解除
           </button>
         </div>
+        {Object.entries(applied).some(
+          ([key, value]) =>
+            value !==
+            { name, contest, slot, tag, unit, status, needsReview }[key as keyof typeof applied],
+        ) && (
+          <p className="filter-pending" role="status">
+            条件を変更しました。「適用」で結果を更新します。
+          </p>
+        )}
       </form>
-      <p>{storageMessage}</p>
-      <p aria-live="polite">
+      <p className="filter-result-count" role="status" aria-live="polite">
         {filtered.length > 0
           ? `${String(filtered.length)}件の問題が該当します。`
           : '0件です。検索語や条件を変更するか、すべて解除してください。'}
       </p>
-      <ul>
+      <ul className="problem-search-results">
         {filtered.map((problem) => (
           <li key={problem.id}>
-            <a href={`${base === '/' ? '' : base.replace(/\/$/u, '')}${problem.route}`}>
-              {problem.id.toUpperCase()} — {problem.title}
+            <a
+              href={`${base === '/' ? '' : base.replace(/\/$/u, '')}${problem.route}`}
+              aria-label={`${problem.id.toUpperCase()} — ${problem.title}`}
+            >
+              <span className="problem-search-identity">
+                ABC {problem.contestNumber} {problem.label}
+              </span>
+              <span>{problem.title}</span>
             </a>
-            （ABC {problem.contestNumber} {problem.label}）
           </li>
         ))}
       </ul>

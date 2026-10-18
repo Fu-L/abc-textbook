@@ -25,61 +25,87 @@ const unavailableMessage = {
 ---
 
 <div class:list={['contest-cell', `state-${cell.state}`]} data-problem-id={problem?.id}>
-  <strong>{cell.stateLabel}</strong>
+  <span class="contest-state">{cell.stateLabel}</span>
   {
     problem ? (
       <>
-        <span>
-          {problem.id.toUpperCase()} — {problem.title}
-        </span>
-        <ul class="cell-links">
-          <li>
-            <a href={withBase(problem.route, base)}>問題詳細: {problem.id}</a>
-          </li>
-          <li>
-            <a href={`${withBase(problem.route, base)}${problem.explanationAnchor}`}>
-              解説: {problem.title}
-            </a>
-          </li>
-          {unit && (
-            <li>
-              <a href={withBase(unit.route, base)}>学習単位: {unit.title}</a>
-            </li>
-          )}
-          {problem.primaryTagIds.map((tagId) => {
-            const tag = catalog.tags.find(({ id }) => id === tagId);
-            return (
-              tag && (
-                <li>
-                  <a href={withBase(tag.route, base)}>主タグ: {tag.name}</a>
-                </li>
-              )
-            );
-          })}
-          {problem.supportingTagIds.map((tagId) => {
-            const supporting = catalog.tags.find(({ id }) => id === tagId);
-            return (
-              supporting && (
-                <li>
-                  <a href={withBase(supporting.route, base)}>補助タグ: {supporting.name}</a>
-                </li>
-              )
-            );
-          })}
-          {problem.similarProblemIds.map((problemId) => {
-            const similar = catalog.problems.find(({ id }) => id === problemId);
-            return (
-              similar && (
-                <li>
-                  <a href={withBase(similar.route, base)}>類題: {similar.id}</a>
-                </li>
-              )
-            );
-          })}
-        </ul>
+        <a
+          class="contest-problem-title"
+          href={withBase(problem.route, base)}
+          aria-label={`${problem.id.toUpperCase()} — ${problem.title}`}
+        >
+          {problem.title}
+        </a>
+        <details class="contest-cell-context">
+          <summary aria-label={`${problem.id.toUpperCase()}の学習のつながり`}>
+            学習のつながり
+          </summary>
+          <div class="cell-links">
+            <p>
+              <a href={`${withBase(problem.route, base)}${problem.explanationAnchor}`}>
+                解説の本文へ
+              </a>
+            </p>
+            {unit && (
+              <p>
+                単元: <a href={withBase(unit.route, base)}>{unit.title}</a>
+              </p>
+            )}
+            {(
+              [
+                ['主タグ', problem.primaryTagIds],
+                ['補助タグ', problem.supportingTagIds],
+              ] as const
+            ).map(
+              ([label, ids]) =>
+                ids.length > 0 && (
+                  <p>
+                    {label}:{' '}
+                    {ids.map((tagId, index) => {
+                      const tag = catalog.tags.find(({ id }) => id === tagId);
+                      return (
+                        tag && (
+                          <>
+                            {index > 0 ? '、' : ''}
+                            <a
+                              href={withBase(tag.route, base)}
+                              aria-label={`${label}: ${tag.name}`}
+                            >
+                              {tag.name}
+                            </a>
+                          </>
+                        )
+                      );
+                    })}
+                  </p>
+                ),
+            )}
+            {problem.similarProblemIds.length > 0 && (
+              <p>
+                類題:{' '}
+                {problem.similarProblemIds.map((problemId, index) => {
+                  const similar = catalog.problems.find(({ id }) => id === problemId);
+                  return (
+                    similar && (
+                      <>
+                        {index > 0 ? '、' : ''}
+                        <a href={withBase(similar.route, base)}>{similar.id.toUpperCase()}</a>
+                      </>
+                    )
+                  );
+                })}
+              </p>
+            )}
+          </div>
+        </details>
       </>
     ) : (
-      <span data-pagefind-ignore>{unavailableMessage[cell.state]}</span>
+      <span
+        class:list={{ 'visually-hidden': cell.state === 'official_absent' }}
+        data-pagefind-ignore
+      >
+        {unavailableMessage[cell.state]}
+      </span>
     )
   }
 </div>

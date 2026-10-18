@@ -237,6 +237,7 @@ export function selectVerificationSteps(
       e2e.add('tests/e2e/study-entry-points.spec.ts');
       e2e.add('tests/e2e/document-contents.spec.ts');
       e2e.add('tests/e2e/contest-matrix.spec.ts');
+      e2e.add('tests/e2e/study-indexes.spec.ts');
     }
     if (records || data) e2e.add('tests/e2e/learning-records.spec.ts');
     if (broad || e2e.size)

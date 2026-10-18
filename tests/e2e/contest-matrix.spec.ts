@@ -8,12 +8,15 @@ test('exposes every primary technique of composite problems in the table and lis
     ['abc227', 'abc227-h', '最大流・最小カット'],
   ] as const) {
     await page.goto(`./contests/${contest}/`);
+    await page.locator('.contest-alternative > summary').click();
     const cells = page.locator(`[data-problem-id="${problem}"]`);
     await expect(cells).toHaveCount(2);
-    for (const cell of await cells.all())
+    for (const cell of await cells.all()) {
+      await cell.locator('summary').click();
       await expect(
         cell.getByRole('link', { name: new RegExp(`主タグ:.*${name}`, 'u') }),
       ).toBeVisible();
+    }
   }
 });
 
@@ -29,7 +32,9 @@ test('renders dynamic columns, explicit states, direct links, and the alternativ
   await expect(table.getByText('公式問題なし').first()).toBeVisible();
 
   const cell = table.locator('[data-problem-id="abc212-g"]');
-  for (const name of ['問題詳細', '解説', '学習単位', '主タグ']) {
+  await expect(cell.getByRole('link', { name: /Power Pair/u })).toBeVisible();
+  await cell.locator('summary').click();
+  for (const name of ['解説', '巡回群を指数化', '主タグ']) {
     await expect(cell.getByRole('link', { name: new RegExp(name, 'u') }).first()).toBeVisible();
   }
   await expect(page.getByRole('heading', { name: 'コンテスト別リスト' })).toBeVisible();
