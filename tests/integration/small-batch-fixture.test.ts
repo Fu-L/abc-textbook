@@ -74,12 +74,12 @@ it('reuses only suite-owned preparation and isolates nested inputs and candidate
     expect(again.baseCatalog).toEqual(current.catalog);
 
     // Forks of the authored seed are independently editable, including nested input.
-    const fork = await copySmallBatchCandidate(again, await candidate());
+    const fork = copySmallBatchCandidate(again, await candidate());
     const document = 'src/content/docs/problems/abc467-e.md';
     await writeFile(path.join(fork.candidateRoot, document), 'broken fork');
     Object.assign(required(fork.metadataBatch.problems[0]), { title: 'broken fork' });
     expect(await contentHashes(again.candidateRoot)).toEqual(firstBytes);
-    const nextFork = await copySmallBatchCandidate(again, await candidate());
+    const nextFork = copySmallBatchCandidate(again, await candidate());
     expect(nextFork.metadataBatch).toEqual(again.metadataBatch);
     expect(await contentHashes(nextFork.candidateRoot)).toEqual(firstBytes);
     expect(await readFile(path.join(nextFork.candidateRoot, document), 'utf8')).not.toBe(

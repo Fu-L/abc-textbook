@@ -1,5 +1,6 @@
-import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { constants, cpSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 
 import { acquireMetadataRange } from '../../scripts/update-abc/acquire.js';
@@ -8,6 +9,16 @@ import { loadFullPublicProjection } from '../../src/lib/catalog/full-public-proj
 import { renderProblemAuthoringDocument } from '../../src/lib/authoring/problem-authoring-document.js';
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { liveBase, liveCheckedAt, livePolicyApproval, liveTransport } from './live-metadata.js';
+
+// These fixture copies run sequentially inside a worker. cpSync avoids per-file
+// async overhead; reflinks keep bytes independent and fall back to ordinary copies
+// on filesystems without copy-on-write support.
+const copyContent = (from: string, to: string) => {
+  cpSync(path.join(from, 'src/content'), path.join(to, 'src/content'), {
+    recursive: true,
+    mode: constants.COPYFILE_FICLONE,
+  });
+};
 
 /** Suite-owned immutable preparation. Keep this factory in beforeAll (or one
  * build lifecycle), never at module/process scope: every suite reads current
@@ -43,9 +54,7 @@ export const createSmallBatchFixture = async () => {
     }
     const acquired = await acquisition;
     if (acquired.status !== 'acquired') throw new Error('Fixture acquisition failed');
-    await cp(path.join(repositoryRoot, 'src/content'), path.join(root, 'src/content'), {
-      recursive: true,
-    });
+    copyContent(repositoryRoot, root);
     const metrics = {
       ...metricsTemplate,
       checkedAt: liveCheckedAt,
@@ -71,6 +80,7 @@ export const createSmallBatchFixture = async () => {
     });
   };
 
+  const policyTemplate = projection.policy;
   const template = projection.problemDocuments.get('abc212-e');
   const placement = projection.policy.placements.find((p) => p.problemId === 'abc212-e');
   const analysis = projection.catalog.techniqueInventory.find((p) => p.problemId === 'abc212-e');
@@ -87,7 +97,7 @@ export const createSmallBatchFixture = async () => {
   /** Borrow a complete document solely to exercise the editing contract; these are
    * synthetic transport Problems, never real ABC467 explanations for publication. */
   const authorSmallBatch = async (input: Awaited<ReturnType<typeof smallBatchInput>>) => {
-    const policy = structuredClone(projection.policy);
+    const policy = structuredClone(policyTemplate);
     for (const problem of input.metadataBatch.problems) {
       const replace = <T>(value: T): T =>
         JSON.parse(
@@ -180,10 +190,8 @@ export type SmallBatchFixture = Awaited<ReturnType<typeof createSmallBatchFixtur
 export type SmallBatchInput = Awaited<ReturnType<SmallBatchFixture['smallBatchInput']>>;
 
 /** Fork an authored starting point without sharing candidate bytes or input arrays. */
-export const copySmallBatchCandidate = async (input: SmallBatchInput, root: string) => {
-  await cp(path.join(input.candidateRoot, 'src/content'), path.join(root, 'src/content'), {
-    recursive: true,
-  });
+export const copySmallBatchCandidate = (input: SmallBatchInput, root: string) => {
+  copyContent(input.candidateRoot, root);
   return structuredClone({ ...input, candidateRoot: root });
 };
 

@@ -259,7 +259,7 @@ describe('normal batch holds', () => {
     beforeEach(async () => {
       root = await mkdtemp(path.join(tmpdir(), 'abc-batch-order-case-'));
       if (!authoredInput) throw new Error('Missing authored starting fixture');
-      input = await copySmallBatchCandidate(authoredInput, root);
+      input = copySmallBatchCandidate(authoredInput, root);
       homeFile = path.join(root, homePath);
       relatedFile = path.join(root, relatedPath);
       docFile = path.join(root, originalHome.docPath);
@@ -394,7 +394,7 @@ describe('normal batch holds', () => {
     beforeEach(async () => {
       root = await mkdtemp(path.join(tmpdir(), 'abc-batch-analysis-case-'));
       if (!authoredInput) throw new Error('Missing authored starting fixture');
-      input = await copySmallBatchCandidate(authoredInput, root);
+      input = copySmallBatchCandidate(authoredInput, root);
       policyFile = path.join(root, 'src/content/policies/problem-placements.json');
       documentFile = path.join(root, 'src/content/docs/problems/abc467-e.md');
     });

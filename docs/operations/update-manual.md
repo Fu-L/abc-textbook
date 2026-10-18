@@ -260,7 +260,7 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run link:check:built
 SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -- --project=chromium tests/e2e/learning-records.spec.ts
 ```
 
-小batchテストの準備は`tests/fixtures/small-batch.ts`の`createSmallBatchFixture`をsuiteの`beforeAll`、または新教材buildの1回のlifecycleで作る。現行本文から`usePreparedRelease: false`で読んだbaseと執筆素材をその範囲で再利用し、合成取得は同じContest範囲につき1回とする。凍結済みcatalogやmodule/process全体のcacheへ置き換えない。返すcatalog・metadata・metricsの入れ子は毎回複製し、candidateのファイルも別コピーにする。異常群で既に共有している執筆済み開始点は維持し、`copySmallBatchCandidate`で各ケースへ複製する。CLI/validatorの結果は共有せず、保留理由・bytes不変・正常な再実行差分0を毎回確認する。
+小batchテストの準備は`tests/fixtures/small-batch.ts`の`createSmallBatchFixture`をsuiteの`beforeAll`、または新教材buildの1回のlifecycleで作る。現行本文から`usePreparedRelease: false`で読んだbaseと執筆素材をその範囲で再利用し、合成取得は同じContest範囲につき1回とする。凍結済みcatalogやmodule/process全体のcacheへ置き換えない。返すcatalog・metadata・metricsの入れ子は毎回複製し、candidateのファイルも別コピーにする。異常群で既に共有している執筆済み開始点は維持し、`copySmallBatchCandidate`で各ケースへ複製する。コピーは各worker内で順次実行し、`cpSync`でファイル単位の非同期処理を減らす。`COPYFILE_FICLONE`は非対応filesystemでは通常コピーへ戻り、hardlinkで変更可能なbytesを共有しない。CLI/validatorの結果は共有せず、保留理由・bytes不変・正常な再実行差分0を毎回確認する。
 
 準備helperを変えた場合は`small-batch-fixture.test.ts`、`update-prepare.test.ts`、`update-validation.test.ts`と、同じhelperを使うChromiumの`new-material.spec.ts`を検証する。順序依存は異常群の単独実行と`--sequence.shuffle.tests --sequence.seed=147`でも確認する。準備時間の比較は同じ範囲・回数でfactory作成からcandidate複製・執筆までを含め、読込/合成取得/全量コピーの回数と残る負担をPR本文に記す。ファイル別時間やActions全体のwall
 timeとは分け、並行度・timeout・検査内容を変更して得た短縮と混ぜない。
