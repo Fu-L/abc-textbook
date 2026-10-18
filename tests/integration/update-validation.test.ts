@@ -2,7 +2,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { enumerateCorrectionImpacts } from '../../scripts/update-abc/correction-impact.js';
 import { deriveFrozenClassification } from '../../scripts/update-abc/classify.js';
@@ -21,6 +21,7 @@ import {
 import { canonicalDigest } from '../../src/lib/domain/canonical-json.js';
 import { runSmallBatchUpdate } from '../../scripts/update-abc/index.js';
 import { smallBatchInput, authorSmallBatch, contentHashes } from '../fixtures/small-batch.js';
+import * as publicProjection from '../../src/lib/catalog/full-public-projection.js';
 
 describe('US5 update validation', () => {
   it('enumerates every affected content and derived index surface', () => {
@@ -447,6 +448,41 @@ describe('normal batch holds', () => {
       },
       300_000,
     );
+
+    it('rejects a stale generated index without applying any candidate bytes', async () => {
+      await writeFile(policyFile, originalPolicy);
+      await writeFile(documentFile, originalDocument);
+      const before = await contentHashes(root);
+      const verify = publicProjection.verifyFullPublicProjectionDerivedFiles;
+      const checks = vi
+        .spyOn(publicProjection, 'verifyFullPublicProjectionDerivedFiles')
+        .mockImplementationOnce(async (input) => {
+          const file = path.join(input.repositoryRoot, publicProjection.TAXONOMY_INDEX_PATH);
+          await writeFile(file, '{}');
+          return verify(input);
+        });
+      const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+      expect(result).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(result.holds[0]?.reason).toContain('CORRECTION_INDEX_STALE');
+      expect(checks).toHaveBeenCalledOnce();
+      expect(await contentHashes(root)).toEqual(before);
+    }, 300_000);
+
+    it('revalidates edited canonical input after a successful call on the same candidate', async () => {
+      await writeFile(policyFile, originalPolicy);
+      await writeFile(documentFile, originalDocument);
+      expect(await runSmallBatchUpdate({ ...input, mode: 'validate' })).toMatchObject({
+        status: 'passed',
+      });
+      const changed = originalDocument.replace('## 正当性\n\n', '## 正当性\n\n異なる主張。\n\n');
+      expect(changed).not.toBe(originalDocument);
+      await writeFile(documentFile, changed);
+      const before = await contentHashes(root);
+      const result = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+      expect(result).toMatchObject({ status: 'on_hold', writtenPaths: [] });
+      expect(result.holds[0]?.reason).toContain('CLAIM_DRIFT');
+      expect(await contentHashes(root)).toEqual(before);
+    }, 300_000);
   });
 
   it('rejects changed acquired input, outside prose and semantic primary mismatch', async () => {

@@ -31,7 +31,10 @@ import { structuredContentRoots } from './content-source-registry.js';
 import { buildProblemContent } from './build-problem-content.js';
 import { buildAdvancedSlotRegistry } from './advanced-slot-registry.js';
 import { catalogContentDigest, projectCatalogContent, assembleCatalog } from './build-catalog.js';
-import { verifyCanonicalCorrectionTargets } from './correction-targets.js';
+import {
+  verifyCanonicalCorrectionTargets,
+  verifyCanonicalDerivedIndex,
+} from './correction-targets.js';
 import { validateReleaseLearningStructure } from './release-learning-structure.js';
 import { buildUiCatalog } from './ui-catalog.js';
 import { learningUnitRoute } from './build-learning-path.js';
@@ -48,6 +51,19 @@ export const FULL_PROJECTION_PATH = 'docs/verification/bootstrap/us4/full-projec
 export const TAXONOMY_INDEX_PATH = 'src/content/indexes/taxonomy.json';
 export const PUBLIC_HISTORY_PATH = 'src/content/indexes/release-history.json';
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
+
+/** Check the file after writing an index from the same, unchanged temporary candidate.
+ * This checks derived bytes only; it cannot validate changed canonical input. */
+export const verifyFullPublicProjectionDerivedFiles = (input: {
+  readonly repositoryRoot: string;
+  readonly taxonomyIndex: unknown;
+}) =>
+  verifyCanonicalDerivedIndex({
+    path: TAXONOMY_INDEX_PATH,
+    expected: input.taxonomyIndex,
+    readTarget: (file) => readFile(path.join(input.repositoryRoot, file)),
+  });
+
 /** Validate current prose and publication structure, without an accepted-byte inventory. */
 export const assertUnitPublication = (
   unit: z.infer<typeof LearningUnitSchema>,

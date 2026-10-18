@@ -8,6 +8,21 @@ import {
   CanonicalLearningPrerequisitesSchema,
 } from '../domain/schema-parts/catalog.js';
 
+/** Compare the actual derived JSON with its value from validated canonical input. */
+export const verifyCanonicalDerivedIndex = async (input: {
+  readonly path: string;
+  readonly expected: unknown;
+  readonly readTarget: (file: string) => Promise<Buffer>;
+}) => {
+  const bytes = await input.readTarget(input.path);
+  if (!bytes.length) throw new Error(`CORRECTION_TARGET_EMPTY:${input.path}`);
+  if (
+    canonicalJson(JSON.parse(bytes.toString('utf8')) as unknown) !== canonicalJson(input.expected)
+  )
+    throw new Error(`CORRECTION_INDEX_STALE:${input.path}`);
+  return { path: input.path, digest: createHash('sha256').update(bytes).digest('hex') };
+};
+
 /** Full-catalog corrections enumerate existing blocks only. Sources from before
  * and after the correction remain attached; absence of optional blocks is valid.
  * Preview enumeration remains in update-abc/correction-impact.ts.
@@ -243,13 +258,13 @@ export const verifyCanonicalCorrectionTargets = async (input: {
   for (const file of impact.derivedIndexPaths) {
     if (!input.indexProjections.has(file))
       throw new Error(`CORRECTION_INDEX_PROJECTION_MISSING:${file}`);
-    const { bytes, digest } = await read(file);
-    if (
-      canonicalJson(JSON.parse(bytes.toString('utf8')) as unknown) !==
-      canonicalJson(input.indexProjections.get(file))
-    )
-      throw new Error(`CORRECTION_INDEX_STALE:${file}`);
-    derivedIndexes.push({ path: file, digest });
+    derivedIndexes.push(
+      await verifyCanonicalDerivedIndex({
+        path: file,
+        expected: input.indexProjections.get(file),
+        readTarget: input.readTarget,
+      }),
+    );
   }
   return {
     correctionImpactId: impact.id,
