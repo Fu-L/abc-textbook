@@ -316,6 +316,22 @@ fence・anchorを軽量に検査し、`tests/e2e/study-readability.spec.ts`は�
 
 学習記録の絞り込みも単元のcoverageを利用する。`src/lib/learning-records/`の変更では保存・日時・backupに加え、`tests/integration/full-public-projection.test.ts`と`tests/e2e/full-projection.spec.ts`で葉単元・親単元・章の問題一覧と復習一覧を確認する。`filter.ts`単独変更でも`verify:fast`は両方を選ぶ。
 
+新教材E2EはPlaywrightの`globalSetup`（`tests/fixtures/study-ux/setup.ts`）で、ブラウザーworkerの開始前に隔離buildを一度準備する。同じCLI引数の`--list --reporter=json`でPlaywright自身にテスト選択を解決させ、新教材テストがなければ準備を省略する。この一覧取得ではsetup・server・browserは起動しない。新教材単独・他の選択E2E・Chromium全体とも既存のコマンドを使い、事前の手動準備は不要である。
+
+```sh
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -- --project=chromium tests/e2e/new-material.spec.ts
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -- --project=chromium tests/e2e/unit-reading.spec.ts
+SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run test:e2e:built -- --project=chromium
+```
+
+上記は同runで通常の`build`または`check`→`build:checked`が成功していることが前提。setupは毎run新しい`build/study-ux-*`を作り、prepare・執筆・validate、正本コピー・Unit生成、実Astro
+buildを行う。代表2ページのHTMLと同じbuildのassetsだけをブラウザーへ渡し、同runのworker・retry間で共有する。CLIの契約に従いcheckout外のシステム一時領域に作ったcandidateは準備後に削除し、隔離project/distはglobal
+teardownで成功・テスト失敗時とも削除する。準備失敗も一時領域を削除して非zeroで停止し、ブラウザー検査へ進まない。古い環境変数のdistや別runの出力は使わず、永続cacheを作らない。強制kill等で残った`build/study-ux-*`は実行中のrunがないことを確認して削除できる。
+
+`New material ... started/finished`は準備全体とprepare/author/validate・copy/generate・Astro
+buildの時間・成否、Playwrightのテスト結果は画面検査の時間・成否を示す。setupの診断ログは標準エラーへ出し、`--reporter=json`の標準出力を維持する。画面検査は通常の30秒制限へ戻し、retryは変更しない。準備・一覧取得を含むE2Eコマンド全体と依存準備から必須検証完了までのwall
+timeを別に測り、画面検査だけの短縮をCI全体の高速化へ換算しない。選択・準備失敗・worker間共有・成功/失敗後のcleanupは`tests/integration/new-material-setup.test.ts`で検証する。
+
 新教材E2Eの隔離buildは、`src`・`scripts`に加えて、runnerが参照する`.github/actions/nonpublic-docs/paths.mjs`もコピーする。共通モジュールの依存先を追加・移動した場合は`tests/fixtures/study-ux/build.ts`のコピー対象も確認し、`new-material.spec.ts`で実際のbuildと表示を検証する。
 
 `verify:fast`は[分類別の検証表](development.md#変更範囲に応じたci検証)に従い、PRのmerge-baseまたはmain
@@ -653,6 +669,10 @@ CLIの旧互換引数と初版監査が読む入力は保持し、明示した�
 consumerは初版bootstrapの`sourceSetFingerprint`も読むため、その経路内だけで旧受入subjectと現行本文から当時のprojection
 digest形式を再構成する。現行digestも受理するが、不明なfingerprintや本文・metadataの変更は引き続き拒否する。公開loaderの台帳読込を復活させず、旧bootstrap・台帳・公開catalogの値を書き換えない。この互換経路はcatalog
 CLIの`--evidence-inventory`指定で引き続き使うため保持する。
+
+旧seedの互換回帰は、`tests/fixtures/legacy-seed.ts`の`LEGACY_SEED_COMMIT`（`b7bc7422538ceb1e9b9997c205c85d487dd72d9a`）から当時の正本・catalogを復元する。一時repositoryを初期化し、元checkoutのローカルpathからこのcommitを明示的に`git fetch`して復元する。cloneの既定refやshared
+alternatesに依存せず、外部ネットワークへは接続しない。動的な履歴検索や現在のbranch
+tipで初版fixtureを再定義しない。`tests/unit/seed-release.test.ts`は既存のbootstrap・本文改変の拒否と初版の範囲・taxonomy・本文所有の検査に加え、現行本文を読んだ後でも固定した旧版本文を読むことを照合する。公開readerや旧入力を書き換えて互換検査を通さない。
 
 復旧はloaderと検査CLIの変更をrevertする。旧台帳・教材・prepared
 catalogは保持しているため、旧経路へ戻せる。

@@ -29,7 +29,9 @@ fixtureで架空のABC467問題をprepare・執筆・validateし、一時コピ�
 一時コピーの読書順と対象色へfixture
 IDを登録し、通常の`loadFullPublicProjection`、問題/単元ページ、CSS、Astro設定を使う。出力routeだけを代表2ページへ限定する。ページ本体・CSS・生成HTMLをfixture用に補修しない。ビルドしたHTMLと同じビルドのassetsをブラウザーへ配信し、PCのライト・JS有効とスマホのダーク・JS無効で確認する。fixtureの出力は本番`dist`・catalog・Pagefindへ入らず、成功/失敗後に一時領域を削除する。
 
-小batch契約の検証には既存corpusを一度読むため、通常ページのE2Eより時間がかかる。別の全件buildやブラウザー別の新教材buildを毎回重ねず、一つの検査内でbuildを再利用する。UI・教材・構造化データ・執筆skillの変更では`verify:fast`が新教材検査を選ぶ。共通生成器など未分類の変更では従来どおり広い検証になる。
+小batch契約の検証と隔離buildは通常ページのE2Eより時間がかかるため、Playwrightのglobal
+setupへ分離する。実際に新教材テストを選んだrunでworker開始前に一度準備し、同runの全ブラウザー・retryで同じ出力を使う。他specだけの実行では準備を省略する。終了・失敗時はglobal
+teardown、準備失敗時はsetup内で削除する。準備の段階別時間・失敗と画面検査の結果は別々にログへ出し、E2E全体の実測には準備とテスト一覧取得も含める。選択と失敗時の回帰は`new-material-setup.test.ts`、コマンドと復旧は[更新マニュアル](update-manual.md#3-変更に必要な検証を選ぶ)を参照する。UI・教材・構造化データ・執筆skillの変更では`verify:fast`が新教材検査を選ぶ。共通生成器など未分類の変更では従来どおり広い検証になる。
 
 ## 実行と比較
 

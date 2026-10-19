@@ -8,6 +8,8 @@ import { promisify } from 'node:util';
 const execute = promisify(execFile);
 const repositoryRoot = fileURLToPath(new URL('../../', import.meta.url));
 export const LEGACY_SEED_CATALOG_PATH = 'docs/verification/releases/catalog.json';
+// Pin the accepted snapshot: later branch tips must not redefine this fixture.
+export const LEGACY_SEED_COMMIT = 'b7bc7422538ceb1e9b9997c205c85d487dd72d9a';
 
 /** Exercise retained seed consumers against the Git version that sealed their catalog.
  * Later publication history belongs to the current site, not to this initial snapshot.
@@ -16,18 +18,15 @@ export const LEGACY_SEED_CATALOG_PATH = 'docs/verification/releases/catalog.json
 export async function withLegacySeedRepository<T>(
   inspect: (root: string) => Promise<T>,
 ): Promise<T> {
-  const { stdout } = await execute(
-    'git',
-    ['log', '-1', '--format=%H', 'HEAD', '--', LEGACY_SEED_CATALOG_PATH],
-    { cwd: repositoryRoot },
-  );
-  const commit = stdout.trim();
-  if (!/^[a-f0-9]{40}$/u.test(commit)) throw new Error('Missing sealed seed catalog commit');
+  const commit = LEGACY_SEED_COMMIT;
   const temporary = await mkdtemp(path.join(tmpdir(), 'abc-legacy-seed-'));
   const root = path.join(temporary, 'repository');
   const git = (...args: string[]) => execute('git', args, { cwd: root });
   try {
-    await execute('git', ['clone', '--shared', '--quiet', '--no-checkout', repositoryRoot, root]);
+    await execute('git', ['init', '--quiet', root]);
+    // Fetch the exact historical input from the local checkout, independently
+    // of clone defaults, branch tips and alternate object stores.
+    await git('fetch', '--quiet', '--no-tags', repositoryRoot, commit);
     await git('reset', '--mixed', '--quiet', commit);
     await git(
       'restore',

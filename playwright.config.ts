@@ -12,6 +12,7 @@ const baseURL = new URL(basePath, origin).href;
 
 export default defineConfig({
   testDir: './tests/e2e',
+  globalSetup: './tests/fixtures/study-ux/setup.ts',
   outputDir: './test-results',
   fullyParallel: true,
   forbidOnly: true,
