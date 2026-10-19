@@ -53,8 +53,7 @@ setupでworker開始前に一度準備し、同runのworker・retryで共有す�
 
 CIは既存文書checkerのfixtureも確認する。変更選択のcontractはrunner・workflow等の変更で選ぶVitest全体に含め、同じrunで重複実行しない。`scripts/verify/runner.ts`が分類を担当し、非公開文書の書式・参照検査は既存`.github/actions/nonpublic-docs/check.mjs --files ...`を再利用する。通常経路にpreview凍結・全shard再join・初版監査・release/review証跡照合・一律の数学回帰は含めない。関係する教材変更ではCodexが公式根拠・証明・境界条件を確認し、既存`docs/verification/bootstrap/pr65*-mathematical-checks.py`の該当回帰を実行する。
 
-切替中は旧4jobも残している。新baselineの実成功後に実branch
-protection/rulesetを読んで旧4checkを外し、deploy参照を揃えてから旧jobを手動入口へ移す。実設定の切替状況と復旧順は[更新マニュアル](update-manual.md#ci必須設定の切替と復旧)を参照する。
+旧4jobから単一baselineへの切替は完了している。実設定の確認結果は下の実測節、再切替と復旧順は[更新マニュアル](update-manual.md#ci必須設定の切替と復旧)を参照する。
 
 ## Actionsで検証時間を読む
 
@@ -74,6 +73,70 @@ Contestと連続小batchの編集・再実行差分0、索引の実ファイル�
 
 処理時間を比較するときは同じfixture・ケース・並行度・環境を用い、validator改善とfixture準備の改善を区別する。ファイル別時間は並列なので合算せず、Actionsのtest
 step・依存準備から検証完了までのwall timeと分けて報告する。
+
+### 改善後の実測とSC-005（2026-10-19）
+
+[Issue #149](https://github.com/Fu-L/abc-textbook/issues/149)、親は[CI改善 #142](https://github.com/Fu-L/abc-textbook/issues/142)。**SC-005は未達・比較母集団不足**。通常本文訂正と問題追加について、同種・同規模・同じ検査条件の成功runを前後各5件特定できていないため、中央値・短縮率は算出しない。T006の旧単独基準16分48秒、PR
+#106の共通処理5件の参考中央値17分45秒、広い検査の28分01秒は過去の参考値として保持する。
+
+2026-10-19 10:30 UTC時点のCI workflow直近100件（2026-10-09〜19）を確認した。先行改善#143〜#148はPR
+#150〜#155でmainへ反映済み。#138の開始以降36件の内訳は成功15件、失敗15件、cancel
+5件、進行中1件である。成功は文書のみPR 1件、共通処理PR 8件（#155の途中版1件を含む）、共通処理main
+6件。失敗・cancel・途中版を正常な独立更新の数合わせに使わない。残る64件は旧運用移行・Study
+UX導入期で、現行条件の通常更新との比較から除外する。#137も本文3問に比較画像・共通試作原稿・表示テストを混在させており、純粋な本文訂正に数えない。
+
+全改善のmain反映後は#155
+mainの進行中1件だけで、成功は0件。通常本文訂正・問題追加はそれぞれ、比較に使える移行前5件を特定できず、改善後も0/5件である。どちらの分類も前後各5件が欠けている。
+
+| 分類             | 観測できた成功と比較からの除外理由                                               | 次に使う自然な更新                                                         |
+| ---------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| 非公開文書のみ   | #139 PRの1件。通常教材更新の時間目標から除外。#144後の画像だけの通常変更は未観測 | 運用文書・比較画像の必要な修正                                             |
+| 公開本文訂正     | 上記36件で0件。移行前後各5件の組は未成立                                         | #140の本文だけ、または同じ対応済み表示テストを伴う同規模の改稿を別々に観測 |
+| 問題追加         | 上記36件で0件。取得CLI・合成fixture成功は実追加ではない                          | #141の同規模の1 Contest追加同士。連続小batchとは分ける                     |
+| UI               | 上記36件に単独の成功なし。以前のStudy UX導入runは通常本文訂正へ混ぜない          | 共通表示の必要な変更として別集計                                           |
+| schema・共通処理 | 成功PR 8件・main 6件。採用改善自体の全量検査であり、教材更新から除外             | 必要な共通変更だけを別集計                                                 |
+
+以下は採用改善の代表成功runであり、前後5件の比較集団ではない。全行ともubuntu-latest、Node
+24.18.0/npm
+11.16.0。広い検査は`docs/lint/format/schema/check/test/build/links/browsers/e2e`で、Vitestは全体、E2EはChromium全体を選択し全stepが成功した。#143〜#146は83
+test file、#147は84、#148最終版は85へ増えており、同じ検査量とも扱わない。
+
+SHAはrun APIのhead（PRのbranch先端）とログの検証SHA（PRのmerge
+ref）を区別し、12桁で示す。時刻はUTC、境界はNode setup開始→Verify changed scope完了。PR
+#150〜#154と時間が確定したmain行は10月18日、#155 PRと進行中mainは10月19日である。
+
+| 改善・分類             | PR run / head → 検証SHA / 時刻 / wall time                                                                                                    | main run / SHA / 時刻 / wall time                                                                                                            |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| #143・共通runner       | [39122172105](https://github.com/Fu-L/abc-textbook/actions/runs/39122172105) / `5914401a5b67` → `13394c4251f4` / 11:10:43→11:38:06 / 27分23秒 | [39125233176](https://github.com/Fu-L/abc-textbook/actions/runs/39125233176) / `ea7ffefac6e0` / 11:56:31→12:24:01 / 27分30秒                 |
+| #144・共通文書checker  | [39127707186](https://github.com/Fu-L/abc-textbook/actions/runs/39127707186) / `e5a4e428c7d6` → `7183736683f0` / 12:32:42→12:53:45 / 21分03秒 | [39129781932](https://github.com/Fu-L/abc-textbook/actions/runs/39129781932) / `82afb0c6f56f` / 13:02:15→13:30:32 / 28分17秒                 |
+| #145・共通選択処理     | [39130205000](https://github.com/Fu-L/abc-textbook/actions/runs/39130205000) / `a976c91e489f` → `ef5db373096b` / 13:08:12→13:26:22 / 18分10秒 | [39131932148](https://github.com/Fu-L/abc-textbook/actions/runs/39131932148) / `c6cca7f223ad` / 13:31:52→13:52:52 / 21分00秒                 |
+| #146・共通validator    | [39133238510](https://github.com/Fu-L/abc-textbook/actions/runs/39133238510) / `12869f3ae2f3` → `366865304148` / 13:49:40→14:06:53 / 17分13秒 | [39135627434](https://github.com/Fu-L/abc-textbook/actions/runs/39135627434) / `4c1c9e2b38cd` / 14:21:46→14:48:56 / 27分10秒                 |
+| #147・共有fixture      | [39137364143](https://github.com/Fu-L/abc-textbook/actions/runs/39137364143) / `8b8a475392ca` → `45a370e6b708` / 14:45:14→15:05:52 / 20分38秒 | [39141352337](https://github.com/Fu-L/abc-textbook/actions/runs/39141352337) / `92fc6333f337` / 15:38:07→16:05:44 / 27分37秒                 |
+| #148・Playwright setup | [39217083282](https://github.com/Fu-L/abc-textbook/actions/runs/39217083282) / `189315356cc4` → `ac80e005f658` / 07:36:42→08:01:39 / 24分57秒 | [39237774186](https://github.com/Fu-L/abc-textbook/actions/runs/39237774186) / `bd08f810f81f` / 観測時は進行中。検証・配信成功と時間は未確定 |
+
+文書のみの[#139 PR run 39112871961](https://github.com/Fu-L/abc-textbook/actions/runs/39112871961)はhead
+`c5ac5aafe9cb`、10月18日08:48:39→08:48:56の17秒で、文書checkerだけを実行した。一方、同PRの[main run 39113203408](https://github.com/Fu-L/abc-textbook/actions/runs/39113203408)（`df812430e569`）は09:09:01→09:37:02の28分01秒である。未配信の#138共通変更を合流した広い検査なので、文書PRとmainを同一分類で比較しない。#150以降のmainもログの`includes undeployed changes since`と比較SHAを確認し、PRとの差分を区別した。
+
+#148最終PRでは新教材のprepare/author/validate 54.313秒、copy/generate 14.251秒、隔離Astro build
+32.658秒、一覧取得等を含むsetup全体103.352秒を観測した。runnerのE2E全体350.737秒にはsetup・画面検査・cleanupを含み、主計測24分57秒にも含まれる。画面検査の30秒制限だけを全体所要時間と報告しない。主計測から除くのは検証後のartifact保存・job
+cleanup・deployであり、必須検証内のfixture cleanupは含む。
+
+残る負担は、同runのVitest全体924.811秒、`update-validation.test.ts`
+791.534秒、`update-prepare.test.ts` 308.502秒、`catalog-cli.test.ts`
+302.710秒、`full-public-projection.test.ts`
+240.257秒である。ファイル時間は並列なので加算しない。#147後mainでもVitest全体1086.876秒を要し、改善後の全量runが10分以内になったとは確認できない。次の調査候補は小batchの実validator・candidateコピーとcatalog
+CLIの正本/旧版互換検証であり、fixture準備・実検証・runner差の切分けが先である。この文書PRでは追加最適化を採用せず、必要な不正入力拒否や旧版互換の検査を残す。
+
+実branch protectionを同日に読戻し、requiredは`Verify (release baseline)`だけ、`strict=true`、Actions
+app ID `15368`を確認した。有効main rulesetにstatus
+checkの重複指定はなく、Pages環境にreviewer要求もない。workflowの成功baseline依存、build→同じdistでリンク/E2E→artifact保存→同じartifactの配信、保存前と配信直前のmain
+SHA確認を維持している。#147 mainの成功job/logではartifact
+`github-pages-92fc6333f337787760d806385eeb9e2e0f593e96-39141352337-1`（ID
+`12141999505`）の保存・配信一致と両SHA確認の成功を確認した。公開origin/base
+path、IndexedDB/backupの実装にこの改善群の変更はない。#148 mainの進行中状態を実配信成功で補わない。
+
+今後は#140/#141で自然に発生した正常更新を分類し、前後各5件と同じ検査条件が揃った分類だけで中央値10分以下・50%以上短縮の両方を判定する。文書だけ、UI、schema/共通処理、PRとmain、本文のみと表示テスト混在、1
+Contestと小catch-upは混ぜない。移行前5件が特定できなければ改善後5件が揃っても短縮率は未判定とする。数合わせの教材変更・再実行は行わず、#149の不足報告完了を#142や002全体の達成と扱わない。教材更新はこの計測不足で止めない。
 
 ## Toolchain policy
 
