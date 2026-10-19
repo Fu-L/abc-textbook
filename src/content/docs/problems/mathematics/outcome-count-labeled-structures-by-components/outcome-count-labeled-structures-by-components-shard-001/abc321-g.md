@@ -1,7 +1,7 @@
 ---
 title: "ABC321-G — Electric Circuit"
 draft: true
-authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-subset-state","unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。","sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/mathematics/outcome-count-labeled-structures-by-components/outcome-count-labeled-structures-by-components-shard-001/abc321-g.md","learningOutcomeIds":["outcome-count-labeled-structures-by-components"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering","unit-dp-subset-state","unit-generating-functions","unit-modular-arithmetic"],"excludedTopics":["label付き連結成分分解・exponential formulaの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-labeled-component-decomposition","tag-combinatorial-coefficients","tag-contribution-reordering","tag-modular-arithmetic","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"集合内で閉じる配線は、赤青の端子数が異なると存在せず、各色が $$m$$ 個なら赤から青への全単射と一対一に対応するため $$f(S)=m!$$ 通りである。\n\n非連結な配線には、固定頂点 $$a$$ を含む成分の集合 $$T\\subsetneq S$$ が一意に存在する。この配線を $$T$$ 内の連結な配線と、残りの集合内で閉じる配線へ分ける操作は、両者を合わせる操作と互いに逆である。従って各分類の個数は $$g(T)f(S\\setminus T)$$ となり、引き算の漸化式は非連結な配線を漏れなく一度ずつ除く。単頂点集合では引く項がなく、この式を小さい集合から計算すればすべての $$g(S)$$ が正しく求まる。\n\n赤青各 $$m$$ 端子の非空集合 $$S$$ が全体の一成分になる配線は、その内部の連結な配線と、外部の赤青各 $$M-m$$ 端子を結ぶ任意の配線の組に一対一に対応する。よってその個数は $$g(S)(M-m)!$$。全体の $$M!$$ 通りが等確率であり、各回路の成分数は全非空集合の指示変数の和なので、最終集計は成分数の期待値に等しい。\n\n端子が一つもない集合でも、何もつながない配線は存在するため $$f(S)=0!=1$$ である。単頂点なら辺がなくても一つの成分なので $$g(S)=1$$。二頂点以上なら連結にできず $$g(S)=0$$ になる。また、端子を持つ頂点と持たない頂点が混在する集合も、端子のない頂点が孤立するため $$g(S)=0$$ となる。同じ漸化式がこれらの非連結な配線を取り除く。","sourceRevisionIds":["source-abc321-editorial-7268-00f24219ca82356649b297dd1947370a7049d3a54b8fe0696d5e78022493df05","source-abc321-g-problem-6fa764dbb82c3672a6615a312862133e97a79b7b932fd3bd84b4db885190581b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,87 +20,174 @@ authoringUnit: {"problemId":"abc321-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-連結成分数の期待値は、各頂点集合が一つの連結成分になる確率の和で求められる。集合内で完結する配線の総数から、複数の成分に分かれる配線を引こう。特定の一頂点を含む成分に着目すると、重複なく場合分けして部分集合DPを組める。
+連結成分数を直接追う代わりに、「どの頂点集合が一つの成分になるか」を数える。集合内で閉じる配線は簡単に数えられるので、そこから非連結な配線を引いて、連結な配線を求めよう。固定した一頂点を含む成分に注目すると、引く対象を重複なく分けられる。
 
-最終graphの各connected componentの頂点集合Sについてindicatorを置くと、component数は非空Sのindicator和なので期待値の線形性を使える。
+### 端子の対応を、頂点集合ごとに数える
 
-S内のred端子数とblue端子数が異なればSだけでcableを閉じられず、等しくmならS内端子の全matching数f(S)はm!である。
+部品を頂点、ケーブルを無向辺とみなす。同じ部品の赤青端子をつなぐ自己ループや、同じ二部品を結ぶ複数の辺も許される。端子は一つずつ区別するが、ケーブル同士は区別しない。赤い端子を順に見て、接続先の青い端子を一つずつ割り当てると、全体の配線は $$M!$$ 通りになる。同じグラフになっても、端子の対応が違えば別の配線である。
 
-Sが1componentとなる内部matching数g(S)は、f(S)から複数componentへ分かれるmatchingをsubset DPで引いて求められる。
+すべての配線を作って成分数を数える方法は、$$M\leq 10^5$$ では使えない。一方、頂点数は $$N\leq 17$$ と小さい。そこで、端子の対応そのものではなく、頂点の部分集合を状態にする。
 
-採用する候補: 各subsetの全内部matching fからconnected matching gをanchor付きsubset recurrenceで抽出し、component indicator確率を総和する。
+全頂点集合を $$V=\{1,2,\ldots,N\}$$ とする。頂点 $$v$$ の赤い端子数を $$r_v$$、青い端子数を $$b_v$$ とし、部分集合 $$S\subseteq V$$ 内の端子数を
 
-N≤17のsubset空間でM!個の配線を列挙せず、連結成分分割をO(3^N)の一意な分解として数えられる。
+$$
+r(S)=\sum_{v\in S}r_v,\qquad b(S)=\sum_{v\in S}b_v
+$$
 
-棄却する候補: M!通りのred-blue terminal matchingを列挙し、毎回DSUでcomponent数を数える。
+と定める。まず $$f(S)$$ を、**集合内の全端子を使い、外へ一本も出さずに閉じる配線の数**とする。各ケーブルは赤青を一つずつ使うため、両色の端子数が違えば閉じられない。一致して $$m$$ 個ずつなら、青い端子の割り当て方を数えればよい。
 
-M≤10^5でfactorial個の配線は列挙不能である。
+$$
+f(S)=
+\begin{cases}
+m! & r(S)=b(S)=m,\\
+0 & r(S)\neq b(S).
+\end{cases}
+$$
 
-棄却する候補: 各part pair間の期待cable本数からexpected component数を直接求める。
+次に、非空集合 $$S$$ に対して $$g(S)$$ を、**集合内で閉じ、かつ $$S$$ 全体が連結になる配線の数**とする。$$f(S)$$ は複数の成分に分かれる配線も含むが、$$g(S)$$ は含まない。赤青の端子数が違う場合は $$g(S)=0$$ でもある。
 
-component数はedge本数の線形関数ではなく、cycleや連結性の高次依存を失う。
+違いを見る独自の小例として、頂点1、2のそれぞれに赤青の端子が一つずつある場合を考える。集合 $$\{1,2\}$$ 内の配線は次の2通りだ。
 
-Sの固定anchor aを含むcomponentをTとすると、Tはconnectedにg(T)通り、残りS\Tは任意の内部matching f(S\T)通りで、非連結caseを一意に分類できる。
+- 各頂点で赤青をつなぐ。自己ループが一つずつでき、成分は $$\{1\}$$ と $$\{2\}$$ に分かれる。
+- 頂点1の赤と頂点2の青、頂点2の赤と頂点1の青をつなぐ。二頂点が連結になる。
 
-従ってg(S)=f(S)-Σ_{T⊊S,a∈T}g(T)f(S\T)となり、小subsetから順に計算できる。
+従って $$f(\{1,2\})=2!=2$$ だが、$$g(\{1,2\})=1$$ である。「外へ出ない」だけでは、一つの成分とは限らない。
 
-Sが全体の1componentとなるfull matching数はg(S)(M-m)!なので、その確率はこれをM!で割った値になる。
+### 固定頂点を含む成分で、非連結な配線を一度ずつ引く
 
-各partのred/blue端子数を数え、subset sumでr[S],b[S]を作る。等しいときf[S]=r[S]!、そうでなければ0。popcount昇順に、Sの最下位bit aを固定してproper submask T⊂S,a∈Tを列挙し、g[S]=f[S]-Σg[T]f[S\T]を求める。各非空Sでm=r[S]=b[S]ならg\[S](M-m)!/M!をanswerへ加え、mod 998244353で出力する。
+連結性を満たす配線を直接作るより、数えやすい $$f(S)$$ から非連結なものを引きたい。しかし「連結な部分を一つ選ぶ」だけでは、一つの配線から複数の成分を選べてしまう。そこで $$S$$ の頂点を一つ固定し、それを含む成分だけを選ぶ。
+
+先ほどの例を3頂点へ広げ、各頂点に赤青の端子を一つずつ置く。$$S=\{1,2,3\}$$ とし、頂点1を固定する。非連結な配線で、頂点1を含む成分の頂点集合を $$T$$ とすると、候補は次の三つになる。
+
+| $$T$$ | $$T$$ 内の連結な配線 | 残りの集合内で閉じる配線 | 積 |
+| --- | --- | --- | --- |
+| $$\{1\}$$ | $$g(\{1\})=1$$ | $$f(\{2,3\})=2$$ | 2 |
+| $$\{1,2\}$$ | $$g(\{1,2\})=1$$ | $$f(\{3\})=1$$ | 1 |
+| $$\{1,3\}$$ | $$g(\{1,3\})=1$$ | $$f(\{2\})=1$$ | 1 |
+
+一行目の残り二頂点は、互いにつながっても、自己ループだけで別々になってもよい。そのため残りには $$g$$ ではなく $$f$$ を使う。全頂点に自己ループがある配線も、頂点1の成分は $$\{1\}$$ に一意に決まるので、一行目で一度だけ引かれる。
+
+全配線は $$f(S)=3!=6$$ 通りだから、連結な配線は $$g(S)=6-(2+1+1)=2$$ 通りとなる。これは三頂点を一周する、赤から青への二つの対応に当たる。
+
+一般にも、非空集合 $$S$$ の固定頂点を $$a$$ とする。非連結な配線を、$$a$$ を含む成分の頂点集合 $$T$$ で分類する。$$T$$ は $$a$$ を含む真部分集合であり、成分内は $$g(T)$$ 通り、残りは $$f(S\setminus T)$$ 通りで独立に選べる。従って
+
+$$
+g(S)=f(S)-\sum_{\substack{T\subsetneq S\\a\in T}}
+g(T)f(S\setminus T)
+$$
+
+となる。どの配線でも $$a$$ の属する成分は一つだけなので、各非連結な配線はちょうど一度引かれる。小さい集合の $$g$$ が分かれば、より大きい集合の $$g$$ を求められる。
+
+### 一つの成分になる確率から、期待値へ戻す
+
+ここまでの $$g(S)$$ は、集合内の配線数である。全体の回路で $$S$$ がちょうど一つの連結成分になるには、内部を連結にし、外部と一本もつながず、残りの端子もすべて配線すればよい。
+
+$$r(S)=b(S)=m$$ なら、外側には赤青の端子がそれぞれ $$M-m$$ 個残る。外側は何成分に分かれてもよいので、その配線は $$(M-m)!$$ 通り。従って求める確率は
+
+$$
+\frac{g(S)(M-m)!}{M!}
+$$
+
+である。赤青の端子数が違う集合の確率は0とする。内部の頂点集合も端子も既に決まっているため、ここで頂点や端子を選ぶ組合せ係数を掛ける必要はない。
+
+非空集合 $$S$$ ごとに、実際の回路でその集合がちょうど一つの成分なら1、そうでなければ0となる指示変数 $$I_S$$ を置く。一つの回路を固定すると、1になる集合はその回路の成分の頂点集合だけである。成分数を $$C$$ と書けば
+
+$$
+C=\sum_{\emptyset\neq S\subseteq V}I_S
+$$
+
+となる。期待値の線形性と、指示変数の期待値がその事象の確率になることから、
+
+$$
+\begin{aligned}
+\mathbb{E}[C]
+&=\sum_{\emptyset\neq S\subseteq V}\Pr(I_S=1)\\
+&=\frac{1}{M!}
+\sum_{\substack{\emptyset\neq S\subseteq V\\r(S)=b(S)}}
+g(S)(M-r(S))!
+\end{aligned}
+$$
+
+を得る。各集合が成分になる事象は互いに独立でなくてよい。
+
+3頂点の小例では、例えば $$\{1\}$$ が成分となる確率は $$1\cdot 2!/3!=1/3$$。外側の二頂点の配線を2通りとも数える必要がある。単頂点集合が三つ、二頂点集合が三つ、全体集合が一つなので、期待値は
+
+$$
+3\cdot\frac{1\cdot 2!}{3!}
++3\cdot\frac{1\cdot 1!}{3!}
++\frac{2\cdot 0!}{3!}
+=\frac{11}{6}
+$$
+
+となる。
+
+### 部分集合DPとしての計算手順
+
+集合を頂点ごとのビットで表し、$$r(S),b(S),f(S),g(S)$$ を配列に持つ。計数はすべて法 $$p=998244353$$ 上で行う。
+
+1. 入力の各端子が属する頂点を数え、$$r_v,b_v$$ を作る。$$0!$$ から $$M!$$ までの階乗も前計算する。
+2. 各集合で含まれる頂点の端子数を足し、$$r(S),b(S)$$ と $$f(S)$$ を求める。空集合は何もつながない一通りとして $$f(\emptyset)=1$$、連結成分には使わないので $$g(\emptyset)=0$$ とする。
+3. 非空集合を要素数の昇順で処理する。赤青の端子数が違えば $$g(S)=0$$ とする。それ以外では $$g(S)$$ を $$f(S)$$ で初期化し、最小番号の頂点を $$a$$ に選ぶ。$$a\in T\subsetneq S$$ を満たす部分集合を列挙し、$$g(T)f(S\setminus T)$$ を引く。参照する $$T$$ は必ず小さく、その値は既に確定している。
+4. 赤青の端子数が一致する各非空集合について $$g(S)(M-r(S))!$$ を足し、最後に $$(M!)^{-1}$$ を一度掛けて出力する。
+
+$$p$$ は素数で、$$M\leq 10^5<p$$ だから $$M!$$ は法 $$p$$ で0にならず、逆元が存在する。逆元はフェルマーの小定理から $$(M!)^{p-2}\bmod p$$ を二分累乗で求められる。普通の整数除算で確率を計算してはいけない。
 
 ## 典型の発動条件
 
 ### indicator期待値
 
-発動条件: random構造のconnected component数など、部分集合eventの個数として表せる量。
-
-各Sがちょうど1componentになる確率を足す。
+数えたい量を「ある対象が条件を満たせば1、そうでなければ0」の和にできるとき、対象を固定して確率を求める。本問では頂点集合を固定することで、成分数の分布全体を持たずに済む。期待値の線形性に、事象同士の独立性は不要である。
 
 ### connected構造のsubset DP
 
-発動条件: 全構造数f(S)からconnected構造数g(S)を抽出したいとき。
-
-anchorを含むcomponent Tで非連結構造を一意分解する。
+集合上の全構造は数えやすいが、連結なものだけ数えたいときに使う。固定頂点を含む成分を切り出し、残りの任意構造と独立に組み合わせられるかを確認する。頂点ごとに端子数が違う本問では、集合の大きさだけでなく、どの頂点を含むかまで状態に残す必要がある。
 
 ### 3^N submask enumeration
 
-発動条件: 各subset Sに対しanchor条件付きの全submaskを走査するとき。
-
-S,T,S\Tの三分類として総計を評価する。
+各集合に対してその部分集合を走査するときは、一組の集合を構成する各頂点の所属を数える。本問では「選んだ成分」「残り」「元の集合の外」の三択となり、全遷移を $$O(3^N)$$ で評価できる。
 
 ## 問題固有の要素
 
-terminal matchingがSの外へ1本も出ない確率と、その内部graphがconnectedな割合をg(S)(M-m)!/M!で同時に数えられる。
-
-別の問題へ持ち帰る視点: subsetがcomponentになるeventは、subset内connected構造と補集合側の任意構造を積に分け、全体構造数で割る。
+赤青を一つずつつなぐという条件から、集合内で配線を閉じられる条件が端子数の一致に、閉じる配線数が階乗になる。連結性だけをDPで取り出し、外側も階乗で数えることで、「内部が連結」と「外へ辺が出ない」を同時に満たす確率を得られる。自己ループや多重辺を消したグラフの個数ではなく、区別された端子の対応を数える点が重要である。
 
 ## 正当性
 
-subset内端子数が等しければ内部matchingはm!、違えば0。anchorを含む真の連結成分Tで分類して非連結分を引く再帰によりconnected内部数g(S)を得る。Sが全graphの一成分となるmatchingはg(S)(M−m)!で、他との端子接続は禁止される。各実現graphの成分indicatorを全非空Sで足すとその成分数になるので期待値の線形性が答えを与える。
+集合内で閉じる配線は、赤青の端子数が異なると存在せず、各色が $$m$$ 個なら赤から青への全単射と一対一に対応するため $$f(S)=m!$$ 通りである。
+
+非連結な配線には、固定頂点 $$a$$ を含む成分の集合 $$T\subsetneq S$$ が一意に存在する。この配線を $$T$$ 内の連結な配線と、残りの集合内で閉じる配線へ分ける操作は、両者を合わせる操作と互いに逆である。従って各分類の個数は $$g(T)f(S\setminus T)$$ となり、引き算の漸化式は非連結な配線を漏れなく一度ずつ除く。単頂点集合では引く項がなく、この式を小さい集合から計算すればすべての $$g(S)$$ が正しく求まる。
+
+赤青各 $$m$$ 端子の非空集合 $$S$$ が全体の一成分になる配線は、その内部の連結な配線と、外部の赤青各 $$M-m$$ 端子を結ぶ任意の配線の組に一対一に対応する。よってその個数は $$g(S)(M-m)!$$。全体の $$M!$$ 通りが等確率であり、各回路の成分数は全非空集合の指示変数の和なので、最終集計は成分数の期待値に等しい。
+
+端子が一つもない集合でも、何もつながない配線は存在するため $$f(S)=0!=1$$ である。単頂点なら辺がなくても一つの成分なので $$g(S)=1$$。二頂点以上なら連結にできず $$g(S)=0$$ になる。また、端子を持つ頂点と持たない頂点が混在する集合も、端子のない頂点が孤立するため $$g(S)=0$$ となる。同じ漸化式がこれらの非連結な配線を取り除く。
 
 ## 実装上の注意
 
-- red/blue数が異なるsubsetはf=g=0とし、m=0のsingletonはedgeなしでもconnectedなのでrecurrence上g=1になる。
-- proper submaskだけを引き、anchor bitを含む条件で同じpartitionを重複計数しない。
-- 最後にinv(M!)を共通で掛け、mod減算を正規化する。
+- 引く集合は固定頂点を含む**真部分集合**だけにする。$$T=S$$ を含めると、求めたい $$g(S)$$ 自身まで引いてしまう。固定頂点を含まない集合も引くと、一つの非連結な配線を複数回引く。
+- 赤青の端子数が違う集合は $$f(S)=g(S)=0$$ とする。端子数が両方0なら $$f(S)=0!=1$$ であり、端子を持たない頂点を状態から除いてはいけない。
+- 部分集合は、整数マスクの昇順で処理してもよい。真部分集合のマスクは必ず元より小さいので、要素数順と同じ依存関係を満たす。
+- 積は法を取る前に符号付き64 bit整数で計算し、引き算後の剰余は非負に正規化する。全項をためず、その都度剰余を取る。
 
 ## 復習の核
 
-- N=2で端子なしsingletonと両partを結ぶ1 cableのcaseを計算し、fからgを引くrecurrenceとcomponent確率の(M-m)!因子を確認する。
+- 「成分数の期待値」では、成分の候補となる頂点集合を固定し、その集合がちょうど一成分になる確率を足す。
+- 全構造から連結構造を取り出すときは、固定頂点を含む成分を一つだけ選ぶ。残りは連結でなくてよい。
+- 内部だけの配線数から全体の確率へ移るには、外側の自由な配線数も掛ける。端子のない孤立頂点も一成分として数える。
 
 ## 計算量と制約
 
 ### 時間
 
-O(3^N+N2^N+M)。subsetの端子数とanchor成分再帰。
+入力の集計と階乗の前計算に $$O(M+N)$$、各集合に含まれる頂点を走査して端子数を求める処理に $$O(N2^N)$$ かかる。要素数ごとの集合の振り分けもこの範囲で行える。
+
+漸化式の全遷移では、各頂点が $$T$$、$$S\setminus T$$、$$V\setminus S$$ のいずれかに属する。三択の割り当ては全体で $$3^N$$ 通りであり、固定頂点の条件や真部分集合の条件は走査数を増やさない。従ってDPは $$O(3^N)$$、最終集計は $$O(2^N)$$。逆元の二分累乗は $$O(\log p)$$ で、$$p=998244353$$ は固定なので、全体は $$O(3^N+N2^N+M)$$ 時間となる。
 
 ### 空間
 
-O(2^N+M+N)。
+集合ごとの端子数と $$f,g$$、処理順の保持に $$O(2^N)$$、階乗配列に $$O(M)$$、頂点ごとの端子数に $$O(N)$$。合計 $$O(2^N+M+N)$$ である。入力の端子列を保存する場合も $$O(M)$$ に収まる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq N \leq 17; 1 \leq M \leq 10^5; 1 \leq R_i, B_i \leq N; All input values are integers.
+$$1\leq N\leq 17$$、$$1\leq M\leq 10^5$$、$$1\leq R_i,B_i\leq N$$。時間制限は3秒、メモリ制限は1024 MiBである。頂点集合の状態数は最大 $$2^{17}=131072$$ で、端子の対応を $$M!$$ 通り列挙する代わりに部分集合DPを使える。三択の全割り当ては $$3^{17}=129140163$$ 通りであり、固定頂点を含む真部分集合に絞ると実際の減算項はさらに少ない。端子数の偏りを許す制約なので、端子数が不一致の集合と、端子を持たない頂点も扱う。
 
 ## 出典
 
