@@ -371,49 +371,83 @@ const readCurrentCatalog = async (
   }
 };
 
-const calculateBaseContentFileInventory = async (
+export const calculateBaseContentFileInventory = async (
   repositoryRoot: string,
   baseCommit: string,
 ): Promise<ContentFileInventoryEntry[]> => {
   let output: string | Buffer;
   try {
-    output = await runGit(
-      ['ls-tree', '-r', '--name-only', baseCommit, '--', 'src/content'],
-      repositoryRoot,
-    );
+    output = await runGit(['ls-tree', '-r', '-z', baseCommit, '--', 'src/content'], repositoryRoot);
   } catch {
     throw new CatalogEvidenceInventoryError(
       'TRUSTED_BASE_CONTENT_UNREADABLE',
       'The protected base commit content tree could not be read.',
     );
   }
-  const relativePaths = String(output)
-    .split('\n')
-    .map((value) => value.trim())
-    .filter(Boolean);
+  // NUL-delimited paths and object IDs preserve whitespace and binary content.
+  // Read bounded batches instead of spawning git show for every content file.
+  const entries = String(output)
+    .split('\0')
+    .filter(Boolean)
+    .map((entry) => {
+      const match = /^\d+ blob ([a-f0-9]+)\t([\s\S]+)$/u.exec(entry);
+      if (!match?.[1] || !match[2])
+        throw new CatalogEvidenceInventoryError('TRUSTED_BASE_CONTENT_UNREADABLE', entry);
+      return { objectId: match[1], path: match[2] };
+    });
   const files: ContentFileInventoryEntry[] = [];
-  for (let offset = 0; offset < relativePaths.length; offset += 32)
-    files.push(
-      ...(await Promise.all(
-        relativePaths.slice(offset, offset + 32).map(async (relativePath) => {
-          let raw: string | Buffer;
-          try {
-            raw = await runGit(['show', `${baseCommit}:${relativePath}`], repositoryRoot, 'buffer');
-          } catch {
-            throw new CatalogEvidenceInventoryError(
-              'TRUSTED_BASE_CONTENT_UNREADABLE',
-              `Cannot read ${relativePath} from the protected base commit.`,
-            );
-          }
-          const bytes = Buffer.isBuffer(raw) ? raw : Buffer.from(raw);
-          return {
-            path: relativePath,
-            sha256: createHash('sha256').update(bytes).digest('hex'),
-            byteLength: bytes.byteLength,
-          };
-        }),
-      )),
-    );
+  for (let offset = 0; offset < entries.length; offset += 32) {
+    const batch = entries.slice(offset, offset + 32);
+    let raw: Buffer;
+    try {
+      raw = await new Promise<Buffer>((resolve, reject) => {
+        const child = execFile(
+          'git',
+          ['cat-file', '--batch'],
+          { cwd: repositoryRoot, encoding: 'buffer', maxBuffer: 128 * 1024 * 1024 },
+          (error: Error | null, stdout: Buffer) => {
+            if (error) reject(error);
+            else resolve(stdout);
+          },
+        );
+        child.stdin?.on('error', reject);
+        child.stdin?.end(batch.map((entry) => `${entry.objectId}\n`).join(''));
+      });
+    } catch {
+      throw new CatalogEvidenceInventoryError(
+        'TRUSTED_BASE_CONTENT_UNREADABLE',
+        'Cannot read protected-base content objects.',
+      );
+    }
+    let position = 0;
+    for (const entry of batch) {
+      const headerEnd = raw.indexOf(10, position);
+      const header = raw.subarray(position, headerEnd).toString('ascii');
+      const match = /^([a-f0-9]+) blob (\d+)$/u.exec(header);
+      const byteLength = Number(match?.[2]);
+      const contentEnd = headerEnd + 1 + byteLength;
+      if (
+        headerEnd < position ||
+        match?.[1] !== entry.objectId ||
+        !Number.isSafeInteger(byteLength) ||
+        contentEnd >= raw.length ||
+        raw[contentEnd] !== 10
+      )
+        throw new CatalogEvidenceInventoryError('TRUSTED_BASE_CONTENT_UNREADABLE', entry.path);
+      const bytes = raw.subarray(headerEnd + 1, contentEnd);
+      files.push({
+        path: entry.path,
+        sha256: createHash('sha256').update(bytes).digest('hex'),
+        byteLength,
+      });
+      position = contentEnd + 1;
+    }
+    if (position !== raw.length)
+      throw new CatalogEvidenceInventoryError(
+        'TRUSTED_BASE_CONTENT_UNREADABLE',
+        'Unexpected trailing content in protected-base object batch.',
+      );
+  }
   return files;
 };
 
