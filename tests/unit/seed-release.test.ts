@@ -18,6 +18,21 @@ describe('accepted seed initial publication', () => {
     // The historical snapshot seals a main base in its temporary repository.
     vi.stubEnv('GITHUB_BASE_REF', 'main');
   });
+  it('keeps the sealed manuscripts after reading current content', async () => {
+    await loadFullPublicProjection({ usePreparedRelease: false });
+    await withLegacySeedRepository(async (repositoryRoot) => {
+      const sealed = JSON.parse(
+        await readFile(path.join(repositoryRoot, LEGACY_SEED_CATALOG_PATH), 'utf8'),
+      ) as { authoringUnits: { problemId: string }[] };
+      const projection = await loadFullPublicProjection({
+        repositoryRoot,
+        usePreparedRelease: false,
+      });
+      expect(projection.problemDocuments.get('abc212-e')?.unit).toEqual(
+        sealed.authoringUnits.find((unit) => unit.problemId === 'abc212-e'),
+      );
+    });
+  }, 60_000);
   it('continues unchanged bootstrap publication after its prepared catalog has merged', async () => {
     await withLegacySeedRepository(async (root) => {
       const catalogPath = LEGACY_SEED_CATALOG_PATH;

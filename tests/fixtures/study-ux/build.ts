@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { cp, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
@@ -9,11 +9,27 @@ import { createSmallBatchFixture } from '../small-batch.js';
 
 const execute = promisify(execFile);
 
-/** One isolated build per test, with real projection, routes and CSS. Dependencies
- * resolve from the parent checkout; no node_modules symlink or public fixture. */
-export async function withNewMaterialBuild(inspect: (dist: string) => Promise<void>) {
-  await mkdir('build', { recursive: true });
-  const root = await mkdtemp(path.resolve('build/study-ux-'));
+async function phase<T>(name: string, action: () => Promise<T>): Promise<T> {
+  const started = performance.now();
+  console.error(`New material ${name} started`);
+  try {
+    const result = await action();
+    console.error(
+      `New material ${name} finished: result=passed elapsed_ms=${String(Math.round(performance.now() - started))}`,
+    );
+    return result;
+  } catch (error) {
+    console.error(
+      `New material ${name} finished: result=failed elapsed_ms=${String(Math.round(performance.now() - started))}`,
+    );
+    throw error;
+  }
+}
+
+/** Build inside a run-owned directory, with real projection, routes and CSS.
+ * Dependencies resolve from the parent checkout; no public fixture or cache. */
+export async function prepareNewMaterialBuild(root: string) {
+  // The update CLI requires an editable candidate outside the base checkout.
   const candidate = await mkdtemp(path.join(tmpdir(), 'abc-new-material-'));
   const env = {
     ...process.env,
@@ -33,62 +49,65 @@ export async function withNewMaterialBuild(inspect: (dist: string) => Promise<vo
     }
   };
   try {
-    const { smallBatchInput, authorSmallBatch } = await createSmallBatchFixture();
-    const input = await smallBatchInput(candidate);
-    assert.equal((await runSmallBatchUpdate({ ...input, mode: 'prepare' })).status, 'on_hold');
-    await authorSmallBatch(input);
-    const validated = await runSmallBatchUpdate({ ...input, mode: 'validate' });
-    assert.equal(validated.status, 'passed', JSON.stringify(validated.holds));
-    for (const entry of [
-      'src',
-      'scripts',
-      // The verification runner imports this shared path classifier.
-      '.github/actions/nonpublic-docs/paths.mjs',
-      'astro.config.mjs',
-      'package.json',
-      'tsconfig.json',
-      'tsconfig.base.json',
-    ])
-      await cp(entry, path.join(root, entry), { recursive: true });
-    await cp(path.join(candidate, 'src/content'), path.join(root, 'src/content'), {
-      recursive: true,
+    await phase('prepare/author/validate', async () => {
+      const { smallBatchInput, authorSmallBatch } = await createSmallBatchFixture();
+      const input = await smallBatchInput(candidate);
+      assert.equal((await runSmallBatchUpdate({ ...input, mode: 'prepare' })).status, 'on_hold');
+      await authorSmallBatch(input);
+      const validated = await runSmallBatchUpdate({ ...input, mode: 'validate' });
+      assert.equal(validated.status, 'passed', JSON.stringify(validated.holds));
     });
-    await cp(
-      'tests/fixtures/study-ux/new-unit.ts',
-      path.join(root, 'tests/fixtures/study-ux/new-unit.ts'),
-      { recursive: true },
-    );
-    const orderPath = path.join(root, 'src/lib/taxonomy/textbook-order.ts');
-    await writeFile(
-      orderPath,
-      (await readFile(orderPath, 'utf8')).replace(
-        'const textbookIndexById',
-        `// Register the synthetic Unit in this disposable project's editorial order.\n(TEXTBOOK_CHAPTERS.find(({ id }) => id === 'unit-chapter-dynamic-programming')!.unitIds as unknown as string[]).push('unit-regression-transitions');\nconst textbookIndexById`,
-      ),
-    );
-    const targetsPath = path.join(root, 'src/lib/taxonomy/unit-learning-targets.ts');
-    await writeFile(
-      targetsPath,
-      `${await readFile(targetsPath, 'utf8')}\nUNIT_LEARNING_TARGETS['unit-regression-transitions'] = UNIT_LEARNING_TARGETS['unit-dp-transition-optimization']!;\n`,
-    );
-    await run(['--import', 'tsx', 'tests/fixtures/study-ux/new-unit.ts']);
-    // Limit static output, keeping the production page bodies and CSS untouched.
-    for (const [file, collection, id] of [
-      ['src/pages/learn/[...slug].astro', 'learningUnits', 'unit-regression-transitions'],
-      ['src/pages/problems/[problemId].astro', 'problems', 'abc467-e'],
-    ] as const) {
-      const target = path.join(root, file);
+    await phase('copy/generate', async () => {
+      for (const entry of [
+        'src',
+        'scripts',
+        // The verification runner imports this shared path classifier.
+        '.github/actions/nonpublic-docs/paths.mjs',
+        'astro.config.mjs',
+        'package.json',
+        'tsconfig.json',
+        'tsconfig.base.json',
+      ])
+        await cp(entry, path.join(root, entry), { recursive: true });
+      await cp(path.join(candidate, 'src/content'), path.join(root, 'src/content'), {
+        recursive: true,
+      });
+      await cp(
+        'tests/fixtures/study-ux/new-unit.ts',
+        path.join(root, 'tests/fixtures/study-ux/new-unit.ts'),
+        { recursive: true },
+      );
+      const orderPath = path.join(root, 'src/lib/taxonomy/textbook-order.ts');
       await writeFile(
-        target,
-        (await readFile(target, 'utf8')).replace(
-          `publicCatalog.${collection}.map(`,
-          `publicCatalog.${collection}.filter((item) => item.id === '${id}').map(`,
+        orderPath,
+        (await readFile(orderPath, 'utf8')).replace(
+          'const textbookIndexById',
+          `// Register the synthetic Unit in this disposable project's editorial order.\n(TEXTBOOK_CHAPTERS.find(({ id }) => id === 'unit-chapter-dynamic-programming')!.unitIds as unknown as string[]).push('unit-regression-transitions');\nconst textbookIndexById`,
         ),
       );
-    }
-    await writeFile(
-      path.join(root, 'astro.fixture.config.mjs'),
-      `
+      const targetsPath = path.join(root, 'src/lib/taxonomy/unit-learning-targets.ts');
+      await writeFile(
+        targetsPath,
+        `${await readFile(targetsPath, 'utf8')}\nUNIT_LEARNING_TARGETS['unit-regression-transitions'] = UNIT_LEARNING_TARGETS['unit-dp-transition-optimization']!;\n`,
+      );
+      await run(['--import', 'tsx', 'tests/fixtures/study-ux/new-unit.ts']);
+      // Limit static output, keeping the production page bodies and CSS untouched.
+      for (const [file, collection, id] of [
+        ['src/pages/learn/[...slug].astro', 'learningUnits', 'unit-regression-transitions'],
+        ['src/pages/problems/[problemId].astro', 'problems', 'abc467-e'],
+      ] as const) {
+        const target = path.join(root, file);
+        await writeFile(
+          target,
+          (await readFile(target, 'utf8')).replace(
+            `publicCatalog.${collection}.map(`,
+            `publicCatalog.${collection}.filter((item) => item.id === '${id}').map(`,
+          ),
+        );
+      }
+      await writeFile(
+        path.join(root, 'astro.fixture.config.mjs'),
+        `
 import config from './astro.config.mjs';
 export default { ...config, integrations: [...config.integrations, {
   name: 'only-new-material-routes',
@@ -99,22 +118,24 @@ export default { ...config, integrations: [...config.integrations, {
   } }
 }] };
 `,
+      );
+    });
+    await phase('Astro build', () =>
+      run([
+        path.resolve('node_modules/astro/bin/astro.mjs'),
+        'build',
+        '--config',
+        './astro.fixture.config.mjs',
+      ]),
     );
-    await run([
-      path.resolve('node_modules/astro/bin/astro.mjs'),
-      'build',
-      '--config',
-      './astro.fixture.config.mjs',
-    ]);
     const dist = path.join(root, 'dist');
     assert.equal(
       (await readdir(dist, { recursive: true })).filter((file) => file.endsWith('.html')).length,
       2,
       'The fixture must build only its two representative pages',
     );
-    await inspect(dist);
+    return dist;
   } finally {
     await rm(candidate, { recursive: true, force: true });
-    await rm(root, { recursive: true, force: true });
   }
 }

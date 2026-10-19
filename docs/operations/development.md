@@ -44,6 +44,9 @@ pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動�
 9本とE2E 4本になる。変更前はテストpathが未知のため全量だった。PR
 #137は`src/lib/study-preview/manuscripts`等の共通変更も含むため、同PR全体は今回の変更後も全量になる。実時間は自然な同種・同規模の教材更新のActionsで比較し、このrunner変更自身の全量runを選択改善の短縮実績へ流用しない。
 
+新教材E2Eの隔離buildはPlaywrightのglobal
+setupでworker開始前に一度準備し、同runのworker・retryで共有する。`--list --reporter=json`で実際の選択に新教材が含まれるときだけ準備するので、他specだけの実行では省略する。単独の`new-material.spec.ts`にも手動準備は不要。終了・失敗時は一時candidate/project/distを削除し、本番`dist`へ合成教材を入れない。準備段階の時間・成否は`New material ...`ログ、画面検査はPlaywrightの結果で確認する。実行例・cleanup・計測境界は[更新マニュアル](update-manual.md#3-変更に必要な検証を選ぶ)を参照する。
+
 教材追加は[共通フローと3つの完了条件](update-manual.md#新しい教材を追加するときの共通フロー)に従う。既存表示を保つこと、新規原稿の内容をCodexが確認すること、新教材へ共通デザインが適用されることを混同しない。#120の`explanation-writing.test.ts`はskill変更で、#122の`new-material.spec.ts`は本文・データ・UI・skill変更で自動選択する。執筆方針・テンプレートを変更したときは`explanation-writing.spec.ts`も手動で加える。各テストの範囲と限界は[執筆例](explanation-writing.md)と[表示回帰](study-ux-regressions.md)を参照する。
 
 学習記録の変更には保存・日時・backupのテストに加え、既存の`full-public-projection.test.ts`と`full-projection.spec.ts`を選ぶ。`src/lib/learning-records/filter.ts`だけの変更でも、葉単元・親単元・章の配下にある問題を問題一覧と復習一覧で絞り込む挙動を検証する。問題の主配置単元だけに絞る回帰を検出し、複数分類で選ばれても同じテストは重複実行しない。
