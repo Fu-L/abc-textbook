@@ -102,7 +102,7 @@ test('uses the shared layout and record controls on other Problem IDs', async ({
 
 for (const [id, introduction] of [
   ['abc330-g', '転倒数を、確定位置同士・未確定位置同士・両者をまたぐ組の三つに分ける。'],
-  ['abc321-g', '連結成分数の期待値は、各頂点集合が一つの連結成分になる確率の和で求められる。'],
+  ['abc321-g', '連結成分数を直接追う代わりに、「どの頂点集合が一つの成分になるか」を数える。'],
 ] as const) {
   for (const colorScheme of ['light', 'dark'] as const) {
     for (const width of [390, 1440]) {

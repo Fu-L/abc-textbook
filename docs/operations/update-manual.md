@@ -363,6 +363,10 @@ cleanupは必須検証時間に含める。前後各5件が同条件で揃った
 
 初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
 
+`full-public-projection.test.ts`の旧記法エスケープ検査は、現行原稿の該当行をすべて表示と照合し、検査対象が空でないことを確認する。本文改稿で変わる該当文書数・行数は固定しない。記法自体の固定例と集合差のバックスラッシュ保持は`public-document.test.ts`で検証する。
+
+代表問題の冒頭文を改稿したら、`tests/e2e/problem-reading.spec.ts`にある期待文も同期する。該当問題を含む同specで、明暗・PC/スマホ・JS無効時に本文が表示され、導入全体が最初の画面に収まることを確認する。
+
 旧inventory互換経路のprotected-base本文は、`git ls-tree -r -z`で固定commitのpathとblob
 IDを列挙し、32件ずつ`git cat-file --batch`で読む。ファイルごとのGit起動を減らし、各ファイルのSHA-256・byte長・Git順序は保持する。作業treeや前回の検証結果を代用せず、欠落object・不正なbatch応答は停止する。この読込を変えた場合は`tests/unit/base-content-inventory.test.ts`、`tests/unit/seed-release.test.ts`、`tests/unit/evidence-inventory.test.ts`、`tests/integration/catalog-cli.test.ts`で、binary・空ファイル・特殊なpath・複数batch・旧正常入力と不正入力拒否を確認する。mainで発生したseed互換テストの120秒timeoutに対する修正であり、timeout・retry・検証範囲は変更しない。
 
