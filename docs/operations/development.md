@@ -21,6 +21,8 @@ pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動�
 
 複数分類は検査の和集合を実行する。renameは削除と追加に分解し、両pathを判定する。本文・データの削除も検査対象にする。非公開文書・比較PNGの削除、空差分、不正なGit出力は広い検査へ戻る。削除・renameでも文書の比較PNG参照を確認する。検査の失敗・signalは非zeroで後続を止め、cancelを成功へ置き換えない。
 
+`src/content/docs/learn/`の本文変更では`tests/integration/full-learning-path.test.ts`も選ぶ。「問題一覧」「関連問題」のリンクの所属・順序を補足文の改稿と区別して検査する。問題本文だけの変更の検証範囲は維持する。
+
 比較PNGの許可配置は[更新マニュアル](update-manual.md#3-変更に必要な検証を選ぶ)を参照する。runnerと文書checkerは`.github/actions/nonpublic-docs/paths.mjs`の分類を共用し、未知のディレクトリ・拡張子は広い検査へ戻す。Markdownの画像記法もローカル参照検査に含め、画像だけの差分でも既知の非公開Markdownから比較PNGへの参照を調べる。mainは画像だけのpushでも未配信差分を合流するため、未配信の教材・共通変更に必要な検査と配信は残る。
 
 この分類改善自身のPRはrunner変更により広い検査となる。文書経路の所要時間は自然に発生した画像付き文書変更のActionsで確認し、計測専用の画像変更・runは作らない。

@@ -17,6 +17,12 @@ import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-po
 describe('full authored LearningUnit navigation', () => {
   let expected: CanonicalTaxonomyMaterialization;
   let actual: CanonicalTaxonomyMaterialization;
+  const withDocument = (id: string, document: string): CanonicalTaxonomyMaterialization => ({
+    ...actual,
+    learningUnits: actual.learningUnits.map((output) =>
+      output.value.id === id ? { ...output, document } : output,
+    ),
+  });
   beforeAll(async () => {
     const context = await loadFinalTaxonomySourceContext();
     const build = FinalTaxonomyBuildSchema.parse(
@@ -85,24 +91,86 @@ describe('full authored LearningUnit navigation', () => {
     },
   );
 
-  it.each(['章の構成', '問題一覧', '関連問題'])(
-    'still rejects changes to accepted navigation: %s',
+  it('still rejects changes to the accepted chapter contents', () => {
+    const title = '章の構成';
+    const heading = `\n## ${title}\n`;
+    const output = actual.learningUnits.find(({ document }) => document.includes(heading));
+    if (!output) throw new Error('Missing navigation fixture');
+    const changed = withDocument(
+      output.value.id,
+      output.document.replace(heading, `${heading}\nUnexpected entry.\n`),
+    );
+    expect(() => buildLearningPath(changed, expected)).toThrow(
+      `ACCEPTED_NAVIGATION_DRIFT:${output.value.id}:${title}`,
+    );
+  });
+
+  it.each(['問題一覧', '関連問題'])(
+    'accepts rewritten role descriptions and supplementary prose in %s',
     (title) => {
       const heading = `\n## ${title}\n`;
-      const output = actual.learningUnits.find(({ document }) => document.includes(heading));
-      if (!output) throw new Error('Missing navigation fixture');
-      const document = output.document.replace(heading, `${heading}\nUnexpected entry.\n`);
-      const changed = {
-        ...actual,
-        learningUnits: actual.learningUnits.map((unit) =>
-          unit === output ? { ...unit, document } : unit,
-        ),
-      };
-      expect(() => buildLearningPath(changed, expected)).toThrow(
-        `ACCEPTED_NAVIGATION_DRIFT:${output.value.id}:${title}`,
+      const output = actual.learningUnits.find(
+        ({ value }) => value.id === 'unit-dp-transition-optimization',
       );
+      if (!output) throw new Error('Missing navigation fixture');
+      const body = output.document.split(heading)[1]?.split('\n## ')[0];
+      if (!body) throw new Error('Missing problem list');
+      const rewritten = body.replace(
+        /^(- \[.*?\]\([^)]+\)).*$/gmu,
+        '$1 — 旧配列の共通部分を集約する。[補足の出典](https://atcoder.jp/contests/abc253/editorial/4018)',
+      );
+      expect(rewritten).not.toBe(body);
+      const changed = withDocument(
+        output.value.id,
+        output.document.replace(body, `遷移式から各問の着眼点を読み取る。\n${rewritten}`),
+      );
+      expect(buildLearningPath(changed, expected).problemHomeById.size).toBe(868);
     },
   );
+
+  describe.each(['問題一覧', '関連問題'])('%s navigation', (title) => {
+    it.each(['remove', 'reorder', 'duplicate', 'replace URL', 'add', 'move to other section'])(
+      'rejects a changed problem link: %s',
+      (change) => {
+        const output = actual.learningUnits.find(
+          ({ value }) => value.id === 'unit-dp-transition-optimization',
+        );
+        if (!output) throw new Error('Missing navigation fixture');
+        const heading = `\n## ${title}\n`;
+        const body = output.document.split(heading)[1]?.split('\n## ')[0];
+        const rows = body?.match(/^- \[.*$/gmu);
+        const first = rows?.[0];
+        const second = rows?.[1];
+        if (!body || !first || !second) throw new Error('Missing problem rows');
+        const newLink = first.replace(
+          /\]\([^)]+\)/u,
+          '](https://atcoder.jp/contests/abc999/tasks/abc999_g)',
+        );
+        const replacement =
+          change === 'reorder'
+            ? body.replace(/^- \[.*$/gmu, (row) =>
+                row === first ? second : row === second ? first : row,
+              )
+            : change === 'duplicate'
+              ? body.replace(first, `${first}\n${first}`)
+              : change === 'replace URL'
+                ? body.replace(first, newLink)
+                : change === 'add'
+                  ? `${body}\n${newLink}`
+                  : body.replace(first, '');
+        let document = output.document.replace(body, replacement);
+        if (change === 'move to other section') {
+          const other = title === '問題一覧' ? '関連問題' : '問題一覧';
+          const otherHeading = `\n## ${other}\n`;
+          document = document.replace(otherHeading, `${otherHeading}\n${first}\n`);
+        }
+        const changed = withDocument(output.value.id, document);
+        expect(() => buildLearningPath(changed, expected)).toThrow(
+          `ACCEPTED_NAVIGATION_DRIFT:${output.value.id}:${title}`,
+        );
+      },
+    );
+  });
 
   it('rejects a handoff that changes accepted reading order', () => {
     const changed = structuredClone(actual);
