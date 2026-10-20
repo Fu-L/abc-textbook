@@ -341,6 +341,25 @@ describe('verify:fast change selection', () => {
     );
   });
 
+  it.each(['A', 'M', 'D'])(
+    'checks authored Unit navigation for a %s manuscript change',
+    (status) => {
+      const steps = selectVerificationSteps([
+        {
+          status,
+          file: 'src/content/docs/learn/dynamic-programming/dp-transition-optimization.md',
+        },
+        { status, file: 'src/content/docs/learn/modeling/index.md' },
+      ]);
+      expect(steps.map(({ id }) => id)).toEqual(ids('src/content/docs/problems/abc212-g.md'));
+      const tests = steps.find(({ id }) => id === 'test')?.args ?? [];
+      expect(tests).toContain('tests/integration/full-learning-path.test.ts');
+      expect(
+        tests.filter((file) => file === 'tests/integration/full-learning-path.test.ts'),
+      ).toHaveLength(1);
+    },
+  );
+
   it('retains real schema, ID/reference/DAG/order and metrics checks for data changes', () => {
     const files = [
       'src/content/problems/abc212-g.json',

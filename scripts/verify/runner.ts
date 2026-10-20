@@ -217,6 +217,7 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
   if (changes === null) broadReasons.add('change set unavailable');
   else if (!changes.length) broadReasons.add('empty change set');
   let prose = false,
+    unitProse = false,
     data = false,
     ui = false,
     records = false,
@@ -237,8 +238,10 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
         broadReasons.add(`nonpublic documentation deleted: ${JSON.stringify(file)}`);
       else docs.push(file);
     } else if (file === 'src/content/indexes/release-history.json') history = true;
-    else if (file.startsWith('src/content/docs/')) prose = true;
-    else if (file.startsWith('src/content/') || file === 'src/lib/taxonomy/textbook-order.ts')
+    else if (file.startsWith('src/content/docs/')) {
+      prose = true;
+      if (file.startsWith('src/content/docs/learn/')) unitProse = true;
+    } else if (file.startsWith('src/content/') || file === 'src/lib/taxonomy/textbook-order.ts')
       data = true;
     else if (file.startsWith('src/lib/learning-records/')) records = true;
     else if (/^src\/(?:pages|components|layouts|styles|client)\//u.test(file)) {
@@ -272,6 +275,7 @@ function planVerification(changes: readonly VerificationChange[] | null, env: No
   if (runtime) steps.push({ id: 'check', script: 'check' });
   const tests = new Set<string>();
   if (prose || data || ui || reading) for (const test of contentTests) tests.add(test);
+  if (unitProse) tests.add('tests/integration/full-learning-path.test.ts');
   for (const test of readingTests) tests.add(test);
   if (data) for (const test of dataTests) tests.add(test);
   if (records) for (const test of recordTests) tests.add(test);

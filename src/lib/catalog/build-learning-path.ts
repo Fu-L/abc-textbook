@@ -7,6 +7,11 @@ import { deterministicTopologicalOrder } from '../validation/validate.js';
 const section = (document: string, title: string): string =>
   document.split(`\n## ${title}\n`)[1]?.split('\n## ')[0]?.trim() ?? '';
 
+// Each problem row starts with its navigation link. Role descriptions and
+// supplementary prose after that link are authored content, not the skeleton.
+const problemListLinks = (text: string): string[] =>
+  [...text.matchAll(/^- \[[^\n]*?\]\(([^)\s]+)\)/gmu)].map((match) => match[1] ?? '');
+
 export const learningUnitRoute = (documentPath: string): string =>
   `/${documentPath.replace(/^src\/content\/docs\//u, '').replace(/(?:\/index)?\.md$/u, '')}/`;
 
@@ -132,9 +137,16 @@ export const buildLearningPath = (
       const expectedLine = expected?.document.split('\n').find((text) => text.startsWith(prefix));
       if (!line || line !== expectedLine) diagnostics.push(`PREREQUISITE_NAVIGATION:${unit.id}`);
     }
-    for (const title of ['章の構成', '問題一覧', '関連問題']) {
-      if (expected && section(document, title) !== section(expected.document, title))
-        diagnostics.push(`ACCEPTED_NAVIGATION_DRIFT:${unit.id}:${title}`);
+    if (expected) {
+      if (section(document, '章の構成') !== section(expected.document, '章の構成'))
+        diagnostics.push(`ACCEPTED_NAVIGATION_DRIFT:${unit.id}:章の構成`);
+      for (const title of ['問題一覧', '関連問題']) {
+        if (
+          canonicalJson(problemListLinks(section(document, title))) !==
+          canonicalJson(problemListLinks(section(expected.document, title)))
+        )
+          diagnostics.push(`ACCEPTED_NAVIGATION_DRIFT:${unit.id}:${title}`);
+      }
     }
     // Authored explanations may add sources while retaining every accepted reference
     // and the taxonomy identity. Navigation sections above still require exact order.
