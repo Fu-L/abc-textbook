@@ -146,7 +146,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   ],
   'unit-priority-queue-best-first': [
     '緑色',
-    'heapの操作を使い、現在選べる候補だけを管理して順に取り出す。',
+    '優先度付きキューで、現在選べる候補だけを管理して順に取り出す。',
   ],
   'unit-ordered-set-multiset': [
     '緑色',

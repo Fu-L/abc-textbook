@@ -301,6 +301,8 @@ IDごとの分岐は不要である。詳細とトレードオフは[単元ペ�
 
 単元本文を変更した場合は`tests/integration/full-learning-path.test.ts`も実行する。`verify:fast`は`src/content/docs/learn/`の変更で同テストを選択する。導線検証は「根拠」節の既存出典とtaxonomy識別行の保持を確認し、執筆に必要な出典の追記を許容する。「問題一覧」「関連問題」は各行の先頭リンクのURL列を節ごとに照合し、所属・順序・重複の有無を保持する。役割の説明や補足文は改稿できる。章目次は引き続き受理済みの内容と順序を照合する。改稿のために既存本文を生成draftへ戻したり、過去の証跡を再生成したりしない。
 
+冒頭の対象色の理由を改稿するときは、`src/lib/taxonomy/unit-learning-targets.ts`の該当Unitの理由も同じ文へ更新する。対象色・レーティング帯と理由の一致は`full-learning-path.test.ts`、生成draftへの反映は`tests/contract/canonical-taxonomy-materialization.test.ts`で確認する。
+
 問題検索・タグ・コンテスト索引の表示は`ProblemFilters.tsx`、`src/pages/tags/`、`ContestMatrixView.astro`、`ContestProblemCell.astro`と`study-indexes.css`を編集する。検索の条件・query値・適用と解除の意味は維持し、学習記録の条件は開閉欄に置く。queryで学習状況・要復習を指定した場合は初めから開く。JS無効時はフォームを無効にし、全問題の静的リンクを使う。タグの定義と手掛かりは常時表示し、分類・前提・学習成果はnative
 detailsに保持する。コンテスト表は問題名から解説へ進み、各セルの「学習のつながり」で本文anchor・単元・全主タグと補助タグ・類題へ進む。縦の代替表示もnative
 detailsで開ける。公式順・欠番・状態・既存anchorを表示都合で再計算しない。
