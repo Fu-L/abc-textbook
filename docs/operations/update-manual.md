@@ -301,6 +301,8 @@ IDごとの分岐は不要である。詳細とトレードオフは[単元ペ�
 
 単元本文を変更した場合は`tests/integration/full-learning-path.test.ts`も実行する。`verify:fast`は`src/content/docs/learn/`の変更で同テストを選択する。導線検証は「根拠」節の既存出典とtaxonomy識別行の保持を確認し、執筆に必要な出典の追記を許容する。「問題一覧」「関連問題」は各行の先頭リンクのURL列を節ごとに照合し、所属・順序・重複の有無を保持する。役割の説明や補足文は改稿できる。章目次は引き続き受理済みの内容と順序を照合する。改稿のために既存本文を生成draftへ戻したり、過去の証跡を再生成したりしない。
 
+冒頭の対象色の理由を改稿するときは、`src/lib/taxonomy/unit-learning-targets.ts`の該当Unitの理由も同じ文へ更新する。対象色・レーティング帯と理由の一致は`full-learning-path.test.ts`、生成draftへの反映は`tests/contract/canonical-taxonomy-materialization.test.ts`で確認する。
+
 問題検索・タグ・コンテスト索引の表示は`ProblemFilters.tsx`、`src/pages/tags/`、`ContestMatrixView.astro`、`ContestProblemCell.astro`と`study-indexes.css`を編集する。検索の条件・query値・適用と解除の意味は維持し、学習記録の条件は開閉欄に置く。queryで学習状況・要復習を指定した場合は初めから開く。JS無効時はフォームを無効にし、全問題の静的リンクを使う。タグの定義と手掛かりは常時表示し、分類・前提・学習成果はnative
 detailsに保持する。コンテスト表は問題名から解説へ進み、各セルの「学習のつながり」で本文anchor・単元・全主タグと補助タグ・類題へ進む。縦の代替表示もnative
 detailsで開ける。公式順・欠番・状態・既存anchorを表示都合で再計算しない。
@@ -362,6 +364,8 @@ timeをActionsとPRへ短く記す。新教材のsetup・隔離build・fixture
 cleanupは必須検証時間に含める。前後各5件が同条件で揃った場合だけ中央値と短縮率を計算し、10分以下かつ50%以上短縮を判定する。移行前が不足なら短縮率は未判定とする。計測のための教材変更・run再実行は行わず、不足報告で#149を完了できても#142/SC-005/002全体を達成済みにしない。教材改稿・追加は止めず、追加最適化の調査候補は親#142へ残す。
 
 初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
+
+旧bootstrapのfingerprint再構築では、対象色・レーティング帯・理由も復元した当時のUnit本文から読む。現在の`unit-learning-targets.ts`の編集を過去のfingerprintへ混ぜない。`seed-release.test.ts`は現在の対象色定義を差し替えても旧bootstrapを検証でき、不正fingerprintと本文変更を引き続き拒否することを確認する。
 
 `full-public-projection.test.ts`の旧記法エスケープ検査は、現行原稿の該当行をすべて表示と照合し、検査対象が空でないことを確認する。本文改稿で変わる該当文書数・行数は固定しない。記法自体の固定例と集合差のバックスラッシュ保持は`public-document.test.ts`で検証する。
 

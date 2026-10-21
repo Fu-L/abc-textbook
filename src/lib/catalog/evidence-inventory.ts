@@ -55,7 +55,6 @@ import {
   TrustedCatalogDiffError,
 } from './trusted-diff.js';
 import { loadFullPublicProjection } from './full-public-projection.js';
-import { unitLearningTarget } from '../taxonomy/unit-learning-targets.js';
 import {
   validateSeedAgentQualityReview,
   SEED_AGENT_OWNER_INSTRUCTION,
@@ -595,10 +594,19 @@ export const loadCatalogEvidenceCanonicalSources = async (
         corrections: projection.corrections,
         retiredTargets: projection.retiredTargets,
         history: projection.history,
-        editorialOrder: projection.ui.learningUnits.map((unit) => ({
-          id: unit.id,
-          target: unitLearningTarget(unit.id),
-        })),
+        editorialOrder: projection.ui.learningUnits.map((unit) => {
+          // A historical fingerprint binds the targets in its sealed manuscripts,
+          // independently of later changes to the current editorial definitions.
+          const [, color, rating, reason] =
+            projection.unitDocuments
+              .get(unit.id)
+              ?.text.match(
+                /^(?:習得|導入)対象の目安: \*\*([^（\n]+)（([^）\n]+)）\*\*。([^\n]+)$/mu,
+              ) ?? [];
+          if (!color || !rating || !reason)
+            throw new CatalogEvidenceInventoryError('INITIAL_LEARNING_TARGET', unit.id);
+          return { id: unit.id, target: { color, rating, reason } };
+        }),
       }),
     ];
     for (const key of [
