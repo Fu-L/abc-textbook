@@ -365,6 +365,8 @@ cleanupは必須検証時間に含める。前後各5件が同条件で揃った
 
 初版の互換回帰は、旧catalogを最後に保存したGit版の入力を`tests/fixtures/legacy-seed.ts`で一時repositoryへ復元し、現在のconsumerで検証する。後から追記した公開履歴を初版のfingerprintへ混ぜず、旧証跡を書き換えたり再生成したりしない。不正fingerprint・本文変更・不正inventoryの拒否は同じfixture内で確認する。現行教材のcompleteness監査は`usePreparedRelease: false`で正本を読み、公開履歴の表示テストは現行indexの順序・URL・件数との一致を確認する。通常CIの検査を除外して失敗を隠さない。
 
+旧bootstrapのfingerprint再構築では、対象色・レーティング帯・理由も復元した当時のUnit本文から読む。現在の`unit-learning-targets.ts`の編集を過去のfingerprintへ混ぜない。`seed-release.test.ts`は現在の対象色定義を差し替えても旧bootstrapを検証でき、不正fingerprintと本文変更を引き続き拒否することを確認する。
+
 `full-public-projection.test.ts`の旧記法エスケープ検査は、現行原稿の該当行をすべて表示と照合し、検査対象が空でないことを確認する。本文改稿で変わる該当文書数・行数は固定しない。記法自体の固定例と集合差のバックスラッシュ保持は`public-document.test.ts`で検証する。
 
 代表問題の冒頭文を改稿したら、`tests/e2e/problem-reading.spec.ts`にある期待文も同期する。該当問題を含む同specで、明暗・PC/スマホ・JS無効時に本文が表示され、導入全体が最初の画面に収まることを確認する。

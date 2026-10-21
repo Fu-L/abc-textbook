@@ -12,6 +12,7 @@ import { ContentWorkManifestSchema } from '../../src/lib/domain/schema-parts/rev
 import { PublicationUpdateSchema } from '../../src/lib/domain/schema-parts/release.js';
 import { validatePublicationUpdate } from '../../src/lib/validation/publication-update.js';
 import { LEGACY_SEED_CATALOG_PATH, withLegacySeedRepository } from '../fixtures/legacy-seed.js';
+import * as learningTargets from '../../src/lib/taxonomy/unit-learning-targets.js';
 
 describe('accepted seed initial publication', () => {
   beforeEach(() => {
@@ -34,6 +35,12 @@ describe('accepted seed initial publication', () => {
     });
   }, 60_000);
   it('continues unchanged bootstrap publication after its prepared catalog has merged', async () => {
+    // Current editorial changes must not redefine a sealed historical fingerprint.
+    vi.spyOn(learningTargets, 'unitLearningTarget').mockReturnValue({
+      color: '青色',
+      rating: '1600–1999',
+      reason: '現在の教材に合わせて改訂した対象色の理由。',
+    });
     await withLegacySeedRepository(async (root) => {
       const catalogPath = LEGACY_SEED_CATALOG_PATH;
       const catalog = JSON.parse(await readFile(path.join(root, catalogPath), 'utf8')) as unknown;
