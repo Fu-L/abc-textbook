@@ -1,7 +1,7 @@
 ---
 title: "ABC370-E — Avoid K Partition"
 draft: true
-authoringUnit: {"problemId":"abc370-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4","source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"最後区間が(j+1..i)ならprefix差B_i−B_j。禁止和Kの切れ目はB_j=B_i−Kに限られる。全旧dp和からそのbucketだけ引くと全許可最後区間の数になる。計算後に現在dpを登録するので空区間を混ぜない。","sourceRevisionIds":["source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4","source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc370-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-subtract-exception-transitions/outcome-subtract-exception-transitions-shard-001/abc370-e.md","learningOutcomeIds":["outcome-subtract-exception-transitions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4","source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"先頭 $$i$$ 要素の合法な分割は、最後の区間の直前の境界 $$j$$ と、先頭 $$j$$ 要素の合法な分割に一意に分かれる。ここで $$0\\leq j<i$$ であり、最後の区間の和が $$K$$ でないことは $$B_j\\ne B_i-K$$ と同値である。従って、この条件を満たす $$dp[j]$$ の総和が、漏れや重複のない分割数になる。\n\n最初の `all` と `bucket[0]` は $$dp[0]=1$$ だけを含み、計算直前の集計の定義を満たす。各 $$i$$ で全体和からキー $$B_i-K$$ の寄与だけを除くと、上の総和が得られる。その後に $$dp[i]$$ をキー $$B_i$$ と全体和へ加えるため、次の計算直前にも集計の定義が保たれる。\n\n従って全ての $$dp[i]$$ が正しく、$$dp[N]$$ が求める答えである。$$K=0$$ や負の要素、同じ累積和の再出現も、等式による分類と $$j<i$$ の範囲を変えない。個数の加減算は法を取る操作と両立する。","sourceRevisionIds":["source-abc370-e-problem-d7ff45d3352a564a1b5f6de1562c31fcf5efce52c658332ce00497f5eb504fb4","source-abc370-editorial-10858-53664a8a6b1d89592b47f761ebce068c5c717e4a955921ededdecf1a92f9d5b7"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,63 +20,136 @@ authoringUnit: {"problemId":"abc370-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-partitionはprefix境界0..Nの選択とみなせる。直前境界mから新境界nへのsegment sumがKでない場合だけdp[m]をdp[n]へ遷移できる。prefix sum Bを使うと禁止条件はB_m=B_n−Kとなり、過去境界の個別位置ではなくprefix値ごとのdp総和だけが必要になる。dp[0]=1を空prefixの境界としてallとbucket[B_0=0]へ先に登録すると、最初のsegmentも同じ式で処理できる。A_iは負を含むためprefix sumは単調でなく、two pointersではなくhash mapによる値別集約が必要である。
+最後の区間をどこから始めるかで、分割を場合分けする。区間和が禁止値になる切れ目は、そこまでの累積和が同じ値になるものに限られる。そこで、過去の全分割数から、その累積和を持つ切れ目の分割数だけをまとめて引けばよい。
 
-採用する候補: 全過去dpの総和allとprefix sum値別のdp総和bucketを持ち、dp[n]=all−bucket[B_n−K]とする。
+### 最後の区間で分け、禁止条件を累積和の一致に直す
 
-許可される全境界の和を毎回列挙せず、禁止される同値class一つだけを差し引ける。
+$$dp[i]$$ を「先頭 $$i$$ 要素を、和が $$K$$ の区間を含まないように分割する方法の数」とする。$$i$$ は $$0\leq i\leq N$$ である。空の先頭部分には何も区間を置かない一通りの方法があるとして、$$dp[0]=1$$ とする。これは空区間を一つ作るという意味ではなく、最初の区間を付け足すための出発点である。
 
-棄却する候補: 各終端nについて全開始境界mを走査し、区間和がKか判定する。
+最後の区間が $$A_{j+1},\ldots,A_i$$ なら、その前の $$j$$ 要素を分割する方法は $$dp[j]$$ 通りある。最後の区間は空でないので、$$0\leq j<i$$ である。各 $$i$$ で全ての $$j$$ を試せばDPになるが、全体で $$O(N^2)$$ 時間かかり、$$N\leq2\times10^5$$ には間に合わない。
 
-prefix sumで一区間判定は速くても境界pairが二次で、同じ禁止prefix値をまとめていない。
+元の配列の累積和を
 
-B_0=0、dp[0]=1、all=1、bucket[0]=1で始める。n=1..Nでprefix B_nを更新し、dp[n]=(all−bucket[B_n−K]) mod 998244353とする。その後allへdp[n]を足し、bucket[B_n]へも足す。dp[N]を出力する。
+$$
+B_0=0,\qquad B_i=\sum_{t=1}^{i}A_t\quad(1\leq i\leq N)
+$$
+
+と定める。$$B_0$$ は要素を一つも含まない空の先頭部分の和である。最後の区間の和は $$B_i-B_j$$ なので、禁止される切れ目の条件は
+
+$$
+B_i-B_j=K\quad\Longleftrightarrow\quad B_j=B_i-K
+$$
+
+となる。従って素朴な遷移を、全候補から禁止分を引く形へ変えられる。
+
+$$
+\begin{aligned}
+dp[i]
+&=\sum_{\substack{0\leq j<i\\B_j\ne B_i-K}}dp[j]\\
+&=\sum_{0\leq j<i}dp[j]
+-\sum_{\substack{0\leq j<i\\B_j=B_i-K}}dp[j]
+\end{aligned}
+$$
+
+### 同じ累積和の切れ目をまとめて登録する
+
+$$i$$ の計算直前に、二つの集計値を持つ。
+
+- `all` は、既に確定した先頭部分 $$j=0,\ldots,i-1$$ の合法な分割数の総和。
+- `bucket[x]` は、そのうち「元の配列の先頭 $$j$$ 要素の和が $$x$$」である切れ目だけを選んだ、合法な分割数の総和。
+
+数式では次の意味になる。
+
+$$
+\mathrm{all}=\sum_{0\leq j<i}dp[j],\qquad
+\mathrm{bucket}[x]=\sum_{\substack{0\leq j<i\\B_j=x}}dp[j]
+$$
+
+`bucket[x]` に入れるのは切れ目の個数ではなく、各切れ目までの分割数 $$dp[j]$$ の和である。同じ累積和が再び現れても、前の値を上書きせず加算する。キーが未登録なら、その値は0と読む。
+
+禁止される累積和は $$B_i-K$$ の一つだけなので、遷移は
+
+$$
+dp[i]=\mathrm{all}-\mathrm{bucket}[B_i-K]
+$$
+
+となる。初めは空の先頭部分 $$j=0$$ だけを登録し、`all = 1`、`bucket[0] = 1`、他のキーは0とする。この初期登録があることで、最初から最後までを一つの区間にする候補も同じ式に含まれる。
+
+以後は個数を全て法998244353で計算し、$$i=1,\ldots,N$$ の順に次を行う。
+
+1. $$B_i=B_{i-1}+A_i$$ を求める。
+2. まだ $$j<i$$ だけを含む集計から、$$dp[i]=(\mathrm{all}-\mathrm{bucket}[B_i-K])\bmod998244353$$ を求める。
+3. 求めた $$dp[i]$$ を `all` と `bucket[B_i]` の両方へ加える。
+
+**取得を終えてから、新しい状態を登録する。** こうすれば次の計算では $$j=0,\ldots,i$$ がちょうど集計される。最後に出力するのは $$dp[N]$$ であり、短い先頭部分の分割数も混ざる `all` ではない。
+
+### 負数と同じ累積和の再出現を追う
+
+独自の小例 $$A=(1,-1,1),K=0$$ を見る。累積和は $$B=(0,1,0,1)$$ で、同じ値が再び現れる。表の `all` と禁止分 `bucket[B_i-K]` は、どちらもその行の登録前の値である。最後の列は登録後の `bucket[0]` と `bucket[1]` をこの順に並べる。
+
+| $$i$$ | `all` | 禁止分 | $$dp[i]$$ | 登録後 |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 0 | 1 | $$(1,1)$$ |
+| 2 | 2 | 1 | 1 | $$(2,1)$$ |
+| 3 | 3 | 1 | 2 | $$(2,3)$$ |
+
+$$i=2$$ では、$$j=0$$ からの最後の区間 $$(1,-1)$$ は和0なので禁止される。一方、$$j=1$$ からの最後の区間は $$(-1)$$ なので許可され、分割 $$(1)\mid(-1)$$ が一通り残る。この値1を `bucket[0]` に**足して**2にする。
+
+$$i=3$$ では禁止キーが1なので、$$j=1$$ の寄与1を引き、$$dp[3]=3-1=2$$ となる。残る分割は $$(1,-1,1)$$ と $$(1)\mid(-1)\mid(1)$$ である。最後の登録で `bucket[1]` は既存の1に2を足した3となる。同じ累積和の境界が二つあることと、その分割数の総和が3であることは異なる。
+
+$$K=0$$ でも、引く対象はあくまで過去の同じ累積和を持つ境界である。例えば $$N=1,A_1=1,K=0$$ なら、未登録の `bucket[1]` は0で、答えは1となる。現在位置を遷移元へ先に含めると $$j=i$$、つまり空の最後の区間が候補に混ざってしまう。空の先頭部分の初期登録と、各非空の先頭部分の計算後の登録を区別する。
+
+また、$$A_i$$ は負にもなり、$$B_i$$ は単調には増えない。切れ目が添字の連続範囲になるとは限らないため、和の大小で尺取りするのではなく、累積和の値をキーにした連想配列でまとめる。
 
 ## 典型の発動条件
 
 ### 全遷移和から禁止classを除くDP
 
-発動条件: 過去状態の大半が遷移可能で、禁止条件が一つのkey一致で表せるとき。
-
-全dp総和を保ち、key別総和だけ差し引く。
+遷移できる過去状態が多くても、禁止条件が少数のキーとの一致だけで決まるなら、全体和とキー別の和を保つ。禁止状態そのものを一つずつ列挙する必要はない。ただし、ここで引くのは状態の個数ではなく、元の遷移式で足すはずだった重みである。
 
 ### prefix sum値別集約
 
-発動条件: segment sum条件が固定値との一致・不一致で決まるとき。
-
-開始境界をprefix値でgroup化して連想配列に蓄積する。
+区間和が固定値になる条件は、両端の累積和の差が固定値になる条件へ直せる。終端を固定し、始端側のどの情報が遷移の可否を決めるかを調べる。同じ値の過去状態が同じ可否を持つなら、そのDP値の和を共有できる。
 
 ## 問題固有の要素
 
-許可条件「Kではない」を直接列挙するより、全候補から唯一の禁止prefix値を引く補集合が単純である。
-
-別の問題へ持ち帰る視点: 否定条件付きDPでは、禁止側のequivalence classが小さく表せるか確認する。
+「和が $$K$$ でない」という許可条件は広いが、禁止条件へ裏返すと累積和の値一つで指定できる。要素が負でもこの等式は変わらない。値の単調性を仮定せず、同じ累積和が何度現れても、その都度分割数を足して保持する。
 
 ## 正当性
 
-最後区間が(j+1..i)ならprefix差B_i−B_j。禁止和Kの切れ目はB_j=B_i−Kに限られる。全旧dp和からそのbucketだけ引くと全許可最後区間の数になる。計算後に現在dpを登録するので空区間を混ぜない。
+先頭 $$i$$ 要素の合法な分割は、最後の区間の直前の境界 $$j$$ と、先頭 $$j$$ 要素の合法な分割に一意に分かれる。ここで $$0\leq j<i$$ であり、最後の区間の和が $$K$$ でないことは $$B_j\ne B_i-K$$ と同値である。従って、この条件を満たす $$dp[j]$$ の総和が、漏れや重複のない分割数になる。
+
+最初の `all` と `bucket[0]` は $$dp[0]=1$$ だけを含み、計算直前の集計の定義を満たす。各 $$i$$ で全体和からキー $$B_i-K$$ の寄与だけを除くと、上の総和が得られる。その後に $$dp[i]$$ をキー $$B_i$$ と全体和へ加えるため、次の計算直前にも集計の定義が保たれる。
+
+従って全ての $$dp[i]$$ が正しく、$$dp[N]$$ が求める答えである。$$K=0$$ や負の要素、同じ累積和の再出現も、等式による分類と $$j<i$$ の範囲を変えない。個数の加減算は法を取る操作と両立する。
 
 ## 実装上の注意
 
-- 添字を境界0..Nで統一し、bucket登録はdp計算後に行って空segmentを許さない。mod減算を負のまま残さず64 bit prefix sumをkeyにする。
+- 累積和 $$B_i$$ とキー $$B_i-K$$ は、法を取らず符号付き64 bit整数で持つ。異なる区間和を同一視しないためであり、法998244353を取るのはDPと集計の個数だけである。
+- `bucket[B_i]` は代入でなく加算する。未登録キーの取得は0とし、減算後のDP値は法の非負範囲へ戻す。
+- 全DP配列や全累積和配列は不要である。現在の累積和、最後に求めたDP値、`all`、連想配列を持ち、入力を左から処理できる。
+- $$N=1$$ なら $$A_1=K$$ で0、それ以外で1になる。全要素が0で $$K=0$$ の場合も、各段階で `all` と禁止分が等しくなり、答えは0となる。
 
 ## 復習の核
 
-- N=1でA_1=K/≠Kの二例を追い、初期bucketと更新順を確認する。負数を含むため順序性を仮定しない。
+- 区間分割の数え上げは最後の区間で分ける。その前の先頭部分の分割数が、各切れ目の重みになる。
+- 遷移の可否が遷移元のキーだけで決まるなら、同じキーのDP値をまとめる。「状態が何個か」と「その状態が何通りを表すか」を区別する。
+- 空の先頭部分は一通りとして初期登録する。現在の状態は取得後に登録し、非空区間だけを作る。
+- 累積和の差を使う等式は負数でも成り立つが、添字順の単調性は成り立たない。
 
 ## 計算量と制約
 
 ### 時間
 
-列長N。prefix値bucketをhashで保持し expected O(N)、balanced mapなら O(N log N)。
+各要素につき累積和の更新、禁止キーの取得、現在キーへの加算、全体和の更新を一度ずつ行う。ハッシュ表なら各操作が期待 $$O(1)$$ なので、入力の読み込みを含め期待 $$O(N)$$ 時間。平衡二分探索木の連想配列なら、一操作 $$O(\log N)$$ で全体 $$O(N\log N)$$ 時間となる。
 
 ### 空間
 
-dp値集約bucket O(N)、列逐次処理可。
+連想配列に保持するキーは $$O(N)$$ 個であり、全体で $$O(N)$$。入力を配列で保持しても同じ評価で、逐次読み込めば入力配列と全DP・累積和配列は省ける。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; -10^{15} \leq K \leq 10^{15}; -10^9 \leq A_i \leq 10^9; All input values are integers.
+$$1\leq N\leq2\times10^5$$、$$-10^{15}\leq K\leq10^{15}$$、$$-10^9\leq A_i\leq10^9$$。全ての境界対を調べる $$O(N^2)$$ は避ける必要がある。$$|B_i|\leq2\times10^{14}$$、$$|B_i-K|\leq1.2\times10^{15}$$ なので、累積和とキーは符号付き64 bit整数に収まる。キーの大きさや正負によらず検索できる連想配列を用いる。
 
 ## 出典
 
