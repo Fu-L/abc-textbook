@@ -1,7 +1,7 @@
 ---
 title: "ABC379-E — Sum of All Substrings"
 draft: true
-authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-004/abc379-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各部分文字列の値は、その中の各桁の寄与の和である。位置 $$j$$ の桁と右端 $$r\\geq j$$ を固定したとき、左端の $$j$$ 通りから合計 $$j\\,s_j10^{r-j}$$ が加わる。これにより、すべての部分文字列のすべての桁を漏れも重複もなく数えている。\n\n指数 $$t=r-j$$ ごとにこの有限和を集め直すと、$$0\\leq t<N$$ に対する係数は $$\\sum_{j=1}^{N-t}j\\,s_j=A_{N-t}$$ となる。従って答えは $$\\sum_{t=0}^{N-1}A_{N-t}10^t$$ である。\n\n筆算では、現在の係数に下位からの繰り上がりを足した値を $$v$$ とすると、$$v=(v\\bmod10)+10\\lfloor v/10\\rfloor$$ が成り立つ。余りを現在の位に置き、商を次の位へ送っても値は変わらない。下位の確定済みの桁には以後の係数が影響しないため、全係数と残った繰り上がりを処理すれば、上の和の十進表記が得られる。","sourceRevisionIds":["source-abc379-e-problem-e9963952c4cbe394961dcbec53050d5c7c6f124ccb29b9cb3943db806c3c4461","source-abc379-editorial-11311-8df95e624e814d6cbd50522069342595ba95bb2f9838769b7583c12ee97c6c99"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,55 +16,119 @@ authoringUnit: {"problemId":"abc379-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-各部分文字列の値を桁寄与でまとめると、元の j 桁目 S_j は右端 i≥j ごとに j·S_j·10^{N-i} を寄与する。従って係数列 A_i=Σ_{j≤i}jS_j を下位桁から足せばよい。
+全部分文字列を数に直して足す代わりに、筆算の同じ位へ入る数字をまとめる。元の各桁がその位に何回現れるかを数えれば、部分文字列の列挙を消せる。あとは通常の筆算と同じく、下の位から繰り上がりを処理すればよい。
 
-採用する候補: A_i の累積を作り、i=N から逆順に carry へ A_i を加えて一桁ずつ10進の筆算を行う。
+部分文字列は $$N(N+1)/2$$ 個あり、一つずつ取り出すだけでも $$O(N^2)$$ かかる。さらに答えも長い整数になるので、巨大整数への加算を繰り返す方針は避けたい。そこで、和を構成する一つの桁へ注目する。
 
-棄却する候補: 各部分文字列を数値へ変換して総和へ加える。
+### 元の桁位置と、部分文字列での位を分ける
 
-部分文字列が Θ(N^2) 個あり、各値も最大 N 桁なので時間も整数サイズも過大になる。
+元の文字列を左から1始まりで番号付けし、位置 $$j$$ の数字の値を $$s_j$$ とする。部分文字列の左端を $$\ell$$、右端を $$r$$ とすると、その中の $$s_j$$ は右から $$r-j$$ 桁だけ離れている。従って、この桁が部分文字列の値に加える量は $$s_j10^{r-j}$$ である。
 
-文字 digit を整数化し prefixWeighted += i×digit として A_i を保存する。逆順に carry へ A_i を足して digit を出力用 buffer に積み、全 A を使った後も carry が0になるまで桁を伸ばし、反転して出力する。
+ここで $$j,r$$ を固定する。$$s_j$$ を含み右端が $$r$$ である部分文字列の左端は $$1,2,\ldots,j$$ の $$j$$ 通りなので、これらを合わせた寄与は
+
+$$
+j\,s_j10^{r-j}\qquad(1\leq j\leq r\leq N)
+$$
+
+となる。この段階では、同じ右端でも元の桁位置ごとに10の指数が異なる。
+
+次は筆算の列、つまり10の指数を固定したい。指数を $$t=r-j$$ と置くと、$$10^t$$ の位へ寄与できる元の位置は $$1\leq j\leq N-t$$ であり、右端は $$r=j+t$$ に一意に決まる。よって、その位へ入る数字の合計は
+
+$$
+\sum_{j=1}^{N-t}j\,s_j
+$$
+
+である。重み付きの接頭辞和を $$A_k=\sum_{j=1}^{k}j\,s_j$$ と定義すれば、求める答えは
+
+$$
+\sum_{t=0}^{N-1}A_{N-t}10^t
+=\sum_{k=1}^{N}A_k10^{N-k}
+$$
+
+と書ける。ここで $$k=N-t$$ は接頭辞和の範囲を表す添字である。$$A_k$$ は、右端を $$k$$ に固定した部分文字列の値の和ではなく、**同じ位へ集めた、繰り上がり前の係数**である。
+
+### 123の筆算から係数と繰り上がりを確かめる
+
+$$S=123$$ の全6部分文字列は $$1,12,123,2,23,3$$ で、和は164になる。右揃えの筆算にすると、各列の数字の合計が見える。
+
+```text
+    1
+   12
+  123
+    2
+   23
++   3
+-----
+  164
+```
+
+百の位には1が1回、十の位には1が1回と2が2回、一の位には1が1回、2が2回、3が3回入る。従って $$A_1=1$$、$$A_2=1+2\times2=5$$、$$A_3=1+2\times2+3\times3=14$$ であり、上の和は $$1\times100+5\times10+14$$ となる。係数14は一桁に収まらないので、下の位から次のように処理する。
+
+- 一の位: 係数14から4を確定し、1を十の位へ送る。
+- 十の位: 係数5に繰り上がり1を足した6を確定する。次への繰り上がりは0。
+- 百の位: 係数1をそのまま確定する。繰り上がりも残らず、答えは164となる。
+
+右端を固定した和との違いも確かめておこう。右端が3の部分文字列の和は $$123+23+3=149$$ であり、$$A_3=14$$ とは異なる。
+
+### 係数を作り、下の位から答えを確定する
+
+まず $$A_0=0$$ とし、左から $$A_k=A_{k-1}+k\,s_k$$ を計算する。次に繰り上がり `carry` を0で始め、$$k=N,N-1,\ldots,1$$ の順に次を行う。
+
+1. `carry` に $$A_k$$ を加える。
+2. `carry` を10で割った余りを、答えの次の一桁として出力用バッファへ追加する。
+3. `carry` を10で割った商へ更新する。
+
+全係数を使っても `carry` が残っていれば、余りの追加と商への更新を0になるまで続ける。例えば $$S=99$$ では係数が $$(9,27)$$ で、一の位は7で繰り上がり2、十の位は $$9+2=11$$ から1で繰り上がり1となる。この最後の1も出力して、$$9+99+9=117$$ を得る。最後にバッファを反転すれば答えになる。
 
 ## 典型の発動条件
 
 ### 巨大整数の桁別寄与と筆算
 
-発動条件: 答えが多数桁だが10冪係数の和として表せるとき。
+答えが長い整数で、多数の項をそのまま足すのが重いときに候補となる。各項を「数字の値×基数の冪」へ分解し、同じ冪へ入る寄与を効率よく数えられるかを調べる。
 
-係数を下位から繰上り処理して文字列として構成する。
+得られた係数が基数以上でもよい。係数と下位からの繰り上がりの和を商と余りに分ければ、答え全体を通常の整数型へ入れずに構成できる。ただし、係数と繰り上がり自体が使用する整数型に収まることは確認する。
 
 ## 問題固有の要素
 
-部分文字列の位置ごとの寄与を、左端数 j と右端側の10冪に分離する。
+左端の選択肢が $$j$$ 通りあることが、元の桁 $$s_j$$ に掛かる重みとなる。一方、$$10^t$$ の位を固定すると右端は $$r=j+t$$ に決まるため、右端の選択肢の数をさらに掛けることはない。
 
-別の問題へ持ち帰る視点: 多倍長整数ライブラリがなくても、基数10の係数列なら carry 正規化で十分である。
+別の問題へ持ち帰る視点: 同じ元の桁でも、選ぶ区間によって出力上の位が変わる。出現回数だけでまとめず、「どの位へ何回入るか」まで固定して数える。
 
 ## 正当性
 
-固定右端 i の全左端を足すと、S_j は j 個の部分文字列に現れるため A_i=ΣjS_j という単純な prefix が得られる。 答えは Σ10^{N-i}A_i なので、最下位から carry+=A_i、digit=carry mod10、carry/=10 と通常の加算筆算にできる。 答えそのものは非常に長く通常整数に入らないが、各桁と繰上りだけなら O(N) 回の整数演算で構成できる。
+各部分文字列の値は、その中の各桁の寄与の和である。位置 $$j$$ の桁と右端 $$r\geq j$$ を固定したとき、左端の $$j$$ 通りから合計 $$j\,s_j10^{r-j}$$ が加わる。これにより、すべての部分文字列のすべての桁を漏れも重複もなく数えている。
+
+指数 $$t=r-j$$ ごとにこの有限和を集め直すと、$$0\leq t<N$$ に対する係数は $$\sum_{j=1}^{N-t}j\,s_j=A_{N-t}$$ となる。従って答えは $$\sum_{t=0}^{N-1}A_{N-t}10^t$$ である。
+
+筆算では、現在の係数に下位からの繰り上がりを足した値を $$v$$ とすると、$$v=(v\bmod10)+10\lfloor v/10\rfloor$$ が成り立つ。余りを現在の位に置き、商を次の位へ送っても値は変わらない。下位の確定済みの桁には以後の係数が影響しないため、全係数と残った繰り上がりを処理すれば、上の和の十進表記が得られる。
 
 ## 実装上の注意
 
-- 問題の index は1-originで係数が j になる。最後の carry を全て吐き、出力 buffer の反転と先頭0を正しく扱う。
+- 文字列を0始まりで持つ場合も、位置の重みは「添字+1」にする。
+- $$A_N\leq9N(N+1)/2$$ なので、上限では $$180000900000$$ になる。係数・累積値・`carry` には64 bit整数を使い、積もその型で計算する。
+- 係数を全て使った後の繰り上がりを忘れない。数字は下位から追加するので、最後に一度だけ反転する。
+- 入力は1〜9だけなので答えは正であり、先頭に不要な0は生じない。$$N=1$$ でも同じ手順で入力の数字そのものを出力できる。
 
 ## 復習の核
 
-- N=3 の全部分文字列を展開し、各 S_j の係数が j を含む prefix A_i になる過程を手で確かめる。
+- 区間ごとの値を足すのが重いときは、「元のどの桁が、出力のどの位へ、何回現れるか」を固定する。元の位置・右端・10の指数を別の添字で書くと混乱しにくい。
+- [ABC233 E](src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc233-e.md)では各桁が同じ列へ1回ずつ入り、通常の接頭辞桁和になる。本問では左端が $$j$$ 通りあるため重み $$j$$ が付く。係数は数え直し、下位から繰り上げる筆算を再利用する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N)、weighted digit prefixとcarry。
+$$O(N)$$。重み付き接頭辞和を作り、$$N$$ 個の係数を各1回処理する。繰り上がりは $$O(N^2)$$ の値に収まるので、残りの処理は高々 $$O(\log(N+1))$$ 桁である。出力バッファの反転と出力も含めて線形時間となる。
 
 ### 空間
 
-O(N)。
+$$O(N)$$。入力文字列、係数列、答えのバッファを保持する。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; N is an integer.; S is a string of length N consisting of digits from 1 through 9.
+$$1\leq N\leq2\times10^5$$、入力の各数字は1〜9である。全部分文字列の列挙を避け、係数と繰り上がりだけを64 bit整数で扱うことで、答えが通常の整数型に収まらなくても線形時間で出力できる。
+
+公式問題文・個別公式解説を2026-10-21に再照合した。
 
 ## 出典
 
