@@ -1,7 +1,7 @@
 ---
 title: "ABC272-E — Add and Mex"
 draft: true
-authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc272-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration"],"sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"有効時刻区間は、条件 $$0\\leq A_i+ij<N$$ と $$1\\leq j\\leq M$$ を同時に満たす整数時刻全体である。従って `bucket[j]` には、操作後の数列のうち $$0,\\ldots,N-1$$ にある値が、各要素につき一度ずつ漏れなく入る。この範囲外を除いてもmexは変わらない。\n\nリストの要素数が $$s_j$$ なら、重複があっても異なる値は高々 $$s_j$$ 個なのでmexは $$s_j$$ 以下である。真偽値配列は $$s_j$$ 未満の各値の存在を正しく表す。そこで最初に偽となる添字が $$s_j$$ 未満なら、それが最小の欠けた非負整数である。そこまで欠けていなければ $$0,\\ldots,s_j-1$$ の $$s_j$$ 種類で要素を使い切るので、mexは $$s_j$$ である。空のリストも同じ手順でmexが0となる。\n\n記録する組の総数は $$K=O(N\\log N)$$ である。各時刻の初期化・存在の記録・mex走査は $$O(s_j+1)$$ 時間であり、空でも0の確認と出力に定数時間かかる。$$\\sum_{j=1}^{M}s_j=K$$ より、全時刻の処理は $$O(K+M)$$、区間計算も含む全体は $$O(N\\log N+M)$$ 時間となる。","sourceRevisionIds":["source-abc272-e-problem-493ed4f594f36757b3b1d7f3788f15076a0d245f0b81a4d87c0c453a941bbade","source-abc272-editorial-4982-2f64ff69fd347743a8eefbd6fcb44cf7401f2413cbda8aa0d11104a3e36b1d54"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,65 +16,138 @@ authoringUnit: {"problemId":"abc272-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-長さNのsequenceのmexは必ず0,…,Nの範囲なので、operation j後の値A_i+ijが[0,N)に入る場合だけを記録すればよい。
+mex（数列に含まれない最小の非負整数）を求めるには、数列の長さ未満の値が存在するかだけ分かればよい。各要素について、その範囲に入る操作回数だけを求め、操作回数ごとのリストへ値を振り分ける。全要素を毎回更新する代わりに、答えに関係する組だけを列挙する方針である。
 
-固定iで重要になるjの個数は高々⌈N/i⌉であり、全iの合計はharmonic sum O(N log N)になる。
+要素の添字を $$i=1,\ldots,N$$、操作回数を $$j=1,\ldots,M$$ とする。以降、$$A_i$$ は初期値を表す。毎回 $$i$$ を加えるので、$$j$$ 回目の操作後の値は $$A_i+ij$$ である。素朴に全要素を更新して毎回mexを求めると $$O(NM)$$ 時間となり、更新だけでも最大 $$4\times 10^{10}$$ 回になる。そこで、mexに関係しない値の更新を省けないか考える。
 
-棄却する候補: 各operationでN要素を更新し、setからmexを求め直す。
+### mexを決めるために必要な値
 
-N×Mが最大4×10^10となる。
+長さ $$N$$ の数列には、異なる値も高々 $$N$$ 個しかない。一方、$$0,1,\ldots,N$$ は $$N+1$$ 個あるので、少なくとも一つは数列に含まれない。従ってmexは $$N$$ 以下である。
 
-採用する候補: 各iについて0≤A_i+ij<Nとなるjだけを列挙し、operation jのbucketへ値を入れてbucketごとにmexを走査する。
+$$0,1,\ldots,N-1$$ のどこかが欠けていれば、最初に欠けた値が答えになる。すべて存在すれば答えは $$N$$ である。この場合、$$N$$ 個の要素をすでに使い切っており、値 $$N$$ は存在できない。従って値 $$N$$ 自体を保存する必要はなく、負数や $$N$$ 以上の値は無視できる。
 
-mexの値域boundで全time-element pairsをsparse eventsへ絞り、arithmetic progressionの有効区間列挙とoffline bucketsで処理する。
+ただし、各時刻で全要素を調べてから不要な値を捨てても、$$NM$$ 回の確認が残る。**要素を固定し、必要な値になる時刻だけを先に求める**のが次の一手になる。
+
+### 各要素が有効になる時刻区間
+
+要素 $$i$$ を記録する条件は
+
+$$
+0\leq A_i+ij<N
+$$
+
+である。すべて整数なので、右側は $$A_i+ij\leq N-1$$ と同値になる。$$i>0$$ より、$$j$$ について解くと
+
+$$
+\left\lceil\frac{-A_i}{i}\right\rceil
+\leq j\leq
+\left\lfloor\frac{N-1-A_i}{i}\right\rfloor
+$$
+
+を得る。ここで $$\lceil x\rceil$$ は $$x$$ 以上の最小の整数、$$\lfloor x\rfloor$$ は $$x$$ 以下の最大の整数である。実際に答えを求める操作回数 $$1\leq j\leq M$$ との共通部分を取り、両端を
+
+$$
+L_i=\max\left(1,\left\lceil\frac{-A_i}{i}\right\rceil\right)
+$$
+
+$$
+R_i=\min\left(M,\left\lfloor\frac{N-1-A_i}{i}\right\rfloor\right)
+$$
+
+とする。$$L_i>R_i$$ なら有効な時刻はない。それ以外では、$$j=L_i,\ldots,R_i$$ だけを列挙すればよい。
+
+例えば $$N=5,M=4$$ で、要素 $$i=2$$ の初期値が $$A_2=-5$$ なら、操作後の値は順に $$-3,-1,1,3$$ である。下端は $$L_2=3$$、上端は $$R_2=4$$ となり、最初の負数二つを調べずに必要な値 $$1,3$$ を取り出せる。
+
+### 保存する値の総数を数える
+
+同じ要素の値は、時刻を一つ進めるたびに $$i$$ ずつ増える。有効時刻の個数を $$k_i$$ とすると、$$k_i\geq 1$$ の場合、最初と最後の有効な値の差は $$(k_i-1)i$$ である。どちらも $$0,\ldots,N-1$$ に収まるため、
+
+$$
+(k_i-1)i\leq N-1
+$$
+
+より
+
+$$
+k_i\leq\left\lfloor\frac{N-1}{i}\right\rfloor+1
+=\left\lceil\frac{N}{i}\right\rceil
+$$
+
+となる。$$k_i=0$$ でもこの上界は成立する。初期値がどれほど負でも、有効範囲の幅と増加量だけで個数を抑えられる。
+
+保存する組 $$(i,j)$$ の総数を $$K$$ とすると、
+
+$$
+\begin{aligned}
+K&=\sum_{i=1}^{N}k_i\\
+&\leq\sum_{i=1}^{N}\left\lceil\frac{N}{i}\right\rceil\\
+&\leq N\sum_{i=1}^{N}\frac{1}{i}+N\\
+&=O(N\log N)
+\end{aligned}
+$$
+
+である。最後は調和級数 $$\sum_{i=1}^{N}1/i=O(\log N)$$ を使った。時刻ごとには多くの要素があっても、全時刻を合わせて保存する個数は小さい。
+
+### 時刻ごとのリストからmexを求める
+
+操作回数 $$j$$ ごとに空のリスト `bucket[j]` を用意する。各要素 $$i$$ について有効時刻区間を求め、その区間内の各 $$j$$ に対して $$A_i+ij$$ を `bucket[j]` へ追加する。このリストには、その時刻のmexに関係する値だけが入る。同じ値が複数回入ってもよい。
+
+次に $$j=1,\ldots,M$$ の順に答えを求める。リストの要素数を $$s_j$$ とする。異なる値は高々 $$s_j$$ 個なので、mexは $$s_j$$ 以下である。従って、この時刻ではさらに存在確認の範囲を $$0,\ldots,s_j-1$$ に縮められる。
+
+1. 添字 $$0,\ldots,s_j$$ を持つ真偽値配列を、すべて偽で初期化する。
+2. `bucket[j]` の値 $$v$$ のうち $$v<s_j$$ について、添字 $$v$$ を真にする。同じ値を再び見ても真のままでよい。
+3. 添字 $$0$$ から順に調べ、最初に偽となる添字を答えとして出力する。添字 $$s_j$$ は偽のままなので、遅くともそこで止まる。
+
+例えばリストが $$(0,0,2)$$ なら、重複を含めた要素数は3だが、存在する値は0と2だけなのでmexは1である。空のリストでは、長さ1の配列の添字0が初めから偽となり、0を出力する。
 
 ## 典型の発動条件
 
 ### mexの値域による枝刈り
 
-発動条件: 集合の要素数がNで、mex以外の巨大値が答えに影響しないとき。
-
-各時刻で[0,N)に入る値だけをpresence候補として保存する。
+要素数からmexの上界が分かり、各値が存在するかだけを使うときに適用できる。長さ $$N$$ なら $$0,\ldots,N-1$$ の存在だけを保存し、すべて揃った場合は $$N$$ と答える。値の大きさではなく、答えに影響する範囲を先に決める。
 
 ### 調和級数による疎な列挙
 
-発動条件: index iごとの有効event数がO(N/i)で抑えられるとき。
-
-A_i+ijがmex範囲にある連続j区間だけを歩き、総event数をO(N log N)と評価する。
+添字 $$i$$ ごとの処理回数を $$\lceil N/i\rceil$$ のように抑えられるとき、各回の最大値を掛ける代わりに総和を取ると $$O(N\log N)$$ になる。ただし、不要な候補を生成してから捨てるのでは足りない。有効区間の両端を直接求めるなど、その個数に比例して生成できることも必要である。
 
 ## 問題固有の要素
 
-j回目の値は初期値を逐次更新せずA_i+ijと直接書けるため、要素ごとに有効時刻を逆列挙できる。
-
-別の問題へ持ち帰る視点: 全時刻simulationが重いときは、各objectが答えのrelevant rangeへ入る時刻だけをofflineに配る。
+「各要素へ、その添字を毎回加える」という操作から、要素ごとの値を時刻の一次式で書ける。全時刻の数列を作る必要はなく、各要素が必要な値域を通過する時刻だけを逆に求められる。増加量が添字そのものであることが、調和級数による総数評価につながる。
 
 ## 正当性
 
-A_iが負でも、最初に非負となるj=max(1,ceil(−A_i/i))から始めれば無駄なnegative valuesを列挙しない。 各bucketの要素数をsとするとmexは高々sなので、0から見つかるまでのscan総量もbucket sizesの総和に比例する。 mexに影響するpair (i,j)だけの総数がO(N log N)で、不要な巨大値を完全に省ける。
+有効時刻区間は、条件 $$0\leq A_i+ij<N$$ と $$1\leq j\leq M$$ を同時に満たす整数時刻全体である。従って `bucket[j]` には、操作後の数列のうち $$0,\ldots,N-1$$ にある値が、各要素につき一度ずつ漏れなく入る。この範囲外を除いてもmexは変わらない。
+
+リストの要素数が $$s_j$$ なら、重複があっても異なる値は高々 $$s_j$$ 個なのでmexは $$s_j$$ 以下である。真偽値配列は $$s_j$$ 未満の各値の存在を正しく表す。そこで最初に偽となる添字が $$s_j$$ 未満なら、それが最小の欠けた非負整数である。そこまで欠けていなければ $$0,\ldots,s_j-1$$ の $$s_j$$ 種類で要素を使い切るので、mexは $$s_j$$ である。空のリストも同じ手順でmexが0となる。
+
+記録する組の総数は $$K=O(N\log N)$$ である。各時刻の初期化・存在の記録・mex走査は $$O(s_j+1)$$ 時間であり、空でも0の確認と出力に定数時間かかる。$$\sum_{j=1}^{M}s_j=K$$ より、全時刻の処理は $$O(K+M)$$、区間計算も含む全体は $$O(N\log N+M)$$ 時間となる。
 
 ## 実装上の注意
 
-- jの下端・上端を整数除算で求める際はnegative A_iのceil divisionを誤らず、[1,M]と交差させる。
-- 同じbucketにduplicate値があってもpresenceだけを立て、mex scan用arrayをtimestamp方式で再利用できる。
+- C++の整数除算は0方向へ切り捨てるため、負数の数学的な床関数とは異なる。例えば $$\lfloor-1/2\rfloor=-1$$ だが、C++の `-1 / 2` は0になる。
+- 負数の除算を避けるなら、まず $$A_i\geq N$$ の要素を飛ばす。残りは $$N-1-A_i\geq 0$$ なので、上端を `min(M, (N - 1 - A_i) / i)` で求められる。下端は $$A_i\geq 0$$ なら1、$$A_i<0$$ なら `(-A_i + i - 1) / i` である。最後に $$L_i>R_i$$ を確認し、空区間なら何も追加しない。両端が等しい場合や最初の有効時刻が $$M$$ の場合も、その一回を含める。
+- 要素の添字は1始まりである。配列を0始まりで実装する場合、加える量は配列の添字に1を足した値になる。積 $$ij$$ は最大 $$4\times 10^{10}$$ なので、値の計算は積を取る前から64 bit整数型にする。
+- 毎回長さ $$N$$ の存在配列を初期化すると $$O(NM)$$ 時間に戻る。上の手順では長さ $$s_j+1$$ の局所配列を使うため、初期化の総費用も $$O(K+M)$$ となる。長さ $$N$$ の配列を使い回すなら、最初に一度だけ0で初期化した `stamp` を用意し、その時刻の値 $$v$$ に対して `stamp[v] = j` と記録する方式でもよい。各時刻で $$x=0$$ から始め、$$x<N$$ かつ `stamp[x] == j` の間だけ $$x$$ を増やせば、全消去なしでその時刻のmexを求められる。
 
 ## 復習の核
 
-- mex問題では、まずsequence lengthから答えの上界を固定し、その範囲外の値を捨てる。
-- 要素ごとの値が時刻の一次式なら、値域に入る時刻区間を解いてevent総数を評価する。
+- mexは要素数以下。その上界までの存在確認へ絞り、すべて揃った場合の答えも決める。
+- 「全時刻×全要素」が重いときは、各要素が答えに関係する時刻だけを直接求められないか考える。
+- 列挙件数を抑えたら、初期化と答えの探索までその件数に比例するか確認する。空でも一回の処理と出力が必要なので、時刻数の項を落とさない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N+M)、時刻ごとの有効event総数ΣO(N/i)。
+$$O(N\log N+M)$$。各要素の区間計算に $$O(N)$$、リストの準備に $$O(M)$$、値の追加に総計 $$O(K)$$ 時間かかる。各時刻の配列初期化と存在の記録は $$O(s_j+1)$$、mex走査も停止時の確認を含めて高々 $$s_j+1$$ 回である。出力を含む総時間は $$O(N+K+M)$$ となり、$$K=O(N\log N)$$ を代入する。すべてのリストが空でも $$O(N+M)$$ 時間かかる。
 
 ### 空間
 
-O(N log N+M)、event bucket。
+$$O(N\log N+M)$$。入力に $$O(N)$$、リストの管理と保存する値に $$O(M+K)$$、一時刻ずつ再利用する局所配列に高々 $$O(N)$$ を使う。同じ時刻に各要素は高々一度しか追加されず、$$s_j\leq N$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,M \leq 2\times 10^5; -10^9\leq A_i\leq 10^9; All values in the input are integers.
+$$1\leq N,M\leq 2\times 10^5$$、$$-10^9\leq A_i\leq 10^9$$。制限は2秒・1024 MiBである。初期値の絶対値や操作回数に比例して要素ごとの時刻を探すのではなく、区間の両端を直接求めることで、保存する値は総計 $$O(N\log N)$$ 個に収まる。$$i>0$$ による値の単調増加と、mexの上界が $$N$$ であることを使っている。
 
 ## 出典
 
