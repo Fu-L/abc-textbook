@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
+import { micromark } from 'micromark';
+import { math, mathHtml } from 'micromark-extension-math';
 import { describe, expect, it } from 'vitest';
 import {
   parseDocumentMath,
@@ -10,6 +12,23 @@ import { inspectDocumentNotation } from '../../src/lib/catalog/inspect-document-
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 
 describe('explicit document mathematics', () => {
+  it('keeps the micromark KaTeX override compatible with its HTML extension', () => {
+    const html = micromark(String.raw`$\frac{1}{2}$`, {
+      extensions: [math()],
+      htmlExtensions: [mathHtml({ output: 'mathml', throwOnError: true, trust: false })],
+    });
+    const $ = load(html);
+    expect($('math mfrac')).toHaveLength(1);
+    expect($('annotation').text()).toBe(String.raw`\frac{1}{2}`);
+    const untrusted = load(
+      micromark(String.raw`$\href{javascript:alert(1)}{x}$`, {
+        extensions: [math()],
+        htmlExtensions: [mathHtml({ output: 'mathml', trust: false })],
+      }),
+    );
+    expect(untrusted('a, script')).toHaveLength(0);
+  });
+
   it('renders TeX as static MathML among Japanese, Markdown, links, and C++', async () => {
     const formula = String.raw`1\leq A_i \leq 2\times 10^5`;
     const cpp = String.raw`vector<int> dp(N); auto v = a_i * b_j; cout << "\\leq";`;

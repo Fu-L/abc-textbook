@@ -5,7 +5,7 @@
 
 ## 変更範囲に応じたCI検証
 
-`Verify (release baseline)`はNode 26.12.1/npm 11.16.0の単一環境で、PRのmerge-base、main
+`Verify (release baseline)`はNode 26.12.1/npm 11.21.1の単一環境で、PRのmerge-base、main
 pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動し、書式・ローカルリンク・見出し参照・feature選択を検証する。
 
 | 変更                                                                       | 検査                                                                                                                 |
@@ -147,12 +147,12 @@ Contestと小catch-upは混ぜない。移行前5件が特定できなければ�
 | Tool       | Supported development range      | Release baseline |
 | ---------- | -------------------------------- | ---------------- |
 | Node.js    | `>=26.12.1 <27.0.0` (26 Current) | `26.12.1`        |
-| npm        | `>=11.16.0 <12.0.0`              | `11.16.0`        |
+| npm        | `>=11.21.1 <12.0.0`              | `11.21.1`        |
 | TypeScript | lockfile exact                   | `6.0.3`          |
-| Astro      | lockfile exact                   | `7.1.0`          |
+| Astro      | lockfile exact                   | `7.4.2`          |
 | Starlight  | lockfile exact                   | `0.41.3`         |
 | Zod        | lockfile exact                   | `4.4.3`          |
-| Vitest     | lockfile exact                   | `4.1.10`         |
+| Vitest     | lockfile exact                   | `4.1.12`         |
 | Playwright | lockfile exact                   | `1.61.1`         |
 | ESLint     | lockfile exact                   | `10.7.0`         |
 | Prettier   | lockfile exact                   | `3.9.5`          |
@@ -162,18 +162,43 @@ Contestと小catch-upは混ぜない。移行前5件が特定できなければ�
 
 2026-10-22にNode.jsの基準版を26.12.1へ更新しました。[公式のセキュリティリリース](https://nodejs.org/en/blog/release/v26.12.1/)で修正を確認しています。この時点の26系はCurrentです。両workflowは`node-version-file: .nvmrc`から同じ版を選びます。`@types/node`は使用中のAPIの型定義として24系を維持し、実行環境の版は`.nvmrc`で管理します。
 
+同日の[#227](https://github.com/Fu-L/abc-textbook/issues/227)・[#228](https://github.com/Fu-L/abc-textbook/issues/228)・[#230](https://github.com/Fu-L/abc-textbook/issues/230)対応でAstroを7.4.2、markdown-remarkを7.3.4、Sharpを0.35.5、Vitestとcoverageを4.1.12、npmを11.21.1へ更新しました。Astroの汎用collection
+schemaは公式`astro/zod`から構築し、フレームワーク側の型と揃えています。教材・学習記録の契約に使う直接依存のZodは4.4.3を維持します。推移依存も修正版へ解決し、Expressive
+Codeは0.44.3系列へ揃えました。`micromark-extension-math`のKaTeXだけは上流の`^0.16.0`制約を限定overrideでrootの0.19.0へ揃えています。HTML拡張のAPI・非trust入力と、既存の静的MathML表示を回帰検証します。上流が修正版のKaTeXを要求するようになったら、このoverrideの撤去を検討します。
+
+### Actionsに残る依存の追跡（#229）
+
+2026-10-22に両workflowのcheckoutを7.0.1、setup-nodeを7.1.0、github-scriptを9.0.0へ更新しました。それぞれの`action.yml`は`runs.using: node24`です。`.nvmrc`が指定するビルド用Node.jsとは別に管理されます。PagesのActionsも下表の正式タグに固定し、artifact名、権限、environment、検証した同じ`dist`の配信契約を維持します。
+
+更新後の正式タグのproduction lockfileをnpm security bulk
+APIで再照会しました。以下は依存の版に一致した検出であり、現行workflowで攻撃経路の成立を確認したものではありません。**[#229](https://github.com/Fu-L/abc-textbook/issues/229)は未解決**です。
+
+| Actionと確認した版                                                                                                                                                                                                                                  | 残る検出の対象                                                                                                   |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [setup-node 7.1.0](https://github.com/actions/setup-node/blob/v7.1.0/package-lock.json)                                                                                                                                                             | smol-toml 1.7.1（Moderate）。旧版のform-dataは解消                                                               |
+| [checkout 7.0.1](https://github.com/actions/checkout/blob/v7.0.1/package-lock.json)                                                                                                                                                                 | undici 6.27.0（High等）                                                                                          |
+| [github-script 9.0.0](https://github.com/actions/github-script/blob/v9.0.0/package-lock.json)                                                                                                                                                       | undici 5.28.5 / 6.24.1、busboy、brace-expansion、minimatch、uuid（High等）                                       |
+| [configure-pages 6.0.0](https://github.com/actions/configure-pages/blob/v6.0.0/package-lock.json)                                                                                                                                                   | undici 5.28.4、busboy、Octokit、uuid（High等）                                                                   |
+| [deploy-pages 5.0.1](https://github.com/actions/deploy-pages/blob/v5.0.1/package-lock.json)                                                                                                                                                         | form-data 4.0.0（Critical）、unzip-stream、cross-spawn、undici、Octokit等（High等）                              |
+| [upload-pages-artifact 5.0.0](https://github.com/actions/upload-pages-artifact/blob/v5.0.0/action.yml) → [upload-artifactの内部固定SHA](https://github.com/actions/upload-artifact/blob/bbbca2ddaa5d8feaa63e36b76fdaad77386f024f/package-lock.json) | undici 6.23.0、brace-expansion、fast-xml-builder/parser、lodash（High等）。外側の更新だけでは内部SHAは追従しない |
+
+修正版を同梱して再bundleした上流リリースが公開されたら、lockfileと実行用`dist/*.js`の双方を確認して更新します。プロジェクトの`overrides`は外部Actionのバンドルを変更しません。特にdeploy-pagesの[form-dataのCritical](https://github.com/advisories/GHSA-fjxv-7rqg-78g4)は残るため、プロジェクトのaudit成功をActions全体の解消と扱いません。配布済み[dist/index.js](https://github.com/actions/deploy-pages/blob/v5.0.1/dist/index.js)にも、boundaryを`Math.random()`で生成する処理が残ることを確認しました。form-dataは追加の[CRLF injection](https://github.com/advisories/GHSA-hmw2-7cc7-3qxx)も含めて4.0.6以上が必要です。通常PRのCIログと、merge後のmain配信ログで同一artifactの保存・配信を確認します。PR段階の検証を実配信成功として扱いません。
+
 ## Local-only setup
 
 ```bash
 nvm install
 nvm use
+npm install --global npm@11.21.1
 node --version
 npm --version
 npm ci
 npm run test:e2e:install
 ```
 
-リリース再現を行う場合は、Node.jsが `v26.12.1`、npmが `11.16.0`
+`nvm use`の後で、選択したNode.js環境のnpmを明示的に更新します。`packageManager`は基準版の指定であり、npm自体をインストール・更新しません。Node.js環境を新しく用意したときも、`npm ci`の前にこの更新と版の確認を行います。
+
+リリース再現を行う場合は、Node.jsが `v26.12.1`、npmが `11.21.1`
 と表示されることを確認します。通常開発では上表の対応範囲内であればpatchが異なっていても実行できます。対応範囲外のNode.js/npmでの動作は保証せず、`engine-strict=true`により依存インストールを停止します。Playwrightのbrowser
 binaryはローカルcacheへ保存され、repositoryへcommitしません。
 

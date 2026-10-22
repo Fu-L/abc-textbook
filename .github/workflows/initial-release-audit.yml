@@ -11,14 +11,19 @@ jobs:
     name: Initial corpus audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version-file: .nvmrc
           cache: npm
-      - run: npm install --global npm@11.16.0
+      - name: Select npm 11.21.1
+        run: npm install --global npm@11.21.1
+      - name: Verify runtime versions
+        run: |
+          test "$(node --version)" = "v$(cat .nvmrc)"
+          test "$(npm --version)" = 11.21.1
       - run: npm ci
       - name: Validate nonpublic documentation changes
         id: docs

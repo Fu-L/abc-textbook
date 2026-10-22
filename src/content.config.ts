@@ -2,7 +2,7 @@ import { docsLoader } from '@astrojs/starlight/loaders';
 import { docsSchema } from '@astrojs/starlight/schema';
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { z } from 'zod';
+import { z } from 'astro/zod';
 
 import { structuredContentRoots } from './lib/catalog/content-source-registry.js';
 
