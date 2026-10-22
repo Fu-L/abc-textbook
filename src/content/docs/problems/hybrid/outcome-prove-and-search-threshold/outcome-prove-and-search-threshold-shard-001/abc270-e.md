@@ -1,7 +1,7 @@
 ---
 title: "ABC270-E — Apple Baskets on Circle"
 draft: true
-authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybrid/outcome-prove-and-search-threshold/outcome-prove-and-search-threshold-shard-001/abc270-e.md","learningOutcomeIds":["outcome-prove-and-search-threshold"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["連続窓の両端を一方向に進める尺取り法、および真偽判定の単調境界を持たない三分探索・局所探索。"],"tagIds":["tag-monotone-threshold-search"],"sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"$$S=K$$ の場合、ちょうど $$K$$ 個を食べた時点では全てのりんごを食べているので、全て0を返す処理は正しい。\n\n$$S>K$$ の場合を考える。各かごを一周に一度訪ね、空でない間だけ一つ食べるため、$$m$$ 周後の消費総数は $$F(m)$$、残数は $$B_i=\\max(A_i-m,0)$$ である。二分探索は成功・失敗の端点を保って区間幅を狭めるので、終了時には $$F(m)\\leq K<F(m+1)$$ が成り立つ。\n\n$$B_i>0$$、すなわち $$A_i>m$$ を満たすかごの個数を $$C$$ とする。各項の増分は $$A_i>m$$ なら1、それ以外なら0なので、\n\n$$\nF(m+1)-F(m)=C,\\qquad 0\\leq r=K-F(m)<C\n$$\n\nとなる。したがって、正のかごを先頭から訪ねて一つずつ食べれば、一周し終わる前に残り $$r$$ 個を食べ終える。これは元の操作と同じ順序なので、得られる残数も一致する。$$r=0$$ の場合、$$m$$ 周を終えるより前に目標へ達していても、その後の周回末尾では何も食べていないため、残数は変わらない。よって追加操作をせず $$B$$ を返せばよい。","sourceRevisionIds":["source-abc270-e-problem-c66b9322e3464e79568be9c6696ffcf139a715b51e01dd520d8c5f31b00ee5cc","source-abc270-editorial-4848-2b1a57357f7fe70823c07b69b7bd043bd1109b94db76394e285cff9f168c4475"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,65 +16,85 @@ authoringUnit: {"problemId":"abc270-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-m周を終えた時点ではbasket iからmin(A_i,m)個食べており、総数F(m)=Σmin(A_i,m)はmについて単調非減少である。
+かごを一周すると、空でない各かごからりんごを一つずつ食べる。この一周分の変化をまとめて計算できれば、大量の周回を飛ばし、最後の一周の途中だけを順番に処理すればよい。
 
-K個を超えない最大の完全周回数mまで一括処理すれば、残りK−F(m)個はbasket 1から一周未満の順次走査で食べられる。
+一つずつ食べる方法では、食べる個数だけでも最大 $$10^{12}$$ 回の処理が必要になり、空のかごを通る移動もある。そこで、食べた個数から直接状態を求める代わりに、「何周したか」を決めたときの状態を調べる。
 
-棄却する候補: 一回の行動ごとにbasketを巡回してK個食べるまでsimulationする。
+かごの番号を $$i=1,\ldots,N$$、最初の個数を $$A_i$$、食べる目標個数を $$K$$ とする。一周は、かご1から順に全かごを訪ねて、再びかご1の前に戻るまでの $$N$$ 回の行動を指す。非負整数 $$m$$ に対し、$$m$$ 周すると各かごをちょうど $$m$$ 回訪ねるので、かご $$i$$ から食べる個数は $$\min(A_i,m)$$、残る個数は $$\max(A_i-m,0)$$ である。食べた総数を
 
-Kが10^12まであり、空basketを通る行動も含めて逐次処理できない。
+$$
+F(m)=\sum_{i=1}^{N}\min(A_i,m)
+$$
 
-採用する候補: F(m)≤Kを満たす最大mをbinary searchし、各A_iからmまでをまとめて引いた後、端数だけ一周simulationする。
+と置く。各項は $$m$$ を増やしても減らないため、$$F(m)\leq K$$ の真偽は成功から失敗へ一方向にだけ変わる。
 
-cyclic simulationをcomplete roundsのmonotone aggregateへ圧縮し、binary searchと一回のresidual scanで最終状態を再構成する。
+ただし、二分探索の前に全消費を分ける必要がある。最初の総数を $$S=\sum_{i=1}^{N}A_i$$ とすると、制約は $$S\geq K$$ で等号も許される。$$S=K$$ なら答えは全て0なので、そのまま出力して終了する。この場合、全て食べ終えた後は何周しても $$F(m)=K$$ のままであり、「成功する最大の $$m$$」は存在しない。例えば $$N=1,A=(1),K=1$$ でもこの問題が起きる。
+
+以降は $$S>K$$ とする。$$A_{\max}=\max_i A_i$$ と置けば、$$F(0)=0\leq K$$ が成功、$$F(A_{\max}+1)=S>K$$ が失敗となる。したがって有限の区間で最後の成功を探せる。
+
+1. `lo = 0`、`hi = Amax + 1` とし、`lo` を成功側、`hi` を失敗側に保つ。
+2. `hi - lo > 1` の間、`mid = lo + (hi - lo) // 2` を取り、$$F(\mathrm{mid})\leq K$$ なら `lo = mid`、そうでなければ `hi = mid` とする。
+3. 終了時の $$m=\mathrm{lo}$$ が最大の成功値である。各かごの残数を $$B_i=\max(A_i-m,0)$$ とし、あと食べる個数を $$r=K-F(m)$$ とする。
+4. $$r=0$$ なら $$B$$ をそのまま出力する。そうでなければかご1から番号順に走査し、$$B_i>0$$ のときだけ $$B_i$$ と $$r$$ を1ずつ減らす。$$r=0$$ になった時点で止め、残った $$B$$ を出力する。
+
+最後の走査が一巡で足りる理由は、次の一周の消費量にある。$$m$$ 周後に正のかごが $$C$$ 個あれば、次の一周ではちょうど $$C$$ 個を食べる。最大の成功を選んだので $$F(m+1)>K$$ であり、残り $$r$$ は $$C$$ 未満になる。詳しい式は正当性で確認する。
+
+例えば $$A=(0,2,4),K=3$$ では、$$F(1)=2\leq3<F(2)=4$$ より $$m=1$$。一周後の $$B=(0,1,3)$$ から、残り1個を食べる。かご1は空なので飛ばし、かご2を一つ減らして $$B=(0,0,3)$$ を得る。同じ配列で $$K=2$$ なら $$m=1,r=0$$ であり、追加で減らさず $$B=(0,1,3)$$ が答えになる。
 
 ## 典型の発動条件
 
 ### 答え上の二分探索
 
-発動条件: 同一操作をm回まとめた効果を計算でき、消費量がmに対して単調なとき。
-
-Σmin(A_i,m)≤Kとなる最大のfull-round countを探す。
+同じ操作を一定回数まとめた効果を計算でき、その回数に対して消費量が単調なら、予算内で実行できる最大回数を探せる。ただし単調性だけでなく、成功・失敗の両端点が存在することも確かめる。総消費量が予算と等しい場合のように、いつまでも成功するなら先に処理を分ける。
 
 ### bulk処理と端数simulation
 
-発動条件: 周期的処理の大部分を一括適用した後、残りが一周期未満になるとき。
-
-m周分を全basketからまとめて減らし、残りだけindex順に1個ずつ減らす。
+周期的な操作では、完全な周期をまとめて適用し、残りだけを元の順序で処理する。端数が本当に一周期未満かは、もう一周期進めたときの消費量と比較して示す。
 
 ## 問題固有の要素
 
-full rounds後のbasket iはmax(A_i−m,0)であり、残りの食数はこの正値basketを先頭から一度ずつ訪ねればよい。
-
-別の問題へ持ち帰る視点: 巨大なcyclic processでは、全要素に同回数作用する完全周期と短いsuffixに分ける。
+空のかごも含めて必ず右隣へ移動するため、一周で全かごを一度ずつ訪ねる。この規則から、空になった時刻を個別に追わずに $$\min(A_i,m)$$ で消費数を表せる。また、完全な周回の後は必ずかご1の前に戻るので、端数は番号順に処理すればよい。
 
 ## 正当性
 
-各basketの消費数は周回数でsaturateするmin(A_i,m)なので、異なる高さの山を同じ水位mまで削る問題として扱える。 最大mを採用した後に未消費数が一周分以上残るならm+1も条件を満たすため、端数処理は必ず高々N basketで終わる。 一周数の判定をO(N)、探索をO(log K)、最後の走査をO(N)で行える。
+$$S=K$$ の場合、ちょうど $$K$$ 個を食べた時点では全てのりんごを食べているので、全て0を返す処理は正しい。
+
+$$S>K$$ の場合を考える。各かごを一周に一度訪ね、空でない間だけ一つ食べるため、$$m$$ 周後の消費総数は $$F(m)$$、残数は $$B_i=\max(A_i-m,0)$$ である。二分探索は成功・失敗の端点を保って区間幅を狭めるので、終了時には $$F(m)\leq K<F(m+1)$$ が成り立つ。
+
+$$B_i>0$$、すなわち $$A_i>m$$ を満たすかごの個数を $$C$$ とする。各項の増分は $$A_i>m$$ なら1、それ以外なら0なので、
+
+$$
+F(m+1)-F(m)=C,\qquad 0\leq r=K-F(m)<C
+$$
+
+となる。したがって、正のかごを先頭から訪ねて一つずつ食べれば、一周し終わる前に残り $$r$$ 個を食べ終える。これは元の操作と同じ順序なので、得られる残数も一致する。$$r=0$$ の場合、$$m$$ 周を終えるより前に目標へ達していても、その後の周回末尾では何も食べていないため、残数は変わらない。よって追加操作をせず $$B$$ を返せばよい。
 
 ## 実装上の注意
 
-- F(m)の加算は10^17規模になり得るため64 bitを使い、Kを超えた時点で打ち切ってoverflowを避ける。
-- binary searchはF(m)≤Kを満たす最大mという境界規約を固定し、端数が0なら余計にbasketを減らさない。
+- 総数 $$S$$、判定値 $$F(m)$$、各かごの個数には64 bit符号付き整数を使う。総和は最大 $$10^{17}$$ で、その範囲に収まる。`hi` や `mid` も同じ型で扱う。
+- $$S=K$$ の分岐を二分探索より前に置く。成功側の更新は $$F(\mathrm{mid})\leq K$$ とし、等号を含める。
+- $$F(m)$$ は元の配列 $$A$$ から求める。判定中に配列を減らさず、探索後に一度だけ $$B$$ を作る。あと食べる個数 $$r$$ と、かごに残る個数 $$B_i$$ を混同しない。
+- 最後の走査では、減らす前に $$r>0$$ を確認し、空のかごでは $$r$$ を減らさない。最初から $$r=0$$ なら何も減らさない。
 
 ## 復習の核
 
-- 円環simulationでは、m周後の各要素と累積処理数を直接式にできるかを先に調べる。
-- 一括処理の境界は、残処理が一周期未満になる最大値として定義すると復元が単純になる。
+- 円環を大量に巡る処理では、まず一周後・数周後の各要素を式にできるか考える。
+- 二分探索の単調性を示したら、成功側と失敗側も実際に確認する。消費量が上限で飽和すると、最後の成功が存在しない場合がある。
+- 一括処理後の端数は「次の一周期で増える量」より小さいと示せば、一巡だけで復元できる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log Amax)、完了周回数の判定O(N)、端数走査O(N)。
+$$O(N\log(A_{\max}+1))$$。総数と最大値の計算に $$O(N)$$、区間幅 $$A_{\max}+1$$ の二分探索で一回の判定に $$O(N)$$ かかる。残数の計算・最後の走査・出力も合わせて $$O(N)$$。全消費の場合は探索せず $$O(N)$$ で終了する。
 
 ### 空間
 
-O(N)。
+入力配列と残数を保持して $$O(N)$$。入力配列を探索後に書き換えて残数を保持する場合も同じ評価となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^5; 0 \leq A_i \leq 10^{12}; 1 \leq K \leq 10^{12}; There are at least K apples in total. That is, \sum_{i=1}^{N}A_i\geq K.; All values in the input are integers.
+$$1\leq N\leq10^5$$、$$0\leq A_i\leq10^{12}$$、$$1\leq K\leq10^{12}$$、$$S\geq K$$ である。空のかごを許し、全消費は先に処理する。残る $$S>K$$ の場合は $$A_{\max}\geq1$$ で、探索の判定回数は最大40回となる。総和の最大値 $$10^{17}$$ は64 bit符号付き整数の範囲内であり、各判定・残数復元とも整数演算だけで行える。
 
 ## 出典
 
