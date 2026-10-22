@@ -1,7 +1,7 @@
 ---
 title: "ABC308-E — MEX"
 draft: true
-authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc308-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各位置で `X` を右側から外し、寄与を集計した後に `M` を左側へ加えるため、`E` の位置を処理するとき、$$L[a]$$ はその左にある値 $$a$$ の `M` の個数、$$R[b]$$ はその右にある値 $$b$$ の `X` の個数である。従って各値の組に対する $$L[a]R[b]$$ 個の選択はすべて順序条件を満たす。\n\n有効な三つ組には中央の `E` と左右の値の組が一意に定まるため、対応する集計でちょうど一度数えられる。同じ集計に含まれる三つ組は mex が等しいので、頻度の積にその mex を掛ければ寄与の総和になる。候補のない値の組は頻度が0となり、全体を足せば漏れや重複なく答えを得られる。","sourceRevisionIds":["source-abc308-e-problem-3bfa4f4d23e60ae943a87baa44eda259ab21b58cf882d17e704d7efaa5900098","source-abc308-editorial-6708-83c0d47e88e485e9deedd8952bdad8c3f4af73cafd21885d4ffebffcadf27205"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,65 +16,70 @@ authoringUnit: {"problemId":"abc308-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-middle index j with S_j='E'を固定すると、left M indexとright X indexのidentityは不要で、それぞれのA value 0,1,2別countだけで全組をまとめられる。
+真ん中の `E` の位置を決めると、左の `M` と右の `X` はそれぞれ自由に選べる。同じ値を持つ位置は mex への寄与が等しいので、左右にある値ごとの個数を掛け合わせれば、多数の三つ組をまとめて数えられる。
 
-mex(a,A_j,b)は3^3の定数表として前計算でき、left/right value countsの積が対応triples数になる。
+求めるのは、添字が $$i<j<k$$ の順に並び、対応する文字が `M`、`E`、`X` となる三つ組の寄与の総和である。全三つ組を調べると時間は $$O(N^3)$$ となり、間に合わない。そこで、順序条件を左右に分けられる中央の添字 $$j$$ に注目する。$$S_j$$ が `E` なら、$$i$$ は左側の `M`、$$k$$ は右側の `X` から選ぶ。どの左候補とどの右候補を組み合わせても順序条件を満たすため、左右の選択に依存関係がなくなる。
 
-棄却する候補: 全i<j<k triplesを列挙して文字条件とmexを調べる。
+残る寄与は $$\operatorname{mex}(A_i,A_j,A_k)$$、つまり三つの値に含まれない最小の非負整数である。$$j$$ を固定したとき、左右の候補について必要なのは添字そのものではなく、その位置の値だけになる。しかも値は $$0,1,2$$ の3種類しかない。値 $$a$$ を持つ左の `M` の個数を $$L[a]$$、値 $$b$$ を持つ右の `X` の個数を $$R[b]$$ とすると、左右の値が $$(a,b)$$ になる三つ組は $$L[a]R[b]$$ 個であり、すべて同じ mex を持つ。この $$j$$ の寄与は次の9組の和になる。
 
-Θ(N^3)である。
+$$
+\sum_{a=0}^{2}\sum_{b=0}^{2} L[a]R[b]\operatorname{mex}(a,A_j,b)
+$$
 
-採用する候補: left M counts[3]とright X counts[3]を維持し、各E positionで9 value pairsのcount積×mexを加える。
+例えば、独自の小例として文字列が `MMEXXX`、数列が $$(0,0,1,2,2,0)$$ の場合を考える。中央の `E` の値は1で、左には値0の `M` が2個、右には値2の `X` が2個と値0の `X` が1個ある。左右の値が $$(0,2)$$ となる選び方は $$2\times2=4$$ 個で、それぞれの mex は3。$$(0,0)$$ となる選び方は $$2\times1=2$$ 個で、それぞれの mex は2である。従って寄与は $$4\times3+2\times2=16$$。値が同じ位置も別々の選択肢なので、頻度の積が必要になる。
 
-ordered triple sumをmiddle-index sweepとsmall-alphabet frequency aggregationへ分解する。
+すべての $$j$$ について頻度を調べ直す必要はない。最初に全体の `X` を値別に数えて $$R$$ へ入れ、$$L$$ はすべて0にする。添字 $$j$$ を左から右へ進め、各位置で次の順に処理する。
+
+1. $$S_j$$ が `X` なら、$$R[A_j]$$ を1減らし、現在位置を右側から外す。
+2. $$S_j$$ が `E` なら、$$L$$ と $$R$$ を使って上の9組の寄与を答えに加える。
+3. $$S_j$$ が `M` なら、$$L[A_j]$$ を1増やし、次の位置から左側の候補にする。
+
+この順序なら、寄与を計算するときの $$L$$ は現在位置より左、$$R$$ は現在位置より右の候補を表す。mex は0から3までを順に調べ、三つの値に含まれない最初の数を返せば定数時間で求まる。9組の集計を各 `E` で行い、加えた総和が答えとなる。
 
 ## 典型の発動条件
 
 ### 中央要素固定のtriplet counting
 
-発動条件: i<j<kの寄与がsmall categories of endpointsとmiddle valueだけで決まるとき。
-
-jをscanし、left/right category frequenciesの直積で全endpoint pairsを数える。
+順序付き三つ組の集計では、中央を固定したときに左右を独立に選べるかを調べる。寄与が両端の少数の属性だけで決まるなら、左右の属性別頻度の積へ集約できる。両端の距離など、左右を結び付ける条件が残る場合は、そのまま積に分けられない。
 
 ### 小さい値域の全組表
 
-発動条件: 状態値が少数で、三値関数を繰り返し評価するとき。
-
-a,b∈{0,1,2}を9通り列挙してmex(a,A_j,b)を加える。
+候補の個数が多くても、答えに影響する値の種類が少なければ、値の組を列挙して頻度を掛ける。本問では中央の値を固定した後の組は9通りである。mex を繰り返し計算する代わりに、三つの値の全27通りを前計算してもよい。
 
 ## 問題固有の要素
 
-M/E/Xという文字役割とAの数値役割を分離し、文字が位置のside、Aがfrequency classを決める。
-
-別の問題へ持ち帰る視点: subsequence countingでは順序をscanで、値依存をcategory countsで処理する。
+文字は「左の `M`・中央の `E`・右の `X`」という役割を決め、数列の値は寄与を決める。この二つを分けて考えると、位置の順序は走査で、値への依存は長さ3の頻度配列で扱える。`MEX` という文字条件と mex という関数の定義を混同しない。
 
 ## 正当性
 
-scan前に全X valuesをrightへ数え、positionを処理する前後でcurrent charに応じてrightから除去・leftへ追加すればstrict i<j<kを保てる。 同じ(a,b) classの全index pairsはmex値も同じなので、個々の組をcount productへ集約できる。 value universeが3なのでpositionごとの処理が定数になり全体O(N)である。
+各位置で `X` を右側から外し、寄与を集計した後に `M` を左側へ加えるため、`E` の位置を処理するとき、$$L[a]$$ はその左にある値 $$a$$ の `M` の個数、$$R[b]$$ はその右にある値 $$b$$ の `X` の個数である。従って各値の組に対する $$L[a]R[b]$$ 個の選択はすべて順序条件を満たす。
+
+有効な三つ組には中央の `E` と左右の値の組が一意に定まるため、対応する集計でちょうど一度数えられる。同じ集計に含まれる三つ組は mex が等しいので、頻度の積にその mex を掛ければ寄与の総和になる。候補のない値の組は頻度が0となり、全体を足せば漏れや重複なく答えを得られる。
 
 ## 実装上の注意
 
-- current positionがXならE評価前にright countから外し、Mなら評価後にleftへ足してstrict inequalityを保つ。
-- triple数はN^3規模なので64 bit整数で積と答えを保持する。
+- `X` を右側から除く→`E` の寄与を計算する→`M` を左側へ足す、の順序にすると、厳密な不等号 $$i<j<k$$ と配列の意味を対応させやすい。
+- $$\operatorname{mex}(0,1,2)=3$$ もありえる。候補は0から3まで調べる。
+- 三つ組の数は最大で $$\binom{N}{3}$$、各寄与は高々3である。積を計算する前に64 bit整数へ変換し、答えも64 bit整数で保持する。
 
 ## 復習の核
 
-- ordered tripleはmiddleを固定し、左右要素を答えに必要な最小categoryへ集約する。
-- 値域が定数ならendpoint categoriesを全列挙し、frequency積でsubsequencesを数える。
+- 三つ組の総和では、中央を固定して左右の選択を切り離せるかを考える。
+- 添字の区別を頻度へまとめても、選択肢の個数は失わない。同じ値の位置も頻度の積で別々に数える。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N)、alphabet0,1,2の固定九組を各Eで集計。
+$$O(N)$$。全 `X` の集計と左からの走査に線形時間を使い、各 `E` では固定9組を定数時間ずつ評価する。
 
 ### 空間
 
-O(1)補助。
+入力の数列と文字列の保持に $$O(N)$$、頻度配列などの補助領域に $$O(1)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N \leq 2\times 10^5; N is an integer.; A_i \in \lbrace 0,1,2\rbrace; S is a string of length N consisting of M, E, and X.
+$$3\leq N\leq2\times10^5$$、$$A_i\in\{0,1,2\}$$。値域が3種類であることが、各位置を定数時間で処理できる理由である。`MEX` となる三つ組がなければ加算されず、答えは0になる。実行時間制限は2秒、メモリ制限は1024 MiB。
 
 ## 出典
 
