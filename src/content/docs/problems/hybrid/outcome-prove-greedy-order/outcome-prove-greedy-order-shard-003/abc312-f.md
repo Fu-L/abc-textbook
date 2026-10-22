@@ -1,7 +1,7 @@
 ---
 title: "ABC312-F — Cans and Openers"
 draft: true
-authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc312-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"種類内の交換により、type0 は満足度降順の先頭から選べばよく、品物が尽きた後も $$P[t]$$ は高々 $$t$$ 枠の最適値を表す。\n\ntype1・type2 側について、任意の上限 $$s$$ を固定する。満足度に寄与しない未開封缶は取り除けるので、選んだ缶をすべて開ける最適解を考えてよい。貪欲法が選んだ品物を含む最適解が存在することを、選択を進めながら保つ。容量が正で缶が残る場合は、考察で示した交換または追加により、次の最大満足度の缶を含む最適解へ移れる。\n\n容量が0の場合、まだ選択枠が残っていても、現在の品物だけでは新たな缶を開けられない。最適解がこの先に缶を選んで満足度を増やすなら、未選択の缶切りを少なくとも一個含む。その缶切りを未選択の最大容量のものへ交換しても、選択枠数は変わらず開封能力は下がらない。最適値が既に達成されている場合も、一枠を使って缶切りを追加してよい。よって、この選択を含む最適解が存在する。缶が尽きた場合、または容量0で缶切りが尽きた場合は、これ以上満足度を増やせない。以後の値を据え置けば、すべての $$0\\leq s\\leq M$$ で $$Q[s]$$ が求まる。\n\n各 $$P[M-s]+Q[s]$$ は、異なる種類の品物を合わせて高々 $$M$$ 個選ぶことで実現できる。一方、任意の高々 $$M$$ 個の選び方で、type1・type2 の選択個数を $$s$$ とすれば、満足度はこの和以下になる。従って全 $$s$$ での最大値が高々 $$M$$ 個の最適値であり、未選択品の追加によりちょうど $$M$$ 個へ拡張できるので、元の問題の答えでもある。","sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc312-f","docPath":"src/content/docs/problems/hybrid/outcome-prove-greedy-order/outcome-prove-greedy-order-shard-003/abc312-f.md","learningOutcomeIds":["outcome-prove-greedy-order"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["対称操作による状態の正規化。"],"tagIds":["tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"種類内の交換により、type0 は満足度降順の先頭から選べばよく、品物が尽きた後も $$P[t]$$ は高々 $$t$$ 枠の最適値を表す。\n\ntype1・type2 側について、任意の上限 $$s$$ を固定する。満足度に寄与しない未開封缶は取り除けるので、選んだ缶をすべて開ける最適解を考えてよい。貪欲法が選んだ品物を含む最適解が存在することを、選択を進めながら保つ。容量が正で缶が残る場合は、考察で示した交換または追加により、次の最大満足度の缶を含む最適解へ移れる。\n\n容量が0の場合、まだ選択枠が残っていても、現在の品物だけでは新たな缶を開けられない。最適解がこの先に缶を選んで満足度を増やすなら、未選択の缶切りを少なくとも一個含む。その缶切りを未選択の最大容量のものへ交換しても、選択枠数は変わらず開封能力は下がらない。最適値が既に達成されている場合も、一枠を使って缶切りを追加してよい。よって、この選択を含む最適解が存在する。缶が尽きた場合、または容量0で缶切りが尽きた場合は、これ以上満足度を増やせない。以後の値を据え置けば、すべての $$0\\leq s\\leq M$$ で $$Q[s]$$ が求まる。\n\n各 $$P[M-s]+Q[s]$$ は、異なる種類の品物を合わせて高々 $$M$$ 個選ぶことで実現できる。一方、任意の高々 $$M$$ 個の選び方で、type1・type2 の選択個数を $$s$$ とすれば、満足度はこの和以下になる。従って全 $$s$$ での最大値が高々 $$M$$ 個の最適値であり、未選択品の追加によりちょうど $$M$$ 個へ拡張できるので、元の問題の答えでもある。","sourceRevisionIds":["source-abc312-editorial-6853-b922391c5997239551db86f1c74077fc12ec6ddd38808df07fb5358c868dca64","source-abc312-f-problem-5f183be91a874fb126f803f5b9cf9cccd1901b25c908dd376b5c6289579b2f03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -45,9 +45,9 @@ $$
 2. $$b>n_1$$ なら値を変えずに進む。缶が残っていないので追加の缶切りは不要である。
 3. そうでなく `capacity > 0` なら、$$B_b$$ を $$Q[s]$$ に加え、$$b$$ を1増やし、`capacity` を1減らす。
 4. そうでなく $$c\leq n_2$$ なら、$$C_c$$ を `capacity` に加え、$$c$$ を1増やす。缶切りにも一枠を使うので、この回には缶を取らず、満足度は増えない。
-5. 缶切りも残っていなければ、以後も値を変えない。開けられない缶を選んでも満足度は増えない。
+5. `capacity = 0` で未使用の缶切りも残っていなければ、以後も値を変えない。開けられない缶を選んでも満足度は増えない。
 
-例えば $$B=(9,5), C=(3)$$ なら、$$Q[0],\ldots,Q[5]$$ は $$0,0,9,14,14,14$$ となる。一枠目は缶切りだけで、三枠を使った後は缶が尽きる。容量が1余っても、それ以降の値は14のままである。最後の二枠では、実際に品物を追加したと解釈する必要はない。
+例えば $$B=(9,5), C=(3)$$ なら、$$Q[0],\ldots,Q[5]$$ は $$0,0,9,14,14,14$$ となる。一枠目で最後の缶切りを選んでも、開封容量は3残っているので、二枠目・三枠目では缶を選んで満足度を増やせる。三枠を使った後は缶が尽きるため、容量が1余っても、それ以降の値は14のままである。最後の二枠では、実際に品物を追加したと解釈する必要はない。
 
 最後に、type1・type2 側へ渡す枠数 $$s$$ をすべて試し、
 
@@ -73,7 +73,7 @@ $$
 
 ## 問題固有の要素
 
-開封容量が余ることと、選択枠が余ることは異なる。缶切り一個で何缶でも選べるわけではなく、選ぶ缶にも一枠ずつ必要である。また、缶や缶切りが尽きると、選択枠を増やしても満足度は増えない。
+開封容量が余ることと、選択枠が余ることは異なる。缶切り一個で何缶でも選べるわけではなく、選ぶ缶にも一枠ずつ必要である。type1・type2 側では、type1 が尽きた場合、または `capacity = 0` で未使用の type2 も尽きた場合に、以後の選択枠を増やしても満足度は増えない。未使用の type2 が尽きても、開封容量と type1 が残っていれば、枠を増やして缶を選び、満足度を増やせる。
 
 「高々」の最適値へ緩められる理由は、余った選択枠を無価値の品物でも埋められる点にある。ちょうどの個数が要求される別問題へ持ち帰る際は、追加できる品物の数と、追加して目的値が悪化しないことを確認する。
 
@@ -89,7 +89,7 @@ type1・type2 側について、任意の上限 $$s$$ を固定する。満足�
 
 ## 実装上の注意
 
-- $$P,Q$$ は長さ $$M+1$$ で作り、初期値をともに0とする。品物が尽きても配列の構築を打ち切らず、直前の値を末尾までコピーする。
+- $$P,Q$$ は長さ $$M+1$$ で作り、初期値をともに0とする。各側でこれ以上満足度を増やせなくなっても、配列の構築を打ち切らず、直前の値を末尾までコピーする。
 - type1 がなければ $$Q[s]=0$$ が続く。type2 がなければ、type1 があっても $$Q[s]=0$$ が続く。公式サンプル2は全品が type1、$$M=N=5$$ なので、$$P,Q$$ がともに全要素0となり、答えも0である。
 - type0 が不足しても $$P[t]$$ の値を延長する。$$M=N$$ や容量余りにも同じ手順を使い、実際には選んでいない品物を配列外から参照しない。
 - 缶切りを追加した回も一枠を使う。`capacity` は選択可能な残り品数ではなく、まだ開けられる缶数である。
