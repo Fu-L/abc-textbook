@@ -47,7 +47,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run preview -- --host 127.0.0.1 --port ${String(port)}`,
+    command: `npm run preview -- --ignore-lock --host 127.0.0.1 --port ${String(port)}`,
     url: baseURL,
     reuseExistingServer: false,
     timeout: 120_000,

@@ -11,6 +11,39 @@ import {
   UsageError,
 } from '../../scripts/config/publication.js';
 
+describe('workflow runtime selection', () => {
+  it.each(['ci.yml', 'initial-release-audit.yml'])(
+    'uses the declared Node/npm baseline and checks the actual versions in %s',
+    (file) => {
+      const manifest = JSON.parse(readFileSync('package.json', 'utf8')) as {
+        packageManager: string;
+      };
+      const npmVersion = manifest.packageManager.replace(/^npm@/u, '');
+      const workflow = parseYaml(readFileSync(`.github/workflows/${file}`, 'utf8')) as {
+        jobs: Record<
+          string,
+          { steps: { uses?: string; run?: string; with?: Record<string, string> }[] }
+        >;
+      };
+      const steps = Object.values(workflow.jobs).flatMap(({ steps }) => steps);
+      const setup = steps.find(({ uses }) => uses?.startsWith('actions/setup-node@'));
+      if (!setup) throw new Error('Missing Node setup step');
+      expect(setup.with?.['node-version-file']).toBe('.nvmrc');
+      expect(setup.with?.cache).toBe('npm');
+      const select = steps.findIndex(({ run }) => run === `npm install --global npm@${npmVersion}`);
+      const check = steps.findIndex(
+        ({ run }) =>
+          run?.includes('test "$(node --version)" = "v$(cat .nvmrc)"') &&
+          run.includes(`test "$(npm --version)" = ${npmVersion}`),
+      );
+      const install = steps.findIndex(({ run }) => run === 'npm ci');
+      expect(select).toBeGreaterThan(steps.indexOf(setup));
+      expect(check).toBeGreaterThan(select);
+      expect(install).toBeGreaterThan(check);
+    },
+  );
+});
+
 describe('publication environment configuration', () => {
   it('normalizes root and subpath publication targets', () => {
     expect(normalizeBasePath('/')).toBe('/');
@@ -156,7 +189,8 @@ describe('standard Pages workflow', () => {
     deploy.steps.find(({ uses }) => uses?.startsWith('actions/deploy-pages@')),
   );
   const script = required(
-    required(required(steps.find(({ uses }) => uses === 'actions/github-script@v7')).with).script,
+    required(required(steps.find(({ uses }) => uses?.startsWith('actions/github-script@'))).with)
+      .script,
   );
   const canRun = (
     expression: string,
@@ -216,7 +250,9 @@ describe('standard Pages workflow', () => {
   it.each(['same SHA', 'new main', 'API failure'])(
     'checks current main when only deploy is rerun: %s',
     async (scenario) => {
-      const guard = required(deploy.steps.find(({ uses }) => uses === 'actions/github-script@v7'));
+      const guard = required(
+        deploy.steps.find(({ uses }) => uses?.startsWith('actions/github-script@')),
+      );
       expect(deploy.steps.indexOf(guard)).toBe(deploy.steps.indexOf(deployment) - 1);
       expect(guard.if).toBeUndefined();
       expect(deployment.if).toBeUndefined();

@@ -199,6 +199,8 @@ test('contents and heading links have accessible names and do not obscure focuse
 }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(problem);
+  // Hydration changes the native select's disabled colors. Scan its settled state.
+  await expect(page.getByRole('combobox', { name: '学習状況', exact: true })).toBeEnabled();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   for (const width of [1440, 1920]) {
     await page.setViewportSize({ width, height: 1000 });

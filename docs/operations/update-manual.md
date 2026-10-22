@@ -353,8 +353,15 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 
 Actionsログには比較元と未配信差分、選択したstepのコマンド・全引数、広い検査へ戻った理由を出す。`Verification planned`は予定、`Verification started/finished`は実際に実行した処理である。終了行の`elapsed_ms`は単調時計による計測で、失敗・signal・実行不能でも記録する。後続の未実行stepを成功として扱わない。
 
-Node.jsの基準版は`.nvmrc`（26.12.1）、npmは`package.json`の`packageManager`（11.16.0）に従う。Node.js更新時は`.nvmrc`、`package.json`の`engines`/`devEngines`、lockfileのroot
+Node.jsの基準版は`.nvmrc`（26.12.1）、npmは`package.json`の`packageManager`（11.21.1）に従う。Node.js更新時は`.nvmrc`、`package.json`の`engines`/`devEngines`、lockfileのroot
 `engines`、開発手順を揃える。両workflowは`.nvmrc`を読み、CIのstep名も基準版に合わせる。基準版で`npm ci`と共通変更の広い検査を実行する。過去の検証記録にある実行版は書き換えない。
+
+npm更新時は`packageManager`、`engines.npm`・`devEngines.packageManager.version`、lockfile
+rootの`engines.npm`、両workflowのglobal
+install・実版照合・step名を揃える。基準Node/npmで`npm ci`と本番subpathの`verify:fast -- --all`を実行する。依存のセキュリティ更新では`npm audit --package-lock-only --ignore-scripts --json`を明示実行し、OS別optional依存と重複コピーも確認する。`.npmrc`の`audit=false`によるインストール成功だけで監査済みとしない。
+
+global
+npmの同梱依存と外部Actionsのproduction依存・実行バンドルは、プロジェクトのaudit・overrideの対象外である。npmの配布物も別に照会し、Actionsは[残存項目](development.md#actionsに残る依存の追跡229)と上流の修正版を確認する。正式タグと内部固定SHA、`runs.using`を確認し、両workflowを同期する。新しいActionの実行用Nodeは`.nvmrc`と別であり、Pagesのartifact名・権限・environment・同じ検証済み成果物の配信を保つ。修正版を確認できない項目はIssueに残し、通常PRのCIとmerge後のmain実配信を区別して報告する。
 
 CI全体の比較は既存Actionsの`Set up Node.js 26.12.1`開始から`Verify changed scope`完了までとし、runner内の時間とは区別する。queue・checkout、検証後のartifact保存・cleanup・deployは除外し、並列テストの時間を合算しない。ログの読み方と計測の限界は[開発手順](development.md#actionsで検証時間を読む)を参照する。実測はPR本文とActionsログへまとめ、計測専用の台帳を作らない。
 
@@ -381,6 +388,13 @@ IDを列挙し、32件ずつ`git cat-file --batch`で読む。ファイルごと
 
 `check`でAstro/各TypeScript環境を検査した同runは`build:checked`でbuildする。単独`build`にはAstro
 checkを保持する。build出力は`:built`へ渡して再利用する。通常CIはE2Eを選んだときだけChromiumを準備する。他browserは`test:e2e:install`、Linuxでは`test:e2e:install:all:ci`で準備し、`test:e2e:built -- --project=firefox`等で必要なspecを実行する。
+
+Astro
+7.4.2のpreviewはエージェント環境で自動的にbackground起動するため、Playwrightの`webServer.command`には`--ignore-lock`を付ける。これによりPlaywrightがforegroundのプロセスを起動・終了できる。既存serverの再利用は行わない。起動失敗時に今回の検証が残したbackground
+serverがあれば、同じcheckoutで`npm run preview -- stop`により停止してから再実行する。[公式CLIのbackground・lockの仕様](https://docs.astro.build/en/reference/cli-reference/#--ignore-lock)を参照する。
+
+JS有効の問題ページでaxeを実行する目次検査は、学習状況selectの有効化を待ってから走査する。IndexedDB初期化中にdisabledからenabledへ切り替わるnative
+controlの色を走査途中で混在させない。保存失敗・JS無効時の挙動は既存の該当E2Eで確認する。
 
 ### CI必須設定の切替と復旧
 
