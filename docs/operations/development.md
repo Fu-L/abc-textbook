@@ -5,7 +5,7 @@
 
 ## 変更範囲に応じたCI検証
 
-`Verify (release baseline)`はNode 24.18.0/npm 11.16.0の単一環境で、PRのmerge-base、main
+`Verify (release baseline)`はNode 26.12.1/npm 11.16.0の単一環境で、PRのmerge-base、main
 pushの前回SHAとの差から検査を選ぶ。文書だけでもjobを起動し、書式・ローカルリンク・見出し参照・feature選択を検証する。
 
 | 変更                                                                       | 検査                                                                                                                 |
@@ -64,7 +64,7 @@ IDとコマンド・全引数をログへ出す。`Verification planned`は実�
 
 実行したstepだけに`Verification started`と`Verification finished`を出す。`at`はUTCの開始・終了日時、`elapsed_ms`は単調時計による経過時間であり、時計の補正に影響されない。終了行は`result=passed/failed/error`と、通常終了なら`native_exit_code`を示す。signal・実行不能は`error`の時間に続いて理由を出し、後続を止める。予定行だけのstepを成功と数えない。Actionsによる強制終了で終了行を残せない場合も成功とは扱わない。
 
-比較の主指標は、Actionsの既存step時刻で**`Set up Node.js 24.18.0`の開始から`Verify changed scope`の完了まで**のwall
+比較の主指標は、Actionsの既存step時刻で**`Set up Node.js 26.12.1`の開始から`Verify changed scope`の完了まで**のwall
 timeを取る。queue・checkout・run
 identity取得、検証後のartifact保存・cleanup・deployは除く。runnerの処理別時間は依存準備・npm選択・`npm ci`・文書checker自身の検査を含まず、この主指標と境界が異なる。Vitest内の並列ファイル時間や処理別時間を足して全体時間や短縮量を求めない。
 
@@ -144,21 +144,23 @@ Contestと小catch-upは混ぜない。移行前5件が特定できなければ�
 
 依存パッケージは`package-lock.json`で完全版を固定します。Node.jsとnpmは、通常開発で利用できる対応範囲と、リリース検証で再現する基準版を分けて管理します。
 
-| Tool       | Supported development range  | Release baseline |
-| ---------- | ---------------------------- | ---------------- |
-| Node.js    | `>=24.18.0 <25.0.0` (24 LTS) | `24.18.0`        |
-| npm        | `>=11.16.0 <12.0.0`          | `11.16.0`        |
-| TypeScript | lockfile exact               | `6.0.3`          |
-| Astro      | lockfile exact               | `7.1.0`          |
-| Starlight  | lockfile exact               | `0.41.3`         |
-| Zod        | lockfile exact               | `4.4.3`          |
-| Vitest     | lockfile exact               | `4.1.10`         |
-| Playwright | lockfile exact               | `1.61.1`         |
-| ESLint     | lockfile exact               | `10.7.0`         |
-| Prettier   | lockfile exact               | `3.9.5`          |
-| Pagefind   | lockfile exact               | `1.5.2`          |
+| Tool       | Supported development range      | Release baseline |
+| ---------- | -------------------------------- | ---------------- |
+| Node.js    | `>=26.12.1 <27.0.0` (26 Current) | `26.12.1`        |
+| npm        | `>=11.16.0 <12.0.0`              | `11.16.0`        |
+| TypeScript | lockfile exact                   | `6.0.3`          |
+| Astro      | lockfile exact                   | `7.1.0`          |
+| Starlight  | lockfile exact                   | `0.41.3`         |
+| Zod        | lockfile exact                   | `4.4.3`          |
+| Vitest     | lockfile exact                   | `4.1.10`         |
+| Playwright | lockfile exact                   | `1.61.1`         |
+| ESLint     | lockfile exact                   | `10.7.0`         |
+| Prettier   | lockfile exact                   | `3.9.5`          |
+| Pagefind   | lockfile exact                   | `1.5.2`          |
 
 `.nvmrc`と`packageManager`はそれぞれリリース基準のNode.js/npmを示します。対応範囲内のpatch更新は通常開発で許可され、`devEngines`は範囲外の場合だけ警告します。依存版を変更するときは、通常どおりmanifestと`package-lock.json`を同じ変更で更新します。
+
+2026-10-22にNode.jsの基準版を26.12.1へ更新しました。[公式のセキュリティリリース](https://nodejs.org/en/blog/release/v26.12.1/)で修正を確認しています。この時点の26系はCurrentです。両workflowは`node-version-file: .nvmrc`から同じ版を選びます。`@types/node`は使用中のAPIの型定義として24系を維持し、実行環境の版は`.nvmrc`で管理します。
 
 ## Local-only setup
 
@@ -171,7 +173,7 @@ npm ci
 npm run test:e2e:install
 ```
 
-リリース再現を行う場合は、Node.jsが `v24.18.0`、npmが `11.16.0`
+リリース再現を行う場合は、Node.jsが `v26.12.1`、npmが `11.16.0`
 と表示されることを確認します。通常開発では上表の対応範囲内であればpatchが異なっていても実行できます。対応範囲外のNode.js/npmでの動作は保証せず、`engine-strict=true`により依存インストールを停止します。Playwrightのbrowser
 binaryはローカルcacheへ保存され、repositoryへcommitしません。
 

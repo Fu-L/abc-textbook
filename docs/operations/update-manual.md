@@ -353,7 +353,10 @@ SITE_URL=https://fu-l.github.io BASE_PATH=/abc-textbook npm run verify:fast -- -
 
 Actionsログには比較元と未配信差分、選択したstepのコマンド・全引数、広い検査へ戻った理由を出す。`Verification planned`は予定、`Verification started/finished`は実際に実行した処理である。終了行の`elapsed_ms`は単調時計による計測で、失敗・signal・実行不能でも記録する。後続の未実行stepを成功として扱わない。
 
-CI全体の比較は既存Actionsの`Set up Node.js 24.18.0`開始から`Verify changed scope`完了までとし、runner内の時間とは区別する。queue・checkout、検証後のartifact保存・cleanup・deployは除外し、並列テストの時間を合算しない。ログの読み方と計測の限界は[開発手順](development.md#actionsで検証時間を読む)を参照する。実測はPR本文とActionsログへまとめ、計測専用の台帳を作らない。
+Node.jsの基準版は`.nvmrc`（26.12.1）、npmは`package.json`の`packageManager`（11.16.0）に従う。Node.js更新時は`.nvmrc`、`package.json`の`engines`/`devEngines`、lockfileのroot
+`engines`、開発手順を揃える。両workflowは`.nvmrc`を読み、CIのstep名も基準版に合わせる。基準版で`npm ci`と共通変更の広い検査を実行する。過去の検証記録にある実行版は書き換えない。
+
+CI全体の比較は既存Actionsの`Set up Node.js 26.12.1`開始から`Verify changed scope`完了までとし、runner内の時間とは区別する。queue・checkout、検証後のartifact保存・cleanup・deployは除外し、並列テストの時間を合算しない。ログの読み方と計測の限界は[開発手順](development.md#actionsで検証時間を読む)を参照する。実測はPR本文とActionsログへまとめ、計測専用の台帳を作らない。
 
 2026-10-19の[改善後の実測とSC-005](development.md#改善後の実測とsc-0052026-10-19)では、#143〜#148のmain反映と代表Actionsの選択・時刻を確認した。通常本文訂正・問題追加の同条件の前後各5件は揃わず、SC-005は未達・比較母集団不足である。採用改善自身の共通処理runや文書だけの17秒を通常更新の短縮実績へ流用しない。#148最終PRは成功したが、観測時の同mainは進行中であり、配信成功を補作しない。
 
