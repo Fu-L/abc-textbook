@@ -189,11 +189,14 @@ APIで再照会しました。以下は依存の版に一致した検出であ�
 ```bash
 nvm install
 nvm use
+npm install --global npm@11.21.1
 node --version
 npm --version
 npm ci
 npm run test:e2e:install
 ```
+
+`nvm use`の後で、選択したNode.js環境のnpmを明示的に更新します。`packageManager`は基準版の指定であり、npm自体をインストール・更新しません。Node.js環境を新しく用意したときも、`npm ci`の前にこの更新と版の確認を行います。
 
 リリース再現を行う場合は、Node.jsが `v26.12.1`、npmが `11.21.1`
 と表示されることを確認します。通常開発では上表の対応範囲内であればpatchが異なっていても実行できます。対応範囲外のNode.js/npmでの動作は保証せず、`engine-strict=true`により依存インストールを停止します。Playwrightのbrowser

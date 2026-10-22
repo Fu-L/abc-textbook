@@ -231,7 +231,7 @@ Contest追加・公開は別依頼まで未実施で、SC-004とM5全体の実�
 
 ## 3. 変更に必要な検証を選ぶ
 
-依存の準備が必要なら`.nvmrc`・`package.json`・lockfileを参照して`npm ci`する。既存scriptの意味と引数を確認して使う。`schema:check`は生成schemaとの一致の確認であり、教材データ自体の検証には対象のschema・catalogテストも使う。
+依存の準備が必要なら[ローカルセットアップ](development.md#local-only-setup)に従い、`.nvmrc`のNode.jsを選択し、`packageManager`のnpmを明示的にインストールして両方の実版を確認してから`npm ci`する。既存scriptの意味と引数を確認して使う。`schema:check`は生成schemaとの一致の確認であり、教材データ自体の検証には対象のschema・catalogテストも使う。
 
 | 変更                               | 必要な確認                                                                               |
 | ---------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -358,7 +358,8 @@ Node.jsの基準版は`.nvmrc`（26.12.1）、npmは`package.json`の`packageMan
 
 npm更新時は`packageManager`、`engines.npm`・`devEngines.packageManager.version`、lockfile
 rootの`engines.npm`、両workflowのglobal
-install・実版照合・step名を揃える。基準Node/npmで`npm ci`と本番subpathの`verify:fast -- --all`を実行する。依存のセキュリティ更新では`npm audit --package-lock-only --ignore-scripts --json`を明示実行し、OS別optional依存と重複コピーも確認する。`.npmrc`の`audit=false`によるインストール成功だけで監査済みとしない。
+install・実版照合・step名、[ローカルセットアップ](development.md#local-only-setup)のglobal
+install・確認する版を揃える。`packageManager`の変更だけでは手元のnpmは更新されないため、新規Node.js環境でもセットアップ例の順で基準npmが導入されることを確認する。基準Node/npmで`npm ci`と本番subpathの`verify:fast -- --all`を実行する。依存のセキュリティ更新では`npm audit --package-lock-only --ignore-scripts --json`を明示実行し、OS別optional依存と重複コピーも確認する。`.npmrc`の`audit=false`によるインストール成功だけで監査済みとしない。
 
 global
 npmの同梱依存と外部Actionsのproduction依存・実行バンドルは、プロジェクトのaudit・overrideの対象外である。npmの配布物も別に照会し、Actionsは[残存項目](development.md#actionsに残る依存の追跡229)と上流の修正版を確認する。正式タグと内部固定SHA、`runs.using`を確認し、両workflowを同期する。新しいActionの実行用Nodeは`.nvmrc`と別であり、Pagesのartifact名・権限・environment・同じ検証済み成果物の配信を保つ。修正版を確認できない項目はIssueに残し、通常PRのCIとmerge後のmain実配信を区別して報告する。
