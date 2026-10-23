@@ -1,7 +1,7 @@
 ---
 title: "ABC392-F — Insert"
 draft: true
-authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。 求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。 prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。","sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-002/abc392-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix"],"sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"後続の挿入は既存要素の相対順を変えない。従って、最終列から値 $$i+1,\\ldots,N$$ を取り除いた残りの列は、$$i$$ 回目直後の列と一致する。\n\n逆順で値 $$i$$ を置く直前に、値 $$i+1,\\ldots,N$$ は正しい最終位置にあり、空き枠を左から見た順序は $$i$$ 回目直後の列の各要素に対応する、という不変条件を保つ。初めの $$i=N$$ では全枠が空いており、この対応が成り立つ。$$i$$ 回目直後の列では値 $$i$$ は $$P_i$$ 番目なので、不変条件より $$P_i$$ 番目の空き枠がその正しい最終位置である。\n\nその枠を埋めて空き枠から除くと、値 $$i$$ を取り除いた順序、すなわち $$i-1$$ 回目直後の列との対応が残る。よって不変条件は次にも保たれる。空き枠はちょうど $$i$$ 個あり、$$1\\leq P_i\\leq i$$ なので選ぶ枠も必ず存在する。全ての値を置き終えると、全枠が正しい最終列になる。","sourceRevisionIds":["source-abc392-editorial-12145-445d321e81594035b30924e7b75bfa6caefdf30ca487bdcd898557192838566c","source-abc392-f-problem-7960d080321bdc2198bcb5bf95b6b91511eb57189a943c0f3bf2ee17d8a8ddb4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,63 +20,84 @@ authoringUnit: {"problemId":"abc392-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-forward挿入では後続操作が既存要素の位置をずらすため、平衡木なしに配列へ直接insertすると二次になる。
+挿入するたびに後ろの要素を動かす代わりに、最終的な列の枠を先に用意し、後から挿入した値から位置を確定する。後続の挿入は既存要素の相対順を変えないので、未確定の枠だけを数えれば、挿入時の順位をそのまま使える。
 
-操作を逆順に見ると、最終N枠のうち現在空いているP_i番目の枠が要素iの最終位置であり、その枠を削除するだけになる。
+配列へ前から直接挿入すると、1回で最大 $$O(N)$$ 個の要素をずらす。毎回先頭へ挿入する場合は全体で $$\Theta(N^2)$$ となり、$$N\leq 5\times 10^5$$ では間に合わない。ここで、値 $$i$$ を入れた瞬間の位置と、全挿入後の位置を区別する。前者は $$P_i$$ として分かっているが、後者は後続の挿入でずれる。
 
-採用する候補: N個の空き枠をFenwick treeで管理し、i=N..1にP_i番目の1をorder-statistic searchする
+最終列から値 $$i+1,\ldots,N$$ を取り除くと、値 $$1,\ldots,i$$ の相対順は $$i$$ 回目の挿入直後と一致する。従って、大きい値を既に最終位置へ置いた時点では、残る空き枠が値 $$1,\ldots,i$$ の場所に対応し、値 $$i$$ の最終位置は左から $$P_i$$ 番目の空き枠になる。
 
-棄却する候補: vectorのP_i位置へiを順に挿入する
+公式入力例1の $$P=(1,1,2,1)$$ では、前向きの列は次のように変わる。
 
-各挿入でsuffixをshiftし、N=5×10^5ではΘ(N²)になる。
+$$
+(1)\ \longrightarrow\ (2,1)\ \longrightarrow\ (2,3,1)\ \longrightarrow\ (4,2,3,1)
+$$
 
-長さNのFenwickを全て1で初期化する。i=N..1についてFenwickのlower_bound(P_i)でposを求め、ans[pos]=i、add(pos,-1)とする。ansを順に出力する。
+逆向きでは、枠の番号を最終列の左から $$1,2,3,4$$ として、次の順に埋める。「空き枠の順位」と「最終列の位置」は異なることに注意する。
+
+| 置く値 $$i$$ | 置く前の空き枠の番号 | 空き枠の順位 $$P_i$$ | 確定する最終位置 |
+| --- | --- | --- | --- |
+| 4 | 1, 2, 3, 4 | 1 | 1 |
+| 3 | 2, 3, 4 | 2 | 3 |
+| 2 | 2, 4 | 1 | 2 |
+| 1 | 4 | 1 | 4 |
+
+例えば値3を置くとき、枠1の値4を数えず、残る枠2・3・4のうち2番目を選ぶ。これが前向きの列 $$(2,3,1)$$ における値3の順位2に対応する。
+
+空き枠を1、埋まった枠を0とする長さ $$N$$ の列 $$B$$ を Fenwick Tree で管理する。全て1で初期化し、$$i=N,N-1,\ldots,1$$ の順に、接頭辞和が $$P_i$$ 以上になる最小位置 $$p$$ を探す。答えの $$p$$ 番目に値 $$i$$ を書き、$$B_p$$ を1から0へ更新する。最後に答えを左から出力する。
+
+この順位探索は、接頭辞和を取得しながら外側で位置を二分探索すると1回 $$O(\log^2 N)$$ かかる。Fenwick Tree 内の区間和を直接使えば、1回 $$O(\log N)$$ にできる。1始まりの内部配列を `tree` とし、探索中は「既に読み飛ばした接頭辞の末尾」$$p$$ と「その右側で探す残り順位」$$k$$ を保つ。初期値は $$p=0,k=P_i$$ である。
+
+$$N$$ 以下の最大の2の冪を $$d$$ として、大きい桁から $$d$$ を半分ずつにする。$$q=p+d\leq N$$ なら `tree[q]` を調べる。この探索順では $$p$$ が $$2d$$ の倍数なので、`tree[q]` はちょうど区間 $$p+1,\ldots,q$$ の空き枠数を表す。その個数が $$k$$ 未満なら、探す枠は区間の右にある。区間全体を飛ばして $$p=q$$ とし、その個数を $$k$$ から引く。個数が $$k$$ 以上なら、探す枠は区間内にあるので飛ばさず、次の小さい桁を調べる。範囲外の $$q$$ も飛ばさない。
+
+全桁を調べると、$$p$$ は接頭辞和が $$P_i$$ 未満である最後の位置になり、答えは $$p+1$$ である。各桁で区間和を一つ読むだけなので、探索全体は $$O(\log N)$$ になる。
 
 ## 典型の発動条件
 
 ### 操作の逆転
 
-発動条件: forward insertが後続要素を広範囲に動かすとき。
-
-最終枠からrank指定で削除する過程へ変える。
+逐次挿入で位置が広くずれても、既存要素同士の相対順が保存されるなら、後から挿入した要素を除いて過去の列を復元できる。最終枠を固定し、逆順に未確定枠の順位を使う方法が候補になる。
 
 ### Fenwick treeのk-th search
 
-発動条件: 動的0/1列からk番目の有効indexを求めたいとき。
-
-prefix sum lower_boundをbinary liftingで行う。
+動的な非負の頻度列で、累積個数が指定順位に達する最初の位置を求めたいときに使う。非負だから接頭辞和が単調になり、区間個数と残り順位の比較で区間全体を読み飛ばせる。負の頻度を許すと、この探索の前提が崩れる。
 
 ## 問題固有の要素
 
-挿入された値そのものの大小順ではなく、最終的な空きpositionを逆から割り当てると、位置ずれを明示的に処理せずに済む。
-
-別の問題へ持ち帰る視点: rank位置への逐次挿入は、全slotを先に用意して逆順にk-th空きを埋める定番変換を試す。
+値 $$i$$ がそのまま挿入時刻を表すため、値の降順に最終位置を決められる。$$P_i$$ は固定された位置ではなく、その時点で残る空き枠の順位として読み替える。この対応によって、前向きの位置ずれを明示的に処理する必要がなくなる。
 
 ## 正当性
 
-逆順時点の空き枠数はちょうどiなので、制約1≤P_i≤iによりP_i番目の空きが必ず存在する。 求めたposition posへanswer[pos]=iと書き、Fenwickへ-1すれば以後のrankから消える。 prefix sumがP_i以上となる最小indexをO(log N)で求め、点を0へ更新できるので全体O(N log N)で最終位置を確定できる。
+後続の挿入は既存要素の相対順を変えない。従って、最終列から値 $$i+1,\ldots,N$$ を取り除いた残りの列は、$$i$$ 回目直後の列と一致する。
+
+逆順で値 $$i$$ を置く直前に、値 $$i+1,\ldots,N$$ は正しい最終位置にあり、空き枠を左から見た順序は $$i$$ 回目直後の列の各要素に対応する、という不変条件を保つ。初めの $$i=N$$ では全枠が空いており、この対応が成り立つ。$$i$$ 回目直後の列では値 $$i$$ は $$P_i$$ 番目なので、不変条件より $$P_i$$ 番目の空き枠がその正しい最終位置である。
+
+その枠を埋めて空き枠から除くと、値 $$i$$ を取り除いた順序、すなわち $$i-1$$ 回目直後の列との対応が残る。よって不変条件は次にも保たれる。空き枠はちょうど $$i$$ 個あり、$$1\leq P_i\leq i$$ なので選ぶ枠も必ず存在する。全ての値を置き終えると、全枠が正しい最終列になる。
 
 ## 実装上の注意
 
-- P_iは1-indexed rankで、Fenwick lower_boundの返すindex規約を合わせる。全1初期化をO(N)またはN回addで正しく行う。
+- $$P_i$$ は1始まりの順位である。上の内部探索が得る $$p$$ は答えの一つ手前なので、選ぶ位置は $$p+1$$。答え配列が0始まりなら変換する。
+- 区間を飛ばせる条件は空き枠数が残り順位「未満」であること。等しいときに飛ばすと、求める枠も通り過ぎる。
+- 1始まりの `tree[q]` は末尾から `q & -q` 個の和を持つ。全1の列なら `tree[q] = q & -q` として $$O(N)$$ で構築できる。選んだ位置には通常の点加算で $$-1$$ を反映する。
 
 ## 復習の核
 
-- N≤9でvector insert結果と比較し、P_i=1が連続するcase、P_i=iが連続するcase、Fenwick境界indexを確認する。
+- 挿入が位置をずらしても相対順を保つなら、後から挿入した値を除いた列と、過去の列を対応させる。
+- 「空きが足りる」だけでは順位を使う証明にならない。未確定枠の順序が何と一致するかを言葉にする。
+- Fenwick 内の順位探索では、飛ばした接頭辞と残り順位を保つ。接頭辞和の外側二分探索とは計算量が異なる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N)、空きrank Fenwick kth。
+全1の Fenwick Tree の構築は $$O(N)$$。各値について順位探索と点更新をそれぞれ $$O(\log(N+1))$$ で行い、出力に $$O(N)$$ かかるので、全体で $$O(N\log(N+1))$$。通常は $$O(N\log N)$$ と表すが、ここでは $$N=1$$ の定数時間も含めた。
 
 ### 空間
 
-O(N)。
+入力の $$P$$、答え配列、Fenwick Tree をそれぞれ長さ $$N$$ で保持するので $$O(N)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 5\times 10^5; 1 \leq P_i \leq i; All input values are integers.
+公式制約は $$1\leq N\leq 5\times 10^5$$、$$1\leq P_i\leq i$$。空き枠の頻度は常に0または1であり、順位探索に必要な接頭辞和の単調性が保たれる。$$P_i=1$$ なら最左の空き枠、$$P_i=i$$ なら最右の空き枠を選び、$$N=1$$ も同じ手順で処理できる。
 
 ## 出典
 

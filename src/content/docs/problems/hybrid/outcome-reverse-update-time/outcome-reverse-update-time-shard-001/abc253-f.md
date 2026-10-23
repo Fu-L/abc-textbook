@@ -1,7 +1,7 @@
 ---
 title: "ABC253-F — Operations on a Matrix"
 draft: true
-authoringUnit: {"problemId":"abc253-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix","tag-prefix-difference"],"sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"取得時の列累積量をS_now[j]、直前代入時をS_set[j]とすれば答えはx+S_now[j]-S_set[j]になる。 代入時に全M列を記録する必要はなく、その代入へ結び付いた将来の点取得が使う列jだけをスナップショットすればよい。 各点取得が参照する直前の行代入を先に特定し、時間順走査中に列加算の代入時スナップショットを引けば、行列を持たずに答えられる。","sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc253-f","docPath":"src/content/docs/problems/hybrid/outcome-reverse-update-time/outcome-reverse-update-time-shard-001/abc253-f.md","learningOutcomeIds":["outcome-reverse-update-time"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-prefix-fenwick"],"excludedTopics":["値順eventを前から処理するsweep、時刻を反転せずに行う通常のonline更新、および答えの局所寄与だけを集計する順序交換。"],"tagIds":["tag-reverse-offline","tag-fenwick-weighted-prefix","tag-prefix-difference"],"sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"点取得 $$(i,j)$$ の直前の行代入が時刻 $$s$$ に値 $$x$$ を書いたとする。その代入によって時刻 $$s$$ 以前の寄与は全て消え、それ以後、取得時刻 $$t$$ までには同じ行への代入はない。従って、成分の値は $$x$$ と、その間に列 $$j$$ へ加えた量 $$S_t[j]-S_s[j]$$ の和である。代入がない場合も、時刻0の仮想代入 $$x=0$$ と $$S_0[j]=0$$ によって同じ式が成り立つ。\n\n一度目の走査の `last[i]` は、各点取得が依存するこの時刻 $$s$$ を正しく特定する。二度目の走査では、差分列の2点更新と接頭辞和により各時点の $$S_t[j]$$ を正しく得られる。紐付け先の代入時に保存した補正値 $$x-S_s[j]$$ に、取得時の $$S_t[j]$$ を加えるので、各答えは求める成分に一致する。記録する列を将来の点取得が使うものに限定しても、各点取得に必要な二時点の値は全て得られる。","sourceRevisionIds":["source-abc253-editorial-4025-a9dda18762878be5ec2358cece648988d3e594c03022782f457e4a13e5c3a095","source-abc253-f-problem-9b46b432bebd3b4b187ea5abb99002da9ceeb10b0aeccaa727cd4c94ffc87a7b"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,61 +21,76 @@ authoringUnit: {"problemId":"abc253-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-行iへの代入後に行う点取得(i,j)は、代入値xに、その代入時刻から取得時刻までに列jへ加わった量だけを足せばよい。
+行への代入が消すのは、その行にそれまで蓄積した値である。最後の行代入を境界にして、それ以後に対象列へ加わった量だけを足せば、巨大な行列を保存せずに各成分を求められる。
 
-採用する候補: 最終行代入へ問い合わせを結び付けるオフラインBIT
+公式制約は行数・列数ともに $$N,M\leq 2\times 10^5$$ であり、全成分を持つと最大 $$4\times 10^{10}$$ 個になる。行列を直接保存して行代入・列区間加算を行う方法では間に合わない。一方、行 $$i$$ の成分を取得するとき、過去の行代入はその時点で最新の一つだけが効いている。
 
-棄却する候補: N×M行列を更新する
+クエリを1始まりの時刻で番号付けし、時刻 $$t$$ までの列区間加算だけを累積した量を $$S_t[j]$$ とする。行代入はこの累積量には反映しない。時刻 $$t$$ の点取得 $$(i,j)$$ に対して、直前の行代入が時刻 $$s$$、代入値が $$x$$ なら、答えは
 
-行列サイズが最大4×10^5同士で、保存も区間更新も不可能である。
+$$
+x+S_t[j]-S_s[j]
+$$
 
-一度目の走査で各点取得をその行の直前代入へ紐付ける。二度目は列区間加算をrange-add/point-query BITで処理し、代入時に紐付く各列のBIT値を負の補正として保存し、取得時のBIT値と代入値へ加える。
+となる。取得時の $$S_t[j]$$ が $$S_{\mathrm{now}}[j]$$、代入時の $$S_s[j]$$ が $$S_{\mathrm{set}}[j]$$ に当たる。例えば、ある成分に5を加え、その行へ7を代入し、その成分に2を加えると、成分は $$0\to 5\to 7\to 9$$ と変わる。列加算だけの累積量は7だが、そのうち代入前の5は既に上書きされている。従って $$7+(5+2)-5=9$$ と、古い加算を引く必要がある。
+
+行代入を一度も受けていない行は、時刻0に0を代入したものとみなす。$$S_0[j]=0$$ なので、同じ式が $$0+S_t[j]-0$$ となり、初期値0からの全加算を数えられる。
+
+問題は、過去の代入時点の $$S_s[j]$$ をどう取得するかである。代入のたびに全列を保存すると、再び行数と列数の積に比例する仕事が生じる。先に全クエリを読めることを使い、実際に将来取得される列だけを、その代入時点で記録する。
+
+1. 一度目の走査では、長さ $$N$$ の配列 `last` を全て0にし、各行の直前代入時刻を保つ。行代入のたびに該当行の `last` を更新する。点取得では、その取得の識別番号と列 $$j$$ を、`last[i]` が示す代入に紐付ける。
+2. 二度目の走査では、列加算の累積量を Fenwick Tree で保つ。時刻 $$s$$ に値 $$x$$ を行代入するとき、そこに紐付く各点取得の列 $$j$$ について $$S_s[j]$$ を読み、その取得の補正値として $$x-S_s[j]$$ を保存する。時刻0に紐付く取得は、走査開始前に補正値を0とする。
+3. 点取得の時刻 $$t$$ に到達したら、保存した補正値に現在の $$S_t[j]$$ を加え、元のクエリ順に出力する。
+
+列区間加算は、列方向の差分列を Fenwick Tree に載せて処理する。列 $$l,\ldots,r$$ に $$a$$ を加えるとき、差分の位置 $$l$$ に $$a$$、位置 $$r+1$$ に $$-a$$ を加える。列 $$j$$ の累積量 $$S_t[j]$$ は、その時点の差分の1列目から $$j$$ 列目までの和で得られる。番兵の位置 $$M+1$$ まで用意すれば、右端が $$M$$ の加算も同じ形で扱える。
+
+一つの代入に多くの取得が紐付いても、各点取得が紐付く代入は一つだけである。代入時点で記録する列の延べ個数は高々 $$Q$$ なので、全列のスナップショットは不要になる。
 
 ## 典型の発動条件
 
 ### オフライン依存先の付け替え
 
-発動条件: 問い合わせの答えが過去の最後の更新一つと、その後の差分で決まる。
-
-行ごとの最終代入時刻を追い、将来の点取得を該当更新イベントへ接続する。
+答えが「過去の最後の上書き一つ」と「その後の変化」で決まり、全問い合わせを先に読めるときに使う。最初の走査で依存する更新を特定すれば、二度目の走査で必要な過去の値だけを記録できる。
 
 ### range-add point-query BIT
 
-発動条件: 列区間への加算履歴から特定列の累積値だけが必要になる。
-
-差分BITで区間加算し、代入時と取得時の二時点の値を引き算する。
+区間へ一様に加算し、特定位置の値だけを読みたいとき、差分列への2点更新と接頭辞和へ変換できる。この問題では、列方向の差分で加算を管理したうえで、時刻方向の二つの累積量の差から上書き以後の寄与を取り出す。
 
 ## 問題固有の要素
 
-行代入は列ごとに異なる過去加算を全て打ち消すため、一つの行基準値では表せないが、実際に問われる列だけを代入時へ遡って差し引けばよい。
-
-別の問題へ持ち帰る視点: 巨大な二次元状態でも、上書き境界と一次元差分を問い合わせ単位で結び付けるオフライン化が有効である。
+行代入は、その行が受けた列ごとに異なる過去の加算を打ち消す。代入値だけを行ごとに保存しても、どの加算を取り消すかが分からない。そこで、点取得ごとに直前の行代入と列を組にして記録する。巨大な二次元状態を、行の上書き境界と列の加算履歴へ分解できることが核心である。
 
 ## 正当性
 
-取得時の列累積量をS_now[j]、直前代入時をS_set[j]とすれば答えはx+S_now[j]-S_set[j]になる。 代入時に全M列を記録する必要はなく、その代入へ結び付いた将来の点取得が使う列jだけをスナップショットすればよい。 各点取得が参照する直前の行代入を先に特定し、時間順走査中に列加算の代入時スナップショットを引けば、行列を持たずに答えられる。
+点取得 $$(i,j)$$ の直前の行代入が時刻 $$s$$ に値 $$x$$ を書いたとする。その代入によって時刻 $$s$$ 以前の寄与は全て消え、それ以後、取得時刻 $$t$$ までには同じ行への代入はない。従って、成分の値は $$x$$ と、その間に列 $$j$$ へ加えた量 $$S_t[j]-S_s[j]$$ の和である。代入がない場合も、時刻0の仮想代入 $$x=0$$ と $$S_0[j]=0$$ によって同じ式が成り立つ。
+
+一度目の走査の `last[i]` は、各点取得が依存するこの時刻 $$s$$ を正しく特定する。二度目の走査では、差分列の2点更新と接頭辞和により各時点の $$S_t[j]$$ を正しく得られる。紐付け先の代入時に保存した補正値 $$x-S_s[j]$$ に、取得時の $$S_t[j]$$ を加えるので、各答えは求める成分に一致する。記録する列を将来の点取得が使うものに限定しても、各点取得に必要な二時点の値は全て得られる。
 
 ## 実装上の注意
 
-- 直前代入がない取得は基準値0・時刻0として扱い、同じ時刻の操作順を変えない。加算総和と代入値は64ビット整数で保持する。
+- 時刻0の紐付けも保持し、その補正値を0で初期化する。実際の代入がない行の取得を落とさない。
+- 二度目の走査で行代入そのものを Fenwick Tree へ反映しない。木が管理するのは、行によらず共通する列加算の累積量だけである。
+- 同じ代入に同じ列の取得が複数紐付いても、それぞれの取得番号へ補正値を保存すればよい。クエリは入力順に処理する。
+- 列加算の総和と補正値は64ビット符号付き整数で持つ。補正値は負になることがある。
 
 ## 復習の核
 
-- 小さい行列を直接更新する実装と比較し、代入前後に同じ列へ加算する例、代入なし、同じ行への連続代入、異なる列の取得を確認する。
+- 上書きと加算が混ざるときは、最後の上書き以前と以後を分ける。累積加算から上書き時点の累積量を引けば、それ以後だけを残せる。
+- 過去の全状態を保存する前に、将来の問い合わせが必要とする位置だけを更新時点へ紐付けられないか考える。
+- 時刻0の仮想代入を置くと、上書きが一度もない行も同じ式で扱える。
 
 ## 計算量と制約
 
 ### 時間
 
-O((M+Q)log M)、列range-add BIT、各点取得を一回snapshot。
+行の `last` 配列の初期化に $$O(N)$$、長さ $$M+1$$ の差分 Fenwick Tree のゼロ初期化に $$O(M)$$、クエリの保持・紐付けに $$O(Q)$$ かかる。各列加算は2回の点更新、各点取得は高々1回の代入時の読み取りと1回の取得時の読み取りであり、紐付け先のリストを巡る総数も $$O(Q)$$。全体で $$O(N+M+Q\log(M+1))$$ となる。$$M=1$$ でも木の操作とクエリ走査の定数時間を含む。
 
 ### 空間
 
-O(N+M+Q)、行lastと取得紐付け。
+行の `last` 配列に $$O(N)$$、差分 Fenwick Tree に $$O(M)$$、クエリ・紐付けリスト・取得ごとの補正値に $$O(Q)$$ を使うので、全体で $$O(N+M+Q)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M, Q \leq 2 \times 10^5; Every query is in one of the formats listed in the Problem Statement.; For each query in the format 1 l r x, 1 \leq l \leq r \leq M and 1 \leq x \leq 10^9.; For each query in the format 2 i x, 1 \leq i \leq N and 1 \leq x \leq 10^9.; For each query in the format 3 i j, 1 \leq i \leq N and 1 \leq j \leq M.; At least one query in the format 3 i j is given.; All values in input are integers.
+公式制約は $$1\leq N,M,Q\leq 2\times 10^5$$、加算値・代入値は1以上 $$10^9$$ 以下。行列全体を作らず、行・列・クエリ数の和に比例する記憶量で処理する。成分の値は高々 $$(Q+1)\times 10^9$$ 程度なので64ビット整数で足りる。代入なし、同じ行への連続代入、$$M=1$$ も、直前代入への紐付けと時刻0の基底を変えずに扱える。
 
 ## 出典
 
