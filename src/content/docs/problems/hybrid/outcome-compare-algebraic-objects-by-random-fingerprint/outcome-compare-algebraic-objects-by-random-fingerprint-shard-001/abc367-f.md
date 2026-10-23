@@ -1,7 +1,7 @@
 ---
 title: "ABC367-F — Rearrange Query"
 draft: true
-authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。","sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybrid/outcome-compare-algebraic-objects-by-random-fingerprint/outcome-compare-algebraic-objects-by-random-fingerprint-shard-001/abc367-f.md","learningOutcomeIds":["outcome-compare-algebraic-objects-by-random-fingerprint"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-randomized-algorithms"],"excludedTopics":["乱択代数fingerprintの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-randomized-algebraic-fingerprint","tag-randomized-algorithm"],"sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"以下では、入力の両配列と全クエリは乱数を選ぶ前に固定されているとする。確率はこの固定入力に対する乱数表の選び方について評価する。\n\n累積和の差では区間より前の寄与がすべて打ち消され、区間内の各値がその出現回数だけ残る。従って得られる値は定義した指紋に等しい。二つの区間が同じ多重集合なら、すべての出現回数が一致するので、どの乱数表でも指紋は一致する。長さも一致するため、正しい答えが `Yes` の場合に `No` を返すことはない。\n\n異なる多重集合 $$S,T$$ の1比較を考える。値 $$v$$ の頻度差を $$\\Delta_v=c_v(S)-c_v(T)$$ とすると、整数として非零の $$\\Delta_u$$ を持つ値 $$u$$ がある。各区間の長さは高々 $$N$$ なので $$0<|\\Delta_u|\\leq N<p$$ であり、$$\\Delta_u$$ は $$\\mathbb F_p$$ でも非零である。衝突条件は\n\n$$\n\\Delta_u h(u)+\\sum_{v\\ne u}\\Delta_v h(v)=0\\quad\\text{in }\\mathbb F_p\n$$\n\nとなる。$$h(u)$$ 以外の乱数をすべて固定すると、和の部分は定数になる。体では非零の $$\\Delta_u$$ で割れるので、この等式を満たす $$h(u)$$ はただ一つである。残した $$h(u)$$ は他の乱数と独立で、$$p$$ 個の体元から一様に選ばれるため、条件付きの衝突確率は $$1/p$$。他の乱数の選び方について平均しても $$1/p$$ となる。長さの違う区間は先に弾くので、1クエリの誤り確率は高々 $$1/p$$ である。\n\n互いに独立な乱数表を $$t$$ 組使い、すべての指紋が一致したときだけ `Yes` とすれば、異なる多重集合が全組で衝突する確率は $$1/p^t$$ となる。全 $$Q$$ クエリのうち一つでも誤る確率は、事象の和の上界（union bound）により\n\n$$\n\\Pr(\\text{どこかのクエリで誤る})\\leq \\frac{Q}{p^t}\n$$\n\nで抑えられる。同じ乱数表を全クエリで共有しているため、クエリ間の衝突は独立とは限らないが、union boundにその独立性は不要である。一方、$$1/p^t$$ への減少には、乱数表同士の独立性が必要になる。\n\n本問の上限 $$Q\\leq 2\\times 10^5$$ に対し、$$p=2^{61}-1$$ なら1組でも全クエリの誤り確率は $$Q/p<8.7\\times 10^{-14}$$。採用した2組では $$Q/p^2<3.8\\times 10^{-32}$$ となる。この評価は、公式解説の加算ハッシュを、値ごと・組ごとに独立一様な体元を使うモデルへ具体化したものである。","sourceRevisionIds":["source-abc367-editorial-10692-0beae3b613a8298bf519f4a89d605337b00f9c020b9b1a41c16c96881f64c1b4","source-abc367-f-problem-e1f97a2452f0b6a07da9585002ebd9d8c9958d71a394beeeffc14028ef82b3f9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,63 +16,101 @@ authoringUnit: {"problemId":"abc367-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-二つの区間を並べ替えて一致できる条件は、長さと各値の出現回数が一致すること、すなわちmultiset equalityである。順序情報は不要である。
+並べ替えた後に一致するかどうかは、各値が何個ずつあるかで決まる。この個数をすべて比較する代わりに、値ごとに決めた乱数を出現回数だけ足し、その和を「指紋」として比較する。和なら順序に依存せず、累積和から区間の指紋を高速に取り出せる。
 
-各値vへ独立なrandom weight h(v)を割り当て、区間hashを重みの和とすれば、同じmultisetは必ず同じ値になり、異なるものの衝突確率を小さくできる。
+まず、各クエリで両区間をソートして比較すれば正しく判定できる。しかし、長い区間を繰り返し比較する場合は全体で $$O(QN\log N)$$ かかり、$$N,Q\leq 2\times 10^5$$ には間に合わない。必要なのは順序を捨てた多重集合、すなわち各値の出現回数の一致である。値ごとの個数の累積和をすべて用意すると、今度は $$O(N^2)$$ の前処理・記憶量が必要になる。
 
-採用する候補: A,Bそれぞれでrandom value hashのprefix sumを作り、区間長とhash差を比較する。
+そこで個数の情報を一つの和へ縮めたい。ただし通常の要素和では、独自例 $$\{1,1,4\}$$ と $$\{1,2,3\}$$ がともに6となり、長さも和も等しいのに区別できない。各値へランダムな重みを割り当てれば、このような決まった相殺を避けられる。
 
-棄却する候補: queryごとに両区間をcopyしてsortし、一致するか比較する。
+ここでは素数 $$p>N$$ を固定する。$$\mathbb F_p$$ は、$$0,1,\ldots,p-1$$ を法 $$p$$ で加減乗算する体である。値 $$v=1,\ldots,N$$ ごとに、$$\mathbb F_p$$ から独立一様に乱数 $$h(v)$$ を一度だけ選ぶ。同じ値には、出現位置によらず、配列 $$A,B$$ の両方で同じ乱数を使う。多重集合 $$S$$ での値 $$v$$ の個数を $$c_v(S)$$ とし、指紋を
 
-長い区間queryが多数あると同じ要素を何度もsortし、入力上限に間に合わない。
+$$
+H(S)=\sum_{v=1}^{N} c_v(S)h(v)\pmod p
+$$
 
-値1..Nへ十分広いrandom hashを割り当て、AとBのhash prefix sumを構築する。各queryで区間長が異なればNo、同じなら二つの区間hashを差分で求め、一致時Yes、不一致時Noを返す。必要なら独立hashを複数併用する。
+と定める。個数を係数として残すので、同じ値が二度出れば $$2h(v)$$ が寄与する。XORでは $$h(v)\mathbin{\mathrm{XOR}}h(v)=0$$ となり、異なる値 $$x,y$$ に対する $$\{x,x\}$$ と $$\{y,y\}$$ が常に同じ0へ潰れるため、本問の多重集合には使えない。
+
+入力に合わせ、配列も区間も1始まりの閉区間で扱う。最初の $$i$$ 要素の指紋を $$P_A[i],P_B[i]$$ とすると、初期値と更新は
+
+$$
+\begin{aligned}
+P_A[0]&=P_B[0]=0,\\
+P_A[i]&=(P_A[i-1]+h(A_i))\bmod p,\\
+P_B[i]&=(P_B[i-1]+h(B_i))\bmod p
+\end{aligned}
+$$
+
+である。$$i=1,\ldots,N$$ の順に構築すると、区間 $$A_l,\ldots,A_r$$ の指紋は $$(P_A[r]-P_A[l-1])\bmod p$$ となる。$$B_L,\ldots,B_R$$ も同様に求められる。
+
+各クエリではまず $$r-l+1$$ と $$R-L+1$$ を比較し、長さが違えば `No` とする。同じ長さなら指紋を比較し、不一致なら `No`、一致なら `Yes` を返す。異なる多重集合が偶然同じ指紋になることを衝突と呼ぶ。後の証明で誤り確率を評価し、ここでは $$p=2^{61}-1$$、互いに独立な乱数表2組を採用する。各組で累積和を作り、両組の指紋が一致したときだけ `Yes` とする。
 
 ## 典型の発動条件
 
 ### Zobrist型multiset hashing
 
-発動条件: 静的列の多数区間について順序を無視した一致判定をしたいとき。
+順序を無視し、重複回数を保って一致判定したいときに、値ごとの乱数を加算する指紋が候補になる。素数の法を各多重集合の大きさより大きくし、整数として異なる個数が法を取っても消えないことを確認する。
 
-要素ごとのrandom weightを加算して頻度vectorのfingerprintを作る。
+例えば同じ値 $$p$$ 個と空集合の指紋は常に等しい。法の条件を外した失敗は、乱数表を増やしても解消しない。
 
 ### hash prefix sum
 
-発動条件: 加法的区間fingerprintを高速に取り出すとき。
-
-列prefixを前計算し、二端点の差でquery hashを得る。
+配列が静的で、区間の情報を加法的な指紋へ写せたときは、累積和の差で1組あたり $$O(1)$$ で取り出せる。配列に更新がある場合は、累積和をそのまま使い回せず、別途区間和を維持する構造が必要になる。
 
 ## 問題固有の要素
 
-順序を無視するためpolynomial rolling hashではなく、加算の可換性を持つhashが必要である。
+本問では値域が $$1,\ldots,N$$ なので、乱数表は配列で持てる。また各区間の長さは高々 $$N$$ であり、$$p>N$$ と選ぶだけで、後述の頻度差が体上でも非零になる条件を満たせる。
 
-別の問題へ持ち帰る視点: 比較対象の同値関係に合わせ、hashの演算も順序依存か可換かを選ぶ。
+持ち帰る視点は、比較したい情報に指紋の演算を合わせることである。並び順を比べる指紋では位置の情報を残し、多重集合を比べる本問では加算の可換性で順序を捨てる。
 
 ## 正当性
 
-XOR hashでは同じ値が偶数回で消えるためmultiset頻度を表せないが、random weightの加算なら出現回数に比例して寄与する。 prefixH[i+1]=prefixH[i]+h(A_i)とすれば、[l,r]のhashはprefixH[r]−prefixH[l−1]で得られる。 multiplicityを加法的に反映し、各queryを定数回のprefix差へ落とせる確率的判定である。
+以下では、入力の両配列と全クエリは乱数を選ぶ前に固定されているとする。確率はこの固定入力に対する乱数表の選び方について評価する。
+
+累積和の差では区間より前の寄与がすべて打ち消され、区間内の各値がその出現回数だけ残る。従って得られる値は定義した指紋に等しい。二つの区間が同じ多重集合なら、すべての出現回数が一致するので、どの乱数表でも指紋は一致する。長さも一致するため、正しい答えが `Yes` の場合に `No` を返すことはない。
+
+異なる多重集合 $$S,T$$ の1比較を考える。値 $$v$$ の頻度差を $$\Delta_v=c_v(S)-c_v(T)$$ とすると、整数として非零の $$\Delta_u$$ を持つ値 $$u$$ がある。各区間の長さは高々 $$N$$ なので $$0<|\Delta_u|\leq N<p$$ であり、$$\Delta_u$$ は $$\mathbb F_p$$ でも非零である。衝突条件は
+
+$$
+\Delta_u h(u)+\sum_{v\ne u}\Delta_v h(v)=0\quad\text{in }\mathbb F_p
+$$
+
+となる。$$h(u)$$ 以外の乱数をすべて固定すると、和の部分は定数になる。体では非零の $$\Delta_u$$ で割れるので、この等式を満たす $$h(u)$$ はただ一つである。残した $$h(u)$$ は他の乱数と独立で、$$p$$ 個の体元から一様に選ばれるため、条件付きの衝突確率は $$1/p$$。他の乱数の選び方について平均しても $$1/p$$ となる。長さの違う区間は先に弾くので、1クエリの誤り確率は高々 $$1/p$$ である。
+
+互いに独立な乱数表を $$t$$ 組使い、すべての指紋が一致したときだけ `Yes` とすれば、異なる多重集合が全組で衝突する確率は $$1/p^t$$ となる。全 $$Q$$ クエリのうち一つでも誤る確率は、事象の和の上界（union bound）により
+
+$$
+\Pr(\text{どこかのクエリで誤る})\leq \frac{Q}{p^t}
+$$
+
+で抑えられる。同じ乱数表を全クエリで共有しているため、クエリ間の衝突は独立とは限らないが、union boundにその独立性は不要である。一方、$$1/p^t$$ への減少には、乱数表同士の独立性が必要になる。
+
+本問の上限 $$Q\leq 2\times 10^5$$ に対し、$$p=2^{61}-1$$ なら1組でも全クエリの誤り確率は $$Q/p<8.7\times 10^{-14}$$。採用した2組では $$Q/p^2<3.8\times 10^{-32}$$ となる。この評価は、公式解説の加算ハッシュを、値ごと・組ごとに独立一様な体元を使うモデルへ具体化したものである。
 
 ## 実装上の注意
 
-- 乱数seed・bit幅を選び衝突確率を十分下げる。overflowを意図したunsigned加算か素数modかを統一し、区間indexのinclusive境界を合わせる。
+- 乱数は0を含む $$0,\ldots,p-1$$ から選ぶ。一様な64 bit乱数の下位61 bitを取り、値が $$p$$ の場合だけ引き直せば、この範囲で一様になる。単に64 bit乱数の剰余を取ると分布が偏る。実装には疑似乱数生成器を使うが、上の確率保証は独立一様な乱数のモデルに対するものと区別する。入力値から決定的に重みを作るだけで、同じ保証が得られるわけではない。
+- 2組目は新たに乱数を生成する。1組目をそのまま複製したり、各重みを同じ非零定数倍にしたりしても、衝突が同時に起きるので誤り確率は二乗にならない。
+- 累積和の各値は毎回 $$0,\ldots,p-1$$ に正規化する。二つの値の加算は $$2p-2<2^{62}$$、区間差を非負にする $$P[r]+p-P[l-1]$$ は高々 $$2p-1<2^{62}$$ なので、符号なし64 bit整数で安全に計算できる。この方式は乗算を使わず、128 bit整数は不要である。区間差も法 $$p$$ で正規化してから比較する。
+- 法 $$2^W$$ の unsigned 加算へ置き換えると、体上の証明は使えない。異なる値 $$x,y$$ の独自例 $$\{x,x\},\{y,y\}$$ では、衝突条件は $$2(h(x)-h(y))=0\pmod{2^W}$$。独立一様な $$W$$ bit乱数で $$W\geq 1$$ のとき、差が $$0$$ または $$2^{W-1}$$ なら衝突し、その確率は $$2/2^W=2^{-(W-1)}$$ である。常に0になるXORの例とも、素数体での $$1/p$$ とも区別する。本解説の手順は素数の法に統一する。
+- $$l=1$$ または $$L=1$$ では先頭の累積和0を使う。長さ1の区間、同じ値ばかりの区間も特別扱いは不要である。クエリを順次処理して出力すれば、全クエリを保存する必要はない。
 
 ## 復習の核
 
-- 同値な並べ替え例と、同じ和だが異なるmultisetの例で通常和との差を確認する。確率解法であることとhash生成方法をレビュー時に明示する。
+並べ替えで同一視する情報は「各値の個数」であり、それを乱数との線形和へ写すと区間の累積和が使える。復習では、非零の頻度差が法を取っても消えない理由と、他の乱数を固定すると衝突させる体元が一つになる理由を再現する。さらに、1比較の上界に全比較回数を掛け、独立な乱数表を増やす費用と効果まで評価する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N+Q)、固定数のrandom hash。
+乱数表 $$t$$ 組の生成と累積和の構築に期待 $$O(tN)$$、全クエリの比較・出力に $$O(tQ)$$、合計で期待 $$O(t(N+Q))$$。期待値なのは一様乱数生成の引き直しによるもので、1回の採用確率は $$1-2^{-61}$$ である。固定した $$t=2$$ では期待 $$O(N+Q)$$ となる。
 
 ### 空間
 
-O(N)。
+値ごとの乱数表と両配列の累積和が各組で $$O(N)$$、入力配列も含めて $$O(tN)$$。クエリを保存しなければ $$O(Q)$$ の領域は不要で、$$t=2$$ では $$O(N)$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N,Q\leq 2\times 10^5; 1\leq A_i,B_i\leq N; 1\leq l_i \leq r_i\leq N; 1\leq L_i \leq R_i\leq N; All input values are integers.
+公式制約は $$1\leq N,Q\leq 2\times 10^5$$、$$1\leq A_i,B_i\leq N$$、$$1\leq l_i\leq r_i\leq N$$、$$1\leq L_i\leq R_i\leq N$$。実行時間制限は2秒、メモリ制限は1024 MiBである。$$p=2^{61}-1>N$$ なので、頻度差が法を取ると0になる事態を避けられる。2組の乱数表と両配列の累積和は計6本の長さ $$N+1$$ の64 bit整数配列で持て、上限でも約9.6 MBである。線形な前処理と1クエリあたり定数回の演算で、長い区間を繰り返し走査する必要がない。
 
 ## 出典
 
