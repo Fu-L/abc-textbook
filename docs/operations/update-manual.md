@@ -426,6 +426,40 @@ Manual」を運用方針として認識する。削除済みのIssue
 validatorはPR-10bで削除した。seed
 agent経路では既存結果に結び付いた現行憲章の方針・bytesを確認する。既存schemaとseedの対象制限、本文・check・監査結果との照合は保ち、人間承認を表す結果は作らない。
 
+### Actionsの依存を再照会する（#229）
+
+1. 両workflowの`uses`を読み、各上流のReleasesで新しい正式版を確認する。mainブランチだけの依存更新や未公開の再bundleを修正版として採用しない。composite
+   Actionは`action.yml`内の`uses`も読み、内部固定SHAまでたどる。
+2. 採用候補の同じrefから`package.json`と`package-lock.json`を一時ディレクトリへ取得し、production依存を再照会する。下の例はdeploy-pagesの現行版を対象に、インストールや上流scriptの実行をせず照会する。別のAction・候補版では`action_repo`・`action_ref`を置き換える。upload-pages-artifactの内側では`action_repo=actions/upload-artifact`と、外側の`action.yml`が参照するSHAを使う。
+
+   ```sh
+   (
+     set -eu
+     action_repo=actions/deploy-pages
+     action_ref=v5.0.1
+     audit_dir="$(mktemp -d)"
+     trap 'rm -rf "$audit_dir"' EXIT
+     for file in package.json package-lock.json; do
+       curl --fail --silent --show-error \
+         "https://raw.githubusercontent.com/$action_repo/$action_ref/$file" \
+         --output "$audit_dir/$file"
+     done
+     cd "$audit_dir"
+     npm audit --omit=dev --package-lock-only --ignore-scripts --json
+   )
+   ```
+
+   2026-10-23にNode.js 26.12.1 / npm 11.21.1で実行した現行deploy-pagesの期待結果はexit
+   1と、JSONの`vulnerabilities`にあるform-data 4.0.0由来のCritical等の検出である。exit
+   1だけを監査成功とせず、JSONに通信・lockfile等の`error`がないことと検出内容を読む。将来の修正版では対象advisoryの消失を確認する。npm
+   security bulk
+   APIへ直接照会する場合も、lockfileの`packages`から`dev: true`を除き、入れ子の同名packageを含むすべての名前・版を対象にする。
+
+3. `action.yml`の`runs.main`・`runs.post`が参照する実行バンドルも同じrefから読む。lockfileの更新だけで修正済みとしない。deploy-pagesではform-dataのboundary生成とCRLF対策を含む修正版のコードが配布物へ反映されたか確認する。未解決のライブラリ、版、advisory、確認日を[残存項目](development.md#actionsに残る依存の追跡229)とPR本文へ短く残す。
+4. 修正版を採用できた場合はworkflow・運用文書を同期し、既存のworkflow回帰と`verify:fast`で検証する。PRのCI成功後、merge後のmainログでverifyの保存元`dist`・artifact名/IDとdeployの入力名/ID・`pages_build_version`のSHA・配信成功を照合する。権限と`github-pages`
+   environment、origin/base
+   pathを保つ。依存が残る間は`Closes #229`を付けず、Issueを開いたまま追跡する。
+
 ## 4. 互換性と見やすさを確認する
 
 既存Problem

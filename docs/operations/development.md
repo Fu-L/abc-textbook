@@ -170,8 +170,8 @@ Codeは0.44.3系列へ揃えました。`micromark-extension-math`のKaTeXだけ
 
 2026-10-22に両workflowのcheckoutを7.0.1、setup-nodeを7.1.0、github-scriptを9.0.0へ更新しました。それぞれの`action.yml`は`runs.using: node24`です。`.nvmrc`が指定するビルド用Node.jsとは別に管理されます。PagesのActionsも下表の正式タグに固定し、artifact名、権限、environment、検証した同じ`dist`の配信契約を維持します。
 
-更新後の正式タグのproduction lockfileをnpm security bulk
-APIで再照会しました。以下は依存の版に一致した検出であり、現行workflowで攻撃経路の成立を確認したものではありません。**[#229](https://github.com/Fu-L/abc-textbook/issues/229)は未解決**です。
+2026-10-23に各Actionの最新の正式リリースとproduction lockfileを再確認し、npm security bulk
+APIへ再照会しました。Actionsの更新は[PR #231](https://github.com/Fu-L/abc-textbook/pull/231)でmainへ反映済みですが、追加で採用できる修正版リリースはありません。以下は依存の版に一致した検出であり、現行workflowで攻撃経路の成立を確認したものではありません。**[#229](https://github.com/Fu-L/abc-textbook/issues/229)は未解決**です。
 
 | Actionと確認した版                                                                                                                                                                                                                                  | 残る検出の対象                                                                                                   |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -183,6 +183,14 @@ APIで再照会しました。以下は依存の版に一致した検出であ�
 | [upload-pages-artifact 5.0.0](https://github.com/actions/upload-pages-artifact/blob/v5.0.0/action.yml) → [upload-artifactの内部固定SHA](https://github.com/actions/upload-artifact/blob/bbbca2ddaa5d8feaa63e36b76fdaad77386f024f/package-lock.json) | undici 6.23.0、brace-expansion、fast-xml-builder/parser、lodash（High等）。外側の更新だけでは内部SHAは追従しない |
 
 修正版を同梱して再bundleした上流リリースが公開されたら、lockfileと実行用`dist/*.js`の双方を確認して更新します。プロジェクトの`overrides`は外部Actionのバンドルを変更しません。特にdeploy-pagesの[form-dataのCritical](https://github.com/advisories/GHSA-fjxv-7rqg-78g4)は残るため、プロジェクトのaudit成功をActions全体の解消と扱いません。配布済み[dist/index.js](https://github.com/actions/deploy-pages/blob/v5.0.1/dist/index.js)にも、boundaryを`Math.random()`で生成する処理が残ることを確認しました。form-dataは追加の[CRLF injection](https://github.com/advisories/GHSA-hmw2-7cc7-3qxx)も含めて4.0.6以上が必要です。通常PRのCIログと、merge後のmain配信ログで同一artifactの保存・配信を確認します。PR段階の検証を実配信成功として扱いません。
+
+優先して追う更新先は[deploy-pagesのReleases](https://github.com/actions/deploy-pages/releases)です。form-dataを4.0.6以上へ更新した実行バンドルに加え、同じActionに残るunzip-stream・cross-spawn・Undici・Octokit等も再照会します。setup-nodeの[smol-toml](https://github.com/advisories/GHSA-r4xh-jqrq-34v2)は1.9.0以上、checkoutの[Undici](https://github.com/advisories/GHSA-rfgv-xxqx-mfg5)は6.28.1以上が今回の検出に対する修正目標です。他の系列・新しいadvisoryは採用時点で再確認します。
+
+upload-pages-artifactは外側の正式版だけでなく、`action.yml`内のupload-artifactの固定SHAも確認します。2026-10-23時点の[upload-artifact最新正式版7.0.2](https://github.com/actions/upload-artifact/releases/tag/v7.0.2)のproduction
+lockfileにも脆弱な依存が残っています。内側だけを最新へ置き換えて解消したとは扱わず、外側の正式版が参照するSHAのlockfileと実行バンドルを再確認します。具体的な再照会方法は[更新マニュアル](update-manual.md#actionsの依存を再照会する229)を参照してください。
+
+既存更新の配信確認は2026-10-23に完了しました。[PR #231のmain run 39786553060](https://github.com/Fu-L/abc-textbook/actions/runs/39786553060)では、SHA
+`4b8b9176865d96531e9142d2eaa0c960e911bb13`の検証とPages配信がともに成功しています。[verifyログ](https://github.com/Fu-L/abc-textbook/actions/runs/39786553060/job/119851184666)の保存元は`dist`、artifact名は`github-pages-4b8b9176865d96531e9142d2eaa0c960e911bb13-39786553060-1`、IDは`12430827214`です。[deployログ](https://github.com/Fu-L/abc-textbook/actions/runs/39786553060/job/119864153305)で同じ名前・IDと`pages_build_version`のSHA、公開先`https://fu-l.github.io/abc-textbook/`、配信成功を確認しました。これは更新済みActionsで配信できた確認であり、上流に残る依存の解消を意味しません。
 
 ## Local-only setup
 
