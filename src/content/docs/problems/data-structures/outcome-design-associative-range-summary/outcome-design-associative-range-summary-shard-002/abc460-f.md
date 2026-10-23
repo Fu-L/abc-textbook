@@ -1,7 +1,7 @@
 ---
 title: "ABC460-F — Farthest Pair Query"
 draft: true
-authoringUnit: {"problemId":"abc460-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc460-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-ancestor-lca","unit-tree-metric"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-tree-ancestor-lca","tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd","source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"empty集合は単位元、一頂点集合は同じ頂点を両端とする長さ0diameterとしてmonoidを構成できる。 merge時は(a,b,c,d)の全pair距離から最大の二端点を選べばS∪Tのdiameterになる。 任意の外部点xから集合U内の最遠点はUのdiameter端点のどちらかなので、cross pairの最大も二組の端点四個で覆える。","sourceRevisionIds":["source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd","source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc460-f","docPath":"src/content/docs/problems/data-structures/outcome-design-associative-range-summary/outcome-design-associative-range-summary-shard-002/abc460-f.md","learningOutcomeIds":["outcome-design-associative-range-summary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-tree-ancestor-lca","unit-tree-metric"],"excludedTopics":["区間monoid要約の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-range-monoid-aggregation","tag-tree-ancestor-lca","tag-tree-metric-diameter"],"sourceRevisionIds":["source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd","source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"空でない頂点集合 $$U$$ の直径の端点を $$a,b$$ とする。まず、任意の $$w\\in U$$ と、集合の外も含めた任意の頂点 $$x$$ について、\n\n$$\nd(x,w)\n\\leq \\max\\bigl(d(x,a),d(x,b)\\bigr)\n$$\n\nを示す。集合が一点なら $$w=a=b$$ なので成り立つ。以下では二点以上とする。\n\n$$a$$ から $$b$$ への経路を $$P$$ とする。$$w$$ から $$P$$ へ向かう経路が最初に出会う頂点を $$p$$ と呼び、$$w$$ の $$P$$ 上への**射影**とする。木の経路は一意なので、この合流点も一意である。$$w$$ が $$P$$ 上なら $$p=w$$。経路から伸びる枝の長さを $$h=d(p,w)$$ とおく。\n\n$$a,b$$ は集合 $$U$$ の直径端なので、$$a,w$$ の距離も $$b,w$$ の距離も $$d(a,b)$$ 以下である。これらの経路は $$p$$ を通るから、例えば\n\n$$\nd(a,p)+h\n\\leq d(a,p)+d(p,b)\n$$\n\nとなる。同様に $$b,w$$ の距離も比べると、\n\n$$\nh\\leq d(p,b),\\qquad\nh\\leq d(p,a)\n$$\n\nを得る。つまり、枝を先端の $$w$$ まで進むより、経路 $$P$$ をどちらかの端まで進むほうが短くならない。\n\n次に、$$x$$ の $$P$$ 上への射影を $$q$$ とする。$$q$$ が $$a$$ から $$p$$ までの経路上にあるときは、反対側の端 $$b$$ と比べる。三角不等式と上の枝の長さの制限から、\n\n$$\n\\begin{aligned}\nd(x,w)\n&\\leq d(x,q)+d(q,p)+h\\\\\n&\\leq d(x,q)+d(q,p)\n       +d(p,b)\\\\\n&=d(x,b).\n\\end{aligned}\n$$\n\n最後の等号は、$$x$$ から $$b$$ への経路が $$q,p$$ をこの順に通るためである。$$q$$ が $$p$$ から $$b$$ までの経路上なら、左右を入れ替えて $$d(x,w)\\leq d(x,a)$$ を得る。$$q=p$$ も含め、これで補題が示された。最初の不等式を等号にしないのは、$$x,w$$ が同じ枝にいる場合、その最短経路が $$q$$ を通るとは限らないためである。\n\nここで左右の空でない集合を $$S,T$$、それぞれの直径端を $$a,b$$ と $$c,d$$ とする。集合をまたぐ任意の対 $$s\\in S,t\\in T$$ に対して、まず集合 $$S$$ と外部点 $$t$$ に補題を使い、次に集合 $$T$$ と外部点 $$a,b$$ に使うと、\n\n$$\n\\begin{aligned}\nd(s,t)\n&\\leq\\max\\bigl(d(a,t),d(b,t)\\bigr)\\\\\n&\\leq\\max\\left\\{\\begin{aligned}\n    &d(a,c),d(a,d),\\\\\n    &d(b,c),d(b,d)\n  \\end{aligned}\\right\\}.\n\\end{aligned}\n$$\n\n同じ集合内の対は、その集合の直径長以下である。従って、和集合のどの対も四端点の6対の最大距離以下となる。逆に、その6対はすべて和集合内の対なので、最大距離は和集合の直径長に一致する。\n\n同率の直径端が複数あっても、補題はどの直径端を選んでも成り立つ。例えば中心から三つの葉へ辺が伸びる星型の木では、どの葉二つも直径端となるが、残した二端点で外部点からの最遠距離を表せる。したがって、合成で最大距離を達成する端点を一組選べば、次の合成でも十分である。括り方を変えた結果、端点の組そのものが一致するとは限らないが、直径長と以後の合成に必要な性質は保たれる。\n\n空集合との合成は相手をそのまま返し、一点集合は同じ頂点を両端とする。葉が表す集合について要約は正しく、内部節点でも上の合成によってその区間の正しい直径端を保持する。更新した葉から根まで再計算すれば、この不変条件が復元される。根は全黒頂点集合を表すので、その端点間距離が求める答えである。","sourceRevisionIds":["source-abc460-editorial-21029-aa3aea6c62f0ad6ad7f3a90d4b509af29a9962b410820591d626e0987bf398fd","source-abc460-f-problem-e78320848f728b55f4d63e6e3cb1a19f2d2668613420c720327f73c7da3d2621"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,61 +17,132 @@ authoringUnit: {"problemId":"abc460-f","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-黒頂点集合Sの最大距離はSのdiameterであり、二集合S,Tをunionしたdiameterは各集合diameterの高々四端点だけから決まる。
+黒頂点どうしの最大距離を保つには、頂点集合を二つに分け、それぞれの直径の両端だけを覚えておく。木の距離では、この合計四端点を比べるだけで、二集合を合わせた直径も求められる。この性質を使えば、色が変わった頂点を含む区間だけを更新できる。
 
-採用する候補: vertex番号上のsegment tree各nodeに、その範囲の黒頂点集合diameter端点pairを持ち、色flipをpoint update、mergeを定数回のtree距離比較で行う。
+各クエリで全黒頂点の対を調べ直すと、最悪で毎回 $$O(N^2)$$ 個の対を比べることになり、$$N,Q\leq 10^5$$ には間に合わない。また、現在の直径の両端だけを全体で一組持つ方法では、その端点が白くなったときに代わりの端点を探し直す必要がある。そこで、**小さな集合の直径から大きな集合の直径を作り直せるか**を考える。
 
-棄却する候補: 各flip後に全黒頂点pairの距離を列挙して最大を求める。
+頂点集合の直径とは、集合内の二頂点間の距離が最大となる経路のことである。距離は元の木上で測り、途中に白頂点があってもよい。以下、二頂点 $$u,v$$ の距離を $$d(u,v)$$ と書く。空でない集合 $$S,T$$ の直径端をそれぞれ $$a,b$$ と $$c,d$$ とすると、和集合 $$S\cup T$$ の直径端は、この四端点の組合せから選べる。同じ集合内の最大距離は既に分かるため、鍵は「集合をまたぐ最遠の対も端点で代表できる」ことにある。その理由を正当性の節で示す。
 
-一queryで黒頂点数の二乗pairがあり、Q回処理できない。
+この合成をSegment Treeに載せる。葉は頂点番号順に並べ、各節点には、その区間にある黒頂点集合の直径端を保持する。区間は番号で分けるだけでよく、木上で連結である必要はない。
 
-Euler tour+RMQまたはbinary liftingでLCAとdist(u,v)を前計算する。segment tree leafは黒なら(v,v)、白ならempty。内部nodeは左右の端点候補最大pairを選び、各queryのleaf更新後root端点距離を出力する。
+- 黒頂点 $$v$$ の葉は $$(v,v)$$、白頂点の葉は空集合を表す印とする。一点集合の直径長は0である。
+- 左右とも空でなければ、両方の要約から得る四端点の6対の距離を比べ、最大となる一組を親に保存する。同じ頂点が重複していても、その距離は0なので構わない。
+- 左右どちらかが空なら相手をそのまま返す。両方が空なら空を返す。
+
+初めは全頂点が黒なので、全葉を $$(v,v)$$ として下から構築する。クエリで頂点 $$x$$ の色を反転したら、その葉を置き換え、根までの祖先を再計算する。根の要約が全黒頂点集合の直径端なので、その距離を出力すればよい。
+
+距離計算のために、固定した根からの深さ $$\operatorname{depth}(v)$$ と最小共通祖先 $$\operatorname{LCA}(u,v)$$ を求められるよう前処理する。二頂点間の経路は最小共通祖先で折り返すので、
+
+$$
+d(u,v)=\operatorname{depth}(u)+\operatorname{depth}(v)
+-2\operatorname{depth}\bigl(\operatorname{LCA}(u,v)\bigr)
+$$
+
+で距離を計算できる。色だけが変わり木は変わらないため、この前処理は一度でよい。
 
 ## 典型の発動条件
 
 ### diameter端点のmerge monoid
 
-発動条件: tree上の動的vertex集合で最大pair距離を保ちたいとき。
-
-部分集合ごとのdiameter二端点だけをsegment treeへ載せる。
+木上の頂点集合が動的に変わり、最遠距離を保ちたいときは、集合の直径端を要約の候補にする。答えの長さだけでは別集合との距離を比べられないが、端点を残せば和集合の直径を作れる。合成後も次の合成に十分な要約であることと、空集合の扱いまで確かめる。同率の代表がある本問では、端点の組の文字どおりの一致を結合則とみなさず、正しい直径を保持する不変条件で説明する。
 
 ### LCA距離oracle
 
-発動条件: 固定tree上で多数の二頂点距離比較を行うとき。
-
-depthとLCAからdistを定数・対数時間で返す。
+固定された木上で多数の二頂点間距離を比較するときは、LCAの前処理を使う。距離を何度でも返すこの仕組みを距離オラクルと呼ぶ。一回の距離取得が定数時間か対数時間かで、Segment Treeの合成費用も変わる。
 
 ## 問題固有の要素
 
-集合の全pair情報でも、tree metricではdiameter端点が外部点に対する最遠候補を代表する。
-
-別の問題へ持ち帰る視点: 動的subset queryをsegment treeへ載せるには、union時に閉じる最小要約とempty単位元を探す。
+黒頂点集合は木上で連結とは限らない。それでも、元の木上の距離では、集合内のどの頂点からも直径の経路へ一意に合流する。この経路の性質により、集合の直径端が外部点からの最遠候補も代表する。任意の距離空間で二端点だけを残してよいわけではなく、木の一意経路を使う証明が要約の根拠となる。
 
 ## 正当性
 
-empty集合は単位元、一頂点集合は同じ頂点を両端とする長さ0diameterとしてmonoidを構成できる。 merge時は(a,b,c,d)の全pair距離から最大の二端点を選べばS∪Tのdiameterになる。 任意の外部点xから集合U内の最遠点はUのdiameter端点のどちらかなので、cross pairの最大も二組の端点四個で覆える。
+空でない頂点集合 $$U$$ の直径の端点を $$a,b$$ とする。まず、任意の $$w\in U$$ と、集合の外も含めた任意の頂点 $$x$$ について、
+
+$$
+d(x,w)
+\leq \max\bigl(d(x,a),d(x,b)\bigr)
+$$
+
+を示す。集合が一点なら $$w=a=b$$ なので成り立つ。以下では二点以上とする。
+
+$$a$$ から $$b$$ への経路を $$P$$ とする。$$w$$ から $$P$$ へ向かう経路が最初に出会う頂点を $$p$$ と呼び、$$w$$ の $$P$$ 上への**射影**とする。木の経路は一意なので、この合流点も一意である。$$w$$ が $$P$$ 上なら $$p=w$$。経路から伸びる枝の長さを $$h=d(p,w)$$ とおく。
+
+$$a,b$$ は集合 $$U$$ の直径端なので、$$a,w$$ の距離も $$b,w$$ の距離も $$d(a,b)$$ 以下である。これらの経路は $$p$$ を通るから、例えば
+
+$$
+d(a,p)+h
+\leq d(a,p)+d(p,b)
+$$
+
+となる。同様に $$b,w$$ の距離も比べると、
+
+$$
+h\leq d(p,b),\qquad
+h\leq d(p,a)
+$$
+
+を得る。つまり、枝を先端の $$w$$ まで進むより、経路 $$P$$ をどちらかの端まで進むほうが短くならない。
+
+次に、$$x$$ の $$P$$ 上への射影を $$q$$ とする。$$q$$ が $$a$$ から $$p$$ までの経路上にあるときは、反対側の端 $$b$$ と比べる。三角不等式と上の枝の長さの制限から、
+
+$$
+\begin{aligned}
+d(x,w)
+&\leq d(x,q)+d(q,p)+h\\
+&\leq d(x,q)+d(q,p)
+       +d(p,b)\\
+&=d(x,b).
+\end{aligned}
+$$
+
+最後の等号は、$$x$$ から $$b$$ への経路が $$q,p$$ をこの順に通るためである。$$q$$ が $$p$$ から $$b$$ までの経路上なら、左右を入れ替えて $$d(x,w)\leq d(x,a)$$ を得る。$$q=p$$ も含め、これで補題が示された。最初の不等式を等号にしないのは、$$x,w$$ が同じ枝にいる場合、その最短経路が $$q$$ を通るとは限らないためである。
+
+ここで左右の空でない集合を $$S,T$$、それぞれの直径端を $$a,b$$ と $$c,d$$ とする。集合をまたぐ任意の対 $$s\in S,t\in T$$ に対して、まず集合 $$S$$ と外部点 $$t$$ に補題を使い、次に集合 $$T$$ と外部点 $$a,b$$ に使うと、
+
+$$
+\begin{aligned}
+d(s,t)
+&\leq\max\bigl(d(a,t),d(b,t)\bigr)\\
+&\leq\max\left\{\begin{aligned}
+    &d(a,c),d(a,d),\\
+    &d(b,c),d(b,d)
+  \end{aligned}\right\}.
+\end{aligned}
+$$
+
+同じ集合内の対は、その集合の直径長以下である。従って、和集合のどの対も四端点の6対の最大距離以下となる。逆に、その6対はすべて和集合内の対なので、最大距離は和集合の直径長に一致する。
+
+同率の直径端が複数あっても、補題はどの直径端を選んでも成り立つ。例えば中心から三つの葉へ辺が伸びる星型の木では、どの葉二つも直径端となるが、残した二端点で外部点からの最遠距離を表せる。したがって、合成で最大距離を達成する端点を一組選べば、次の合成でも十分である。括り方を変えた結果、端点の組そのものが一致するとは限らないが、直径長と以後の合成に必要な性質は保たれる。
+
+空集合との合成は相手をそのまま返し、一点集合は同じ頂点を両端とする。葉が表す集合について要約は正しく、内部節点でも上の合成によってその区間の正しい直径端を保持する。更新した葉から根まで再計算すれば、この不変条件が復元される。根は全黒頂点集合を表すので、その端点間距離が求める答えである。
 
 ## 実装上の注意
 
-- 黒頂点0個・1個の出力規約を確認し、距離最大tieは任意端点でよい。merge一回のdistance呼出し定数を抑える。
+- 公式入力では、全体の黒頂点は常に2個以上ある。根が空・一点になる場合の出力規約を追加する必要はない。一方、内部節点や葉は空・一点になり得るので、空との合成と $$(v,v)$$ は必ず実装する。葉数を2の冪にそろえる際の余った葉も空とする。
+- 空を表す印を距離計算へ渡さない。同率では最大距離を達成する端点を任意に一組残せばよく、以後の合成も正しい。
+- 合成一回の距離取得は定数回だが、一回のLCA取得の費用も数える。現在の直径長を要約に添えれば、左右それぞれの直径長を再計算せずに使える。
 
 ## 復習の核
 
-- 外部点からdiameter端点のどちらかが最遠となる補題を使い、二集合mergeで四端点だけで十分な証明を再現する。
+- 動的集合の答えを保つときは、削除に直接対応する代わりに、小集合の要約から全体を作り直せないか考える。
+- 木の直径端を代表として使う理由は、直径経路から伸びる枝が、合流点から両端までの距離を超えないことにある。この補題を二回使って四端点の十分性を示す。
+- 要約の代表が同率で変わっても、次の合成に必要な性質が保たれるかを確認する。問題全体の非空保証とは別に、内部の空集合を扱う。
 
 ## 計算量と制約
 
 ### 時間
 
-binary lifting版で前計算O(N log N)、Q更新O(Q log²N)。O(1)距離のRMQ版なら更新O(log N)。
+ダブリングでLCAを求める方式では、前処理が $$O(N\log N)$$、距離取得が一回 $$O(\log N)$$。Segment Treeの構築には $$O(N)$$ 回、各更新には $$O(\log N)$$ 回の合成を行い、合成ごとに定数回の距離を取得する。従って構築は $$O(N\log N)$$、各更新と出力は $$O(\log^2 N)$$ で、全体は $$O(N\log N+Q\log^2 N)$$ となる。
+
+オイラーツアーの深さ列に対する区間最小値取得（RMQ）をSparse Tableで行えば、$$O(N\log N)$$ 時間の前処理後にLCAと距離を $$O(1)$$ で取得できる。この方式では構築が $$O(N)$$、各更新と出力が $$O(\log N)$$ で、前処理を含む全体は $$O((N+Q)\log N)$$ となる。
 
 ### 空間
 
-binary lifting版O(N log N)。
+どちらの方式もLCAの前処理に $$O(N\log N)$$、木・深さ・色・Segment Treeに $$O(N)$$ を使う。全体で $$O(N\log N)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 3 \leq N \leq 10^5; 1 \leq U_i, V_i \leq N; The given graph is a tree.; 1 \leq Q \leq 10^5; For each query, 1 \leq x \leq N.; There are always at least two black vertices.; All input values are integers.
+$$3\leq N\leq 10^5$$、$$1\leq Q\leq 10^5$$。時間制限は4秒、メモリ制限は1024 MiBである。ダブリング方式は更新ごとに対数因子が二つ掛かるため、距離取得の定数倍にも注意する。定数時間で距離を取得する方式なら、全体を $$O((N+Q)\log N)$$ に抑えられる。いずれの方式でも、どの時点でも全体の黒頂点が2個以上あるという保証により、根の端点間距離をそのまま答えにできる。
 
 ## 出典
 
