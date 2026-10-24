@@ -1,7 +1,7 @@
 ---
 title: "ABC306-E — Best Performances"
 draft: true
-authoringUnit: {"problemId":"abc306-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc306-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。","sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-e","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc306-e.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"初期状態では二集合を合わせた値と個数が数列に一致し、サイズと順序の条件も満たす。`add(v)` と `erase(u)` は値をそれぞれ一個追加・削除し、`balance` は所属だけを変えるため、更新後の二集合を合わせると、旧値一個を新値一個に置き換えた数列と一致する。同値が両集合にあっても、どちらから消すかによって残る値の個数は変わらない。\n\n追加前に二条件が成立しているとする。新値は $$Y$$ に入るので $$|X|=K$$ は変わらず、順序を壊す可能性があるのは新値だけである。新値が $$\\min(X)$$ 以下なら交換は不要である。より大きいなら、新値は $$Y$$ の最大値になるため、$$X$$ の最小値と一回交換する。交換後の $$X$$ の各値は交換前の最小値以上、$$Y$$ の各値はそれ以下となり、順序も回復する。\n\n続く削除では、$$Y$$ から消すならサイズも順序も保たれる。$$X$$ から消すなら一個だけ不足するが、削除自体は残った要素の大小関係を壊さない。$$Y$$ の最大値を一個補充すると、もともと $$X$$ に残った値は補充値以上であり、補充値は $$Y$$ に残る値以上である。よってサイズと順序がともに回復する。$$K\\geq 1$$ かつ総要素数が $$K$$ 以上なので補充は可能であり、$$X$$ が一時的に空になる場合にもこの議論は成り立つ。\n\n$$s$$ は初期値が $$X$$ の和と一致し、$$X$$ への追加・削除・交換ごとに出入りした値だけを加減するので、常にその和に一致する。各更新の最後には $$X$$ がちょうど $$K$$ 個で、どの値も $$Y$$ の値以上である。したがって $$s$$ は求める上位 $$K$$ 個の和になる。また、一更新の修復は追加時の交換高々一回と削除時の補充高々一回で済む。","sourceRevisionIds":["source-abc306-e-problem-7a0c907258114d906490202c29dd06ecd0183d802838a4082c7ffe19ef006fdd","source-abc306-editorial-6607-dfd76b13871fadcbf924ade6be1e1d08f663f009c7365a5820cfc4eef2479928"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,65 +12,84 @@ authoringUnit: {"problemId":"abc306-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-求める値はmultiset Aのlargest K elementsの和なので、要素のindexではなく境界を挟む二つのmultisetsだけを維持すればよい。
+上位の要素を毎回並べ直す代わりに、「和に含める側」と「残り」に分けておく。一つの値が変わったとき、選び直す必要があるのは二つの集合の境界付近だけである。境界を修復すると同時に和を更新すれば、毎回上位の全要素を足し直す必要もない。
 
-top側Xを常にsize Kかつmin(X)≥max(Y)、rest側Yを残りと保てば、保持するsum(X)が各queryの答えになる。
+各更新の後で数列全体をソートする方法では、$$N,Q\leq 5\times 10^5$$ に対して $$O(QN\log N)$$ 時間がかかる。一方、答えに必要なのは上位 $$K$$ 個の和であり、上位の内部での順位までは必要ない。そこで、重複を許す順序付き集合である `multiset` を二つ使い、値を次のように分ける。
 
-棄却する候補: 各update後にA全体をsortして先頭K個を合計する。
+- $$X$$：和に含める上位 $$K$$ 個の値。
+- $$Y$$：それ以外の値。
+- $$s$$：$$X$$ に含まれる値の総和。
 
-Q回のO(N log N) sortはN,Q=50万で不可能である。
+保つべき条件は、$$|X|=K$$ という**サイズの条件**と、両集合が空でないときの $$\min(X)\geq\max(Y)$$ という**順序の条件**である。後者は、選んだ側の最小値さえ残りの最大値以上であることを表す。この二条件があれば $$X$$ は上位 $$K$$ 個になり、答えは $$s$$ でよい。
 
-採用する候補: top Kとremaining valuesを二つのmultisetへ分け、old valueの削除・new valueの追加後に境界要素を移してbalanceする。
+最初の数列はすべて $$0$$ なので、$$X$$ に $$K$$ 個、$$Y$$ に $$N-K$$ 個の $$0$$ を挿入し、$$s=0$$ とする。配列 $$A$$ も別に保持し、更新される位置の旧値を取り出せるようにする。集合には位置を持たせず、値とその個数を管理する。
 
-dynamic top-K aggregateをorder-statistic boundaryで二分したmultisetsとrunning sumにより維持する。
+二条件を回復する操作を `balance` とし、次の順で行う。移動・交換では、対象の値を一個ずつ取り扱う。
+
+1. $$|X|<K$$ の間、$$Y$$ の最大値 $$b$$ を $$X$$ へ移し、$$s$$ に $$b$$ を足す。
+2. 両集合が空でなく、$$a=\min(X)<b=\max(Y)$$ である間、$$a$$ と $$b$$ を交換し、$$s$$ に $$b-a$$ を足す。
+
+この後で定義する追加・削除では $$|X|>K$$ にはならない。サイズ超過も起こる別の規則へ拡張するなら、不足を補う前に $$X$$ の最小値を $$Y$$ へ移して $$s$$ から引き、サイズを $$K$$ まで減らせばよい。
+
+サイズが合うだけでは不十分である。例えば $$K=2$$、$$X=\{5,3\},Y=\{2,1\},s=8$$ から、値 $$1$$ を $$10$$ へ変える場合を考える。新値 $$10$$ を $$Y$$ に入れても $$|X|=2$$ のままだが、$$\min(X)=3<10=\max(Y)$$ なので上位二個にはなっていない。$$3$$ と $$10$$ を交換して $$s=8+(10-3)=15$$ とし、その後 $$Y$$ に残る旧値 $$1$$ を消せば、$$X=\{10,5\},Y=\{3,2\}$$ となる。
+
+位置 $$p$$ の値を $$v$$ に変える更新は、旧値 $$u=A_p$$ を保存してから、次の手順で処理する。
+
+1. `add(v)`：$$v$$ をまず $$Y$$ に一個追加し、`balance` する。
+2. `erase(u)`：$$X$$ に $$u$$ があれば一個削除して $$s$$ から $$u$$ を引く。なければ $$Y$$ から一個削除する。その後 `balance` する。
+3. $$A_p=v$$ とし、$$s$$ を出力する。
+
+新値を先に入れるため、`balance` を呼ぶ時点の総要素数は一時的に $$N+1$$ 個、その後 $$N$$ 個となり、常に $$K$$ 個以上ある。したがって不足を補う間は $$Y$$ が空にならない。旧値を先に消すと、$$K=N$$ の場合に総要素数が $$K-1$$ 個になり、同じ補充手順を使えない。新旧の値が等しくても、値を一個足して一個消すという処理でよい。
 
 ## 典型の発動条件
 
 ### 二つのmultisetによるtop-K維持
 
-発動条件: point updatesのたびに全要素中のlargest Kまたはsmallest Kのaggregateが必要なとき。
-
-selected/unselected multisetsをsizeとboundary orderの不変条件でbalanceする。
+一要素ずつ値が変わり、そのたびに固定した個数の上位または下位の値を集計したいときに使う。選ぶ側と残す側を分け、サイズと境界の大小関係をそれぞれ保つ。基本単元の「小さい $$k$$ 個の和」とは大小が逆であり、本問では選ぶ側の最小値と残りの最大値を比較する。$$K$$ 自体を一度に大きく変える問題では移動数も増えるため、一更新が同じ計算量になるとは限らない。
 
 ### 選択集合のrunning aggregate
 
-発動条件: data structure間の要素移動を追跡でき、selected sideのsum等を即時取得したいとき。
-
-Xへのinsertで加算、eraseで減算してsumを同期する。
+選んだ集合への出入りを追えるなら、和は要素の追加・削除・交換と同時に差分更新できる。本問では $$X$$ に入る値を足し、出る値を引くことで、集合全体の走査を省く。二集合の分割が正しくても、和の更新を一つ忘れると答えは一致しない。
 
 ## 問題固有の要素
 
-初期値0をK個X、N−K個Yへ置けば最初からinvariantが成立し、index arrayは各updateで消すold valueだけを与える。
-
-別の問題へ持ち帰る視点: 順位集合の更新では、値の所属を検索して削除し、境界不変条件から所属を再決定する。
+初期値がすべて $$0$$ なので、最初にどの位置を上位側へ置くかを決める必要はない。$$K$$ 個と $$N-K$$ 個に分けるだけで二条件を満たす。また、同じ値ならどの位置の要素も和への寄与は等しいため、集合内で位置を識別せず旧値を一個消してよい。位置と値の対応は配列 $$A$$ が受け持つ。
 
 ## 正当性
 
-duplicate valuesがあるためvalue→一意位置ではなくmultisetを使い、eraseは該当iterator一個だけを削除する。 Xへの出入りと同時にrunning sum sを加減すれば、毎回K要素を走査せず答えを出せる。 一updateで境界を跨ぐ要素は定数個で、各insert/erase/moveをO(log N)で処理できる。
+初期状態では二集合を合わせた値と個数が数列に一致し、サイズと順序の条件も満たす。`add(v)` と `erase(u)` は値をそれぞれ一個追加・削除し、`balance` は所属だけを変えるため、更新後の二集合を合わせると、旧値一個を新値一個に置き換えた数列と一致する。同値が両集合にあっても、どちらから消すかによって残る値の個数は変わらない。
+
+追加前に二条件が成立しているとする。新値は $$Y$$ に入るので $$|X|=K$$ は変わらず、順序を壊す可能性があるのは新値だけである。新値が $$\min(X)$$ 以下なら交換は不要である。より大きいなら、新値は $$Y$$ の最大値になるため、$$X$$ の最小値と一回交換する。交換後の $$X$$ の各値は交換前の最小値以上、$$Y$$ の各値はそれ以下となり、順序も回復する。
+
+続く削除では、$$Y$$ から消すならサイズも順序も保たれる。$$X$$ から消すなら一個だけ不足するが、削除自体は残った要素の大小関係を壊さない。$$Y$$ の最大値を一個補充すると、もともと $$X$$ に残った値は補充値以上であり、補充値は $$Y$$ に残る値以上である。よってサイズと順序がともに回復する。$$K\geq 1$$ かつ総要素数が $$K$$ 以上なので補充は可能であり、$$X$$ が一時的に空になる場合にもこの議論は成り立つ。
+
+$$s$$ は初期値が $$X$$ の和と一致し、$$X$$ への追加・削除・交換ごとに出入りした値だけを加減するので、常にその和に一致する。各更新の最後には $$X$$ がちょうど $$K$$ 個で、どの値も $$Y$$ の値以上である。したがって $$s$$ は求める上位 $$K$$ 個の和になる。また、一更新の修復は追加時の交換高々一回と削除時の補充高々一回で済む。
 
 ## 実装上の注意
 
-- K=NやN=1ではYがemptyになるので、min/max参照前にempty checkを行う。
-- sumは最大5×10^14になるため64 bitを使い、duplicate削除はfindで得た一要素だけにする。
+- `multiset` は重複を保持する。C++ の `erase(value)` は同じ値をすべて消すので、`find` で得たイテレータを `erase` に渡して一個だけ消す。$$X$$ で見つからなければ $$Y$$ を探す。新旧が同値のときも、個数を一個ずつ扱う。
+- 順序の比較は、両集合が空でないことを確認してから行う。$$K=N$$ では更新完了時に $$Y$$ が空になる。$$K=1$$ では $$X$$ から削除した直後に $$X$$ が空になるが、先に不足を補ってから境界を比較すればよい。$$N=K=1$$ もこの手順に含まれる。
+- 和は最大 $$K\times 10^9\leq 5\times 10^{14}$$ になるため、$$s$$ は64 bit整数で保持する。
 
 ## 復習の核
 
-- 固定順位までのaggregateは、境界の両側を別containerにしてsize/order invariantを明示する。
-- selected集合が局所的に変わるならaggregateも移動時だけ差分更新する。
+- 上位・下位の固定個数を保つなら、「選ぶ個数」と「境界の大小関係」を別々の不変条件にする。サイズだけでは選び方の正しさを保証できない。
+- 追加先を決めたら、壊れる条件と修復に必要な移動数まで追う。新値を先に足すと、上位全要素を選ぶ場合でも補充元を確保できる。
+- 選択集合の和は、所属が変わる瞬間に更新する。同値の削除は一個だけにする。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N+Q log N)。
+初期値の $$0$$ を通常の `multiset` 挿入で合計 $$N$$ 回入れるため、初期化は $$O(N\log(N+1))$$ 時間とする。一更新では検索・挿入・削除に加え、境界交換と不足の補充がそれぞれ高々一回であり、$$O(\log(N+1))$$ 時間で処理できる。出力まで含めた全体は $$O((N+Q)\log(N+1))$$ 時間。$$N=1$$ も含めるため、対数を $$\log(N+1)$$ と表記している。
 
 ### 空間
 
-O(N)。
+配列 $$A$$ に $$N$$ 個、二つの `multiset` に合計で最大 $$N+1$$ 個の値を保持する。更新を一件ずつ読み、答えを順次出力すれば、空間計算量は $$O(N)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le K \le N \le 5 \times 10^5; 1 \le Q \le 5 \times 10^5; 1 \le X_i \le N; 0 \le Y_i \le 10^9
+$$1\leq K\leq N\leq 5\times 10^5$$、$$1\leq Q\leq 5\times 10^5$$。各更新は一つの位置を指定し、新値は $$0$$ 以上 $$10^9$$ 以下の整数である。全体を毎回ソートする代わりに、一更新につき定数回の平衡木操作へ絞る。時間制限は6秒、メモリ制限は1024 MiB。
 
 ## 出典
 
