@@ -1,7 +1,7 @@
 ---
 title: "ABC308-G — Minimum Xor Pair Query"
 draft: true
-authoringUnit: {"problemId":"abc308-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。","sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc308-g","docPath":"src/content/docs/problems/data-structures/outcome-maintain-ordered-set-statistics/outcome-maintain-ordered-set-statistics-shard-001/abc308-g.md","learningOutcomeIds":["outcome-maintain-ordered-set-statistics"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["ordered set・multisetの動的順序管理の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-ordered-set-multiset"],"sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"値がすべて異なる場合、非隣接の二値の間には別の値がある。考察で示した最高相違ビットの議論により、その中間値と片方の端点を選ぶとXORが真に小さくなるので、非隣接対は最小値を達成しない。重複値がある場合も、等しい値は昇順で隣接し、XORの最小値0を達成する。従って、どちらの場合も全隣接対を候補にすれば最小値を取りこぼさない。\n\n初期状態では値も隣接対もなく、二つの多重集合はともに空である。挿入では両隣を結んでいた一対だけがなくなり、新しい要素と各隣を結ぶ対だけが生まれる。削除ではその逆であり、存在する隣だけを扱えば先頭・末尾でも同じ説明が成り立つ。各対に対応するXORを一個ずつ増減するため、値が等しい候補も個数を含めて保たれる。よって、各クエリ処理後に候補多重集合は全隣接対のXORと一致し、二要素以上あるとき、その最小値が答えになる。","sourceRevisionIds":["source-abc308-g-problem-5f1e37a4408da6b0b3ff6f2ac5d4239bd0610d292685302a43f32136cf30268a","source-abc308-editorial-6707-1e3beaaaa4cc22ca819353d6cc0d97f74a2ac4ff027f5854b7841956d497e107"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,71 +12,94 @@ authoringUnit: {"problemId":"abc308-g","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-sorted values x<y<zについてmin(x xor y,y xor z)<x xor zなので、global minimum XOR pairはsorted multisetのadjacent pairに必ず存在する。
+最小のXORを作る二つの値は、値の小さい順に並べたときの隣同士から選べる。これを示せれば、全ての対を持つ必要はなく、一つの値の挿入・削除で変わる前後の隣接対だけを更新すればよい。
 
-一要素のinsert/eraseで変化するadjacenciesはそのpredecessor・itself・successor周辺だけである。
+黒板上の要素数を $$n$$ とすると、全ての対を調べる方法では、一回の最小値の問い合わせに $$O(n^2)$$ 時間がかかる。クエリ数は最大 $$3\times 10^5$$ なので、まず答えの候補を減らす性質を探したい。XORは、二つの値が異なる最も上位のビットが1になる。その位置を下げられる対ほどXORが小さくなるため、数値順で間に別の値がある対に注目する。
 
-棄却する候補: type 3ごとに全pairsのXORを計算する。
+異なる非負整数 $$x<y<z$$ を取り、$$x$$ と $$z$$ が異なる最も上位のビット位置を $$k$$ とする。最下位を位置0と数える。位置 $$k$$ より上は一致し、位置 $$k$$ では小さい側の $$x$$ が0、大きい側の $$z$$ が1なので、$$x\oplus z\geq 2^k$$ である。ここで $$\oplus$$ はビット単位XORを表す。
 
-一queryで要素数の二乗が必要になる。
+共通の上位桁の並びを $$P$$ とする。この上位桁を持つ整数は、下位 $$k+1$$ 桁を動かして得られる一つの連続した整数区間をなす。$$x$$ と $$z$$ がともにこの区間に入るので、その間の $$y$$ も同じ上位桁 $$P$$ を持つ。従って三つの値の二進表示は、次の形に書ける。
 
-採用する候補: valuesのordered multisetと全adjacent XORsのmultisetを持ち、local edgesだけ差分更新して候補multiset最小を返す。
+$$
+\begin{aligned}
+x&=(P\,0\,\alpha)_2\\
+y&=(P\,b\,\beta)_2\\
+z&=(P\,1\,\gamma)_2
+\end{aligned}
+$$
 
-minimum候補の完全性がadjacency lemmaで保証され、各queryをO(log Q)で処理できる。
+ここで $$b$$ は $$y$$ の位置 $$k$$ のビットで、$$\alpha,\beta,\gamma$$ はそれぞれ下位 $$k$$ 桁の並びである。上位の $$P$$ や下位の並びが空でも構わない。$$b=0$$ なら $$x$$ と $$y$$ は位置 $$k$$ まで一致するため $$x\oplus y<2^k$$、$$b=1$$ なら同様に $$y\oplus z<2^k$$ となる。どちらにしても、
 
-insert xで旧pred-succ xorを消し、pred-xとx-succを追加する。eraseではこの操作を逆にする。
+$$
+\min(x\oplus y,\ y\oplus z)<2^k\leq x\oplus z
+$$
 
-duplicate xも別要素として隣接しxor 0を生成するため、valuesもcandidate XORsもsetではなくmultisetで管理する。
+を得る。値がすべて異なるとき、非隣接対の間には必ずこの $$y$$ を選べるので、その対よりXORの小さい対が存在する。したがって、最小値を達成する対は隣接していなければならない。一方、同じ値が複数あれば、それらは昇順で隣り合い、XORが0となって最小値を達成する。重複の有無によらず、隣接対だけを残せば十分である。
 
-minimum XOR pairをnumeric-order adjacencyへ局所化し、dynamic ordered multisetのneighbor-edge aggregateとして維持する。
+そこで、次の二つの順序付き多重集合（同じ値を複数個保持できるmultiset）を用意し、空の状態からクエリを順に処理する。
+
+- $$S$$：黒板上の値を、出現個数を保って昇順に管理する。
+- $$C$$：$$S$$ の各隣接対のXORを、その対一つにつき一個保持する。
+
+挿入する値を $$x$$、挿入位置の直前・直後の値をそれぞれ $$p,s$$ とすると、更新は次のとおりになる。
+
+1. $$S$$ に $$x$$ を一個挿入し、その要素の両隣を調べる。
+2. 両隣があれば、それまで隣接していた対の $$p\oplus s$$ を $$C$$ から一個消す。
+3. 前の値があれば $$p\oplus x$$、後ろの値があれば $$x\oplus s$$ を $$C$$ に一個ずつ加える。
+
+削除では、$$S$$ から $$x$$ の要素を一個選び、消す前に両隣を調べる。存在する隣に応じて $$p\oplus x$$ と $$x\oplus s$$ を $$C$$ からそれぞれ一個消し、両隣があれば $$p\oplus s$$ を一個加え、選んだ要素を $$S$$ から消す。問い合わせでは $$C$$ の最小値を返す。
+
+例えば、$$S=(0,2,3)$$ の隣接XORは $$0\oplus 2=2$$ と $$2\oplus 3=1$$ なので、$$C=(1,2)$$ である。ここに1を挿入すると、旧対 $$(0,2)$$ の候補2が消え、新しい二対 $$(0,1),(1,2)$$ の候補1と3が加わる。もともとの対 $$(2,3)$$ の候補1も残るので、更新後は $$S=(0,1,2,3)$$、$$C=(1,1,3)$$ となる。
+
+この状態から1を削除するときは、候補1と3を一個ずつ消し、候補2を戻す。候補1をまとめて消すと、残る対 $$(2,3)$$ の候補まで失われてしまう。$$S$$ だけでなく $$C$$ も多重集合にする理由は、値が異なる対でも同じXORを持ち得るからである。
 
 ## 典型の発動条件
 
 ### XOR minimumの隣接性
 
-発動条件: 整数集合からminimum pairwise XORを求めたいとき。
-
-numeric sortで隣接するpairsだけをcandidateにする。
+非負整数から二要素を選ぶXORの最小値が必要なら、数値順に並べて非隣接対を除けないか考える。最高相違ビットに注目し、中間値と片方の端点のXORが必ず小さくなると示すことが、候補を隣接対へ絞る根拠になる。
 
 ### 動的順序集合の局所gap更新
 
-発動条件: ordered elementsのadjacent-pair functionをinsert/erase下で維持したいとき。
-
-更新点前後のold edgeを除きnew edgesを追加する。
+昇順の隣接対ごとの量を、値の挿入・削除のもとで保ちたいときに使う。挿入は旧対一つを新対二つへ、削除はその逆へ置き換えるだけでよく、無関係な隣接対の計算をやり直す必要はない。値ごとの個数を持てば、同じ集約値を持つ別の対も区別して増減できる。
 
 ## 問題固有の要素
 
-x,zが初めて異なるhighest bitに対し、中間yはx側かz側のbitを持つので片方のadjacent XORはそのbit未満になる。
-
-別の問題へ持ち帰る視点: bitwise distanceの最小pairはhighest-differing-bitのorder argumentで隣接候補へ絞れる。
+XORは数値の差ではないため、単に「値が近いからXORも小さい」とは言えない。例えば $$3\oplus 4=7$$ だが、$$4\oplus 6=2$$ である。本問で隣接対だけを残せる根拠は距離の近さではなく、共通の上位桁を持つ区間の内部なら、最高相違ビットを打ち消す相手が見つかることである。XORを小さくする問題では、下位桁の細部より先に、最も上位の1がどこに立つかを調べたい。
 
 ## 正当性
 
-最小XORを達成する対は、値順で隣接する対から選べる。挿入・削除が変える隣接関係はその位置の前後だけなので、候補多重集合の局所更新が全隣接対を保つ。重複値の対も残るため、候補の最小値が常に答えになる。
+値がすべて異なる場合、非隣接の二値の間には別の値がある。考察で示した最高相違ビットの議論により、その中間値と片方の端点を選ぶとXORが真に小さくなるので、非隣接対は最小値を達成しない。重複値がある場合も、等しい値は昇順で隣接し、XORの最小値0を達成する。従って、どちらの場合も全隣接対を候補にすれば最小値を取りこぼさない。
+
+初期状態では値も隣接対もなく、二つの多重集合はともに空である。挿入では両隣を結んでいた一対だけがなくなり、新しい要素と各隣を結ぶ対だけが生まれる。削除ではその逆であり、存在する隣だけを扱えば先頭・末尾でも同じ説明が成り立つ。各対に対応するXORを一個ずつ増減するため、値が等しい候補も個数を含めて保たれる。よって、各クエリ処理後に候補多重集合は全隣接対のXORと一致し、二要素以上あるとき、その最小値が答えになる。
 
 ## 実装上の注意
 
-- begin/end sentinelを跨いでxorを作らず、candidate multisetからも該当値一個だけをeraseする。
-- erase対象iteratorを得てneighborsを先に保存し、container変更後のiterator invalidationを避ける。
+- C++なら $$S,C$$ に `std::multiset<int>` を使える。$$S$$ への挿入で得たイテレータ、削除する要素のイテレータを基準に両隣を調べる。同値の要素も一個ずつ隣接関係に含めるので、同じ値を挿入すると候補0ができる。
+- 先頭には前の要素がなく、末尾には後ろの要素がない。`begin()` より前へ移動せず、`end()` を参照しない。両隣があるときだけ旧対の削除・復元を行う。番兵の値とのXORを候補に混ぜない。
+- 候補値を一個消すには、その値を `C.find` で探して、得たイテレータを `C.erase` に渡す。値を直接渡す `C.erase(v)` は同値の候補をすべて消す。$$S$$ の削除も `S.erase(S.find(x))` のように一個に限る。
+- 削除対象の両隣は削除前に調べる。削除した要素のイテレータは、その後参照しない。
+- $$S$$ が空または一要素なら $$C$$ は空である。一要素からの削除や空集合への再挿入も、存在しない隣を省略すれば処理できる。種類3では二要素以上あることが保証されるので、そのときだけ $$C$$ の先頭を参照する。
 
 ## 復習の核
 
-- 全pair最小値はsort order上の非隣接pairを中間点で改善できる性質がないか調べる。
-- adjacent-pair aggregateの更新はinserted/deleted node周辺のedge差分だけを管理する。
+- 全ての対の最小値を求めるときは、非隣接対を中間の要素で必ず改善できないか調べる。XORでは共通の上位桁と最高相違ビットが手掛かりになる。
+- 隣接関係が一か所で変わるなら、消える対と生まれる対だけを更新する。
+- 値の重複と、別々の対が生む候補値の重複は別の問題である。両方の個数を保ち、削除は一個ずつ行う。
 
 ## 計算量と制約
 
 ### 時間
 
-O(Q log Q)。
+$$O(Q\log Q)$$。二つの多重集合は空から始める。要素数は最大 $$Q$$ で、一回の挿入・削除は前後の探索と定数個の多重集合の更新だけなので $$O(\log Q)$$ 時間、種類3は $$C$$ の先頭を読むだけなので $$O(1)$$ 時間である。従って、全 $$Q$$ クエリを上記の時間で処理できる。
 
 ### 空間
 
-O(Q)、値multisetと隣接XOR multiset。
+$$O(Q)$$。黒板上に $$n$$ 要素あるとき、$$S$$ は $$n$$ 個、$$C$$ は $$\max(n-1,0)$$ 個の値を保持する。クエリは受け取った順に処理できる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q \leq 3\times 10^5; 0\leq x < 2 ^{30}; When a query 2 is given, at least one x is written on the blackboard.; When a query 3 is given, at least two integers are written on the blackboard.; All input values are integers.
+$$1\leq Q\leq 3\times 10^5$$ に対し、全ての対を列挙せず隣接対だけを保持するので、候補数も更新時間も上の範囲に収まる。値は $$0\leq x<2^{30}$$ で、XORも同じ範囲の非負整数になるため、C++の32 bit符号付き整数で表せる。0にも最高相違ビットの議論は適用でき、等しい値の対は別にXORが0として扱う。種類2では削除する値が一個以上存在し、種類3では黒板上に二要素以上あるという保証を使う。
 
 ## 出典
 
