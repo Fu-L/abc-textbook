@@ -1,7 +1,7 @@
 ---
 title: "ABC273-E — Notebook"
 draft: true
-authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.md","learningOutcomeIds":["outcome-persist-data-structure-versions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-persistence"],"sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。 value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。 各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。","sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data-structures/outcome-persist-data-structure-versions/outcome-persist-data-structure-versions-shard-001/abc273-e.md","learningOutcomeIds":["outcome-persist-data-structure-versions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["永続data structure・structural sharingの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-persistence"],"sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"「番兵を除く根から `current` への道の値列が現在の列に一致し、登録済みページの `saved` は最後にSAVEした列の末尾を指す」という不変条件を保つ。初めは `current` が `root` で、すべてのページも空列なので成立する。\n\nADDでは現在の末尾の子として値 `x` の新節点を作るため、道の末尾に `x` だけが加わる。DELETEでは親へ戻るので末尾の一要素だけが除かれる。空列でも `parent[root] = root` により、そのまま空列に留まる。`value[root] = -1` だけでは親への移動先は定まらず、この親の定義が必要である。\n\nSAVEは現在の列を表す番号を指定ページへ代入するので、同じページへの上書きも含めて保存内容が一致する。既存節点の値と親は変更しないため、保存済みの道は後のADDやDELETEで変わらない。LOADではその番号へ移ることで保存時の列になり、未保存なら `root` へ移ることで初期の空列になる。`root` を保存したページをLOADする場合も同じである。\n\n従って四操作の後も不変条件が保たれる。空列以外では `current` の値が末尾であり、空列では `value[root]` が $$-1$$ なので、毎回 `value[current]` を出力すれば正しい。","sourceRevisionIds":["source-abc273-e-problem-fed53a2a982096aeb89f298579a1e809a95058a06ddf4fe75177d79e756a083a","source-abc273-editorial-5023-f05e948a7eca80904f9ead71fc40f2c30993d9c1d91142ec2d2b7b341bb61399"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,63 +12,109 @@ authoringUnit: {"problemId":"abc273-e","docPath":"src/content/docs/problems/data
 
 ## 考察
 
-sequence AへのADD/DELETEはstackのpush/popであり、SAVE時に必要なのは全要素のcopyではなくそのversionのtopを指す参照だけである。
+保存後に列を変更しても、保存した時点の列へ戻れるようにしたい。変更されるのは末尾だけなので、各要素に「一つ前の末尾」を記録して残しておけば、列全体をコピーせずに過去の状態を表せる。
 
-各ADDで現在topをparentに持つimmutable nodeを一つ作れば、root-to-current pathがその時点のAを表し、過去versionも壊れない。
+クエリ数を $$Q$$ とする。列を普通の配列で持ち、SAVEやLOADのたびに全要素をコピーすると、長い列の保存・復元が繰り返される場合に時間・空間とも最悪で $$O(Q^2)$$ になる。クエリ数は最大 $$5\times 10^5$$ なので、列の長さによらず処理する方法を考える。
 
-棄却する候補: SAVEごとにsequence全体をnotebook pageへcopyし、LOADで復元する。
+ADDとDELETEは、末尾への追加・削除を行うスタックの操作である。例えば列 $$(3,4)$$ の末尾4に「一つ前は3」と記録しておけば、DELETEは3へ戻るだけでよい。ただし、削除した4の記録を消したり、後のADDで上書きしたりすると、保存していた $$(3,4)$$ へ戻れなくなる。そこでADDのたびに新しい節点を作り、作成済みの節点は変更しない。このように過去の版を残すデータ構造を、永続データ構造という。
 
-sequence長とSAVE回数の積が二乗になり、memoryもtimeもQ=50万を扱えない。
+### 列を末尾の節点番号で表す
 
-採用する候補: parent pointer付きnodeでpersistent stackを作り、page→top-nodeのmapだけを保存する。
+空列を表す番兵の節点番号を `root = 0` とする。節点 `v` には、追加した値 `value[v]` と、その直前の末尾の節点番号 `parent[v]` を持たせる。現在の末尾は `current`、ページ `p` に保存した末尾は連想配列の `saved[p]` で管理する。初期状態は次のとおりである。
+
+- `value[root] = -1`。空列の出力を表す。
+- `parent[root] = root`。空列から親へ戻っても空列に留まる。
+- `current = root`。`saved` は空で、未登録のページは `root` を保存していると解釈する。
+
+根 `root` から `current` への道にある値を、番兵を除いて根側から順に並べたものが現在の列になる。末尾の節点番号一つで、その列全体が定まる。ページに保存するのもこの番号であり、全版で共通の根 `root` 自体は変わらない。
+
+### 四操作と答えの取り出し方
+
+クエリを入力順に、次のように処理する。
+
+- `ADD x`: 未使用の節点番号 `v` を取り、`value[v] = x`、`parent[v] = current` としてから `current = v` にする。
+- `DELETE`: `current = parent[current]` とする。節点自体は消さない。
+- `SAVE y`: `saved[y] = current` と代入する。同じページへの以前の保存は、この番号で上書きする。
+- `LOAD z`: ページ `z` が登録済みなら `current = saved[z]`、未登録なら `current = root` とする。
+
+どの操作でも、直後の答えは `value[current]` である。SAVEやLOADの後も一つずつ記録し、全 $$Q$$ 個を空白区切りで出力する。
+
+### 保存後の追加は別の枝になる
+
+次の独自の小例では、節点番号をADDのたびに1、2、3と割り当てる。SAVEしたページ1の番号は、その後のADDやLOADでは変わらない。
+
+| 操作 | `current` | 現在の列 |
+| --- | --- | --- |
+| `ADD 3` | 1 | $$(3)$$ |
+| `SAVE 1` | 1 | $$(3)$$ |
+| `ADD 4` | 2 | $$(3,4)$$ |
+| `LOAD 1` | 1 | $$(3)$$ |
+| `ADD 5` | 3 | $$(3,5)$$ |
+| `LOAD 1` | 1 | $$(3)$$ |
+
+最後までにできた木は次の形である。矢印は親から子への関係を表し、実装では逆向きの `parent` だけを持てばよい。
+
+```text
+0: 番兵
+  └→ 1: 値3（ページ1の保存先）
+       ├→ 2: 値4
+       └→ 3: 値5
+```
+
+列 $$(3,4)$$ と $$(3,5)$$ は、接頭辞 $$(3)$$ を表す節点1を共有している。`ADD 5` は新しい節点3を作るだけで、節点1や2の値・親を変更しない。従って、再び `LOAD 1` すれば列は $$(3)$$ に戻る。もし列 $$(3,4)$$ も別ページへ保存してあれば、節点2も残っているのでそちらへも戻れる。
 
 ## 典型の発動条件
 
 ### 永続stackとstructural sharing
 
-発動条件: push/popで変化する列の過去versionへ何度も戻りたいとき。
-
-各push nodeへvalueとprevious topを持たせ、version間で共通prefixを共有する。
+末尾への追加・削除を行う列で、過去の版へ何度も戻り、そこからさらに更新したいときに使える。各要素に直前の末尾への参照を持たせ、既存節点へ書き込まずに新しい節点を追加することで、版どうしの共通部分を共有する。内部の任意位置も書き換える別問題では、この末尾だけの表現で十分かを改めて確認する。
 
 ### 疎なkey状態の連想配列
 
-発動条件: key universeは巨大だが実際に保存・参照されるkey数がquery数以下のとき。
-
-10^9 pagesを配列化せず、SAVEされたpageだけをmapでtop pointerへ対応させる。
+キーの範囲が大きく、実際に必要なキーがクエリ数以下なら連想配列を考える。この問題では $$10^9$$ ページすべてを確保せず、SAVEされたページだけに末尾の節点番号を対応させればよい。
 
 ## 問題固有の要素
 
-未保存pageには初期empty sequenceが記録されているため、mapにないLOADはsentinel rootを返す。
+未保存のページには空列が記録されているので、未登録のLOAD先は番兵と解釈する。また、空列をSAVEするときも `root` をそのまま保存でき、特別な印は要らない。
 
-別の問題へ持ち帰る視点: snapshot保存はdata本体ではなくimmutable representationのroot handleだけを記録する。
+要求される出力が各操作直後の末尾だけであることにも注目する。列の表現には親をたどる道を使うが、答えを出すために道を実際にたどる必要はない。
 
 ## 正当性
 
-DELETEはcurrent=parent[current]、LOADはcurrent=saved[z]であり、sequenceを実際に辿る必要がない。 value −1のsentinel rootをempty sequenceとすれば、emptyでのDELETEと出力−1を条件分岐なしに統一できる。 各queryがnode一個の追加またはpointerの移動・保存だけになり、過去状態を共有できる。
+「番兵を除く根から `current` への道の値列が現在の列に一致し、登録済みページの `saved` は最後にSAVEした列の末尾を指す」という不変条件を保つ。初めは `current` が `root` で、すべてのページも空列なので成立する。
+
+ADDでは現在の末尾の子として値 `x` の新節点を作るため、道の末尾に `x` だけが加わる。DELETEでは親へ戻るので末尾の一要素だけが除かれる。空列でも `parent[root] = root` により、そのまま空列に留まる。`value[root] = -1` だけでは親への移動先は定まらず、この親の定義が必要である。
+
+SAVEは現在の列を表す番号を指定ページへ代入するので、同じページへの上書きも含めて保存内容が一致する。既存節点の値と親は変更しないため、保存済みの道は後のADDやDELETEで変わらない。LOADではその番号へ移ることで保存時の列になり、未保存なら `root` へ移ることで初期の空列になる。`root` を保存したページをLOADする場合も同じである。
+
+従って四操作の後も不変条件が保たれる。空列以外では `current` の値が末尾であり、空列では `value[root]` が $$-1$$ なので、毎回 `value[current]` を出力すれば正しい。
 
 ## 実装上の注意
 
-- ADDで作るnode数は高々Qなのでcontiguous arraysにvalue/parentを格納し、pointerの代わりにindexを使える。
-- 大量出力をbufferし、各query後にはcurrent nodeのvalueを必ず一つ記録する。
+- 節点番号は列の長さと区別する。DELETEやLOADで短い列へ戻っても、次のADDには未使用番号を割り当てる。節点を再利用して上書きすると保存済みの列が壊れる。
+- ADDは高々 $$Q$$ 回なので、番兵を含めて $$Q+1$$ 個分の `value` と `parent` の配列を用意できる。子の一覧は不要である。
+- 空DELETEを分岐なしで扱うには、番兵の値だけでなく `parent[0] = 0` も初期化する。
+- 出力は全操作後の一個だけではなく、各操作直後の計 $$Q$$ 個である。バッファにまとめるなどして大量の出力に対応する。
 
 ## 復習の核
 
-- 過去状態への復帰があるpush/pop列は、各状態をroot-to-node pathで表してsnapshotをpointer一つにする。
-- 巨大なlogical address spaceでも実際に触れるkeysが少なければsparse mapで表す。
+- 保存後も任意の過去状態から更新したいなら、保存する参照と、その先の共有部分を変えない方法を考える。
+- 末尾だけを操作する列は、各要素に直前の末尾を持たせると、版全体を末尾の節点番号一つで表せる。
+- 番兵は値だけでなく、境界で操作した後も正しい状態に留まるよう、参照先まで定義する。
 
 ## 計算量と制約
 
 ### 時間
 
-hash map版は期待O(Q)、平衡木page map版O(Q log Q)。
+番兵の初期化は $$O(1)$$、ADDで使う配列をまとめて確保・初期化しても $$O(Q)$$ である。ADDとDELETE、各操作後の答えの取り出しは一回 $$O(1)$$。SAVEとLOADをハッシュマップで管理すると一回期待 $$O(1)$$ なので、入力と $$Q$$ 個の出力を含めて全体で期待 $$O(Q)$$ 時間となる。ページの連想配列に平衡二分探索木を使うなら一回 $$O(\log(Q+1))$$、全体で最悪 $$O(Q\log(Q+1))$$ 時間である。
 
 ### 空間
 
-O(Q)、ADD nodeとsaved page。
+番兵とADDで作る節点が高々 $$Q+1$$ 個、保存するページが高々 $$Q$$ 個で、空間計算量は $$O(Q)$$。全 $$Q$$ 個の出力をバッファに保持しても同じである。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq Q \leq 5 \times 10^5; 1 \leq x, y, z \leq 10^9; Q, x, y, and z are integers.; Each of the given queries is of one of the four kinds in the Problem Statement.
+クエリ数は $$1\leq Q\leq 5\times 10^5$$、追加値とページ番号は $$1\leq x,y,z\leq 10^9$$。列をコピーする二乗の処理や全ページ分の配列を避け、クエリ数に比例する節点・ページ情報で処理できる。追加値は正なので番兵の $$-1$$ と区別できる。
 
 ## 出典
 
