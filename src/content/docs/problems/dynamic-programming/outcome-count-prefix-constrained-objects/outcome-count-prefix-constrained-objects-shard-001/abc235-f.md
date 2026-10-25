@@ -1,7 +1,7 @@
 ---
 title: "ABC235-F — Variety of Digits"
 draft: true
-authoringUnit: {"problemId":"abc235-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同じtight・started・出現maskのprefixは、後続で選べる数字と必要条件が同じだから合流できる。個数と数値和を保持し、数字dの追加で新しい総和は10sum+d countとなるので各値を列挙する必要はない。未開始の0は位取りのpaddingでありmaskに加えず、開始後の0は通常数字として加える。最後にstartedかつ必要maskを包含する全状態を足すと1..Nの条件を満たす整数の和になる。","sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc235-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-count-prefix-constrained-objects/outcome-count-prefix-constrained-objects-shard-001/abc235-f.md","learningOutcomeIds":["outcome-count-prefix-constrained-objects"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["上限制約付き桁DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-digit-dp"],"sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"上から同じ桁数だけ処理したとき、各状態の `count` と `sum` は、その状態に属する接頭辞の個数と数値の総和を表すとする。初期状態には空の接頭辞が一つあり、その値は0なので、この意味を満たす。\n\n同じ `tight`・`started`・`mask` を持つ接頭辞では、次に選べる数字も、今後満たすべき出現条件も等しい。よって一つの状態にまとめられる。各接頭辞に数字を一つ付ける操作は、上限を超えない全候補を尽くし、異なる接頭辞や数字から同じ桁列を重複して作らない。接頭辞の値を $$x$$ とすると、桁追加後は $$10x+d$$ になることから、個数と総和の更新式も上の意味を保つ。桁埋めの0だけを出現集合から除くため、`mask` は常に実際の十進表記で現れた数字の集合である。\n\n最後には、1以上上限以下の各整数が、左を0で埋めた桁列と一対一に対応する。`started=1` で0を除き、`(mask & req) == req` で必須数字をすべて含む整数だけを残せる。両方の `tight` の `sum` を足すので、上限自身も含め、求める整数の値を一度ずつ加えた答えを得る。加算・乗算のたびに剰余を取っても、最終的な答えの剰余は変わらない。","sourceRevisionIds":["source-abc235-editorial-3247-40b42877dc2f3f4848b32cad6e7590119a465d0b0a1811e07fe9c61be1106227","source-abc235-f-problem-672edfd549b078e96c6eeb187037ac67478679bf4e5888b426893cfabe8e065e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,69 +16,103 @@ authoringUnit: {"problemId":"abc235-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-N は最大 1 万桁なので数値として列挙できないが、上位から同じ prefix を選ぶ間だけ次桁上限が N の対応桁に制限される。
+上限が巨大でも、上の桁から数字を決めれば「まだ上限と一致しているか」と「どの数字が出たか」で残りの選択肢をまとめられる。さらに、まとめた整数の個数と総和を一緒に持つと、末尾に数字を付けた後の総和も一度に更新できる。
 
-条件は各数字が少なくとも一度出たかだけなので、prefix の履歴は出現数字集合の 10 bit mask に圧縮できる。
+### 残りの選択肢を決める情報
 
-棄却する候補: 1 から N までの各整数を生成し、必要数字を全て含むか調べて総和へ加える。
+上限 $$N$$ は最大1万桁なので、1から順に整数を調べることはできない。そこで $$N$$ を文字列で読み、その桁数を $$D$$ とする。短い整数は左を0で埋めて $$D$$ 桁に揃え、上位桁から順に作る。
 
-N が 1 万桁に達し、整数の個数も値も列挙不可能である。
+途中まで決めた桁列を接頭辞と呼ぶ。同じ桁数まで作った接頭辞について、以後の選択に必要なのは次の情報である。
 
-採用する候補: 桁位置、出現数字 mask、N 未満確定か、数が開始済みかを状態とする digit DP で、個数と値の総和を同時に更新する。
+- `tight`：接頭辞が上限の同じ長さの接頭辞と一致していれば1、すでに小さければ0。一致している間だけ、次の数字を上限の対応桁以下に制限する。
+- `started`：0でない数字を一度でも選んでいれば1。0のままなら、これまで選んだ0はすべて桁埋めである。
+- `mask`：実際の表記に現れた数字の集合を表す10ビットの整数。数字 $$d$$ が現れたらビット $$d$$ を立てる。出現回数や順序は、各必須数字を一度以上含むかの判定に影響しない。
 
-上限と leading zero を正しく扱いながら、各 prefix の将来に必要な情報を定数個の mask 状態へまとめられる。
+桁位置は外側のループで管理し、各 `(tight, started, mask)` に、その状態に属する接頭辞の個数 `count` と、接頭辞を数値とみなした総和 `sum` を保存する。
 
-新しい数字 d を末尾へ付けると、総和は旧総和×10＋旧個数×d で更新できるため、完成数を個別に保持しなくてよい。
+### 総和の更新には個数も必要
 
-巨大上限の十進 prefix automaton 上で、tight・started・digit mask ごとの個数と数値和を伝播し、必要 mask を包含する終了状態の和を集計する。
+ある状態に属する接頭辞の値を $$x_1,\ldots,x_k$$ とする。各接頭辞の末尾に同じ数字 $$d$$ を付けると、値はそれぞれ $$10x_j+d$$ になる。したがって、その遷移が次の状態へ加える総和は
+
+$$
+\begin{aligned}
+&\sum_{j=1}^{k}(10x_j+d)\\
+&\quad=10\sum_{j=1}^{k}x_j+dk\\
+&\quad=10\,\mathrm{sum}+d\,\mathrm{count}
+\end{aligned}
+$$
+
+である。数字 $$d$$ は各接頭辞に一回ずつ付くため、総和だけでは更新できず、個数も必要になる。同じ数字を付けてできる接頭辞の個数は変わらないので、次の個数への寄与は `count` である。
+
+### 空の接頭辞から一桁ずつ配る
+
+まだ一桁も選んでいないときは、`tight=1, started=0, mask=0` に `(count, sum)=(1, 0)` を置き、他の状態を `(0, 0)` にする。空の接頭辞は「何も選ばない方法」一つなので個数は1、その値は0なので総和は0である。
+
+次の手順を上の桁から $$D$$ 回繰り返す。DPの個数・総和に関する加算と乗算はすべて $$998244353$$ で剰余を取る。
+
+1. 次の桁まで作った状態を保存する別の配列を用意し、全状態の個数・総和を0にする。
+2. 現在の各状態について、上限の対応桁の数字を $$a$$ とすると、`tight=1` なら $$0\leq d\leq a$$、`tight=0` なら $$0\leq d\leq9$$ の各数字 $$d$$ を選ぶ。
+3. 遷移先を次のように決める。
+   - `newTight = tight && (d == a)`。一度上限より小さくなった接頭辞は、その後も小さいままである。
+   - `newStarted = started || (d != 0)`。
+   - `newStarted=0` なら `newMask=mask` のままにする。このときの0は桁埋めである。それ以外なら `newMask = mask | (1 << d)` とし、数字 $$d$$ のビットを立てる。開始後に選ぶ0もこの場合に含まれる。
+4. 遷移先 `(newTight, newStarted, newMask)` の次層の個数へ `count`、総和へ `10 * sum + d * count` を加える。複数の遷移が同じ状態へ来るので、代入ではなく加算する。
+5. 全状態・全候補数字を処理したら、現在の配列を次層の配列に置き換える。同じ桁の処理中に、書き込んだ値を再び遷移元として使わない。
+
+最後に、必須数字のビットを立てた集合を `req` として、`started=1` かつ `(mask & req) == req` を満たす状態の `sum` を足す。`tight=0` は上限未満、`tight=1` は上限自身に対応するので、両方を集計する。全桁が0の状態は `started=0` のため除外される。
 
 ## 典型の発動条件
 
 ### 出現集合付き digit DP
 
-発動条件: 上限 N 以下の整数について、十進表記に特定数字が現れる条件を数え上げるとき。
-
-使用済み数字を bitmask、上限との大小を tight、leading zero を started で管理する。
+上限以下の整数を数え、条件が各数字の出現の有無だけで決まるときは、出現集合をビット集合に圧縮できる。上限との一致を `tight`、桁埋めの0と実際の0の区別を `started` で管理する。
 
 ### 桁 DP での値の総和
 
-発動条件: 条件を満たす整数の個数だけでなく、整数値そのものの合計を求めるとき。
-
-各状態に count と sum を持ち、桁追加で sum' に 10×sum＋d×count を足す。
+桁の追加で各値が同じ一次式に従って変わるなら、状態ごとの個数と総和だけで、次の総和を更新できる。整数値の列挙を避けたいときは、更新式を総和にして、個数の項が必要にならないかを調べる。
 
 ## 問題固有の要素
 
-数字 0 が必須でも、数が始まる前の leading zero は十進表記に含まれないため mask へ追加してはいけない。
+必須数字に0が含まれると、左に埋めた0を出現として数える誤りが起きやすい。次は説明用の小例である。$$N=20$$、必須数字が0だけの場合を考える。説明のため上限も `020` と書いて3桁に揃えると、条件を満たすのは `010` と `020`、すなわち10と20で、総和は30になる。余分な先頭0を一桁付けても、整数との対応は変わらない。
 
-別の問題へ持ち帰る視点: 桁条件に 0 が関わる digit DP では、padding の 0 と実際の表記中の 0 を started 状態で分離する。
+`010` では最初の0を選んでも `started=0, mask=0` のままである。次の1で `started=1` となりビット1を立て、最後の0で初めてビット0を立てる。`020` も同様に、最後の0が実際の表記中の0になる。
+
+一方、`001` は整数1を表す。最初の二つの0はどちらも桁埋めで、最後の1を選ぶまで `mask=0` のままである。完成後もビット0は立たず、必須数字0の条件を満たさない。0という値だけを見てビットを立てるのではなく、数が開始したかと組み合わせて判定する。
 
 ## 正当性
 
-同じtight・started・出現maskのprefixは、後続で選べる数字と必要条件が同じだから合流できる。個数と数値和を保持し、数字dの追加で新しい総和は10sum+d countとなるので各値を列挙する必要はない。未開始の0は位取りのpaddingでありmaskに加えず、開始後の0は通常数字として加える。最後にstartedかつ必要maskを包含する全状態を足すと1..Nの条件を満たす整数の和になる。
+上から同じ桁数だけ処理したとき、各状態の `count` と `sum` は、その状態に属する接頭辞の個数と数値の総和を表すとする。初期状態には空の接頭辞が一つあり、その値は0なので、この意味を満たす。
+
+同じ `tight`・`started`・`mask` を持つ接頭辞では、次に選べる数字も、今後満たすべき出現条件も等しい。よって一つの状態にまとめられる。各接頭辞に数字を一つ付ける操作は、上限を超えない全候補を尽くし、異なる接頭辞や数字から同じ桁列を重複して作らない。接頭辞の値を $$x$$ とすると、桁追加後は $$10x+d$$ になることから、個数と総和の更新式も上の意味を保つ。桁埋めの0だけを出現集合から除くため、`mask` は常に実際の十進表記で現れた数字の集合である。
+
+最後には、1以上上限以下の各整数が、左を0で埋めた桁列と一対一に対応する。`started=1` で0を除き、`(mask & req) == req` で必須数字をすべて含む整数だけを残せる。両方の `tight` の `sum` を足すので、上限自身も含め、求める整数の値を一度ずつ加えた答えを得る。加算・乗算のたびに剰余を取っても、最終的な答えの剰余は変わらない。
 
 ## 実装上の注意
 
-- 未開始のまま全桁 0 を選んだ状態は整数 0 に対応するので最終集計から除外する。
-- 必要数字 mask req に対し (mask＆req)＝req の全 started 状態を集計し、N 自身を含む tight 状態も落とさない。
+- $$N$$ は整数型へ変換せず文字列で持ち、各文字から対応する一桁だけを取り出す。
+- 次層の配列は毎桁0に戻す。上限との比較・出現集合の更新は現在の状態から行い、個数・総和だけを次層へ加算する。
+- 剰余を取った `count` が0でも、`sum` が0とは限らない。`count == 0` だけを理由に遷移を省かず、全状態を処理すればよい。
+- 積を計算してから剰余を取るまでに、32ビット整数の範囲を超え得る。`10 * sum + d * count` は十分な幅の整数型や剰余演算用の型で計算する。
 
 ## 復習の核
 
-- 桁 DP で総和を求めるときは、同じ prefix 状態の値を列挙せず count と sum の二統計を持つ。
-- 必須数字に 0 が含まれる小例で、leading zero が出現扱いになっていないことを確認する。
+- 値を一つずつ求められないときは、桁追加の式をまとめて足し、次の総和を更新するための統計を探す。
+- 空の接頭辞は個数1・総和0。初期値はそれぞれが何を表すかから決める。
+- 必須数字0の小例で、桁埋めの0を無視し、開始後の0を出現として扱えているか確かめる。
 
 ## 計算量と制約
 
 ### 時間
 
-D=桁数としてO(D·2^10·10)。
+桁数を $$D$$ とする。各桁で `tight`・`started` の各2通りと、出現集合 $$2^{10}$$ 通りに対し最大10個の数字を試すため、時間計算量は $$O(D\cdot2^{10}\cdot10)$$。各桁の次層の初期化と、最後の全状態の集計もこの範囲に含まれる。
 
 ### 空間
 
-O(2^10)。桁ごとにrollingする。
+現在と次の桁の2層だけを保持するので、DPの作業領域は $$O(2^{10})$$。上限文字列の保存に $$O(D)$$ 必要なため、入力を含む全体の空間計算量は $$O(D+2^{10})$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N < 10^{10^4}; 1 \leq M \leq 10; 0 \leq C_1 < \ldots < C_M \leq 9; All values in input are integers.
+$$1\leq N<10^{10^4}$$ より $$D\leq10^4$$。桁数に比例する処理と、10種類の数字の出現集合で管理でき、上限の数値の大きさに比例する列挙は行わない。必須数字は $$1\leq M\leq10$$ 個で、$$0\leq C_1<\cdots<C_M\leq9$$ なので10ビットの `req` に収まる。実装では全桁分のDP配列を保存せず2層を使う。
 
 ## 出典
 
