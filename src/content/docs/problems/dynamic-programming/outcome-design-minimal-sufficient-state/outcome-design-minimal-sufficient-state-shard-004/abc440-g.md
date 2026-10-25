@@ -1,7 +1,7 @@
 ---
 title: "ABC440-G — Haunted House"
 draft: true
-authoringUnit: {"problemId":"abc440-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc440-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dsu-components"],"sourceRevisionIds":["source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92","source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"上るだけの経路は最初の上り先で分類でき、Pの遷移になる。ハシゴを最初に使う場合は、その下り先vと次の上り先wでRを分類する。階は以後増えるので既訪問成分と重なる可能性は同じ階のuだけであり、w=uの場合だけc_uを引く。最初に上る経路では、ハシゴ使用がさらに上ならQ_uを引き継ぎ、すぐに下るならR(u,z)を使う。後者で重なる可能性がある出発成分はz=vだけである。この分類は全経路を尽くし、各コインを一度だけ足す。最初に下るケースも最後の答えで合成している。","sourceRevisionIds":["source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92","source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc440-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-minimal-sufficient-state/outcome-design-minimal-sufficient-state-shard-004/abc440-g.md","learningOutcomeIds":["outcome-design-minimal-sufficient-state"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["状態の再利用をせず、頂点を一度ずつ訪問する到達可能性探索。"],"tagIds":["tag-dp-state-equivalence","tag-dsu-components"],"sourceRevisionIds":["source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92","source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"上るだけの経路は最初の上り先で分類でき、Pの遷移になる。ハシゴを最初に使う場合は、その下り先vと次の上り先wでRを分類する。階は以後増えるので既訪問成分と重なる可能性は同じ階のuだけであり、w=uの場合だけc_uを引く。最初に上る経路では、ハシゴ使用がさらに上ならQ_uを引き継ぎ、すぐに下るならR(u,z)を使う。後者で重なる可能性がある出発成分はz=vだけである。この分類は全経路を尽くし、各コインを一度だけ足す。最初に下るケースも最後の答えで合成している。","sourceRevisionIds":["source-abc440-editorial-15033-e736b20251169d62c9695d54e2699f8cab16ab21ed6a0a06466c5f30ddecfb92","source-abc440-g-problem-3878da44dd24e2554a0f3a6202d860f40957ffa364bd7f2c634c695900fde4a2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -56,7 +56,7 @@ Q_vはまずc_v+max(0,max_{u∈U(v)}Q_u)で初期化する。さらにv→u→z�
 
 発動条件: 候補集合から指定された ID と同じ候補だけを除外して最大値を求める処理が、多数の遷移で繰り返される場合。
 
-dv の値と接続先成分 ID の上位二件を保持し、一位の ID が除外対象なら二位、異なるなら一位を使う。
+$$P_w$$ や $$R(u,z)$$ の値と接続先成分 ID の上位二件を保持し、一位の ID が除外対象なら二位、異なるなら一位を使う。
 
 ## 問題固有の要素
 
@@ -76,8 +76,9 @@ dv の値と接続先成分 ID の上位二件を保持し、一位の ID が除
 
 ## 復習の核
 
-- 三つの階を描き、開始から上昇、梯子で下降、再上昇する経路を dp_0、dp_1、dv_0、dv_1 の各定義へ対応させ、どの時点で成分重みを数えたかを確認する。
-- 下降元と再上昇先が同じ場合と異なる場合、候補が一件しかない場合、上階へ進めない場合を別々に試し、上位二件による除外と二重計上防止を検査する。
+- 開始成分を $$v$$ とし、「上るだけ」は $$P_v$$、「最初に上り、途中で一度下りてもよい」は $$Q_v$$、「最初に隣接する下階の成分 $$z$$ へ下り、その後は上るだけ」は $$R(v,z)$$ に対応させる。$$Q_v$$ は下らない経路と、その場で止まる場合も含む。開始直後に下る経路を落とさないため、答えでは $$Q_v$$ と各 $$R(v,z)$$ を比較する。
+- 途中で下る経路 $$v\to u\to z\to w$$ で、加算済みの成分を追う。$$u,w$$ は $$v$$ の一つ上、$$z$$ は $$v$$ と同じ階にある。$$R(u,z)$$ では下降元 $$u$$ を既に数えているので、再上昇先が $$w=u$$ なら $$c_u$$ をもう一度足さない。さらに開始成分 $$v$$ と合成するときは、$$z=v$$ なら $$R(u,z)$$ が既に $$c_v$$ を含むので足さず、$$z\ne v$$ のときだけ $$c_v$$ を足す。
+- 除外するのは一つの成分 ID である。上位二件は異なる ID の候補を残し、値が同じでも一件にまとめない。候補が一件しかなく、それが除外対象なら除外後の候補はない。同じ成分へ戻る場合と、上階へ進めず止まる場合を別に確認する。
 
 ## 計算量と制約
 
