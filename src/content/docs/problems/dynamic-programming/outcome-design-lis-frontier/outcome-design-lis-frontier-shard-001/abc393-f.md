@@ -1,7 +1,7 @@
 ---
 title: "ABC393-F — Prefix LIS Query"
 draft: true
-authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-event-sweep"],"sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"tails[j] を長さ j+1 の増加部分列の最小末尾とする不変条件は lower_bound 置換で保たれる。末尾≤Xの列では全要素が末尾以下なので値上限を満たす。逆に値上限を満たす列が長さ j+1なら最小末尾も≤X。従って tails 内の≤Xの要素数が答えであり、prefix R 時点の upper_bound がそれを返す。","sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-lis-frontier/outcome-design-lis-frontier-shard-001/abc393-f.md","learningOutcomeIds":["outcome-design-lis-frontier"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-sequence","unit-event-sweep"],"excludedTopics":["LIS・末尾の支配関係の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-lis-state","tag-event-sweep"],"sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"`tails[j]` を長さ $$j+1$$ の増加部分列の最小末尾とする。長さ $$j+2$$ の部分列から末尾を除くと、その末尾より小さい値で終わる長さ $$j+1$$ の部分列が得られるため、最小末尾も長さとともに狭義に増加する。\n\n空のprefixでは不変条件を満たす。新しい値 $$a$$ の `lower_bound` の位置を $$p$$ とすると、$$p>0$$ なら `tails[p-1]` は $$a$$ より小さく、それを実現する長さ $$p$$ の部分列に $$a$$ をつなげられる。$$p=0$$ なら $$a$$ 単独を選べる。いずれも長さ $$p+1$$ の末尾を $$a$$ にできる。より短い長さの最小末尾はすでに $$a$$ より小さいので改善せず、より長い部分列を $$a$$ で終えるには、更新前に長さ $$p+1$$ 以上で末尾が $$a$$ 未満の部分列が必要だが、それは $$p$$ の定義に反する。従って位置 $$p$$ の置換または末尾への追加だけで不変条件を保つ。\n\n値上限 $$X$$ を満たす長さ $$j+1$$ の増加部分列が存在すれば、その末尾以下である `tails[j]` も $$X$$ 以下である。逆に `tails[j]` が $$X$$ 以下なら、その最小末尾を実現する部分列の全要素が $$X$$ 以下になる。従って実現可能な長さは、`tails` の中の $$X$$ 以下の要素数を $$k$$ として $$1,\\dots,k$$ であり、答えは $$k$$ である。`upper_bound` の0始まりの位置はこの個数に等しい。各質問をちょうど先頭の $$R$$ 要素を反映した直後に処理するので、求めるprefixに対する正しい答えを返す。","sourceRevisionIds":["source-abc393-editorial-12252-2c47af898a83fbae6ed97509092415b6a76c99ea5847d3fba170615ef30eea0d","source-abc393-f-problem-e0e9edbbde1eef3fa48ba213588f4d51c7172f39ea658be6f6bcdf81b50b1d06"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,63 +17,90 @@ authoringUnit: {"problemId":"abc393-f","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-prefix A[1..R]の通常LIS tails配列dp[j]=長さjの増加部分列の最小末尾は、jについてstrict増加する。値上限Xの要素だけからなる最長長さは、prefix R処理時点でdp[j]≤Xとなる最大jに等しい。末尾がX以下なら構成要素もstrict増加ゆえ全てX以下である。strict LISなのでA_iの更新位置はdpでA_i以上となる最初の場所（lower_bound）である。queryはdp[j]≤Xの個数なのでXより大きい最初の位置（upper_bound）が答えになる。
+増加部分列では末尾が最大の要素になる。そのため、各長さについて「末尾をどこまで小さくできるか」が分かれば、値の上限を満たすかも判定できる。質問ごとに要素を除いてLISを求め直す代わりに、この最小末尾を共有することを考える。
 
-採用する候補: R昇順にoffline queryを処理しながらpatience sortingのtailsを更新し、Xをupper_boundする
+質問で使うのは先頭からの区間（prefix）なので、右端が短い質問から処理すれば、配列の要素を一つずつ追加するだけでよい。各質問でLISを再計算すると最悪 $$O(NQ\log N)$$ かかるが、同じprefixまでの計算を使い回せる。
 
-各A_iのlower_bound更新と各queryのupper_boundをO(log N)で行い、全体O((N+Q)log N)になる。
+元の配列の添字は $$1,\dots,N$$ とする。先頭の $$R$$ 要素を処理した時点で、動的配列 `tails` を次の意味で持つ。
 
-棄却する候補: 各queryごとにA[1..R]からX超過を除いてLISを再計算する
+- `tails` の添字は0始まりで、`tails[j]` は長さ $$j+1$$ の狭義単調増加部分列の最小末尾である。
+- 存在する長さの分だけ要素を持つ。空のprefixでは `tails` も空で、現在のLIS長は `tails.size()` に等しい。
+- 長さが増えるほど最小末尾も狭義に増加するため、`tails` は二分探索できる。
 
-prefixが重なるのに計算を共有せず、最悪O(NQ log N)となる。
+新しい値 $$A_i$$ を追加するときは、`lower_bound(tails, A_i)`、すなわち $$A_i$$ 以上の最初の要素の位置 $$p$$ を探す。その位置があれば `tails[p]` を $$A_i$$ に置き換え、末尾の次なら追加する。等しい値も置き換えるので、同じ値を二度選んで長さを増やすことはない。
 
-queryをR別bucketへ入れる。i=1..NでtailsへA_iをlower_bound置換し、R=iの各queryについてtailsをXでupper_boundしたindexを答えとして保存する。
+例えば $$A=(2,2,3)$$ なら、更新は次のようになる。
+
+| 右端 $$R$$ | `tails` | 更新の意味 |
+| --- | --- | --- |
+| 1 | `(2)` | 2を追加し、長さ1に |
+| 2 | `(2)` | 同じ2を置換し、長さは1のまま |
+| 3 | `(2,3)` | 3を追加し、長さ2に |
+
+では、値の上限 $$X$$ を持つ質問にはどう答えるか。長さ $$j+1$$ の部分列で全要素を $$X$$ 以下にできる条件は、`tails[j]` が $$X$$ 以下であることだ。最小末尾自体が $$X$$ 以下なら、その末尾を実現する増加部分列の全要素も上限を満たす。
+
+`tails` は増加しているので、$$X$$ 以下の要素は先頭に連続して並ぶ。その個数を $$k$$ とすると、対応する長さは $$1,\dots,k$$ であり、最大長も $$k$$ となる。`upper_bound(tails, X)` が返す「$$X$$ より大きい最初の位置」は、この個数 $$k$$ そのものである。**最後に条件を満たす添字に1を足す代わりに、条件を満たす要素の個数を直接読む**と考えると、添字と長さを混同しにくい。
+
+先ほどの例では、$$R=2$$ の `tails=(2)` で $$X=2$$ の答えは1。$$R=3$$ の `tails=(2,3)` では、$$X=2$$ なら位置1、$$X=3$$ なら末尾の次の位置2が返り、答えはそれぞれ1、2になる。更新の `lower_bound` と質問の `upper_bound` は、等しい値の扱いが異なる。
+
+具体的には、質問を右端 $$R$$ ごとのbucketへ入れ、値上限 $$X$$ と入力時の質問番号を保存する。`tails` を空で初期化し、$$i=1,\dots,N$$ の順に次を行う。
+
+1. $$A_i$$ を `lower_bound` で `tails` に反映する。
+2. $$R=i$$ の質問すべてに、`upper_bound(tails, X)` の0始まりの位置を答える。
+3. 答えを元の質問番号の場所へ保存する。
+
+最後に答えの配列を入力順に出力する。同じ右端を持つ質問はすべて、$$A_i$$ を含む同じ状態で処理する。
 
 ## 典型の発動条件
 
 ### offline prefix query
 
-発動条件: query条件の一軸がprefix終端で、状態を一要素ずつ更新できるとき。
-
-R順にsweepして同じprefix状態を共有する。
+質問を入力順に処理する必要がなく、先頭からの区間の状態を一要素ずつ更新できるときに使う。右端ごとのbucketで処理すれば、質問のソートも不要になる。入力時の質問番号を持って答えの順序を戻す。
 
 ### LIS tails invariant
 
-発動条件: strict LIS長を最小末尾列で管理するとき。
-
-lower_bound更新と値thresholdのupper_boundを組み合わせる。
+同じ長さの増加部分列なら、末尾が小さいほど将来の値をつなげやすい。長さ別の最小末尾だけを残し、狭義増加では `lower_bound` で更新する。その状態が値上限にも答えられるかは、末尾と部分列全体の値の関係から確認する。
 
 ## 問題固有の要素
 
-「各要素≤X」という制約はLIS DPへ新しい次元を足さず、最小末尾dpの値境界を読むだけで表せる。
+「全要素が $$X$$ 以下」という条件も、増加部分列では末尾一つで判定できる。値上限をDPの新しい次元にせず、最小末尾列の中で条件を満たす長さを二分探索すればよい。
 
-別の問題へ持ち帰る視点: prefix subsequence queryでは、標準online DPのfrontierにquery条件が直接binary searchできないか確認する。
+別の問題へ持ち帰る視点は、標準のDPが保持する最適値から、追加された質問条件を直接判定できないかを調べることだ。
 
 ## 正当性
 
-tails[j] を長さ j+1 の増加部分列の最小末尾とする不変条件は lower_bound 置換で保たれる。末尾≤Xの列では全要素が末尾以下なので値上限を満たす。逆に値上限を満たす列が長さ j+1なら最小末尾も≤X。従って tails 内の≤Xの要素数が答えであり、prefix R 時点の upper_bound がそれを返す。
+`tails[j]` を長さ $$j+1$$ の増加部分列の最小末尾とする。長さ $$j+2$$ の部分列から末尾を除くと、その末尾より小さい値で終わる長さ $$j+1$$ の部分列が得られるため、最小末尾も長さとともに狭義に増加する。
+
+空のprefixでは不変条件を満たす。新しい値 $$a$$ の `lower_bound` の位置を $$p$$ とすると、$$p>0$$ なら `tails[p-1]` は $$a$$ より小さく、それを実現する長さ $$p$$ の部分列に $$a$$ をつなげられる。$$p=0$$ なら $$a$$ 単独を選べる。いずれも長さ $$p+1$$ の末尾を $$a$$ にできる。より短い長さの最小末尾はすでに $$a$$ より小さいので改善せず、より長い部分列を $$a$$ で終えるには、更新前に長さ $$p+1$$ 以上で末尾が $$a$$ 未満の部分列が必要だが、それは $$p$$ の定義に反する。従って位置 $$p$$ の置換または末尾への追加だけで不変条件を保つ。
+
+値上限 $$X$$ を満たす長さ $$j+1$$ の増加部分列が存在すれば、その末尾以下である `tails[j]` も $$X$$ 以下である。逆に `tails[j]` が $$X$$ 以下なら、その最小末尾を実現する部分列の全要素が $$X$$ 以下になる。従って実現可能な長さは、`tails` の中の $$X$$ 以下の要素数を $$k$$ として $$1,\dots,k$$ であり、答えは $$k$$ である。`upper_bound` の0始まりの位置はこの個数に等しい。各質問をちょうど先頭の $$R$$ 要素を反映した直後に処理するので、求めるprefixに対する正しい答えを返す。
 
 ## 実装上の注意
 
-- strict増加なのでupdateはlower_bound、queryは≤Xなのでupper_boundを使う。未到達INFをtailsへ含める実装ではXとの比較範囲を揃える。
+- `tails` は0始まりの動的配列とし、未到達の長さや番兵は入れない。更新位置が `tails.size()` なら追加し、それ以外なら置換する。
+- 狭義増加の更新には、同値を置き換える `lower_bound` を使う。質問は上限と等しい値も許すので `upper_bound` を使う。C++なら `upper_bound(tails.begin(), tails.end(), X) - tails.begin()` が答えであり、1を足したり引いたりしない。
+- $$R=i$$ の質問には $$A_i$$ の更新後に答える。特に $$R=1$$ や、最後の要素を選んで答えが伸びる質問で処理順の誤りが現れる。
+- 質問の処理順は右端の順へ変わるため、答えは元の質問番号で保存する。
 
 ## 復習の核
 
-- 重複値列、降順列、Xがちょうどtails要素/その直前のcaseをsubsequence全探索と比較する。
+- 長さ別の最小末尾は、将来の延長だけでなく「全要素が上限以下か」の判定にも使える。
+- `tails[j]` は長さ $$j+1$$。答えは最後の添字ではなく、上限以下の末尾の個数で読む。
+- 同値を伸ばさない更新は `lower_bound`、同値を含めて数える質問は `upper_bound`。
 
 ## 計算量と制約
 
 ### 時間
 
-N 要素、Q 質問。R別 bucket で O((N+Q)log N)、query sort を使うなら追加 O(Qlog Q)。
+$$N$$ 要素、$$Q$$ 質問。bucketの準備と出力は $$O(N+Q)$$、各要素の更新と各質問の二分探索はそれぞれ $$O(\log N)$$ なので、全体は $$O((N+Q)\log N)$$。質問をソートする方法では別途 $$O(Q\log Q)$$ が必要になる。
 
 ### 空間
 
-tails、bucket、出力で O(N+Q)。
+`tails` と元の配列に $$O(N)$$、bucketと答えの配列に $$O(N+Q)$$ を使い、全体は $$O(N+Q)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N,Q \leq 2 \times 10^5; 1 \leq A_i \leq 10^9; 1 \leq R_i \leq N; \min\lbrace A_1, A_2,\dots,A_{R_i} \rbrace\leq X_i\leq 10^9; All input values are integers.
+$$1\leq N,Q\leq 2\times 10^5$$、$$1\leq A_i\leq 10^9$$ なので、質問ごとの再計算を避け、一要素・一質問あたり二分探索一回で処理する。$$1\leq R_i\leq N$$ であり、$$\min\{A_1,\dots,A_{R_i}\}\leq X_i\leq 10^9$$ が保証されるため、公式入力の答えは必ず1以上になる。上限より大きい末尾がなければ、`upper_bound` は末尾の次を返し、答えは `tails.size()` になる。制限時間は2秒、メモリ制限は1024 MiB。
 
 ## 出典
 
