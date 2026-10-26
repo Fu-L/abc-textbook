@@ -1,7 +1,7 @@
 ---
 title: "ABC466-G — Segment Sum Constraints"
 draft: true
-authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非負化は元の正整数解との全単射である。成分内の隣接prefix差を満たせば、足し合わせてすべての入力等式を戻せる。負の右辺を入力時と抽出時に排除することで、非負区間和という前提を維持する。既決定の下位bit和と目標下位部分の差を2^bで割った値がcarryであり、偶奇検査と次carryへの更新は一桁の加算と同値になる。登場変数・目標は2^30未満なので、30bit後のcarry0で整数として完全一致する。未登場変数は他の条件を変えず任意に増やせるため、一解の存在が無限個の解を意味する。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-design-carry-or-mixed-radix-dp/outcome-design-carry-or-mixed-radix-dp-shard-001/abc466-g.md","learningOutcomeIds":["outcome-design-carry-or-mixed-radix-dp","outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["数値上限とのtight flagや文字列pattern状態を接頭辞から更新する桁・automaton DP。"],"tagIds":["tag-carry-mixed-radix-dp","tag-potential-dsu"],"sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"非負化は元の正整数解との全単射である。DSUで差の矛盾を検査した後、成分内の隣接する累積和の差を残す置き換えは必要十分であり、入力時・抽出時の負の右辺は非負解を持たないので排除できる。\n\nDPは下位 $$b$$ bitでの合同条件と、その差を $$2^b$$ で割ったcarryを保つ。合同条件と剰余の範囲により各carryは $$0,\\ldots,\\ell_j-1$$ に収まる。偶奇検査は次の桁まで合同条件を保つための必要十分条件であり、次carryの式はその差を $$2^{b+1}$$ で割った値である。各変数のbit列とmaskの列は一対一に対応するので、合法遷移をすべて加算すると漏れも重複もない。同成分の隣接添字のgapを使うため、成分数ごとの積の評価からcarry候補数は1024以下となる。\n\n登場変数と抽出した目標は $$2^{30}$$ 未満なので、30bit後に全carryが0であることと、整数としてすべての等式を満たすことは同値である。未登場変数を0に固定しても可解性は変わらず、登場変数に一解があれば未登場変数の任意の増加により解は無限個となる。存在boolを剰余個数とは別に更新するので、解数が法の倍数でもこの判定を誤らない。","sourceRevisionIds":["source-abc466-editorial-22603-f992aca49e269ba09ae63173b5ecfa3abca8cb1209f03e38c7a61966ed2ebbe6","source-abc466-g-problem-f651880065e63f9eadfd21ab05aa1ddfd0d51291fb74a755a028f47b63830dd6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,66 +21,143 @@ authoringUnit: {"problemId":"abc466-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-正整数列をu_i=A_i−1で非負化し、各条件の目標をS−(R−L+1)へ変える。ここが負なら非負区間和では作れず、答えは0。prefix B_i=Σ_{j≤i}u_jを使えば、条件はB_R−B_{L−1}=S'という差等式になる。
+変数は8個以下でも、それぞれの値は大きいので、値の組を直接列挙することはできない。一方、加算を二進数の下の桁から行えば、過去の桁から必要なのは繰り上がりだけになる。ただし、すべての区間和について繰り上がりを持つと状態が増えすぎる。まず累積和の差として条件を整理し、残した式の繰り上がりを同時に追う。
 
-採用する候補: weighted DSUで等式を整理した後、下位bitからcarry vector DPを行う。
+正整数という下限を扱いやすくするため、$$u_i=A_i-1$$ と置く。入力の条件 $$m$$ の右辺を $$T_m=S_m-(R_m-L_m+1)$$ に変えれば、求めるのは非負整数列の区間和である。$$T_m<0$$ なら答えは0。累積和を $$B_0=0,\ B_i=\sum_{h=1}^{i}u_h$$ とすると、各条件は $$B_{R_m}-B_{L_m-1}=T_m$$ となる。
 
-同じDSU成分の二点に要求された差が既存potentialと食い違えば0。各成分のprefix添字を昇順に並べ、隣接するp<qだけを結ぶ式Σ_{p<j≤q}u_j=B_q−B_pを残す。元の差はこれらを足して戻せるので、独立式は高々N本になる。ただし、抽出した右辺もすべて非負か調べる。入力の右辺が非負でも、例えばu_1=9,u_1+u_2=3から得るu_2=−6は不可能で、DSUの等式検査だけでは弾けない。
+添字 $$0,\ldots,N$$ を頂点、入力の差等式を辺とみなし、重み付きDSU（weighted DSU）で成分と相対差を管理する。頂点 $$v$$ の potential を $$w_v=B_v-B_{\mathrm{root}(v)}$$ と定めると、既に同成分である二点への条件は $$w_{R_m}-w_{L_m-1}=T_m$$ かを調べればよい。食い違えば答えは0である。
 
-棄却する候補: 各u_iを0..10^9から選んで条件を検査する。
+次に、各成分の添字を昇順に並べ、その中で隣り合う二点だけを結ぶ。抽出した式を $$j=1,\ldots,q$$ と番号付けし、その両端を $$p_j<r_j$$ と書くと、
 
-N≤8でも値域の直積は列挙できない。一方、式jの区間長をℓ_jとするとcarryは0..ℓ_j−1だけで、その組合せは本問では高々1024通りに収まる。
+$$
+\sum_{i=p_j+1}^{r_j}u_i=S'_j,
+\qquad S'_j=w_{r_j}-w_{p_j},\qquad \ell_j=r_j-p_j
+$$
 
-bit bでは各u_iのbitをN-bit maskで選ぶ。式jの区間内bit数をa_j、目標bitをs_jとし、C_j+a_jとs_jの偶奇が一致するmaskだけを許す。次carryは(C_j+a_j−s_j)/2。初期は全carry0の個数1、他は0とし、bit0..29を処理した全carry0の個数を得る。
+を残せばよい。$$\ell_j$$ はこの区間の長さである。元の辺の両端は同成分なので、成分内の隣接差を足すと元の条件を戻せる。逆に、抽出した差も元の条件から決まるため、この置き換えは必要十分である。成分数を $$k$$ とすると、残る式は各成分の頂点数より一つ少ないので、全体で $$q=N+1-k\leq N$$ 本となる。
 
-条件に登場する非負変数は、元の区間和の目標≤10^9に抑えられるため、30bitで足りる。未登場変数はDPでは0に固定して存在だけを調べ、可解ならInfinity、不可解なら0とする。存在boolを個数mod 998244353とは別に保つ。
+ここで、**抽出した右辺もすべて非負か調べる**。入力時の右辺が非負でも、例えば $$u_1=9,\ u_1+u_2=3$$ から得る $$u_2=-6$$ は不可能であり、DSUの差等式としては矛盾しない。以降は $$S'_j\geq0$$ とする。
+
+一つの式の桁加算から考えよう。独自の小例 $$u_1+u_2=2$$ で $$u_1=u_2=1$$ を選ぶと、最下位bitの和は2、目標の最下位bitは0なので、次の桁へ1を繰り上げる。次の桁では変数のbitは両方0だが、前の桁から来た1が目標のbitの1と一致し、繰り上がりが0へ戻る。下位桁の合計そのものを保存せず、この「目標との差を次の桁の単位で測った値」を持てばよい。
+
+一般に、下位 $$b$$ bitを決めた段階で、式 $$j$$ について
+
+$$
+\sum_{i=p_j+1}^{r_j}(u_i\bmod 2^b)
+\equiv S'_j\pmod{2^b}
+$$
+
+を満たす部分的な選び方だけを残す。その繰り上がり（carry）を
+
+$$
+C_j=\frac{\displaystyle\sum_{i=p_j+1}^{r_j}(u_i\bmod 2^b)-(S'_j\bmod 2^b)}{2^b}
+$$
+
+と定義する。合同条件から分子は $$2^b$$ の倍数である。また、各剰余は $$0,\ldots,2^b-1$$ なので、分子は $$-2^b$$ より大きく、$$\ell_j2^b$$ より小さい。従って整数である $$C_j$$ は **$$0\leq C_j<\ell_j$$** を満たす。目標の下位部分を引いていても負のcarryが不要なのは、この整数倍という条件による。
+
+続いて、各変数のbit $$b$$（$$2^b$$ の位）を $$x_i\in\{0,1\}$$ として選び、式内のbit和を $$a_j=\sum_{i=p_j+1}^{r_j}x_i$$、目標のbitを $$s_j=\lfloor S'_j/2^b\rfloor\bmod2$$ とする。下位 $$b+1$$ bitでの差は
+
+$$
+2^b(C_j+a_j-s_j)
+$$
+
+だから、次の桁まで合同条件を保てるのは $$C_j+a_j-s_j$$ が偶数のときに限る。そのとき次のcarryは
+
+$$
+C'_j=\frac{C_j+a_j-s_j}{2}
+$$
+
+となる。先ほどの小例では、最初は $$C=0,\ a=2,\ s=0$$ から $$C'=1$$、次は $$C=1,\ a=0,\ s=1$$ から $$C'=0$$ と計算できる。
+
+複数の式でも、同じ変数のbit選択を共有して、各式のcarryを並べたベクトル $$\mathbf C=(C_1,\ldots,C_q)$$ を状態にすればよい。各式に $$\ell_j$$ 通りの候補があるので、ベクトルの候補数は
+
+$$
+C=\prod_{j=1}^{q}\ell_j
+$$
+
+で抑えられる。ただし、**式を高々 $$N$$ 本に減らしただけで、この積が1024以下になるわけではない**。ここからは、同成分の隣接添字の間隔（gap）だけを使って式を作ったことが効く。
+
+各成分の最初と最後の添字をそれぞれ $$f_c,t_c$$（$$c=1,\ldots,k$$）とする。同じ成分内のgapを足すと両端の差になるため、
+
+$$
+\sum_{j=1}^{q}\ell_j=\sum_{c=1}^{k}(t_c-f_c)
+\leq k(N+1-k)=kq
+$$
+
+が成り立つ。実際、最初の添字は互いに異なるので合計は少なくとも $$0+\cdots+(k-1)$$、最後の添字も互いに異なるので合計は高々 $$(N-k+1)+\cdots+N$$ であり、その差が $$k(N+1-k)$$ である。従って $$q>0$$ なら、相加相乗平均の不等式から
+
+$$
+C\leq\left(\frac{\sum_j\ell_j}{q}\right)^q
+\leq k^q\leq k^{9-k}
+$$
+
+を得る。最後で $$N\leq8$$ を使った。$$q=0$$ ならcarryベクトルは空の一通りだけである。成分数ごとの上界は次のとおりで、最大は1024となる。
+
+| 成分数 $$k$$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 上界 $$k^{9-k}$$ | 1 | 128 | 729 | 1024 | 625 | 216 | 49 | 8 | 1 |
+
+この上界は実際に達する。$$N=8$$ で添字 $$0,\ldots,8$$ の成分番号を $$(0,1,2,3,0,1,2,3,0)$$ とすると、抽出するgapは $$(0,4),(4,8),(1,5),(2,6),(3,7)$$ の五つで、長さの積は $$4^5=1024$$ である。これはcarryの**候補数**の上界であり、特定の右辺で全候補へ到達するという意味ではない。この成分分割による論証は本解説で補ったもので、任意の加算式を $$q$$ 本選んだ場合へそのまま転用できない。
+
+あとは、$$dp_b[\mathbf C]$$ を「下位 $$b$$ bitまで合同条件を満たし、carryが $$\mathbf C$$ となる選び方の数」とする。$$dp_0[\mathbf0]=1$$、他は0で開始する。各桁で各変数のbitを一つの $$N$$ bitのmaskで選び、すべての式の偶奇検査を通るmaskだけで次のベクトルへ個数を加える。異なるmaskが同じ次状態へ移る場合も、それぞれの選び方として加算する。更新先は次の層に分ける。
+
+条件に登場する非負変数は、それを含む元の区間和の右辺以下だから $$10^9<2^{30}$$ に収まる。抽出した右辺も同じ上限に収まる。各抽出区間は元のいずれかの入力区間に含まれるためである。同成分内の隣接二点の間で頂点を左右に分けると、成分をつなぐ元の辺が必ずこの境界をまたぐ。その元の区間和は抽出した非負の区間和を足したものなので、各項は元の右辺以下となる。
+
+従ってbit $$0,\ldots,29$$ を処理すればよい。ただし、30bitで合同なだけでは等式とは限らない。例えば $$u_1=u_2=2^{29},\ S'=0$$ は下位30bitの和が目標と一致するが、和は $$2^{30}$$ なので最終carryが1となり、解ではない。答えとして取り出すのは **$$dp_{30}[\mathbf0]$$ だけ**である。
+
+未登場変数がある場合は、DPではそのbitを常に0へ固定する。登場変数に一つでも解があれば、未登場変数をいくらでも増やせるので `Infinity`、解がなければ0となる。全変数が登場するなら解数は有限である。解数は $$998244353$$ で割った余りを持つが、剰余0でも実際の解数が0とは限らないため、**存在boolを別に持つ**。初期状態のboolを真とし、到達可能な状態からの合法遷移では次状態を真にする。個数の剰余が0の状態も、boolが真なら遷移を続ける。
 
 ## 典型の発動条件
 
 ### weighted DSUの差制約
 
-発動条件: 変数差x_v-x_u=wの整合性をonlineで統合したいとき。
+発動条件: 区間和を累積和の差へ変換でき、差等式の整合性と、同成分内の別の二点の差を求めたいとき。
 
-component rootへのpotentialを持ち、同成分constraintの矛盾を検出する。
+根に対するpotentialを持ち、既に同成分の二点へ追加する差を既存の差と照合する。ただし、差等式の整合性だけでは変数の非負条件までは保証しない。
 
 ### 加算式のbitwise carry DP
 
-発動条件: 少数変数の複数subset sum等式を大きな値域で数えたいとき。
+発動条件: 大きな値域を持つ少数の非負変数について、複数の加算式を同時に満たす組を数えたいとき。
 
-各等式のcarry vectorだけを桁間状態として下位bitから遷移する。数値上限との一致を追うtight flagは持たない。
+下位bitでの合同条件を保ちながら、各式のcarryだけを次の桁へ渡す。各carryが小さくても、その候補数の積が小さいかを別に確認する。変数の範囲は式から抑えるため、数値上限との一致を追うtight flagは持たない。
 
 ## 問題固有の要素
 
-区間和等式はprefix差制約として線形依存を先に除くと、bitwise carry DPで追う式数とcarry空間を縮められる。
-
-別の問題へ持ち帰る視点: 複数加算式も下位bitから処理すれば、過去情報は各式の小さなcarryだけに圧縮できる。
+累積和の成分ごとに、添字順で隣り合う二点の差を残す。この選び方なら式の数を減らすと同時に、各式の区間長を成分のgapとして評価できる。状態数の1024という上界は、独立な式の本数だけでなく、この選び方と $$N\leq8$$ の両方に支えられている。
 
 ## 正当性
 
-非負化は元の正整数解との全単射である。成分内の隣接prefix差を満たせば、足し合わせてすべての入力等式を戻せる。負の右辺を入力時と抽出時に排除することで、非負区間和という前提を維持する。既決定の下位bit和と目標下位部分の差を2^bで割った値がcarryであり、偶奇検査と次carryへの更新は一桁の加算と同値になる。登場変数・目標は2^30未満なので、30bit後のcarry0で整数として完全一致する。未登場変数は他の条件を変えず任意に増やせるため、一解の存在が無限個の解を意味する。
+非負化は元の正整数解との全単射である。DSUで差の矛盾を検査した後、成分内の隣接する累積和の差を残す置き換えは必要十分であり、入力時・抽出時の負の右辺は非負解を持たないので排除できる。
+
+DPは下位 $$b$$ bitでの合同条件と、その差を $$2^b$$ で割ったcarryを保つ。合同条件と剰余の範囲により各carryは $$0,\ldots,\ell_j-1$$ に収まる。偶奇検査は次の桁まで合同条件を保つための必要十分条件であり、次carryの式はその差を $$2^{b+1}$$ で割った値である。各変数のbit列とmaskの列は一対一に対応するので、合法遷移をすべて加算すると漏れも重複もない。同成分の隣接添字のgapを使うため、成分数ごとの積の評価からcarry候補数は1024以下となる。
+
+登場変数と抽出した目標は $$2^{30}$$ 未満なので、30bit後に全carryが0であることと、整数としてすべての等式を満たすことは同値である。未登場変数を0に固定しても可解性は変わらず、登場変数に一解があれば未登場変数の任意の増加により解は無限個となる。存在boolを剰余個数とは別に更新するので、解数が法の倍数でもこの判定を誤らない。
 
 ## 実装上の注意
 
-- shift後の入力目標と、隣接prefixから抽出した全目標の両方を検査し、負なら0を出す。
-- 30桁を処理したdp[30][全carry0]を取る。未登場変数はbit選択を0へ固定し、登場変数の解数と存在boolを並行して更新する。
+- 非負化した入力目標と、隣接する累積和から抽出した全目標の両方を検査し、負なら0を出す。potentialの加減算には64 bit整数を使う。
+- 長さ $$\ell_j=1$$ の式はcarryが0の一通りだけとなる。各carryを基数 $$\ell_j$$ の桁として配列添字へ符号化すれば、候補をちょうど $$C$$ 個の配列で持てる。
+- 30桁後に全carryが0の状態だけを取る。未登場変数のbitは0に固定し、剰余個数が0でも存在boolが真の状態は捨てない。
 
 ## 復習の核
 
-- prefix差への変換とDSU potential符号を小式で確認し、一つの区間和のbit加算からnext carry式を導いて複数式vectorへ拡張する。
+- 下位桁を決めた後に何を次の桁へ渡すかは、「左辺の下位部分と目標の下位部分の差」から導く。
+- 状態をベクトルにするときは、各成分の小ささだけでなく候補数の積を評価する。本問では成分内の隣接gapという式の選び方が鍵になる。
+- 最後のcarryと、解数の剰余・存在判定を区別する。合同条件だけ、剰余0だけで終了判定をしない。
 
 ## 計算量と制約
 
 ### 時間
 
-N≤8、式M、独立式q≤N、bit数B=30、carry候補C≤1024。potential整理O(Mα(N)+N²)。各maskの式内bit数を前計算O(2^N qN)、直接carry遷移O(BC2^Nq)。hash状態表ならこの部分は期待計算量、carryをmixed-radix配列にすれば確定的。
+入力式数を $$M$$、抽出式数を $$q\leq N$$、bit数を $$B=30$$、carry候補数を $$C\leq1024$$ とする。DSUでの差の整理と隣接差の抽出に $$O(M\alpha(N)+N^2)$$、各maskの式内bit和の前計算に $$O(2^NqN)$$、直接のDP遷移に $$O(BC2^Nq)$$ かかる。全体はこれらの和である。carryを基数の異なる桁として配列へ符号化すれば確定的な評価となり、hash表を使う場合は期待計算量となる。
 
 ### 空間
 
-rollingcarry O(C)、mask式内和O(2^Nq)、式potential O(N+M)。遷移表全保持ならO(C2^Nq)が追加。
+DPの現在・次の層と存在boolに $$O(C)$$、maskごとの式内bit和に $$O(2^Nq)$$、入力・DSU・抽出式に $$O(N+M)$$ を使う。従って全体は $$O(C+2^Nq+N+M)$$。ここでは全状態の遷移表は保持せず、各桁で直接遷移を計算する。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 8; 1 \leq M \leq 36; 1\leq L_i\leq R_i\leq N; 1\leq S_i\leq 10^9; All (L_i,R_i) are distinct.; All input values are integers.
+公式制約は $$1\leq N\leq8,\ 1\leq M\leq36,\ 1\leq L_i\leq R_i\leq N,\ 1\leq S_i\leq10^9$$ で、区間の組は互いに異なる。時間制限2秒、メモリ制限1024 MiB。変数の値域全体を列挙せず、30桁・高々1024状態・各桁高々 $$2^8$$ 個のmaskに分ける。直接遷移でも式ごとの検査は高々 $$30\cdot1024\cdot2^8\cdot8$$ 回程度である。未登場変数には有限上限がないため、30桁の列挙に含めず0に固定して可解性を判定する。
 
 ## 出典
 
