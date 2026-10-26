@@ -1,7 +1,7 @@
 ---
 title: "ABC364-G — Last Major City"
 draft: true
-authoringUnit: {"problemId":"abc364-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a","source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非負辺の最適連結部分 graph は閉路を取り除いて木にできる。root v の最適木が分岐するなら、端点集合を二つへ分けた木を v で併合する遷移に分解できる。root から最初の分岐まで一本道なら root を動かす最短路 closure に分解できる。各候補の union は端点を結ぶ有効解であり、重なった辺の二重計上は過大候補を作るだけで過小評価しない。最適木の分解も候補に含まれるため subset 帰納法で等号を得る。","sourceRevisionIds":["source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a","source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc364-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-solve-steiner-tree-by-subset-dp/outcome-solve-steiner-tree-by-subset-dp-shard-001/abc364-g.md","learningOutcomeIds":["outcome-solve-steiner-tree-by-subset-dp"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-subset-state","unit-weighted-shortest-path"],"excludedTopics":["Steiner tree subset DPの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-steiner-tree-dp","tag-shortest-path"],"sourceRevisionIds":["source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a","source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"まず、遷移が真の最適値より小さい費用を作らないことを確認する。二つの部分木の合併も、木に経路を付け足したものも、必要な端点と根をつなぐ。辺が重複して二重計上されても、実際の合併の費用は候補値以下であり、非負重みなので閉路を取り除いて木にできる。したがって、候補値以下の費用で有効な木を作れ、重複は過小評価の原因にならない。\n\n逆に、任意の非空集合の最適木を遷移で捉えられることを、端点数について帰納的に示す。端点が一つなら、その端点と根を結ぶ最短路が最適であり、初期値0からのDijkstra法が求める。\n\n端点が二つ以上の場合、最適木から、今回の集合に含まれる端点でも根でもない葉を繰り返し取り除く。根 $$v$$ から一本道をたどり、初めて集合内の端点に着くか、端点へ向かう枝が二つ以上に分かれる頂点 $$x$$ を選ぶ。根で既にこの条件を満たすなら $$x=v$$ とする。$$x$$ が端点なら、その端点一つと残りに集合を分ける。$$x$$ が端点でなければ、$$x$$ から先の枝を二組に分け、各組にある端点で集合を分ける。不要な葉を除いてあるので、どちらの組にも端点がある。\n\nこの分け方では、二つの部分木は $$x$$ で合流し、根 $$v$$ までの経路とは辺を共有しない。片方が端点 $$x$$ 一つの場合、その部分木の費用は0でよい。帰納法の仮定で各部分木の費用以下の値が既に求まり、$$x$$ での合成と $$x$$ から $$v$$ への最短路閉包が、元の最適木の費用以下の候補を作る。根そのものが端点でも、$$x=v$$ としてこの分解ができる。\n\n過小評価しないことと合わせて、各maskの閉包後の値は定義した最適費用に一致する。よって、全固定端点のmaskを取り、根を追加都市にした値が求める答えである。","sourceRevisionIds":["source-abc364-editorial-10547-0ce6702759818c3334c43dfff2b684fb4f5ff524c8e1a158e410e6d33ffd750a","source-abc364-g-problem-2b7755f38ab76701b38b7e8606e7efbd62fb407a019d63341ada4e0e7fed61b6"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,63 +17,113 @@ authoringUnit: {"problemId":"abc364-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-求める各答えは固定terminal 1..K−1と追加頂点vを含む最小Steiner treeの重みであり、K≤10なのでterminal集合をbit maskで持てる。同じ頂点vで二つのterminal部分集合を結合する遷移と、辺を一つ延ばしてroot位置を移す遷移の二種類で任意の最適木を分解できる。dp[mask][v]←dp[sub][v]+dp[mask−sub][v]はvを共通接続点として二木を合併し、重複辺があれば最適解をさらに改善できるので上界遷移として安全である。各maskでmergeを済ませた値を全頂点sourceの初期距離としてDijkstraすれば、dp[mask][v]←dp[mask][u]+wを循環なく最短路閉包できる。
+固定された主要都市をつなぐ部分と、最後に追加する都市までの接続を分けて考える。固定都市の部分集合と「そこまでつないだ接続点」を状態にすれば、同じ点で二つの部分解を合成する操作と、接続点を道路に沿って移す操作で木を組み立てられる。接続点を全都市について求めておけば、追加都市ごとに計算をやり直す必要はない。
 
-採用する候補: dp[mask][v]をmask内terminalとvを結ぶ最小木とし、subset merge後にmulti-source Dijkstraで辺延長を閉包する。
+以降、都市を頂点、道路を辺、拡張費用を辺の重みと呼ぶ。必ずつなぐ頂点を端点（terminal）と呼び、固定端点数を $$k=K-1$$ とする。重みは正なので、必要な頂点をつなぐ連結部分グラフから閉路を取り除けば、費用を増やさず木にできる。このように、端点以外の頂点も中継に使ってよい最小の木が最小シュタイナー木である。
 
-Steiner treeの分岐を同一点での集合併合、path部分を最短路緩和として網羅できる。
+辺集合や中継点集合を直接列挙するには、頂点数も辺数も多すぎる。一方、固定端点は最大9個しかない。そこで「どの固定端点をつないだか」をbitmaskで持ち、木を合成するための接続点を一つ添える。
 
-棄却する候補: 各vについてSteiner頂点集合や木の辺集合を個別に列挙する。
+都市番号は入力と同じ **1始まり**、bit位置は **0始まり** とする。固定端点 $$i\ (1\leq i\leq k)$$ に対応するbitは $$i-1$$ である。例えば $$K=3$$ なら、都市1はbit 0（mask 1）、都市2はbit 1（mask 2）、両方を含む集合はmask 3（二進表記 `11`）になる。全固定端点を表すmaskを `full = (1 << k) - 1` とする。
 
-非terminal候補がN個あり部分集合探索は巨大で、vごとに共通する固定terminalの計算も共有できない。
+非空mask $$s$$ と都市 $$v\ (1\leq v\leq N)$$ に対し、$$dp[s][v]$$ を「$$s$$ に含まれる固定端点と $$v$$ をすべて含む木の最小費用」と定める。$$v$$ をこの木の根と呼ぶが、葉である必要はなく、固定端点と一致してもよい。また、$$s$$ に含まれない端点を中継に使ってもよい。追加都市をbitに入れず、この根として残すことが、全都市の答えを共有する鍵になる。
 
-固定terminal i=1..K−1についてdp[1<<i][i]=0、他を∞とする。maskを昇順に処理し、全非空proper submaskとの和で各vをmin更新する。そのdp列を初期距離にmulti-source Dijkstraして全辺緩和する。full maskについてv=K..Nのdp[full][v]を出力する。
+初めはすべて $$\infty$$ とし、各固定端点 $$i$$ について `dp[1 << (i - 1)][i] = 0` と置く。端点一つと根が同じなら、辺を使わない木でよいからである。maskの配列長は $$2^k$$、使用するmaskは1から `full` までで、mask 0は使わない。$$K=2$$ でも都市1の初期値は `dp[1][1] = 0` となり、長さ2の配列に収まる。
+
+各maskを整数として小さい順に、次の二段階で確定させる。
+
+1. **同じ根で集合を合成する。** $$s$$ の非空な真部分集合を表すmask $$t$$ をすべて選び、各根 $$v$$ で次の更新を行う。
+
+   $$
+   dp[s][v]\leftarrow\min\bigl(dp[s][v],\ dp[t][v]+dp[s\mathbin{\oplus}t][v]\bigr)
+   $$
+
+   $$\oplus$$ はbitごとの排他的論理和で、ここでは $$s$$ から $$t$$ のbitを除いた残りを表す。二つの木が $$v$$ を共有すれば、合併して両方の端点をつなげる。どちらのmaskも正で $$s$$ より小さいため、その最短路計算まで完了した値を読める。
+
+2. **同じ集合のまま根を移す。** 合成直後の有限な $$dp[s][u]$$ を、全都市 $$u$$ からの初期距離として優先度付きキューへ入れ、多始点Dijkstra法を行う。辺 $$u\! -\! v$$ の重みが $$w$$ なら、次の更新で根を移せる。
+
+   $$
+   dp[s][v]\leftarrow\min\bigl(dp[s][v],\ dp[s][u]+w\bigr)
+   $$
+
+   初期距離はすべて0ではなく、各都市を根にするまでの費用である。この処理は、任意の都市で得た合成結果へ経路を付け足す全候補を求める「最短路閉包」に当たる。同じmask内には辺に沿った循環依存があるため、頂点番号順の一巡では足りない。
+
+端点一つだけのmask（singleton）でも、第二段階を省略しない。この場合は合成する真部分集合がないが、初期値0の端点からの最短距離を全都市へ伝える必要がある。したがって $$K=2$$ の全体は、都市1を始点とする通常の最短路計算になる。
+
+公式sample 1は $$K=3$$ なので、固定端点は都市1、2である。都市を根にしたsingletonの距離と、mask 3の合成直後・最短路閉包後の値を並べると次のようになる。最後の列が $$dp[3][v]$$ に当たる。
+
+| 根 $$v$$ | $$dp[1][v]$$ | $$dp[2][v]$$ | 合成後 | 閉包後 |
+| --- | --- | --- | --- | --- |
+| 1 | 0 | 3 | 3 | 3 |
+| 2 | 3 | 0 | 3 | 3 |
+| 3 | 1 | 2 | 3 | 3 |
+| 4 | 3 | 6 | 9 | 6 |
+
+都市3では、都市1からの費用1と都市2からの費用2を合成して3になる。都市4で二つの最短路をそのまま合成すると9だが、都市1を根とする費用3の木に、都市1と4を結ぶ重み3の辺を足せば6になる。この改善を第二段階が伝える。最後に `full` は3なので、追加都市 $$v=3,4$$ について $$dp[3][3]=3$$、$$dp[3][4]=6$$ を読み出す。
+
+一般にも、閉包まで済んだ `dp[full][v]` が追加都市 $$v$$ の答えである。$$v=K,K+1,\ldots,N$$ の順に、$$N-K+1$$ 行で出力する。
 
 ## 典型の発動条件
 
 ### Dreyfus-Wagner型Steiner DP
 
-発動条件: terminal数だけが小さいweighted graphの最小接続部分graph。
-
-terminal subsetと接続rootを状態にし、subset mergeとshortest-path closureを交互に行う。
+発動条件は、非負重みの無向グラフで、少数の端点を中継点も使って最小費用でつなぐこと。グラフ全体の部分集合ではなく、端点の部分集合だけを指数状態にする。木の分岐を同一点での集合合成、分岐間の経路を根の移動として分ける。
 
 ### multi-source Dijkstra閉包
 
-発動条件: 同一mask内の辺遷移に循環があり、全rootの初期候補が既にあるとき。
-
-全dp[mask][v]をqueueへ入れて最短距離として一括伝播する。
+発動条件は、集合を固定したまま非負重みの辺に沿って移動でき、各頂点に既知の初期費用があること。初期費用ごとキューに入れれば、「どこから移動を始めるか」も含めて最小化できる。すべての初期距離を0にする通常の多始点探索との違いに注意する。
 
 ## 問題固有の要素
 
-追加都市vをterminal bitへ毎回加えず、Steiner DPのroot位置vとして残すことで全vの答えを一回の表から得られる。
-
-別の問題へ持ち帰る視点: 多数の追加terminal queryは、一点をroot parameterにした共通DPで同時計算できないか考える。
+問いごとに変わるのは最後の主要都市だけで、固定端点は共通している。追加都市を集合のbitへ入れ直す代わりに、DPが元から持つ根の位置として読むことで、全都市の答えを一つの表から得られる。多数の問いが小さな必須集合を共有するとき、変わる一点を接続点の軸へ移せないか考える。
 
 ## 正当性
 
-非負辺の最適連結部分 graph は閉路を取り除いて木にできる。root v の最適木が分岐するなら、端点集合を二つへ分けた木を v で併合する遷移に分解できる。root から最初の分岐まで一本道なら root を動かす最短路 closure に分解できる。各候補の union は端点を結ぶ有効解であり、重なった辺の二重計上は過大候補を作るだけで過小評価しない。最適木の分解も候補に含まれるため subset 帰納法で等号を得る。
+まず、遷移が真の最適値より小さい費用を作らないことを確認する。二つの部分木の合併も、木に経路を付け足したものも、必要な端点と根をつなぐ。辺が重複して二重計上されても、実際の合併の費用は候補値以下であり、非負重みなので閉路を取り除いて木にできる。したがって、候補値以下の費用で有効な木を作れ、重複は過小評価の原因にならない。
+
+逆に、任意の非空集合の最適木を遷移で捉えられることを、端点数について帰納的に示す。端点が一つなら、その端点と根を結ぶ最短路が最適であり、初期値0からのDijkstra法が求める。
+
+端点が二つ以上の場合、最適木から、今回の集合に含まれる端点でも根でもない葉を繰り返し取り除く。根 $$v$$ から一本道をたどり、初めて集合内の端点に着くか、端点へ向かう枝が二つ以上に分かれる頂点 $$x$$ を選ぶ。根で既にこの条件を満たすなら $$x=v$$ とする。$$x$$ が端点なら、その端点一つと残りに集合を分ける。$$x$$ が端点でなければ、$$x$$ から先の枝を二組に分け、各組にある端点で集合を分ける。不要な葉を除いてあるので、どちらの組にも端点がある。
+
+この分け方では、二つの部分木は $$x$$ で合流し、根 $$v$$ までの経路とは辺を共有しない。片方が端点 $$x$$ 一つの場合、その部分木の費用は0でよい。帰納法の仮定で各部分木の費用以下の値が既に求まり、$$x$$ での合成と $$x$$ から $$v$$ への最短路閉包が、元の最適木の費用以下の候補を作る。根そのものが端点でも、$$x=v$$ としてこの分解ができる。
+
+過小評価しないことと合わせて、各maskの閉包後の値は定義した最適費用に一致する。よって、全固定端点のmaskを取り、根を追加都市にした値が求める答えである。
 
 ## 実装上の注意
 
-- submaskと補集合のmergeを重複実行しても正しさは保つが定数倍に注意する。∞との加算overflowを避け、terminal番号とbit位置をずらさない。
+- 都市番号は1から $$N$$、maskのbitは0から $$k-1$$。都市用配列を長さ $$N+1$$、mask用配列を長さ $$2^k$$ とすれば、本文の添字をそのまま使える。
+- 非空な真部分集合は、擬似コードとして `t = (s - 1) & s` から始め、`t > 0` の間 `t = (t - 1) & s` で列挙する。mask 0と $$s$$ 自身を読まない。補集合 `s ^ t` も必ず非空で $$s$$ より小さい。二つの組を入れ替えた合成は重複しても正しさを保つ。
+- 合成では両方の値が有限のときだけ加算する。Dijkstra法のキューにも有限値だけを入れ、取り出した距離が現在値と違えば古い候補として捨てる。
+- 有限な最適費用は $$ (N-1)\times 10^9\leq 3.999\times 10^{12} $$ 以下なので、費用とその和には64 bit整数を使う。例えば無限大の番兵値を `INF = 1LL << 60` とし、無限大との加算を避ける。
+- 道路は双方向に登録する。同じ都市対に複数の道路があっても、それぞれを隣接リストへ入れてよい。
 
 ## 復習の核
 
-- 最適木のvが葉の場合は辺延長、分岐点の場合はsubset mergeのどちらで分解されるかを図示する。各maskのmerge後に必ず最短路閉包する順序を守る。
+- 端点が少ない最小接続問題では、端点の部分集合と接続点を状態にし、木の合成と経路の延長に分ける。
+- 合成元の小さい集合は最短路閉包まで済ませておく。端点一つの集合にも、他の根への距離を伝える処理が必要である。
+- 多数の問いで変わる一点を、集合のbitへ追加せず根として読めないか考える。
+- 都市番号とbit位置は別の添字である。$$K=3$$ で「都市1・2がbit 0・1、全体がmask 3」と確認する。
 
 ## 計算量と制約
 
 ### 時間
 
-元 graph N 頂点 M 辺、固定端点数 k=K−1。O(3^k N+2^k(N+M)log N+N)（heap Dijkstra）、出力は N−K+1 個。
+全maskにわたる部分集合の分割は、各端点を「左側・右側・今回の集合外」の三通りに振り分けるので $$O(3^k)$$ 組、各根で合成して $$O(3^kN)$$。二分heapへ改善候補を追加するDijkstra法は、各maskで $$O((N+M)\log(N+M))$$ かかる。入力・初期化・出力を含む全体は
+
+$$
+O\bigl(3^kN+2^k(N+M)\log(N+M)+N\bigr)
+$$
+
+となる。出力は $$N-K+1$$ 個である。
 
 ### 空間
 
-dp と graph で O(2^k N+N+M)。
+DP表に $$O(2^kN)$$、隣接リストと一回分の優先度付きキューに $$O(N+M)$$ を使い、全体は $$O(2^kN+N+M)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 5 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 4000; N-1 \leq M \leq 8000; 2\leq K \leq \min(N,\,10); 1 \leq A_i < B_i \leq N; 1 \leq C_i \leq 10^9; One can travel between any two cities by traversing some roads.; All input values are integers.
+公式制約は $$2\leq N\leq 4000$$、$$N-1\leq M\leq 8000$$、$$2\leq K\leq\min(N,10)$$。道路の端点は $$1\leq A_i<B_i\leq N$$、費用は $$1\leq C_i\leq 10^9$$ で、グラフは連結、入力はすべて整数である。実行時間制限は5秒、メモリ制限は1024 MiB。
+
+$$k=K-1\leq 9$$ なのでmask数は最大512、DP表は都市用の余白を含めても約205万要素で、64 bit整数なら約16.4 MBになる。指数部分を全都市ではなく固定端点だけにかけられる点が制約に対応する。非負重みだからDijkstra法を使え、連結なので出力する答えはすべて有限である。
 
 ## 出典
 
