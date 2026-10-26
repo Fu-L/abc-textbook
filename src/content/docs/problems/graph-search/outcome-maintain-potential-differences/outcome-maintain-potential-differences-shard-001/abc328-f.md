@@ -1,7 +1,7 @@
 ---
 title: "ABC328-F — Good Set Query"
 draft: true
-authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/graph-search/outcome-maintain-potential-differences/outcome-maintain-potential-differences-shard-001/abc328-f.md","learningOutcomeIds":["outcome-maintain-potential-differences"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components","unit-graph-potential-propagation"],"excludedTopics":["potential・weighted DSUの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-potential-dsu"],"sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"採用済みの条件は整合しており、DSU はその連結成分と、各頂点から親への差を正しく表しているとする。初期状態では条件がなく、この性質を満たす。経路圧縮は旧親までの差と旧親から根までの差を足すだけなので、表す差を変えない。\n\n新しい条件の両端が同じ成分なら、既存の条件に沿って差を足した値は一意であり、それが根への差の差 $$p_a-p_b$$ に等しい。これが $$d$$ と一致すれば既存の解は新条件も満たす。一致しなければ既存の解のどれも新条件を満たせないので、拒否が必要である。\n\n別成分なら、片方の全変数を同じ整数だけ平行移動しても既存の条件は保たれる。根の差を $$X_{r_b}-X_{r_a}=p_a-p_b-d$$ に定めれば新条件を満たせる。逆向きの親辺にはこの符号反転を保存するので、どちらの併合方向でも全条件を満たす整数の割当てが存在し、親への差も正しく保たれる。\n\n従って各質問で採用の可否を正しく判定し、採用後も不変条件を維持する。拒否時の経路圧縮も既存の差を保存するため、以後の判定に影響しない。採用した添字を処理順に出力するので、最終的な良い集合を昇順に得られる。","sourceRevisionIds":["source-abc328-editorial-7656-bdf5103565963552cb1c95c00e1e3e5fd3b142434aa7c8d7642bfd9d4626ee28","source-abc328-f-problem-cec6ce239a8d4fe18e7b82b8f6adc77f8efb52ab84c3aa5f67a5a8d9262a0f58"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,69 +17,154 @@ authoringUnit: {"problemId":"abc328-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-accepted constraint X_a-X_b=dは頂点a,b間のpotential差を固定するedgeであり、同じconnected component内の任意2頂点差は既存constraintから一意に決まる。a,bが別componentなら両componentの絶対offsetは自由なので、新しいdは常に矛盾なく両者を接続できる。同componentなら既に決まるX_a-X_bとdが一致するときだけconstraintを追加できる。find時にparent pathの差も加算して圧縮すれば、pot[v]=X_v-X_rootを取得でき、同rootならX_a-X_b=pot[a]-pot[b]である。別rootをmergeするときはconstraint式から新しいroot間potentialを逆算し、union by sizeで向きを反転する場合はその符号も反転する。
+採用済みの条件から二つの変数の差が決まっているなら、新しい条件とはその値を比較すればよい。まだ差が決まっていなければ、一方の変数群をまとめて平行移動して新しい条件に合わせられる。この「差が決まる範囲」と「その範囲内での差」を、重み付き Union-Find で管理する。
 
-採用する候補: rootからのpotential差を持つweighted Union-Findで、各queryの既知差判定とconstraint unionを行う。
+### 連結性だけでは何が足りないか
 
-通常DSUの連結性に数値差を追加し、Q≤2×10^5をほぼ定数償却で順にsimulationできる。
+条件 $$X_a-X_b=d$$ を頂点 $$a,b$$ を結ぶ辺と考える。採用済みの辺をたどれば差を足し合わせられるので、同じ連結成分内の二頂点の差は一意に決まる。例えば、
 
-棄却する候補: accepted constraint graphへedgeを追加し、queryごとにDFSしてa-bの差を求める。
+$$
+X_1-X_2=3,\qquad X_2-X_3=-1
+$$
 
-長いcomponentを毎回辿るとNQ規模になり、過去queryの計算を再利用できない。
+を採用すると、$$X_1-X_3=2$$ である。次の条件が $$X_1-X_3=2$$ なら採用でき、$$X_1-X_3=4$$ なら矛盾する。通常の Union-Find は両者をともに「連結」と判定するため、差の情報を補う必要がある。
 
-棄却する候補: 通常のUnion-Findでa,bが同componentかだけを見る。
+一方、別々の連結成分なら、それぞれの成分内の全変数へ同じ整数を加えても既存の条件は変わらない。成分間の差にはまだ自由度があるため、初めて両成分を結ぶ条件は必ず採用できる。
 
-同componentへ追加するconstraintが既知差と一致するかという矛盾判定にpotential値が必要である。
+毎回、採用済みの辺を DFS でたどって差を求める方法もあるが、一回に最大 $$O(N+Q)$$、全体で $$O(Q(N+Q))$$ かかる。必要なのは、成分を併合しながら差を再利用する方法である。
 
-weighted DSUをN頂点で初期化する。query(a,b,d)ごとにfindして、rootが同じならpot[a]-pot[b]==dのときだけindexをanswerへ追加する。rootが異なるなら常にindexを追加し、X_a-X_b=dを満たすroot間差を設定してsizeの小さいrootを大きいrootへmergeする。最後にaccepted indexを順に出力する。
+### 親への差を持ち、経路圧縮でも保つ
+
+各頂点 $$v$$ に対し、`parent[v]` を DSU 上の親、`diff[v]` を「子の値から親の値を引いた差」と定める。
+
+$$
+\mathrm{diff}[v]=X_v-X_{\mathrm{parent}[v]}
+$$
+
+初めは全頂点が単独の成分なので、`parent[v] = v`、`diff[v] = 0`、根が持つ成分サイズ `size[v] = 1` とする。DSU の親辺は差を表すための辺であり、入力された辺そのものとは限らない。
+
+`find(v)` は根を返すと同時に経路を圧縮する。旧親を $$u$$、成分の根を $$r$$ とすると、必要な更新は次の差の加算になる。
+
+$$
+X_v-X_r=(X_v-X_u)+(X_u-X_r)
+$$
+
+そのため、旧親を保存し、その親の `find` を先に済ませてから差を加える。以下は擬似コードである。
+
+```text
+find(v):
+    if parent[v] == v:
+        return v
+    u = parent[v]
+    r = find(u)
+    diff[v] = diff[v] + diff[u]
+    parent[v] = r
+    return r
+```
+
+更新前の `diff[v]` は $$X_v-X_u$$、`find(u)` 後の `diff[u]` は $$X_u-X_r$$ なので、圧縮後は `diff[v]` が根からの差 $$X_v-X_r$$ になる。先に `parent[v]` を根へ書き換えると旧親を見失うため、この順序が必要である。
+
+### 制約式から根の併合時の符号を導く
+
+新しい条件 $$X_a-X_b=d$$ に対し、`find(a)`、`find(b)` を呼ぶ。得られた根を $$r_a,r_b$$、圧縮後の差をそれぞれ $$p_a,p_b$$ とする。
+
+$$
+\begin{aligned}
+p_a&=\mathrm{diff}[a]=X_a-X_{r_a}\\
+p_b&=\mathrm{diff}[b]=X_b-X_{r_b}
+\end{aligned}
+$$
+
+同じ根なら根の値が打ち消され、$$X_a-X_b=p_a-p_b$$ である。従って $$p_a-p_b=d$$ のときだけ採用する。一致する条件は既存の差を言い直しているだけなので、採用しても DSU を併合し直す必要はない。
+
+別の根なら常に採用できるが、親辺へ入れる値は式から求める。$$X_a=X_{r_a}+p_a$$、$$X_b=X_{r_b}+p_b$$ を代入すると、
+
+$$
+(X_{r_a}+p_a)-(X_{r_b}+p_b)=d
+$$
+
+だから、$$r_b$$ を $$r_a$$ の子にするときに必要な差は
+
+$$
+X_{r_b}-X_{r_a}=p_a-p_b-d
+$$
+
+となる。右辺を $$t$$ と置けば、併合方向ごとの更新は次のとおりである。
+
+- `size[ra] >= size[rb]` なら、`parent[rb] = ra`、`diff[rb] = t` として `size[ra]` に `size[rb]` を加える。
+- `size[ra] < size[rb]` なら、`parent[ra] = rb`、`diff[ra] = -t` として `size[rb]` に `size[ra]` を加える。
+
+後者で必要なのは $$X_{r_a}-X_{r_b}$$ なので符号が反転する。$$t$$ は元の $$a,b$$ の向きで計算した値であり、根だけを交換して同じ値を代入してはいけない。
+
+[親単元の一般式](src/content/docs/learn/graph/potential-dsu.md)は $$p[v]-p[u]=w$$ を扱う。本問では $$u=b,v=a,w=d$$ と対応させれば同じ規約で使える。なお、個別公式解説は親差を「親−子」と定義しているため、本稿の `diff` とは符号が逆になる。式を参照するときは差の定義もそろえる。
+
+### 三制約を実際に処理する
+
+先ほどの例を、同サイズなら $$r_b$$ を $$r_a$$ へ付ける規則で追う。
+
+1. $$X_1-X_2=3$$：$$p_a=p_b=0$$ なので $$t=-3$$。根2を根1へ付け、`diff[2] = -3` とする。これは $$X_2-X_1=-3$$ を表す。
+2. $$X_2-X_3=-1$$：根は $$r_a=1,r_b=3$$、差は $$p_a=-3,p_b=0$$。従って $$t=-3-0-(-1)=-2$$ であり、根3を根1へ付けて `diff[3] = -2` とする。
+3. $$X_1-X_3=2$$：同じ根で $$p_a=0,p_b=-2$$ なので、$$p_a-p_b=2$$ が一致し採用する。親辺は追加しない。
+
+併合の逆向きも確認しよう。1本目の直後に、2本目と等価な $$X_3-X_2=1$$ を処理すると、$$r_a=3,r_b=1$$、$$p_a=0,p_b=-3$$ だから $$t=0-(-3)-1=2$$ となる。今度は $$a$$ 側の成分が小さいので根3を根1へ付け、`diff[3] = -t = -2` とする。条件の書き方が逆でも、同じ差に落ち着く。
+
+続いて $$X_1-X_3=4$$ は既存の差2と一致せず拒否する。その次に $$X_3-X_1=-2$$ が来れば採用できる。拒否した条件を基準へ混ぜなければ、後続の判定も元の採用集合に対して行える。
+
+以上を質問の添字 $$i=1,2,\ldots,Q$$ の順に実行し、採用したときだけ $$i$$ を答えの配列へ追加する。最後にその配列を空白区切りで出力すれば、既に昇順なのでソートは不要である。
 
 ## 典型の発動条件
 
 ### weighted Union-Find
 
-発動条件: onlineに差分等式pot(a)-pot(b)=dを追加し整合性を判定するとき。
-
-parent edgeへpotential差を持たせ、rootからの差をpath compressionで集約する。
+変数間の差分等式を順に追加し、その整合性や同一成分内の差を問い合わせるときに使う。連結性に加えて、親への差を経路圧縮で累積できることが要点である。全条件が最初から与えられる静的な問題なら、DFS・BFS による差の伝播も候補になる。
 
 ### 相対offsetの自由度
 
-発動条件: 別connected component間にはまだ絶対基準関係がない差分constraint系。
-
-最初の接続constraintは任意dでcomponent offsetを定められる。
+差だけを固定する等式では、各連結成分を独立に平行移動できる。別成分を結ぶ最初の等式はこの自由度を一つ使い、同成分を結ぶ等式は既存の差との一致を要求する。この二分が、オンラインの採用判定へつながる。
 
 ## 問題固有の要素
 
-good setを直接解方程式として持たず、constraint graphの各componentに1つだけ残る平行移動自由度と、component内の一意な差をDSUへ符号化する。
+「良い集合か」という整数列の存在判定を、採用済みの条件の整合性として読む。整数列そのものを一つに決める必要はなく、成分内の差だけを保てばよい。差も併合時の調整量も整数なので、実数解しか存在しないという問題は起きない。
 
-別の問題へ持ち帰る視点: 差分方程式系では絶対値でなくroot基準potentialを管理するとonline unionと矛盾検出ができる。
+また、本問は矛盾した条件をその場で拒否する。矛盾を含むグラフ全体について後から問い合わせる問題とは異なり、管理中の成分は常に整合しており、成分に矛盾フラグを持たせる必要はない。
 
 ## 正当性
 
-同成分なら既存差が一意で一致制約だけを採用できる。別成分の絶対offsetは自由なので新差に合わせて全成分offsetを移せる。root差を正しい符号で置きunionすれば既存差と新差が同時に保存され、逐次accept判定が厳密。
+採用済みの条件は整合しており、DSU はその連結成分と、各頂点から親への差を正しく表しているとする。初期状態では条件がなく、この性質を満たす。経路圧縮は旧親までの差と旧親から根までの差を足すだけなので、表す差を変えない。
+
+新しい条件の両端が同じ成分なら、既存の条件に沿って差を足した値は一意であり、それが根への差の差 $$p_a-p_b$$ に等しい。これが $$d$$ と一致すれば既存の解は新条件も満たす。一致しなければ既存の解のどれも新条件を満たせないので、拒否が必要である。
+
+別成分なら、片方の全変数を同じ整数だけ平行移動しても既存の条件は保たれる。根の差を $$X_{r_b}-X_{r_a}=p_a-p_b-d$$ に定めれば新条件を満たせる。逆向きの親辺にはこの符号反転を保存するので、どちらの併合方向でも全条件を満たす整数の割当てが存在し、親への差も正しく保たれる。
+
+従って各質問で採用の可否を正しく判定し、採用後も不変条件を維持する。拒否時の経路圧縮も既存の差を保存するため、以後の判定に影響しない。採用した添字を処理順に出力するので、最終的な良い集合を昇順に得られる。
 
 ## 実装上の注意
 
-- potの定義をX_v-X_rootなどに固定し、merge式とsame-root比較の符号を小例で統一する。
-- potential差は最大Q×10^9級になり得るため64bit整数を使う。
-- rejectしたconstraintはDSUへ追加せず、後続queryの基準集合を変えない。
+- `find` 後の `diff[a]`、`diff[b]` を使って $$p_a,p_b$$ を得る。圧縮前の親への差を、そのまま根への差として使わない。
+- 拒否した条件について併合やサイズ更新はしない。ただし、判定のために行った `find` の経路圧縮を巻き戻す必要はない。表現を変えただけで、採用済みの差は変わっていない。
+- $$a=b$$ なら差は必ず0であり、$$d=0$$ のときだけ採用する。既存の条件と同じ条件も、矛盾しない限り別の添字として採用する。
+- 差は辺に沿って累積するので、入力の $$d$$ が32bit整数に収まっても、保持する差や $$t$$ の計算は符号付き64bit整数で行う。最大 $$N-1$$ 本の辺の和で差の絶対値は $$(N-1)\times10^9$$ 以下となり、32bitの範囲を超え得る。
+- 採用が一つもなければ、答えは空の行になる。公式入力例2の自己制約 $$X_1-X_1=1$$ もこの場合である。
 
 ## 復習の核
 
-- X_1-X_2=3、X_2-X_3=-1からX_1-X_3=2を導く三角形で、accepted/rejected queryとpotential符号を確認する。
+- 差の条件を辺と見たら、「同じ成分では差が確定し、別成分では平行移動が自由」と分けて考える。
+- 併合式を暗記せず、子−親という `diff` の定義を固定し、$$X_a-X_b=d$$ へ根と根への差を代入する。親子を逆に付ければ差の符号も逆になる。
+- 矛盾した条件の拒否と、DSU の内部表現を整える経路圧縮を区別する。巻き戻すべき制約追加は行わず、差を保存する圧縮はそのまま残せる。
 
 ## 計算量と制約
 
 ### 時間
 
-N 変数、Q 制約。weighted DSU O((N+Q)α(N))、出力 O(Q)。
+初期化に $$O(N)$$。経路圧縮とサイズによる併合を使い、各質問で定数回の `find` と高々一回の併合を行うので、質問処理は全体で $$O(Q\alpha(N))$$（償却）、出力は $$O(Q)$$。合計は $$O(N+Q\alpha(N))$$、通常の緩い表記では $$O((N+Q)\alpha(N))$$ となる。$$\alpha$$ は逆アッカーマン関数である。
 
 ### 空間
 
-親、potential、採用index O(N+Q)。
+親・親への差・成分サイズに $$O(N)$$、採用添字に最大 $$O(Q)$$ を使い、合計 $$O(N+Q)$$。サイズによる併合では圧縮前でも木の高さは $$O(\log N)$$ なので、再帰的な `find` のスタックもこの範囲に収まる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \leq N, Q \leq 2 \times 10^5; 1 \leq a_i, b_i \leq N; -10^9 \leq d_i \leq 10^9
+公式制約は $$1\leq N,Q\leq2\times10^5$$、$$1\leq a_i,b_i\leq N$$、$$-10^9\leq d_i\leq10^9$$ で、入力はすべて整数である。質問ごとの全成分探索は避け、ほぼ定数の償却時間で処理する。累積差には符号付き64bit整数を使う。時間制限は2秒、メモリ制限は1024 MiBである。
 
 ## 出典
 
