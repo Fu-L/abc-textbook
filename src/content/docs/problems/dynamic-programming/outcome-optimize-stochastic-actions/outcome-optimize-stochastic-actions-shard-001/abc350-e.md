@@ -1,7 +1,7 @@
 ---
 title: "ABC350-E — Toward 0"
 draft: true
-authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dynamic-programming/outcome-optimize-stochastic-actions/outcome-optimize-stochastic-actions-shard-001/abc350-e.md","learningOutcomeIds":["outcome-optimize-stochastic-actions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["二人零和ゲームの勝敗・Grundy数。"],"tagIds":["tag-stochastic-expectation-dp","tag-dp-state-equivalence"],"sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"現在の整数が同じなら、選べる操作も今後の出目の分布も同じであり、過去の履歴や支払額は将来の最小期待費用を変えない。したがって状態は現在の整数だけでよい。\n\n$$f(0)=0$$ は正しい。小さい状態の最適値が求まっているとき、最初に確定操作を選ぶ場合とサイコロ操作を選ぶ場合で全ての選択肢を覆える。出目を見た後は到達した状態の最適値を使うので、一歩式 $$f(n)=\\min(D,B+f(n)/6)$$ が成り立つ。考察の二場合の整理により、その解は一意に $$\\min(D,6B/5)$$ となる。\n\nこの値は実現できる。確定操作が最小ならそれを行い、サイコロ候補が最小なら状態が変わるまで振り直す。その後は小さい状態の最適な選択を使う。サイコロで状態が変わるまでの期待試行回数は $$6/5$$ と有限で、状態が変わるたびに整数は少なくとも半分になるため、期待費用は有限である。一歩式が与える下界をこの方針が達成し、各状態の最小値が正しく求まる。自己ループ消去後の再帰先は全て小さいので、メモ化再帰は終端に達し、最終的に $$f(N)$$ を返す。","sourceRevisionIds":["source-abc350-e-problem-2172166be04dc738ac2859fd537154e5d5cf2c252050988440b91d9db3bdbc19","source-abc350-editorial-9812-5fa52fa0c05cf3a8348ee6ead26ae50e8fca6caf6801b6c1c6cd2b3278073ba4"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,65 +20,132 @@ authoringUnit: {"problemId":"abc350-e","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-state nからどちらのoperationを選んでも、dieの1以外またはA除算ではstrictly小さいfloor quotientへ移る。dieで1が出るself-loopだけを期待値方程式の左辺へ移せば、memoized recursion可能な形になる。die操作の期待値EはE=Y+(E+Σ_{b=2}^6f(floor(n/b)))/6を満たすので、E=6Y/5+Σ_{b=2}^6f(floor(n/b))/5となる。従ってf(n)=min(X+f(floor(n/A)),E)である。
+サイコロで1が出ると、費用を払っても整数は変わらない。それでも次に同じ操作を選ぶ義務はなく、改めて二つの操作を比較できる。まず「一回操作し、その結果を見てから最適に続ける」費用の式を立てると、この自己ループを含めた最適化を整理できる。
 
-採用する候補: 期待値Bellman方程式からself-loopを消去し、floor quotientをmemo化する
+入力の $$N$$ は最大 $$10^{18}$$ なので、全ての整数について順番に計算する配列DPは使えない。一方、確定操作の除数 $$A$$ は2以上で、サイコロも出目1を除けば整数を少なくとも半分にする。そこで、必要な状態だけを再帰的に求め、同じ整数に到達した計算を共有する方針を考える。
 
-各nで二操作の期待costを比較でき、到達する相異なるquotient state数もpolylogarithmicに抑えられる。
+現在の整数を $$n$$ とし、そこから0にするまでに追加で払う金額の期待値の最小値を $$f(n)$$ と定義する。既に払った金額は今後の選択を変えず、出目は過去と独立なので、履歴を状態に持つ必要はない。終端は $$f(0)=0$$ である。以降は $$n>0$$ を考える。
 
-棄却する候補: 確率processを試行回数で有限stepまでsimulationする
+確定操作を一回行い、その先で最適に行動する費用を $$D$$ と置く。
 
-終了時刻に固定上限がなく、打切り誤差を伴う一方で厳密な期待値方程式が使える。
+$$
+D=X+f\left(\left\lfloor\frac{n}{A}\right\rfloor\right)
+$$
 
-従ってf(n)=min(X+f(floor(n/A)),E)である。
+サイコロ操作では、まず $$Y$$ 円を払い、出目を見てから次の操作を選ぶ。出目1なら同じ状態から最適に続けるので、その先の費用は $$f(n)$$ である。自己ループ以外の部分を $$B$$ とまとめると、
 
-f(0)=0とし、n>0ではmemoを確認する。deterministic候補X+f(n/A)と、random候補6Y/5+(f(n/2)+…+f(n/6))/5を再帰的に求め小さい方をmemoする。doubleでf(N)を出力する。
+$$
+B=Y+\frac{1}{6}\sum_{b=2}^{6}f\left(\left\lfloor\frac{n}{b}\right\rfloor\right)
+$$
+
+となり、サイコロを一回選ぶ費用は $$B+f(n)/6$$ となる。操作を選ぶ時点ではまだ出目を知らないため、二操作の比較は確率平均の外側に置く。この一歩先の最適値を使う式をBellman最適方程式という。
+
+$$
+f(n)=\min\left(D,B+\frac{f(n)}{6}\right)
+$$
+
+右辺にも $$f(n)$$ が残っているが、最小値をどちらが与えるかで場合分けすれば解ける。
+
+- 確定操作側が最小値を与えるなら $$f(n)=D$$ である。この選択が式と整合する条件は $$D\leq B+D/6$$、すなわち $$D\leq 6B/5$$ となる。
+- サイコロ側が最小値を与えるなら $$f(n)=B+f(n)/6$$ である。移項すると $$f(n)=6B/5$$ となり、この選択が式と整合する条件は $$6B/5\leq D$$ となる。
+
+等号のときはどちらを選んでも同じ値なので、まとめると次の漸化式を得る。
+
+$$
+f(n)=\min\left(D,\frac{6B}{5}\right)
+$$
+
+ここでサイコロ候補 $$E=6B/5$$ は、「状態が変わるまでサイコロを振り続け、変わった先では最適に選ぶ」方針の期待費用と解釈できる。出目1以外が出る確率は $$5/6$$ なので、状態が変わるまでの期待試行回数は $$6/5$$。最初の1以外の出目は2から6の五つが等確率になるため、
+
+$$
+E=\frac{6Y}{5}+\frac{1}{5}\sum_{b=2}^{6}f\left(\left\lfloor\frac{n}{b}\right\rfloor\right)
+$$
+
+である。これは最初から行動の選び直しを禁止した式ではなく、一歩式を解いて得た候補である。同じ状態に戻っても比較する二つの候補は変わらないので、状態が変わらない間は同じ最適行動を選び続けてよい。状態が変わった後は、その状態に応じて操作を選び直す。
+
+公式入力例2の $$N=3,A=2,X=Y=20$$ で確かめよう。状態1では、どの2以上の除数でも0へ進むため、確定操作の費用は20、サイコロ候補は $$6\times20/5=24$$。よって $$f(1)=20$$ である。状態3では、出目2・3が状態1へ、出目4・5・6が状態0へ進むので、
+
+$$
+\begin{aligned}
+D&=20+f(1)=40,\\
+E&=\frac{6\times20}{5}+\frac{2f(1)+3f(0)}{5}=32
+\end{aligned}
+$$
+
+となり、$$f(3)=32$$ を得る。3ではサイコロを振り、1になったら確定操作へ切り替える。出目1で3に戻れば再びサイコロを選ぶ、という公式の方針とも一致する。
+
+実装では $$f(0)=0$$ を先に返し、それ以外はメモに値があれば再利用する。未計算なら $$\lfloor n/A\rfloor$$ と $$\lfloor n/b\rfloor\ (b=2,\ldots,6)$$ の値を再帰で求め、$$D$$ と $$E$$ の小さい方をメモに保存する。自己ループを消したので、計算中の $$f(n)$$ 自身を呼ぶことはない。答えは $$f(N)$$ である。必要な状態数が少ない理由は計算量の節で示す。
 
 ## 典型の発動条件
 
 ### 期待値方程式のself-loop消去
 
-発動条件: random遷移に現在stateへ戻るoutcomeが含まれ、そのまま再帰できない。
-
-現在期待値の係数を左辺へ移項し、strictly小さいstateだけの式へ解く。
+同じ状態へ戻る確率があるときは、一回分の費用と、その後の期待費用を分けて式にする。行動も選べるなら、各行動の期待費用を比較する最適式を先に立てる。本問のように自己項以外が小さい状態だけで決まる場合は、場合分けと移項で再帰可能な式にできる。複数の状態を巡る循環には、この一状態の移項だけでは対処できない。
 
 ### floor quotient memoization
 
-発動条件: nが最大10^18だが遷移は少数の整数除算だけである。
-
-同じfloor(n/m) stateをhash mapで共有し、再帰木の重複を除く。
+巨大な整数から少数の整数除算だけで遷移するなら、実際に現れる切り捨て商をメモ化する。同じ商への到達経路を共有できるが、高速に解けると結論するには、除数の積の形などから相異なる状態数も評価する必要がある。
 
 ## 問題固有の要素
 
-dieの出目1は何も進めずcost Yだけ再試行させるため、実質的には2…6が出るまでの期待支払6Y/5と条件付き一様5択として解釈できる。
-
-別の問題へ持ち帰る視点: 無変化outcomeを持つ試行は成功outcomeまでの幾何待ちcostへ吸収できる。
+出目1だけが整数を変えず、他の出目では必ず小さくなる。このため、自己ループを取り除いた後は小さい状態からのDPになる。また、$$A\leq6$$ に注目すると、確定操作も含めた全ての除数の素因数が2・3・5に限られ、到達する商を三つの指数で数えられる。二操作を同じ少数の状態集合で扱えるのは、この除数の制約による。
 
 ## 正当性
 
-決定操作はX+f(floor(n/A))。dice操作の1は同状態で自己loopとなり、移項すると6Y/5と2..6の五依存平均になる。いずれも小nへ進むためmemo Bellmanの最小が最適。floor除算の合成は積のfloor除算なので到達状態は除数の指数組へ限定される。
+現在の整数が同じなら、選べる操作も今後の出目の分布も同じであり、過去の履歴や支払額は将来の最小期待費用を変えない。したがって状態は現在の整数だけでよい。
+
+$$f(0)=0$$ は正しい。小さい状態の最適値が求まっているとき、最初に確定操作を選ぶ場合とサイコロ操作を選ぶ場合で全ての選択肢を覆える。出目を見た後は到達した状態の最適値を使うので、一歩式 $$f(n)=\min(D,B+f(n)/6)$$ が成り立つ。考察の二場合の整理により、その解は一意に $$\min(D,6B/5)$$ となる。
+
+この値は実現できる。確定操作が最小ならそれを行い、サイコロ候補が最小なら状態が変わるまで振り直す。その後は小さい状態の最適な選択を使う。サイコロで状態が変わるまでの期待試行回数は $$6/5$$ と有限で、状態が変わるたびに整数は少なくとも半分になるため、期待費用は有限である。一歩式が与える下界をこの方針が達成し、各状態の最小値が正しく求まる。自己ループ消去後の再帰先は全て小さいので、メモ化再帰は終端に達し、最終的に $$f(N)$$ を返す。
 
 ## 実装上の注意
 
-- integer divisionはfloorで、f(0)=0を先に返す。random候補の6Y/5を整数除算せずdoubleで計算し、memo keyは64bit整数にする。
+- 状態とメモのキーには64 bit整数を使い、切り捨て商は整数除算で求める。$$N$$ を浮動小数点数に変換してから割ると、大きい整数の状態がずれる。
+- 費用の計算は `double` などの浮動小数点数で行う。例えば `6.0 * Y / 5.0` とし、整数除算による切り捨てと `6 * Y` の32 bit整数でのオーバーフローを避ける。
+- 出目2から6の商が同じでも、その項は出目の個数分だけ足す。上の例の状態3では $$f(1)$$ を二回加える。
+- $$n=0$$ で操作を続けず、必ず0を返す。$$n=1$$ では全ての再帰先が0となり、$$f(1)=\min(X,6Y/5)$$ になる。
+- 絶対誤差または相対誤差 $$10^{-6}$$ を満たせるよう、出力には十分な桁数を指定する。
 
 ## 復習の核
 
-- A=2…6各場合、Xが極端に安い/高い、N=1を小stateの方程式直接解と比較する。
+- 行動を選ぶのは観測の前か後かを確認する。確率平均と最小値の順序は、その時点で知っている情報に合わせる。
+- 自己ループ先にも行動の選択肢があるなら、まず最適値自身を右辺に置く。「同じ操作を繰り返す」方針でよい理由は、その最適式から説明する。
+- 巨大な整数をメモ化するときは、遷移の深さに加えて、異なる経路から生じる状態の総数を数える。
 
 ## 計算量と制約
 
 ### 時間
 
-到達quotient状態数S、Nの指数範囲h=O(log N)。memo一状態定数遷移で O(S)、S=O(h⁴)の安全な上界（A,2,3,5の除数指数分類）。
+相異なる到達状態数を、終端0も含めて $$S$$ とする。正の整数 $$a,b$$ による切り捨て除算には、
+
+$$
+\left\lfloor\frac{\lfloor N/a\rfloor}{b}\right\rfloor
+=\left\lfloor\frac{N}{ab}\right\rfloor
+$$
+
+が成り立つ。実際、$$N=abq+r\ (0\leq r<ab)$$ と書くと、左辺も右辺も $$q$$ になる。従って、どの到達状態も除数の積 $$m$$ を使った $$\lfloor N/m\rfloor$$ と表せる。
+
+除数は $$A,2,3,4,5,6$$ で、$$2\leq A\leq6$$ より素因数は2・3・5だけである。よって $$m=2^p3^q5^r\ (p,q,r\geq0)$$ と書ける。正の状態では $$m\leq N$$ なので、
+
+$$
+p\leq\lfloor\log_2N\rfloor,\quad
+q\leq\lfloor\log_3N\rfloor,\quad
+r\leq\lfloor\log_5N\rfloor
+$$
+
+となる。指数の三つ組は高々 $$O((1+\log N)^3)$$ 個であり、異なる三つ組が同じ商になればメモでは一つに共有される。$$m>N$$ の場合も全て状態0にまとまるため、$$S=O((1+\log N)^3)$$ である。
+
+一状態につき確定操作一つとサイコロの五つの遷移を調べる。ハッシュ表の検索・追加を平均 $$O(1)$$ とすると、全体の期待時間計算量は $$O(S)=O((1+\log N)^3)$$。$$N\geq2$$ では通常の表記で $$O((\log N)^3)$$ となる。
 
 ### 空間
 
-memo O(S)、再帰深さ O(log N)。
+メモに $$O(S)$$ の領域を使う。自己ループ消去後の再帰先は高々 $$\lfloor n/2\rfloor$$ なので、再帰の深さは $$O(1+\log N)$$。合計の空間計算量は $$O(S+1+\log N)=O((1+\log N)^3)$$ となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 10^{18}; 2 \leq A \leq 6; 1 \leq X, Y \leq 10^9; All input values are integers.
+公式制約は $$1\leq N\leq10^{18}$$、$$2\leq A\leq6$$、$$1\leq X,Y\leq10^9$$ で、入力は全て整数。実行時間制限は2秒、メモリ制限は1024 MiBである。
+
+$$N\leq10^{18}$$ では $$p\leq59,q\leq37,r\leq25$$ なので、正の状態数は粗い上界でも $$60\times38\times26=59{,}280$$ 個に収まる。終端を含む再帰の深さも高々61であり、全整数を配列で持たず、到達した商だけをメモに記録する方法が使える。
 
 ## 出典
 
