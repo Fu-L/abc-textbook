@@ -1,7 +1,7 @@
 ---
 title: "ABC338-G — evall"
 draft: true
-authoringUnit: {"problemId":"abc338-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"数字位置から始まる各有効候補式を、確定済み加算部分preと現在の乗算係数mul、現在数numに分けて保持する。digit連結はnumを10num+dへ、*は現在termを次のmulへ、+は現在termをpreへ確定する。従ってpre,mul,term=mul×numの総和と開始数だけで全候補への同じ写像を適用できる。各digit位置で新開始を一つ加え、その位置で終わる候補のpre+termを足せば、全有効substringを開始・終了位置ごとに一回数える。演算子で終わるものを加算しないので不正な式も入らない。","sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc338-g","docPath":"src/content/docs/problems/dynamic-programming/outcome-compress-dp-sufficient-aggregates/outcome-compress-dp-sufficient-aggregates-shard-001/abc338-g.md","learningOutcomeIds":["outcome-compress-dp-sufficient-aggregates"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-state-design"],"excludedTopics":["固定線形遷移の巨大回累乗。"],"tagIds":["tag-dp-transition-acceleration"],"sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"本稿の四集計値による方法は、公式解説の数字ごとの左右の寄与を分解する方法とは異なる。ここでは公式問題文の評価規則から、次の不変条件を示す。\n\n各文字の処理後、処理済みのすべての数字左端について、一つずつ延長状態が存在すると考える。各状態の加算済み部分が $$\\mathrm{pre}$$、最後の乗算項の既読因子の積が $$\\mathrm{mul}$$、現在数が $$\\mathrm{num}$$ で、$$\\mathrm{term}=\\mathrm{mul}\\cdot\\mathrm{num}$$ を満たす。演算子直後は次の数を待つ $$\\mathrm{num}=\\mathrm{term}=0$$ の状態とする。四集計値は、この状態集合の個数と各成分の総和に等しいものとする。\n\n初期状態は空集合なので、四つとも0で条件を満たす。数字を読む場合、各既存状態では十進連結の式に従って現在項が更新され、新しい左端の状態 $$(0,1,d)$$ がちょうど一つ加わる。`+` では現在項を加算済みにして係数を1へ戻し、`*` では現在項を次の係数へ引き継ぐ。いずれも通常の演算優先順位に従う一候補の更新であり、これらを全候補について足したものが本文の集約式である。従って不変条件は次の文字の処理後も保たれる。\n\n数字を右端とするとき、すべての状態は有効な式で、その値の総和は更新後の $$\\mathrm{preSum}+\\mathrm{termSum}$$ に等しい。任意の両端が数字の部分文字列は、左端を読んだときに生成され、右端を読んだときに一度だけ答えへ加わる。演算子を端点とする部分文字列は定義上0であり、加算の対象にしない。よって最後の $$\\mathrm{answer}$$ は求める総和である。更新は加算・乗算のみなので、各段階で法998244353の剰余に置き換えても答えの剰余を保つ。","sourceRevisionIds":["source-abc338-editorial-9174-882059f710a8b5642f21646998075bd40604d5e3f4d7126ba9d98fc60c7a2892","source-abc338-g-problem-a4019826c94c7dc9ace7c734f2b75a77c98320c82f74f0980e601b9db60fac08"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,65 +20,152 @@ authoringUnit: {"problemId":"abc338-g","docPath":"src/content/docs/problems/dyna
 
 ## 考察
 
-全substringを個別評価する代わりに、各digit位置を右端とする全有効startの式評価値をまとめて更新する。通常の式を「+で確定済みの和pre」と「現在の乗算項term」に分ければ、digit・+・*ごとの更新が線形になる。
+右端を一文字ずつ伸ばすと、それまでに選んだすべての左端に同じ文字が追加される。各式を「加算が確定した部分」と「まだ伸びる乗算項」に分ければ、この共通の変化を少数の合計値だけで追える。数字を読んだ時点で、その位置を右端とする式の値をまとめて答えへ加えよう。
 
-採用する候補: 全開始位置に対する式状態の総和をconstant個の集約変数でstreaming更新する
+文字列の長さを $$L=|S|$$ とする。数字だけの入力でも部分文字列は $$L(L+1)/2$$ 個あり、$$L\leq 10^6$$ では個別に評価できない。一方、右端を固定すると、以前の数字位置から始めた式を延長する処理は共通である。まず一つの左端について更新を考え、それを全左端について足し合わせる方針を試す。
 
-各文字を一度処理し、数の連結・加算・乗算の優先順位を保ったままO(|S|)で全substring和を得られる。
+### 一つの式をどう延長するか
 
-棄却する候補: 全O(|S|^2) substringを切り出して式評価する
+通常の演算優先順位では、`+` で区切られた乗算項を足し合わせる。そこで、ある数字位置から現在位置までを読んだ状態を次の量で表す。
 
-|S|は10^6で、substring数だけで二乗になる。
+- $$\mathrm{pre}$$: 最後に読んだ `+` までに確定した乗算項の和。`+` がなければ0。
+- $$\mathrm{num}$$: 今読んでいる数。数字を続けて読む間は十進数として連結する。
+- $$\mathrm{mul}$$: 現在の乗算項で、$$\mathrm{num}$$ より前にある因子の積。まだ因子がなければ1。
+- $$\mathrm{term}=\mathrm{mul}\cdot\mathrm{num}$$: 現在の乗算項。
 
-各active startについてpre、現在数へ掛かる係数mul、現在項term=mul×numを考える。総和だけ持てばdigit dでtermSum←10·termSum+d·mulSum+d、mulSum←mulSum+1となる。+ではpreSum←preSum+termSum,mulSum←startCount、*ではmulSum←termSumとなりtermSumを0へ戻せる。
+数字を読んだ直後なら、式の値は $$\mathrm{pre}+\mathrm{term}$$ である。例えば `1+2*3` では、$$\mathrm{pre}=1,\ \mathrm{mul}=2,\ \mathrm{num}=3,\ \mathrm{term}=6$$。次に `4` を連結すると、現在の数が34になり、式の値は69になる。
 
-左から走査し、active start数cnt、Σpre、Σmul、Σtermをmodで保持する。digitでは既存の数を10倍してdを足す更新に加え、その位置から始まる新substring状態(pre=0,mul=1,term=d)を追加し、preSum+termSumを答えへ足す。+と*では上記の状態変換だけを行う。
+数字 $$d$$ の連結は $$\mathrm{num}'=10\mathrm{num}+d$$ なので、
+
+$$
+\mathrm{term}'=10\mathrm{term}+d\cdot\mathrm{mul}
+$$
+
+となる。`+` を読んだら現在項を確定して $$\mathrm{pre}$$ に足し、次の乗算項の係数を1へ戻す。`*` を読んだら現在項を次の数に掛ける係数へ引き継ぐ。どちらの演算子でも、次の数を待つため $$\mathrm{num}=0,\ \mathrm{term}=0$$ にする。この0は待機状態を表すもので、演算子で終わる式の評価値ではない。
+
+`1+2*` の段階では $$\mathrm{pre}=1,\ \mathrm{mul}=2,\ \mathrm{term}=0$$ として次を待つ。ここで2を加算済みにしてしまうと、続く `3` を掛けるべき相手を失う。確定するのは `+` を読んだときだけである。
+
+### 全左端を四つの集計値へまとめる
+
+処理済みの各数字位置を左端に選び、そこから現在位置まで延長している状態をすべて残す。状態数を $$\mathrm{cnt}$$ とし、各状態の $$\mathrm{pre},\mathrm{mul},\mathrm{term}$$ の総和をそれぞれ $$\mathrm{preSum},\mathrm{mulSum},\mathrm{termSum}$$ と呼ぶ。左端ごとの値や $$\mathrm{num}$$ 自体を保存する必要はなく、この四つだけで次の更新が閉じる。
+
+最初は状態が一つもないので、四つの集計値と答え $$\mathrm{answer}$$ を**すべて0**にする。以下のプライム付きの値は更新後、右辺はすべて更新前の値を表す。実装では必要な旧値を保存して同時更新する。
+
+数字 $$d$$ では、既存状態の連結に加えて、その位置を新しい左端とする一文字の式を追加する。新状態は $$(\mathrm{pre},\mathrm{mul},\mathrm{term})=(0,1,d)$$ なので、
+
+$$
+\begin{aligned}
+\mathrm{cnt}'&=\mathrm{cnt}+1,\\
+\mathrm{preSum}'&=\mathrm{preSum},\\
+\mathrm{mulSum}'&=\mathrm{mulSum}+1,\\
+\mathrm{termSum}'&=10\mathrm{termSum}+d\cdot\mathrm{mulSum}+d.
+\end{aligned}
+$$
+
+最後の $$+d$$ が新しい左端の寄与である。新状態を含めた**更新後**の値から、
+
+$$
+\mathrm{answer}'=\mathrm{answer}+\mathrm{preSum}'+\mathrm{termSum}'
+$$
+
+とする。先に $$\mathrm{mulSum}$$ を増やしてから旧値用の式へ代入すると、新状態を二度足してしまう。
+
+`+` では各状態の現在項を加算済みにし、各状態の係数を1にする。係数の総和は状態数になるので、
+
+$$
+\begin{aligned}
+\mathrm{cnt}'&=\mathrm{cnt},\\
+\mathrm{preSum}'&=\mathrm{preSum}+\mathrm{termSum},\\
+\mathrm{mulSum}'&=\mathrm{cnt},\\
+\mathrm{termSum}'&=0.
+\end{aligned}
+$$
+
+`*` では加算済み部分に触れず、各状態の現在項を次の係数にするので、
+
+$$
+\begin{aligned}
+\mathrm{cnt}'&=\mathrm{cnt},\\
+\mathrm{preSum}'&=\mathrm{preSum},\\
+\mathrm{mulSum}'&=\mathrm{termSum},\\
+\mathrm{termSum}'&=0.
+\end{aligned}
+$$
+
+この代入には旧 $$\mathrm{termSum}$$ が必要である。0へ戻す前に読み取る。**両方の演算子で**現在項を0へ戻し、新しい左端は作らず、答えも増やさない。演算子を右端とする部分文字列の値は問題の定義で0だからである。最後の数字まで処理した $$\mathrm{answer}$$ が答えとなる。加算・乗算だけの更新なので、途中からすべて法998244353で計算してよい。
+
+### `1+2*34` の状態を追う
+
+入力例1を一文字ずつ処理すると次のようになる。表は更新後の集計値で、演算子の行も次の数字へ引き継ぐ状態を示す。
+
+| 読んだ文字 | $$\mathrm{cnt}$$ | $$\mathrm{preSum}$$ | $$\mathrm{mulSum}$$ | $$\mathrm{termSum}$$ | 今回足す値 | $$\mathrm{answer}$$ |
+| --- | --- | --- | --- | --- | --- | --- |
+| 初期状態 | 0 | 0 | 0 | 0 | — | 0 |
+| `1` | 1 | 0 | 1 | 1 | 1 | 1 |
+| `+` | 1 | 1 | 1 | 0 | — | 1 |
+| `2` | 2 | 1 | 2 | 4 | 5 | 6 |
+| `*` | 2 | 1 | 4 | 0 | — | 6 |
+| `3` | 3 | 1 | 5 | 15 | 16 | 22 |
+| `4` | 4 | 1 | 6 | 174 | 175 | 197 |
+
+`2` を読んだ時点の式は `1+2` と `2` で、寄与は $$3+2=5$$。`*` の後も加算済みの1はそのまま残り、次の係数はそれぞれ2となる。続く `3` では `1+2*3`, `2*3`, `3` の値を足して $$7+6+3=16$$ になる。
+
+さらに `4` を読むと、既存の三つは `1+2*34`, `2*34`, `34` へ延び、それぞれ69、68、34となる。加えて、`4` の位置から始まる一文字の式も必要である。左端は数の先頭に限られず、二桁の34の途中からでも選べるため、寄与は $$69+68+34+4=175$$。右端ごとの寄与を合計した $$1+5+16+175=197$$ が入力例1の出力と一致する。
 
 ## 典型の発動条件
 
 ### 式評価stateの線形集約
 
-発動条件: 多数の開始位置の式を同じsuffix文字で同時に延長し、必要演算が和と積に分解できる。
+発動条件: 多数の候補へ同じ文字・操作を適用し、個別状態の更新を足し合わせると少数の総和と個数だけで次の値を求められる。
 
-個別状態のpre・mul・termの総和を保ち、線形な更新を一括適用する。
+まず一候補の遷移を導き、総和を取って必要な補助量を探す。本問では数字の連結に係数の総和、`+` に候補数が必要になる。現在の答えを出せるだけでなく、次の更新にも十分かを確かめる。
 
 ### 乗算優先順位の遅延評価
 
-発動条件: 通常の+と*を左から読み、未確定の乗算chainだけを保持したい。
+発動条件: 括弧のない加算・乗算を、乗算を優先して左から評価したい。
 
-加算済み項preと進行中termを分離し、*ではtermの係数を次factorへ引き継ぐ。
+加算済み部分と現在の乗算項を分離する。`*` では現在項を次の因子に掛ける係数へ引き継ぎ、`+` で初めて加算済みにする。減算・除算・括弧などを許す別問題では、その演算でも同じ状態が十分かを考え直す。
 
 ## 問題固有の要素
 
-substring開始はdigit位置ごとに一つ新状態を追加すればよく、終了については各digit時点の全active式評価和を答えへ加えるだけで全(i,j)を一度ずつ数えられる。
-
-別の問題へ持ち帰る視点: 全substring集計は、左端ごとの状態を可換な統計量へ圧縮できればonlineに新規開始と全終了を処理できる。
+有効な左端と右端がどちらも数字位置なので、数字を読むたびに「新しい左端を一つ追加する」「そこを右端とする全候補を数える」を行える。演算子の直後は候補の延長に必要な待機状態だけを保つ。この開始・終了の条件と、通常の演算優先順位の両方を状態設計へ反映する点が本問の要所である。
 
 ## 正当性
 
-数字位置から始まる各有効候補式を、確定済み加算部分preと現在の乗算係数mul、現在数numに分けて保持する。digit連結はnumを10num+dへ、*は現在termを次のmulへ、+は現在termをpreへ確定する。従ってpre,mul,term=mul×numの総和と開始数だけで全候補への同じ写像を適用できる。各digit位置で新開始を一つ加え、その位置で終わる候補のpre+termを足せば、全有効substringを開始・終了位置ごとに一回数える。演算子で終わるものを加算しないので不正な式も入らない。
+本稿の四集計値による方法は、公式解説の数字ごとの左右の寄与を分解する方法とは異なる。ここでは公式問題文の評価規則から、次の不変条件を示す。
+
+各文字の処理後、処理済みのすべての数字左端について、一つずつ延長状態が存在すると考える。各状態の加算済み部分が $$\mathrm{pre}$$、最後の乗算項の既読因子の積が $$\mathrm{mul}$$、現在数が $$\mathrm{num}$$ で、$$\mathrm{term}=\mathrm{mul}\cdot\mathrm{num}$$ を満たす。演算子直後は次の数を待つ $$\mathrm{num}=\mathrm{term}=0$$ の状態とする。四集計値は、この状態集合の個数と各成分の総和に等しいものとする。
+
+初期状態は空集合なので、四つとも0で条件を満たす。数字を読む場合、各既存状態では十進連結の式に従って現在項が更新され、新しい左端の状態 $$(0,1,d)$$ がちょうど一つ加わる。`+` では現在項を加算済みにして係数を1へ戻し、`*` では現在項を次の係数へ引き継ぐ。いずれも通常の演算優先順位に従う一候補の更新であり、これらを全候補について足したものが本文の集約式である。従って不変条件は次の文字の処理後も保たれる。
+
+数字を右端とするとき、すべての状態は有効な式で、その値の総和は更新後の $$\mathrm{preSum}+\mathrm{termSum}$$ に等しい。任意の両端が数字の部分文字列は、左端を読んだときに生成され、右端を読んだときに一度だけ答えへ加わる。演算子を端点とする部分文字列は定義上0であり、加算の対象にしない。よって最後の $$\mathrm{answer}$$ は求める総和である。更新は加算・乗算のみなので、各段階で法998244353の剰余に置き換えても答えの剰余を保つ。
 
 ## 実装上の注意
 
-- operator位置ではsubstringを答えへ加えず、digit位置だけを右端とする。*更新でpreは確定せず、+更新でのみtermをpreへ移す。全演算をmod 998244353で行う。
+- 数字の式の右辺には更新前の $$\mathrm{mulSum}$$ を使い、答えには更新後の $$\mathrm{termSum}$$ を使う。`*` では旧 $$\mathrm{termSum}$$ を係数へ移してから0にする。
+- `+` と `*` では候補数と答えを変えない。演算子直後の待機状態を式の値として足さない。
+- 入力が一桁 $$d$$ なら最初の数字更新だけで答えは $$d$$ になる。演算子がなくても各数字で新しい左端を追加し、数字列の全部分文字列を数えられる。
+- 積を取る前に剰余を保ち、積や和を計算する整数幅に注意する。64 bit整数なら、本稿の $$10\mathrm{termSum}+d\cdot\mathrm{mulSum}+d$$ を安全に計算できる。
 
 ## 復習の核
 
-- 数字だけの12、1+2、2*3、1+2*34、12*3+4を全substring直接評価し、streaming状態と比較する。
+- 全部分文字列の和では、右端を固定したときの共通更新を探す。一候補の式から始め、総和の更新に必要な補助量を追加する。
+- 現在の評価値だけでは桁連結や乗算を続けられない。加算済み部分・乗算係数・現在項に分け、次の文字でも更新が閉じることを確かめる。
+- 新しい左端は数字ごとに追加する。`1+2*34` の最後では、`34` だけでなく `4` も数える。演算子直後の待機状態は答えへ足さない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(L)、Lは式長、開始位置群の四集約を文字ごとに更新。
+入力の読込みを含めて $$O(L)$$。各文字で四つの集計値と答えを定数回の演算で更新し、前処理や左端ごとの走査は行わない。
 
 ### 空間
 
-O(1)補助。
+入力文字列を保持する場合、入力込みで $$O(L)$$、集計値と一時変数だけの補助領域は $$O(1)$$。候補の状態や桁の累乗表は保存しない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq |S| \leq 10^6; Each character of S is one of 123456789+*.; The first and last characters of S are digits.; There are no adjacent non-digit characters in S.
+$$1\leq L\leq 10^6$$ に対して一走査で済む。文字は1〜9の数字と `+`, `*` のいずれかで、先頭・末尾は数字、演算子どうしは隣接しない。このため数字の左端から数字の右端まで切り出せば常に通常の式になり、演算子直後の待機状態には必ず次の数字が続く。答えは998244353で割った余りを求める。制限時間は2秒、メモリ制限は1024 MiB。
 
 ## 出典
 
