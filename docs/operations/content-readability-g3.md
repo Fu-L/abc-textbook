@@ -45,13 +45,15 @@ G等の既存補強も欠落扱いしない。初期改稿・他分野の担当�
 ### ABC445 G：gcdで変えるのは色の式であり、マスの頂点数ではない
 
 [現稿](../../src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md)の「考察」の「gcd
-blockへ縮約」「公式のparity規則」では、座標の写し方が未定義で、同じblockのマスを一頂点へ併合する手順とも読める。
+blockへ縮約」「公式のparity規則」では、座標の写し方が未定義で、同じblockのマスを一頂点へ併合する手順とも読める。また、具体手順が「空き数-flowを答える」で止まっている。公式問題が要求するのは最大個数に達する配置そのものであり、最大値の計算から配置の復元・出力までを改稿対象に含める。
 
 座標を0始まりに固定し、g=gcd(A,B)>0、a=A/g、b=B/gとする。a,bが両奇なら色はfloor(i/g) mod
 2、一方だけ奇なら(floor(i/g)+floor(j/g)) mod
 2。変位がgの整数倍なので、床関数の差が±a,±bになることから攻撃辺で色が反転する。A=B=2では通常の市松模様が失敗する理由を示せる。A=0,B=2でもg>0で、後者の式を使える。空きマスは元の別々の頂点として残す。
 
-[公式問題](https://atcoder.jp/contests/abc445/tasks/abc445_g)・[個別公式解説](https://atcoder.jp/contests/abc445/editorial/15902)の彩色から、配置↔独立集合、被覆の補集合、空きマス数−最大matchingへつなぐ。盤面走査N²、全壁・孤立点も計算量へ含める。[#356](https://github.com/Fu-L/abc-textbook/issues/356)で扱う。
+[公式問題](https://atcoder.jp/contests/abc445/tasks/abc445_g)・[個別公式解説](https://atcoder.jp/contests/abc445/editorial/15902)の彩色から、配置↔独立集合、被覆の補集合、空きマス数−最大matchingへつなぐ。色0の空きマス集合をL、色1をR、空きマス数をV、最大matchingの辺数をμとする。最大matching後、未使用のLの全頂点を始点に、非matching辺をL→R、matching辺をR→Lの向きに探索し、到達集合をZ_L,Z_Rとする。最小頂点被覆は(L∖Z_L)∪Z_Rなので、その補集合Z_L∪(R∖Z_R)を選ぶ。正当性は[主Unitの被覆復元](../../src/content/docs/learn/graph/bipartite-matching.md#kőnigの定理と最小頂点被覆の復元)へ接続し、証明を複写しない。
+
+選んだ頂点の元のマスだけを`o`へ変え、壁の`#`と未選択の`.`を保ってN行を出力する。個数V−μは最適性の確認に使い、個数だけの出力で終えない。全壁なら壁をそのまま出し、孤立点は全て選ばれることも確認する。後続の個別検証は、彩色・最大個数の全探索比較に加え、出力配置が壁を含まず、全攻撃辺の両端を同時選択せず、`o`の個数がV−μかつ全探索の最大個数に一致することまで含める。盤面走査・出力のO(N²)と復元のO(V+E)（Eは攻撃辺数）も全体計算量へ含める。[#356](https://github.com/Fu-L/abc-textbook/issues/356)で扱う。
 
 ### ABC285 G：下限を先に流すと、どちら向きへ補修するのか
 
@@ -95,7 +97,7 @@ matching」は、核心を結論だけで済ませている。固定端とa=(b�
   flowずつmin-cost
   flowを進め」は自前の逐次増加法として正しいが、ACLの`flow(s,t,1)`を繰り返す手順とも読める。[公式問題](https://atcoder.jp/contests/abc247/tasks/abc247_g)・[個別公式解説](https://atcoder.jp/contests/abc247/editorial/3729)の全人数出力と、[ACL公式仕様](https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html)の複数回呼出し未定義・同一直線上の中間点省略を2026-10-26に追加照合した。ACLなら一回のslopeを取り、隣接端点間の全整数流量を線形補間してi×BIG−cost(i)を出す。別々の大学・分野の強さ5の二人、BIG=10では端点が(0,0),(2,10)だけでも、人数1の答え5を出す必要がある。既存の[min-cost flow Unit](../../src/content/docs/learn/graph/min-cost-flow.md)の契約へ接続する。[#361](https://github.com/Fu-L/abc-textbook/issues/361)で扱い、代表5問と同じ深さの全面診断済みとはしない。
 - **graph-core-peeling・graph-core**：親はcycle
-  rankを予告するが式の導出がなく、子にはE−V+1・葉刈り・複数cycle時の注意がある。三角形1–2–3–1に枝3–4–5を付けたV=E=5の例で、全域木からの余剰一辺、剥離5→4、残る三角形と根ラベルを追う。二つの三角形を一本の橋で結ぶ反例は全点が2-coreに残り、橋はcycle上にない。coreとcycle上頂点集合、独立cycle数と単純cycle総数を分ける。[ABC226 E問題](https://atcoder.jp/contests/abc226/tasks/abc226_e)・[個別公式解説](https://atcoder.jp/contests/abc226/editorial/2889)、[ABC266 F問題](https://atcoder.jp/contests/abc266/tasks/abc266_f)・[個別公式解説](https://atcoder.jp/contests/abc266/editorial/4698)を2026-10-26に接続確認した。[#362](https://github.com/Fu-L/abc-textbook/issues/362)は二単元だけを編集し、問題本文は照合のみ。
+  rankを予告するが式の導出がなく、子にはE−V+1・葉刈り・複数cycle時の注意がある。三角形1–2–3–1に枝3–4–5を付けたV=E=5の例で、全域木からの余剰一辺、剥離5→4、残る三角形と根ラベルを追う。反例では、別々の三角形の頂点u,vを、新しい頂点xを挟んだ長さ2のpath、u–x–vで結ぶ。全7頂点が2-coreに残る一方、xは次数2でもどの単純cycle上にもない。u–xとx–vは橋であり、xを通って別の道で戻れないためである。一本の橋で直接結ぶだけでは全頂点が三角形上にあり、頂点集合の違いを示せない。coreとcycle上頂点集合、独立cycle数と単純cycle総数を分ける。[ABC226 E問題](https://atcoder.jp/contests/abc226/tasks/abc226_e)・[個別公式解説](https://atcoder.jp/contests/abc226/editorial/2889)、[ABC266 F問題](https://atcoder.jp/contests/abc266/tasks/abc266_f)・[個別公式解説](https://atcoder.jp/contests/abc266/editorial/4698)を2026-10-26に接続確認した。[#362](https://github.com/Fu-L/abc-textbook/issues/362)は二単元だけを編集し、問題本文は照合のみ。
 - **flow-matching**：「考え方」の抽象説明へ、二仕事p,q、受け手a,b、許可p→a,bとq→aの独自例を補う。p→aを選んだ後の残余path
   s→q→a→p→b→tが割当の付替えになる。逆辺a→pは元の許可関係の逆ではなく取り消しである。上記ABC247
   G・ABC285
@@ -105,16 +107,16 @@ matching」は、核心を結論だけで済ませている。固定端とa=(b�
 
 6問・3単元を8件へ分けた。全件に実path・症状・補う説明・公式根拠・検証・依存を記した。編集path9本は重複しない。
 
-| 優先する学習上の課題    | 後続Issue                                               | 編集対象                       |
-| ----------------------- | ------------------------------------------------------- | ------------------------------ |
-| 彩色式と元頂点の区別    | [#356](https://github.com/Fu-L/abc-textbook/issues/356) | ABC445 G                       |
-| 収支の符号と必須頂点    | [#357](https://github.com/Fu-L/abc-textbook/issues/357) | ABC285 G                       |
-| 端点と退化盤面          | [#359](https://github.com/Fu-L/abc-textbook/issues/359) | ABC413 G                       |
-| 初期値・降順・評価時点  | [#358](https://github.com/Fu-L/abc-textbook/issues/358) | ABC332 G                       |
-| 独自論証の補完          | [#360](https://github.com/Fu-L/abc-textbook/issues/360) | ABC464 G                       |
-| 一回のslopeと全人数出力 | [#361](https://github.com/Fu-L/abc-textbook/issues/361) | ABC247 G                       |
-| rankとcoreを分ける小例  | [#362](https://github.com/Fu-L/abc-textbook/issues/362) | graph-core-peeling・graph-core |
-| 入口の付替えの小例      | [#363](https://github.com/Fu-L/abc-textbook/issues/363) | flow-matching                  |
+| 優先する学習上の課題     | 後続Issue                                               | 編集対象                       |
+| ------------------------ | ------------------------------------------------------- | ------------------------------ |
+| 彩色式・元頂点・配置復元 | [#356](https://github.com/Fu-L/abc-textbook/issues/356) | ABC445 G                       |
+| 収支の符号と必須頂点     | [#357](https://github.com/Fu-L/abc-textbook/issues/357) | ABC285 G                       |
+| 端点と退化盤面           | [#359](https://github.com/Fu-L/abc-textbook/issues/359) | ABC413 G                       |
+| 初期値・降順・評価時点   | [#358](https://github.com/Fu-L/abc-textbook/issues/358) | ABC332 G                       |
+| 独自論証の補完           | [#360](https://github.com/Fu-L/abc-textbook/issues/360) | ABC464 G                       |
+| 一回のslopeと全人数出力  | [#361](https://github.com/Fu-L/abc-textbook/issues/361) | ABC247 G                       |
+| rankとcoreを分ける小例   | [#362](https://github.com/Fu-L/abc-textbook/issues/362) | graph-core-peeling・graph-core |
+| 入口の付替えの小例       | [#363](https://github.com/Fu-L/abc-textbook/issues/363) | flow-matching                  |
 
 各1 Issue＝1
 PR、必須先行mergeなし。#178や他分野の調査、#141・#142の全完了を待たない。親単元・問題は説明を照合するが、編集を相互の完了条件にはしない。#140はGitHubの直接Sub-issue数100件の上限に達したため、今回の8件は#178の標準Sub-issueにまとめ、#140本文からも一覧と残範囲をたどれるようにする。#178の調査完了は配下の改稿完了を意味しない。
@@ -150,6 +152,8 @@ Gの呼出し契約だけを追加照合した。予約6問・3単元を除く**
   Gは700例で全色subsetのcut・明示最大流・DPとbucket走査が一致。ABC413
   Gは退化盤面を含む16,545障害物集合でdual DSUと通常BFSが一致。ABC464
   Gは長さ2〜9の全1,020文字列で、全最終文字列へのHamming距離による予算別最適値とgapの固定個数matchingが一致。一般証明、heap実装、後続改稿の公式例・表示検証の代用にはしない。
+- 2026-10-27、ABC445
+  Gの公式問題・個別公式解説を再照合し、配置の復元・出力を診断と#356へ補った。一時検算ではN=1〜3の全4,692盤面・変位の組と、N=4の308組（全壁・全空き・固定seedの抽出）で、彩色、壁の保持、攻撃辺の両端非選択、出力個数V−μと全探索の最適値の一致を確認した。#362の反例も、二つの三角形をu–x–vで結ぶ7頂点へ修正し、葉刈りでは全頂点が残り、列挙した全単純cycleは二つの三角形だけでxを含まないことを確認した。
 - 固定37
   IDとの一致・重複なし、15単元のpathとhomeの既存順、関連8問の形式、後続8件の編集path9本の存在・重複なしを確認した。source
   ID・fingerprint・過去の確認日時・教材・分類・問題順は変更しない。一時取得結果・検算コード・管理台帳はcommitしない。
