@@ -98,7 +98,7 @@ $$
 
 入力例1を一文字ずつ処理すると次のようになる。表は更新後の集計値で、演算子の行も次の数字へ引き継ぐ状態を示す。先頭行はまだ文字を読んでいない初期状態である。
 
-| 文字 | $$\mathrm{cnt}$$ | $$\mathrm{preSum}$$ | $$\mathrm{mulSum}$$ | $$\mathrm{termSum}$$ | 今回足す値 | $$\mathrm{answer}$$ |
+| 文字 | $$\mathrm{cnt}$$ | $$\mathrm{preSum}$$ | $$\mathrm{mulSum}$$ | $$\mathrm{termSum}$$ | 寄与 | $$\mathrm{answer}$$ |
 | --- | --- | --- | --- | --- | --- | --- |
 | — | 0 | 0 | 0 | 0 | — | 0 |
 | `1` | 1 | 0 | 1 | 1 | 1 | 1 |
