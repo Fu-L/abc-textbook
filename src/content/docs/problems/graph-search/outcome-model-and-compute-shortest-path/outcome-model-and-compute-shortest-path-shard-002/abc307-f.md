@@ -1,7 +1,7 @@
 ---
 title: "ABC307-F — Virus 2"
 draft: true
-authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/graph-search/outcome-model-and-compute-shortest-path/outcome-model-and-compute-shortest-path-shard-002/abc307-f.md","learningOutcomeIds":["outcome-model-and-compute-shortest-path"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-priority-queue-best-first","unit-state-graph-search"],"excludedTopics":["最短路モデルの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-shortest-path","tag-amortized-monotone-progress","tag-priority-queue-best-first"],"sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"$$i$$ 日目の開始時に、共有キューには前夜の感染集合 $$S$$ から未感染頂点へ出る各辺の候補が残っているとする。各候補のキーはその辺の重みである。初期感染頂点から出る辺を登録すれば、1日目にはこの条件が成り立つ。\n\n$$S$$ から未感染頂点への最短路を一つ取り、その経路上で最後に $$S$$ を出る辺に注目する。$$S$$ 内の頂点はすべて距離0の始点なので、その辺の手前までの経路を省いても距離は増えない。従って、$$S$$ から外へ出る辺を最初の候補にすれば十分であり、その後は未感染頂点の間だけを探索すればよい。重みは正なので、合計が $$X_i$$ 以下の経路は最初の辺も各途中の累積距離も $$X_i$$ 以下になる。日の開始時の移送と当日キューへの追加条件は、必要な経路を取りこぼさない。\n\n当日キューは累積距離の最小値から取り出すため、未感染頂点を初めて取り出した距離が $$S$$ からの最短距離となる。新感染頂点からの重みだけの候補を同日中に取り出さないので、探索中に始点集合が増えることもない。よって、その日の新感染はちょうど $$S$$ から距離 $$X_i$$ 以内の未感染頂点である。\n\n次の日の開始時にも未感染である頂点へ向かう境界辺を考える。手前の頂点が以前から感染していた場合、その候補が当日側へ移されていれば行き先も当日に感染するので、まだ未感染なら候補は共有側に残っている。手前の頂点が当日の新感染なら、辺の重みをキーとする候補を新たに追加してある。従って翌日も同じ条件が保たれ、すべての日で正しい感染日を記録できる。閾値が上下してもこの議論は変わらない。","sourceRevisionIds":["source-abc307-f-problem-b0089329ba5360617439d21241faf8ca5a32cab672d1540920bcbb7b8136db5c","source-abc307-editorial-6665-f55fde8a54ace843278f8e65b3dbebe27cc579af05ff928f75e6bf0aa7618166"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -18,63 +18,83 @@ authoringUnit: {"problemId":"abc307-f","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-day iの新規感染集合は、前日までの感染verticesをmulti-sourceとするdistance≤X_iのDijkstra ballである。毎日既感染verticesをdistance 0で確定し直す部分は同じなので、感染領域から未感染側へ出るboundary edgesをpersistent priority queueに残せる。当日local Dijkstraで確定したvertexはday iと記録し、そのincident edgesをlocalにはcurrent distance+w、future boundaryにはfresh distance wとして役割別に扱う。priority queue topがX_iを超えたらその日には以後到達不能で、未処理boundary candidatesは次の日へそのまま持ち越せる。
+毎日、感染済みの頂点をすべて始点にして探索し直すと、同じ領域を何度も調べてしまう。感染済み領域から外へ出る辺だけを保存し、その日の感染が届く範囲を探索したい。ただし、当日の探索では前夜の感染者からの距離を累積し、新感染者を距離0の始点として使うのは翌日から、と分ける必要がある。
 
-棄却する候補: 各dayに全既感染verticesからmulti-source Dijkstraを最初から実行する。
+部屋を頂点、通路を重み付き無向辺とする。$$i$$ 日目に新しく感染するのは、前夜までの感染頂点集合 $$S$$ のいずれかから、最短距離が $$X_i$$ 以下の未感染頂点である。従って、$$S$$ の全頂点を距離0とする多始点Dijkstra法を毎日行えば解けるが、最悪 $$O(D(N+M)\log(N+1))$$ 時間かかる。
 
-最悪D(N+M) log Nとなる。
+この探索で繰り返しているのは、感染済み頂点を距離0で確定し、その隣接辺を調べる部分である。ここを一度済ませた状態から再開できないだろうか。感染済み頂点 $$u$$ から未感染頂点 $$v$$ へ出る重み $$w$$ の辺は、$$v$$ に距離 $$w$$ で到達する候補になる。このような辺を感染領域の「境界」と呼び、候補 $$(w,v)$$ を全日共有の最小優先度付きキュー `boundary` に保存する。同じ頂点への候補が複数あってもよい。
 
-採用する候補: 全日共有のboundary queueと当日用distance queueを持ち、key≤X_iのboundary seedsだけを移してcapped Dijkstraを継続する。
+一方、当日新しく感染した頂点から進むときは、そこまでに使った距離を忘れてはいけない。そこで当日用の最小優先度付きキュー `today` も用意する。
 
-vertexは感染時一度、edgeはboundary/local expansionで全期間定数回しか処理されず償却できる。
+| キュー | キーの意味と取り出す時点 |
+| --- | --- |
+| `boundary` | 境界の一辺の重み $$w$$。**各日の開始時だけ**取り出す。 |
+| `today` | 前夜の感染集合からの累積距離 $$d$$。**開始時の移送を終えてから**取り出す。 |
+
+感染日を記録する配列 `ans` を用意し、未感染を `-1`、初期感染頂点を0にする。初期感染頂点をすべて記録してから、それらと未感染頂点を結ぶ辺の候補を `boundary` に入れる。各日 $$i=1,\ldots,D$$ には、次の順で処理する。
+
+1. 空の `today` を用意する。`boundary` の最小キーが $$X_i$$ 以下である間、候補 $$(w,v)$$ を取り出す。$$v$$ が既に感染していれば捨て、未感染なら同じ $$(w,v)$$ を `today` へ移す。**この移送を終えてから当日の探索を始め、同日中は二度と `boundary` から取り出さない。**
+2. `today` から累積距離が最小の候補 $$(d,v)$$ を取り出す。$$v$$ が既に感染していれば捨てる。未感染なら距離 $$d$$ が確定するので、`ans[v]` を $$i$$ にし、$$v$$ の隣接辺を調べる。未感染の隣接頂点 $$u$$ への辺の重みを $$w$$ とすると、$$d+w\leq X_i$$ のときは $$(d+w,u)$$ を `today` に入れる。また、翌日以降には $$v$$ も距離0の始点になるため、$$(w,u)$$ を `boundary` に入れる。この共有候補は当日には使わない。
+3. `today` が空になればその日を終える。`boundary` に残った候補を保持して次の日へ進む。全日終了後に `ans` を出力する。
+
+例えば、頂点1–2–3を重み3、3の辺で結び、初期感染を頂点1、閾値を $$X=(4,3)$$ とする独自例を考える。1日目は `boundary` の $$(3,2)$$ を移し、頂点2を距離3で確定する。頂点3への当日の距離は $$3+3=6>4$$ なので、当日側には追加しない。翌日用の $$(3,3)$$ は共有側へ入れるが、その日は取り出さない。2日目にこの候補を移して頂点3が感染し、感染日は $$(0,1,2)$$ になる。同日の探索中に共有側の $$(3,3)$$ まで取り出すと、頂点2で距離を0に戻したことになり、頂点3も1日目に感染するという誤答になる。
+
+共有キューのキーは日ごとの残り距離ではなく、辺そのものの重みである。その日の閾値を超える候補は減算せずに残し、翌日の閾値で改めて判定する。これにより、感染のない日や、閾値が小さくなる日も同じ手順で扱える。
 
 ## 典型の発動条件
 
 ### Dijkstra frontierの再利用
 
-発動条件: source集合が単調に増えるthreshold reachabilityを複数roundで処理するとき。
-
-既確定領域のboundary candidatesを全round共有heapに保持する。
+始点集合が単調に増え、各段階でその集合から一定距離以内へ到達する頂点を求めるとき、毎回距離0で確定する領域に注目する。その外へ出る探索境界（frontier）を保存できれば、既確定領域の走査を省ける。今回のように段階の途中では始点を増やせない場合、境界の更新と利用の時点を分ける必要がある。
 
 ### 全期間での辺処理償却
 
-発動条件: 各vertexが一度だけactiveになり、その時だけincident edgesを展開するprocess。
-
-infection day確定時にedgeを追加し、stale heap entriesをskipして総push数をO(M)に抑える。
+各頂点が一度だけ感染し、その時に一度だけ隣接辺を展開することを使う。日ごとの最悪計算量に日数を掛ける前に、全日を通じた辺の走査回数とキューへの追加回数を数える。
 
 ## 問題固有の要素
 
-同じ日に感染したvertexはその日の距離探索をさらに中継できるが、次日以降は全員が新しいdistance-0 sourcesになるため二種類のheap keyが必要になる。
-
-別の問題へ持ち帰る視点: round内距離と次roundのsourceからの距離を混同せず、local propagationとpersistent boundaryを分ける。
+問題文の「前日の夜の時点で感染していた人」が距離の基準を固定している。同日中の新感染頂点は経路の中継点にはなるが、新しい距離0の始点にはならない。この区別が、当日の累積距離と翌日用の一辺の重みを別々に保存し、共有側からの移送を日の開始時に限る理由である。
 
 ## 正当性
 
-dayのsourceは前日まで感染した全頂点で距離0。persistent queueに未感染へ出るedgeを残し、その日の許容Xまで局所Dijkstraするとまさに距離ballを得る。day内新感染からの距離は累積し、次dayには0へリセットする境界情報だけ再利用するため閾値が上下しても正しい。
+$$i$$ 日目の開始時に、共有キューには前夜の感染集合 $$S$$ から未感染頂点へ出る各辺の候補が残っているとする。各候補のキーはその辺の重みである。初期感染頂点から出る辺を登録すれば、1日目にはこの条件が成り立つ。
+
+$$S$$ から未感染頂点への最短路を一つ取り、その経路上で最後に $$S$$ を出る辺に注目する。$$S$$ 内の頂点はすべて距離0の始点なので、その辺の手前までの経路を省いても距離は増えない。従って、$$S$$ から外へ出る辺を最初の候補にすれば十分であり、その後は未感染頂点の間だけを探索すればよい。重みは正なので、合計が $$X_i$$ 以下の経路は最初の辺も各途中の累積距離も $$X_i$$ 以下になる。日の開始時の移送と当日キューへの追加条件は、必要な経路を取りこぼさない。
+
+当日キューは累積距離の最小値から取り出すため、未感染頂点を初めて取り出した距離が $$S$$ からの最短距離となる。新感染頂点からの重みだけの候補を同日中に取り出さないので、探索中に始点集合が増えることもない。よって、その日の新感染はちょうど $$S$$ から距離 $$X_i$$ 以内の未感染頂点である。
+
+次の日の開始時にも未感染である頂点へ向かう境界辺を考える。手前の頂点が以前から感染していた場合、その候補が当日側へ移されていれば行き先も当日に感染するので、まだ未感染なら候補は共有側に残っている。手前の頂点が当日の新感染なら、辺の重みをキーとする候補を新たに追加してある。従って翌日も同じ条件が保たれ、すべての日で正しい感染日を記録できる。閾値が上下してもこの議論は変わらない。
 
 ## 実装上の注意
 
-- 既感染vertexへのheap entryはpop時に捨て、day-local distance arrayは当日触れたverticesだけresetする。
-- edge weightsとX_iは10^9でpath sumは32 bitを超えるため64 bitを使う。
+- 二つのキューとも、候補を取り出した時点で行き先の `ans` を確認する。同じ頂点への別経路や共有側に残った候補は、既に感染していれば捨て、隣接辺を再展開しない。追加時に感染確定とすると、より短い経路を後で処理できなくなる。
+- 上の手順では、確定済みかどうかは `ans` だけで判定でき、当日用の全長距離配列は不要である。暫定距離配列を使って候補を減らす実装でも、日ごとの全頂点初期化は避け、その日に触れた頂点だけを戻すか日付を併記する。毎日 $$O(N)$$ の初期化をすると全体が $$O(DN)$$ になる。
+- 距離の加算には64 bit整数を使う。重みと閾値はそれぞれ $$10^9$$ 以下だが、比較前の $$d+w$$ を安全に扱えるようにする。
+- 共有側の最小キーが閾値を超え、当日側も空なら、その日の感染はない。候補を残して翌日へ進む。孤立頂点など、最後まで感染しなかった頂点の `-1` はそのまま出力する。
 
 ## 復習の核
 
-- 増加source集合に対する反復shortest pathは、毎回確定済みdistance 0領域を再走査せずfrontierを保存する。
-- round内でのみ累積するdistanceと、次roundでresetされるdistanceの意味を別queueで表す。
+- 始点集合が増える探索では、毎回距離0で走査し直す領域を探し、その外へ出る候補だけを残せないか考える。
+- 距離をリセットできる時点を問題文で確かめる。この問題では、新感染からの一辺の重みを使えるのは翌日からである。
+- 段階数が多くても、各頂点・辺を処理する総回数が少なければ償却できる。配列の初期化や空の日の処理も含めて数える。
 
 ## 計算量と制約
 
 ### 時間
 
-N頂点M辺、日数D。感染時展開とpersistent boundary各辺定数回、heap操作 O((N+M)log(N+M)+D)。
+$$N$$ 頂点 $$M$$ 辺、日数 $$D$$ とする。隣接リストと `ans` の初期化・入力・出力は $$O(N+M+D)$$。各頂点の隣接辺は初期感染時または新感染の確定時に一度だけ調べるので、走査は全日合計で高々 $$2M$$ 回である。各走査から各キューへ追加する候補は高々一つずつで、共有側から当日側への移送も共有候補一つにつき高々一度だから、全日合計の追加・削除回数は $$O(M)$$。古い候補の破棄もこの回数に含まれる。
+
+候補数は $$O(M)$$ なので、一回のキュー操作は $$O(\log(N+M+1))$$ で抑えられる。削除を伴わない空・閾値の確認は一日あたり定数回であり、全体の時間計算量は $$O((N+M)\log(N+M+1)+D)$$ となる。日ごとの全頂点走査は行わない。
 
 ### 空間
 
-隣接、infection day、二frontier heap O(N+M)。
+隣接リストに $$O(N+M)$$、感染日の配列に $$O(N)$$、二つのキューを合わせて $$O(M)$$ を使う。閾値を入力順に一つずつ処理すれば、日数分の配列も不要であり、全体で $$O(N+M)$$ 空間となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N\leq 3\times 10^5; 0 \leq M\leq 3\times 10^5; 1 \leq U_i < V_i\leq N; All (U_i,V_i) are different.; 1\leq W_i\leq 10^9; 1 \leq K\leq N; 1\leq A_1<A_2<\cdots<A_K\leq N; 1 \leq D\leq 3\times 10^5; 1\leq X_i\leq 10^9; All input values are integers.
+$$1\leq N\leq 3\times 10^5$$、$$0\leq M\leq 3\times 10^5$$、$$1\leq D\leq 3\times 10^5$$。毎日の再探索や全長配列の初期化を避け、辺数に応じた回数だけキューを操作することでこの上限に対応する。辺は異なる二頂点を結ぶ無向辺で重複はなく、重みは $$1\leq W_i\leq 10^9$$ と正なのでDijkstra法と距離による探索の打切りが使える。
+
+初期感染者数は $$1\leq K\leq N$$ で、頂点番号は昇順かつ重複しない。閾値は $$1\leq X_i\leq 10^9$$ であり、日を追って単調になる保証はない。$$M=0$$ や全頂点が初期感染の場合も、空のキューで各日を終える同じ手順で扱える。
 
 ## 出典
 
