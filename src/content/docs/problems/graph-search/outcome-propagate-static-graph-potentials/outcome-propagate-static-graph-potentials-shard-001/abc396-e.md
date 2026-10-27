@@ -1,7 +1,7 @@
 ---
 title: "ABC396-E — Min of Restricted Sum"
 draft: true
-authoringUnit: {"problemId":"abc396-e","docPath":"src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-potential-propagation","tag-constructive-witness"],"sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"同成分の全解はA_v=p_v xor tで、辺xorは共通tで打ち消される。矛盾potentialは解なし。bitごとt反転は成分全bitを反転しone数をsize−onesへ替えるので少数側を選ぶのが総和最小。bit寄与は独立に加算できる。","sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc396-e","docPath":"src/content/docs/problems/graph-search/outcome-propagate-static-graph-potentials/outcome-propagate-static-graph-potentials-shard-001/abc396-e.md","learningOutcomeIds":["outcome-propagate-static-graph-potentials"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-constructive-witness","unit-state-graph-search"],"excludedTopics":["静的graph等式制約のpotential伝播の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-graph-potential-propagation","tag-constructive-witness"],"sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"根を0として得た相対値を $$p_v$$ とする。全辺で $$p_u\\oplus p_v=z$$ が成り立つなら、任意の共通マスク $$t$$ に対する $$A_v=p_v\\oplus t$$ も、辺のXORで二つの $$t$$ が打ち消されるので全制約を満たす。逆に、任意の解で根の値を $$t$$ とすると、根からの経路に沿って $$A_v=p_v\\oplus t$$ が強制されるので、これで全解を尽くす。照合に失敗した辺では、この形のどの候補も等式を満たせないため、解は存在しない。\n\n成分の頂点数を $$s$$、相対値のbit $$b$$ が1の頂点数を $$c_b$$ とする。共通マスクのbitを0にした場合と1にした場合の総和への寄与は、それぞれ $$2^b c_b$$ と $$2^b(s-c_b)$$ である。制約はbit間・成分間で独立で、総和もその寄与の和なので、各々で小さい方を選ぶと全体の総和も最小になる。同数ならどちらを選んでも最小値は変わらない。全ての $$p_v$$ で0となるbit 30以上は、共通マスクでも0にするのが最小である。","sourceRevisionIds":["source-abc396-e-problem-c31b2e0500585e6c964e0c4d69feb8d69b79c20268e0b70f888a608f5050f5be","source-abc396-editorial-12390-71791dcbbee89dd3c8461b74eb40ed29a5b6449cb7af08322d917ad0443365bc"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,63 +17,99 @@ authoringUnit: {"problemId":"abc396-e","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-constraint A_x xor A_y=zはbitごとに独立で、連結成分内では一頂点の値を決めるとpath上のxorにより全頂点値が決まる。rootを0と仮定したpotential p_vをDFSで付けると、任意解はcomponent共通mask tに対してA_v=p_v xor tとなる。既訪問vertexへ別pathから到達したとき、既存p_vとp_u xor zが異なればcycle xorが非零で解なしである。Z≤10^9なので必要bit範囲を覆えばよく、各bitの選択を組み合わせたmask tで全値を同時に構成できる。
+辺で結ばれた二頂点では、片方の値を決めるとXORの条件からもう片方も決まる。そこで、まず一頂点を仮に0にして、成分内の相対的な値を求める。まだ自由に選べる根の値を後から調整すれば、制約を壊さずに総和を小さくできる。
 
-採用する候補: xor potentialで整合性を検査し、各component・各bitで1の個数が少ないroot bitを選ぶ
+入力の制約 $$A_{X_i}\oplus A_{Y_i}=Z_i$$ を、頂点 $$X_i,Y_i$$ を結ぶ重み $$Z_i$$ の無向辺として表す。$$\oplus$$ はビットごとの排他的論理和（XOR）である。辺 $$u,v$$ の重みを $$z$$ とすると、$$A_v=A_u\oplus z$$ と書ける。逆向きも同じ重みでよい。辺のない別の連結成分とは制約を共有しないため、成分ごとに解いてよい。
 
-bit bでt_bを反転するとcomponent全頂点のbitが反転するため、onesとsize-onesの小さい方を独立に選べばΣA_iを最小化できる。
+### 根を0にして相対値を求める
 
-棄却する候補: A_iを整数としてcomponentごとにgreedy決定する
+一つの成分の根を $$r$$ とし、$$p_r=0$$ からDFS・BFSで仮の値 $$p_v$$ を付ける。辺 $$u,v$$ を通るとき、未訪問なら $$p_v=p_u\oplus z$$ として記録する。訪問済みなら同じ等式を満たすか照合する。値が異なれば、二経路のXORが一致せず、どんな根の値でも解は存在しない。
 
-整数大小の局所選択はxor constraintを伝播し、各bitの独立な全体最適化を表せない。
+矛盾がなければ、その成分の全解は共通のXORマスク $$t$$ により
 
-各未訪問rootをp=0としてDFS/BFSし、edge(u,v,z)でp_v=p_u xor zを割り当て矛盾検査する。componentごとに各bitのonesを数え、ones>size-onesならtのbitを1にし、A_v=p_v xor tを出す。
+$$
+A_v=p_v\oplus t
+$$
+
+と表せる。根では $$A_r=t$$ であり、$$t$$ が実際に選ぶ根の値になる。詳しい伝播と自由度の考え方は[静的ポテンシャルの単元](src/content/docs/learn/graph/graph-potential-propagation.md)で確認できる。
+
+根を0として探索することは、最適解の根も0と決めることではない。独自例として、制約が $$A_1\oplus A_2=1$$、$$A_2\oplus A_3=0$$ の三頂点を考える。根を頂点1とすると $$p=(0,1,1)$$ で、$$t=0$$ のままでは総和は2になる。しかし $$t=1$$ を共通にXORすると $$A=(1,0,0)$$ となり、二つの制約を満たしたまま総和を1へ減らせる。根だけを小さくしても、他の頂点を含む総和は最小にならない。
+
+### 各bitで1の多い側を反転する
+
+残った候補は $$t$$ の値だが、全整数を試す必要はない。XORではbit間に繰り上がりがなく、制約も目的の総和もbitごとに分けられる。
+
+成分 $$C$$ の頂点数を $$s$$、$$p_v$$ のbit $$b$$ が1である頂点数を $$c_b$$ とする。bitは最下位を0番とし、$$t_b$$ を $$t$$ のbit $$b$$ と呼ぶ。$$t_b=0$$ なら1の個数は $$c_b$$ のまま、$$t_b=1$$ なら全頂点のそのbitが反転して $$s-c_b$$ 個になる。総和への寄与はそれぞれ
+
+$$
+2^b c_b,\qquad 2^b(s-c_b)
+$$
+
+なので、$$c_b>s-c_b$$ のときだけ $$t_b=1$$ とすればよい。同数ならどちらでも最小になり、ここでは $$t_b=0$$ を選ぶ。先ほどの $$p=(0,1,1)$$ ではbit 0の1が2個、0が1個なので反転する。このように各bitで選んだ値を一つの $$t$$ にまとめられるため、成分の最小総和は
+
+$$
+\sum_{b\geq0}2^b\min(c_b,s-c_b)
+$$
+
+となる。ただし求める出力はこの総和ではなく、最小化する数列 $$A$$ そのものである。
+
+### 伝播・最小化・出力の手順
+
+1. 各制約を同じ重みの二方向の辺として保存し、全頂点を未訪問にする。
+2. 未訪問の根に $$p_r=0$$ を置き、スタックまたはキューで探索する。値を割り当てた時点で訪問済みにし、その成分の頂点一覧を集める。既訪問の頂点への辺も照合し、不一致があれば `-1` を出力して終了する。
+3. 成分の頂点一覧を使って各bitの $$c_b$$ を数え、上の比較から $$t$$ を作る。各頂点に $$A_v=p_v\oplus t$$ を格納する。
+4. 全成分を処理できたら、頂点番号順に $$A_1,\ldots,A_N$$ を空白区切りで出力する。
+
+$$Z_i\leq10^9<2^{30}$$ なので、伝播で得られる $$p_v$$ のbit 30以上は全て0である。その上位bitを $$t$$ に立てると成分の全頂点に同じ正の寄与を足すだけなので、最適解でも0にできる。従って調べるのはbit 0から29までで十分である。
 
 ## 典型の発動条件
 
 ### xor potential graph
 
-発動条件: 辺が二頂点値のxor差を指定するとき。
-
-rootからpath xorをpotentialとして伝播しcycle整合性を判定する。
+辺が二頂点の値のXORを指定し、一方を決めると他方も一意に決まるとき、根からXORを累積して相対値を求める。別経路との照合で整合性を判定し、全解を成分共通のXORマスク一つに絞る。
 
 ### bitwise independent minimization
 
-発動条件: 制約と目的がbitごとの重み付き和へ分離できるとき。
-
-component共通flipをbitごとに多数決の少数側へ選ぶ。
+制約がbit間で干渉せず、目的が各bitの寄与の和であるときに使う。本問では共通マスクの一つのbitが成分全体の反転を選ぶので、bitごとに1の個数の少ない方を選べる。整数の大小だけで一頂点ずつ貪欲に決めると、他頂点へ伝わる反転の影響を評価できない。
 
 ## 問題固有の要素
 
-自由度は頂点ごとでなく各connected componentの共通xor mask一つだけで、その各bitを独立に選べる。
+自由に選べるのは各頂点の値ではなく、成分共通のマスクだけである。本問はその各bitを独立に選べ、同じbitが1である各頂点の寄与も等しく $$2^b$$ なので、個数の比較だけで最小化できる。
 
-別の問題へ持ち帰る視点: 群差constraintではroot potential＋component共通shiftとして一般解を表し、残る自由度だけ最適化する。
+別の問題へ持ち帰る視点: まず辺の等式から相対値を確定し、成分に残る自由度を取り出す。その自由度をbitごとに独立に最適化できるかは、制約と目的の両方から確認する。
 
 ## 正当性
 
-同成分の全解はA_v=p_v xor tで、辺xorは共通tで打ち消される。矛盾potentialは解なし。bitごとt反転は成分全bitを反転しone数をsize−onesへ替えるので少数側を選ぶのが総和最小。bit寄与は独立に加算できる。
+根を0として得た相対値を $$p_v$$ とする。全辺で $$p_u\oplus p_v=z$$ が成り立つなら、任意の共通マスク $$t$$ に対する $$A_v=p_v\oplus t$$ も、辺のXORで二つの $$t$$ が打ち消されるので全制約を満たす。逆に、任意の解で根の値を $$t$$ とすると、根からの経路に沿って $$A_v=p_v\oplus t$$ が強制されるので、これで全解を尽くす。照合に失敗した辺では、この形のどの候補も等式を満たせないため、解は存在しない。
+
+成分の頂点数を $$s$$、相対値のbit $$b$$ が1の頂点数を $$c_b$$ とする。共通マスクのbitを0にした場合と1にした場合の総和への寄与は、それぞれ $$2^b c_b$$ と $$2^b(s-c_b)$$ である。制約はbit間・成分間で独立で、総和もその寄与の和なので、各々で小さい方を選ぶと全体の総和も最小になる。同数ならどちらを選んでも最小値は変わらない。全ての $$p_v$$ で0となるbit 30以上は、共通マスクでも0にするのが最小である。
 
 ## 実装上の注意
 
-- self-edgeやparallel constraintでも既訪問整合性を検査する。0..30程度の全bitを含め、isolated vertexは全0が最小。
+- 自己ループも照合する。$$A_v\oplus A_v=0$$ なので、重みが0なら許され、非零なら `-1` になる。同じ二頂点の多重辺も省略せず照合する。
+- 訪問状態は値0と区別し、割当て時に記録する。$$N\leq2\times10^5$$ なので、再帰の深さを避けたい場合は明示的なスタックやキューを使う。
+- 孤立点は $$s=1,p_v=0$$ なので $$t=0,A_v=0$$ が最小になる。$$M=0$$ の場合は全頂点が孤立し、全要素0を出力する。
+- 最小化にはbitごとの個数だけが必要で、総和を計算する必要はない。検算などで総和を持つなら、$$N(2^{30}-1)$$ まで収まる64 bit整数型を使う。
 
 ## 復習の核
 
-- 小componentでroot maskを全探索し、非零cycle xor、tie bit、isolated vertexを比較して最小sumを確認する。
+- 根を0に置くのは相対値を求めるため。総和最小の解は、成分全体への共通XORを選んで復元する。
+- XOR制約の自由度は成分ごとのマスク一つ。その各bitを変えると全頂点が反転するため、目的が総和なら1の多い側を反転する。
+- 閉路XORが非零なら、根の値の選び直しでは直せない矛盾である。
 
 ## 計算量と制約
 
 ### 時間
 
-N頂点M xor制約、最大bit数B。potential探索O(N+M)、各成分bit最小化O(NB)。
+$$N$$ 頂点、$$M$$ 制約、調べるbit数を $$B$$ とする。隣接リスト構築と全成分の探索は $$O(N+M)$$。成分の頂点数を $$s$$ とすると各bitの個数集計は $$O(sB)$$ であり、全成分を合わせて $$O(NB)$$。回答の復元・出力も含め、全体で $$O(N+M+NB)$$ 時間。
 
 ### 空間
 
-隣接、potential、回答 O(N+M)。
+隣接リスト、訪問状態、相対値、成分の頂点一覧、回答を保持する。bitは順に処理し、個数の作業領域を再利用できるので、全体で $$O(N+M)$$ 空間。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2\times 10^5; 0 \le M \le 10^5; 1 \le X_i, Y_i \le N; 0 \le Z_i \le 10^9; All input values are integers.
+$$1\leq N\leq2\times10^5$$、$$0\leq M\leq10^5$$、$$1\leq X_i,Y_i\leq N$$、$$0\leq Z_i\leq10^9$$。$$B=30$$ とすれば各頂点につき30 bitを調べるだけでよく、全整数の根の値を列挙せずに処理できる。制限は3秒・1024 MiB。全ての入力は整数であり、孤立点・自己ループ・多重辺を含めて上の手順で扱える。
 
 ## 出典
 
