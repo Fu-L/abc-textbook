@@ -1,7 +1,7 @@
 ---
 title: "ABC247-G — Dream Team"
 draft: true
-authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"人を大学–分野辺とすると二側容量1が双方重複禁止を表す。flow量kの費用はkBIG−power総和なので同kで費用最小はpower最大。残余逆辺が以前のmatchingを組み替えられるため逐次augmentで各kの最適を得る。","sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/graph-search/outcome-model-min-cost-flow/outcome-model-min-cost-flow-shard-001/abc247-g.md","learningOutcomeIds":["outcome-model-min-cost-flow"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-max-flow-min-cut","unit-weighted-shortest-path"],"excludedTopics":["最小費用流・circulationの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-min-cost-flow"],"sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"整数流では、各大学から高々 1 本、各分野へ高々 1 本の人の辺に流れるため、流量 $$i$$ の流れは条件を満たす $$i$$ 人のチームに対応する。逆に、そのようなチームから各人を通る経路へ 1 ずつ流せる。両者の費用は $$i\\,\\mathrm{BIG}$$ から強さの合計を引いた値なので、流量 $$i$$ の最小費用 $$c(i)$$ から得る $$i\\,\\mathrm{BIG}-c(i)$$ が求める最大値である。\n\n初期流量 0 の残余グラフには負費用閉路がなく、逐次最短路増加法はこの固定流量での最適性を保ちながら流量を増やす。残余逆辺による取消しも許すので、以前のチームを含まない最適チームにも組み替えられる。増加路がなくなると最大流であり、その流量 $$K$$ は構成可能な最大人数に等しい。\n\n一度の `slope` が返す折れ線は、0 から $$K$$ までの各流量の最小費用を表す。連続端点間では限界費用が一定なので、線形補間で省略された各整数人数の $$c(i)$$ も正確に復元できる。各区間の左端を除き右端を含めて出力すれば、すべての実現可能な人数の答えを漏れ・重複なく出力する。","sourceRevisionIds":["source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd","source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,66 +17,107 @@ authoringUnit: {"problemId":"abc247-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-大学を左頂点、得意分野を右頂点、人をその間の重み付き辺とすると、dream team は端点を共有しない辺集合、すなわち二部 matching である。必要なのは最大 cardinality だけでなく、サイズ i ごとの最大重みなので、1 unit ずつ flow を増やした各段階の最適費用を記録する必要がある。source→大学と分野→sink の容量を 1 にすると、同じ大学・同じ分野を 2 人選べない条件が flow の容量制約そのものになる。人辺を cost=BIG-C_i とすれば、固定 flow 量 i では定数 i×BIG が共通なので、費用最小化と power 和最大化が同値になる。
+大学と得意分野をそれぞれ頂点、人をその間の辺と考えると、選べるチームは端点を共有しない辺集合になる。これは二部マッチングである。人数ごとに強さの合計を最大化したいので、人数を流量、強さを費用へ対応させ、流量別の最小費用を求める。
 
-採用する候補: 大学・分野の二部 flow network を作り、人の power を BIG-C_i の費用へ変換して、min-cost flow を 1 unit ずつ流す。
+### 人数を流量、強さを費用に対応させる
 
-flow 量 i の最小費用が i×BIG から最大 power 和を引いた値になり、全 i の最適値を successive augmentation で得られる。
+人 $$j$$ の大学・分野・強さをそれぞれ $$A_j,B_j,C_j$$ とする。始点 $$S$$ と終点 $$T$$ を用意し、次の辺を張る。
 
-棄却する候補: power の大きい人から、未使用の大学・分野なら貪欲に採用する。
+- $$S$$ から各大学へ、容量 1・費用 0 の辺。
+- 人 $$j$$ の大学から分野へ、容量 1・費用 $$\mathrm{BIG}-C_j$$ の辺。
+- 各分野から $$T$$ へ、容量 1・費用 0 の辺。
 
-高 power の 1 辺が 2 本の組合せを塞ぐ場合があり、各サイズの最大重み matching を保証しない。
+ここで $$\mathrm{BIG}$$ は全員の強さより大きい定数とし、例えば $$10^9+1$$ を使う。人を選ぶことがその人の辺へ 1 流すことに対応し、大学側と分野側の容量 1 が、それぞれの重複禁止を表す。$$i$$ 人のチームに対応する流れの費用は
 
-S→各大学、各分野→T に容量 1・費用 0、人ごとに大学→分野へ容量 1・費用 BIG-C_i の辺を張る。増加路がなくなるまで 1 flow ずつ min-cost flow を進め、累積費用 cost_i から i×BIG-cost_i を順に出力する。
+$$
+i\,\mathrm{BIG}-\sum_{j\text{：選んだ人}}C_j
+$$
+
+である。同じ人数なら第一項が共通なので、最小費用を $$c(i)$$ とすると、求める強さの最大値は $$i\,\mathrm{BIG}-c(i)$$ となる。
+
+強い人から順に採用するだけでは足りない。例えば、大学・分野・強さが $$(1,1,100),(1,2,10),(2,1,1)$$ の 3 人では、1 人の最適解は強さ 100 の人だが、2 人の最適解は残る 2 人で合計 11 となる。人数を増やすとき、既に選んだ人を取り消して選び直す必要がある。最小費用流の残余逆辺は、この取消しを表す。
+
+### 逐次増加という算法と、ACL の呼出しを区別する
+
+自前で逐次最短路増加法を実装するなら、流量・費用を 0、各頂点の potential を 0 で初期化する。元の辺の費用はすべて非負なので、この初期化で始められる。残余グラフ上で potential を使った最短路を探し、potential と残余容量を更新して 1 流し、累積流量と累積費用を記録する。これらの状態を維持する**一つの実行**を、増加路がなくなるまで続ければよい。各増加が流量別の最適性を保つ理由と potential の更新式は、[主単元の説明](src/content/docs/learn/graph/min-cost-flow.md)を参照する。
+
+一方、[ACL の公式仕様](https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html)では、同じグラフへの `flow` と `slope` を合わせた複数回呼出しの挙動は未定義である。「1 ずつ増やす」を、`graph.flow(S,T,1)` の繰返しとして実装してはいけない。ACL では、辺をすべて追加した未実行のグラフに対し、流量上限を指定しない `graph.slope(S,T)` を**一度だけ**呼ぶ。これで最大流までの流量別最小費用が得られる。
+
+ただし、返るのは全人数の値を並べた配列ではなく、最小費用の折れ線の端点列である。同じ限界費用、すなわち 1 流すための費用の増分が続く区間では、同一直線上の中間点が省かれる。
+
+### 折れ線から全人数の答えを取り出す
+
+返り値の最初の点は $$(0,0)$$ で、最後の点の流量が最大人数 $$K$$ である。まず $$K$$ を出力する。次に隣り合う端点 $$(f_0,c_0),(f_1,c_1)$$ を順に見て、その区間の単位増加費用
+
+$$
+d=\frac{c_1-c_0}{f_1-f_0}
+$$
+
+を求める。この区間では限界費用が一定なので、各整数人数 $$i=f_0+1,\ldots,f_1$$ に対して
+
+$$
+c(i)=c_0+(i-f_0)d
+$$
+
+を復元し、$$i\,\mathrm{BIG}-c(i)$$ を出力する。辺費用が整数なので $$d$$ も整数であり、浮動小数点計算は不要である。左端を除いて右端を含めることで、区間の境目の人数を二重に出力せず、1 人から $$K$$ 人までをちょうど一度ずつ扱える。
+
+例えば、大学も分野も異なる強さ 5 の 2 人を考え、ここだけ $$\mathrm{BIG}=10$$ とする。最小費用は $$c(0)=0,c(1)=5,c(2)=10$$ であり、`slope` は $$(0,0),(2,10)$$ だけを返す。区間の傾きは 5 なので、人数 1 の答えは $$10-5=5$$、人数 2 の答えは $$20-10=10$$ と両方復元できる。端点だけを出力すると、人数 1 の答えを落としてしまう。
+
+また、大学の種類数を $$U$$、分野の種類数を $$F$$ とすると、$$\min(U,F)$$ は $$K$$ の上界にすぎない。例えば属性対が $$(1,1),(2,1),(3,2),(3,3)$$ なら、大学も分野も 3 種類あるが、最初の 2 大学は分野 1 を取り合うため最大人数は 2 である。実際に流せた最大流量を `slope` の最後から読み、実現可能な人数だけを出力する。
 
 ## 典型の発動条件
 
 ### 二部 matching の flow 表現
 
-発動条件: 2 種類の属性がそれぞれ重複禁止で、要素が属性対を結ぶとき。
-
-大学と分野を二部頂点にし、各人を容量 1 の辺として選択を表す。
+2 種類の属性がそれぞれ重複禁止で、選ぶ要素が属性対を結ぶとき、要素を二部グラフの辺にする。両側に容量 1 の辺を置くと、重複禁止を流量制約へ移せる。
 
 ### 重み付き matching の min-cost flow
 
-発動条件: matching size ごとの最大重みをすべて求めたいとき。
-
-重みを BIG-C に反転し、unit augmentation ごとの累積最小費用を記録する。
+人数ごとの最大重みをすべて求めたいとき、人数を流量に対応させる。固定流量のどの選び方にも同じ費用補正が掛かることを確認してから、重みを非負費用へ変換する。`slope` を使う場合は、圧縮された端点列から必要な全整数流量の値を復元する。
 
 ## 問題固有の要素
 
-dream team の 2 種類の重複禁止条件は二部 matching であり、BIG による費用反転で同じ flow run から全 team size の最大 power を得られる。
+大学と分野がそれぞれ重複禁止なので、1 人を二部グラフの 1 辺にできる。ちょうど $$i$$ 人なら必ず人の辺を $$i$$ 本選ぶため、各辺に $$\mathrm{BIG}$$ を足す補正も必ず $$i\,\mathrm{BIG}$$ になる。
 
-別の問題へ持ち帰る視点: 固定個数ごとの最大価値が必要なら、cardinality を flow 量にし、1 unit ごとの最適費用列を利用する。
+別の問題へ持ち帰る視点: 個数別の最大価値を求めるときは、固定個数で共通になる費用補正と、個数を増やす際の選び直しの両方を考える。
 
 ## 正当性
 
-人を大学–分野辺とすると二側容量1が双方重複禁止を表す。flow量kの費用はkBIG−power総和なので同kで費用最小はpower最大。残余逆辺が以前のmatchingを組み替えられるため逐次augmentで各kの最適を得る。
+整数流では、各大学から高々 1 本、各分野へ高々 1 本の人の辺に流れるため、流量 $$i$$ の流れは条件を満たす $$i$$ 人のチームに対応する。逆に、そのようなチームから各人を通る経路へ 1 ずつ流せる。両者の費用は $$i\,\mathrm{BIG}$$ から強さの合計を引いた値なので、流量 $$i$$ の最小費用 $$c(i)$$ から得る $$i\,\mathrm{BIG}-c(i)$$ が求める最大値である。
+
+初期流量 0 の残余グラフには負費用閉路がなく、逐次最短路増加法はこの固定流量での最適性を保ちながら流量を増やす。残余逆辺による取消しも許すので、以前のチームを含まない最適チームにも組み替えられる。増加路がなくなると最大流であり、その流量 $$K$$ は構成可能な最大人数に等しい。
+
+一度の `slope` が返す折れ線は、0 から $$K$$ までの各流量の最小費用を表す。連続端点間では限界費用が一定なので、線形補間で省略された各整数人数の $$c(i)$$ も正確に復元できる。各区間の左端を除き右端を含めて出力すれば、すべての実現可能な人数の答えを漏れ・重複なく出力する。
 
 ## 実装上の注意
 
-- BIG は全 C_i より大きくして人辺費用を非負にし、power 和・累積費用は 64 bit で保持する。
-- 同じ (A_i,B_i) の人が複数いても平行辺として扱える。圧縮するなら最大 C_i 以外が最適解に不要であることを明示する。
+- `mcf_graph<int,long long>` などを使い、費用・potential・累積費用・$$i\,\mathrm{BIG}$$ の積を 64 bit 整数で扱う。$$\mathrm{BIG}=10^9+1$$ ならすべての人の辺費用が正になり、最大 150 人の補正項も 64 bit に収まる。
+- 同じグラフで `flow` を実行してから `slope` を呼ぶことも、複数回呼出しに当たる。最大人数の取得と全人数の答えの復元には、一度の `slope` の結果を共有する。
+- 区間の費用差を流量差で割って整数の傾きを求めてから補間する。端点の個数を最大人数と取り違えず、最後の点の流量を使う。
+- 同じ属性対 $$(A_j,B_j)$$ の人が複数いても平行辺のままでよい。圧縮するなら、両者を同時には選べず、強い方への置換で人数と制約を保てるため、最大の $$C_j$$ だけ残せる。
 
 ## 復習の核
 
-- 最高 power の 1 人を選ぶと最適な 2 人組を塞ぐ反例を作り、各 flow 量で残余辺を含む再最適化が必要な理由を確認する。
+- 人数ごとの最適なチームは、人数を増やすと既存の選択を取り消すことがある。残余逆辺による選び直しまで含めて最適化する。
+- 算法の「1 ずつ増やす」と API の「1 を指定して繰り返し呼ぶ」を区別する。ACL では一度の `slope` を使い、省略された人数の答えを補間する。
+- 属性の種類数は最大人数の上界であり、実際に選べる人数は接続関係で決まる。
 
 ## 計算量と制約
 
 ### 時間
 
-大学U、分野F、人N、最大matching数K。V=U+F+2,E=O(U+F+N)。potential付きsuccessive shortest pathなら O(K E log V)。
+大学 $$U$$ 種類、分野 $$F$$ 種類、人 $$N$$ 人とする。頂点数は $$V=U+F+2$$、追加する辺数は $$E=U+F+N$$ で、グラフ構築は $$O(V+E)$$。1 回の増加は流量 1 なので、最大人数 $$K$$ に対して増加は $$K$$ 回となる。ACL の `slope` の時間計算量は $$O(K(V+E)\log(V+E))$$、全人数の補間と出力は合計 $$O(K)$$ であり、構築を含む全体も $$O(K(V+E)\log(V+E))$$ となる。ここでは $$N\geq 1$$ より $$K\geq 1$$ を使った。
 
 ### 空間
 
-残余network O(E+V)、全K回答O(K)。
+残余グラフと最短路用の配列が $$O(V+E)$$、`slope` の端点列が $$O(K)$$ なので、全体で $$O(V+E+K)$$。復元した答えは人数順にそのまま出力できる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3\times 10^4; 1 \leq A_i,B_i \leq 150; 1 \leq C_i \leq 10^9; All values in input are integers.
+公式制約は $$1\leq N\leq 3\times 10^4$$、$$1\leq A_j,B_j\leq 150$$、$$1\leq C_j\leq 10^9$$ で、入力はすべて整数である。したがって $$U,F\leq 150$$、$$V\leq 302$$、$$E\leq 30300$$、$$K\leq 150$$ となり、増加回数を小さく抑えられる。$$K=\min(U,F)$$ とは限らないため、人数の出力範囲には実際の最大流量を使う。時間制限は 2 秒、メモリ制限は 1024 MiB。
 
 ## 出典
 
 - [個別公式解説（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc247/editorial/3729) — source-abc247-editorial-3729-d7de442ae3dd43ece4043120c05ae811a331d91ecdc233e51e30718c40e10dbd
 - [公式問題（2026-07-24T23:59:30+09:00確認）](https://atcoder.jp/contests/abc247/tasks/abc247_g) — source-abc247-g-problem-97ce63edb2c318a18b4ac80ee8763a28ae0868ff43b08fa9551a8ec5ec9ea7d3
+- [ACL MinCostFlow 公式仕様（2026-10-28確認）](https://atcoder.github.io/ac-library/production/document_ja/mincostflow.html) — 一回の呼出し、端点の省略、計算量の契約。
