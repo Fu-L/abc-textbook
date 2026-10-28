@@ -1,7 +1,7 @@
 ---
 title: "ABC445-G — Knight Placement"
 draft: true
-authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-bipartite-matching/outcome-solve-bipartite-matching-shard-001/abc445-g.md","learningOutcomeIds":["outcome-solve-bipartite-matching"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bipartite-structure","unit-gcd-structure"],"excludedTopics":["二部matching・Hall・Kőnigの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-bipartite-matching-hall","tag-bipartite-structure","tag-gcd-structure"],"sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各空きマスを頂点とし、攻撃し合う二マスを漏れなく辺で結ぶ。合法な配置では辺の両端を同時に選ばないため、選んだ頂点は独立集合である。逆に独立集合の各マスへ一つずつコマを置けば、壁や攻撃に関する制約をすべて満たす。従って配置の最大化と独立集合の最大化は同値である。\n\n任意の攻撃辺では、床関数で写した座標の差が $$(\\pm a,\\pm b)$$ または $$(\\pm b,\\pm a)$$ となる。$$\\gcd(a,b)=1$$ より両方が偶数となることはない。両奇なら行座標の差が奇数、一方だけ奇なら行列和の差が奇数なので、定義した色は必ず反転する。壁を除いてもこの性質は保たれ、競合グラフは二部グラフである。\n\n最大matching後の交互路探索について、[主単元の被覆復元][matching-cover-proof]より、$$(L\\setminus Z_L)\\cup Z_R$$ は大きさ $$\\mu$$ の最小頂点被覆となる。被覆の補集合に辺の両端が残ることはなく、逆に独立集合の補集合は被覆である。よってその補集合 $$Z_L\\cup(R\\setminus Z_R)$$ は大きさ $$V-\\mu$$ の最大独立集合である。この集合だけを元の盤面上で `o` に変える手順は、最大個数に達する合法な配置を出力する。\n\n[matching-cover-proof]: ../../learn/graph/bipartite-matching/#kőnigの定理と最小頂点被覆の復元","sourceRevisionIds":["source-abc445-editorial-15902-8856e84e6a547dd61f4e0a419708c4280d1730b3a37b6e43542e2f2eb7223394","source-abc445-g-problem-2d7ebb0233bada43b7bf2f02427ca84c69b3f52392ce63ba9c82c383b8de1d5a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,63 +17,110 @@ authoringUnit: {"problemId":"abc445-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-同時配置できない二マスを辺で結ぶと、求める配置は障害物を除いたマス graph の最大独立集合である。移動量 (±A,±B),(±B,±A) に応じた特別な二色塗りで graph は二部になる。gcd block へ縮約した後、A/g,B/g が両方奇数なら行 block parity、一方だけ奇数なら行列 block 和 parity で攻撃辺の色が反転する。最大 matching は最小頂点被覆と同サイズなので、その補集合が最大独立集合を与える。
+同時に置けない二マスの関係をグラフの辺で表すと、置けるコマの最大化は「辺の両端を同時に選ばない頂点集合」の最大化になる。鍵は、この競合グラフを常に二色で塗り分けられることである。二部グラフなら、最大matchingから最小頂点被覆を復元し、その補集合として最大配置を取り出せる。
 
-採用する候補: g=gcd(A,B) の block と A/g,B/g の parity から各空きマスを二色化し、攻撃辺を張って最大 matching を flow で求め、空きマス数から引く。
+空きマス数を $$V$$ とする。各マスに置く・置かないを全探索すると $$2^V$$ 通りあり、最大 $$300\times300$$ の盤面には使えない。そこで、空きマスを一つずつ頂点にし、変位 $$(\pm A,\pm B)$$ または $$(\pm B,\pm A)$$ で結ばれる二つの空きマスの間に無向辺を置く。求めるのは、このグラフの最大独立集合である。独立集合とは、内部に辺を持たない頂点集合をいう。
 
-示した色分けでは全攻撃辺が異色間だけに存在し、二部 graph の最大独立集合サイズは König の定理により |V|-最大 matching となる。
+一般のグラフで最大独立集合を求めるのは難しいが、今回は辺が一定の座標変位に限られる。まず、移動するたびに色が反転する塗り方を探そう。
 
-棄却する候補: 空きマスごとに置く・置かないを全探索し、攻撃し合わない最大集合を探す。
+### gcdで移動量の共通因子を取り除く
 
-一般の独立集合列挙は頂点数に対して指数時間で、盤面サイズの制約に対応できない。
+以後、行・列の座標 $$(i,j)$$ はともに0始まりとし、$$0\leq i,j<N$$ とする。通常の市松模様、すなわち $$(i+j)\bmod2$$ では、$$A+B$$ が偶数のときに色が変わらない。例えば $$A=B=2$$ では、$$(0,0)$$ と $$(2,2)$$ は攻撃し合うのに同色になる。
 
-障害物でないマスを頂点化し、公式の parity 規則で左右部へ分ける。左部から有効な knight 移動先へ容量1辺を張り、source/left と right/sink も容量1で Dinic 等を実行し、空き数-flow を答える。
+移動量に共通の因子があるなら、それを取り除いた尺度で偶奇を調べたい。そこで
+
+$$
+g=\gcd(A,B),\qquad a=A/g,\qquad b=B/g
+$$
+
+と置く。$$B\geq1$$ より $$g>0$$ なので、$$A=0$$ でも割れる。色を決めるための座標を
+
+$$
+x=\lfloor i/g\rfloor,\qquad y=\lfloor j/g\rfloor
+$$
+
+とする。整数 $$k$$ に対して
+
+$$
+\left\lfloor\frac{i+kg}{g}\right\rfloor
+=\left\lfloor\frac{i}{g}\right\rfloor+k
+$$
+
+だから、攻撃による $$(x,y)$$ の差は正負も含めて $$(\pm a,\pm b)$$ または $$(\pm b,\pm a)$$ になる。端数の位置に依存せず、割った移動量そのものが座標の差になる点が重要である。
+
+$$\gcd(a,b)=1$$ なので、偶奇は次の二場合だけである。
+
+- **両方が奇数**なら、色を $$c(i,j)=x\bmod2$$ とする。行方向の差は $$\pm a$$ または $$\pm b$$ で必ず奇数なので、色が反転する。
+- **一方だけが奇数**なら、色を $$c(i,j)=(x+y)\bmod2$$ とする。行列和の差は $$\pm a\pm b$$ で必ず奇数なので、色が反転する。
+
+$$A=B=2$$ なら $$g=2,a=b=1$$ なので、行を2行ずつ区切って色を交互にすればよい。先ほどの $$(0,0)$$ と $$(2,2)$$ は、それぞれ色0と色1になる。$$A=0,B=2$$ なら $$g=2,a=0,b=1$$ で後者を使う。$$(0,0)$$ から攻撃できる $$(0,2)$$ と $$(2,0)$$ はともに色1となり、行方向の変位が0でも問題ない。
+
+この座標の写し方は**彩色のためだけ**に使う。同じ $$(x,y)$$ や同じ色になったマスも、一つの頂点へ併合しない。例えば $$(0,0)$$ と $$(0,1)$$ が同じ色でも、置く・置かないは別々に選べる。盤内の空きマスはすべて元の頂点として残し、壁と盤外の移動先だけを除く。全盤面で攻撃辺の異色性を示したので、壁の位置によらず二部グラフになる。
+
+### 最大個数から配置の復元へ
+
+色0の空きマス集合を $$L$$、色1を $$R$$ とする。端点を共有しない辺の集合であるmatchingを最大化し、その辺数を $$\mu$$ とする。Kőnigの定理より、すべての辺の少なくとも一端を含む最小頂点被覆の大きさも $$\mu$$ である。被覆の補集合を選べば攻撃辺の両端を同時に選ばず、最大個数 $$V-\mu$$ の配置になる。
+
+ただし、この問題では個数だけでなく配置そのものを出力する。matchingの各辺から片方の端点を任意に除くだけでは、matchingに入らなかった攻撃辺が残り得る。最小頂点被覆を、次の交互路探索で具体的に取り出す。
+
+1. 各空きマスに頂点IDと元の座標を対応させ、上の式で色を決める。各 $$L$$ 頂点から八方向の移動先を調べ、盤内かつ空きマスの場合だけ $$R$$ への辺を加える。
+2. 最大matchingを求め、各頂点の相手を `mate` に保存する。相手がいない頂点は未使用とする。Hopcroft–Karp法を使うか、始点 $$s$$ から $$L$$、攻撃辺を $$L\to R$$、$$R$$ から終点 $$t$$ へすべて容量1の辺を置き、Dinic法で最大流を求める。後者では流量1の攻撃辺がmatchingとなる。
+3. matchingで未使用の $$L$$ の**全頂点**をキューへ入れ、到達済みにする。$$L$$ からはmatchingに含まれない辺を $$R$$ へ進み、$$R$$ からはmatchingに含まれる辺を相手の $$L$$ へ進む。未訪問の頂点だけを追加し、キューが空になるまで探索する。
+4. 到達した左・右の集合をそれぞれ $$Z_L,Z_R$$ とする。最小頂点被覆は $$(L\setminus Z_L)\cup Z_R$$ なので、コマを置く集合としてその補集合 $$Z_L\cup(R\setminus Z_R)$$ を選ぶ。
+5. 入力の盤面をコピーし、選んだ頂点の元のマスだけを `o` に変えて $$N$$ 行を出力する。選ばなかった空きマスは `.`、壁は `#` のままにする。$$V-\mu$$ は選んだ個数の確認に使い、個数自体を別に出力する必要はない。
+
+交互路から最小頂点被覆が得られる理由は[主単元のKőnigの定理と被覆復元][matching-cover-proof]を参照する。本問では、そこで選ぶ頂点を元のマスへ戻すところまでが必要である。
 
 ## 典型の発動条件
 
 ### 二部 graph の最大独立集合
 
-発動条件: 競合関係 graph を二色化でき、同時選択数を最大化したいとき。
-
-最大 matching を flow で求めて頂点数から引く。
+同時に選べない二要素の関係を辺にでき、競合グラフの二部性を証明できるときに使う。配置と独立集合の対応を両方向に確認し、最大matchingから最小頂点被覆、その補集合へ進む。実際の選択集合が必要なら、最大個数の式だけで終えず、交互路から被覆も復元する。
 
 ### gcd・parity による特殊彩色
 
-発動条件: 格子上の一定変位辺を二部化したいとき。
-
-共通尺度で block 化し、縮約変位の parity から色を定める。
+格子上の辺が固定の変位で結ばれるときは、変位の共通因子を取り除き、どの座標の偶奇が毎回反転するかを調べる。床関数で写した座標の差を式にしてから色を定める。色が同じことは頂点を同一視してよい理由にはならず、元の選択肢は保つ。
 
 ## 問題固有の要素
 
-通常の市松模様で二部にならない移動でも、gcd block と変位 parity を見直すと適切な二色塗りが得られる。
-
-別の問題へ持ち帰る視点: 配置最大化は競合 graph の独立集合へ翻訳し、二部性が証明できれば matching へ落とす。
+縦横を交換した二種類の移動があるため、行の偶奇だけで足りるのは割った移動量が両方奇数の場合である。一方だけ奇数なら、行列和の偶奇を使うことで交換後の移動も同時に扱える。「通常の市松模様が失敗した」段階で二部性を諦めず、共通因子を除いた変位で色の反転を調べ直すのが本問の着眼点となる。
 
 ## 正当性
 
-gcd blockの移動量を互いに素へ割る。両奇なら行block parity、一方奇なら行列和parityが全attack edgeで反転し二部性を示す。非攻撃配置は独立集合で、二部graphの最小cover=最大matchingだから最大独立数V−μ。
+各空きマスを頂点とし、攻撃し合う二マスを漏れなく辺で結ぶ。合法な配置では辺の両端を同時に選ばないため、選んだ頂点は独立集合である。逆に独立集合の各マスへ一つずつコマを置けば、壁や攻撃に関する制約をすべて満たす。従って配置の最大化と独立集合の最大化は同値である。
+
+任意の攻撃辺では、床関数で写した座標の差が $$(\pm a,\pm b)$$ または $$(\pm b,\pm a)$$ となる。$$\gcd(a,b)=1$$ より両方が偶数となることはない。両奇なら行座標の差が奇数、一方だけ奇なら行列和の差が奇数なので、定義した色は必ず反転する。壁を除いてもこの性質は保たれ、競合グラフは二部グラフである。
+
+最大matching後の交互路探索について、[主単元の被覆復元][matching-cover-proof]より、$$(L\setminus Z_L)\cup Z_R$$ は大きさ $$\mu$$ の最小頂点被覆となる。被覆の補集合に辺の両端が残ることはなく、逆に独立集合の補集合は被覆である。よってその補集合 $$Z_L\cup(R\setminus Z_R)$$ は大きさ $$V-\mu$$ の最大独立集合である。この集合だけを元の盤面上で `o` に変える手順は、最大個数に達する合法な配置を出力する。
+
+[matching-cover-proof]: ../../learn/graph/bipartite-matching/#kőnigの定理と最小頂点被覆の復元
 
 ## 実装上の注意
 
-- A=B や0を含む移動で同じ辺を重複生成しても正しさを崩さないよう整理し、障害マスと盤外を除く。
+- $$A=0$$ でも $$g=\gcd(0,B)=B>0$$、$$a=0,b=1$$ となり、行列和の色をそのまま使える。$$A=B$$ の場合も含め、八方向の変位に重複が生じるため、変位を先に重複除去すると同じ攻撃辺を二重に保存せずに済む。
+- 負方向もあるので、移動先の座標は符号付き整数で計算し、盤内か確認してから盤面を参照する。$$B=N$$ など、移動先がすべて盤外となる場合も辺を張らない。途中のマスが壁かどうかは調べず、両端の空きマスだけを確認する。
+- 交互路探索は最大matchingを確定した後、訪問状態を初期化して行う。最大化の途中の訪問印を流用せず、未使用の左頂点をすべて始点にする。matching辺かどうかは `mate` で判定する。
+- 全壁なら $$V=0$$ で、盤面をそのまま出す。孤立点は左なら探索の始点、右なら未到達なので、どちらも選ばれる。辺が一本もなければ全空きマスを `o` にする。
 
 ## 復習の核
 
-- A/g,B/g の parity 二ケースで全許容変位が色を反転することを式で示してから、König の定理へ接続する。
+- 配置の最大化では、同時に選べない二要素を辺へ翻訳し、二部性を証明できるか調べる。
+- 変位に共通因子があるときは、尺度を変えた座標の差を先に計算する。「同じ色」と「同じ頂点」を混同しない。
+- 最大matchingの個数から最大独立集合の個数が分かっても、配置出力には被覆の復元が要る。未使用の左頂点からの交互路と、左は到達・右は未到達を選ぶ規則を対応させる。
 
 ## 計算量と制約
 
 ### 時間
 
-空cell数V、許容攻撃辺E≤8V。特殊parity二色化O(V)、Hopcroft–Karp O(E√V)=O(V√V)。
+$$E$$ を重複を除いた無向攻撃辺の数とする。盤面走査に $$O(N^2)$$、彩色と各空きマスの高々八方向の辺生成に $$O(V)$$ かかり、各頂点の次数は高々8なので $$E\leq4V$$ である。Hopcroft–Karp法、またはこの二部matching用の単位容量ネットワークでのDinic法に $$O((V+E)\sqrt{V+1})$$、交互路からの復元に $$O(V+E)$$、盤面出力に $$O(N^2)$$。全体で $$O(N^2+(V+E)\sqrt{V+1})$$ 時間、$$V\leq N^2$$ より $$O(N^3)$$ となる。この評価は $$V=0$$ や $$E=0$$ でも盤面走査・出力の時間を含む。
 
 ### 空間
 
-盤面、攻撃graph O(HW)。
+入力・出力の盤面と座標から頂点IDへの対応が $$O(N^2)$$、隣接リストが $$O(V+E)$$、matchingの相手・到達状態・キューが $$O(V)$$。全体で $$O(N^2+V+E)=O(N^2)$$ 空間となる。最大流を使う場合の逆辺と始点・終点もこの範囲に収まる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 300; 0 \le A \le B \le N; 1 \le B; N,A,B are integers.; S_i is a string of length N consisting of . and # (1 \le i \le N).
+$$1\leq N\leq300$$、$$0\leq A\leq B\leq N$$、$$B\geq1$$。空きマスは最大 $$90{,}000$$ 個、攻撃辺は最大 $$4V$$ 本なので、疎な二部グラフとして扱う。$$B\geq1$$ は $$g>0$$ と、自己ループが生じないことを保証する。盤面は `.` と `#` からなり、出力は選んだ空きマスだけを `o` にした長さ $$N$$ の文字列を $$N$$ 行とする。時間制限は3秒、メモリ制限は1024 MiBであり、単純な一頂点ずつのDFS増加法の $$O(VE)$$ ではなく、上の評価を持つ最大matchingアルゴリズムを用いる。
 
 ## 出典
 
