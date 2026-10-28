@@ -1,7 +1,7 @@
 ---
 title: "ABC404-G — Specified Range Sums"
 draft: true
-authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/graph-search/outcome-solve-difference-constraints/outcome-solve-difference-constraints-shard-001/abc404-g.md","learningOutcomeIds":["outcome-solve-difference-constraints"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-prefix-aggregate","unit-weighted-shortest-path"],"excludedTopics":["difference constraints・不等式系の最短路化の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-difference-constraints","tag-prefix-difference"],"sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各区間等式は逆符号の二辺、正値条件は重み $$-1$$ の辺 $$j\\to j-1$$ に一致する。負閉路上の不等式を足すと、$$0$$ が負数以下という矛盾を得るので、負閉路があれば条件を満たす列は存在しない。\n\n同期緩和では、前段の歩道をそのまま使う場合と、最後の一辺を足す場合を合わせるため、$$d_k[v]$$ は高々 $$k$$ 辺の歩道の最小重みになる。負閉路がなければ、歩道中の閉じた部分は重みが非負なので取り除ける。従って最短距離は高々 $$N$$ 辺で達成でき、$$d_N$$ で確定して第 $$N+1$$ 段では改善しない。\n\n逆に、第 $$N+1$$ 段で改善しなければ、全辺について $$d_N[v]\\leq d_N[u]+c$$ が成り立つ。全頂点へ到達できるため、これらはすべて有限値の不等式であり、負閉路があるという仮定とは矛盾する。よって追加の一段で改善することと、負閉路が存在することは同値である。\n\n負閉路がなければ $$d_N[N]=0$$ であり、$$B_v=d_N[v]$$ は全差分制約を満たす。辺重みが整数なので $$A_j=B_j-B_{j-1}$$ も整数で、正値条件と区間和の条件を満たす。一方、$$B_N=0$$ を満たす任意の実行可能解は、経路上の不等式の和より $$B_0\\leq d_N[0]$$ である。従って距離の割り当ては最大の $$B_0$$ を達成し、その負値 $$-d_N[0]$$ が最小総和となる。","sourceRevisionIds":["source-abc404-editorial-12867-07ec4e656a2816bf6bedd96c93c8e48bddf8381e4b5afe650723b7a41d0c3552","source-abc404-g-problem-92bb4dcb3f7cfb6cf7e8a701d6403e72b19590e52bb6098a6300d10b981420ee"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -17,19 +17,40 @@ authoringUnit: {"problemId":"abc404-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-正整数列 A の区間和制約は、B_k=Σ_{j=1}^k A_j と置けば B_R-B_{L-1}=S という二点間の差へ変わる。等式を二本の不等式へ分け、正値条件を B_j-B_{j-1}≥1 と書くと、すべて X_v-X_u≤c 型の差分制約になる。B_R-B_{L-1}=S は (L-1)→R の重み S と R→(L-1) の重み -S、B_j-B_{j-1}≥1 は j→j-1 の重み -1 に対応する。全 B を定数だけずらしても差は変わらない。B_N=0 とすると元の総和 B_N-B_0 は -B_0 であり、N からの最短距離が制約下での最大 B_0 を与える。
+区間和を累積和の差で表すと、各条件を二つの変数の関係へ変換できる。正整数列 $$A$$ に対して $$B_0=0$$、$$B_k=\sum_{j=1}^k A_j$$ と置く。区間和の条件は $$B_{R_i}-B_{L_i-1}=S_i$$、正値条件は $$B_j-B_{j-1}\geq 1$$ となる。
 
-採用する候補: B_N=0 へ平行移動し、差分制約グラフの最短路で最大可能な B_0 を求めて答え -B_0 を得る
+等式を二本の不等式へ分ければ、すべて $$B_v-B_u\leq c$$ 型の差分制約になる。この制約を、頂点 $$u$$ から $$v$$ へ向かう重み $$c$$ の辺で表す。
 
-各制約を有向辺にし Bellman-Ford 法を使えば、負閉路による実行不能判定と目的値の最適化を N,M≤4000 で同時に扱える。
+- 各区間和には、$$L_i-1\to R_i$$ の重み $$S_i$$ と、$$R_i\to L_i-1$$ の重み $$-S_i$$ の二辺を張る。
+- 各 $$1\leq j\leq N$$ には、$$j\to j-1$$ の重み $$-1$$ の辺を張る。
+
+全 $$B$$ を定数だけずらしても差は変わらない。そこで、ここからは $$B_N=0$$ となるよう平行移動した変数を同じ $$B$$ と書く。元の総和は $$B_N-B_0=-B_0$$ なので、総和の最小化は $$B_0$$ の最大化に変わる。$$N$$ から $$0$$ への経路に沿って不等式を足すと、$$B_0$$ はその経路の重みの総和以下になる。最も厳しい上界が最短距離であり、負閉路がなければ、その距離を各変数に割り当てて上界を達成できる。
+
+採用する候補: $$B_N=0$$ へ平行移動し、差分制約グラフの最短路で最大可能な $$B_0$$ を求めて答え $$-B_0$$ を得る
+
+各制約を有向辺にし Bellman–Ford 法を使えば、負閉路による実行不能判定と目的値の最適化を $$N,M\leq 4000$$ で同時に扱える。
 
 棄却する候補: 区間和の等式だけを連立方程式として解き、未決定変数を任意に埋める
 
-A_j≥1 の不等式と総和の最小化を反映できず、整合する等式系でも正整数解が存在しない場合を判定できない。
+$$A_j\geq 1$$ の不等式と総和の最小化を反映できず、整合する等式系でも正整数解が存在しない場合を判定できない。
 
-全 B を定数だけずらしても差は変わらない。
+頂点は $$0,\ldots,N$$ の $$V=N+1$$ 個である。負閉路がなければ、最短路は頂点を重複しない経路として選べるので、使う辺は高々 $$V-1=N$$ 本になる。この **距離を求める $$N$$ 段** と、**負閉路を調べる追加の一段** を区別する。
 
-頂点 0..N のグラフを作り、X_v≤X_u+c を辺 u→v, 重み c に変換する。B_N=0 を始点として Bellman-Ford で距離を緩和し、N 回後にも更新があれば -1、なければ -dist[0] を出力する。
+ここでは、一段前の配列だけを参照する同期緩和で説明する。$$d_k[v]$$ を「始点 $$N$$ から頂点 $$v$$ へ、高々 $$k$$ 本の辺を使う歩道の重みの最小値」とする。歩道とは頂点や辺の重複を許す経路のことで、該当する歩道がなければ値は $$+\infty$$ とする。
+
+1. $$d_0[N]=0$$、それ以外を $$+\infty$$ にする。
+2. $$k=1,\ldots,N$$ の順に、次の式で全頂点の値を求める。まず次の配列へ前段の値をコピーし、すべての辺について**前段の配列から**候補を計算する。
+
+   $$
+   d_k[v]=\min\left(d_{k-1}[v],\min_{(u\to v,c)}\bigl(d_{k-1}[u]+c\bigr)\right)
+   $$
+
+   内側の最小値は、$$v$$ へ入る重み $$c$$ の辺すべてについて取る。到達していない $$u$$ からの候補は使わない。
+3. 同じ方法でもう一段だけ進め、$$d_{N+1}[v]<d_N[v]$$ となる頂点が一つでもあるか調べる。あれば負閉路があるので `-1`、なければ $$-d_N[0]$$ を出力する。
+
+例えば $$N=1,M=1,(L_1,R_1,S_1)=(1,1,1)$$ では、初期状態は $$d_0[1]=0,d_0[0]=+\infty$$ である。重み $$-1$$ の辺 $$1\to 0$$ により、第 $$N=1$$ 段で $$d_1[0]=-1$$ に改善する。しかし第2段では改善せず、答えは $$1$$ である。実際に $$A=(1)$$ が条件を満たす。第 $$N$$ 段での更新だけを見て不可能と判定してはいけない。
+
+また、辺 $$N\to N-1\to\cdots\to 0$$ があるため、始点 $$N$$ から全頂点へ到達できる。従って、始点から到達可能な負閉路を検出すれば、グラフ全体の負閉路、つまり全制約の矛盾を調べられる。
 
 ## 典型の発動条件
 
@@ -41,9 +62,9 @@ A_j≥1 の不等式と総和の最小化を反映できず、整合する等式
 
 ### 差分制約と Bellman-Ford
 
-発動条件: 制約が X_v-X_u≤c に統一でき、実行可能性と一変数の極値が必要なとき。
+発動条件: 制約が $$X_v-X_u\leq c$$ に統一でき、実行可能性と一変数の極値が必要なとき。
 
-制約を有向辺へ写し、最短距離と負閉路検出で最大 B_0 を求める。
+制約を有向辺へ写し、最短距離と負閉路検出で最大 $$B_0$$ を求める。
 
 ## 問題固有の要素
 
@@ -53,29 +74,38 @@ A_j≥1 の不等式と総和の最小化を反映できず、整合する等式
 
 ## 正当性
 
-各区間等式は逆符号二辺、A_i≥1はi→i−1重み−1に一致する。全差分制約がfeasible iff負cycleなし。B_N=0の固定により総和は−B0、Nからの最短距離は最大可能B0で自身がfeasibleなのでその負値が最小総和。
+各区間等式は逆符号の二辺、正値条件は重み $$-1$$ の辺 $$j\to j-1$$ に一致する。負閉路上の不等式を足すと、$$0$$ が負数以下という矛盾を得るので、負閉路があれば条件を満たす列は存在しない。
+
+同期緩和では、前段の歩道をそのまま使う場合と、最後の一辺を足す場合を合わせるため、$$d_k[v]$$ は高々 $$k$$ 辺の歩道の最小重みになる。負閉路がなければ、歩道中の閉じた部分は重みが非負なので取り除ける。従って最短距離は高々 $$N$$ 辺で達成でき、$$d_N$$ で確定して第 $$N+1$$ 段では改善しない。
+
+逆に、第 $$N+1$$ 段で改善しなければ、全辺について $$d_N[v]\leq d_N[u]+c$$ が成り立つ。全頂点へ到達できるため、これらはすべて有限値の不等式であり、負閉路があるという仮定とは矛盾する。よって追加の一段で改善することと、負閉路が存在することは同値である。
+
+負閉路がなければ $$d_N[N]=0$$ であり、$$B_v=d_N[v]$$ は全差分制約を満たす。辺重みが整数なので $$A_j=B_j-B_{j-1}$$ も整数で、正値条件と区間和の条件を満たす。一方、$$B_N=0$$ を満たす任意の実行可能解は、経路上の不等式の和より $$B_0\leq d_N[0]$$ である。従って距離の割り当ては最大の $$B_0$$ を達成し、その負値 $$-d_N[0]$$ が最小総和となる。
 
 ## 実装上の注意
 
-- S_i と距離は 32 bit を超えうるので 64 bit を使う。等式の両向き辺と正値条件の向きを取り違えず、到達可能な負閉路の更新を判定する。
+- 距離と加算には64 bit整数を使う。到達不能を表す値には辺重みを加えない。等式の両向き辺と正値条件の向きを取り違えない。
+- 同期版は前段と次段の二配列を使う。途中で書き換えた次段の値を参照すると、「高々 $$k$$ 辺」という段の意味が変わる。
+- 一配列をその場で更新する実装では、全辺を一通り調べる操作を1回の走査とし、$$N$$ 回走査した後、追加の第 $$N+1$$ 回で改善があるか調べる。この実装も負閉路がなければ $$N$$ 回までに最短距離が確定するが、同じ走査中に複数の辺を伝わるので、1回の走査を厳密に1辺分の進行とは解釈しない。更新がない走査では以後も変わらないため、途中で打ち切ってよい。
 
 ## 復習の核
 
-- 同一区間に異なる S がある矛盾、S が区間長未満、制約のない位置を含む例、N=1 を小さい A の全探索と照合する。
+- 同一区間に異なる $$S$$ がある矛盾、$$S$$ が区間長未満、制約のない位置を含む例、$$N=1$$ を小さい $$A$$ の全探索と照合する。
+- 負閉路判定では頂点数を数える。$$V$$ 頂点なら有限最短距離を求めるのは $$V-1$$ 段、矛盾を検出するのは追加の第 $$V$$ 段である。
 
 ## 計算量と制約
 
 ### 時間
 
-N要素M和制約、V=N+1,E=N+2M。Bellman–Ford O(NE)=O(N(N+M))。
+頂点数は $$V=N+1$$、辺数は $$E=N+2M$$。グラフ構築に $$O(N+M)$$、同期緩和は追加判定を含む $$N+1$$ 段で、各段に配列のコピーと全辺の走査で $$O(V+E)$$ かかる。全体は $$O(N(N+M))$$ 時間となる。
 
 ### 空間
 
-constraint edgeとdist O(N+M)。
+辺リストに $$O(N+M)$$、前段と次段の二配列に $$O(N)$$ を使い、全体で $$O(N+M)$$ 空間となる。全段の配列を保存する必要はない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 1 \le N,M \le 4000; 1 \le L_i \le R_i \le N; 1 \le S_i \le 10^9
+公式制約は $$1\leq N,M\leq 4000$$、$$1\leq L_i\leq R_i\leq N$$、$$1\leq S_i\leq 10^9$$。辺数は最大12,000本、追加判定を含めても全辺の走査は約4,800万回である。制限時間は2秒、メモリ制限は1024 MiB。
 
 ## 出典
 
