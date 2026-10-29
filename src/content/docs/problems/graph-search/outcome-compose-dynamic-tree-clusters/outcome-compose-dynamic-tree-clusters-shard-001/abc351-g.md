@@ -1,7 +1,7 @@
 ---
 title: "ABC351-G — Hash on Tree"
 draft: true
-authoringUnit: {"problemId":"abc351-g","docPath":"src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.md","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-heavy-light-decomposition","unit-rooted-tree-aggregation"],"excludedTopics":["更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"],"tagIds":["tag-static-top-tree","tag-heavy-light-decomposition"],"sourceRevisionIds":["source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e","source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"heavyな子だけを変数に残した木DPはアフィン変換になり、compressの式はF_p(F_c(x))を展開したもの。lightな子の独立な寄与は積なのでrakeで結合できる。各頂点を一度含むcluster分解を帰納的に合成すれば元の木DPと同じ値になる。合成の括弧付けを変更しても、アフィン合成と積の結合則により結果は保存される。重みで釣り合わせた合成木の高さがO(log N)なので、一点変更の影響を受ける合成ノードもO(log N)個である。","sourceRevisionIds":["source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e","source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc351-g","docPath":"src/content/docs/problems/graph-search/outcome-compose-dynamic-tree-clusters/outcome-compose-dynamic-tree-clusters-shard-001/abc351-g.md","learningOutcomeIds":["outcome-compose-dynamic-tree-clusters"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-heavy-light-decomposition","unit-rooted-tree-aggregation"],"excludedTopics":["更新を伴わない一回の木DP、および木上pathだけを列へ分けるHeavy-Light Decomposition。"],"tagIds":["tag-static-top-tree","tag-heavy-light-decomposition"],"sourceRevisionIds":["source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e","source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"葉の写像 $$(0,A_v)$$ は問題の葉の値を返す。非葉では light 側の積を係数にした写像へ heavy な子の値を代入すると、元の木DPの式になる。rake は互いに重ならない light 部分木の積を、compress は上下順を保った関数合成を計算するので、子の cluster が正しい要約なら親も正しい。各頂点値を一度だけ使って全体を構築するため、合成木の根は $$f_1$$ を返す。括弧付けを変えても、積と関数合成の結合則によりこの値は保存される。\n\n重み付き構築の高さも確認する。総重み $$W$$ の列中の重み $$w$$ の部品を追うと、その部品が pivot になるまで、含まれる再帰区間の重みは毎回半分以下になる。各分割が加える合成は高々二段なので、その部品から列全体までの深さは $$O(1+\\log(W/w))$$ である。重い pivot 自身を分離するため、一つの部品が重みの半分を超えていてもこの評価は崩れない。\n\n元の一頂点から根まで追うと、path 内の合成では頂点部品の重みから path 全体の重みへ、rake では light 部分木の重みからその束全体の重みへ増える。これらは入れ子の頂点集合なので、$$\\log(W/w)$$ の和は中間の重みの比が相殺し、全体で $$O(\\log N)$$ となる。束に親頂点を加える段階も一段である。各段の定数項は path をまたぐ回数に比例するが、light な子 $$u$$ の親を $$v$$ とすると $$s_v\\geq 1+2s_u$$ なので、その回数も $$O(\\log N)$$。従って合成木の高さは $$O(\\log N)$$ である。\n\n一つの $$A_v$$ に直接依存するのは対応する頂点追加ノードだけであり、他に影響し得るノードはその祖先だけである。子の再計算を済ませてから親を更新すれば、各要約の正しさが復元される。よって更新後も根から正しい答えを得られ、再計算するノード数は $$O(\\log N)$$ である。","sourceRevisionIds":["source-abc351-editorial-9868-860696c2a3056d2d8d8b9c37b1d6efe15564a3b3db133c5619ab4686c81b1c2e","source-abc351-g-problem-db5ec50bcd9264b8596fd6a75bb905bf447b1f1de9e684cb4f1d3be444486fa9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,15 +21,42 @@ authoringUnit: {"problemId":"abc351-g","docPath":"src/content/docs/problems/grap
 
 ## 考察
 
-葉ではf_v=A_v、非葉ではf_v=A_v+Π_{子w}f_wという木DPである。一点更新は祖先全体へ波及する。深さNの鎖と次数Nの星の両方を速く処理するには、計算の依存関係そのものを浅い二分木へ組み直す必要がある。
+必要なのは、値を変更してから根の答えに届くまでの依存関係を浅くすることである。木の形は固定なので、木DPを計算する順序を一度組み直し、その後は変更箇所から必要な部分だけを再計算したい。
 
-重軽分解し、各頂点のlightな子の値の積をm_vとする。heavyな子の値xを未確定のまま残すと、頂点の変換はF_v(x)=m_v x+A_vになる。heavy pathの最下端の葉だけはF_v(x)=A_vとする。lightな子がない積は1、ただし葉のDPに空積1を足してはならない。
+頂点 $$v$$ の部分木の値を $$f_v$$、子の集合を $$C(v)$$ とすると、問題の定義は次のとおりである。以降の値と係数の演算はすべて法 $$998244353$$ で行う。
 
-path clusterは未接続の下端の値xから上端へのアフィン変換(a,b)、point clusterはlight部分木の値の積mを持つ。根側pと子側cのcompressは(a_p a_c,a_p b_c+b_p)、rakeはm_1m_2、lightな子の完成pathをpointへ変えるときはその値bを渡す。頂点を追加すれば(m,A_v)、葉なら(0,A_v)になる。積を保持するので、値0の子があっても除算は不要である。
+$$
+f_v=\begin{cases}
+A_v & (v\text{ が葉})\\
+A_v+\displaystyle\prod_{u\in C(v)}f_u & (v\text{ が非葉})
+\end{cases}
+$$
 
-compressはheavy path順を保ち、rakeはlight部分木をまとめる。この二種の合成を、要素数ではなく各clusterが含む元の頂点数を重みにして二分する。例えばpathの重み付き中央の頂点を分離し、左右を再帰的に合成する。rakeも子の部分木サイズを使って重みを釣り合わせる。重みwの部品が全体Wへ合流する深さはO(1+log(W/w))となる。heavy pathをまたぐ各段の比は望遠鏡的に相殺し、light辺の段数もO(log N)なので、一頂点から合成木の根までO(log N)である。
+頂点数を $$N$$、更新回数を $$Q$$ とすると、毎回このDPを計算する方法は $$O(NQ)$$ かかる。変更した頂点の祖先だけを計算し直しても、二つの難しさが残る。根から $$1\to2\to3\to4$$ と続く鎖なら、末端の更新が全頂点へ波及する。一方、根 $$1$$ に葉 $$2,3,4,5$$ が付く星では、葉の更新後に根の積を作り直すだけで子をすべて見る。鎖の「縦に長い依存」と星の「横に広い集約」の両方を、二分木で浅くまとめたい。
 
-初期化後はA_vを持つ葉の変換だけを更新し、合成木の親を辿って再計算する。根の定数成分がf_rootである。この構造がstatic top treeであり、木の辺追加・削除は必要ない。
+まず、鎖では子の値に定数を足す変換を合成すればよいことに注目する。一般の木でも、重軽分解で一本の経路を選び、脇の部分木を先に集約すれば同じ形にできる。頂点 $$v$$ を根とする部分木の頂点数を $$s_v$$ とし、子のうち $$s_u$$ が最大のものを heavy な子、それ以外を light な子とする。同率ならどれを選んでもよい。heavy 辺でつながる極大の経路を heavy path と呼ぶ。
+
+非葉 $$v$$ で light な子の値の積を $$m_v$$ とする。heavy な子の値だけを変数 $$x$$ として残すと、頂点の変換は $$F_v(x)=m_vx+A_v$$ となる。light な子がない場合は $$m_v=1$$。ただし葉では $$F_v(x)=A_v$$ とする。葉のDPに空積の1を足してはならない。
+
+heavy path の連続区間と、そこに付く light 部分木をまとめたものを path cluster と呼び、未接続の下端の値 $$x$$ を上端へ渡すアフィン変換 $$ax+b$$ の係数 $$(a,b)$$ を持たせる。同じ親へ付く light 部分木の束を point cluster と呼び、その値の積 $$m$$ を持たせる。結合は次のように定義できる。
+
+- **compress**: 根側の path cluster $$(a_p,b_p)$$ と子側の $$(a_c,b_c)$$ を結び、$$(a_pa_c,\ a_pb_c+b_p)$$ にする。これは根側の関数を外側に置いた $$F_p(F_c(x))$$ の係数である。
+- **rake**: 同じ親へ付く二つの point cluster を結び、積 $$m_1m_2$$ にする。
+- light な子を先頭とする heavy path が完成したら、定数成分 $$b$$ を point cluster の値として親へ渡す。その path は最下端の葉の定数写像を含むため、下端の変数に依存しない。
+- 頂点 $$v$$ を追加するときは、light 側の集約を使って $$(m_v,A_v)$$ を作る。葉なら $$(0,A_v)$$ とする。
+
+鎖の小例では $$F_1(x)=x+A_1$$、$$F_2(x)=x+A_2$$、$$F_3(x)=x+A_3$$、$$F_4(x)=A_4$$ となる。例えば上半分と下半分を先に compress してから結べば、末端の更新で通る合成の段数を減らせる。星の小例で葉2を heavy な子に選ぶと、light 側は $$m_1=(A_3A_4)A_5$$、根は $$F_1(x)=m_1x+A_1$$ である。light 側の積を rake 木で持てば、葉3の更新時もその祖先の積だけを作り直せる。値が0の子があっても、古い値で割る操作は必要ない。
+
+一般の木では、各 path や子の束を部品個数だけで均等分割すると、path をまたぐたびに深さが増えて全体で $$O(\log^2 N)$$ になり得る。そこで、参照 Unit と同じく**部品が含む元の頂点数**を重みにする。
+
+- rake でまとめる各 light 部分木の重みは、その部分木サイズ $$s_u$$。
+- compress でまとめる頂点部品の重みは $$w_v=1+\sum_{u:\,\text{light な子}}s_u$$。頂点自身と脇の部分木を数えるので、heavy path 全体の重みは先頭頂点の部分木サイズに等しい。
+
+各列の重みの累積和（prefix 重み）を一度作る。再帰で扱う区間の総重みを $$W$$ とし、累積重みが $$W/2$$ に初めて達する部品を二分探索して pivot とする。pivot 自身を分離し、左右の空でない区間を再帰的に構築した後、「左・pivot・右」の順に高々二回の二分合成でつなぐ。左右それぞれの重みは $$W/2$$ 以下になり、compress でも path の上下順を保てる。区間は添字で持ち、再帰のたびに列や累積和を作り直さない。
+
+構築は light 部分木から先に行い、その値を渡す point cluster、各頂点の rake 木、頂点追加ノード、heavy path の compress 木の順に作る。各ノードには操作の種類と子・親の参照を保存し、各 $$A_v$$ を使う頂点追加ノードも記録する。これは木DPの計算過程を表す static top tree であり、木の辺追加・削除は扱わない。重み付き構築の高さの証明は以下で補い、構築に要する時間は「計算量と制約」で別に評価する。
+
+初期値は合成木を子から親の順に計算する。クエリで $$A_v$$ が変わったら、対応する頂点追加ノードを現在の light 積と新しい $$A_v$$ から再計算する。その後、**元の木ではなく合成木の親**を一つずつたどり、保存した子の要約と操作から根まで再計算する。合成木の根は全体の完成 path なので、その定数成分 $$b$$ が答え $$f_1$$ になる。
 
 ## 典型の発動条件
 
@@ -37,47 +64,61 @@ compressはheavy path順を保ち、rakeはlight部分木をまとめる。こ�
 
 発動条件: 木構造は固定で頂点値だけ更新され、全体の木 DP 値を毎回求めるとき。
 
-木を深さ O(log N) の二分 cluster merge tree に変換し、DP 合成則を載せる。
+木を深さ $$O(\log N)$$ の合成木に変換し、DPの合成則を載せる。合成する要約が定数サイズで、その再計算が定数時間に収まることを確認する。
 
 ### path cluster の affine 作用
 
-発動条件: 一つの未確定 boundary 値を通じて cluster 外部と接続し、DP 式が一次式に閉じるとき。
+発動条件: 一つの未確定な境界値を通じて cluster 外部と接続し、DP式が一次式に閉じるとき。
 
-cluster を ax+b として表し、compress を関数合成にする。
+cluster を $$ax+b$$ として表し、compress を関数合成にする。上下順を保った括弧付けの変更なら、結合則によって同じ値を得られる。
 
 ## 問題固有の要素
 
-木 DP の式を速くするのでなく、「木を組み立てる計算グラフ」自体を平衡二分木へ変える発想が核心である。
+この問題では子の値の積と頂点値の加算から、heavy な子を変数に残した式がアフィン変換に閉じる。この性質によって、縦の依存と横の集約をそれぞれ compress と rake に載せられる。
 
-別の問題へ持ち帰る視点: 静的構造・動的ラベルの全体 DP では、再計算依存 DAG を balance できないか考える。
+別の問題へ持ち帰る視点: 構造が固定で値だけが変わる全体DPでは、境界へ渡す要約を決め、再計算の依存関係を平衡化できないか考える。
 
 ## 正当性
 
-heavyな子だけを変数に残した木DPはアフィン変換になり、compressの式はF_p(F_c(x))を展開したもの。lightな子の独立な寄与は積なのでrakeで結合できる。各頂点を一度含むcluster分解を帰納的に合成すれば元の木DPと同じ値になる。合成の括弧付けを変更しても、アフィン合成と積の結合則により結果は保存される。重みで釣り合わせた合成木の高さがO(log N)なので、一点変更の影響を受ける合成ノードもO(log N)個である。
+葉の写像 $$(0,A_v)$$ は問題の葉の値を返す。非葉では light 側の積を係数にした写像へ heavy な子の値を代入すると、元の木DPの式になる。rake は互いに重ならない light 部分木の積を、compress は上下順を保った関数合成を計算するので、子の cluster が正しい要約なら親も正しい。各頂点値を一度だけ使って全体を構築するため、合成木の根は $$f_1$$ を返す。括弧付けを変えても、積と関数合成の結合則によりこの値は保存される。
+
+重み付き構築の高さも確認する。総重み $$W$$ の列中の重み $$w$$ の部品を追うと、その部品が pivot になるまで、含まれる再帰区間の重みは毎回半分以下になる。各分割が加える合成は高々二段なので、その部品から列全体までの深さは $$O(1+\log(W/w))$$ である。重い pivot 自身を分離するため、一つの部品が重みの半分を超えていてもこの評価は崩れない。
+
+元の一頂点から根まで追うと、path 内の合成では頂点部品の重みから path 全体の重みへ、rake では light 部分木の重みからその束全体の重みへ増える。これらは入れ子の頂点集合なので、$$\log(W/w)$$ の和は中間の重みの比が相殺し、全体で $$O(\log N)$$ となる。束に親頂点を加える段階も一段である。各段の定数項は path をまたぐ回数に比例するが、light な子 $$u$$ の親を $$v$$ とすると $$s_v\geq 1+2s_u$$ なので、その回数も $$O(\log N)$$。従って合成木の高さは $$O(\log N)$$ である。
+
+一つの $$A_v$$ に直接依存するのは対応する頂点追加ノードだけであり、他に影響し得るノードはその祖先だけである。子の再計算を済ませてから親を更新すれば、各要約の正しさが復元される。よって更新後も根から正しい答えを得られ、再計算するノード数は $$O(\log N)$$ である。
 
 ## 実装上の注意
 
 - compressの順序は根側の関数が外側、子側が内側。一般には交換できない。
-- 葉はf=Aであり、非葉の式へ空積を入れたA+1ではない。
-- 各heavy pathを単純な要素数で二分すると全体の高さはO(log²N)になり得る。O(log N)更新を主張するならclusterの頂点数で釣り合わせる。
+- 葉は $$f_v=A_v$$ であり、非葉の式へ空積を入れた $$A_v+1$$ ではない。非葉で light な子がないときの係数は1だが、葉の係数は0にする。
+- 子の値が0でも積の木を再計算すればよい。以前の積を古い子の値で割って差し替える実装は使わない。
+- 各 heavy path を単純な要素数で二分すると全体の高さは $$O(\log^2 N)$$ になり得る。$$O(\log N)$$ 更新を主張するなら元の頂点数で重みを付ける。
+- 元の木は鎖なら深さ $$N-1$$ になる。部分木サイズの計算は反復走査などで行い、合成木が浅いことを元の木での再帰の安全性と混同しない。
 
 ## 復習の核
 
-木DPの未確定な境界値を変数として残し、有限個の係数で閉じた変換になるかを考える。static top treeはその変換の合成順を平衡化する道具である。
+- 木DPの更新が祖先全体へ広がるときは、未確定な境界値を変数として残し、少数の係数で閉じる変換を探す。
+- 鎖の縦方向は関数合成、星の横方向は子の集約として、計算の依存関係を浅くする。
+- 合成木の高さと構築時間は別に評価する。重み付き分割で高さを証明しても、pivot を探す作業が無料になるわけではない。
 
 ## 計算量と制約
 
 ### 時間
 
-N頂点Q更新。balanced Static Top Tree構築 O(N)、各leaf更新O(log N)、全体 O(N+Qlog N)。
+部分木サイズと重軽分解は $$O(N)$$。構築で使う列は、各頂点が一度入る compress 用の列と、各 light 部分木が一度入る rake 用の列なので、部品数の総和は $$O(N)$$。prefix 重みの作成も総計 $$O(N)$$ である。
+
+部品数 $$k$$ の列では、空でない再帰区間から pivot を一つずつ取り除くため、分割回数は $$k$$ 回以下。一回の pivot 探索は二分探索で $$O(\log(k+1))$$、ノードの追加と結合は $$O(1)$$ なので、全列の構築は $$O(N\log N)$$ で抑えられる。初期の要約の計算は、できた $$O(N)$$ 個のノードを一度ずつ処理して $$O(N)$$。
+
+各更新は高さ $$O(\log N)$$ の合成木の祖先だけを定数時間ずつ再計算し、答えの取得は $$O(1)$$。従って $$Q$$ 回の更新を含む全体は $$O(N\log N+Q\log N)$$ となる。これは[公式解説](https://atcoder.jp/contests/abc351/editorial/9868)の掲げる $$O((N+Q)\log N)$$ と一致する。ここでの前処理の上界は、本文と参照 Unit で説明した prefix 重み・pivot 分離の具体手順から評価したものである。
 
 ### 空間
 
-木とO(N)個定数情報clusterで O(N)。
+元の木、部分木サイズ、heavy な子、各頂点と更新ノードの対応に $$O(N)$$。各列の prefix 重みは部品数と同じだけ保持する。各 pivot が作る結合ノードは高々二つで、頂点追加・point への変換も元の頂点あたり定数個なので、合成木は $$O(N)$$ ノードである。各ノードの要約と参照は定数サイズ。区間を添字で保持すれば、作業領域を含めて全体で $$O(N)$$ となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq Q \leq 2 \times 10^5; 1 \leq p_i < i; 0 \leq A_i < 998244353; 1 \leq v \leq N; 0 \leq x < 998244353; All input values are integers.
+$$2\leq N\leq 2\times10^5$$、$$1\leq Q\leq 2\times10^5$$ なので、全体を毎回計算する $$O(NQ)$$ ではなく、上記の前処理と対数時間更新を用いる。$$1\leq p_i<i$$ で根は頂点1。頂点値と更新値は0以上 $$998244353$$ 未満であり、0を含んでも除算をしない合成則はそのまま使える。制限時間は4秒、メモリ制限は1024 MiB。公式問題文・個別公式解説を2026-10-29に再照合した。過去の Source Revision と確認日時は出典欄のまま保持している。
 
 ## 出典
 
