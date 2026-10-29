@@ -76,14 +76,31 @@ describe('independent initial-release audit', () => {
     });
   });
 
-  it('refuses to certify an added runnable fence without actual execution evidence', () => {
-    const document = projection.problemDocuments.values().next().value;
-    if (!document) throw new Error('Missing fixture.');
-    const changed = { ...projection, problemDocuments: new Map(projection.problemDocuments) };
-    changed.problemDocuments.set(document.unit.problemId, {
-      ...document,
-      text: `${document.text}\n\n\`\`\`python\nprint(42)\n\`\`\`\n`,
-    });
-    expect(() => auditOptionalBlocks(changed)).toThrow('AUDIT_EXECUTION_REQUIRED');
-  });
+  it.each(['', 'text', 'plaintext', 'pseudo', 'pseudocode', 'math'])(
+    'accepts an explicitly non-executable fence with language "%s"',
+    (language) => {
+      const document = projection.problemDocuments.values().next().value;
+      if (!document) throw new Error('Missing fixture.');
+      const changed = { ...projection, problemDocuments: new Map(projection.problemDocuments) };
+      changed.problemDocuments.set(document.unit.problemId, {
+        ...document,
+        text: `${document.text}\n\n\`\`\`${language}\n手順の説明\n\`\`\`\n`,
+      });
+      expect(auditOptionalBlocks(changed)).toMatchObject({ executableCount: 0 });
+    },
+  );
+
+  it.each(['```', '~~~', '````'])(
+    'refuses to certify an added %s runnable fence without actual execution evidence',
+    (fence) => {
+      const document = projection.problemDocuments.values().next().value;
+      if (!document) throw new Error('Missing fixture.');
+      const changed = { ...projection, problemDocuments: new Map(projection.problemDocuments) };
+      changed.problemDocuments.set(document.unit.problemId, {
+        ...document,
+        text: `${document.text}\n\n${fence}python title="実行例"\nprint(42)\n${fence}\n`,
+      });
+      expect(() => auditOptionalBlocks(changed)).toThrow('AUDIT_EXECUTION_REQUIRED');
+    },
+  );
 });

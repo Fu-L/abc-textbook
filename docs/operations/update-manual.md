@@ -716,6 +716,9 @@ Problem・Unitとも、実行例は既存の`examples`で`verificationStatus: pa
 code blockには、同じ`language`の実行例を一件ずつ登録する。Unitの例情報はUnit
 metadata、Problemの例情報は本文frontmatterに置く。環境・入力・実行手順・期待結果を記し、コードを実行してから成功を記録する。非実行の擬似コード・図・数式は`pseudo`、`pseudocode`、`text`、`plaintext`、`math`で明示する。未登録・未検証・失敗した実行コードは公開projectionで拒否し、旧digest台帳の再生成で代用しない。
 
+初版監査のoptional
+block検査も`validatePublicationExamples`で同じ非実行言語とfence構文を判定する。監査の実行例・演習0件という前提は維持し、擬似コードを実行コードとして拒否しない。判定を変えたら`tests/unit/publication-examples.test.ts`と`tests/integration/initial-release-audit.test.ts`で、非実行blockの受理と未検証の実行blockの拒否を確認する。
+
 現行の公開projectionは通常の`verify:fast`と、本節の本文・分類の互換テストで検証する。build・リンク・Chromiumも同じ`dist`を使う。
 
 PR-10b時点では`corpus:verify-full-projections`と任意のbuilt-projectionテストに旧prepared
