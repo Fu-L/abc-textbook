@@ -1,7 +1,7 @@
 ---
 title: "ABC322-G — Two Kinds of Base"
 draft: true
-authoringUnit: {"problemId":"abc322-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"差X>0なのでa>bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。","sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc322-g","docPath":"src/content/docs/problems/mathematics/outcome-decompose-by-prime-or-divisor/outcome-decompose-by-prime-or-divisor-shard-001/abc322-g.md","learningOutcomeIds":["outcome-decompose-by-prime-or-divisor"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-greedy-exchange"],"excludedTopics":["床関数や整数根の値が一定となる区間への分割。"],"tagIds":["tag-prime-divisor-decomposition","tag-greedy-exchange-order"],"sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"$$k=1$$ では差が0となる。$$k\\geq 2$$ の解では、非負の桁と正の先頭桁から $$a>b\\geq 2$$ が必要である。二桁の解は先頭桁 $$c\\mid X$$ と $$s=X/c$$、区間 $$c+1\\leq b\\leq N-s$$ の選択に一対一に対応し、末尾の選択数は $$\\min(10,b)$$ である。三桁以上の解は $$s\\mid X$$ かつ $$s(2b+s)\\leq X$$ を満たすため、指定した約数と基数の列挙から漏れない。\n\n各基数対では、$$D_e-(b-1)\\sum_{i=0}^{e-1}D_i=s\\sum_{i=0}^{e-1}a^i>0$$ と $$d\\leq b$$ より、合法な下位桁の寄与は $$D_e$$ 未満である。従って存在する解の各桁は高位から取る商に強制され、商が $$d$$ 以上なら解はない。すべての商が合法で最終残余が0なら、その桁列は差の条件を満たす。先頭の指数は $$D_E\\leq X<D_{E+1}$$ を満たす $$E$$ に限られるので、末尾を除く桁列は高々一つである。\n\n三桁以上では $$E\\geq 2$$ を要求し、自由な末尾桁の $$d$$ 通りを加える。二桁と三桁以上は重ならず、異なる基数対は別の組なので、加算結果は求める全組数となる。","sourceRevisionIds":["source-abc322-editorial-7306-4ada279b066a1b48f41a168b2c0d27f4ff554367f0a7d9826fcf227968f42582","source-abc322-g-problem-626d58127ceb854ca88e535338f03db474096d9116702ab159162b3a52ad7783"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -20,85 +20,192 @@ authoringUnit: {"problemId":"abc322-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-X>0かつdigitが非負なのでa=bでは差0、a<bでは差が負となり、解では必ずa>bである。
+二つの基数をすべて試すには範囲が大きすぎる。そこで、同じ桁列を二通りに評価した「差」に注目する。基数の差は与えられた差の約数に限られ、さらに各桁の重みが下位桁全体の最大寄与を上回るため、基数を固定すれば桁を高位から一つずつ確定できる。
 
-k=2では差がS_1(a-b)だけになり、S_1|Xを固定するとs=a-b=X/S_1、bの範囲と自由な末尾digit S_2を直接数えられる。
+### 基数の差を固定し、長さで分ける
 
-k≥3では各a^e-b^eがa-bの倍数なのでs=a-bはXの約数で、さらにleading exponentが2以上だからa²-b²=s(2b+s)≤Xが必要になる。
+桁列を $$S=(S_1,\ldots,S_k)$$ とする。$$k=1$$ ならどの基数でも値は $$S_1$$ なので、正の差 $$X$$ は作れない。$$k\geq 2$$ では、先頭桁が正で他の桁も非負であるため、基数を大きくすると値は厳密に増える。従って解では $$a>b$$ である。また $$b=1$$ では全桁が0に制限され、先頭桁を正にできない。以降は $$a>b\geq 2$$ とし、
 
-採用する候補: k=2をdivisorごとの閉形式で数え、k≥3はdivisor sと有限なbを列挙してsuperincreasingなweightのgreedy表現を検査する。
+$$
+s=a-b,\qquad d=\min(10,b),\qquad D_e=a^e-b^e\quad(e\geq 0)
+$$
 
-Nが10^9でも候補(a,b)をXだけに依存する範囲へ絞り、各pairの有効Sが高々1つという構造を使える。
+と置く。各桁の範囲は $$0,\ldots,d-1$$、差の条件は
 
-棄却する候補: a,b≤Nを全組列挙し、長さとdigit列をDPする。
+$$
+X=\sum_{e=0}^{k-1} S_{k-e}D_e
+$$
 
-N^2 pairだけで最大10^18となり、Xが小さいという制約を利用していない。
+となる。$$D_0=0$$ なので末尾桁は差に影響しない。一方、$$e\geq 1$$ では冪差の因数分解により $$s\mid D_e$$ だから、必ず $$s\mid X$$ である。大きい $$N$$ そのものを走査する代わりに、小さい $$X$$ の約数を列挙する方針が見えてくる。
 
-棄却する候補: 通常のbase-a表現とbase-b表現を別々に列挙して一致を探す。
+まず $$k=2$$ では、先頭桁を $$c=S_1$$ とすると条件は $$X=cs$$ だけになる。$$1\leq c\leq 9$$ のうち $$c\mid X$$ を満たすものを試せば、$$s=X/c$$ が決まる。先頭桁の上限と $$a=b+s\leq N$$ を合わせた範囲は
 
-同じdigit列Sを両baseで共有する制約が結合しており、独立な表現の照合では候補が膨らむ。
+$$
+L=c+1\leq b\leq N-s=U
+$$
 
-digit上限d=min(10,b)に対し、weight D_e=a^e-b^eはD_e>(d-1)Σ_{i<e}D_iを満たすため、大きいweightから係数を決めるgreedy表現が一意になる。
+である。各 $$b$$ について末尾桁は $$d=\min(10,b)$$ 通りなので、$$L\leq U$$ のとき
 
-固定(a,b)では最大D_e≤Xから降順にquotientをdigitとして引き、各digit<dかつ最終remainder 0ならleadingから定まるS prefixが唯一存在する。
+$$
+\sum_{b=L}^{U}\min(10,b)=F(U)-F(L-1)
+$$
 
-末尾digit S_kはweight a^0-b^0=0で差へ影響せず、valid prefixごとにd通り選べる。
+を加える。ただし非負整数 $$t$$ に対し、
 
-k=2はS_1=1..9かつS_1|Xを走査し、s=X/S_1、b∈[S_1+1,N-s]ごとの末尾digit数min(10,b)を区間和で加える。k≥3は各divisor s of Xについて1≤b≤min(N-s,floor((X/s-s)/2))、a=b+sを列挙する。D_e=a^e-b^eをXでcapしながらe≥2まで作り、最大weightからXをgreedy分解してdigitが0..min(10,b)-1、leading非zero、remainder 0ならmin(10,b)を加える。
+$$
+F(t)=\begin{cases}
+t(t+1)/2 & (0\leq t\leq 9),\\
+45+10(t-9) & (t\geq 10)
+\end{cases}
+$$
+
+である。$$L>U$$ なら加算は0とする。これで、二桁では $$b$$ の候補が巨大でも区間和で処理できる。
+
+次に $$k\geq 3$$ を考える。先頭桁が1以上なので $$X\geq D_{k-1}\geq D_2$$ であり、
+
+$$
+D_2=(b+s)^2-b^2=s(2b+s)\leq X
+$$
+
+が必要になる。従って $$X$$ の約数 $$s$$ ごとに、
+
+$$
+2\leq b\leq \min\left(N-s,\left\lfloor\frac{X/s-s}{2}\right\rfloor\right),\qquad a=b+s
+$$
+
+だけを列挙すればよい。上端が2未満なら候補はない。この範囲は $$N$$ が大きくても $$X$$ だけで抑えられる。残る課題は、一つの基数対について桁列をどう調べるかである。
+
+### 一つの重みは下位桁全体より大きい
+
+通常の位取り表記では、下位桁をすべて最大にしても一つ上の位に届かない。その性質が、今回の重み $$D_e$$ にもあれば、高位から商を取る方法が使える。そこで、まず桁上限を $$b-1$$ とした下位桁の最大寄与と比べる。
+
+$$e\geq 1$$ に対して等比級数を展開すると、
+
+$$
+a^e-1=(a-1)\sum_{i=0}^{e-1}a^i,\qquad
+b^e-1=(b-1)\sum_{i=0}^{e-1}b^i
+$$
+
+だから、その差を使って
+
+$$
+\begin{aligned}
+D_e-(b-1)\sum_{i=0}^{e-1}D_i
+&=(a-1)\sum_{i=0}^{e-1}a^i-(b-1)\sum_{i=0}^{e-1}b^i\\
+&\quad -(b-1)\left(\sum_{i=0}^{e-1}a^i-\sum_{i=0}^{e-1}b^i\right)\\
+&=(a-b)\sum_{i=0}^{e-1}a^i
+=s\sum_{i=0}^{e-1}a^i>0
+\end{aligned}
+$$
+
+を得る。実際の上限は $$d-1\leq b-1$$ なので、
+
+$$
+(d-1)\sum_{i=0}^{e-1}D_i\leq (b-1)\sum_{i=0}^{e-1}D_i<D_e
+$$
+
+も成り立つ。$$b\geq 10$$ で桁上限が9になる場合も、同じ証明を使える。
+
+### 商が桁を強制する理由
+
+高位の桁を処理した後の残余を $$R$$ とする。残る指数が $$e$$ 以下なら、解が存在するためには
+
+$$
+R=c_eD_e+T,\qquad 0\leq c_e<d,\qquad
+0\leq T\leq(d-1)\sum_{i=0}^{e-1}D_i<D_e
+$$
+
+と書ける必要がある。ここで $$c_e$$ は指数 $$e$$ の桁、$$T$$ は下位桁の寄与である。従って
+
+$$
+c_e=\left\lfloor R/D_e\right\rfloor
+$$
+
+が強制される。商を一つ減らすと下位桁へ $$D_e$$ 以上を渡すことになり、最大寄与を超える。商が $$d$$ 以上のときも、合法な小さい桁へ置き換えて下位桁で埋めることはできない。
+
+具体的には、$$D_e\leq X$$ を満たす最大の指数を $$E$$ とし、$$R=X$$ から $$e=E,E-1,\ldots,1$$ の順に商を求める。どこかの商が $$d$$ 以上なら不可能、そうでなければ $$R$$ を $$R-c_eD_e$$ に更新する。最後の残余が0なら、選んだ桁の寄与の和がちょうど $$X$$ なので十分でもある。指数0の桁で余りを埋めることはできない。
+
+例えば $$a=3,b=2$$ なら $$d=2$$、重みは $$D_1=1,D_2=5,D_3=19$$ となる。
+
+- $$X=6$$ では商は指数2で1、残余1、指数1で1、残余0となる。末尾を除く桁列は $$(1,1)$$ に決まり、末尾を0または1として $$(1,1,0),(1,1,1)$$ の2通りを得る。
+- $$X=7$$ では指数2の桁を1にした残余が2で、指数1の商2が桁上限に反する。指数2の桁を0にしても、下位の最大寄与は1なので救えない。
+
+最大指数 $$E$$ より大きい桁は、1以上なら重みだけで $$X$$ を超える。一方、$$E$$ 未満の桁だけでは最大寄与が $$D_E\leq X$$ に届かない。従って解の先頭の指数は必ず $$E$$、先頭桁は正である。三桁以上の列挙では $$E\geq 2$$ を確認し、復号に成功した基数対ごとに末尾桁の選択数 $$d$$ を加える。**高々一つなのは末尾を除く桁列**であり、末尾まで含む列は $$d$$ 通りある。
 
 ## 典型の発動条件
 
 ### 差の因数による候補圧縮
 
-発動条件: a^e-b^eの線形結合がXに等しくa,bの上限が巨大なとき。
-
-a-b|Xと二乗差≤Xからsmall parameterを列挙する。
+巨大な二つの整数について多項式評価の差が小さい値に固定されるなら、共通因子となる二整数の差を探す。本問では $$a-b\mid X$$ に加え、三桁以上の先頭項から二乗差の上限を得た。二桁のようにこの上限を使えない場合は分けて直接数える。
 
 ### superincreasing weightのgreedy復号
 
-発動条件: 各weightが小さいweightの最大総寄与を上回るbounded-digit表現。
-
-最大weightからquotientを一意なdigitとして決める。
+各重みが「合法な下位係数による最大総和」を上回るなら、高位の商が唯一の係数になる。この性質を満たす重みを superincreasing な重みと呼ぶことがある。単に重みが増加するだけでは不十分であり、下位の最大総和との厳密な不等式を証明してから使う。
 
 ### 自由な零weight桁の分離
 
-発動条件: 表現の末尾項がparameter差に寄与しないとき。
-
-有効prefixごとに末尾digitの選択数を掛ける。
+係数の重みが0なら、その係数は目標値から復元できない。他の係数を確定させた後、合法な選択数を掛ける。ただし他の制約にも影響しないことを確認する。本問の末尾桁は先頭桁ではなく、桁上限以外の制約を持たない。
 
 ## 問題固有の要素
 
-同一digit列を2つのbaseで評価した差はD_e=a^e-b^eをweightにした非標準進数表現であり、そのweightがdigit上限に対して十分急増する。
-
-別の問題へ持ち帰る視点: 2種類の評価関数の差を、係数制限付きweight表現として見て一意復号性や因数条件を探す。
+同じ桁列を異なる基数で評価する条件から、冪差を重みにした表現が現れる。この重みは基数差で割り切れるだけでなく、桁上限と組み合わせると下位の最大寄与を上回る。差の因数分解で候補を減らし、残った候補内では表現の一意性を使う、という二段階を見抜くことが核心である。
 
 ## 正当性
 
-差X>0なのでa>bでs=a−bはXの約数。二桁は先頭digit·sだけで末尾は自由。三桁以上はs(2b+s)≤Xが必要なので有限のpair列挙で全候補を覆う。weight D_eが低位digit全和より大きいため高位からのquotientは唯一の可能digitであり、digit上限と最終余りを確認すれば表現の必要十分を判定できる。末尾weight0の自由度だけ最後に掛ける。
+$$k=1$$ では差が0となる。$$k\geq 2$$ の解では、非負の桁と正の先頭桁から $$a>b\geq 2$$ が必要である。二桁の解は先頭桁 $$c\mid X$$ と $$s=X/c$$、区間 $$c+1\leq b\leq N-s$$ の選択に一対一に対応し、末尾の選択数は $$\min(10,b)$$ である。三桁以上の解は $$s\mid X$$ かつ $$s(2b+s)\leq X$$ を満たすため、指定した約数と基数の列挙から漏れない。
+
+各基数対では、$$D_e-(b-1)\sum_{i=0}^{e-1}D_i=s\sum_{i=0}^{e-1}a^i>0$$ と $$d\leq b$$ より、合法な下位桁の寄与は $$D_e$$ 未満である。従って存在する解の各桁は高位から取る商に強制され、商が $$d$$ 以上なら解はない。すべての商が合法で最終残余が0なら、その桁列は差の条件を満たす。先頭の指数は $$D_E\leq X<D_{E+1}$$ を満たす $$E$$ に限られるので、末尾を除く桁列は高々一つである。
+
+三桁以上では $$E\geq 2$$ を要求し、自由な末尾桁の $$d$$ 通りを加える。二桁と三桁以上は重ならず、異なる基数対は別の組なので、加算結果は求める全組数となる。
 
 ## 実装上の注意
 
-- k=2のb範囲和Σmin(10,b)はb≤9とb≥10に分け、N-sが下端未満なら0とする。
-- power差の生成はa,bが10^9なので128bitとX+1でのcapを使い、overflow前に停止する。
-- k≥3のgreedyでは最大exponentが少なくとも2であることとleading digit>0を確認し、k=2との重複を避ける。
+- $$N=1$$ や $$N=2$$ では $$a>b\geq 2$$ を満たす対がなく、答えは0となる。列挙の下端を2とし、空区間を処理すれば自然に除外できる。
+- 答えは $$998244353$$ で割った余りを取る。二桁の区間和は64 bit整数で計算してから加算すればよい。
+- 重み $$D_e$$ は $$X$$ 以下のものを指数1から保存し、初めて $$X$$ を超えたところで止める。等号の場合は保存する。$$D_0=0$$ では割り算せず、最後の残余と末尾の自由度を別に処理する。
+
+冪をそれぞれ $$X+1$$ に飽和させてから引いてはいけない。例えば $$a=3,b=2,e=3,X=19$$ では、$$27-8=19$$ を求めたいのに、飽和後の差は $$20-8=12$$ となる。代わりに、正の項だけからなる
+
+$$
+D_1=s,\qquad D_{e+1}=bD_e+s a^e
+$$
+
+を使う。$$b(a^e-b^e)+(a-b)a^e=a^{e+1}-b^{e+1}$$ なので、この漸化式は正確である。乗算前の判定まで含めた生成手順は次のようにできる。
+
+1. 現在の $$D_e\leq X$$ と $$P=\min(a^e,X+1)$$ を保持する。初期値は $$D_1=s$$、$$P=\min(a,X+1)$$ とする。
+2. $$D_e>\lfloor X/b\rfloor$$ なら次の重みは $$X$$ を超えるので停止する。そうでなければ $$T=bD_e\leq X$$ を計算する。
+3. $$P>\lfloor(X-T)/s\rfloor$$ なら停止する。そうでなければ $$D_{e+1}=T+sP\leq X$$ を計算して保存する。$$P=X+1$$ に飽和していた場合は必ず停止するため、保存する差は常に正確である。
+4. 次の反復のため、$$P>\lfloor X/a\rfloor$$ なら $$P=X+1$$、そうでなければ $$P=aP$$ と更新する。
+
+これなら超過する積を実際に作らずに済む。$$D_{e+1}\geq 2D_e$$ で重みは増え続けるため、一度超えた後の指数もすべて除外できる。復号は保存した重みを逆順に使い、三桁以上の処理では最大指数が2以上であることを確認する。
 
 ## 復習の核
 
-- k=2で末尾digitが自由になる理由と、k=3以上でD_eが下位digit最大和を上回る不等式を小さいa,bで確かめ、同じSを二重計数しないか確認する。
+- 候補の上限が巨大でも、差が小さいなら因数分解から「差の約数」を列挙できないか考える。
+- 高位から商を取るには、下位桁の最大寄与が現在の重み未満であることを示す。単調増加や典型名だけで正当化しない。
+- 重み0の桁は一意復号の対象から外し、自由度として数える。差を計算するときも、二つの値を個別に飽和すると相殺を壊すことに注意する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(√X+Σ_{s|X}(X/s)log X)を上界とする。二桁は9case、長桁は各基数pairをgreedy検査する。
+約数は $$O(\sqrt X)$$ 時間で列挙でき、二桁の処理は先頭桁9通りで $$O(1)$$ 時間である。三桁以上の基数対の総数を $$C$$ とすると、各約数 $$s$$ に対して $$b\leq X/(2s)$$ だから、
+
+$$
+C\leq\sum_{s\mid X}\left\lfloor\frac{X}{2s}\right\rfloor
+\leq\frac X2\sum_{s=1}^{X}\frac1s
+=O(X\log X)
+$$
+
+と $$X$$ だけで評価できる。各対では $$D_{e+1}\geq 2D_e$$ より重みの生成と復号がともに $$O(\log X)$$ 時間なので、全体は $$O(\sqrt X+C\log X)=O(X\log^2 X)$$ 時間となる。
 
 ### 空間
 
-O(τ(X)+log X)。
+約数一覧に $$O(\tau(X))$$、一つの基数対の重み列に $$O(\log X)$$ を使う。ここで $$\tau(X)$$ は $$X$$ の約数の個数である。基数対や桁列をすべて保存する必要はなく、全体は $$O(\tau(X)+\log X)$$ 空間である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 10^9; 1 \le X \le 2 \times 10^5; All input values are integers.
+$$1\leq N\leq 10^9$$ に対して基数対の全探索はできないが、$$1\leq X\leq 2\times 10^5$$ なので、二桁を区間和で処理し、三桁以上の候補と重み数を $$X$$ で制限できる。時間制限は2秒、メモリ制限は1024 MiBである。正の $$X$$、非負の桁、正の先頭桁、$$d\leq b$$ がそれぞれ候補の制限と復号の証明に必要である。
 
 ## 出典
 
