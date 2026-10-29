@@ -90,11 +90,11 @@ $$
 
 $$
 \begin{aligned}
-D_e-(b-1)\sum_{i=0}^{e-1}D_i
-&=(a-1)\sum_{i=0}^{e-1}a^i-(b-1)\sum_{i=0}^{e-1}b^i\\
-&\quad -(b-1)\left(\sum_{i=0}^{e-1}a^i-\sum_{i=0}^{e-1}b^i\right)\\
-&=(a-b)\sum_{i=0}^{e-1}a^i
-=s\sum_{i=0}^{e-1}a^i>0
+&D_e-(b-1)\sum_{i=0}^{e-1}D_i\\
+&\quad=(a-1)\sum_{i=0}^{e-1}a^i-(b-1)\sum_{i=0}^{e-1}b^i\\
+&\qquad -(b-1)\left(\sum_{i=0}^{e-1}a^i-\sum_{i=0}^{e-1}b^i\right)\\
+&\quad=(a-b)\sum_{i=0}^{e-1}a^i\\
+&\quad=s\sum_{i=0}^{e-1}a^i>0
 \end{aligned}
 $$
 
