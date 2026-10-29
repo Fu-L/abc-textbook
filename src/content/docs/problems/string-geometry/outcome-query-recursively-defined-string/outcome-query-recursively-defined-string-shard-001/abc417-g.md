@@ -1,7 +1,7 @@
 ---
 title: "ABC417-G — Binary Cat"
 draft: true
-authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-binary-lifting"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-amortized-monotone-progress","tag-binary-lifting"],"sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"query位置≤Cなのでprefix C文字以降を捨てても答えは保存される。親に含まれる長さでheavyを選ぶとlightへ移るたび残長が半減する。heavy descendantの含有区間にqueryが入るときだけjumpするため、その間のoffset減算をdoublingでまとめても元の一辺追跡と同じ位置になる。最後にbase一文字へ到達して正しいbitを得る。","sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/string-geometry/outcome-query-recursively-defined-string/outcome-query-recursively-defined-string-shard-001/abc417-g.md","learningOutcomeIds":["outcome-query-recursively-defined-string"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-binary-lifting"],"excludedTopics":["明示された文字列への接尾辞索引の構築。"],"tagIds":["tag-recursive-compressed-string","tag-amortized-monotone-progress","tag-binary-lifting"],"sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"### 切り詰めと一辺の移動は照会文字を保つ\n\n連結元の先頭 $$C$$ 文字より後ろは、連結結果でも第 $$C+1$$ 文字以降にしか現れない。したがって各連結の直後に切り詰めても、照会可能な先頭部分は元の問題と一致する。\n\n状態 $$(A,B)$$ では常に $$1\\leq B\\leq\\ell_A$$ を保つ。左右の含有区間は親の第1文字から第 $$\\ell_A$$ 文字までを重複なく覆うので、位置を含む側へ開始 offset を引いて移れば、同じ文字を指し続ける。右の含有長が0なら、その側は選ばれない。\n\n### 飽和した長さには照会位置を組み合わせる\n\n一辺を移動する前後を $$(A,B),(A',B')$$ とする。開始 offset は非負なので $$B'\\leq B$$。保存長も、未飽和の親では左右の和、飽和した親では上限 $$C$$ 以下なので、どちらの辺でも増えない。\n\nlight 移動について、次の三つを示す。\n\n1. **親が未飽和の場合。** $$\\ell_A<C$$ なら両方の参照先が全部含まれる。light 先の保存長は小さい方の含有長そのものなので、$$\\ell_{A'}\\leq\\ell_A/2$$ となる。\n2. **飽和した親から、飽和した light 先へ移る場合。** 左の参照先の保存長が $$C$$ なら、含有長は左が $$C$$、右が0となり、左は heavy である。従って飽和した light 先は右に限られる。左の含有長を $$a$$、右を $$b=C-a$$ とすると、右が light なので $$b\\leq C/2$$。移動後の位置は $$B'=B-a\\leq C-a=b\\leq C/2$$ となる。保存長は減らなくても、照会位置は前半へ移る。\n3. **親が飽和し、位置が既に $$B\\leq C/2$$ の場合。** 右が light なら左の含有長は $$a\\geq C/2$$ であり、右へ行くには $$B>a$$ が必要なので選べない。light へ行くなら左で、その保存長は含有長 $$a\\leq C/2$$ に等しい。従って $$\\ell_{A'}\\leq C/2$$ となる。\n\nこれで light 回数を数えられる。最初から未飽和なら、light のたびに保存長が半減する。飽和した状態での最初の light 移動で未飽和になった場合も、その一回を除けば同じである。\n\n最初の light 移動後も飽和していた場合は、2より照会位置が $$C/2$$ 以下になる。その後 heavy を何回進んでも位置は増えない。次の light 移動時に親がまだ飽和していれば3、既に未飽和なら1を使い、二回目の light 移動後には保存長が $$C/2$$ 以下になる。以降は通常の半減が続く。\n\n従って $$C=10^{18}$$ では、前者は $$1+\\lfloor\\log_2(C-1)\\rfloor=60$$ 回以下、後者も $$2+\\lfloor\\log_2(C/2)\\rfloor=60$$ 回以下である。途中で基底へ着けば、さらに少なくなる。\n\n### ダブリングは一辺ずつ辿る操作をまとめている\n\n表の漸化式は、前半の到達先から後半を辿り、二つの開始 offset を足している。したがって $$U_{A,k}$$ と $$D_{A,k}$$ は、heavy を一辺ずつ $$2^k$$ 回辿った結果を表す。\n\n各参照先の先頭部分が、移動元の連続区間として含まれる。さらに先へ辿ってもその区間から外へは出ず、末尾での切り詰めは区間の右端を短くするだけである。到達先 $$t$$、累積 offset $$d$$ に対し、出発点内で実際に残る区間は $$[d+1,\\min(\\ell_A,d+\\ell_t)]$$。現在位置は既に $$B\\leq\\ell_A$$ を満たすので、本文の $$d<B\\leq d+\\ell_t$$ が、一辺ずつ同じ heavy 経路を選べる条件になる。\n\n経路を深く進むほど区間は狭くなるので、この条件の成立は途中まで連続する。大きい段からの走査はその最長の連続部分を選び終え、基底でなければ次に選ぶべき一辺は light となる。どの移動も照会文字を保ち、頂点番号は狭義に減るため、最終的に基底0または1へ停止し、正しい文字を返す。","sourceRevisionIds":["source-abc417-editorial-13580-dac193090d80c330b4061b9f795134aaf3386a8de0774cf8ad055bd69bf67dee","source-abc417-g-problem-d89d2f3572482bf501b1f2d1ef60ea5fe7fa61bf1bccc5e1084ffefa28f92d4a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,75 +21,168 @@ authoringUnit: {"problemId":"abc417-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-query位置は10^18以下なので、各S_iは先頭C=10^18文字だけ保持する設定へ変えても全回答は不変で、長さもmin(C,lenL+lenR)へsaturateできる。
+連結するたびに文字列を展開すると、長さが指数的に増えてしまう。一方、必要なのは指定された一文字だけである。連結元と長さを保存し、その文字が左右どちらに由来するかを逆に辿る。さらに、長く続く側への移動をダブリングでまとめ、もう一方へ移る回数を抑える。
 
-concat DAGを一文字まで辿ると深さQになり得る。各nodeで親に含まれる長さが大きいchildをheavy、小さい方をlightとすれば、query追跡中のlight遷移は長さ半減により高々約60回である。
+### 先頭だけを残し、照会位置を連結元へ戻す
 
-採用する候補: heavy child chainをbinary liftingし、各queryで可能なheavy jumpをまとめ、次のlight edgeへ移る操作をbase文字まで繰り返す
+上限を $$C=10^{18}$$ とする。すべての照会位置は $$C$$ 以下なので、各連結の直後に先頭 $$C$$ 文字だけを残しても回答は変わらない。連結後の先頭 $$C$$ 文字に使われるのは、連結元それぞれの先頭 $$C$$ 文字までだからである。
 
-light回数O(log C)、各heavy chain移動O(log Q)なので全体O(Q log Q log C)。jump tableには到達nodeと元文字列内offsetを持つ。
+以後は切り詰めた文字列を $$S_v$$ と書き、その保存長を $$\ell_v$$ とする。文字列そのものは保存せず、連結を表す頂点に左右の参照先と長さを持たせる。基底は $$S_0=\texttt{0}, S_1=\texttt{1}$$、$$\ell_0=\ell_1=1$$。クエリ $$i$$ で作る頂点は $$v=i+1$$、左右の参照先は $$L_i,R_i$$ であり、
 
-棄却する候補: 各queryでconcat元を一段ずつ辿ってS_0/S_1へ到達する
+$$
+\ell_v=\min(C,\ell_{L_i}+\ell_{R_i})
+$$
 
-node indexは減るがchain長はΘ(Q)になり、Q件でO(Q^2)となる。
+と計算できる。参照先は必ず小さい番号なので、入力順に計算すればよい。同じ頂点を複数箇所から参照できるため、全体は木ではなく有向非巡回グラフ（DAG）になる。
 
-truncationで右childは一部しか親に含まれないことがあるため、heavy判定はchild本来の長さではなく親内のincluded lengthで行う。
+照会状態を $$(A,B)$$ とし、「$$S_A$$ の **1始まりの第 $$B$$ 文字**を求める」と定める。左右の開始 offset は、先頭から何文字飛ばすかを表す **0始まりの値**である。左は0、右は左の保存長となる。
 
-2^k heavy jump後のdescendantと累積offsetをdoublingできる。現在位置Bがそのdescendantの親内区間に入るときだけjumpし、heavyを最大限進めた後は位置がlight側にある。
+現在の左右の参照先を $$u,w$$ とすると、$$B\leq\ell_u$$ なら $$(u,B)$$ へ、そうでなければ $$(w,B-\ell_u)$$ へ移る。番号が0または1に着いたら、その番号が答えの文字である。ただし、一段ずつ戻るだけでは、片側へ一文字ずつ継ぎ足す構造で一照会に $$\Theta(Q)$$ 段を辿り、全体で $$O(Q^2)$$ 時間かかる。
 
-各新nodeでc_left,c_right、親内offset、saturated length、included lengthからheavy/lightを決め、up[node][k]とoffset[node][k]を作る。回答は(A,B)=(i+1,X_i)から、large k順にBがheavy descendant区間内ならまとめて移り、baseでなければlight childへoffsetを引いて移る。A=0/1の文字を出力する。
+### 親に含まれる長さで heavy と light を選ぶ
+
+深い参照を毎回辿らずに済ませたい。各頂点で、親の中に長く含まれる側への辺を heavy、もう一方を light と決め、heavy の連続だけをまとめて飛ばすことを考える。
+
+ここで、**参照先の保存長と、切り詰めた親に実際に含まれる長さは違う**。親 $$v$$ の左右の参照先を $$u,w$$ として、含有長を
+
+$$
+a_v=\ell_u,\qquad b_v=\ell_v-a_v
+$$
+
+と置く。左は全部残り、右は先頭 $$b_v$$ 文字だけが残る。$$a_v\geq b_v$$ なら左を heavy、右を light とし、そうでなければ逆にする。同長なら左を heavy と決めておく。左が上限を占めると $$b_v=0$$ となり、右へ移る照会はない。
+
+上限を小さくした独自例 $$C=10$$ で、左右の保存長が6と10なら、親の保存長は10、含有長は6と4である。右が light だが、その参照先の保存長は10のままで、半減していない。第8文字は右の第2文字へ移る。この例が示すように、飽和後の回数評価には長さに加えて照会位置も使う必要がある。
+
+未飽和の頂点では、light 先の保存長は親の半分以下になる。飽和した頂点でも、飽和した参照先へ light で移ると位置は $$C/2$$ 以下になり、次の light 移動を終えると保存長も $$C/2$$ 以下へ下がる。この場合分けは「正当性」で証明する。結果として、一照会の light 移動は高々60回である。
+
+### heavy の到達先と累積 offset を倍増する
+
+各頂点 $$v$$ の heavy 先を $$h(v)$$、その開始 offset を $$x_v$$ とする。heavy が左なら $$x_v=0$$、右なら $$x_v=a_v$$ である。
+
+$$v$$ から heavy を $$2^k$$ 回辿った到達先を $$U_{v,k}$$、途中の開始 offset の合計を $$D_{v,k}$$ とする。0段目は一回分なので、
+
+$$
+U_{v,0}=h(v),\qquad D_{v,0}=x_v
+$$
+
+となる。二つの同じ長さの移動をつなぐには、前半の到着先 $$m=U_{v,k}$$ から後半を始める。
+
+$$
+\begin{aligned}
+U_{v,k+1}&=U_{m,k},\\
+D_{v,k+1}&=D_{v,k}+D_{m,k}.
+\end{aligned}
+$$
+
+両方の移動が存在するときだけ表を埋め、基底0・1から出る辺や、途中で基底に着いて歩数が足りない欄は「存在しない」とする。参照先の番号は小さいため、新頂点の表を入力順に $$O(\log Q)$$ 時間で作れる。
+
+到達先を $$t=U_{A,k}$$、累積 offset を $$d=D_{A,k}$$ とすると、まとめて移動できる条件は
+
+$$
+d<B\leq d+\ell_t
+$$
+
+である。つまり、1始まりの文字位置が区間 $$[d+1,d+\ell_t]$$ に入るかを調べる。成立すれば $$(A,B)\leftarrow(t,B-d)$$ と更新する。親の末尾で切り詰められる部分は、常に $$B\leq\ell_A$$ を満たすことから照会に現れない。
+
+小例として $$T=\texttt{01}$$、$$M=\texttt{1}+T=\texttt{101}$$、$$V=\texttt{0}+M=\texttt{0101}$$ とする。ここで $$+$$ は連結を表す。$$V\to M\to T$$ はともに右への heavy 移動で、offset はそれぞれ1。二回分の表の到達先は $$T$$、累積 offset は2であり、$$V$$ 内では $$T$$ が第3〜4文字に当たる。第3文字を照会すると、二回分をまとめて $$T$$ の第1文字へ移れる。
+
+### 一回の heavy 走査の後、light を一辺だけ進む
+
+クエリ $$i$$ では、表を作ってから $$(A,B)=(i+1,X_i)$$ で照会を始める。段 $$k=\lfloor\log_2 Q\rfloor,\ldots,0$$ を大きい順に一度ずつ調べ、存在する表の区間に位置が入る場合だけ移動する。途中で基底0・1に着いたら直ちに答えを返す。
+
+heavy の経路に沿って、照会位置を含む区間は途中まで連続する。一度その区間から外れると、さらに先の heavy 先にも同じ位置は含まれない。そのため、大きい段から調べる走査で可能な heavy 移動をすべて済ませられる。走査後も基底でなければ、次の heavy 一辺は選べず、位置は light 側にある。light 先へ、その辺の offset を引いて一回移り、再び大きい段から走査する。
+
+先ほどの $$V$$ の第3文字なら、二回分を飛んで $$T$$ の第1文字に着く。$$T$$ は左右同長なので左が heavy で、その先は基底0となる。$$V$$ の第2文字なら、二回分の区間には入らないが、一回分では $$M$$ の第1文字へ移れる。そこでは heavy の $$T$$ に入らないので、light の基底1へ移って終了する。
 
 ## 典型の発動条件
 
 ### heavy-light decompositionの考え方
 
-発動条件: root-to-leaf追跡で一方のchild sizeが少なくとも半分になり、長い同系遷移をjumpしたいとき。
+発動条件: 分岐を辿る照会で、一方の辺を選ぶ回数に対数上界を付けられ、残る長い連続移動をまとめたいとき。
 
-大きいchildをheavy、小さいchildへの移動回数を対数に抑える。
+含まれる量が小さい側を light とする。ただし、切り詰めや共有がある構造では、その量と参照先全体の大きさが一致するかを確かめる。本問では照会位置の単調性も使って回数を抑える。
 
 ### binary lifting
 
-発動条件: functionalなheavy edgeを多数回辿り、位置条件を満たす最深ancestorへ進みたいとき。
+発動条件: 各状態の次の移動先が一意で、移動中の値も合成できるとき。本問の heavy 先は頂点だけで決まり、累積 offset は加算で合成できる。
 
-2^k先nodeと累積開始offsetをtable化する。
+移動可能かの条件が経路上で途中まで成立するなら、大きい段から表を試して、条件を満たす最遠の到達先を探せる。
 
 ### saturating length
 
-発動条件: 巨大な暗黙文字列でquery位置に上限があるとき。
+発動条件: 暗黙文字列の先頭からの照会位置に上限があり、それより後ろの情報が、後続操作でも回答に影響しないとき。
 
-上限より後ろを捨て、length加算をcapしてoverflowと不要情報を防ぐ。
+連結では先頭の長さだけを上限で飽和できる。反転や末尾からの照会など、捨てた部分を再び参照する操作へは、そのまま適用できない。
 
 ## 問題固有の要素
 
-通常のsubtree-size HLDではなく、concat後に実際に残るprefix長をsizeとし、文字位置Bも含めたhalving argumentでlight回数を抑える。
+本問では文字列の先頭だけを残すため、左の参照先は全部含まれ、右の参照先は途中で切れる。通常の木のサイズによる半減の議論をそのまま使うと、この非対称性を落としてしまう。
 
-別の問題へ持ち帰る視点: 暗黙sequence DAGのrank queryでは、参照可能prefixへtruncateし、included child lengthによるheavy decompositionを使える。
+そこで状態を「頂点と照会位置」の対で見る。飽和したまま light を辿っても、照会位置が前半へ移ることで、次の light 移動から長さの半減へ接続できる。値を上限で丸めた後の償却解析では、丸めた値だけで減少を示せるかを確かめ、足りなければ操作が参照する位置も追う。
 
 ## 正当性
 
-query位置≤Cなのでprefix C文字以降を捨てても答えは保存される。親に含まれる長さでheavyを選ぶとlightへ移るたび残長が半減する。heavy descendantの含有区間にqueryが入るときだけjumpするため、その間のoffset減算をdoublingでまとめても元の一辺追跡と同じ位置になる。最後にbase一文字へ到達して正しいbitを得る。
+### 切り詰めと一辺の移動は照会文字を保つ
+
+連結元の先頭 $$C$$ 文字より後ろは、連結結果でも第 $$C+1$$ 文字以降にしか現れない。したがって各連結の直後に切り詰めても、照会可能な先頭部分は元の問題と一致する。
+
+状態 $$(A,B)$$ では常に $$1\leq B\leq\ell_A$$ を保つ。左右の含有区間は親の第1文字から第 $$\ell_A$$ 文字までを重複なく覆うので、位置を含む側へ開始 offset を引いて移れば、同じ文字を指し続ける。右の含有長が0なら、その側は選ばれない。
+
+### 飽和した長さには照会位置を組み合わせる
+
+一辺を移動する前後を $$(A,B),(A',B')$$ とする。開始 offset は非負なので $$B'\leq B$$。保存長も、未飽和の親では左右の和、飽和した親では上限 $$C$$ 以下なので、どちらの辺でも増えない。
+
+light 移動について、次の三つを示す。
+
+1. **親が未飽和の場合。** $$\ell_A<C$$ なら両方の参照先が全部含まれる。light 先の保存長は小さい方の含有長そのものなので、$$\ell_{A'}\leq\ell_A/2$$ となる。
+2. **飽和した親から、飽和した light 先へ移る場合。** 左の参照先の保存長が $$C$$ なら、含有長は左が $$C$$、右が0となり、左は heavy である。従って飽和した light 先は右に限られる。左の含有長を $$a$$、右を $$b=C-a$$ とすると、右が light なので $$b\leq C/2$$。移動後の位置は $$B'=B-a\leq C-a=b\leq C/2$$ となる。保存長は減らなくても、照会位置は前半へ移る。
+3. **親が飽和し、位置が既に $$B\leq C/2$$ の場合。** 右が light なら左の含有長は $$a\geq C/2$$ であり、右へ行くには $$B>a$$ が必要なので選べない。light へ行くなら左で、その保存長は含有長 $$a\leq C/2$$ に等しい。従って $$\ell_{A'}\leq C/2$$ となる。
+
+これで light 回数を数えられる。最初から未飽和なら、light のたびに保存長が半減する。飽和した状態での最初の light 移動で未飽和になった場合も、その一回を除けば同じである。
+
+最初の light 移動後も飽和していた場合は、2より照会位置が $$C/2$$ 以下になる。その後 heavy を何回進んでも位置は増えない。次の light 移動時に親がまだ飽和していれば3、既に未飽和なら1を使い、二回目の light 移動後には保存長が $$C/2$$ 以下になる。以降は通常の半減が続く。
+
+従って $$C=10^{18}$$ では、前者は $$1+\lfloor\log_2(C-1)\rfloor=60$$ 回以下、後者も $$2+\lfloor\log_2(C/2)\rfloor=60$$ 回以下である。途中で基底へ着けば、さらに少なくなる。
+
+### ダブリングは一辺ずつ辿る操作をまとめている
+
+表の漸化式は、前半の到達先から後半を辿り、二つの開始 offset を足している。したがって $$U_{A,k}$$ と $$D_{A,k}$$ は、heavy を一辺ずつ $$2^k$$ 回辿った結果を表す。
+
+各参照先の先頭部分が、移動元の連続区間として含まれる。さらに先へ辿ってもその区間から外へは出ず、末尾での切り詰めは区間の右端を短くするだけである。到達先 $$t$$、累積 offset $$d$$ に対し、出発点内で実際に残る区間は $$[d+1,\min(\ell_A,d+\ell_t)]$$。現在位置は既に $$B\leq\ell_A$$ を満たすので、本文の $$d<B\leq d+\ell_t$$ が、一辺ずつ同じ heavy 経路を選べる条件になる。
+
+経路を深く進むほど区間は狭くなるので、この条件の成立は途中まで連続する。大きい段からの走査はその最長の連続部分を選び終え、基底でなければ次に選ぶべき一辺は light となる。どの移動も照会文字を保ち、頂点番号は狭義に減るため、最終的に基底0または1へ停止し、正しい文字を返す。
 
 ## 実装上の注意
 
-- length加算とoffsetを10^18でsaturateしつつoverflow前に比較する。右childが0文字しか含まれない場合、equal-length tie、1-index Bと0-index offsetの包含判定を統一する。
+- 位置 $$B$$ は1始まり、offset $$d$$ は0始まりで統一する。移動判定は $$d<B\leq d+\ell_t$$。0始まりの位置へ直す実装なら、全体を $$d\leq B<d+\ell_t$$ にそろえる。
+- 長さの加算は $$\min(C,\ell_u+\ell_w)$$ とする。offset も $$C$$ で飽和させてよい。真の累積 offset が $$C$$ 以上なら、先頭の1文字目でも出発点の第 $$C+1$$ 文字以降になる。保存値が $$d=C$$ なら条件 $$d<B$$ を満たさず、上限超の移動が合法になることはない。offset は非負なので、合成後にこの判定が逆転することもない。
+- 飽和した二値の和も最大 $$2C$$。区間の右端 $$d+\ell_t$$ も含めて64 bit符号付き整数に収まる。整数を正確に表せない型で $$10^{18}$$ を扱わない。
+- 表には $$k=0,\ldots,\lfloor\log_2 Q\rfloor$$ の段があればよい。基底には出辺を作らず、存在しない欄を合成しない。照会中に基底へ着いたら、その場で終了する。
+- 左右が同じ参照先でも、親内の出現位置は別である。左の offset は0、右は左の保存長を使う。同長のときの heavy 選択を前処理と照会で統一し、右の含有長0も扱う。
 
 ## 復習の核
 
-- 常に左だけがcapを占めるchain、左右同長、lightを交互に辿る構造、X=1/Cを小さい実文字列生成と比較する。
+- 巨大な連結文字列では、まず文字の内容と構成を分け、指定位置を連結元へ戻すことを考える。そのままでは深さが時間になる点まで確認する。
+- 切り詰めた親に含まれる量と、参照先全体の大きさを混同しない。丸めた長さが減らない遷移では、照会位置など別の単調な量を探す。
+- 長い一意な移動は到達先と累積 offset の対でまとめる。位置条件で最長の移動を探すには、条件が経路の途中まで連続して成立することを証明する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(Q log Q·log C)、C=10^18。heavy doublingと高々log Cのlight遷移。
+各頂点の長さ・左右の含有長・heavy/light の決定は $$O(1)$$。ダブリング表は頂点ごとに $$O(\log Q)$$ 段なので、前処理の合計は $$O(Q\log Q)$$ 時間となる。入力を読みながら、その頂点の表を構築できる。
+
+一照会では light 移動が $$O(\log C)$$ 回で、その前後に行う heavy 走査一回が $$O(\log Q)$$ 時間。従って一照会は $$O(\log Q\log C)$$、全 $$Q$$ 件と表の構築を合わせて $$O(Q\log Q\log C)$$ 時間である。$$Q=1$$ では一段だけ持ち、定数時間で処理する。
 
 ### 空間
 
-O(Q log Q)。
+$$Q+2$$ 頂点に左右の参照先・保存長・heavy/light を持ち、各頂点の各段に到達先と累積 offset を保存するので、$$O(Q\log Q)$$。照会は反復で処理でき、表以外の作業領域は $$O(1)$$ でよい。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 6 sec; Memory limit: 1024 MiB; Constraints: 1\leq Q\leq 5\times 10^5; 0\leq L_i,R_i\leq i; 1\leq X_i\leq 10^{18}; X_i is at most the length of S_{i+1}.; All input values are integers.
+2026-10-29に公式問題文・個別公式解説を再照合した。$$1\leq Q\leq5\times10^5$$、$$0\leq L_i,R_i\leq i$$、$$1\leq X_i\leq10^{18}$$ で、照会位置は生成文字列の長さ以下と保証される。時間制限は6秒、メモリ制限は1024 MiBである。
+
+$$C=10^{18}$$ とすれば light は高々60回、ダブリング表は $$k=0,\ldots,18$$ の19段で足りる。各欄には文字列本体ではなく、頂点番号と64 bitの offset を保存する。
 
 ## 出典
 
