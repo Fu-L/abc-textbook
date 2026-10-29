@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import { load } from 'cheerio';
 import { micromark } from 'micromark';
@@ -68,10 +67,9 @@ describe('explicit document mathematics', () => {
     expect($('math msubsup')).toHaveLength(1);
   });
 
-  it('preserves the existing dollar sentinel manuscript and undelimited legacy notation', async () => {
-    const path =
-      'src/content/docs/problems/string-geometry/outcome-build-finite-string-automaton/outcome-build-finite-string-automaton-shard-001/abc264-g.md';
-    const $ = load(await renderPublicDocument(await readFile(path, 'utf8'), '/'));
+  it('preserves literal dollar sentinels and undelimited legacy notation', async () => {
+    const sentinel = '初期状態 $$ から開始する。ダミー文字 $ を二つ置き、$を含む状態を扱う。';
+    const $ = load(await renderPublicDocument(sentinel, '/'));
     expect($('math')).toHaveLength(0);
     expect($('p').text()).toContain('初期状態 $$ から');
     expect($('p').text()).toContain('ダミー文字 $ を二つ置き、$を含む');
