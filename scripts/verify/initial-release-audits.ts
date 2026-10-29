@@ -11,6 +11,7 @@ import { validateReleaseLearningStructure } from '../../src/lib/catalog/release-
 import { deterministicTopologicalOrder } from '../../src/lib/validation/validate.js';
 import { TEXTBOOK_CHAPTERS } from '../../src/lib/taxonomy/textbook-order.js';
 import { unitLearningTarget } from '../../src/lib/taxonomy/unit-learning-targets.js';
+import { validatePublicationExamples } from '../../src/lib/authoring/publication-examples.js';
 
 type Catalog = z.infer<typeof CatalogSchema>;
 export type FullProjection = Awaited<ReturnType<typeof loadFullPublicProjection>>;
@@ -332,13 +333,9 @@ export const auditOptionalBlocks = (projection: FullProjection) => {
     ...projection.unitDocuments.values(),
     ...projection.problemDocuments.values(),
   ]) {
-    const fences = [...document.text.matchAll(/^```([^\n]*)/gmu)].map(
-      (match) => match[1]?.trim() ?? '',
-    );
-    assertAudit(
-      fences.every((language) => ['', 'text'].includes(language)),
-      'AUDIT_EXECUTION_REQUIRED',
-    );
+    validatePublicationExamples(document.text, [], () => {
+      throw new Error('AUDIT_EXECUTION_REQUIRED');
+    });
     assertAudit(
       !/^## (?:演習|解答|確認問題|評価課題)$/mu.test(document.text),
       'AUDIT_ANSWER_VERIFICATION_REQUIRED',
@@ -352,6 +349,6 @@ export const auditOptionalBlocks = (projection: FullProjection) => {
     exerciseCount,
     fixedOutcomeBlocksRequired: false,
     basis:
-      'All current owner inventories and prose fences inspected. Text fences are pseudocode; optional runnable/answer additions block until executed and verified.',
+      'All current owner inventories and prose fences inspected using publication fence rules. Explicitly non-executable fences are optional; runnable/answer additions block until executed and verified.',
   };
 };
