@@ -100,7 +100,9 @@ $$
 
 ## 根拠
 
-- [ABC220 F 公式解説](https://atcoder.jp/contests/abc220/editorial/2693) — 全頂点からの距離和を、部分木サイズと根の移動による差分で線形時間に求める方針。上のメッセージ表現と4頂点の小例は、その方針を一般の集約へつなぐための本書独自の説明である（問題文とともに2026-10-29再照合）。
+ABC220 Fの公式問題文・公式解説を2026-10-29に再照合した。公式解説は、全頂点からの距離和を、部分木サイズと根の移動による差分で線形時間に求める方針を示す。上のメッセージ表現と4頂点の小例は、その方針を一般の集約へつなぐための本書独自の説明である。
+
+- [ABC220 F 公式解説](https://atcoder.jp/contests/abc220/editorial/2693)
 - [ABC220 F 公式問題文](https://atcoder.jp/contests/abc220/tasks/abc220_f)
 - [ABC223 G 公式解説](https://atcoder.jp/contests/abc223/editorial/2775)
 - [ABC223 G 公式問題文](https://atcoder.jp/contests/abc223/tasks/abc223_g)
