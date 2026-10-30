@@ -138,7 +138,6 @@ test('keeps the mathematical and grammar notation readable in published explanat
     ['abc267-g', 'newdp[m]+=dp[m](m+c)'],
     ['abc298-ex', 'F_L=H[M]+sz[M](dep[L]−2dep[C])'],
     ['abc272-ex', 'G(L) = dp[N][L](N−L)!'],
-    ['abc306-ex', 'dp[mask]=Σ_{∅≠s⊆mask}dp[mask\\s](−1)^(c(s)+1)'],
     ['abc222-h', '(1/N)[x^(N-1)](1+3x+x^2)^(2N)'],
   ] as const) {
     await page.goto(`./problems/${id}/`);
@@ -146,6 +145,19 @@ test('keeps the mathematical and grammar notation readable in published explanat
       page.locator('.authored-content').getByText(notation, { exact: false }).first(),
     ).toBeVisible();
   }
+});
+
+test('renders the ABC306 Ex subset recurrence as visible MathML', async ({ page }) => {
+  await page.goto('./problems/abc306-ex/');
+  const recurrence = page.locator('.authored-content .math-display math').filter({
+    has: page.locator('munder'),
+  });
+  await expect(recurrence).toHaveCount(1);
+  await expect(recurrence).toBeVisible();
+  // Check the rendered expression, not the hidden TeX annotation or the old plain text.
+  await expect(recurrence.locator('semantics > mrow')).toHaveText('dp[T]=∑∅≠s⊆T(−1)c(s)+1dp[T∖s]');
+  await expect(recurrence.locator('munder')).toHaveText('∑∅≠s⊆T');
+  await expect(recurrence.locator('msup')).toHaveText(')c(s)+1');
 });
 
 test('connects unknown-problem recall cues to the actual slope-trick learning outcome', async ({

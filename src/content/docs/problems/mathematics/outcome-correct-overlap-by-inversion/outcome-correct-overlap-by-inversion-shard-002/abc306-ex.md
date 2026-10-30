@@ -1,7 +1,7 @@
 ---
 title: "ABC306-EX — Balance Scale"
 draft: true
-authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mathematics/outcome-correct-overlap-by-inversion/outcome-correct-overlap-by-inversion-shard-002/abc306-ex.md","learningOutcomeIds":["outcome-correct-overlap-by-inversion"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dag-topological-processing","unit-dp-subset-state"],"excludedTopics":["選択順を二項係数だけで式化する数え上げ。"],"tagIds":["tag-inclusion-exclusion","tag-dag-topological-processing","tag-subset-bitmask-dp"],"sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"等値辺の各連結成分を縮約し、厳密な比較を軽い側から重い側への辺とする。実現可能な比較結果から自己ループや有向閉路は生じない。逆に縮約後がDAGなら、トポロジカル順の位置を成分の重さにできるため、比較結果は実現可能である。\n\n非空集合 $$s\\subseteq T$$ を選び、内部辺を全て等値、補集合との辺を全て外向きに固定する。この操作は、補集合の有効な比較結果から、$$G[s]$$ の各連結成分をsourceとする有効な結果への一意な拡張である。反対に、完成結果からsourceの非空な部分集合を選ぶと、その和集合 $$s$$ の内部辺と境界辺はこの固定と一致する。従って、選択されたsource数は $$c(s)$$ となり、各選択の完成結果を数える項は $$dp[T\\setminus s]$$ に対応する。\n\n任意の非空の有効な結果は少なくとも一つのsourceを持つ。source数が $$k$$ の結果は、$$j$$ 個を選ぶ $$\\binom{k}{j}$$ 通りに符号 $$(-1)^{j+1}$$ を付けた和で数えられ、その係数は1である。不正な結果は拡張で生成されない。空の結果を1通りとする初期値から、真部分集合の値を用いてこの包除を行うことで、全ての有効な比較結果を過不足なく数える。","sourceRevisionIds":["source-abc306-ex-problem-b9c7a8bd006550e4d73f568241fff4d4c28a401e89035db0d0f5053c9441705b","source-abc306-editorial-6608-b26cf5ec067dbb3ef7869e21dc5ec7a7d1d7630314db9f49d2d1710a6ad2fa10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -21,69 +21,125 @@ authoringUnit: {"problemId":"abc306-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-各comparisonの<,>,=はedgeの向きまたは両端の同一weight classへのcontractに対応し、実現可能性はcontract後のstrict-order digraphがDAGであることと同値である。
+同じ重さだと分かったおもりを一つにまとめると、残る比較は「軽い側から重い側へ」の有向辺になる。このグラフが閉路を持たなければ比較結果を実現できる。そこで、入ってくる辺のない成分を取り除く部分集合DPを考える。ただし、取り除ける成分が複数あると同じ比較結果を重複して数えるため、包除原理で補正する。
 
-DAGからindegree-zero classesを順に除く数え方は複数sourcesの除去順を重複計上するため、source集合に包除原理が必要になる。
+### 数えるのは入力の辺上の比較結果
 
-棄却する候補: M edgesへ3結果をすべて割り当て、cycle consistencyを検査する。
+おもりを頂点、入力で比較する二頂点の組を無向辺とするグラフを $$G=(V,E)$$ と置く。$$V=\{1,\ldots,N\}$$、辺数は $$M$$ である。辺ごとに `<`・`=`・`>` を割り当て、その全てを満たす重さが存在する結果だけを数えたい。全割当ての列挙は $$3^M$$ 通りで、$$M\leq136$$ では大きすぎる。一方、$$N\leq17$$ なので、頂点集合を状態にする余地がある。
 
-3^MでMは最大136となる。
+ここで、重さそのものや全頂点の大小関係を数えると、同じ比較結果を何度も数えてしまう。頂点 $$i$$ の重さを $$w_i$$ とする。例えば三頂点の道 $$1-2-3$$ では、重さの列が $$(1,3,1)$$、$$(1,3,2)$$、$$(2,3,1)$$ のどれでも、観測する結果は $$w_1<w_2$$、$$w_2>w_3$$ で同じである。比較しない頂点1と3の関係が等しい・小さい・大きいと変わっても、答えへの寄与は合わせて1通りである。
 
-採用する候補: vertex subset maskのDPを用い、除去する非空subset sが元graph上で持つconnected components数c(s)に応じて符号(−1)^(c(s)+1)を掛ける。
+### 等値辺を縮約して実現可能性を表す
 
-source equality classesの全選択を包除で一度ずつ数え、全submask遷移はO(3^N)でN≤17に収まる。
+比較結果を一つ固定する。`=` を割り当てた辺だけを残し、その連結成分を一頂点へ縮約する。成分内のおもりは全て同じ重さである必要があるので、以下ではこの成分を**等値成分**と呼ぶ。厳密な大小を表す辺は、必ず軽い側から重い側へ向ける。
 
-同時にindegree zeroとして除くverticesは、元のundirected selected subgraphの各connected component内で=により一classへcontractされる必要がある。
+縮約後に有向辺の自己ループが残るなら、一つの等値成分内で厳密な大小を要求しており矛盾する。有向閉路も、辺に沿って重さが増え続けて元へ戻るので実現できない。逆に、自己ループも有向閉路もない有向非循環グラフ（DAG）なら、トポロジカル順に並べた成分へ順に重さ $$1,2,\ldots$$ を与えれば、全比較を実現できる。従って、有効な比較結果であることと、等値辺の縮約後がDAGであることは同値である。
 
-dp[mask]=Σ_{∅≠s⊆mask}dp\[mask\s](−1)^(c(s)+1)とすると、複数zero-indegree componentsを持つcaseのalternating sumが1になる。
+この縮約では、入力の等値辺で結ばれた頂点だけをまとめる。先ほどの道で $$w_1=w_3$$ としても、頂点1と3の間に等値辺の道はなく、二つの別の等値成分として扱う。DAGに重さを付ける方法やトポロジカル順の個数は数えず、元の各辺に割り当てた比較結果を一度だけ数える。
+
+### 取り除くsourceを固定すると残りだけを数えられる
+
+有向グラフの入次数0の頂点を **source** と呼ぶ。ここでは縮約後の等値成分が一頂点なので、sourceも一つの等値成分を指す。非空のDAGには必ずsourceがあるため、これを取り除き、残る頂点集合に同じ問題を解けばよさそうである。
+
+残っている元の頂点集合を $$T\subseteq V$$ とする。$$G[T]$$ は、$$T$$ 内の頂点と、その両端が $$T$$ にある入力辺だけを残した**誘導部分グラフ**である。縮約後のsourceをいくつか選び、それらに含まれる元の頂点の和集合を、非空集合 $$s\subseteq T$$ と置く。選ばないsourceが残っていてもよい。
+
+このような選択では、$$s$$ に関係する辺の結果は全て決まる。
+
+- **両端が $$s$$ 内にある辺は全て `=`。** 厳密な比較なら、その到着先の等値成分に入辺ができ、選んだ成分がsourceでなくなる。従って、$$G[s]$$ の各連結成分がちょうど一つの選択された等値成分になる。
+- **$$s$$ と $$T\setminus s$$ を結ぶ辺は全て $$s$$ から外向き。** `=` なら同じ等値成分の一部を残したことになり、内向きならsourceの条件に反する。各比較では $$s$$ 側を軽くする以外にない。
+
+逆に、任意の非空集合 $$s\subseteq T$$ と、補集合 $$T\setminus s$$ の有効な比較結果を一つ取ろう。$$s$$ 内の辺を全て `=`、補集合への辺を全て外向きにすれば、一つの完成結果が一意に定まる。追加した等値成分には入辺がなく、補集合内は既にDAGなので、新しい閉路は生じない。よって、この拡張は常に有効で、$$G[s]$$ の各連結成分は確かにsourceとなる。元の結果から選んだsourceを除く操作と、この拡張操作は互いに逆である。
+
+この対応で固定しているのは「選んだ成分がsourceである」ことであり、「sourceがそれらだけである」ことではない。この違いが、次の重複補正につながる。
+
+### 完成結果ごとの寄与を1にする
+
+一つずつsourceを選んで足すだけでは、sourceが二つある同じ完成結果を2回数える。二つをまとめて選んだ分を1回引けば、寄与は $$+1,+1,-1$$ で合計1になる。
+
+道 $$1-2-3$$ の結果 $$1\to2\leftarrow3$$ では、sourceは頂点1と3の二つである。$$s=\{1\}$$ と $$s=\{3\}$$ で各1回足し、$$s=\{1,3\}$$ で1回引く。最後の集合は非連結であり、二つのsourceを選ぶので符号が負になる。一方、同じ道の結果が $$w_1=w_2<w_3$$ なら、$$s=\{1,2\}$$ は二頂点でも一つのsourceであり、符号は正となる。選んだsourceの個数は、一般には頂点数ではなく、$$G[s]$$ の連結成分数で求まる。
+
+一般に、固定した完成結果が $$k$$ 個のsourceを持つとする。$$k\geq1$$ であり、そのうち $$j$$ 個を選ぶ方法は $$\binom{k}{j}$$ 通りある。選ぶ個数が奇数なら足し、偶数なら引くと、完成結果一つの合計係数は
+
+$$
+\sum_{j=1}^{k}(-1)^{j+1}\binom{k}{j}=1
+$$
+
+となる。これは $$\sum_{j=0}^{k}(-1)^j\binom{k}{j}=(1-1)^k=0$$ から、空の選択の項1を移せば分かる。全sourceを一度に選ぶよう強制する必要はなく、非空の部分集合を全て選んで符号を付ければ、どの完成結果も一度だけ数えられる。
+
+### 部分集合DPの式と計算順
+
+$$dp[T]$$ を、$$G[T]$$ 上の有効な比較結果の個数とする。頂点がない場合は、比較もない空の結果が1通りなので
+
+$$
+dp[\varnothing]=1
+$$
+
+と初期化する。$$c(s)$$ を、等値縮約する前の無向グラフ $$G[s]$$ の連結成分数と定義する。前述の対応から、選択するsource数は $$c(s)$$、各選択で補集合から拡張できる結果数は $$dp[T\setminus s]$$ である。従って、非空の $$T$$ について
+
+$$
+dp[T]=\sum_{\varnothing\ne s\subseteq T}
+(-1)^{c(s)+1}dp[T\setminus s]
+$$
+
+を得る。ここでは **$$G[s]$$ の連結成分数を使う**。$$s$$ の頂点数や、補集合の連結成分数を符号に使ってはならない。
+
+まず全ての $$s$$ について $$c(s)$$ を前計算する。入力を隣接行列で持ち、各誘導部分グラフをDFSやBFSで探索すれば、一集合あたり $$O(N^2)$$ 時間でよい。続いて、集合サイズの昇順、またはbitmaskの整数値の昇順に $$dp[T]$$ を求める。$$s$$ は非空なので、参照先は必ず真部分集合であり、先に計算できる。答えは $$dp[V]$$ を $$998244353$$ で割った余りである。
+
+### 三頂点の道と三角形で違いを確かめる
+
+道 $$1-2-3$$ では、二辺の三値比較の全 $$3^2=9$$ 通りを実現できる。特に $$s=\{1,3\}$$ は二成分なので符号が負となり、先ほどの二sourceの重複を引く。一方、$$s=V$$ は連結なので、一成分を全て等値にする結果を正の符号で足す。
+
+三角形 $$K_3$$ では全ての頂点対を比較する。有効な結果は、全て等しい1通り、二つだけ等しい $$3\times2=6$$ 通り、全て異なる $$3!=6$$ 通りの合計13通りで、公式の入力例1と一致する。等値辺の連結性だけで全てを受理してはいけない。例えば $$w_1=w_2$$、$$w_2=w_3$$、$$w_1<w_3$$ は縮約後の自己ループで不正となり、$$w_1<w_2<w_3<w_1$$ は有向閉路で不正となる。
 
 ## 典型の発動条件
 
 ### DAGのsource除去と包除原理
 
-発動条件: partial orderをminimal elementsの除去で数えると複数の除去順が同じ構造を表すとき。
-
-nonempty source subsetを選ぶsubmask transitionにconnected-component数由来のalternating signを付ける。
+対象をDAGとして表し、入次数0の成分を取り除いて小さい問題へ帰着できるときに候補になる。除去可能な成分が複数あると、一成分ずつ足す再帰は同じ完成結果を重複して数える。選んだ成分を同時にsourceにする条件を調べ、残りの有効な結果との一対一対応が得られるなら、非空のsource選択に交互符号を付けて補正できる。
 
 ### 全subsetの連結成分数前計算
 
-発動条件: Nが20未満で、各submask transitionの係数がinduced subgraphのcomponent countに依存するとき。
-
-least bitを追加するrecurrence等でc(mask)を全2^N masksについて求める。
+頂点数が小さく、部分集合DPの係数が誘導部分グラフだけで決まるときは、係数を全 $$2^N$$ 集合について先に求める。各DP遷移で探索を繰り返さず、前計算した値を参照すれば、全ての部分集合とその部分集合の列挙を $$O(3^N)$$ 時間で処理できる。
 
 ## 問題固有の要素
 
-equal outcomesは単なるbidirectional edgesではなくvertex identificationであり、異なるmass classes間だけにstrict directed edgesが残る。
-
-別の問題へ持ち帰る視点: 比較結果の=を含む整合性問題は、equality classesをcontractしてstrict relationのacyclicityを見る。
+`=` の結果は双方向の有向辺として扱わず、等値辺でつながる頂点の縮約として表す。一方、同じ重さを割り当てられることだけを理由に、入力辺でつながらない二成分をまとめない。観測する辺だけに注目したからこそ、sourceを選ぶ集合 $$s$$ の内部と境界の比較が一意に決まり、重さの割当てを列挙せずに済む。
 
 ## 正当性
 
-等値比較を縮約した後の厳密比較がDAGであることが実現可能性と同値。任意の非空DAGはsourceを持ち、source classの一つ以上を選ぶ交互和は1なので除去順重複を相殺できる。選択頂点sの元graph各成分は同時sourceとして一classへ等値縮約されるため符号は(−1)^{c(s)+1}になる。補集合の既計算dpを合成すると全実現可能結果を一度数える。
+等値辺の各連結成分を縮約し、厳密な比較を軽い側から重い側への辺とする。実現可能な比較結果から自己ループや有向閉路は生じない。逆に縮約後がDAGなら、トポロジカル順の位置を成分の重さにできるため、比較結果は実現可能である。
+
+非空集合 $$s\subseteq T$$ を選び、内部辺を全て等値、補集合との辺を全て外向きに固定する。この操作は、補集合の有効な比較結果から、$$G[s]$$ の各連結成分をsourceとする有効な結果への一意な拡張である。反対に、完成結果からsourceの非空な部分集合を選ぶと、その和集合 $$s$$ の内部辺と境界辺はこの固定と一致する。従って、選択されたsource数は $$c(s)$$ となり、各選択の完成結果を数える項は $$dp[T\setminus s]$$ に対応する。
+
+任意の非空の有効な結果は少なくとも一つのsourceを持つ。source数が $$k$$ の結果は、$$j$$ 個を選ぶ $$\binom{k}{j}$$ 通りに符号 $$(-1)^{j+1}$$ を付けた和で数えられ、その係数は1である。不正な結果は拡張で生成されない。空の結果を1通りとする初期値から、真部分集合の値を用いてこの包除を行うことで、全ての有効な比較結果を過不足なく数える。
 
 ## 実装上の注意
 
-- submask loopはs=maskから(s−1)&maskでempty直前まで回し、mask\sの既計算順を保証する。
-- c(s)のparityでmodular加減を行い、負値を998244353へ正規化する。
+- 頂点 $$i$$ をbit $$i-1$$ に対応させる。集合の整数表現を `mask`、その非空部分集合を `s` とすると、`s = mask` から始め、`s = (s - 1) & mask` で0になる直前まで列挙できる。`mask ^ s` が補集合であり、`mask` より小さいので昇順のDPで参照できる。
+- $$c(s)$$ が奇数なら加算、偶数なら減算する。演算は $$998244353$$ を法として行い、減算後の負値を正規化する。
+- $$s=T$$ の項も含める。残りが空のとき $$dp[\varnothing]=1$$ が必要で、0では全ての値が0になってしまう。
+- 孤立頂点は誘導部分グラフの一成分として数える。ただし比較辺がないので、その重さを選ぶ追加の係数は掛けない。辺のない集合上の比較結果は空の結果1通りであり、離れた成分の重さを並べる方法も掛けない。
 
 ## 復習の核
 
-- 三値比較はequality contract後のstrict partial orderとしてmodel化する。
-- DAGをsourcesから生成する数え上げでは、同時に選べるsourcesによる重複を包除で補正する。
+- 比較結果を数えるときは、入力で比較していない頂点間の大小を勝手に補って数えない。
+- 等値辺で縮約し、厳密な大小を一方向へそろえると、実現可能性をDAGの条件へ移せる。
+- 包除の符号は「何個の条件を同時に選んだか」で決まる。本問では選んだ頂点数ではなく、選んだsource数、すなわち誘導部分グラフの連結成分数を見る。
+- 遷移を導くときは、小さい結果からの拡張と完成結果からの分解を両方確認し、固定した完成結果一つの係数を調べる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(3^N+N²2^N)。誘導graphの成分数を前計算してsource集合包除を行う。
+$$O(3^N+N^2 2^N)$$。全誘導部分グラフの成分数を隣接行列上の探索で前計算する部分が $$O(N^2 2^N)$$。DPでは各頂点が「$$s$$ 内」「$$T\setminus s$$ 内」「$$T$$ 外」の三つのいずれかに属するため、全ての組 $$(T,s)$$ は $$3^N$$ 通りで、非空の $$s$$ を使う遷移数は $$3^N-2^N$$ 通りとなる。
 
 ### 空間
 
-O(2^N+N²)。
+$$O(2^N+N^2)$$。$$dp$$ と連結成分数の配列が $$O(2^N)$$、隣接行列が $$O(N^2)$$、各探索で使う一時領域が $$O(N)$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All input values are integers.; 2 \le N \le 17; 1 \le M \le \frac{N \times (N-1)}{2}; 1 \le A_i < B_i \le N; i \neq j \Rightarrow (A_i,B_i) \neq (A_j,B_j)
+$$2\leq N\leq17$$、$$1\leq M\leq N(N-1)/2$$ で、同じ頂点対の比較は重複しない。最大で $$M=136$$ となるため辺の全割当て列挙は使わず、$$2^{17}=131072$$ 状態、$$3^{17}-2^{17}=129009091$$ 遷移の頂点集合DPを用いる。全ての状態で答えを $$998244353$$ を法として保持する。入力の上限は実行時間3秒・メモリ1024 MiBであり、各遷移を配列参照と剰余の加減算だけにする。
 
 ## 出典
 
