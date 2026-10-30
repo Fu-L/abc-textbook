@@ -1,7 +1,7 @@
 ---
 title: "ABC270-G — Sequence in mod P"
 draft: true
-authoringUnit: {"problemId":"abc270-g","docPath":"src/content/docs/problems/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.md","learningOutcomeIds":["outcome-find-orbit-hit-by-bsgs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-baby-step-giant-step","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"A≠0ならaffine写像は有限体上の全単射で、到達するならP未満の最初の時刻がある。時刻iB+jを、f^{iB}(S)=f^{−j}(G)の衝突として探索すると全候補を覆う。baby重複で最小jを保持し全衝突の最小時刻を選ぶと最初の到達になる。A=0は初期と一歩後Bだけの別case。","sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc270-g","docPath":"src/content/docs/problems/mathematics/outcome-find-orbit-hit-by-bsgs/outcome-find-orbit-hit-by-bsgs-shard-001/abc270-g.md","learningOutcomeIds":["outcome-find-orbit-hit-by-bsgs"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["Baby-Step Giant-Step・可逆作用の反復到達探索の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-baby-step-giant-step","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"$$S=G$$ なら0が最小である。$$S\\ne G,A=0$$ なら、時刻1以降は常に $$B$$ なので、$$G=B$$ のときだけ最小時刻1を返せばよい。\n\n残りでは $$f$$ は全単射である。軌道で $$X_u=X_v$$（$$0\\leq u<v$$）となったとき、逆写像を $$u$$ 回適用すれば $$S=X_{v-u}$$ となる。従って軌道は出発点から周期をなし、その長さは状態数 $$P$$ 以下である。到達する目標の最初の出現は必ず $$0\\leq t<P$$ に含まれる。\n\n範囲内の任意の時刻を $$t=iW+j$$、$$0\\leq j<W$$ と分けると、可逆性により $$f^t(S)=G$$ と $$f^{iW}(S)=f^{-j}(G)$$ は同値である。よって照合から返す時刻では必ず目標に到達し、到達時刻があればその商に対応するgiant stepで一致が見つかる。重複をまとめても同じ状態の最小の $$j$$ は残るため、到達候補は失われない。\n\n固定した $$i$$ では最小の $$j$$ が最も早い候補であり、$$i$$ を増やすと候補時刻の区間 $$[iW,(i+1)W)$$ が昇順に並ぶ。従って $$i$$ 昇順で最初に見つけた範囲内の一致が最小時刻になる。最終区間で保存した $$j$$ が $$iW+j\\geq P$$ を満たすなら、同じ状態のより大きい添字もすべて範囲外である。最後まで一致がなければ、周期内に目標がなく到達不能である。","sourceRevisionIds":["source-abc270-g-problem-d2e7f7e98ead091815bbff0cacc9d5bb12379fe195b4aa6f134dfa403c930e96","source-abc270-editorial-4847-f2bf8ee71d83512d90ea93c0c7ced12401891727cf5632de535bcbe42d7368fb"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,69 +16,139 @@ authoringUnit: {"problemId":"abc270-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-A≠0ならf(x)=Ax+Bはfield modulo P上のbijectionで、inverseもaffine functionとして計算できる。
+目標から一歩ずつ逆にたどった状態を表にし、出発点から大きな幅で進んだ状態との一致を探す。逆に戻れることと、何歩分もの遷移を一つの式にまとめられることが、この問題で長い数列を走査せずに済む理由になる。
 
-有限集合上のbijection orbitではGが現れるなら最初のP step以内なので、indexをiM+jへ分けてmeet-in-the-middleできる。
+### 先に直接答えられる場合を分ける
 
-棄却する候補: Sからrecurrenceを順にsimulationし、Gまたは重複状態に達するまで進める。
+求めるのは、初項 $$X_0=S$$、遷移 $$X_{t+1}=(AX_t+B)\bmod P$$ に対して、$$X_t=G$$ となる最小の非負整数 $$t$$ である。まず $$S=G$$ なら、他の条件によらず答えは0になる。
 
-一caseでP=10^9 stepかかり得る。
+以後は $$S\ne G$$ とする。$$A=0$$ なら一歩後からずっと $$B$$ なので、$$G=B$$ なら1、そうでなければ到達不能の $$-1$$ を返す。逆写像を作るのは残りの $$A\ne0$$ の場合だけでよい。
 
-採用する候補: M≈√Pとし、G,f^{-1}(G),…,f^{-(M−1)}(G)をmapへ置き、S,f^M(S),…とのintersectionを探す。
+### 逆に戻れるなら、時刻を二つに分けられる
 
-一致 f^{iM}(S)=f^{-j}(G) から候補index iM+jを復元でき、各caseをO(√P log P)以内で処理できる。
+ここから合同式はすべて法 $$P$$ で考える。$$P$$ は素数で $$A\ne0$$ なので、$$A$$ の逆元 $$A^{-1}$$ が存在する。$$f(x)=Ax+B$$ と置き、$$y=f(x)$$ を $$x$$ について解くと、
 
-affine mapsはpair(a,b)で表し、compositionによりf^MもO(M)またはbinary exponentiationで一つのaffine mapとして得られる。
+$$
+y=Ax+B\quad\Longleftrightarrow\quad x=A^{-1}(y-B)
+$$
 
-baby valuesに重複がある場合は最小jを保持し、得られたiM+jの最小値を取らないと最初の到達時刻を保証できない。
+となる。従って $$f^{-1}(y)=A^{-1}(y-B)$$ が逆写像であり、各状態の直前の状態は一意に決まる。逆元は $$A^{P-2}\bmod P$$ を高速累乗で一度計算すればよい。
+
+可逆な遷移を有限個の状態上で繰り返すと、出発点から周期をなす。状態は $$P$$ 個なので、目標へ到達するなら最初の時刻は $$P$$ 未満である。ただし、一歩ずつ調べると一ケースで最大 $$10^9$$ 回程度の遷移が必要になる。
+
+そこで探索幅を $$W=\lceil\sqrt P\rceil$$ とし、時刻を商と余りに分ける。$$f^k$$ は $$f$$ の $$k$$ 回の適用を表し、$$f^0$$ は何も変えない写像とする。
+
+$$
+t=iW+j,\qquad 0\leq j<W,\quad 0\leq iW+j<P
+$$
+
+到達条件の両辺に逆写像を $$j$$ 回適用すると、
+
+$$
+f^{iW+j}(S)=G\quad\Longleftrightarrow\quad f^{iW}(S)=f^{-j}(G)
+$$
+
+となる。左辺は出発点から $$W$$ 歩ずつ、右辺は目標から逆向きに一歩ずつ進めた状態である。右辺を表にしておけば、各 $$i$$ について $$W$$ 通りの $$j$$ を毎回試す必要がなくなる。
+
+### 一giant stepを一次式の評価にまとめる
+
+$$W$$ 歩進むたびに $$f$$ を $$W$$ 回適用しては、全体が再び $$O(P)$$ 時間になる。ここでは $$f^W$$ も一次式になることを使う。
+
+一次式の写像 $$x\mapsto ax+b$$ を係数の組 $$(a,b)$$ で表す。$$(c,d)$$ を適用した**後に** $$(a,b)$$ を適用するなら、代入して
+
+$$
+a(cx+d)+b=(ac)x+(ad+b)
+$$
+
+を得るので、合成後の係数は $$(ac,ad+b)$$ である。定数項が $$ad+b$$ になるのは、先に足した $$d$$ にも後の係数 $$a$$ が掛かるためだ。順序を逆にした合成とは区別する。
+
+単位写像 $$(1,0)$$ を初期値とし、$$(A,B)$$ をこの合成で二分累乗すると、$$O(\log W)$$ 回の合成で $$f^W(x)=\alpha x+\beta$$ を求められる。あるいは、$$(a,b)=(1,0)$$ から $$(a,b)\leftarrow(Aa,Ab+B)$$ を $$W$$ 回同時更新しても、前計算は $$O(W)$$ 時間に収まる。一度係数 $$\alpha,\beta$$ を得れば、各giant stepは $$x\leftarrow(\alpha x+\beta)\bmod P$$ の定数時間の更新になる。
+
+### 二つの表現を照合する
+
+一ケースの手順は次のとおり。二分累乗による前計算を使う。
+
+1. 前述の $$S=G$$、$$A=0$$ を処理する。残りで $$A^{-1}$$ と $$f^W$$ の係数を前計算する。
+2. $$y=G$$ から始め、$$j=0,1,\ldots,W-1$$ の順に状態 $$y$$ と添字 $$j$$ を表へ保存し、$$y\leftarrow A^{-1}(y-B)\bmod P$$ と更新する。同じ状態が登録済みなら上書きせず、最小の $$j$$ を残す。
+3. $$x=S$$ から始め、$$i=0,1,\ldots,\lfloor(P-1)/W\rfloor$$ の順に表で $$x$$ を探す。一致した添字を $$j$$ として、$$iW+j<P$$ ならその時刻を返す。次の状態は $$x\leftarrow(\alpha x+\beta)\bmod P$$ で得る。
+4. 最後まで範囲内の一致がなければ $$-1$$ を返す。
+
+公式入力例の最初のケース、$$P=5,A=2,B=1,S=1,G=0$$ を追う。$$W=3$$ で、$$2^{-1}=3\pmod5$$ だから逆写像は $$3(y-1)$$。baby側の表は次のようになる。
+
+| 添字 $$j$$ | 0 | 1 | 2 |
+| --- | --- | --- | --- |
+| 目標から逆に戻った状態 $$f^{-j}(0)$$ | 0 | 2 | 3 |
+
+順向きには $$f^2(x)=4x+3$$、$$f^3(x)=8x+7\equiv3x+2\pmod5$$ なので、giant側は1から始まり、次が $$3\cdot1+2\equiv0$$ となる。
+
+| 添字 $$i$$ | 0 | 1 |
+| --- | --- | --- |
+| $$W$$ 歩ずつ進んだ状態 $$f^{iW}(1)$$ | 1 | 0 |
+| 一致する表の添字 $$j$$ | なし | 0 |
+
+最初の一致は $$i=1,j=0$$ なので、答えは $$1\cdot3+0=3$$。実際の列 $$1\to3\to2\to0$$ と一致する。
+
+一方、短周期では表に重複ができる。$$P=11,A=10,B=0,S=1,G=10,W=4$$ なら逆写像も $$10y\bmod11$$ で、baby側は $$10,1,10,1$$ となる。状態1に最小の $$j=1$$ を残すと、giant側の初期状態1と照合して答え1を得る。最後の $$j=3$$ で上書きすると、同じ最初の照合で3を返してしまう。従って、表の重複処理まで含めて最小時刻を保証する必要がある。
 
 ## 典型の発動条件
 
 ### Baby-Step Giant-Step
 
-発動条件: invertible functionの反復でf^n(x)=yとなる最小nを、状態空間全走査より速く求めたいとき。
+可逆な遷移の反復で最初の到達時刻を求めたいが、一歩ずつの走査は長すぎるときに候補になる。必要なのは探索時刻の上限、逆向きの一歩、幅をまとめた順向きの一歩をそれぞれ求める方法である。
 
-targetからinverseをM回辿るbaby tableと、startからf^Mを反復するgiant sequenceを照合する。
+本問では目標側から逆向きに進む表と、出発点側から順向きに進む列を照合する。表の向きを決めてから一致条件を書き、候補時刻を復元する。
 
 ### affine mapの合成と逆写像
 
-発動条件: modular recurrenceがax+bで、反復・逆向き遷移をまとめたいとき。
+遷移が一次式なら、合成しても係数二つで表せることに注目する。結合則を持つ合成を使って高速累乗すれば、多数回の反復を一つの写像へまとめられる。
 
-pair(a,b)のcompositionでpower mapを作り、a^{-1}からinverse affine mapを導く。
+逆写像には乗数の逆元が必要である。合成できることと逆に戻れることは別の条件なので、両方を確認する。
 
 ## 問題固有の要素
 
-A=0ではX_0=S、その後は常にBなので別処理し、A≠0のときだけinverse-based BSGSを使える。
+法が素数なので、$$A\ne0$$ だけで逆元の存在が保証される。$$A=0$$ は逆に戻れないが、状態が一歩で一定になるため直接答えられる。可逆性が必要な解法では、使えないパラメーターを先に分類すると、かえって簡単な場合として処理できることがある。
 
-別の問題へ持ち帰る視点: inverseを要求するorbit algorithmでは、非可逆parameterを先に分類して小さな直接解へ落とす。
+$$A=1$$ でもこの手順を使える。$$A-1$$ で割る変形を使っていないため、追加の場合分けは不要である。
 
 ## 正当性
 
-A≠0ならaffine写像は有限体上の全単射で、到達するならP未満の最初の時刻がある。時刻iB+jを、f^{iB}(S)=f^{−j}(G)の衝突として探索すると全候補を覆う。baby重複で最小jを保持し全衝突の最小時刻を選ぶと最初の到達になる。A=0は初期と一歩後Bだけの別case。
+$$S=G$$ なら0が最小である。$$S\ne G,A=0$$ なら、時刻1以降は常に $$B$$ なので、$$G=B$$ のときだけ最小時刻1を返せばよい。
+
+残りでは $$f$$ は全単射である。軌道で $$X_u=X_v$$（$$0\leq u<v$$）となったとき、逆写像を $$u$$ 回適用すれば $$S=X_{v-u}$$ となる。従って軌道は出発点から周期をなし、その長さは状態数 $$P$$ 以下である。到達する目標の最初の出現は必ず $$0\leq t<P$$ に含まれる。
+
+範囲内の任意の時刻を $$t=iW+j$$、$$0\leq j<W$$ と分けると、可逆性により $$f^t(S)=G$$ と $$f^{iW}(S)=f^{-j}(G)$$ は同値である。よって照合から返す時刻では必ず目標に到達し、到達時刻があればその商に対応するgiant stepで一致が見つかる。重複をまとめても同じ状態の最小の $$j$$ は残るため、到達候補は失われない。
+
+固定した $$i$$ では最小の $$j$$ が最も早い候補であり、$$i$$ を増やすと候補時刻の区間 $$[iW,(i+1)W)$$ が昇順に並ぶ。従って $$i$$ 昇順で最初に見つけた範囲内の一致が最小時刻になる。最終区間で保存した $$j$$ が $$iW+j\geq P$$ を満たすなら、同じ状態のより大きい添字もすべて範囲外である。最後まで一致がなければ、周期内に目標がなく到達不能である。
 
 ## 実装上の注意
 
-- candidate iM+jはP以下の範囲だけを採用し、S=Gなら必ず0を最小解として返す。
-- P近傍の積は64 bitで保持してmoduloを取り、baby tableのduplicateは必要なjの向きに合わせて更新する。
+- $$S=G$$ を最初に判定する。$$A=0$$ の場合も、$$S=G=B$$ の答えは1ではなく0である。
+- 表には最小の $$j$$ を残す。$$j$$ 昇順で初回だけ挿入すればよく、短周期でも上書きしない。
+- giant側は $$iW<P$$ の間だけ調べ、候補にも $$iW+j<P$$ を要求する。$$W=\lceil\sqrt P\rceil$$ は整数の二乗で確かめると丸め誤差を避けられる。
+- 引き算 $$y-B$$ は負になり得るので、剰余を $$0,\ldots,P-1$$ に正規化する。係数の合成では、更新前の係数から二つの新しい値を計算する。
+- 係数の積や $$\alpha x+\beta$$ は $$10^{18}$$ 程度になり得る。C++などでは符号付き64 bit整数で計算してから剰余を取り、32 bitで先に掛けない。
 
 ## 復習の核
 
-- function iterationの到達時刻はindexをblock quotientとremainderに分け、inverse側とのmeet-in-the-middleを考える。
-- BSGSで存在判定だけでなく最小indexが必要なら、tableのduplicateと候補の走査順を別途証明する。
+- 反復回数が大きいときは、時刻を商と余りに分け、逆向きに戻した目標と順向きに進めた出発点を照合できないか考える。
+- 逆に戻れるだけでは高速化にならない。大きな幅を一度で進める写像も前計算する。
+- 最小時刻を返すには、表の重複で残す添字と、giant側を調べる順序の両方が必要になる。
 
 ## 計算量と制約
 
 ### 時間
 
-各case O(√P)期待時間。affine BSGSのbaby tableをhashで照合する。
+一ケースで逆元の高速累乗に $$O(\log P)$$、$$f^W$$ の合成の二分累乗に $$O(\log W)$$ 時間。baby側は $$W$$ 状態、giant側は高々 $$\lceil P/W\rceil$$ 状態であり、一回の状態更新は定数時間である。
+
+hash表なら、構築・照合を含めて期待 $$O(\log P+W+P/W)=O(\sqrt P)$$ 時間。平衡二分探索木などの順序付き辞書なら、各操作の最悪 $$O(\log W)$$ を含めて最悪 $$O(\sqrt P\log P)$$ 時間となる。全 $$T$$ ケースの時間は、各ケースの費用の総和である。
 
 ### 空間
 
-O(√P)。
+表に保存する状態は高々 $$W$$ 個なので、一ケース $$O(\sqrt P)$$。二分累乗は係数二つの組を定数個使う反復実装でよい。ケースを順に処理して表を使い回せば、全ケース分の表を同時に持つ必要はない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq T \leq 100; 2 \leq P \leq 10^9; P is a prime.; 0\leq A,B,S,G < P; All values in the input are integers.
+公式制約は $$1\leq T\leq100$$、素数 $$2\leq P\leq10^9$$、$$0\leq A,B,S,G<P$$。実行時間制限は4秒、メモリ制限は1024 MiBである。最大の $$W$$ は31623で、各ケースで両方向をそれぞれ約3.2万状態に抑えられる。hash表なら十分な容量を確保し、辞書を使う場合はその操作費用も含めて実装する。
 
 ## 出典
 
