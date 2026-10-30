@@ -24,16 +24,36 @@ sidebar:
 
 ## 考え方
 
-剰余は加減乗算と両立するが、aで割るにはgcd(a,m)=1が必要になる。二分累乗でa^kを求め、拡張Euclidまたは素数法のFermatで逆元を作る。
+以下では法を整数 $$m\geq2$$ とする。加減乗算は各入力を剰余に置き換えて計算できるが、整数除算ではその順序を交換できない。例えば8を2で割ってから法7で剰余を取ると4になる。一方、先に8を剰余1へ置き換え、整数除算で小数部分を切り捨てると、結果は0になってしまう。
 
+$$
+(8/2)\bmod7=4,\qquad
+\left\lfloor\frac{8\bmod7}{2}\right\rfloor=0.
+$$
 
-二分累乗はres=1,power=a mod m,k=Kから、kが奇数ならres←res·power mod m、power←power² mod m、k←floor(k/2)を繰り返す。res·power^k≡a^Kの不変量で正しく、K=0は単位元1 mod m。逆元はgcd(a,m)=1のときだけ存在し、拡張Euclidのas+mt=1からs mod mで構成できる。素数pなら非零aに対しa^(p−2)も逆元である。
+法上で「2で割る」とは、2を掛けると元の値に戻る剰余を求めることである。$$2\cdot4\equiv1\pmod7$$ なので、2の逆元は4である。従って剰余1に対する除算は $$1\cdot2^{-1}\equiv1\cdot4\equiv4\pmod7$$ と計算でき、元の整数商の剰余と一致する。割り切れる整数の商を求めたい場合も、分母が可逆ならこの方法でよい。切り捨てを伴う一般の整数除算まで逆元の乗算に置き換えられるわけではない。
 
-法上の確率A/Bは整数のBが非零というだけでなく、B mod mが可逆かを確認してA·B^(−1)とする。例えばBがpの倍数なら素数法でも割れない。負の入力の剰余は[0,m)へ正規化し、法1は全値0として扱う。
+整数 $$a$$ の逆元が存在する条件は $$\gcd(a,m)=1$$ である。拡張ユークリッドの互除法で整数 $$s,t$$ を求め、$$as+mt=1$$ と表せれば、$$s\bmod m$$ が逆元になる。逆に逆元があれば同じ形の整数の等式が得られるので、最大公約数は1でなければならない。例えば法6で非零の2は可逆ではない。$$2x\bmod6$$ は0、2、4のいずれかで、1にはならないためである。
+
+法が素数 $$p$$ なら、$$a\not\equiv0\pmod p$$ に対してフェルマーの小定理より $$a^{p-1}\equiv1\pmod p$$ となるので、$$a^{p-2}$$ を逆元にできる。この累乗を高速に計算するのが二分累乗である。
+
+整数 $$a$$ と非負整数 $$K$$ に対して $$a^K\bmod m$$ を求めるには、$$\mathrm{res}=1$$、$$\mathrm{power}=a\bmod m$$、$$k=K$$ で始める。次の操作を $$k=0$$ になるまで繰り返す。
+
+1. $$k$$ が奇数なら、$$\mathrm{res}\leftarrow\mathrm{res}\cdot\mathrm{power}\bmod m$$ とする。
+2. $$\mathrm{power}\leftarrow\mathrm{power}^2\bmod m$$ とする。
+3. $$k\leftarrow\lfloor k/2\rfloor$$ とする。
+
+各反復の前後で $$\mathrm{res}\cdot\mathrm{power}^k\equiv a^K\pmod m$$ が保たれる。奇数なら余った一因子を $$\mathrm{res}$$ へ移し、残りの偶数個の因子を二つずつまとめるのが二乗と指数の半減である。終了時には $$\mathrm{res}$$ が答えとなり、$$K=0$$ でも初期値1をそのまま返す。
+
+整数 $$A,B$$ で表した確率 $$A/B$$ も、分母 $$B$$ の剰余が可逆であることを確認して $$A\cdot B^{-1}\bmod m$$ とする。整数として $$B\ne0$$ でも、$$B$$ が素数法 $$p$$ の倍数なら割れない。[ABC228 E](/problems/abc228-e/)では累乗の底が法の倍数かを先に分岐し、[ABC411 E](/problems/abc411-e/)では可逆な分母を使って期待値を表す。いずれも、法上の式変形を行う前に適用条件を確かめることが重要になる。
+
+負の入力は、例えば `((a % m) + m) % m` で $$0\leq r<m$$ の剰余 $$r$$ へ正規化する。法1では全値の剰余が0になるため、上の逆元を使う手順と分けて扱う。
 
 ## 成立条件と計算量
 
-累乗とEuclidはO(log U)回の固定長算術。負の剰余を正規化し、乗算前のoverflowを扱う。確率をmodで表す場合も分母が可逆であることを検査する。合成数modへFermatを流用しない。
+二分累乗は指数を毎回半分にするため $$O(\log(K+1))$$ 回、正規化した剰余の逆元を求める拡張ユークリッドの互除法は $$O(\log m)$$ 回の算術演算を行う。素数法の逆元を累乗で作る場合も $$O(\log m)$$ 回となる。いずれも反復で実装すれば補助空間は $$O(1)$$ である。
+
+これらは各算術演算を定数時間とみなした評価である。乗算後に剰余を取っても、乗算そのもののオーバーフローは防げないので、中間積を保持できる整数型や乗算方法を選ぶ。合成数法へ $$a^{m-2}$$ による逆元計算を流用しない。
 
 概念上の親: [法上の演算と積の保守](/learn/number-theory/modular-product-foundations/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
 
@@ -158,5 +178,9 @@ sidebar:
 - [ABC215 G 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_g)
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
+- [ABC228 E 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+- [ABC228 E 公式解説](https://atcoder.jp/contests/abc228/editorial/2932)
+- [ABC411 E 公式問題文](https://atcoder.jp/contests/abc411/tasks/abc411_e)
+- [ABC411 E 公式解説](https://atcoder.jp/contests/abc411/editorial/13361)
 
 Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-modular-arithmetic`
