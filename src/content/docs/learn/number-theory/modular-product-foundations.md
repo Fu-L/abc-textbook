@@ -18,11 +18,17 @@ sidebar:
 
 ## 考え方
 
-積の更新を割算で戻すには、消す因子が可逆である必要がある。素数modでも0因子は逆元を持たないため、0の個数と非零因子の積を分ける。
+法を整数 $$m\geq2$$ とする。加減乗算では途中で剰余を取っても最後の剰余は変わらないが、整数の割り算では同じ扱いができない。法上で因子を取り除くには、その因子に掛けると1になる数、すなわち**逆元**を使う。例えば法7では $$3\cdot5\equiv1\pmod7$$ なので、積 $$2\cdot3\equiv6$$ から3を外す操作は $$6\cdot5\equiv2$$ となる。
+
+一方、法7で因子7を掛けると積は0になり、逆元で取り除くこともできない。後でその因子を外して積を復元したいなら、剰余0の因子の個数と、それ以外の因子の積を別々に保持する必要がある。
+
+まず[四則演算・高速累乗・逆元](/learn/number-theory/modular-arithmetic/)で、整数除算との違いと逆元を使える条件を確認する。続く[法上の動的積](/learn/number-theory/dynamic-modular-product/)では、複数の剰余0因子が消えたときにも積を復元できる更新を追う。
 
 ## 成立条件と計算量
 
-非零因子の逆元はO(log m)累乗などで作る。合成数modなら法の素因数ごとの指数と可逆部分へ分ける必要がある。積が0であることと、どの因子が非可逆かは同じ情報ではない。
+法 $$m$$ が素数なら、非零剰余 $$a$$ の逆元は $$a^{m-2}\bmod m$$ を二分累乗して $$O(\log m)$$ 回の算術演算で求められる。逆元が既知なら、一因子の削除・差し替えは $$O(1)$$ 回の算術演算で済む。
+
+合成数法では、非零であるだけでは逆元の存在を保証できない。取り得る非零因子がすべて可逆なら同じ更新を使えるが、非可逆な非零因子も扱うには、法の素因数ごとの指数と可逆部分へ分けるなど別の表現が必要になる。積が0であることと、どの因子が非可逆かは同じ情報ではない。
 
 概念上の親: [数論](/learn/number-theory/)。問題へ進む前に、下記の直接前提のうち未習得の単元を確認する。
 
@@ -152,5 +158,9 @@ sidebar:
 - [ABC215 G 公式問題文](https://atcoder.jp/contests/abc215/tasks/abc215_g)
 - [ABC216 H 公式解説](https://atcoder.jp/contests/abc216/editorial/2561)
 - [ABC216 H 公式問題文](https://atcoder.jp/contests/abc216/tasks/abc216_h)
+- [ABC228 E 公式問題文](https://atcoder.jp/contests/abc228/tasks/abc228_e)
+- [ABC228 E 公式解説](https://atcoder.jp/contests/abc228/editorial/2932)
+- [ABC411 E 公式問題文](https://atcoder.jp/contests/abc411/tasks/abc411_e)
+- [ABC411 E 公式解説](https://atcoder.jp/contests/abc411/editorial/13361)
 
 Canonical taxonomy: FinalTaxonomyBuild `final-taxonomy-build-initial` digest `f1ae39bc7201c3374c108e800284e1e0068ce6f7a57f15b2a9e5219616e3c4fe` / LearningUnit `unit-modular-product-foundations`
