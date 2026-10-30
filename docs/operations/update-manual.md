@@ -94,6 +94,9 @@ Markdownは同じ数式parser・KaTeXの静的MathML出力を使う。ブラウ�
 `tests/unit/document-notation.test.ts`、既存の記号保護テスト、 `tests/e2e/document-math.spec.ts`
 で添字・分数・集合演算と狭い画面を確認する。
 
+既存の数式を明示数式へ改稿したら、`tests/e2e/full-projection.spec.ts`等に旧本文の文字列を要求する検査がないか確認し、対象E2Eも実行する。MathMLへ変わった式は、対象の`math`要素の存在・可視性と、表示される式・総和の範囲・指数等を検査する。非表示のTeX
+annotationの一致だけを表示確認に使わない。
+
 ### Unit内の問題の挿入順
 
 本教科書はABCの過去問を通じて典型知識を網羅的に身につけ、ARC・AGC・CF Div.
