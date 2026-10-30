@@ -34,8 +34,10 @@ authoringUnit: {"problemId":"abc445-e","docPath":"src/content/docs/problems/math
 全要素の最小公倍数を $$L$$、$$A_k$$ を除いた最小公倍数を $$L_k$$ とすると、整数としては
 
 $$
-L=\prod_p p^{e_1(p)},\qquad
-L_k=\frac{L}{\displaystyle\prod_{\substack{p\mid A_k\\v_k(p)=e_1(p)}}p^{e_1(p)-e_2(p)}}
+\begin{aligned}
+L&=\prod_p p^{e_1(p)},\\
+L_k&=\frac{L}{\displaystyle\prod_{\substack{p\mid A_k\\v_k(p)=e_1(p)}}p^{e_1(p)-e_2(p)}}
+\end{aligned}
 $$
 
 となる。分母では $$A_k$$ の素因数だけを調べればよく、最大が重複した素数の因子は $$p^0=1$$ となる。以下では $$\mathrm{MOD}=998244353$$ とし、$$L$$ の剰余から分母の逆元を掛けて $$L_k$$ の剰余を求める。逆元を使える理由は「正当性」で確認する。
@@ -97,7 +99,10 @@ $$A_k$$ の指数が最大未満なら最大を持つ要素が残り、最大と
 したがって、`map` を使う場合の全ケース合計は
 
 $$
-O\bigl(V\log\log V+M+S(\log(S+1)+\log\mathrm{MOD})\bigr)
+\begin{aligned}
+O\bigl(&V\log\log V+M\\
+&+S(\log(S+1)+\log\mathrm{MOD})\bigr)
+\end{aligned}
 $$
 
 となる。素因数分解の項も $$\log V<\log\mathrm{MOD}$$ により含めている。ハッシュ表で更新・参照が期待 $$O(1)$$ 時間なら、全体は期待 $$O(V\log\log V+M+S\log\mathrm{MOD})$$ 時間となる。配列と使用した素数のリストを使う方法でも、この評価が期待値によらず成り立つ。
