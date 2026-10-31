@@ -1,7 +1,7 @@
 ---
 title: "ABC297-EX — Diff Adjacent"
 draft: true
-authoringUnit: {"problemId":"abc297-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc297-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e","source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"同値隣接runの包除では値iをj個連結した部品の符号が(−1)^{j−1}になる。部品列の母関数は1/(1−g)、長さmarkを微分して1へ戻すと長さ総和H/(1−G)²を得る。これは違反境界を持つ列が相殺された後の各適正列をその長さだけ数えるため、N次係数が求める和になる。","sourceRevisionIds":["source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e","source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc297-ex","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-001/abc297-ex.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-apply-formal-power-series-operations"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-inclusion-exclusion","unit-modular-arithmetic","unit-polynomial-convolution"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-formal-power-series","tag-generating-functions","tag-convolution","tag-inclusion-exclusion","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e","source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"部品列を展開し、部品内部の境界を選ぶと、元の正整数列と等値境界の部分集合の組が一意に定まる。逆にその組から選択境界だけを結合すれば同じ部品列へ戻るため、部品列の母関数はすべての組を漏れ・重複なく数える。\n\n一つの列に対する符号和は、等値境界があれば0、なければ1になる。各分割は元の列の総和と長さを同じ指数に保持するので、相殺は長さ別にも成立する。従って、相殺後の母関数の係数は合法な列の個数である。\n\nこの母関数を長さの変数で微分して1を代入すると、各合法列の寄与がその長さになる。微分結果は $$H/(1-G)^2$$ であり、約数寄与で作った係数列と、定数項1の $$1-G$$ の逆元からその $$N$$ 次係数を求める手順は、要求された長さの総和を返す。","sourceRevisionIds":["source-abc297-editorial-6141-eb4db3f782f161398487c46accd3f29e0badf888e3d74996b9178385e861fb3e","source-abc297-ex-problem-acf0c092c4ebf9fd75c392b95e3647caad781aabbd8a882a52ff5ff9b40ad215"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -24,71 +24,187 @@ authoringUnit: {"problemId":"abc297-ex","docPath":"src/content/docs/problems/mat
 
 ## 考察
 
-隣接要素が異なる列は、同値runの境界違反へ包除を掛けるとrun長jの重み(-1)^(j-1)x^(ij)y^jで表せる。
+隣り合う値が等しい列を包除で打ち消す。等しい隣接項の境界を選んで結合すると、同じ値を並べた部品へ分解でき、部品を自由に並べる母関数が使える。さらに、元の列の長さを別の変数の指数に記録し、微分で長さの総和を取り出す。
 
-採用する候補: 二変数母関数をy微分し形式冪級数計算
+### 等値な境界を選び、不適な列を相殺する
 
-長さ総和は∂/∂yをy=1で評価でき、必要級数を約数列挙で作って多項式逆元を計算できる。
+求めるのは、総和が $$N$$ で、隣り合う値がすべて異なる正整数列の長さの総和である。正整数列の全列挙では、$$N$$ 個の1の間に区切りを置くかどうかを選ぶだけでも $$2^{N-1}$$ 通りある。$$N\leq 2\times 10^5$$ では、列を一つずつ作れない。
 
-棄却する候補: 総和Nの全compositionを列挙
+まず隣接条件を外し、包除原理で不適な列を消すことを考える。正整数列 $$A=(a_1,\ldots,a_m)$$ に対し、値が等しい隣接境界の集合を
 
-2^(N-1)個ありN=2×10^5では不可能。
+$$
+B(A)=\{t\mid 1\leq t<m,\ a_t=a_{t+1}\}
+$$
 
-列をrun部品の列と見るとf=1/(1-g)で、長さmark yの微分が全列の長さ合計を抽出する。
+とする。列 $$A$$ だけでなく、そこから選んだ境界の部分集合 $$S\subseteq B(A)$$ との組 $$(A,S)$$ を数え、その重みを
 
-次数NまでG=Σ x^i/(1+x^i)とH=Σx^i/(1+x^i)^2を約数寄与で構成し、H/(1-G)^2のx^N係数をNTTとFPS逆元で求める。
+$$
+(-1)^{|S|}x^{a_1+\cdots+a_m}y^m
+$$
+
+と定める。$$x$$ の指数は要素の総和、$$y$$ の指数は元の列の長さであり、どの境界を選んでも変わらない。
+
+列 $$A$$ を固定し、$$b=|B(A)|$$ とすると、全部分集合の符号和は
+
+$$
+\sum_{S\subseteq B(A)}(-1)^{|S|}=(1-1)^b
+$$
+
+となる。等値な境界が一つでもあれば0、なければ空集合を選ぶ1通りだけが残る。したがって、この符号付きの和は合法な列だけを1回ずつ数える。
+
+### 選んだ境界だけを結び、部品を自由に並べる
+
+組 $$(A,S)$$ を扱いやすくするため、$$S$$ に含まれる境界だけを結合する。一つの部品は、ある値 $$i\geq 1$$ が $$j\geq 1$$ 個並んだものになる。内部の $$j-1$$ 境界を選んでいるので、その重みは
+
+$$
+(-1)^{j-1}x^{ij}y^j
+$$
+
+である。**この部品は、同じ値が続く最大区間とは限らない。** 等値な境界でも選ばなければ切れたままであり、隣り合う二部品の値が同じでもよい。
+
+例えば、総和4の不適な列 $$(1,1,2)$$ には、等値な境界が最初の1箇所だけある。
+
+- 境界を選ばないと、部品列は $$(1)\mid(1)\mid(2)$$ となり、重みは $$+x^4y^3$$。
+- 最初の境界を選ぶと、部品列は $$(1,1)\mid(2)$$ となり、重みは $$-x^4y^3$$。
+
+部品数は3から2へ変わるが、どちらも元の長さ3を記録するため、ちょうど相殺される。ここで同じ値の部品の隣接を禁じると、前者を落としてしまい、包除が崩れる。
+
+逆に、こうした部品を任意の順序で並べれば、展開して元の列 $$A$$ を復元し、部品内部の境界をすべて選ぶことで $$S$$ も一意に復元できる。よって、組 $$(A,S)$$ と部品列は一対一に対応する。
+
+一つの部品の重みをすべて足した母関数を $$g(x,y)$$ と置く。値 $$i$$ を固定すると、長さ $$j$$ に関する交代符号の等比級数になるので、
+
+$$
+\begin{aligned}
+g(x,y)
+&=\sum_{i\geq 1}\sum_{j\geq 1}(-1)^{j-1}x^{ij}y^j\\
+&=\sum_{i\geq 1}\frac{x^iy}{1+x^iy}
+\end{aligned}
+$$
+
+である。部品数が $$k$$ の列は $$g(x,y)^k$$ で表せる。空列も含めた部品列の母関数を $$f(x,y)$$ とすれば、
+
+$$
+f(x,y)=\sum_{k\geq 0}g(x,y)^k=\frac{1}{1-g(x,y)}
+$$
+
+となる。どの部品も総和が正なので $$g(0,y)=0$$ であり、$$x^N$$ 以下には高々 $$N$$ 個の部品しか寄与しない。形式冪級数としてこの和を扱え、解析的な収束は不要である。先ほどの相殺により、$$[x^ny^m]f(x,y)$$ は、総和 $$n$$・長さ $$m$$ の合法な列の個数に等しい。
+
+### 長さを記録する変数を微分する
+
+列数を長さ別に求めてから足す必要はない。$$y^m$$ を微分して $$y=1$$ を代入すれば $$m$$ になるため、各列をその長さだけ数えられる。ここで微分するのは、部品数を表す変数ではなく、各部品内の元の要素数まで記録した $$y$$ である。
+
+一変数の級数を
+
+$$
+\begin{aligned}
+G(x)&=g(x,1)\\
+H(x)&=\left.\frac{\partial g}{\partial y}(x,y)\right|_{y=1}
+\end{aligned}
+$$
+
+と定義する。$$f$$ を微分すると、長さの総和の母関数は
+
+$$
+\left.\frac{\partial f}{\partial y}(x,y)\right|_{y=1}
+=\frac{H(x)}{(1-G(x))^2}
+$$
+
+となる。従って、答えはこの式の $$x^N$$ の係数である。
+
+具体的に、$$g$$ の各項の微分から
+
+$$
+\begin{aligned}
+G(x)&=\sum_{i\geq 1}\frac{x^i}{1+x^i}\\
+H(x)&=\sum_{i\geq 1}\frac{x^i}{(1+x^i)^2}
+\end{aligned}
+$$
+
+を得る。$$x$$ の次数を固定すれば元の長さも有限なので、微分と $$y=1$$ の代入は係数ごとに行える。空列の項は1であり、微分への寄与は0になる。
+
+### 約数ごとの寄与から係数列を作る
+
+残るのは $$G,H$$ を $$N$$ 次まで作ることである。$$G_n=[x^n]G(x)$$、$$H_n=[x^n]H(x)$$ と書くと、部品の重みとその $$y$$ 微分から、$$n\geq 1$$ について
+
+$$
+\begin{aligned}
+G_n&=\sum_{\substack{i,j\geq 1\\ ij=n}}(-1)^{j-1}\\
+H_n&=\sum_{\substack{i,j\geq 1\\ ij=n}}(-1)^{j-1}j
+\end{aligned}
+$$
+
+となる。微分で掛かるのは元の長さ $$j$$ である。定数項はどちらも $$G_0=H_0=0$$。
+
+長さ $$N+1$$ の係数配列を0で初期化し、$$i=1,\ldots,N$$ に対して $$j=1,\ldots,\lfloor N/i\rfloor$$ を走査する。$$n=ij$$ の位置へ、$$j$$ が奇数なら $$G_n$$ に1、$$H_n$$ に $$j$$ を足し、偶数ならそれぞれを引く。値 $$i$$ ごとに有理式の逆元を求める必要はない。
+
+例えば $$n=4$$ に寄与する $$(i,j)$$ は $$(1,4),(2,2),(4,1)$$ であり、$$G_4=-1-1+1=-1$$、$$H_4=-4-2+1=-5$$ となる。これらは相殺前の符号付き部品の係数なので、負になってもよい。
+
+最後は、法 $$998244353$$ 上で次の順に計算する。
+
+1. $$D(x)=1-G(x)$$ を作り、FPSの逆元 $$P(x)=D(x)^{-1}$$ を $$N$$ 次まで求める。$$D(0)=1$$ なので逆元が存在する。
+2. NTTによる畳み込みで $$Q(x)=P(x)^2$$、続いて $$R(x)=H(x)Q(x)$$ を求める。積のたびに $$N$$ 次まで残す。
+3. $$[x^N]R(x)$$ を出力する。
+
+$$N=4$$ なら、残る合法な列は $$(4),(1,3),(3,1),(1,2,1)$$ であり、長さの和は $$1+2+2+3=8$$ となる。
 
 ## 典型の発動条件
 
 ### 包除付き母関数
 
-発動条件: 局所禁止条件をrunの重みへ織り込む。
-
-同値run長に交代符号を付ける。
+局所的な禁止条件を直接守って並べるのが難しいとき、違反箇所の部分集合へ符号を付けて数える。選んだ違反が連続区間を結ぶなら、その区間を一部品として表せないかを考える。部品への分解と元の対象・選択集合との対応を確認してから、部品列の母関数を使う。
 
 ### marking variableの微分
 
-発動条件: 全構造の要素数総和を数える。
-
-長さをyでmarkしy微分する。
+構造の個数だけでなく、長さや要素数の総和が欲しいときは、その量を補助変数の指数に記録する。微分後に1を代入すると、その量を重みにできる。部品を圧縮した場合も、数えたい元の要素数を指数に保持することが必要である。
 
 ### 形式冪級数逆元
 
-発動条件: 1/(1-G)^2の係数を高速に得る。
-
-NTT/Newton法で次数Nまで計算する。
+非空の部品を自由に並べる構造から逆数が現れたら、まず定数項が可逆かを調べる。必要次数までの係数列を作れれば、NTTとNewton法で逆元を高速に求められる。
 
 ## 問題固有の要素
 
-隣接非同値制約を値ごとのrun包除に変えると、正整数列の総和・長さが二変数生成関数へまとまる。
-
-別の問題へ持ち帰る視点: 局所一致禁止はcluster/run法で母関数化する。
+禁止条件が「隣接する値の一致」なので、選んだ違反境界を結んだ区間は同じ値の繰り返しになる。値 $$i$$ と長さ $$j$$ だけで部品が定まり、総和は積 $$ij$$ になる。このため、部品の係数を約数ごとの寄与として列挙できる。
 
 ## 正当性
 
-同値隣接runの包除では値iをj個連結した部品の符号が(−1)^{j−1}になる。部品列の母関数は1/(1−g)、長さmarkを微分して1へ戻すと長さ総和H/(1−G)²を得る。これは違反境界を持つ列が相殺された後の各適正列をその長さだけ数えるため、N次係数が求める和になる。
+部品列を展開し、部品内部の境界を選ぶと、元の正整数列と等値境界の部分集合の組が一意に定まる。逆にその組から選択境界だけを結合すれば同じ部品列へ戻るため、部品列の母関数はすべての組を漏れ・重複なく数える。
+
+一つの列に対する符号和は、等値境界があれば0、なければ1になる。各分割は元の列の総和と長さを同じ指数に保持するので、相殺は長さ別にも成立する。従って、相殺後の母関数の係数は合法な列の個数である。
+
+この母関数を長さの変数で微分して1を代入すると、各合法列の寄与がその長さになる。微分結果は $$H/(1-G)^2$$ であり、約数寄与で作った係数列と、定数項1の $$1-G$$ の逆元からその $$N$$ 次係数を求める手順は、要求された長さの総和を返す。
 
 ## 実装上の注意
 
-- 次数Nで全級数をtruncateし、符号と微分後の分子、法998244353のNTT長を確認する。
+- 計算はすべて法 $$998244353$$ 上で行い、負の寄与も剰余として正規化する。$$G_0=H_0=0$$ とし、$$D=1-G$$ を作るときは定数項だけが1になる。
+- 保持するのは $$0,\ldots,N$$ 次の $$N+1$$ 係数である。逆元も積も $$x^{N+1}$$ を法として打ち切る。低次数の係数は高次数の項から影響を受けない。
+- NTTでは巡回畳み込みにならないよう、打切り前の積に必要な長さまで0で埋める。上限でも、長さ $$N+1$$ 同士の積は $$2N+1$$ 係数であり、変換長 $$2^{19}$$ で足りる。この長さは法 $$998244353$$ で扱える。
+- 小規模な検算では、不適な列の相殺と長さの重みを別々に確かめる。$$N=1,2,3,4$$ の答えは順に $$1,1,5,8$$ となる。
 
 ## 復習の核
 
-- 小Nのcomposition全列挙と係数を比較し、N=1,2とrun包除符号を確認する。
+- 包除で結ぶのは「選んだ境界」だけ。同じ値の部品の隣接を許すことが、相殺に必要になる。
+- 圧縮後も、補助変数の指数は求めたい元の量を保つ。ここでは部品数ではなく、元の列の長さである。
+- 二変数の係数表を作る前に、微分と代入で欲しい重みの総和だけを取り出せないか考える。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N)。約数寄与でG,Hを作りNTT/FPS逆元で係数抽出する。
+約数寄与の二重ループの総反復数は
+
+$$
+\sum_{i=1}^{N}\left\lfloor\frac{N}{i}\right\rfloor=O(N\log N)
+$$
+
+である。NTTでの畳み込みと、精度を倍増するNewton法でのFPS逆元も $$O(N\log N)$$。その後の2回の積まで含め、全体で $$O(N\log N)$$ となる。
 
 ### 空間
 
-O(N)。
+係数配列とNTTの作業領域に $$O(N)$$ を使う。長さ別の二変数係数表は保持しない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; All values in the input are integers.
+公式制約は $$1\leq N\leq 2\times 10^5$$、実行時間制限4秒、メモリ制限1024 MiBである。全列挙や二次元の係数表を避け、約数寄与と高速な級数演算を使うことで、この上限に対応する。
 
 ## 出典
 
