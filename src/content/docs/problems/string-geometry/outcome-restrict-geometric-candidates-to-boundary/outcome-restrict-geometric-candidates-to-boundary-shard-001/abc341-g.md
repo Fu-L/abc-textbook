@@ -1,7 +1,7 @@
 ---
 title: "ABC341-G — Highest Ratio"
 draft: true
-authoringUnit: {"problemId":"abc341-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"区間平均はprefix二点の傾き。固定左点はsuffix集合の最左x点なので、最大傾き方向はupper hullの隣接辺になる。hullの内側の点を消してもその最大方向を変えず、右から追加するstackのpopは各点一度だけ。各左点追加直後の隣接傾きを取れば全左端の最大平均を得る。","sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc341-g","docPath":"src/content/docs/problems/string-geometry/outcome-restrict-geometric-candidates-to-boundary/outcome-restrict-geometric-candidates-to-boundary-shard-001/abc341-g.md","learningOutcomeIds":["outcome-restrict-geometric-candidates-to-boundary"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives"],"excludedTopics":["凸包・支持方向・境界候補の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-convex-boundary-hull"],"sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"処理済みの点の上側凸包を、x 座標の降順にスタックへ保持する。新点 $$p=P_i$$ は常に全処理済み点より左にある。末尾の $$a,b$$ に対して外積が0以下なら、$$b$$ は線分 $$pa$$ の上には出ない。従って、今後さらに左に置く点から見ても、$$b$$ への傾きは $$p,a$$ への傾きの大きい方を超えず、最大値の候補から除ける。等号の場合も最大値は変わらない。末尾でこの除去を繰り返して新点を追加すると、全処理済み点を下側に含む上側凸包が保たれる。\n\n上側凸包を左から読むと辺の傾きは減少するので、最左点 $$P_i$$ からの最初の辺を延長した直線より上に候補点はない。この辺の右端で傾きの最大値を達成するため、追加直後のスタックの末尾とその一つ前の点から求めた値が $$\\mathrm{ans}[i+1]$$ に等しい。$$i=N$$ では候補区間がなく点だけを置き、$$i<N$$ では右側の点が少なくとも一つ残る。よって $$N=1$$ や全点が共線の場合を含め、すべての左端について正しい最大平均を得る。","sourceRevisionIds":["source-abc341-editorial-9326-f7af493fa4dae6393c81c87687e016a4cc680f445c19b89afe4d6ea25cf7e8b0","source-abc341-g-problem-dcabda9ffa6ce4e4b9261053e335e65354faeb0ab8d81bc72d99dc904ed5f8c2"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,65 +16,110 @@ authoringUnit: {"problemId":"abc341-g","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-prefix sum点P_i=(i,Σ_{j≤i}A_j)を置くと、区間[k,r]の平均はP_{k-1}からP_rへのslopeである。固定した左点から右側点への最大slopeは、そのsuffix点集合のupper convex hullで左点に隣接する点が与える。
+区間の平均は、累積和を表す二点を結ぶ直線の傾きと見なせる。傾きを最大にする右端を探すには、点集合の上側の境界だけを残せばよい。さらに左端を右から動かすと、境界を作り直さずに更新できる。
 
-採用する候補: prefix sum点を右から追加しupper hullをstackで維持する
+まず左端 $$k$$ ごとに右端 $$r$$ をすべて試すと、累積和で各平均を定数時間で計算しても全体で $$O(N^2)$$ かかる。$$N\leq 2\times 10^5$$ では、右端の候補を絞る必要がある。
 
-各点は一度push/popされ、全kの最大slopeをO(N)で得られる。
+配列 $$A_1,\ldots,A_N$$ は問題文どおり1始まりとし、累積和と点は0始まりで
 
-棄却する候補: 各kで全r≥kの平均を走査する
+$$
+S_0=0,\qquad S_i=\sum_{j=1}^{i}A_j,\qquad P_i=(i,S_i)\quad(0\leq i\leq N)
+$$
 
-suffix長の総和がO(N^2)になりN=2×10^5に間に合わない。
+と定める。区間 $$[k,r]$$ の平均は
 
-P_{k-1}はsuffix点集合でx最小の点である。そこから引ける直線の最大傾きはupper hullの時計回り側の最初の辺の傾きであり、内部点へのslopeはその値を超えない。
+$$
+\frac{S_r-S_{k-1}}{r-(k-1)}
+$$
 
-prefix sumsを作り、i=Nから0へ点P_iをstack hullへ追加する。末尾二点と新点のcross productがupper-hullのconvexityを壊す間、中央点をpopする。P_{k-1}追加直後にその隣のhull点との(y差)/(x差)をans[k]として記録しdoubleで出力する。
+であり、$$P_{k-1}$$ から $$P_r$$ への傾きに一致する。従って $$P_{k-1},P_k,\ldots,P_N$$ の中で、最左点から右側の点への最大傾きを求めればよい。
+
+この点集合の上側凸包、つまり全点を下側に含む凸な折れ線を考える。最左点から上側凸包の最初の辺を延長すると、すべての候補点はその直線上か下側にある。従って、その辺の右端への傾きが最大になる。必要なのは上側凸包の最左点に隣接する頂点だけである。
+
+左端を一つ左に動かすと、対象の点集合には新しい最左点が一つ増える。このため $$P_N,P_{N-1},\ldots,P_0$$ の順に追加し、上側凸包の頂点をスタック `hull` で維持する。スタックは先頭から末尾へ **x 座標の降順**に並べる。追加する点を $$p$$、追加前の末尾二点を順に $$a,b$$ とすると、横の並びは $$p,b,a$$ となる。
+
+外積は $$\operatorname{cross}(u,v)=u_xv_y-u_yv_x$$ と定義する。この向きでの判定値は
+
+$$
+C=\operatorname{cross}(b-a,p-b)
+$$
+
+である。$$m_{pb}$$ を $$p$$ から $$b$$ への傾き、$$m_{ba}$$ を $$b$$ から $$a$$ への傾きとすると、
+
+$$
+C=(x_a-x_b)(x_b-x_p)(m_{pb}-m_{ba})
+$$
+
+となる。上側の凸な折れ線では左から右へ辺の傾きが減るので、残したいのは $$m_{pb}>m_{ba}$$、すなわち $$C>0$$ の曲がりである。逆に $$C\leq 0$$ なら、$$b$$ は線分 $$pa$$ の上には出ないため除ける。特に $$C=0$$ では三点が共線であり、中点 $$b$$ を消しても $$p$$ からの傾きは $$a$$ で同じ値を得られる。さらに左から見ても線分上の中点が両端より大きい傾きを与えることはなく、将来の答えも失わない。
+
+以上から、手順は次のように固定できる。
+
+1. 累積和を作り、`hull` を空にする。$$i=N,N-1,\ldots,0$$ の順に処理する。
+2. 新点を $$p=P_i$$ とする。`hull` に二点以上あり、末尾二点 $$a,b$$ に対して $$\operatorname{cross}(b-a,p-b)\leq 0$$ である間、末尾の $$b$$ を pop する。pop 後の末尾二点で同じ判定を繰り返す。
+3. $$P_i$$ を push する。$$i=N$$ なら点を置くだけで、答えは求めない。
+4. $$i<N$$ なら、push 直後の末尾は $$P_i$$、その一つ前は右側の隣接頂点 $$P_j$$ である。次の値を保存する。
+
+$$
+\mathrm{ans}[i+1]=\frac{S_j-S_i}{j-i}
+$$
+
+例えば $$A=(1,3,2)$$ なら、累積和の点は $$P_0=(0,0),P_1=(1,1),P_2=(2,4),P_3=(3,6)$$ である。以下ではスタックを先頭から末尾の順で示す。
+
+- $$P_3$$ を追加すると、`hull` は $$[P_3]$$。まだ答えは求めない。
+- $$P_2$$ を追加すると、`hull` は $$[P_3,P_2]$$。末尾二点から $$\mathrm{ans}[3]=(6-4)/(3-2)=2$$ を得る。
+- $$P_1$$ を追加するときは $$C=1>0$$ なので pop せず、`hull` は $$[P_3,P_2,P_1]$$。$$\mathrm{ans}[2]=(4-1)/(2-1)=3$$ を得る。
+- $$P_0$$ を追加するときは $$C=-2$$ なので $$P_1$$ を除く。次の判定は $$C=0$$ となり、共線の $$P_2$$ も除く。push 後の `hull` は $$[P_3,P_0]$$ で、$$\mathrm{ans}[1]=(6-0)/(3-0)=2$$ を得る。
+
+左端の順に出力すると答えは $$(2,3,2)$$ となる。最後の処理では $$P_2$$ を消したが、$$P_0P_2$$ と $$P_0P_3$$ の傾きはともに2なので、最大平均は保たれている。
 
 ## 典型の発動条件
 
 ### prefix sum幾何
 
-発動条件: 連続区間の平均や比率がsum差/lengthとして現れる。
-
-prefix点間slopeへ変換し、endpoint選択を幾何的な接線問題にする。
+連続区間の平均や比率が「累積和の差 ÷ 長さ」で表されるとき、累積和の添字を x 座標、値を y 座標にして、右端選択を傾きの最大化へ変換できる。
 
 ### monotone convex hull
 
-発動条件: 点がx順に追加され、各時点のsuffix hull端の隣接辺が欲しい。
-
-cross productで不要点をstackからpopし、各点を償却O(1)で処理する。
+点が x 座標順に追加され、凸包の端の隣接辺を求めたいとき、不要な曲がりを外積で除くスタックが使える。走査方向と残す側を先に決め、それに合う外積の符号を導く。任意順の追加や、凸包の端以外からの問い合わせへ同じ手順をそのまま使うことはできない。
 
 ## 問題固有の要素
 
-各kで別々のconvex hullを作らず、kを右から減らすと候補点集合へ左端点が一つ追加されるだけなのでhullを永続的に更新できる。
+左端 $$k$$ の問い合わせに必要なのは、累積和の点 $$P_{k-1},\ldots,P_N$$ が作る上側凸包である。$$k$$ を右から減らすと、この接尾辞の点集合には最左点が一つ追加されるだけになる。この順序なら、全左端に対する凸包を一つのスタックの更新過程で扱える。
 
-別の問題へ持ち帰る視点: nested suffix queryは走査方向を合わせ、monotone data structureを一回構築しながら答える。
+別の問題へ持ち帰る視点は、問い合わせの候補集合が入れ子なら、走査方向を変えて「削除」や「作り直し」を「追加」へ置き換えられないかを考えることである。
 
 ## 正当性
 
-区間平均はprefix二点の傾き。固定左点はsuffix集合の最左x点なので、最大傾き方向はupper hullの隣接辺になる。hullの内側の点を消してもその最大方向を変えず、右から追加するstackのpopは各点一度だけ。各左点追加直後の隣接傾きを取れば全左端の最大平均を得る。
+処理済みの点の上側凸包を、x 座標の降順にスタックへ保持する。新点 $$p=P_i$$ は常に全処理済み点より左にある。末尾の $$a,b$$ に対して外積が0以下なら、$$b$$ は線分 $$pa$$ の上には出ない。従って、今後さらに左に置く点から見ても、$$b$$ への傾きは $$p,a$$ への傾きの大きい方を超えず、最大値の候補から除ける。等号の場合も最大値は変わらない。末尾でこの除去を繰り返して新点を追加すると、全処理済み点を下側に含む上側凸包が保たれる。
+
+上側凸包を左から読むと辺の傾きは減少するので、最左点 $$P_i$$ からの最初の辺を延長した直線より上に候補点はない。この辺の右端で傾きの最大値を達成するため、追加直後のスタックの末尾とその一つ前の点から求めた値が $$\mathrm{ans}[i+1]$$ に等しい。$$i=N$$ では候補区間がなく点だけを置き、$$i<N$$ では右側の点が少なくとも一つ残る。よって $$N=1$$ や全点が共線の場合を含め、すべての左端について正しい最大平均を得る。
 
 ## 実装上の注意
 
-- cross productはprefix sum最大2×10^11との積を扱う64bit範囲を確認し、collinear点のpop不等号を最大slopeと隣接点規約に合わせる。出力は十分なprecisionを使う。
+- 外積の判定は整数で行う。$$S_N\leq 2\times 10^{11}$$、x 座標差は $$2\times 10^5$$ 以下なので、各積の絶対値は $$4\times 10^{16}$$ 以下、差の絶対値も $$8\times 10^{16}$$ 以下である。符号付き64 bit整数に収まり、掛け算の前にその型へそろえる。
+- pop 条件はこの点順・外積の定義で $$C\leq 0$$ とする。全要素が等しい場合も共線の中点を除き、両端から同じ平均を得られる。
+- $$i=N$$ では問い合わせない。$$i<N$$ の答えは、新点を push した**後**の末尾二点から読み、1始まりの $$\mathrm{ans}[i+1]$$ へ保存する。$$j>i$$ なので分母は正になる。
+- 最後の除算を `double` などの浮動小数点数で行い、整数除算を避ける。答えは左端の昇順に、小数点以下10桁程度で出力すれば、要求される絶対誤差または相対誤差 $$10^{-6}$$ に対応できる。
 
 ## 復習の核
 
-- 全要素同値、単調増加・減少、collinearなprefix点、最大がr=kとr=Nになる例をO(N^2)真値と比較する。
+- 区間平均が現れたら「累積和の差 ÷ 添字の差」を書き、二点間の傾きとして候補を眺める。
+- 接尾辞ごとに同じ構造を求めたいなら、右から走査して一要素ずつ追加する形を探す。
+- 凸包の pop 不等号は暗記せず、点の左右関係と、上側に残したい辺の傾きの大小から復元する。共線の中点を消せるのは、ここでは最大値だけが必要だからである。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N)。prefix点を右から追加する単調hull。
+$$O(N)$$。累積和の構築と出力はそれぞれ $$O(N)$$。凸包の更新では、各点を一度だけ push し、pop も各点につき高々一度なので、while の全反復を合わせても $$O(N)$$ となる。点は既に x 座標順のためソートは不要である。
 
 ### 空間
 
-O(N)。
+$$O(N)$$。累積和、上側凸包のスタック、各左端の答えを保存する。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 1\leq A_i\leq 10^6; All input values are integers.
+$$1\leq N\leq 2\times 10^5$$、$$1\leq A_i\leq 10^6$$。全体を線形時間で処理でき、累積和と外積も符号付き64 bit整数で正確に扱える。$$N=1$$ のときは $$P_1$$ を置いた後に $$P_0$$ を追加し、唯一の平均 $$A_1$$ を得る。
 
 ## 出典
 
