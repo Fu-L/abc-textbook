@@ -1,7 +1,7 @@
 ---
 title: "ABC390-G — Permutation Concatenation"
 draft: true
-authoringUnit: {"problemId":"abc390-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。","sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc390-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc390-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-contribution-reordering"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-contribution-reordering"],"sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"整数 $$m$$ を固定する。任意の順列から、$$m$$ より右側の集合 $$S$$ と左右それぞれの並び順を一意に取り出せる。逆に、それらを決めて左側、$$m$$、右側の順に連結すれば元の順列を復元できる。従ってこの対応に漏れも重複もない。\n\n$$m$$ が $$b$$ 桁なら、$$F^0$$ から $$1+10^b x$$ を一つ除いた $$Q_b$$ の展開は、$$m$$ 以外の各整数を右側に選ぶかどうかと一対一に対応する。$$x^r$$ の係数 $$q_r$$ は、$$|S|=r$$ のすべての集合について $$10^{\\sum_{t\\in S}\\ell(t)}$$ を足した値である。係数比較による漸化式は、この商の各係数を低次から一意に復元する。\n\n各集合に対して左右の並び順は $$r!(N-1-r)!$$ 通りなので、$$mW_b$$ は全順列における $$m$$ の寄与の総和となる。同じ桁数の整数は同じ因子を除くため、これらを足した値は $$S_bW_b$$ である。さらに全桁数について足せば、各順列の連結値を整数ごとの寄与に分けた全項をちょうど一度ずつ数える。\n\n$$N=1$$ の場合も、$$Q_1=1$$、$$r=0$$ の左右の並べ方は $$0!0!=1$$ なので、答え1を返す。","sourceRevisionIds":["source-abc390-editorial-11976-fb24d3a16a0815a303639a818c312a8ec4cabe6b0ae38d5a004bf02acc3cc5fc","source-abc390-g-problem-0efb6c892cf4c2fbca1efc1e7ec7fe51ca8912ef596ab781a05cc96abc582952"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,69 +22,185 @@ authoringUnit: {"problemId":"abc390-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-permutation中の整数mの寄与は、mより後ろに並ぶ数の総桁数dだけ10^d倍される。後方集合を桁数category別に選ぶと、選択数・順列数・桁shiftを生成関数でまとめられる。
+連結した値を整数ごとの寄与に分けると、各整数が何倍されるかは、その右側に並ぶ整数の総桁数だけで決まる。右側の集合を選ぶ操作を生成関数へ写し、左右の並べ方を階乗で数える。同じ桁数の整数では、右側の選択から得られる重みを共有できる。
 
-1..N全体の桁数count C_k^0から作るF^0(x)=∏_k(1+10^k x)^{C_k^0}を、m自身の因子(1+10^b x)で割れば、m以外から後方集合を選ぶ係数になる。
+すべての順列を作る方針では $$N!$$ 通りあり、$$N\leq 2\times 10^5$$ に対応できない。そこで、足し合わせる順序を交換し、一つの整数 $$m$$ が全順列へ与える寄与を先に求める。以後の係数や答えは、すべて法 $$998244353$$ で計算する。
 
-採用する候補: 桁数categoryの母関数をconvolutionで作り、各桁数bの因子除算後にfactorial重みとの内積を取る
+### 右側の個数と総桁数を分ける
 
-同じ桁数のmは同一の係数列を共有し、そのm総和だけ掛ければよい。桁数はO(log N)種類で、全体O(N log N)に収まる。
+整数 $$t$$ の十進表記の桁数を $$\ell(t)$$ とする。$$m$$ より右側に並ぶ整数の集合を $$S$$ とすると、連結値のうち $$m$$ に由来する部分は次の値である。
 
-棄却する候補: N!個のpermutationを列挙してdecimal連結値を足す
+$$
+m\,10^{\sum_{t\in S}\ell(t)}
+$$
 
-N=2×10^5で不可能で、各整数の線形な位置寄与を利用していない。
+右側の並び順を変えても、この値は変わらない。さらに $$r=|S|$$ とすると、右側の並べ方は $$r!$$ 通り、残る左側の並べ方は $$(N-1-r)!$$ 通りである。つまり、必要なのは「右側を何個選んだか」と「選んだ集合の桁数による重み」であり、右側の順序そのものを状態に持つ必要はない。
 
-後方にr個を選んだとき、その並べ方r!と前方の(N-1-r)!を係数へ掛ける。
+各整数 $$t$$ について、右側に選ばなければ $$1$$、選べば $$10^{\ell(t)}x$$ を掛ける。この積では、$$x$$ の次数が選んだ個数、係数の10の冪が選んだ整数の総桁数を表す。例えば右側が $$\{3,10\}$$ なら、対応する項は $$10^3x^2$$ である。次数2は右側の整数が2個という意味であり、総桁数3とは異なる。
 
-因子は一次式の冪なのでF^0/(1+10^b x)は係数を低次から筆算してO(N)で求められる。
+### 同じ桁数の因子をまとめて作る
 
-桁数別countから各(1+10^k x)^{C_k^0}を構築し、小次数順convolutionでF^0を得る。bごとに一次因子で割った係数q_rへr!(N-1-r)!を掛けた重みW_bを計算し、b桁のmの総和×W_bを答えへ足す。
+$$N$$ の桁数を $$B$$ とする。$$1\leq b\leq B$$ に対し、$$b$$ 桁の整数が現れる区間の両端と、その個数を定める。
+
+$$
+\begin{aligned}
+L_b&=10^{b-1},\\
+U_b&=\min(N,10^b-1),\\
+C_b&=U_b-L_b+1
+\end{aligned}
+$$
+
+同じ桁数の整数は同じ一次因子を持つ。$$b$$ 桁の群から選ぶ集合の生成関数は、二項定理により次のように書ける。
+
+$$
+\begin{aligned}
+G_b(x)&=(1+10^b x)^{C_b}\\
+&=\sum_{r=0}^{C_b}\binom{C_b}{r}10^{br}x^r
+\end{aligned}
+$$
+
+係数は、$$C_b$$ 個から $$r$$ 個を選ぶ方法の数に、その総桁数 $$br$$ による重みを掛けたものだ。階乗と逆階乗を $$N$$ まで前計算し、$$10^{br}$$ は直前の値へ $$10^b$$ を掛けて更新すれば、$$G_b$$ の全係数を $$O(C_b+1)$$ 時間で作れる。
+
+まず、まだどの整数も除いていない全体の積を一度だけ計算する。上付きの0は「除去前」を表す。
+
+$$
+F^0(x)=\prod_{b=1}^{B}G_b(x)=\sum_{r=0}^{N}F^0_r x^r
+$$
+
+$$G_1,G_2,\ldots,G_B$$ の順に、現在の積へ次の群をNTTによる畳み込みで掛ける。この順序なら、合成後の次数は $$\min(N,10^b-1)$$ と幾何的に増え、最後に次数 $$N$$ となる。各群を二項係数から直接作ることと合わせて、合成全体は $$O(N\log N)$$ 時間に収まる。計算量節で最後の群も含めて評価する。
+
+### 一次因子を係数の低い方から取り除く
+
+$$m$$ が $$b$$ 桁なら、$$m$$ 自身を右側に選ばないよう、その一次因子を一つだけ除く。
+
+$$
+Q_b(x)=\frac{F^0(x)}{1+10^b x}=\sum_{r=0}^{N-1}q_r x^r
+$$
+
+ここで $$q_r$$ は、$$m$$ 以外から右側の整数を $$r$$ 個選んだときの、$$10^{\text{総桁数}}$$ の総和となる。$$F^0=(1+10^b x)Q_b$$ の定数項と $$r$$ 次係数を比べると、
+
+$$
+\begin{aligned}
+q_0&=F^0_0=1,\\
+F^0_r&=q_r+10^b q_{r-1}\quad(1\leq r<N)
+\end{aligned}
+$$
+
+なので、更新式は次の形になる。
+
+$$
+q_r=F^0_r-10^b q_{r-1}\quad(1\leq r<N)
+$$
+
+低次から順に求めれば、直前の係数だけで次の係数が決まる。一般の多項式除算や逆数計算は不要で、各桁数につき $$O(N)$$ 時間である。最高次の係数には $$F^0_N=10^b q_{N-1}$$ が成り立つが、答えには $$q_0,\ldots,q_{N-1}$$ だけを使う。
+
+### 集合の重みへ左右の並べ方を掛ける
+
+固定した $$m$$ に対し、右側の集合と、左右それぞれの並び順を決めると、順列が一つに決まる。したがって $$b$$ 桁の整数一つ当たりに掛ける重みは、次の内積で求まる。
+
+$$
+W_b=\sum_{r=0}^{N-1}q_r\,r!(N-1-r)!
+$$
+
+例えば $$N=4,m=2$$ とし、右側の集合を $$S=\{1,3\}$$ に固定する。左側は4だけなので、対応する順列は $$(4,2,1,3)$$ と $$(4,2,3,1)$$ の2通り。どちらも $$m$$ の寄与は200であり、この集合は $$q_2$$ に100を加え、これへ $$m=2$$ と $$2!1!$$ を掛けると、寄与の総和400を再現する。実際には $$q_2$$ が右側の集合3通りの重みを合わせるので $$q_2=300$$ となり、$$r=2$$ の寄与は $$2\times300\times2!1!=1200$$ である。
+
+同じ $$b$$ 桁の整数なら、取り除く因子も残りの重み $$W_b$$ も共通する。群内の整数の和を $$S_b$$ とすると、求める答えは次の式で得られる。
+
+$$
+\begin{aligned}
+S_b&=\frac{(L_b+U_b)C_b}{2},\\
+\text{答え}&=\sum_{b=1}^{B}S_bW_b
+\end{aligned}
+$$
+
+実装では、階乗・逆階乗を前計算し、桁数の小さい順に群の多項式を作って全体積へ合成する。その後、各桁数について全体積から一次因子を除き、重みの内積と整数和を掛けて答えへ加える。
 
 ## 典型の発動条件
 
 ### 要素ごとの線形寄与分解
 
-発動条件: 連結・配置値が各要素の寄与和として表せるとき。
-
-mの右側の総桁数だけを数えて全permutationへ加算する。
+連結・配置の値が、各要素の寄与の和として表せるときに使う。全配置を作る前に、一要素を固定して、その寄与が依存する情報を調べる。この問題では右側の総桁数だけに依存するため、並び順の列挙を集合の選択と階乗へ分離できる。
 
 ### category母関数と因子除去
 
-発動条件: 一要素を除いたsubset生成関数をcategoryごとに多数求めるとき。
-
-全体積から該当一次因子を割り、同categoryで再利用する。
+一要素を除いた集合の生成関数を繰り返し求めるとき、除く要素が同じ因子を持つ群に分かれていれば、全体積からの因子除去を群ごとに共有できる。特に除去する因子が $$1+ax$$ なら、係数比較から一次の漸化式を作れる。
 
 ## 問題固有の要素
 
-mごとの差は値mと桁数bだけであり、permutationにおける残り要素配置の全情報をb別の一つの多項式へ集約できる。
+整数が $$1,2,\ldots,N$$ と連続しているため、同じ桁数なら連結の重みが等しく、群内の個数と整数和を区間の両端から求められる。また、低い桁数から合成した次数は $$9,99,999,\ldots$$ と増える。この構造が、群ごとの再利用と合成時間の評価の両方を支える。
 
-別の問題へ持ち帰る視点: 全permutation連結の総和では、一要素をmarkして左右集合を選ぶEGF/OGF係数と両側factorialを組み合わせる。
+要素が任意の整数列であっても桁数による集約は使えるが、各群の個数がこのように増えるとは限らない。今回の合成時間の証明を、そのまま持ち込むことはできない。
 
 ## 正当性
 
-整数mの寄与はm以後の整数集合の総桁数だけ10冪でずれる。各後方整数を選ぶ/選ばないfactor1+10^{digits}xを掛けると後方個数rと桁shiftの重み和を得る。m自身のfactorを除き、後方順r!と前方順(N−1−r)!を掛けると全順列でのm寄与を一度数える。同桁mの係数は共通なのでcategory総和を掛ければよい。
+整数 $$m$$ を固定する。任意の順列から、$$m$$ より右側の集合 $$S$$ と左右それぞれの並び順を一意に取り出せる。逆に、それらを決めて左側、$$m$$、右側の順に連結すれば元の順列を復元できる。従ってこの対応に漏れも重複もない。
+
+$$m$$ が $$b$$ 桁なら、$$F^0$$ から $$1+10^b x$$ を一つ除いた $$Q_b$$ の展開は、$$m$$ 以外の各整数を右側に選ぶかどうかと一対一に対応する。$$x^r$$ の係数 $$q_r$$ は、$$|S|=r$$ のすべての集合について $$10^{\sum_{t\in S}\ell(t)}$$ を足した値である。係数比較による漸化式は、この商の各係数を低次から一意に復元する。
+
+各集合に対して左右の並び順は $$r!(N-1-r)!$$ 通りなので、$$mW_b$$ は全順列における $$m$$ の寄与の総和となる。同じ桁数の整数は同じ因子を除くため、これらを足した値は $$S_bW_b$$ である。さらに全桁数について足せば、各順列の連結値を整数ごとの寄与に分けた全項をちょうど一度ずつ数える。
+
+$$N=1$$ の場合も、$$Q_1=1$$、$$r=0$$ の左右の並べ方は $$0!0!=1$$ なので、答え1を返す。
 
 ## 実装上の注意
 
-- 桁数境界10^kと各categoryの整数和をmodで正しく求める。係数index r=0..N-1、factorial積、N=1の空集合を扱う。
+- 各桁群は両端を含む区間 $$[L_b,U_b]$$ とする。$$U_b=\min(N,10^b-1)$$ であり、次の桁数の最初の整数を混ぜない。境界での個数と整数和は次の表のようになる。
+
+| $$N$$ | 個数（桁数順） | 整数和（桁数順） |
+| --- | --- | --- |
+| 1 | 1 | 1 |
+| 9 | 9 | 45 |
+| 10 | 9, 1 | 45, 10 |
+| 99 | 9, 90 | 45, 4905 |
+| 100 | 9, 90, 1 | 45, 4905, 100 |
+
+- $$S_b$$ を通常の整数で求めるなら、乗算前に64 bit整数へ変換して2で割り、最後に剰余を取る。法上で求めるなら2の逆元を掛ける。
+- 桁数ごとの除去では、毎回同じ除去前の $$F^0$$ を使う。別の桁数で因子を除いた配列を次の除去元にしない。減算後の剰余を正規化する。
+- 使う係数は $$0\leq r<N$$。空集合と空の並び順も数えるため、階乗の初期値を $$0!=1$$ とする。
 
 ## 復習の核
 
-- N≤8で全permutationを直接連結し、N=9/10など桁境界とN=1についてb別重み・category和を照合する。
+- 同じ桁なら、除去する因子も残りの重みも共有できる。一要素を除く計算を繰り返す前に、どの要素が同じ因子を持つかを調べる。
+- 生成関数の次数に何を数えさせるかを先に決める。ここでは右側の個数を次数に持ち、総桁数は係数の重みに埋め込む。
+- 畳み込みの回数だけでなく、各段で扱う次数の総量を見る。桁数の小さい群から合成することが、今回の計算量を支える。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log²N+N log_{10}N)。桁category多項式の合成とcategoryごとの一次除算。
+次数の和が $$d$$ の二多項式をNTTで掛ける費用を $$M(d)=O((d+1)\log(d+2))$$ とする。$$b$$ 桁以下の群を合成した積の次数は、
+
+$$
+D_b=\sum_{k=1}^{b}C_k=\min(N,10^b-1)
+$$
+
+である。最後の段より前は $$D_b=10^b-1$$、最後は $$D_B=N$$ なので、
+
+$$
+\begin{aligned}
+\sum_{b=1}^{B}D_b
+&=N+\sum_{b=1}^{B-1}(10^b-1)\\
+&\leq N+\frac{10^B-10}{9}\\
+&=O(N)
+\end{aligned}
+$$
+
+となる。最後の評価には $$10^{B-1}\leq N$$ を使った。最後の群が少数で、直前の段から次数がほとんど増えない場合も、この一段を $$N$$ として含めている。従って、各段の対数を $$O(\log(N+1))$$ で押さえると、畳み込み全体の費用は次のとおりである。
+
+$$
+\sum_{b=2}^{B}M(D_b)=O(N\log(N+1))
+$$
+
+一般の $$N$$ 本の一次因子を均等に分けて掛ける積木では、各段に同程度の総次数があり、通常 $$O(N\log^2N)$$ と評価する。今回は、同じ因子の冪を二項係数から直接作り、桁数の小さい群から順に合成するため、上の次数の和で評価できる。
+
+階乗・逆階乗の前計算と全群の係数構築は $$O(N)$$、一次因子の除去と重みの内積は全 $$B$$ 群で $$O(NB)$$ かかる。$$B=\lfloor\log_{10}N\rfloor+1$$ より、全体は $$O(N\log(N+1)+NB)$$、$$N\geq2$$ では $$O(N\log N)$$ 時間である。$$N=1$$ は定数時間となる。
 
 ### 空間
 
-O(N)。
+$$O(N)$$。階乗・逆階乗、現在の積、次の群の係数とNTTの作業領域を保持する。合成済みの古い積や処理済みの商をすべて保存せず、桁数ごとに領域を再利用する。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \le N \le 2 \times 10^5; All input values are integers.
+公式制約は $$1\leq N\leq2\times10^5$$、法は $$998244353$$、制限時間は2秒、メモリ制限は1024 MiBである。桁数は最大6種類なので、一次因子の除去と内積は高々6回の線形走査で済む。階乗の添字は法未満で逆階乗を作れ、次数 $$N$$ の積に必要なNTT長は最大 $$2^{18}$$ であり、この法で扱える。
 
 ## 出典
 
