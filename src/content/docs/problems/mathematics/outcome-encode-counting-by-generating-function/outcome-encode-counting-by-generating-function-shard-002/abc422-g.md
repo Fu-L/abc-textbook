@@ -1,7 +1,7 @@
 ---
 title: "ABC422-G — Balls and Boxes"
 draft: true
-authoringUnit: {"problemId":"abc422-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc422-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a","source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"各box数は独立で、multiple条件を満たす次数だけ置けば積のN次係数が総数Nの全tupleを一度表す。区別しないballは係数1、区別するballは1/n!で正規化した後N!を掛けて各tupleのlabel割当て多項係数を回復する。0個の定数項1が空boxも含める。","sourceRevisionIds":["source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a","source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc422-g","docPath":"src/content/docs/problems/mathematics/outcome-encode-counting-by-generating-function/outcome-encode-counting-by-generating-function-shard-002/abc422-g.md","learningOutcomeIds":["outcome-encode-counting-by-generating-function","outcome-compute-convolution-or-correlation"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-combinatorial-coefficients","unit-modular-arithmetic"],"excludedTopics":["係数列同士を単に畳み込む相互相関、および係数の組合せ的意味を持たない信号処理。"],"tagIds":["tag-convolution","tag-generating-functions","tag-combinatorial-coefficients","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a","source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各箱の多項式は、倍数条件を満たす非負の個数に対応する項だけを持つ。積の $$N$$ 次の項を作る選択と、合計 $$N$$ の合法な三つ組 $$(a,b,c)$$ は一対一に対応する。問題1では各選択の係数が1なので、積の $$N$$ 次係数が分配数に等しい。\n\n問題2では各三つ組が係数 $$1/(a!b!c!)$$ を一度寄与する。これに共通の $$N!$$ を掛けた値は、箱1の番号を選び、次に箱2の番号を選び、残りを箱3へ渡す方法の数に等しい。各番号付き分配はその個数の三つ組を一意に定めるため、三つ組間にも漏れや重複はない。\n\n0個はすべての箱で許され、$$0!=1$$ により定数項1が空の箱を正しく表す。また、次数は非負なので、$$N$$ 次を超える項を除いても求める係数は変わらない。従って二つの出力はいずれも求める分配数である。","sourceRevisionIds":["source-abc422-editorial-13823-688787088bbacb5a2bcde2cad5c97b46a3aed6338d6c6ec3d9525f651765d20a","source-abc422-g-problem-876fa801bc8143fe0c7ab2505b22d0f0dc02ce66aca804ceae4404b1a3c30de9"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -22,65 +22,158 @@ authoringUnit: {"problemId":"abc422-g","docPath":"src/content/docs/problems/math
 
 ## 考察
 
-box別ball数の制約は独立で、総数Nだけが三boxを結合する。indistinguishable ballsにはordinary generating function、labeled ballsにはfactorial重みのexponential generating functionが対応する。
+まず各箱に入れる個数を決め、その個数になる分配が何通りあるかを数える。球を区別しなければ各組を1通りと数え、番号付きなら各箱へ渡す番号の選び方を数える。この違いを係数の重みに持たせると、二つの問題を同じ多項式の掛け算で解ける。
 
-採用する候補: 三つのsparse OGF/EGFをNTT convolutionする
+### 個数を先に決め、番号の選び方を重みにする
 
-各boxの許容個数を係数列にし、productのN次係数で分配数をO(N log N)計算できる。
+箱1、箱2、箱3へ入れる個数を、それぞれ $$a,b,c$$ とする。各箱の倍数条件は独立で、三箱を結び付けているのは総数だけである。従って、まず
 
-棄却する候補: aA+bB+cC=Nを全三重loopする
+$$
+a+b+c=N,\qquad A\mid a,\quad B\mid b,\quad C\mid c
+$$
 
-各変数がO(N)候補を持ち最悪O(N^3)になる。
+を満たす非負整数の三つ組を考えればよい。ここで $$A\mid a$$ は「$$a$$ が $$A$$ の倍数」を表し、0個も許される。箱には番号があるため、三つ組の成分を入れ替えたものは一般に別の分配になる。
 
-Problem1のbox A列はΣx^{iA}、Problem2はΣx^{iA}/(iA)!である。三積のx^N係数は前者で個数tuple数、後者でlabel分割のmultinomialをN!倍した数になる。
+三つの個数を独立に列挙すると最悪 $$O(N^3)$$ だが、二つを決めれば $$c=N-a-b$$ と定まる。そこで $$a$$ を $$A$$ の倍数、$$b$$ を $$B$$ の倍数として列挙し、残りが非負の $$C$$ の倍数かを調べる方がよい。それでも $$A=B=1$$ なら調べる組は $$\Theta(N^2)$$ あり、上限の $$N=3\times10^5$$ には間に合わない。三つ組を一つずつ処理する代わりに、個数ごとの寄与をまとめたい。
 
-次数NまでのF_A,F_B,F_Cでmultiple位置を1、G_A,G_B,G_Cでmultiple位置をinverseFactorialにする。各三積を二回のNTTで畳み込み、Problem1はcoeff N、Problem2はcoeff N×N!を出す。
+寄与の中身を先に確かめる。問題1では、合法な三つ組を固定すると分配はちょうど1通りである。問題2では、まず $$N$$ 個の番号から箱1へ入れる $$a$$ 個を選び、残りから箱2へ入れる $$b$$ 個を選ぶ。残った $$c$$ 個は箱3へ入るので、同じ三つ組に対応する分配数は
+
+$$
+\binom{N}{a}\binom{N-a}{b}
+=\frac{N!}{a!b!c!}
+$$
+
+となる。箱内で球を並べる順序は数えない。この多項係数を各三つ組の重みとすればよい。
+
+公式入力例1の $$N=3,(A,B,C)=(1,2,3)$$ では、合法な三つ組は次の三つだけである。
+
+| 個数の三つ組 $$(a,b,c)$$ | 問題1の重み | 問題2の重み |
+| --- | --- | --- |
+| $$(3,0,0)$$ | $$1$$ | $$3!/(3!0!0!)=1$$ |
+| $$(1,2,0)$$ | $$1$$ | $$3!/(1!2!0!)=3$$ |
+| $$(0,0,3)$$ | $$1$$ | $$3!/(0!0!3!)=1$$ |
+
+中央の組では、箱1へ渡す球の番号を1、2、3のどれにするかで3通りになる。従って答えは問題1が $$1+1+1=3$$、問題2が $$1+3+1=5$$ となる。
+
+### 指数で個数を、係数で重みを記録する
+
+多項式の項 $$w x^k$$ を「球を $$k$$ 個使う選択に、重み $$w$$ を付ける」という記録として使う。$$x$$ に値を代入する必要はない。指数が使う個数、係数がその選択の重みを表す。掛け算では指数が足され、係数が掛けられるので、各箱から一つずつ選ぶ操作と相性がよい。
+
+問題1では、箱1へ $$0,A,2A,\ldots$$ 個入れる選択を、それぞれ係数1で記録する。
+
+$$
+F_A(x)=\sum_{i=0}^{\lfloor N/A\rfloor}x^{iA}
+$$
+
+同様に $$F_B,F_C$$ を作る。個数ごとの通り数をそのまま係数に置く表現を**通常型母関数（OGF）**と呼ぶ。ここでは答えに必要な $$N$$ 次までで打ち切っている。
+
+$$[x^N]P(x)$$ という記号は、多項式 $$P(x)$$ の $$x^N$$ の係数を取り出すことを表す。三つの項を選んで掛けると $$x^a x^b x^c=x^{a+b+c}$$ となるため、問題1の答えは
+
+$$
+[x^N]\bigl(F_A(x)F_B(x)F_C(x)\bigr)
+$$
+
+である。積の係数は、合計が $$N$$ になる三つ組の重みの和になっている。
+
+問題2で足したい重みは $$N!/(a!b!c!)$$ である。共通の $$N!$$ を最後に掛けることにすれば、各箱側へ $$1/a!$$、$$1/b!$$、$$1/c!$$ を分けて持たせられる。そこで
+
+$$
+G_A(x)=\sum_{i=0}^{\lfloor N/A\rfloor}\frac{x^{iA}}{(iA)!}
+$$
+
+とし、$$G_B,G_C$$ も同様に作る。固定された $$k$$ 個の異なる番号を使う構造の通り数を $$d_k$$ とするとき、$$\sum_{k\geq0}d_k x^k/k!$$ という表現を**指数型母関数（EGF）**と呼ぶ。一つの箱では、その $$k$$ 個を全部入れる方法が、倍数条件を満たすときだけ1通りある。従って、合法な次数の係数を $$1/k!$$ にすればよい。
+
+この積から取り出す通常の $$x^N$$ の係数は、分配数を $$N!$$ で割った値である。問題2の答えは
+
+$$
+N!\,[x^N]\bigl(G_A(x)G_B(x)G_C(x)\bigr)
+$$
+
+となる。先ほどの三つ組に対して、積へ寄与する係数を追うと
+
+$$
+[x^3]\bigl(F_A F_B F_C\bigr)=1+1+1=3,
+$$
+
+$$
+[x^3]\bigl(G_A G_B G_C\bigr)
+=\frac{1}{3!}+\frac{1}{1!2!}+\frac{1}{3!}
+=\frac{5}{3!}.
+$$
+
+後者に $$3!$$ を掛ければ5へ戻る。問題1の係数3に単に $$3!$$ を掛けるのではない。同じ総数でも個数の分かれ方により番号の割り当て数が異なるため、各箱の係数を変えてから積を求める必要がある。
+
+### 二回の多項式積で必要な係数を求める
+
+係数配列同士の積は、添字の和ごとに積を足す**畳み込み**である。普通に二重ループで求めると依然 $$O(N^2)$$ なので、[NTTによる高速畳み込み](src/content/docs/learn/combinatorics-algebra/polynomial-convolution.md)を使う。NTTは、今回の法で多項式の積を $$O(N\log N)$$ 時間で計算できる数論変換である。
+
+各母関数を長さ $$N+1$$ の係数配列で持ち、次の順に計算する。
+
+1. $$0!,1!,\ldots,N!$$ と、それぞれの逆元である逆階乗を前計算する。
+2. 問題1用の三配列を0で初期化し、対応する倍数の添字だけ1にする。まず $$F_A F_B$$ を畳み込み、結果の $$N$$ 次以下だけを残して $$F_C$$ と畳み込む。次数 $$N$$ の係数が問題1の答えである。
+3. 問題2用には、倍数の添字 $$k$$ の値を逆階乗 $$1/k!$$ にする。$$G_A G_B$$、その結果と $$G_C$$ の順に同じ処理を行い、次数 $$N$$ の係数へ $$N!$$ を掛ける。
+4. 二つの答えを問題1、問題2の順に出力する。計算はすべて $$998244353$$ を法として行う。
+
+各答えに多項式積が二回、二問合わせて四回である。次数は非負なので、途中で $$N$$ 次を超えた項が、後の積で $$N$$ 次へ戻ることはない。入力の三配列も中間の積も、$$N$$ 次以下だけを残してよい。
+
+なお、問題1だけなら $$O(N)$$ 時間でも解ける。合計個数ごとの配列を $$dp[0]=1$$、他を0として始め、箱の条件 $$D=A,B,C$$ を一つずつ処理する。各回で $$s=D,D+1,\ldots,N$$ の昇順に $$dp[s]\gets dp[s]+dp[s-D]$$ と更新すると、その箱へ $$D$$ 個ずつ何回でも追加する選択を数えられる。三箱を処理した $$dp[N]$$ が答えになる。この更新は係数が等間隔に1であることを使うため、逆階乗を重みにする問題2へはそのまま使えない。ここでは二問を「係数の重みを替えた同じ積」として理解できる方法を採用する。
 
 ## 典型の発動条件
 
 ### OGFとEGFの使い分け
 
-発動条件: 同じsize分割でも部品がindistinguishableかlabeledかで結合係数が異なる。
+発動条件: 部品ごとの大きさを独立に選び、合計の大きさを指定して数えたい。
 
-unlabeled countにOGF、label集合分割に1/n!係数のEGFを使う。
+通常型では大きさごとの通り数をそのまま係数にする。異なる番号を部品へ分ける選び方まで必要なら、まず固定した大きさの組に何通り対応するかを調べる。その倍率が階乗の比なら、各係数を逆階乗で正規化する指数型が候補になる。「番号があるから」と名前だけで決めず、結合時の倍率から係数を導く。
 
 ### sparse polynomial convolution
 
-発動条件: 三boxの許容size列から総size Nの組合せを求める。
+発動条件: 各部品で許される大きさが係数配列で表され、合計の条件が積の次数に対応する。
 
-各列を次数Nで切りNTT productのN次係数を取る。
+許容されない次数を0にすれば、倍数条件のような疎な配列も同じ積で扱える。ただし積が疎とは限らず、配列が疎だから列挙が速いとは限らない。必要な次数で打ち切り、高速畳み込みを使える法と長さを確認する。
 
 ## 問題固有の要素
 
-EGF積のfactorial denominatorが、N個のballを三box sizeへ割り当てるmultinomial係数を自動的に生成する。
+二つの問題で変わるのは球を区別するかどうかだけで、箱の倍数条件は共通している。この対比から、合法な三つ組の集合を固定し、その三つ組に対応する分配数だけを変えると考えられる。
 
-別の問題へ持ち帰る視点: label付き直積はEGF convolutionでlabel partition数を吸収できる。
+別の問題へ持ち帰る視点は、総数の条件と、固定した個数配分の中で生じる組合せの倍率を分けること。その倍率を各部品の重みの積へ分解できれば、同じ畳み込みの枠組みを使える。
 
 ## 正当性
 
-各box数は独立で、multiple条件を満たす次数だけ置けば積のN次係数が総数Nの全tupleを一度表す。区別しないballは係数1、区別するballは1/n!で正規化した後N!を掛けて各tupleのlabel割当て多項係数を回復する。0個の定数項1が空boxも含める。
+各箱の多項式は、倍数条件を満たす非負の個数に対応する項だけを持つ。積の $$N$$ 次の項を作る選択と、合計 $$N$$ の合法な三つ組 $$(a,b,c)$$ は一対一に対応する。問題1では各選択の係数が1なので、積の $$N$$ 次係数が分配数に等しい。
+
+問題2では各三つ組が係数 $$1/(a!b!c!)$$ を一度寄与する。これに共通の $$N!$$ を掛けた値は、箱1の番号を選び、次に箱2の番号を選び、残りを箱3へ渡す方法の数に等しい。各番号付き分配はその個数の三つ組を一意に定めるため、三つ組間にも漏れや重複はない。
+
+0個はすべての箱で許され、$$0!=1$$ により定数項1が空の箱を正しく表す。また、次数は非負なので、$$N$$ 次を超える項を除いても求める係数は変わらない。従って二つの出力はいずれも求める分配数である。
 
 ## 実装上の注意
 
-- 全多項式をN次でtruncateし、0個は各boxで許されるため定数項1を入れる。
+- 0はどの正整数の倍数でもある。倍数の添字を埋めるループは0から始め、定数項を1にする。例えば $$A>N$$ なら箱1の配列は定数項1だけとなり、その箱へ0個を入れる場合を表す。三つとも $$N$$ より大きければ、正の $$N$$ を分配できず答えは両方0になる。
+- $$p=998244353$$ は素数で、$$N<p$$ だから $$0!,\ldots,N!$$ はすべて法上で逆元を持つ。分数は整数除算せず、逆元を掛ける。階乗配列を `fact`、逆階乗配列を `invFact` とし、まず `fact[0] = 1` から昇順に階乗を作る。次に `invFact[N]` を `fact[N]` の $$p-2$$ 乗で求め、降順に `invFact[k-1] = invFact[k] * k` とする。各演算で法を取り、問題2の最後の階乗も同じ表から使う。
+- 二回目の積へ進む前に、中間配列の長さを $$N+1$$ 以下へ切る。ただしNTTの長さは、各積の**切り捨てる前**の結果全体を収められる必要がある。入力長がそれぞれ $$N+1$$ 以下なら、$$2N+1$$ 以上の最小の2冪を取ればよい。長さを単に $$N+1$$ へ丸めると、高次の係数が低次へ回り込むことがある。
+- 通常の整数型で剰余積を実装する場合は、法を取る前の積を64 bit整数で計算する。定数項しか残らない箱や解のない入力でも、係数配列を長さ $$N+1$$ で保持すれば次数 $$N$$ の取り出しを統一できる。
 
 ## 復習の核
 
-- N小でsize triple列挙と3^N assignment列挙を各係数結果と比較する。
+- 区別の有無が変わると、同じ個数配分に対応する分配数が変わる。固定した三つ組の倍率を先に求める。
+- 指数は合計したい量、係数はその選択の重み。積の次数条件が元の総数条件と一致するかを確認する。
+- 番号の分配に階乗の比が現れたら、各部品を逆階乗で正規化し、最後に全体の階乗を掛ける。通常の係数と、階乗を掛けて復元した通り数を混ぜない。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log N)。三box多項式の二回NTT積と階乗表。
+$$O(N\log N)$$。係数配列と階乗・逆階乗表の作成は $$O(N)$$、逆元を一つ求める二分累乗は $$O(\log p)$$ である。各問二回、計四回の高速畳み込みにそれぞれ $$O(N\log N)$$ かかる。法 $$p=998244353$$ は固定としている。
 
 ### 空間
 
-O(N)。
+$$O(N)$$。係数配列、階乗・逆階乗表、中間の積とNTTの作業領域を含む。配列数は定数個で、各配列の長さは $$O(N)$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 3 \times 10^5; 1 \leq A \leq 3 \times 10^5; 1 \leq B \leq 3 \times 10^5; 1 \leq C \leq 3 \times 10^5; All input values are integers.
+$$1\leq N,A,B,C\leq3\times10^5$$、実行時間制限は2秒、メモリ制限は1024 MiB。二変数列挙は最悪で約 $$N^2/2$$ 組を調べる一方、高速畳み込みなら上記の計算量になる。
+
+中間の積を $$N$$ 次で打ち切る手順では、各畳み込みの結果の長さは最大 $$2N+1\leq600001$$、必要なNTT長は最大 $$2^{20}$$ である。$$998244353-1=119\times2^{23}$$ なので、この法で使える2冪の変換長に収まる。逆階乗についても $$N<p$$ を満たす。倍数条件による0個や解なしの場合を含め、同じ計算手順を使える。
 
 ## 出典
 
