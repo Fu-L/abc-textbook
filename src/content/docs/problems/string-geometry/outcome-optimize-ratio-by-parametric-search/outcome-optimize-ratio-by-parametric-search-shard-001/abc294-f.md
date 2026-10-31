@@ -1,7 +1,7 @@
 ---
 title: "ABC294-F — Sugar Water 2"
 draft: true
-authoringUnit: {"problemId":"abc294-f","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc294-f.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search"],"sourceRevisionIds":["source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416","source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"濃度≥xは総sugar−x総weight≥0で、各溶液の変換scoreの和が非負と同値。片側scoreをsortして補数境界をlower_boundすれば重複濃度も含む全pair数を正確に数える。xを上げると成立pair数は減るので、count≥Kの最大境界がK番目の濃度になる。正weightにより変形の不等号向きは保存される。","sourceRevisionIds":["source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416","source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+authoringUnit: {"problemId":"abc294-f","docPath":"src/content/docs/problems/string-geometry/outcome-optimize-ratio-by-parametric-search/outcome-optimize-ratio-by-parametric-search-shard-001/abc294-f.md","learningOutcomeIds":["outcome-optimize-ratio-by-parametric-search"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-monotone-search"],"excludedTopics":["fractional programming・比率parametric searchの発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-fractional-parametric-search"],"sourceRevisionIds":["source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416","source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"総質量が正なので、組 $$(i,j)$$ の混合濃度が $$x$$ 以上であることと $$u_i+v_j\\geq 0$$ は同値である。固定した $$i$$ について、整列した $$V$$ の位置 $$p_i$$ 以降がちょうど $$v_j\\geq -u_i$$ を満たす相手となる。各組は自分の $$i$$ の集計で一度だけ数えられ、等しいスコアも除去しないので、$$\\mathrm{count}(x)$$ は同濃度の別の組を含む正しい個数になる。\n\n全 $$NM$$ 組の比率を重複も含めて降順に並べ、$$K$$ 番目を $$q_K$$ とする。$$x\\leq q_K$$ なら上位 $$K$$ 組が条件を満たし、$$x>q_K$$ なら満たす組は $$K$$ 個未満となる。従って $$\\mathrm{count}(x)\\geq K$$ と $$x\\leq q_K$$ は同値である。初期区間と更新は常に $$L\\leq q_K<R$$ を保ち、厳密な実数演算では反復ごとに区間幅が半分になる。よって区間を十分に狭めた後の $$100L$$ は、求める百分率 $$100q_K$$ を近似する。","sourceRevisionIds":["source-abc294-editorial-6007-de45be4385ee21284a25107feade9404328fc47a94c7f503c5abbdd9959c2416","source-abc294-f-problem-4cac15dbeb01b266629f56e03570d7c6798a2ea688747b57db91c1296762e613"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,65 +16,109 @@ authoringUnit: {"problemId":"abc294-f","docPath":"src/content/docs/problems/stri
 
 ## 考察
 
-濃度x以上かは各溶液の余剰量s-t*x/(1-x)を足した値が0以上かで判定できる。
+候補の濃度以上になる混ぜ方の個数が分かれば、濃い方から何番目かを判定できる。砂糖量から「候補の濃度に達するために必要な砂糖量」を引くと、混合後の条件を二つの容器の寄与の和に分けられる。
 
-採用する候補: 答え濃度の二分探索と余剰列sort
+全ての混ぜ方を作って濃度順に並べると、最大 $$NM=2.5\times 10^9$$ 組になる。そこで、順位そのものを探す代わりに「ある濃度以上の組が $$K$$ 個以上あるか」を考える。その濃度を高くするほど条件は厳しくなるため、この判定には二分探索が使えそうだ。残る課題は、全組を調べずに個数を数えることである。
 
-固定xで一方の余剰をsortし、各他方に対し和が非負となる個数を二分探索すればK番目判定ができる。
+以後、候補濃度 $$x$$ は百分率ではなく、砂糖の質量を砂糖水の総質量で割った $$0\leq x\leq 1$$ の比率とする。例えば $$x=0.5$$ が50%に対応する。高橋君の容器 $$i$$ は砂糖 $$A_i$$ グラム・水 $$B_i$$ グラム、青木君の容器 $$j$$ は砂糖 $$C_j$$ グラム・水 $$D_j$$ グラムを含む。添字の範囲は $$1\leq i\leq N$$、$$1\leq j\leq M$$ とする。
 
-棄却する候補: NM個の混合濃度を列挙sort
+混ぜた後の比率が $$x$$ 以上という条件を式にしよう。総質量は正なので、分母を払っても不等号の向きは変わらない。
 
-最大2.5×10^9組で生成できない。
+$$
+\frac{A_i+C_j}{A_i+B_i+C_j+D_j}\geq x
+$$
 
-比率不等式をA_i-(A_i+B_i)xとC_j-(C_j+D_j)xの和へ交差乗算すれば、ペア条件が二数の和の符号になる。
+分母を払い、右辺を左辺へ移すと、
 
-xを0..1で十分回二分探索し、各判定で青木側scoreをsort、各高橋側scoreについてlower_boundで和≥0のペア数を数え、K以上なら下限を上げる。
+$$
+\begin{aligned}
+&A_i+C_j\\
+&\quad-x(A_i+B_i+C_j+D_j)\geq 0
+\end{aligned}
+$$
+
+ここで総質量に $$x$$ を掛けた量は、その総質量で候補濃度を満たすために必要な砂糖量である。容器ごとに「実際の砂糖量からこの必要量を引いた値」をスコアとして定義する。
+
+$$
+\begin{aligned}
+u_i&=A_i-x(A_i+B_i),
+\\
+v_j&=C_j-x(C_j+D_j)
+\end{aligned}
+$$
+
+これで混合条件は $$u_i+v_j\geq 0$$ となる。例えば $$x=0.5$$ のとき、砂糖4グラム・水1グラムのスコアは $$1.5$$、砂糖1グラム・水4グラムのスコアは $$-1.5$$ である。和は0なので、二つを混ぜるとちょうど50%になる。濃度そのものを足すのではなく、質量の単位を持つスコアを足している。
+
+公式解説は、砂糖 $$s$$ グラム・水 $$t$$ グラムに対し、水の量を固定して濃度 $$x$$ にするための砂糖量 $$tx/(1-x)$$ を考え、余剰 $$s-tx/(1-x)$$ を使う。本稿のスコアとの関係は、$$0\leq x<1$$ で
+
+$$
+s-x(s+t)=(1-x)\left(s-\frac{tx}{1-x}\right)
+$$
+
+である。固定した $$x$$ では全容器に同じ正数 $$1-x$$ を掛けているので、スコアの大小関係も、二つの和の符号も同じになる。以降は除算のない $$u_i,v_j$$ を使う。公式解説の余剰の式は $$x=1$$ では評価できないが、本稿の式は端点でも定義できる。
+
+固定した $$x$$ で青木君のスコアを昇順に整列した配列を $$V$$ とし、その位置は0始まりとする。高橋君の容器 $$i$$ に対し、混ぜられる相手は $$v_j\geq -u_i$$ を満たすもの全てである。`lower_bound(V, -u_i)` が返す最初の位置を $$p_i$$、該当要素がなければ $$p_i=M$$ とすれば、その個数は $$M-p_i$$ になる。従って
+
+$$
+\mathrm{count}(x)=\sum_{i=1}^{N}(M-p_i)
+$$
+
+を求めればよい。等号も含めるので `upper_bound` ではなく `lower_bound` を使い、同じスコアも配列に残す。順位の対象は濃度の異なる値ではなく、容器の選び方 $$(i,j)$$ だからだ。例えば両者が同じ50%の砂糖水を2本ずつ持つなら、50%の組は4個ある。
+
+探索の下端を $$L=0$$、上端を $$R=1$$ とする。砂糖も水も正なので、$$\mathrm{count}(0)=NM\geq K$$、$$\mathrm{count}(1)=0<K$$ であり、下端が成功側、上端が失敗側になる。次を固定回数 $$I$$ だけ繰り返す。
+
+1. $$x=(L+R)/2$$ とし、この $$x$$ に対するスコアを計算する。
+2. 青木君のスコアを整列し、各高橋君のスコアから `lower_bound` で $$\mathrm{count}(x)$$ を求める。
+3. $$\mathrm{count}(x)\geq K$$ なら $$L=x$$、そうでなければ $$R=x$$ とする。
+
+候補濃度が変わるたびにスコアも変わるため、青木君側の整列は毎回行う。探索後に初めて100倍し、$$100L$$ を百分率で出力する。反復数と浮動小数点誤差の扱いは「実装上の注意」で確認する。
 
 ## 典型の発動条件
 
 ### K番目値の二分探索
 
-発動条件: 巨大な直積集合の順位値を求める。
-
-閾値以上の要素数を判定する。
+候補全体を列挙するには多すぎても、閾値以上の要素数を高速に数えられるなら、順位を個数の判定へ変換する。閾値を上げたとき個数が増えないことと、同じ値を持つ別の選択を数えることを確認する。
 
 ### 二集合pair和数え上げ
 
-発動条件: 条件がu_i+v_j≥0へ分離できる。
-
-片側sortとlower_boundで数える。
+二つの選択肢にまたがる条件が $$u_i+v_j\geq 0$$ へ分離できれば、一方を整列し、他方を固定して補数 $$-u_i$$ 以上の範囲を数えられる。比率の場合は、分母が正であることを確認してから「分子 − 閾値 × 分母」へ変形すると、この分離を見つけやすい。
 
 ## 問題固有の要素
 
-混合後の分数比較を各容器の閾値余剰へ分離すると、直積濃度がpair和問題になる。
-
-別の問題へ持ち帰る視点: 比率の順位問題は閾値との差を加法分離する。
+混ぜた砂糖水では砂糖量も総質量も加算されるため、比率の不等式を払うと各容器のスコアの和になる。ここでは「条件を満たす組が存在するか」だけでは順位が分からず、条件を満たす容器の組を全て数える必要がある。比率の最適化で使う変形を、二集合の組数判定へつなぐ点が核心である。
 
 ## 正当性
 
-濃度≥xは総sugar−x総weight≥0で、各溶液の変換scoreの和が非負と同値。片側scoreをsortして補数境界をlower_boundすれば重複濃度も含む全pair数を正確に数える。xを上げると成立pair数は減るので、count≥Kの最大境界がK番目の濃度になる。正weightにより変形の不等号向きは保存される。
+総質量が正なので、組 $$(i,j)$$ の混合濃度が $$x$$ 以上であることと $$u_i+v_j\geq 0$$ は同値である。固定した $$i$$ について、整列した $$V$$ の位置 $$p_i$$ 以降がちょうど $$v_j\geq -u_i$$ を満たす相手となる。各組は自分の $$i$$ の集計で一度だけ数えられ、等しいスコアも除去しないので、$$\mathrm{count}(x)$$ は同濃度の別の組を含む正しい個数になる。
+
+全 $$NM$$ 組の比率を重複も含めて降順に並べ、$$K$$ 番目を $$q_K$$ とする。$$x\leq q_K$$ なら上位 $$K$$ 組が条件を満たし、$$x>q_K$$ なら満たす組は $$K$$ 個未満となる。従って $$\mathrm{count}(x)\geq K$$ と $$x\leq q_K$$ は同値である。初期区間と更新は常に $$L\leq q_K<R$$ を保ち、厳密な実数演算では反復ごとに区間幅が半分になる。よって区間を十分に狭めた後の $$100L$$ は、求める百分率 $$100q_K$$ を近似する。
 
 ## 実装上の注意
 
-- 百分率出力の100倍を忘れず、判定回数を誤差保証に十分取り、pair数は64ビットで持つ。
+- $$K$$ と組数の合計は最大 $$2.5\times 10^9$$ なので、符号付き64 bit整数で持つ。$$NM$$ を計算するときも乗算前に型を広げる。スコアと探索端点には `double` などの浮動小数点型を使う。
+- 許容誤差は、百分率で出力した値の絶対誤差または相対誤差 $$10^{-9}$$ である。厳密な実数演算なら $$I$$ 回後の百分率の区間幅は $$100\cdot 2^{-I}$$。例えば30回では約 $$9.31\times 10^{-8}$$ だが、40回なら約 $$9.10\times 10^{-11}$$ となる。実装では丸めもあるため、公式解説にならい100回程度反復し、例えば固定小数点で小数部を15桁以上出力する。反復だけで丸め誤差まで消せるわけではなく、`double` では途中から中点が端点と一致し得る。
+- 判定の境界は等号を含む0に保つ。安易に許容幅を足して組を数えると、順位の境界そのものがずれる。$$K=1$$ と $$K=NM$$、同濃度多数、砂糖量と水量が極端に偏る入力を、小さい全組列挙と比較して確認する。
+- 除算のないスコアなら $$x=1$$ でも $$u_i=-B_i<0$$、$$v_j=-D_j<0$$ となり、全組が失敗する。$$x=0$$ では全組が成功する。水も砂糖も正という制約が、初期端点を保証している。
 
 ## 復習の核
 
-- 小NMの全濃度sortと比較し、同濃度多数、K=1,NM、極端な砂糖水比を確認する。
+- 比率を直接足せないときは、分母の正性を確かめて「分子 − 閾値 × 分母」を作り、選択肢ごとの寄与に分ける。
+- 「大きい方から何番目か」は「閾値以上が何個あるか」へ変える。等しい値でも選び方が違えば順位を占める。
+- 探索中の単位と出力の単位を区別し、換算倍率を誤差評価にも掛ける。
 
 ## 計算量と制約
 
 ### 時間
 
-O(I(M log M+N log M))、Iは誤差保証用二分探索回数。
+判定1回につき、スコアの計算が $$O(N+M)$$、青木君側の整列が $$O(M\log M)$$、高橋君側からの $$N$$ 回の境界探索が $$O(N\log M)$$。従って全体は $$O(I(M\log M+N\log M))$$ 時間（$$M\geq 2$$）。$$M=1$$ も含めて書けば $$O(I(M+N)\log(M+1))$$ であり、$$I$$ は二分探索の反復数である。
 
 ### 空間
 
-O(N+M)。
+入力を保持する $$O(N+M)$$ と、青木君側のスコア配列 $$O(M)$$ を合わせて $$O(N+M)$$。全 $$NM$$ 組を保持する必要はない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N, M \leq 5 \times 10^4; 1 \leq K \leq N \times M; 1 \leq A_i, B_i, C_i, D_i \leq 10^5; All values in the input are integers.
+$$1\leq N,M\leq 5\times 10^4$$、$$1\leq K\leq NM$$、$$1\leq A_i,B_i,C_j,D_j\leq 10^5$$。全組の列挙を避け、各判定を整列と境界探索で処理する。全ての砂糖量・水量が正なので混合濃度は0と1の間にあり、分母の正性と探索端点の成功・失敗が保証される。制限時間は4秒、メモリ制限は1024 MiB。
 
 ## 出典
 
