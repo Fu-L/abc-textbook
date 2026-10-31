@@ -44,9 +44,9 @@ $$
 の係数、右に定数を書くと、
 
 $$
-\left[\begin{array}{ccc|c}
-1&1&0&1\\
-0&1&1&0
+\left[\begin{array}{ccccc}
+1&1&0&\mid&1\\
+0&1&1&\mid&0
 \end{array}\right]
 $$
 
@@ -55,9 +55,9 @@ $$
 $$x_2$$ の係数1をピボットにし、一行目へ二行目を右辺ごとXORする。
 
 $$
-\left[\begin{array}{ccc|c}
-1&0&1&1\\
-0&1&1&0
+\left[\begin{array}{ccccc}
+1&0&1&\mid&1\\
+0&1&1&\mid&0
 \end{array}\right]
 $$
 
@@ -98,8 +98,8 @@ $$
 消去後の一行目は $$[1,0,1\mid1]$$ だった。追加行 $$[1,0,1\mid0]$$ へこれをXORすると、次の行が残る。
 
 $$
-\left[\begin{array}{ccc|c}
-0&0&0&1
+\left[\begin{array}{ccccc}
+0&0&0&\mid&1
 \end{array}\right]
 $$
 
