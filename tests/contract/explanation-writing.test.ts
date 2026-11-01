@@ -64,5 +64,9 @@ describe('new explanation writing examples', () => {
       a.flatMap((x) => b.flatMap((y) => c.map((z) => x * y + y * z + z * x))).sort((x, y) => y - x);
     expect(values([3, 1], [4, 2], [5, 1])).toEqual([47, 31, 29, 19, 17, 11, 9, 5]);
     expect(values([1, 1], [1, 1], [1, 1])).toEqual(Array<number>(8).fill(3));
+    // The counterexample in the technique section: descending order alone is insufficient.
+    const score = (a: number, b: number, c: number) => a * b + b * c + c * a;
+    expect(score(2, -3, 1)).toBe(-7);
+    expect(score(1, -3, 1)).toBe(-5);
   });
 });

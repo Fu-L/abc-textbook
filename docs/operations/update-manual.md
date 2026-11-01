@@ -23,7 +23,11 @@ Unitとし、関連問題の参照と区別する。開催順・difficultyから
 
 [再執筆Epic #491](https://github.com/Fu-L/abc-textbook/issues/491)で全232単元・868問と章導入を扱う。
 `abc-explanation-author`を執筆方針の正本とし、旧ルート`prompt.md`は削除した。問題には同skillの執筆方針とfullテンプレート、単元には
-[単元執筆方針](../../.agents/skills/abc-explanation-author/references/unit-writing-policy.md)を使う。サンプルプラグインの指示は方針の参考、保存された解説本文は品質比較の参考とし、公式根拠の代用にしない。本文未取得の間はサンプル比較と再執筆を完了扱いにせず、取得条件をIssueへ残す。
+[単元執筆方針](../../.agents/skills/abc-explanation-author/references/unit-writing-policy.md)を使う。サンプルプラグインの指示は方針の参考、保存された解説本文は品質比較の参考とし、公式根拠の代用にしない。
+
+12会話の本文は[sample/explanations](../../sample/explanations/README.md)に保存し、[現行本文・公式根拠との比較](../../sample/explanations/comparison.md)で改善点とサンプルの訂正を確認した。対象の再執筆ではこの比較を参照し、既存の正しい補強を残す。保存名`abc215-ex-*`は公式のABC215
+Hへ対応付け、既存Problem
+IDは変えない。別のサンプルを追加する場合も、本文未取得を比較済みと扱わず、取得・照合できない箇所をIssueへ残す。比較完了と個別原稿の再執筆完了は区別する。
 
 既存868問はすべてfullのため、形式だけのデータ移行や一括再生成は不要である。全問を単独で学べる解説とし、考察の判断、小例の途中状態と一般形の対応、典型の仕組み・適用条件・本問との対応を十分に説明する。改稿済み教材も対象とし、既存の正しい証明・補強を引き継ぐ。ID・URL・所属・関連先・前提・問題順・学習記録を保持する。17分野のIssueで担当対象を一意にし、着手分から原則最大5問または3単元の作業Issueを作る。重い独自論証は1問、1作業Issue＝1PRとし、先行再執筆分を重複担当させない。本文・公式根拠・論証と必要な検算、schema・参照検証、build・内部リンク、公開rendererを確認する。進捗と再執筆済みPRはIssueで管理し、manifestや別の証跡台帳は追加しない。
 

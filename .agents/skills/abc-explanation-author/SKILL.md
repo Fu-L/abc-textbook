@@ -1,7 +1,7 @@
 ---
 name: abc-explanation-author
 description: 検証済みの公式Source RevisionからABC上級問題の解説草案または具体的な保留診断を作る。
-version: 2.2.0
+version: 2.3.0
 ---
 
 # ABC Explanation Author
@@ -11,9 +11,9 @@ ABC上級問題の `ProblemAuthoringUnit`
 
 ## 対象の選択
 
-問題解説は以下の入出力契約を使う。単元本文は`references/unit-writing-policy.md`へ進み、問題用packetを単元へ要求しない。
-全面再執筆は全問を自立したfull解説とする。既存短縮形式の読込契約は保持する。
-プラグインは文章方針、保存された解説本文は品質比較の参考とし、公式根拠の代用にしない。本文未取得を比較済みと報告しない。
+問題解説は以下の入出力契約を使う。単元本文は`references/unit-writing-policy.md`へ進み、問題用packetを単元へ要求しない。全面再執筆は全問を自立したfull解説とする。既存短縮形式の読込契約は保持する。
+
+プラグインは文章方針、保存された解説本文は品質比較の参考とし、公式根拠の代用にしない。本文未取得を比較済みと報告しない。品質サンプルを使う改稿では[12会話と現行本文の比較](../../../sample/explanations/comparison.md)から、対象の改善点・引き継ぐ論証・サンプルの訂正を確認する。表示名ではなく公式taskで対応付ける。
 
 ## 入力
 
@@ -33,7 +33,8 @@ ABC上級問題の `ProblemAuthoringUnit`
 1. `references/input-output-contract.md`
    に従って入力packetを検証する。旧skill欄がある場合は型を確認して保持する。
 2. sourceの公式task、確認日時、利用目的を確認する。editorial indexだけを問題固有の根拠にしない。
-3. `references/placement-policy.md` に従い、新規執筆と全面再執筆にはfullを使う。旧短縮形式の検証では比較の一要素でも不一致ならfullへ戻す。
+3. `references/placement-policy.md`
+   に従い、新規執筆と全面再執筆にはfullを使う。旧短縮形式の検証では比較の一要素でも不一致ならfullへ戻す。
 4. `references/writing-policy.md`
    を毎回読み、同文書の良い例・悪い例と照らして執筆する。冒頭は未定義の記号を使わず、解法の核心とその理由を短く伝える。問題文の観察から次の一手を選ぶ理由、必要な定義、具体的な手順へ進み、後知恵で直線化しない。
 5. fullは `templates/full-explanation.md`、similar/supplementは
