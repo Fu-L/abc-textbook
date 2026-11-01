@@ -1,6 +1,8 @@
 # Full / similar / supplement
 
-fullを既定とする。primary Problemがあり、学習成果、前提、主解法、証明着眼点、漸近計算量のすべてが同じと根拠付きで確認できる場合だけ短縮形式を検討する。
+新規執筆と今回の全面再執筆は、全問で単独で学べるfullを使う。入力packetの`placementCandidate`は`primaryProblemId: null`、`comparison: null`、`additionalElement: null`とし、正本と照合する。既存868問はすべてfullであり、所属・関連先・問題順の変更や一括変換は不要である。
+
+以下は既存短縮形式を扱う互換規則であり、今回の再執筆で説明を省略するために適用しない。primary Problemがあり、学習成果、前提、主解法、証明着眼点、漸近計算量のすべてが同じと根拠付きで確認できる場合だけ短縮形式を検討する。
 
 - `similar`: 上記がすべて同じで、新しい独立要素がない。
 - `supplement`: 上記がすべて同じで、学習成果を補強する一つの追加要素がある。

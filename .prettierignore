@@ -12,7 +12,9 @@ docs/verification/bootstrap/technique-inventory.json
 .agents/
 .specify/
 specs/
-prompt.md
+# Imported quality references retain the original plugin and ChatGPT notation.
+sample/plugin/
+sample/explanations/abc*.md
 
 # These byte-for-byte artifacts are formatted and checked by their deterministic generators.
 docs/reviews/human-content/bootstrap/us2/final-taxonomy-review.json

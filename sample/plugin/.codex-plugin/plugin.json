@@ -1,0 +1,21 @@
+{
+  "interface": {
+    "capabilities": [
+      "skills"
+    ],
+    "category": "Education & Research",
+    "defaultPrompt": [],
+    "developerName": "Fuma Hidaka",
+    "displayName": "\u7af6\u30d7\u30ed\u554f\u984c\u89e3\u8aac",
+    "longDescription": "\u7af6\u6280\u30d7\u30ed\u30b0\u30e9\u30df\u30f3\u30b0\u306e\u554f\u984c\u3092\u601d\u8003\u904e\u7a0b\u3082\u542b\u3081\u3066\u89e3\u8aac\u3057\u307e\u3059",
+    "shortDescription": "\u7af6\u6280\u30d7\u30ed\u30b0\u30e9\u30df\u30f3\u30b0\u306e\u554f\u984c\u3092\u601d\u8003\u904e\u7a0b\u3082\u542b\u3081\u3066\u89e3\u8aac\u3057\u307e\u3059"
+  },
+  "name": "gpt-57a5baebf51b78d5e6feb9b7da0874f5",
+  "version": "0.2.6",
+  "description": "\u7af6\u6280\u30d7\u30ed\u30b0\u30e9\u30df\u30f3\u30b0\u306e\u554f\u984c\u3092\u601d\u8003\u904e\u7a0b\u3082\u542b\u3081\u3066\u89e3\u8aac\u3057\u307e\u3059",
+  "author": {
+    "name": "Fuma Hidaka"
+  },
+  "keywords": [],
+  "skills": "./skills"
+}
