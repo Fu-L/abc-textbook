@@ -4,6 +4,9 @@
 
 ## 方針と生成の入口
 
+[Issue #509](https://github.com/Fu-L/abc-textbook/issues/509)では、[品質サンプル12会話の比較](../../sample/explanations/comparison.md)から、状態の必要性と十分性、変換が保つ問い、候補削減の妨げとなる場合、資源量による個数上界の教え方を補強した。以下のfull
+fixtureも、短い要約だった「典型の発動条件」を、仕組み・判断条件・本問の対応・転用と反例まで説明する文章へ改稿した。#120の下記画像は当時の表示比較であり、#509後の全文を撮影したものではない。
+
 正本は[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)と[執筆方針](../../.agents/skills/abc-explanation-author/references/writing-policy.md)。`prepareExplanationAuthoring`は形式別の`templatePath`に加え、毎回読む`writingPolicyPath`を返す。入力を検証し、方針と比較例を読んで執筆し、完成unitを検証して`renderProblemAuthoringDocument`へ渡す。準備関数やMarkdown生成器が解法の説明を自動執筆するわけではない。
 
 旧テンプレートの「自然な考察ロードマップ」「観察と解法候補」「鍵となる発想」などは、そのまま並べても既存readerが読む本文形式にはならなかった。新版は実際の`sections`欄と本文の節名へ対応させる。必須の着想・状態・手順・証明・境界・計算量・復習は残し、状態や遷移ごとの小見出し、候補の採用/棄却欄を一律に要求しない。必要な小見出しだけを内容に合わせて付ける。外側の節名は互換性のため維持する。

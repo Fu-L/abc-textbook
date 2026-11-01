@@ -78,6 +78,17 @@ for (const colorScheme of ['light', 'dark'] as const) {
         );
         await expect(article.locator('math').first()).toBeVisible();
         await expect(article).toContainText(unit.kind === 'full' ? '以前の候補29' : '復習では');
+        if (unit.kind === 'full') {
+          await expect(
+            article.getByRole('heading', {
+              name: '値の単調性と、同じ状態への合流を確かめる',
+              exact: true,
+            }),
+          ).toBeVisible();
+          // The constraint-changing counterexample must render its negative operand as math.
+          await expect(article.locator('math').filter({ hasText: '−3' })).toBeVisible();
+          await expect(article).toContainText('値が−7から−5へ増える');
+        }
         await expect(article.locator('#出典 + ul a')).toHaveCount(unit.sourceRevisionIds.length);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
           true,
