@@ -1,7 +1,7 @@
 ---
 name: abc-explanation-author
 description: 検証済みの公式Source RevisionからABC上級問題の解説草案または具体的な保留診断を作る。
-version: 2.3.0
+version: 2.3.1
 ---
 
 # ABC Explanation Author
@@ -23,7 +23,7 @@ ABC上級問題の `ProblemAuthoringUnit`
 - 公式問題文から確認した制約
 - `references/source-policy.md` に従って正規化されたSource Revision packet
 - 出典に紐づくtechnical claim
-- full / similar / supplementの候補判定に必要なprimary Problemと比較結果
+- 新規執筆・再執筆では、3欄をnullにした`placementCandidate`。旧短縮形式の互換検証だけは参照元のfull Problemと比較結果
 
 一項目でも不足、不一致、利用目的外のsourceがあれば執筆せず、診断code、対象field、必要な再試行条件を持つ
 `blocked` とする。
@@ -34,12 +34,12 @@ ABC上級問題の `ProblemAuthoringUnit`
    に従って入力packetを検証する。旧skill欄がある場合は型を確認して保持する。
 2. sourceの公式task、確認日時、利用目的を確認する。editorial indexだけを問題固有の根拠にしない。
 3. `references/placement-policy.md`
-   に従い、新規執筆と全面再執筆にはfullを使う。旧短縮形式の検証では比較の一要素でも不一致ならfullへ戻す。
+   に従い、新規執筆・再執筆では`placementCandidate`の`primaryProblemId`・`comparison`・`additionalElement`をすべてnullにしてfullを準備する。旧短縮形式の互換検証では元のpacketを保持し、比較の一要素でも不一致ならfullと判定する。
 4. `references/writing-policy.md`
    を毎回読み、同文書の良い例・悪い例と照らして執筆する。冒頭は未定義の記号を使わず、解法の核心とその理由を短く伝える。問題文の観察から次の一手を選ぶ理由、必要な定義、具体的な手順へ進み、後知恵で直線化しない。
-5. fullは `templates/full-explanation.md`、similar/supplementは
+5. 新規執筆・再執筆は `templates/full-explanation.md`を使う。旧similar/supplementの互換確認だけは
    `templates/abbreviated-explanation.md`
-   を使う。テンプレートの節と既存の`sections`欄を対応させ、本文は`renderProblemAuthoringDocument`で生成する。説明の順序を見出しの数で代用せず、任意の小見出しは問題に合わせる。短縮形式でも差分の導出・根拠・全体計算量への接続・復習の核を残す。
+   を参照する。テンプレートの節と既存の`sections`欄を対応させ、本文は`renderProblemAuthoringDocument`で生成する。説明の順序を見出しの数で代用せず、任意の小見出しは問題に合わせる。旧短縮形式でも差分の導出・根拠・全体計算量への接続・復習の核を確認する。
 6. Claimを本文と同じauthoring
    unitへ置き、sourceと学習成果を明示する。必要な短い例・反例は本文へ組み込む。掲載するコードは実行可能／擬似コード／省略を区別し、実行可能コードを実行して期待結果を確認する。
 7. `references/review-policy.md`

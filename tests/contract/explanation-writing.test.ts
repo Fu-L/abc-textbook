@@ -6,9 +6,81 @@ import { generateWritingExamples } from '../fixtures/authoring-skill/writing-exa
 import { readProblemAuthoringDocument } from '../../src/lib/authoring/problem-authoring-document.js';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 import { splitProblemContext } from '../../src/components/problem-reading.js';
+import {
+  prepareExplanationAuthoring,
+  validateAuthoringInput,
+  validateAuthoringOutput,
+  type ExplanationComparison,
+} from '../../src/lib/authoring/explanation-authoring-skill.js';
 
-describe('new explanation writing examples', () => {
-  it('prepares both forms with the current policy and round-trips the generated prose', async () => {
+describe('standalone full writing and legacy abbreviated compatibility', () => {
+  it('prepares standalone full input and rejects abbreviated comparison input for full output', async () => {
+    const examples = await generateWritingExamples();
+    const full = examples.find(({ unit }) => unit.kind === 'full');
+    const legacy = examples.find(({ unit }) => unit.kind === 'similar');
+    if (!full || !legacy) throw new Error('Missing writing fixtures');
+    expect(full.input.placementCandidate).toEqual({
+      primaryProblemId: null,
+      comparison: null,
+      additionalElement: null,
+    });
+    expect(full.preparation).toMatchObject({
+      status: 'authoring_required',
+      explanationKind: 'full',
+      templatePath: '.agents/skills/abc-explanation-author/templates/full-explanation.md',
+    });
+    expect(full.unit).toMatchObject({
+      kind: 'full',
+      primaryProblemId: null,
+      differenceSummary: null,
+    });
+    expect(validateAuthoringOutput(full.unit, full.input).status).toBe('ready');
+
+    for (const additionalElement of [null, '旧形式の追加観察']) {
+      const input = structuredClone(full.input);
+      input.placementCandidate = {
+        ...legacy.input.placementCandidate,
+        primaryProblemId: legacy.unit.problemId,
+        additionalElement,
+      };
+      const snapshot = structuredClone(input);
+      expect(prepareExplanationAuthoring(input).explanationKind).toBe(
+        additionalElement === null ? 'similar' : 'supplement',
+      );
+      expect(validateAuthoringOutput(full.unit, input).diagnostics.map(({ code }) => code)).toEqual(
+        expect.arrayContaining(['OUTPUT_KIND_MISMATCH', 'OUTPUT_PRIMARY_PROBLEM_MISMATCH']),
+      );
+      expect(input).toEqual(snapshot);
+    }
+  });
+
+  it.each<keyof ExplanationComparison>([
+    'learningOutcomes',
+    'prerequisites',
+    'coreMethod',
+    'proofIdea',
+    'asymptoticComplexity',
+  ])('retains full fallback for a legacy mismatch in %s', async (field) => {
+    const legacy = (await generateWritingExamples()).find(({ unit }) => unit.kind === 'similar');
+    if (!legacy?.input.placementCandidate.comparison) throw new Error('Missing legacy comparison');
+    const input = structuredClone(legacy.input);
+    if (!input.placementCandidate.comparison) throw new Error('Missing comparison');
+    input.placementCandidate.comparison[field] = false;
+    for (const additionalElement of [null, '旧形式の追加観察']) {
+      input.placementCandidate.additionalElement = additionalElement;
+      expect(prepareExplanationAuthoring(input)).toMatchObject({
+        status: 'authoring_required',
+        explanationKind: 'full',
+        templatePath: '.agents/skills/abc-explanation-author/templates/full-explanation.md',
+      });
+    }
+    input.placementCandidate.comparison = null;
+    expect(validateAuthoringInput(input).diagnostics.map(({ code }) => code)).toContain(
+      'PLACEMENT_COMPARISON_INCOMPLETE',
+    );
+  });
+
+  it('prepares full and legacy similar with the current policy and round-trips generated prose', async () => {
     for (const { unit, preparation, document } of await generateWritingExamples()) {
       expect(preparation.explanationKind).toBe(unit.kind);
       expect(preparation.writingPolicyPath).toBe(

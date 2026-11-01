@@ -26,6 +26,7 @@ import {
   renderProblemAuthoringDocument,
 } from '../../src/lib/authoring/problem-authoring-document.js';
 import {
+  prepareExplanationAuthoring,
   validateAuthoringOutput,
   type AuthoringInputPacket,
 } from '../../src/lib/authoring/explanation-authoring-skill.js';
@@ -267,6 +268,14 @@ describe('accepted canonical full public projection', () => {
             allowedUses: ['constraint_reference', 'technical_claim'],
           })),
         };
+        expect(prepareExplanationAuthoring(input)).toMatchObject({
+          status: 'authoring_required',
+          explanationKind: kind,
+          templatePath:
+            '.agents/skills/abc-explanation-author/templates/abbreviated-explanation.md',
+          diagnostics: [],
+        });
+        expect(read.unit).toEqual(unit);
         expect(validateAuthoringOutput(read.unit, input)).toEqual({
           status: 'ready',
           diagnostics: [],
