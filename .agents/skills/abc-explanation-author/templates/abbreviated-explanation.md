@@ -1,4 +1,6 @@
-# similar / supplementの執筆テンプレート
+# 旧similar / supplementの互換テンプレート
+
+既存短縮形式の読込・検証・表示確認用に保持する。新規執筆・再執筆には[fullテンプレート](full-explanation.md)を使い、この形式を選ばない。以下は旧packetと本文を扱う際の契約である。
 
 まず[執筆方針と比較例](../references/writing-policy.md)と[分類条件](../references/placement-policy.md)を読む。共通するfullの学習成果・前提・主解法・証明着眼点・漸近計算量を比較してから使う。
 

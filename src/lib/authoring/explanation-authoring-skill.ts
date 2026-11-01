@@ -142,6 +142,8 @@ const sourceSetKey = (sourceRevisionIds: readonly string[]): string =>
 export const classifyExplanationKind = (
   candidate: AuthoringInputPacket['placementCandidate'],
 ): 'full' | 'similar' | 'supplement' => {
+  // New/revised explanations supply three null fields for standalone full prose.
+  // Keep comparison-based classification for historical abbreviated packets.
   if (candidate.primaryProblemId === null || candidate.comparison === null) return 'full';
   const sameCore = Object.values(candidate.comparison).every(Boolean);
   if (!sameCore) return 'full';

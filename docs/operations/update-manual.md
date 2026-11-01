@@ -49,7 +49,7 @@ Study UX
 | 追加対象         | 準備・執筆する正本                                                                                                   | 生成・表示の入口                                                                                                                                    |
 | ---------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ContestとProblem | 公開済みbaseから公式metadata・Source Revisionとmetricsを取得し、candidateで解説・分析・主配置・関連先・問題順を編集  | 下のPR-08取得→PR-09の`abc:update --mode prepare`→執筆→`--mode validate`。問題本文は`renderProblemAuthoringDocument`で生成                           |
-| Problemの本文    | `abc-explanation-author`の`SKILL.md`・執筆方針・full/similar/supplementテンプレートを読み、公式根拠から執筆          | `prepareExplanationAuthoring`が方針とtemplateのpathを返す。`validateAuthoringInput`・`validateAuthoringOutput`とreaderの往復で入出力を確認          |
+| Problemの本文    | `abc-explanation-author`の`SKILL.md`・執筆方針・fullテンプレートを読み、公式根拠から執筆。短縮形式は互換確認用       | `prepareExplanationAuthoring`が方針とtemplateのpathを返す。`validateAuthoringInput`・`validateAuthoringOutput`とreaderの往復で入出力を確認          |
 | Unit             | taxonomyの所属・前提・問題集合と明示的な読書順・対象色を整合させ、概念・小例・操作・成立条件・計算量をMarkdownへ執筆 | `canonical-taxonomy-materialization.ts`の`renderLearningUnitDocument`でdraftを生成。`textbook-order.ts`・`unit-learning-targets.ts`も必要分だけ編集 |
 
 小batch
@@ -69,9 +69,9 @@ CLIは既存taxonomyへの問題追加を扱い、新Unitの設計・登録や�
 
 最小検証は下の「変更に必要な検証を選ぶ」と[CIの分類表](development.md#変更範囲に応じたci検証)に従う。`verify:fast -- --base origin/main`は本文・データ・UI・執筆skillの変更で新教材E2Eを選び、skill変更では#120の執筆contractも選ぶ。方針・テンプレート変更時の`explanation-writing.spec.ts`は手動で追加する。UI変更時の拡大・配色検査、記録の保存形式を変えた場合のbackup検査などは該当変更だけに加える。同じ本番subpathのbuildをリンク・E2Eで再利用し、非公開文書だけの変更ではbuild/E2Eを要求しない。
 
-問題解説の新規執筆では[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)の執筆方針と形式別テンプレートを毎回読む。`prepareExplanationAuthoring`も`writingPolicyPath`と`templatePath`を返す。冒頭の核心から、観察→次の一手の理由→必要な定義→手順と進み、正当性・全体計算量・典型の発動条件・復習の核を残す。既存の外側の節名は維持し、その内側へ定型の小見出しを一律に増やさない。完成unitを検証して`renderProblemAuthoringDocument`で生成し、readerで往復を確認する。[執筆例の比較](explanation-writing.md)と未公開fixtureは全問再生成の指示ではない。
+問題解説の新規執筆・再執筆では[`abc-explanation-author`](../../.agents/skills/abc-explanation-author/SKILL.md)の執筆方針とfullテンプレートを毎回読む。入力は[入出力契約](../../.agents/skills/abc-explanation-author/references/input-output-contract.md)の例に従い、`placementCandidate`の`primaryProblemId`・`comparison`・`additionalElement`をすべてnullにする。`prepareExplanationAuthoring`の`explanationKind: full`とfullの`templatePath`を確認する。完成unitは`kind: full`、`primaryProblemId: null`、`differenceSummary: null`とし、既存の主題・所属・関連先・前提を引き継ぐ。`writingPolicyPath`と`templatePath`を返す既存APIは旧短縮形式にも引き続き対応する。冒頭の核心から、観察→次の一手の理由→必要な定義→手順と進み、正当性・全体計算量・典型の発動条件・復習の核を残す。既存の外側の節名は維持し、その内側へ定型の小見出しを一律に増やさない。完成unitを検証して`renderProblemAuthoringDocument`で生成し、readerで往復を確認する。[執筆例の比較](explanation-writing.md)と未公開fixtureは全問再生成の指示ではない。
 
-方針・テンプレートの変更では`tests/contract/explanation-writing.test.ts`で新規のfull・差分解説を準備・生成し、schema・往復・共通rendererの数式と導線を検証する。`tests/e2e/explanation-writing.spec.ts`で同じ原稿を現行レイアウトへ置き、狭い画面・明暗・JS無効・参照元への移動を確認する。fixtureは教材・公開catalog・検索indexへ追加しない。通常buildと内部リンク確認には本番subpathを使う。
+方針・テンプレートの変更では`tests/contract/explanation-writing.test.ts`で新規fullと旧短縮形式の互換fixtureを準備・生成し、schema・往復・共通rendererの数式と導線を検証する。`tests/e2e/explanation-writing.spec.ts`で同じ原稿を現行レイアウトへ置き、狭い画面・明暗・JS無効・参照元への移動を確認する。fixtureは教材・公開catalog・検索indexへ追加しない。通常buildと内部リンク確認には本番subpathを使う。
 
 既存教材の文章改善は[読みにくさと最初の修正](content-readability.md)の症状・未修正箇所から小batchを選ぶ。未区切りTeXの候補数だけで優先順位を決めず、条件・状態・式を読めるか、着想から手順へつながるかを本文で確認する。生成器起因ならその正本を先に直し、執筆済み本文は一括再生成しない。正当性節を改稿するときは同居するclaimも一致させ、旧anchor・学習の位置・出典リンクを保持する。別の棚卸し台帳は作らず、修正前後・検証と未修正をPRまたは既存の比較文書へ短く残す。
 
@@ -783,7 +783,7 @@ full本文の着想、状態・保持する量、初期化・遷移・操作順�
 `similar`/`supplement`は参照元が既存の`full`解説であることを公開loaderで確認する。差分には対象問題の検証済みSource
 Revisionを持つclaimを置き、そのtextを`sections.differences`へ一致させる。`full`の`correctness`
 claimと正当性節の照合は維持する。短縮解説の公開本文の冒頭には`primaryProblemId`から参照元のIDと内部リンクを生成し、共通の成立条件・証明・全体計算量へ戻れるようにする。両短縮形式の変更ではreaderの往復変換に加え、`tests/integration/full-public-projection.test.ts`で公開loader、差分と根拠の不一致・未検証claim・対象外source・参照元の拒否、本番base
-path付きHTMLの導線を確認する。形式を変える訂正では本文の訂正先も`full`の`sections.reasoning`から短縮形式の`sections.differences`へ更新し、現存する節に解決することを確認する。本文surfaceのschemaは両節を受理するが、公開loaderは欠落した節を拒否する。分類の可否は学習成果・前提・手法・証明・漸近計算量の比較で判断し、同じTagだけを理由に短縮しない。
+path付きHTMLの導線を確認する。旧形式の互換確認で形式を変える場合は本文の訂正先も`full`の`sections.reasoning`から短縮形式の`sections.differences`へ更新し、現存する節に解決することを確認する。本文surfaceのschemaは両節を受理するが、公開loaderは欠落した節を拒否する。旧形式の互換判定は学習成果・前提・手法・証明・漸近計算量の比較を維持する。通常の新規執筆・再執筆はfullとし、同じTagや手法を理由に短縮しない。
 
 初版shardとpreviewの互換readerは、過去manifestに記録されたartifact subjectと当時のsource
 packetの内部整合を確認する。現在のskill文書を当時のartifact

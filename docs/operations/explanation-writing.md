@@ -30,14 +30,16 @@ Revisionの確認日は書き換えない。
 
 ## full・similar・supplement
 
-`full`は単独で手順と成立理由を追える説明にする。`similar`は同じ学習成果・前提・主解法・証明着眼点・漸近計算量を確認し、差分を導く理由と実装への影響を説明する。`supplement`は同じ核へ一つの補強要素を加えるときに使い、その追加観察を導く。新しい主成果・前提・証明・漸近計算量が必要なら`full`へ戻す。同じデータ構造を使うことだけを短縮の根拠にしない。
+新規執筆・再執筆はすべて`full`とし、単独で手順と成立理由を追える説明にする。入力packetは[入出力契約](../../.agents/skills/abc-explanation-author/references/input-output-contract.md)の例に従い、`placementCandidate`の3欄をnullにする。準備結果はfullテンプレート、完成unitは`kind: full`、`primaryProblemId: null`、`differenceSummary: null`となる。主題・所属・関連先・前提を変更する操作ではない。
+
+以下の`similar`・`supplement`の説明とfixtureは旧形式の互換確認用である。`similar`は同じ学習成果・前提・主解法・証明着眼点・漸近計算量を確認し、差分を導く理由と実装への影響を説明する。`supplement`は同じ核へ一つの補強要素を加えるときに使い、その追加観察を導く。新しい主成果・前提・証明・漸近計算量が必要なら既存分類器も`full`を返す。同じデータ構造を使うことだけを短縮の根拠にしない。
 
 未公開の差分fixtureは[ABC123 D](https://atcoder.jp/contests/abc123/tasks/abc123_d)を使う。優先値が和でも一座標ごとに単調であること、配列長ごとの境界、上位すべてを出力する差分を導き、探索境界の証明へ接続する。入力長の合計を定義して全体の時間・空間計算量を対応付け、復習の着目点を残す。ABC123
 Dは収録範囲外の比較教材であり、公開catalog・taxonomyへ追加しない。対象の公式問題文から独自に論証し、sourceは既存の正規化方式でfingerprintを計算したfixture専用Source
 Revisionである。
 
 逆に和の列挙を既習としてABC391
-Fへ進むなら、交差項を因数分解し、正の制約から単調性を導くことを一つの補強要素として説明できる。この`supplement`の例も執筆方針へ記載した。実問題の分類変更は別途比較して決める。
+Fへ進むなら、交差項を因数分解し、正の制約から単調性を導くことを一つの補強要素として説明できる。この`supplement`の比較例も執筆方針へ残すが、新規執筆・再執筆では自立したfullとして説明する。正本868件はすべてfullであり、形式移行や本文再生成は行わない。
 
 短縮形式は既存の`sections.differences`と`implementationNotes`を使う。復習や証明のために新しい管理欄を増やさず、共通の証明・計算量にどの条件で戻れるかを差分内で説明する。参照元fullへの冒頭リンクは共通rendererが生成する。
 

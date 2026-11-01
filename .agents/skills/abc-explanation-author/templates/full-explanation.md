@@ -2,6 +2,8 @@
 
 まず[執筆方針と比較例](../references/writing-policy.md)を読む。これは完成Markdownの雛形ではなく、`ProblemAuthoringUnit.sections`へ執筆するための案内である。
 
+新規執筆・再執筆では他問と同じ典型でもこのテンプレートを使う。[入力契約](../references/input-output-contract.md)に従い`placementCandidate`の3欄をnullにし、準備結果が`explanationKind: full`であることを確認する。
+
 入力packetのProblem・学習成果・baseline・前提・Tag・Source
 Revisionを引き継ぎ、`kind: full`、`primaryProblemId: null`、`differenceSummary: null`とする。Claimは同じunitの`claims`へ置く。`examples`・`exercises`は必要なければ`[]`。完成unitを`validateAuthoringOutput`で検証し、`renderProblemAuthoringDocument`で本文にする。
 
