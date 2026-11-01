@@ -1,13 +1,19 @@
 ---
 name: abc-explanation-author
 description: 検証済みの公式Source RevisionからABC上級問題の解説草案または具体的な保留診断を作る。
-version: 2.1.0
+version: 2.2.0
 ---
 
 # ABC Explanation Author
 
 ABC上級問題の `ProblemAuthoringUnit`
 を、公式根拠と教材の学習成果へ追跡可能な形で執筆するためのskillである。世界トップレベルの競技プログラマー兼コーチの視点で、上位コンテストを目指す学習者が初見で解法を再現できる思考法と汎用的な典型知識を教える。入力不足を推測で補完してはならない。
+
+## 対象の選択
+
+問題解説は以下の入出力契約を使う。単元本文は`references/unit-writing-policy.md`へ進み、問題用packetを単元へ要求しない。
+全面再執筆は全問を自立したfull解説とする。既存短縮形式の読込契約は保持する。
+プラグインは文章方針、保存された解説本文は品質比較の参考とし、公式根拠の代用にしない。本文未取得を比較済みと報告しない。
 
 ## 入力
 
@@ -27,8 +33,7 @@ ABC上級問題の `ProblemAuthoringUnit`
 1. `references/input-output-contract.md`
    に従って入力packetを検証する。旧skill欄がある場合は型を確認して保持する。
 2. sourceの公式task、確認日時、利用目的を確認する。editorial indexだけを問題固有の根拠にしない。
-3. `references/placement-policy.md` に従ってfull / similar /
-   supplementを決める。比較の一要素でも不一致ならfullへ戻す。
+3. `references/placement-policy.md` に従い、新規執筆と全面再執筆にはfullを使う。旧短縮形式の検証では比較の一要素でも不一致ならfullへ戻す。
 4. `references/writing-policy.md`
    を毎回読み、同文書の良い例・悪い例と照らして執筆する。冒頭は未定義の記号を使わず、解法の核心とその理由を短く伝える。問題文の観察から次の一手を選ぶ理由、必要な定義、具体的な手順へ進み、後知恵で直線化しない。
 5. fullは `templates/full-explanation.md`、similar/supplementは
@@ -37,7 +42,7 @@ ABC上級問題の `ProblemAuthoringUnit`
 6. Claimを本文と同じauthoring
    unitへ置き、sourceと学習成果を明示する。必要な短い例・反例は本文へ組み込む。掲載するコードは実行可能／擬似コード／省略を区別し、実行可能コードを実行して期待結果を確認する。
 7. `references/review-policy.md`
-   に従って公式根拠、独自の論証、境界と分類への影響をCodexが確認する。明示数式は`$$…$$`または独立した`$$`行で囲み、最小の具体例・図表は理解を助ける箇所だけに置く。数式の定義・文章による説明を省かず、生成Markdownと公開rendererの両方を確認する。
+   に従って公式根拠、独自の論証、境界と分類への影響をCodexが確認する。明示数式は`$$…$$`または独立した`$$`行で囲み、具体例・図表は理解を助ける箇所に置く。操作途中や一般化への対応、数式の定義と文章による説明を省かず、生成Markdownと公開rendererの両方を確認する。
 8. output
    contractと再現可能性を検証する。出力のProblem、学習成果、baseline、前提、対象外、Tag、placementは入力packetと一致させ、Claimのsourceは入力technical
    claimと同じsource集合を参照し、対象Problemのofficial taskと用途許可を満たすことを確認する。

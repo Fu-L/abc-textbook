@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "gpt-57a5baebf51b78d5e6feb9b7da0874f5",
+  "version": "0.2.6",
+  "description": "競技プログラミングの問題を思考過程も含めて解説します",
+  "author": {
+    "name": "Fuma Hidaka"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "skills"
+        ],
+        "category": "Education & Research",
+        "defaultPrompt": [],
+        "developerName": "Fuma Hidaka",
+        "displayName": "競プロ問題解説",
+        "longDescription": "競技プログラミングの問題を思考過程も含めて解説します",
+        "shortDescription": "競技プログラミングの問題を思考過程も含めて解説します"
+      }
+    }
+  }
+}
