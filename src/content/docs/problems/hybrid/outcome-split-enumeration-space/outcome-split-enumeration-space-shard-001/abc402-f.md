@@ -1,7 +1,8 @@
 ---
 title: "ABC402-F — Path to Integer"
 draft: true
-authoringUnit: {"problemId":"abc402-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc402-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817","source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。 固定xに対し(x+y) mod M最大は、y<M-xの最大があればそれ、なければS2最大である。 全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。","sourceRevisionIds":["source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817","source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"meet-in-the-middle-on-lattice-paths":"典型の発動条件","maximum-modular-pair-sum":"典型の発動条件"}
+authoringUnit: {"problemId":"abc402-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc402-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817","source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"各マスの重みは、その数字が全経路の整数へ寄与する値と $$M$$ を法として合同である。中央で分けた二つのリストは、接続マスを前半だけに含めるので、全経路のスコアを正確に $$p+q$$ の余りとして表す。\n\n各全経路は接続マスと二つの部分経路へ一意に分解でき、同じマスの部分経路の組は必ず合法な全経路を作る。固定した $$p$$ に対する検索は、折り返さない候補があればその最大を、なければ折り返す候補の最大を選ぶため、相手の最良値を返す。全 $$p$$ と接続マスの最大を取ることで、すべての全経路のスコアの最大値を得る。","sourceRevisionIds":["source-abc402-editorial-12713-b694a104e0818db20607af90c3769a6d79fdc4c66a4eb243a0aa4be1fa578817","source-abc402-f-problem-da2fa5cd1889a27d365df403a7a588d73613e27327d2c49e21e1071dce6b588e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,63 +13,99 @@ authoringUnit: {"problemId":"abc402-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-pathが通るcell(i,j)のdigitは最終decimal numberで10^{2N-i-j}の位を占めるため、各path scoreは通過cell weightの和mod Mになる。
+経路が作る整数は大きすぎるが、各マスの数字が何桁目に入るかは位置だけで決まる。まず連結を重み付きの和へ変え、中央の斜めの列で経路を半分にする。最後は、余りの和が法を越える境目を二分探索すればよい。
 
-任意pathは反対角線i+j=N+1をちょうど一cell通る。そこまでの前半と以後の後半は各O(2^{N})通りで独立に列挙できる。
+### 同じマスなら、同じ桁へ入る
 
-採用する候補: 反対角線でmeet-in-the-middleし、cell別の前半/後半剰余集合をsortして最大mod和を探す
+始点から終点までの経路は $$2N-1$$ 個の数字を通る。最大39桁なので整数をそのまま保持する必要はない。また、各マスで「ここまでの余りの最大値」だけを残すDPも正しくない。後から数字を足すと法で折り返すため、現在の余りの大小が将来の大小を保証しないからである。
 
-棄却する候補: 全start-to-goal pathを列挙してdecimal値を計算する
+一方、マス $$(i,j)$$ に来るまでの移動回数は、どの経路でも $$i+j-2$$ 回である。このマスの数字の後ろには必ず $$2N-i-j$$ 桁が続く。そこで
 
-N=20でも約C(38,19)が大きく、中央分割を使わないと間に合わない。
+$$
+w_{i,j}=A_{i,j}10^{2N-i-j}\bmod M
+$$
 
-10冪mod Mでcell weightを作る。DFS/DPでstartから各反対角cellまでのsum residue、goalから同cell直後までのsum residueを列挙する。後半listをsortし各前半xへlower_bound(M-x)直前または末尾を組み合わせてmaxを取る。
+と置くと、経路のスコアは通った $$w_{i,j}$$ の和を $$M$$ で割った余りになる。$$10$$ の累乗は、0乗から順に10を掛けて余りを取ればよい。
+
+これで、順番を意識する連結が、各マスの加算へ変わった。ただし和の余りの最大化なので、途中で最大値一つにまとめることはまだできない。
+
+### 中央までの値を全部残す
+
+全経路は中央の斜めの列 $$i+j=N+1$$ をちょうど一度通る。始点から右・下へ $$N-1$$ 歩進む経路と、終点から左・上へ $$N-1$$ 歩戻る経路を別々に列挙する。
+
+接続マス $$v$$ ごとに、次の二つのリストを作る。
+
+- $$P_v$$：始点から $$v$$ まで、$$v$$ を含めた重みの和の余り。
+- $$Q_v$$：$$v$$ の直後から終点まで、$$v$$ を含めない重みの和の余り。
+
+逆向きDFSでは、中央の斜めの列に着いたら、そのマスの値を加える前に停止する。この規約なら、つないだ全経路のスコアは単に
+
+$$
+(p+q)\bmod M
+$$
+
+である。$$N=1$$ なら、$$P$$ は唯一の数字の余り、$$Q$$ は空の後半を表す0一つとなり、同じ式が使える。
+
+### 余りの最大化には、折り返しの直前を探す
+
+同じ接続マスの $$p$$ を固定し、$$Q_v$$ を昇順に並べたとする。$$0\leq p,q<M$$ なので、和は高々 $$2M-2$$。折り返しは一度しか起こらない。
+
+$$q<M-p$$ の範囲ではスコアは $$p+q$$ であり、$$q$$ が大きいほどよい。この範囲に候補があれば、その最大の $$q$$ を選ぶ。$$q\geq M-p$$ の範囲ではスコアは $$p+q-M\leq p-1$$ になるので、折り返さない候補のスコア $$p+q\geq p$$ より必ず小さい。
+
+従って、$$M-p$$ の下限位置を二分探索し、その一つ前を使えばよい。一つ前が存在しなければ、全候補が折り返す。この場合だけ、リスト全体の最大の $$q$$ を使う。
+
+例えば $$M=10,p=6,Q=(1,3,5,9)$$ とする。スコアは順に7・9・1・5であり、最大の $$q=9$$ では最適にならない。折り返しの境目 $$M-p=4$$ の直前、$$q=3$$ を選べば9が得られる。もし $$Q=(5,9)$$ だけなら、全候補が折り返すので最大の9を使い、スコア5となる。
+
+この検索を全接続マスの全 $$p$$ について行い、スコアの最大値を答える。
 
 ## 典型の発動条件
 
-### meet-in-the-middle on lattice paths
+### 位置が決まる桁を、重みとして先に付ける
 
-発動条件: path長が約40で全path列挙は重いが中央layerで二分できるとき。
+数字の連結でも、各数字の最終的な桁が位置から一意に決まるなら、桁の重みを先に掛けて総和へ変えられる。経路や部分列の長さが変わる設定では、同じマスの桁が変わる可能性があるため、この変換をそのまま使わない。本問では右・下移動で経路長と到着時刻が固定されることが鍵になる。
 
-反対角線cellごとに前後path residueを列挙する。
+### 加算と剰余の間にある一つの境界を使う
 
-### maximum modular pair sum
+剰余を取った結果は全体では単調でないが、折り返しのない区間に分けると単調になる。値域を $$[0,M)$$ にそろえれば、二つの和には境界が一つだけであり、その直前と、候補がない場合の扱いを導ける。
 
-発動条件: 二集合から(x+y) mod Mの最大を求めるとき。
-
-wrap直前のyをbinary searchする。
+半分全列挙では、片側固定後に相手をどう探すかが計算量を決める。本問は「相手の最大値」でも「相手との全ペア」でもなく、境界の直前を検索する問題へ落ちる。
 
 ## 問題固有の要素
 
-decimal連結を逐次value更新する代わりに各cellの固定place valueへ展開すると、前後pathの寄与が加法的になりmeet-in-the-middleできる。
-
-別の問題へ持ち帰る視点: path上で順序依存に見える数値も、位置がpath長で固定なら重み付き和へ変換する。
+中央の斜めの列で切ると両側の移動回数が $$N-1$$ 回にそろい、各側の候補数が $$2^{N-1}$$ になる。連結の処理と経路の分割を一緒に考えるのでなく、まず固定された桁を重みへ変えると、接続で何を足せばよいかが明確になる。
 
 ## 正当性
 
-中央cellのweightは前半側だけへ含め、後半側から除外して二重加算を防ぐ。 固定xに対し(x+y) mod M最大は、y<M-xの最大があればそれ、なければS2最大である。 全path数C(2N-2,N-1)を、各半分O(2^{N-1})へ分割し、各xに対する最適yをbinary searchしてO(N2^N)程度で処理できる。
+各マスの重みは、その数字が全経路の整数へ寄与する値と $$M$$ を法として合同である。中央で分けた二つのリストは、接続マスを前半だけに含めるので、全経路のスコアを正確に $$p+q$$ の余りとして表す。
+
+各全経路は接続マスと二つの部分経路へ一意に分解でき、同じマスの部分経路の組は必ず合法な全経路を作る。固定した $$p$$ に対する検索は、折り返さない候補があればその最大を、なければ折り返す候補の最大を選ぶため、相手の最良値を返す。全 $$p$$ と接続マスの最大を取ることで、すべての全経路のスコアの最大値を得る。
 
 ## 実装上の注意
 
-- 中央cellを前半/後半どちらか一方だけに含める。M-x=0のlower_bound境界、N=1の空後半を扱う。
+- 逆向きに列挙しても、数字の桁の重みは元の経路の位置に対応させる。逆順の整数を作る処理ではない。
+- $$P$$ は中央を含み、$$Q$$ は含まない。この非対称な規約を初期化と停止条件で守る。
+- 下限位置が0なら直前は存在しないので、末尾の要素を使う。$$p=0$$ の境界は $$M$$ であり、すべての $$q$$ が折り返さない。
+- 重みの積 $$A_{i,j}10^k$$ は、累乗を法で縮めた後でも32bitを超え得る。積の前から64bit整数を使う。
 
 ## 復習の核
 
-- N≤6で全pathを列挙し、Mが小さくresidue重複が多いcase、wrap有無、N=1を比較する。
+- 連結の桁が固定なら、各要素へ桁の重みを付けて加算へ変える。
+- 剰余の最大化は大小関係が途中で折り返す。単調な範囲と境界を先に調べる。
+- 部分経路の接続では、共有マスをどちらに含めるかを式より先に決める。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N2ᴺ)、半path列挙・後半sort・各前半lower_bound。
+累乗と盤面の重みの準備が $$O(N^2)$$。両側の部分経路は各 $$2^{N-1}$$ 個で、DFSの総節点数は $$O(2^N)$$。整列と二分探索を含めて全体は $$O(N^2+N2^N)$$ である。
 
 ### 空間
 
-O(2ᴺ+N²)。
+盤面と重みが $$O(N^2)$$、部分経路のリストが $$O(2^N)$$、再帰スタックが $$O(N)$$。全体は $$O(N^2+2^N)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 20; 2 \leq M \leq 10^9; 1 \leq A_{i,j} \leq 9; All input values are integers.
+$$N\leq20$$ なので、各側約52万の部分経路を扱えばよい。法 $$M\leq10^9$$ の全余りを状態にする必要はなく、最大39桁の整数も生成しない。$$N=1$$ も空の後半の余り0によって自然に扱える。
 
 ## 出典
 

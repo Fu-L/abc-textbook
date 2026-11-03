@@ -1,7 +1,8 @@
 ---
 title: "ABC271-F — XOR on Grid Path"
 draft: true
-authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。 XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。 各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。","sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"grid-pathの半分全列挙":"典型の発動条件","xor頻度のmeet-in-the-middle":"典型の発動条件"}
+authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybrid/outcome-split-enumeration-space/outcome-split-enumeration-space-shard-001/abc271-f.md","learningOutcomeIds":["outcome-split-enumeration-space"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["meet-in-the-middle・半分全列挙の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-meet-in-the-middle"],"sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"任意の始点・終点間の経路は、中央の斜めの列のマスをちょうど一つ通り、そのマスで始点側と終点側の部分経路へ一意に分解できる。逆に、同じ接続マスの部分経路を一つずつ選べば、右・下へ進む合法な全経路を一意に作れる。\n\nこの全経路のXORが0であることは、接続マスの二重計上を補正した式により $$q=p\\oplus a_{r,c}$$ と同値である。出現回数の検索は、条件を満たす相手の部分経路を、同値のものも区別してすべて数える。従って、全マスの和は適切な経路を漏れなく重複なく数える。","sourceRevisionIds":["source-abc271-editorial-4925-19ad91acd5c2c9a9b19404010121c28e1bfa3f981ac243dc4107ee938b2253c1","source-abc271-f-problem-c81c79b9f08bcfd560d6e4294093f4aa569025fba39c2b64baeade51037625fa"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,63 +13,100 @@ authoringUnit: {"problemId":"abc271-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-任意のmonotone pathはx+y=N+1のanti-diagonal上のちょうど一つのcellを通り、そこまでにN−1 moves、そこからN−1 movesへ二分できる。
+経路を一本ずつ調べるには多すぎるが、真ん中までなら列挙できる。始点側と終点側で経路を半分ずつ作り、同じマスで出会うものをXORの条件で結び付ける。接続点の値を二度数えることだけ、式で補正する。
 
-全path数は最大約3.5×10^10だが、各half pathの総数は片側2^(N−1)なのでN≤20なら列挙できる。
+### 値をDPの添字にはできない
 
-棄却する候補: startからgoalへの全monotone pathsを列挙してvisited valuesのXORを計算する。
+右と下へそれぞれ $$N-1$$ 回進むので、経路数は $$\binom{2N-2}{N-1}$$。$$N=20$$ では約353億通りあり、全経路の走査は難しい。一方、XORは $$2^{30}$$ 未満の値を取り得る。マスごとに全XOR値を持つDPも、そのままでは大きすぎる。
 
-中央二項係数C(38,19)規模となり列挙不能である。
+経路長は38以下である。二択の回数が半分の19回なら、候補は約52万通りになる。値域を小さくするのではなく、列挙する経路を短くする方針が候補になる。
 
-採用する候補: start側とgoal側からanti-diagonalまでhalf pathsを列挙し、meeting cell別のXOR frequencyを照合する。
+### すべての経路が一度だけ通る場所で切る
+
+添字を1始まりとする。右か下へ一歩進むたびに行番号と列番号の和は1増える。従って、すべての経路は
+
+$$
+r+c=N+1
+$$
+
+を満たす斜めの列のマスを、ちょうど一つ通る。そこまでの移動回数は必ず $$N-1$$ 回である。
+
+始点から右・下へDFSし、$$N-1$$ 回進んだら止める。そのときのマスと、始点・停止マスを含む通過値のXORを記録する。同様に終点から左・上へDFSし、同じ斜めの列までのXORを記録する。
+
+接続マス $$v=(r,c)$$ ごとに、始点側の値のリストを $$P_v$$、終点側を $$Q_v$$ とする。このリストで必要なのは値の集合ではなく、経路ごとの値の列である。異なる経路が同じXORになっても、別の候補として残す。
+
+### 接続マスは二度含まれている
+
+始点側のXORが $$p$$、終点側が $$q$$ だとする。単純に $$p\oplus q$$ とすると、接続マスの値が二度出現して打ち消される。本来の経路では一度だけ通るので、全経路のXORは
+
+$$
+p\oplus q\oplus a_{r,c}
+$$
+
+となる。これが0になる条件は
+
+$$
+q=p\oplus a_{r,c}
+$$
+
+である。従って、一方の値を固定すると、相手に必要な値が一意に分かる。
+
+例えば2行2列の盤面を、上段 `1, 2`、下段 `2, 3` とする。上側の接続点 $$(1,2)$$ では $$p=1\oplus2=3$$、$$q=3\oplus2=1$$。補正したXORは $$3\oplus1\oplus2=0$$ となる。下側の接続点でも同じ計算になり、二つの経路が条件を満たす。接続点の値を補正しなければ、どちらも誤って不適切と判定してしまう。
+
+### 必要な値の出現回数を足す
+
+各 $$Q_v$$ を昇順に並べる。各 $$p\in P_v$$ について、値 $$p\oplus a_{r,c}$$ の下限位置と上限位置を二分探索し、その差を加える。等しい値が5個あれば、対応する経路が5通りあるという意味である。
+
+全接続マスについてこの値を足したものが答えになる。同じXOR値でも接続マスが違うものは結び付けない。経路としてつながるためには、値の条件だけでなく境界上の位置も一致しなければならない。
 
 ## 典型の発動条件
 
-### grid pathの半分全列挙
+### 二択を半分にし、直積を検索へ置き換える
 
-発動条件: path lengthは小さいが全path数が大きく、全pathが中央layerで一意に二分できるとき。
+選択回数が40前後で、全選択は多すぎても半分の選択は列挙できるとき、半分全列挙を考える。ただし、二つのリストを作った後に全ペアを調べると、元の指数時間へ戻る。本問では片側のXORから相手の値を一意に求められるため、全ペアを出現回数の検索へ置き換えられる。
 
-両端からN−1 movesだけDFSし、anti-diagonal cellごとにhalf-path情報を集める。
+足し算なら補数、XORなら同じXORをもう一度取ることで、相手への条件を書ける。半分に分けるだけでなく、接続条件が高速に検索できる形かを見る。
 
-### XOR頻度のmeet-in-the-middle
+### 境界状態と集約値を分けて残す
 
-発動条件: 全体のXOR条件を左右partial XOR間の一意なmatching valueへ変形できるとき。
-
-一方のXOR frequencyをmapにし、他方の各qに必要なpのcountを加える。
+部分経路を結び付けるには、接続位置とXORの両方が必要である。前者は実際につながるか、後者は目的の条件を満たすかを決める。部分解から将来必要な情報だけを抜き出す考え方は、木や文字列の分割にも使える。経路の途中の順番は、位置とXORが分かれば接続判定に影響しない。
 
 ## 問題固有の要素
 
-meeting cellは両halfで二重にXORされるため、結合条件でa_{x,y}を一度追加してfull pathでは一度だけ含まれるよう補正する。
-
-別の問題へ持ち帰る視点: meet-in-the-middleでは境界要素が左右のどちらに含まれるかを式で固定し、重複・欠落を補正する。
+右・下への移動では行番号と列番号の和が単調に増え、中央の斜めの列を一度だけ横切る。このため、分割位置の重複も、中央までの長さの偏りも生じない。XORの二重計上は、接続マスを両側へ含めるという列挙規約から導く。
 
 ## 正当性
 
-両half XORがmeeting valueをともに含むなら、full XOR=0は p⊕a_{x,y}⊕q=0、すなわちq=p⊕a_{x,y}と同値である。 XOR valueは同じものが複数pathから生じるため、setではなくfrequency mapを使い、matching frequenciesの積を答えへ足す。 各full pathが一意なhalf-path pairに対応し、総列挙量を指数の半分へ落とせる。
+任意の始点・終点間の経路は、中央の斜めの列のマスをちょうど一つ通り、そのマスで始点側と終点側の部分経路へ一意に分解できる。逆に、同じ接続マスの部分経路を一つずつ選べば、右・下へ進む合法な全経路を一意に作れる。
+
+この全経路のXORが0であることは、接続マスの二重計上を補正した式により $$q=p\oplus a_{r,c}$$ と同値である。出現回数の検索は、条件を満たす相手の部分経路を、同値のものも区別してすべて数える。従って、全マスの和は適切な経路を漏れなく重複なく数える。
 
 ## 実装上の注意
 
-- forward/backward DFSをちょうどN−1 movesで止め、meeting cell座標をkeyの一部として混在を防ぐ。
-- 答えはpath数で32 bitを超えるため64 bit整数を使い、meeting valueの包含規約を両DFSで統一する。
+- DFSの初期XORへ始点または終点の値を含め、移動したら移動先の値をXORする。両側で同じ規約を使う。
+- リストを集合へ変えて重複を消さない。必要なのは値ごとの経路数である。
+- 答えは32bitを超え得る。全マスが0なら、答えは全経路数 $$\binom{38}{19}$$ になるので64bit整数を使う。
+- 対角線全体の値を混ぜず、接続マスごとにリストを持つ。
 
 ## 復習の核
 
-- 組合せpath数が大きい一方でlengthが40程度なら、全pathが一度だけ通る中央layerで二分する。
-- 左右情報を照合する前に、meeting elementを含む回数をXOR式として明示する。
+- 全体の値域を圧縮できなくても、選択回数を半分にできるかを見る。
+- 分割境界では「位置の一致」「集約値の条件」「共有要素の重複」を別々に確認する。
+- 数え上げでは、同じ集約値へ至る部分解の多重度を残す。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N2ᴺ)の保守的上界、半path列挙とmap照合の対数因子を含む。
+片側のDFS木は深さ $$N-1$$ の二分木に含まれ、節点数は $$O(2^N)$$。各側の停止経路数の合計は $$2^{N-1}$$ である。全リストの整列と二分探索を合わせて $$O(N2^N)$$ 時間となる。
 
 ### 空間
 
-O(2ᴺ)、meeting cell別XOR頻度。
+盤面が $$O(N^2)$$、部分経路のXORリストが $$O(2^N)$$、DFSの再帰が $$O(N)$$。全体は $$O(N^2+2^N)$$ である。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 20; 0 \leq a_{i, j} \lt 2^{30} \, (1 \leq i, j \leq N); All values in the input are integers.
+$$N\leq20$$ なので、各側の停止経路は高々 $$2^{19}=524288$$ 個。約353億の全経路を作る代わりに、この二つのリストの整列と検索で処理できる。XORの値そのものを添字にした巨大な配列は必要ない。
 
 ## 出典
 
