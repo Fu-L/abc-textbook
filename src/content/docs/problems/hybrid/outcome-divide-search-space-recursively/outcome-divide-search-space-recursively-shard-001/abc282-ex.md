@@ -1,7 +1,8 @@
 ---
 title: "ABC282-EX — Min + Sum"
 draft: true
-authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。Bの非負性から累積和は非減少なので、一端を固定すれば二分探索で条件を満たす他端の範囲を漏れなく数えられる。短い側を列挙しても各交差区間を落とさない。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"minimum-pivot-divide-and-conquer":"典型の発動条件","smaller-side-enumeration":"典型の発動条件","monotone-prefix-sum-binary-search":"典型の発動条件"}
+authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hybrid/outcome-divide-search-space-recursively/outcome-divide-search-space-recursively-shard-001/abc282-ex.md","learningOutcomeIds":["outcome-divide-search-space-recursively"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-amortized-monotone-progress","unit-idempotent-overlap-range-query"],"excludedTopics":["再帰分割・分割統治の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-recursive-divide-and-conquer","tag-amortized-monotone-progress","tag-idempotent-overlap-range-query"],"sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":4,"claims":[{"key":"correctness","text":"中央をまたぐ任意の区間は、左右の長さの組 $$(k,t)$$ に一意に対応する。その最小値は $$\\min(u_k,v_t)$$、和は $$x_k+y_t$$ である。$$u_k\\leq v_t$$ と $$v_t<u_k$$ は重複なく全組を分け、それぞれで示した二条件は元の条件と同値になる。\n\n各条件を満たす添字は先頭範囲なので、二分探索した二つの範囲の共通部分を数えると、担当する合法区間だけを漏れなく一度ずつ数えられる。左右の内部区間は再帰へ渡し、一要素は直接判定する。各区間は初めて分割点をまたぐ頂点か一要素の葉で一度だけ数えられるため、返す総数は求める答えになる。","sourceRevisionIds":["source-abc282-editorial-5404-af7ca5d897c8ea3ead4396fabb25b13e43b7b0d2a368066302179faa9f21794c","source-abc282-ex-problem-467f20007e97f251312a9a6d652bba298cf793d3a81d179c5f942db55b98b68e"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,83 +13,130 @@ authoringUnit: {"problemId":"abc282-ex","docPath":"src/content/docs/problems/hyb
 
 先に読む単元:
 
-- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md) — 要素の一方向移動・一度だけの削除・軽辺へ進むたびの部分問題サイズ半減など、単調に減るpotentialから操作列全体の仕事量を抑える。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
-- [冪等演算のoverlap range query・Sparse Table](src/content/docs/learn/query/idempotent-overlap-range-query.md) — 区間monoid要約で得た考え方と実装を再利用し、冪等演算のoverlap range query・Sparse Tableの発動条件・正当化・境界を重複なく学ぶ。
+- [単調進行による償却解析](src/content/docs/learn/modeling/amortized-monotone-progress.md)
+- [冪等演算のoverlap range query・Sparse Table](src/content/docs/learn/query/idempotent-overlap-range-query.md)
 
 ## 考察
 
-B_i≥0なのでprefix sum PBは非減少で、区間minimumが固定されればsumB≤S-minという条件の相手endpoint範囲を二分探索できる。
+区間を中央で分け、中央をまたぐ区間だけをまとめて数える。その際、最小値を左側が担当する場合と右側が担当する場合へ分けると、片側の端点を固定するだけで最小値も固定できる。残る和の条件は、非負の要素の累積和に対する二分探索になる。
 
-区間[L,R]のA最小位置Mを選ぶと、Mを含む全subarrayのminimumはA_Mに固定され、残りは左右再帰へ重複なく分割できる。
+### 和が増える一方でも、式全体は単調ではない
 
-採用する候補: range minimum位置でdivide-and-conquerし、Mを含むintervalは短い側のendpointだけ列挙して、長い側の有効範囲をPB上のbinary searchで数える。
+区間の右端を伸ばすと、$$B$$ の和は増える一方で、$$A$$ の最小値は下がり得る。従って、条件を満たさなくなった後に、再び満たすこともある。
 
-minimumの変化を消し、各indexの列挙回数をsmall-side規則で対数回に抑えられる。
+例えば $$A=(10,0),B=(1,1),S=5$$ なら、区間 $$[1,1]$$ の式は11で条件を満たさないが、伸ばした $$[1,2]$$ の式は2で満たす。式全体へ、そのまま尺取り法や端点の二分探索を使うことはできない。
 
-棄却する候補: 全(l,r)を列挙し、RMQとprefix sumで条件を定数/対数時間判定する。
+どこが最小値を決めるかを固定できれば、事情が変わる。最小値が定数なら、残るのは非負の $$B$$ の和だけで、端点の移動に対して単調になる。この二つの部分を分ける方針を探そう。
 
-interval自体が二次個あるためN≤2×10^5に間に合わない。
+### 中央をまたぐ区間へ、左右の要約を作る
 
-l≤M≤rなら条件はPB[r]-PB[l-1]≤S-A_Mとなり、l固定ではrのvalid集合がprefix、r固定ではlのvalid集合がsuffixになる。
+0始まりの半開区間 $$[L,R)$$ を中央 $$m$$ で二分する。左の中だけ・右の中だけの区間は再帰に任せ、ここでは $$m-1$$ と $$m$$ の間をまたぐ区間を数える。一要素区間では $$A_i+B_i\leq S$$ かどうかを直接判定する。
 
-[L,M]と[M,R]の短い方だけendpointを固定すると、再帰treeで各indexが短い側に入るたび担当区間sizeが少なくとも半減する。
+中央をまたぐ区間は、左から最後の $$k$$ 個と、右から最初の $$t$$ 個の連結として一意に表せる。$$1\leq k\leq m-L$$、$$1\leq t\leq R-m$$ とし、次を前計算する。
 
-最小位置で左右へ再帰すれば、各subarrayはその最小要素を代表とするnodeで一度だけcross intervalとして数えられる。
+$$
+\begin{aligned}
+u_k&=\min(A_{m-k},\ldots,A_{m-1}),&
+x_k&=B_{m-k}+\cdots+B_{m-1},\\
+v_t&=\min(A_m,\ldots,A_{m+t-1}),&
+y_t&=B_m+\cdots+B_{m+t-1}.
+\end{aligned}
+$$
 
-RMQまたはmin Cartesian treeで各区間の最小位置Mを得る。leftが短ければ各l∈[L,M]についてPB上で最大r∈[M,R]を探し、rightが短ければ各rについて最小lを探す。cross数を加え、[L,M-1],[M+1,R]へ再帰する。
+中央から外へ一要素ずつ伸ばせば、各側の最小値と和を線形時間で作れる。$$u,v$$ は非増加、$$x,y$$ は非減少である。求める条件は
+
+$$
+\min(u_k,v_t)+x_k+y_t\leq S
+$$
+
+となった。このままでは二変数だが、最小値をどちらが担当するかで分ければ、一方を固定したときの条件を二つの単調な条件へ分解できる。
+
+### 左が最小値を担当する場合
+
+同値は左へ担当させ、$$u_k\leq v_t$$ の組を数える。$$k$$ を固定すれば、式の最小値は $$u_k$$ に確定し、残る条件は
+
+$$
+v_t\geq u_k,\qquad y_t\leq S-u_k-x_k
+$$
+
+になる。
+
+$$v_t$$ は非増加なので、一つ目を満たす $$t$$ は先頭からの連続範囲。$$y_t$$ は非減少なので、二つ目も先頭からの連続範囲である。それぞれの最大の有効添字を二分探索し、小さい方までの個数を加算すれば、両方を満たす組数が得られる。満たす添字がなければ個数0とする。
+
+例えば $$A=(5,2,4,2),B=(1,2,1,0),S=5$$ を中央で二分すると、左は $$u=(2,2),x=(2,3)$$、右は $$v=(4,2),y=(1,1)$$ になる。
+
+- $$k=1$$ では、右のどちらを付けても最小値は2、和を含めた式は $$2+2+1=5$$。2区間を数える。
+- $$k=2$$ では、どちらも $$2+3+1=6$$ となり0区間。
+
+この例では最小値が左右で同値になる組も含まれるが、左へまとめて担当させるので、後の右側の処理とは重ならない。
+
+### 右が最小値を担当する場合
+
+残るのは $$v_t<u_k$$ の組である。今度は $$t$$ を固定し、
+
+$$
+u_k>v_t,\qquad x_k\leq S-v_t-y_t
+$$
+
+を満たす $$k$$ を数える。こちらも、非増加の $$u$$ と非減少の $$x$$ に対する二つの先頭範囲の共通部分なので、二分探索二回で個数が分かる。
+
+左右とも、一方を固定すると二つの条件が同時に単調になることが改善の理由である。最小値と和を最初から足した配列が単調になったわけではない。
+
+左担当と右担当の個数を足し、左右の再帰結果も足して返す。中央で等分するので再帰は均等に小さくなり、各深さの処理量を合算できる。最小値の位置で区間を分ける別の方針では、単調な $$A$$ で区間が一要素ずつしか縮まらない場合があるため、同じ計算量の議論はできない。本稿は中央での分割を使う。
 
 ## 典型の発動条件
 
-### minimum-pivot divide-and-conquer
+### 部分ごとに最小値の担当を決め、難しい合成を単調条件へ分解する
 
-発動条件: subarray costにminimum/maximumが含まれ、そのextremum位置を含む区間で値を固定できるとき。
+$$\min(u,v)$$ のような合成が条件へ入るなら、$$u\leq v$$ と $$v<u$$ に分け、一方を定数にできないか考える。本問は各側の長さに対する累積最小が非増加なので、担当条件そのものも二分探索できる。
 
-range最小位置をpivotにcross intervalを数え、左右へ再帰する。
+同値の扱いを片方へ寄せるのは、分割を重複なく全体へ対応させるためである。両方を非厳密不等号にすると同値を二重計数し、両方を厳密にすると数え落とす。
 
-### smaller-side enumeration
+### 区間を中央で分け、境界をまたぐ寄与だけを担当する
 
-発動条件: divide-and-conquerのpivotが偏り得るが、cross pairの片側endpointだけ列挙できるとき。
+全区間を、左の内部・右の内部・中央をまたぐものへ分割する。この三分類は互いに素なので、交差区間だけを効率よく数えられれば分割統治になる。本問では中央へ固定された左右のsuffix・prefixの要約が、全交差区間で共有できる。
 
-短い側を走査して各要素の担当回数を対数に抑える。
-
-### monotone prefix sum binary search
-
-発動条件: 非負列の区間和上限からendpointの境界を求めるとき。
-
-非減少PBにlower/upper_boundしてvalid endpoint数を取る。
+中央で等分するなら深さは対数で、一つの深さにある区間長の総和は $$N$$ 以下。この二点を組み合わせて、局所の $$O(n\log n)$$ から全体の $$O(N\log^2N)$$ を導ける。分割する場所を変える場合は、この均衡性も改めて評価する。
 
 ## 問題固有の要素
 
-minimum pivotを含むintervalではmin項が定数A_Mになり、min+sumという混合条件が単なるprefix sum差の閾値へ変わる。
-
-別の問題へ持ち帰る視点: extremumと加法量が混ざる区間条件では、extremumを固定する分割とprefix sum queryを組み合わせる。
+$$B_i\geq0$$ なので累積和が非減少になり、最小値の担当を固定した後の容量条件を二分探索できる。0を許すため同じ累積和が続くが、等号を含む最後の位置を探せばよい。負数を許す場合は、この和の条件の単調性がなくなる。
 
 ## 正当性
 
-各区間を最小位置で分けると、その位置を含む区間は現在節点、含まない区間は片側の子に一意に属する。Bの非負性から累積和は非減少なので、一端を固定すれば二分探索で条件を満たす他端の範囲を漏れなく数えられる。短い側を列挙しても各交差区間を落とさない。
+中央をまたぐ任意の区間は、左右の長さの組 $$(k,t)$$ に一意に対応する。その最小値は $$\min(u_k,v_t)$$、和は $$x_k+y_t$$ である。$$u_k\leq v_t$$ と $$v_t<u_k$$ は重複なく全組を分け、それぞれで示した二条件は元の条件と同値になる。
+
+各条件を満たす添字は先頭範囲なので、二分探索した二つの範囲の共通部分を数えると、担当する合法区間だけを漏れなく一度ずつ数えられる。左右の内部区間は再帰へ渡し、一要素は直接判定する。各区間は初めて分割点をまたぐ頂点か一要素の葉で一度だけ数えられるため、返す総数は求める答えになる。
 
 ## 実装上の注意
 
-- S-A_M<0ならpivotを含むgood intervalは0で、unsigned underflowを避ける。
-- B_i=0でPBが同値になるため、≤条件に合うupper_bound/lower_boundの種類と検索区間を正しく選ぶ。
+- 左右の配列はいずれも、中央から外へ伸ばす長さ順に作る。元の添字順のまま左側を読むと、説明した単調方向と逆になる。
+- 左担当では $$v_t\geq u_k$$、右担当では $$u_k>v_t$$。同値の担当を統一する。
+- 和の閾値が負なら、有効な長さは0個。非負の累積和を誤って一つ数えない。
+- $$B_i=0$$ で累積和が同じ位置も全て数える。和が閾値以下である最後の位置、または閾値を超える最初の位置を探す。
+- 値・和・閾値の差・答えは64bit整数を使う。答えだけでも $$N(N+1)/2$$ まであり得る。
+- この頂点の交差区間を数えたら、左右の要約配列は破棄してから子へ進めば、作業領域を線形に保てる。
 
 ## 復習の核
 
-- 同じminimumが複数ある列でtie規約を固定し、あるsubarrayがどのpivot nodeで一度だけ数えられるかCartesian tree上で確認する。
+- 和と最小値の動きが逆なら、足した式を単調と決めつけない。
+- 最小値の担当を固定し、担当条件と残る和の条件へ分ける。
+- 同値を一方へ担当させ、重複のない分割を作る。
+- 局所計算量だけでなく、再帰の均衡性と各階層の総量を確認する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N log²N)、短い側endpointは各要素O(log N)回、各二分探索O(log N)。
+長さ $$n$$ の頂点で要約を作るのに $$O(n)$$、左右の各長さから二分探索を行うのに合計 $$O(n\log n)$$。中央で等分し、各深さの長さの総和が高々 $$N$$、深さが $$O(\log N)$$ なので、全体は $$O(N\log^2N)$$。
 
 ### 空間
 
-O(N)、prefix・Cartesian tree・再帰stack。
+入力と左右の要約配列に $$O(N)$$、再帰の深さに $$O(\log N)$$。交差計数後に作業配列を解放する実装では、合計 $$O(N)$$ となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq S \leq 3 \times 10^{14}; 0 \leq A_i \leq 10^{14}; 0 \leq B_i \leq 10^9; All values in the input are integers.
+$$N\leq2\times10^5$$ に対し、二乗個の区間を生成せず、対数階層の要約と二分探索で処理する。$$A_i\leq10^{14}$$、$$\sum B_i\leq2\times10^{14}$$、$$S\leq3\times10^{14}$$ と、それらの差は符号付き64bit整数の範囲に収まる。
 
 ## 出典
 
