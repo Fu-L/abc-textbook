@@ -1,7 +1,8 @@
 ---
 title: "ABC343-E — 7x7x7"
 draft: true
-authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"軸平行cubeの交差体積は、各軸の区間交差長の積で正確に求まる。上の有界配置に解が必ず含まれるため、全6座標の列挙は可能な解を落とさない。またPでは三重領域を3回数え、Tでは1回数えるので、V2=P−3Tとなり、総cube体積からV1も復元できる。列挙で条件を満たした候補は指定された各領域体積を持つため、探索の成功・失敗は解の存在と一致する。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"平行移動対称性の固定":"典型の発動条件","包除的なexact-coverage集計":"典型の発動条件"}
+authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc343-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-geometry-primitives","unit-inclusion-exclusion"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-geometry-orientation-transform","tag-inclusion-exclusion"],"sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"任意の実現可能な配置は、重なりのグラフによる場合分けで、体積を変えずに原点と $$[-7,7]^3$$ 内の二開始点へ変形できる。よって解が存在するなら、列挙範囲にも少なくとも一つ存在する。\n\n各候補の共通体積は、直積をなす三軸の共通区間の長さの積で正確に得られる。そこからの式は、各点が一個・二個・三個に属する場合の数えられ方を正確に補正する。従って受理した候補は指定体積を満たす合法な配置であり、全候補を調べてもなければ解は存在しない。","sourceRevisionIds":["source-abc343-e-problem-f843540e135cdb6b25bd3346102dbd7b34b7409341f6ae65e0e8e50f9302d84e","source-abc343-editorial-9435-ed07cc393d2136d295dda1792c5b598ae1d4ab773e7bb16fa9091f0a4dc62b03"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,8 +13,8 @@ authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md) — 座標と外積・距離式で向きや交差を代数判定し、凸幾何へ進む前提を作る。
-- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md) — 単純に足すと重複する条件を交差構造ごとに補正し、包除・Möbius反転へ一般化する。
+- [幾何の基本判定と座標変換](src/content/docs/learn/geometry-optimization/geometry-primitives.md)
+- [包除・Möbius反転で重複を補正する](src/content/docs/learn/combinatorics-algebra/inclusion-exclusion.md)
 
 この解説で扱わないこと:
 
@@ -21,55 +22,104 @@ authoringUnit: {"problemId":"abc343-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-平行移動で体積は変わらないので、一つのcubeをC1=(0,0,0)に固定する。重なりgraphが連結なら、三角形の場合は任意のcubeを、長さ2のpathの場合は中央のcubeをC1に選ぶ。残る二つはC1と重なるため、各軸の座標差は[-7,7]に入る。重なる一組と孤立した一個に分かれる場合は、重なる組の一方をC1にし、もう一方とのx差を見て孤立cubeを反対側のx=±7へ置く。これで既存の重なりを変えず、孤立cubeは両方から離れる。全て互いに離れているなら、x座標を−7,0,7として配置すれば全ての交差体積0を保つ。いずれも同じ三領域体積を持つ代表配置が各座標差[-7,7]にある。
+立方体の相対位置だけを調べればよい。一つを原点に置き、残る二つの各座標を−7から7まで列挙できると示す。その一候補の体積は、格子を塗る代わりに、二個・三個の共通部分から定数時間で求める。
 
-よってC2,C3の6座標だけを[-7,7]で列挙する。各二個の共通体積の和をP、三個の共通体積をTとすると、三重領域V3=T、二重領域V2=P-3T、単独領域V1=3·7^3-2V2-3V3である。各候補の体積条件を調べる。
+### 絶対座標の自由度を消す
+
+一辺7の同じ立方体を三つ置き、ちょうど一個・二個・三個に覆われる体積を、それぞれ指定値 $$V_1,V_2,V_3$$ にしたい。各立方体は、その座標が最小の頂点 $$(a_i,b_i,c_i)$$ で表せる。
+
+すべてを同じだけ平行移動しても重なりは変わらない。従って一つの立方体を $$(0,0,0)$$ に固定したい。ただし、単に移動しただけでは他の座標が遠くに残るかもしれない。小さい探索範囲で十分な理由を考える。
+
+### 遠くに離す必要は、どこにあるか
+
+体積が正の共通部分を持つ二立方体を、辺で結んだ3頂点のグラフを考える。立方体をつなぎ直すのではなく、重なり方を分類するための補助的なグラフである。
+
+三頂点が連結なら、残る二つの両方と重なる立方体が一つはある。それを一番目と呼び直して原点へ移す。各軸で幅7の区間が正の長さで重なるため、他の立方体の開始座標は、各成分が−7から7の範囲に収まる。
+
+辺が一本だけなら、その辺の一端を原点にし、相手との相対位置を保つ。孤立している三つ目は、両方と体積が正に重ならなければどこに置いてもよい。二番目のx開始座標が非負なら三つ目を $$(-7,0,0)$$ に置く。負なら $$(7,0,0)$$ に置く。どちらもx軸方向だけで前二つと体積が正に重ならず、元の体積を保てる。
+
+辺が一本もなければ、三つを $$(0,0,0),(7,0,0),(-7,0,0)$$ に並べればよい。面で接しても重複体積は0なので、問題ない。
+
+以上により、解が存在するなら、立方体の番号の付け替えと平行移動・孤立立方体の移動によって、残る六座標をすべて $$[-7,7]$$ にできる。同じ立方体どうしで、入力はどの番号がどこへ来るかを指定していないので、番号の付け替えも許される。
+
+### 一候補の重なりを、区間の交差で求める
+
+x方向の開始座標が $$a_i,a_j$$ の二立方体なら、共通する長さは
+
+$$
+\max\bigl(0,\min(a_i+7,a_j+7)-\max(a_i,a_j)\bigr).
+$$
+
+同じ式をy・z方向にも適用し、三つの長さを掛けると共通体積になる。三立方体の共通体積も、各軸の上端の最小と下端の最大を使って同様に求められる。
+
+二立方体の共通体積を $$I_{12},I_{13},I_{23}$$、三つの共通体積を $$T$$ としよう。ちょうど三つに覆われる体積は $$T$$ そのもの。一方、二個ずつの共通体積の和は、ちょうど二個の部分を一回、ちょうど三個の部分を三回ずつ数えている。
+
+従って、一候補から得られる体積 $$v_1,v_2,v_3$$ は
+
+$$
+\begin{aligned}
+v_3&=T,\\
+v_2&=I_{12}+I_{13}+I_{23}-3T,\\
+v_1&=3\times7^3-2v_2-3v_3.
+\end{aligned}
+$$
+
+例えば開始点を $$(0,0,0),(1,0,0),(2,0,0)$$ とすると、二個ずつの共通体積は294・245・294、三個の共通体積は245である。従って $$v_2=833-3\times245=98$$、$$v_1=1029-2\times98-3\times245=98$$ になる。三重部分を「二回引く」と、ちょうど二個の体積にはならないことに注意したい。
+
+### 全候補を検査して、最初の一つを返す
+
+残る六座標をそれぞれ−7から7まで走査し、上の式で体積を求める。すべてが指定値に等しければ、その三立方体を出力して終了する。最後まで見つからなければ `No` とする。
+
+各立方体の体積の和から、入力が $$V_1+2V_2+3V_3=1029$$ を満たすことも必要である。満たさなければ列挙前に `No` と分かるが、満たしただけで配置が存在するとは限らないので、最終的には候補を検査する。
 
 ## 典型の発動条件
 
-### 平行移動対称性の固定
+### 対称性を消した後、有限範囲の完全性を証明する
 
-発動条件: 配置問題の目的が物体間の相対位置だけで決まる。
+配置問題では平行移動などの対称性で一つを固定できる場合がある。ただしそれだけで、残る範囲を勘で狭めてよいわけではない。本問では重なりのグラフを場合分けし、任意の解から範囲内の解へ移れることを示した。
 
-一つのcubeを原点へ固定し、接触まで平行移動できることから残る6座標を[-7,7]へ界して15^6候補を全列挙する。
+番号の付け替えを使えるのは、三つの立方体が区別されず、目的が重複度ごとの体積だけだからである。立方体ごとに別の大きさや役割が付く設定では、同じ正規化が使えるかを確認し直す。
 
-### 包除的なexact coverage集計
+### 共通部分の和を、重複度ごとの量へ戻す
 
-発動条件: pair/triple intersectionからexactly k個に覆われるvolumeを求めたい。
-
-多重に数えたtriple領域の係数を補正し、体積総和式でv1を得る。
+「ちょうど何個に含まれるか」を求めるときは、各共通部分の和が一つの点を何回数えるかを見る。三つに含まれる点は二個組の共通部分へ $$\binom32=3$$ 回現れる。この係数を理解すると、包除の式を暗記せず、目的の重複度に合わせて式を導ける。
 
 ## 問題固有の要素
 
-side lengthが7の軸平行cube同士のintersectionも軸平行直方体なので、3D体積は各axisのinterval overlap長の積へ完全分離する。
-
-別の問題へ持ち帰る視点: 直積形状の交差量は各次元の一次元overlapを独立計算して掛ける。
+立方体が三つだけなので、重なりのグラフは、連結・一本の辺と孤立点・辺なしへ分けられる。ここから小さい座標範囲を保証でき、$$15^6$$ 候補の直接検査へ進める。
 
 ## 正当性
 
-軸平行cubeの交差体積は、各軸の区間交差長の積で正確に求まる。上の有界配置に解が必ず含まれるため、全6座標の列挙は可能な解を落とさない。またPでは三重領域を3回数え、Tでは1回数えるので、V2=P−3Tとなり、総cube体積からV1も復元できる。列挙で条件を満たした候補は指定された各領域体積を持つため、探索の成功・失敗は解の存在と一致する。
+任意の実現可能な配置は、重なりのグラフによる場合分けで、体積を変えずに原点と $$[-7,7]^3$$ 内の二開始点へ変形できる。よって解が存在するなら、列挙範囲にも少なくとも一つ存在する。
+
+各候補の共通体積は、直積をなす三軸の共通区間の長さの積で正確に得られる。そこからの式は、各点が一個・二個・三個に属する場合の数えられ方を正確に補正する。従って受理した候補は指定体積を満たす合法な配置であり、全候補を調べてもなければ解は存在しない。
 
 ## 実装上の注意
 
-- 境界で接するだけならoverlap長0であり候補範囲には±7を含める。v2=P-3v3、v1=1029-2v2-3v3の係数を混同しない。
+- 共通区間が空なら長さを0にする。差を負のまま掛けると、不正な正の体積を作ることがある。
+- 面・辺・点で接するだけの共通部分は体積0であり、許される。
+- 探索座標−7と7の両端を含める。得られる開始座標は問題の絶対値100以下という出力条件も満たす。
+- 一候補ごとに空間を塗らず、三個の二重共通部分と一個の三重共通部分だけを計算する。
 
 ## 復習の核
 
-- 三cube一致、全てdisjoint、pairだけoverlap、triple overlapありを手計算し、出力座標からvolumeを再検算する。
+- 相対位置だけの問題では一つを固定し、その後の探索範囲にも存在証明を付ける。
+- 数量を保って動かせる対象と、重なりを保つ必要のある対象を分ける。
+- 共通部分の和が重複度ごとに何回数えるかを調べて、「ちょうど」の式を作る。
 
 ## 計算量と制約
 
 ### 時間
 
-O(15⁶)、各候補のintersectionはO(1)。
+一辺を $$L$$ とした同じ列挙の時間は $$O((2L+1)^6)$$。各候補は定数個の区間交差と積で評価する。本問は $$L=7$$ なので、候補数は $$15^6=11390625$$。
 
 ### 空間
 
-O(1)。
+候補の座標と体積だけを保持する $$O(1)$$ 空間。全候補や格子の占有表は保存しない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 0 \leq V_1, V_2, V_3 \leq 3 \times 7^3; All input values are integers.
+座標の絶対値100までを直接列挙する代わりに、解の存在を保存する範囲へ縮めている。体積は最大でも三立方体分の1029であり、計算する整数は小さい。必要条件が一致していても、実現可能性は全候補の検査で判定する。
 
 ## 出典
 
