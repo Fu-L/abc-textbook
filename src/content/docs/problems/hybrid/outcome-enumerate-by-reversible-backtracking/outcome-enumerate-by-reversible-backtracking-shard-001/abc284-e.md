@@ -1,7 +1,8 @@
 ---
 title: "ABC284-E — Count Simple Paths"
 draft: true
-authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"backtracking-dfs":"典型の発動条件","上限付き列挙":"典型の発動条件"}
+authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-by-reversible-backtracking/outcome-enumerate-by-reversible-backtracking-shard-001/abc284-e.md","learningOutcomeIds":["outcome-enumerate-by-reversible-backtracking"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-bounded-enumeration"],"excludedTopics":["backtracking・可逆な探索状態の発動条件・不変量を使わず、実装部品だけを偶然共有する解法。"],"tagIds":["tag-backtracking-search","tag-bounded-enumeration"],"sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"スタックが表す頂点列は、初期状態では頂点1のみの単純パスである。使用中でない隣接頂点だけを追加するので、遷移後も単純パスであり、一つの追加で一つの新しいパスを数える。\n\n任意の始点1の単純パスは、頂点列の順に対応する分岐を選ぶことで生成される。ある頂点列への生成方法は、その最後の頂点を除いたパスからの追加に限られるので、一度しか数えられない。復元により兄弟の分岐が妨げられないため、打切りがなければ全パスを数える。100万本へ達した場合も、その時点で実際の本数は100万以上と確定するので、求める切り詰めた答えを返せる。","sourceRevisionIds":["source-abc284-e-problem-e3aa0c7dc6b9a0eeb249e80baa5619e13ef8df92d556656b7ef9b2d3f0d5a7a1","source-abc284-editorial-5494-aed35b7f2bd9d203b74300434d0e36f1fa1a4d6d9aa223ea87b424bc70a9ba5f"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,72 +13,119 @@ authoringUnit: {"problemId":"abc284-e","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md) — 候補総数を直接界す全列挙と、鳩ノ巣原理で成功前の失敗回数だけを界す探索を分け、実際に処理する回数を証明する。
+- [候補数を界して全列挙・有限case分解する](src/content/docs/learn/modeling/bounded-enumeration.md)
 
 ## 考察
 
-数える対象は頂点1から始まる単純pathであり、DFS中の現在の再帰stackがそのまま1本のpathを表す。
+一本の単純パスは、その終点で探索を止める選択に対応する。現在のパスに含まれる頂点だけを使用中としてDFSし、戻るときに解除すれば、各パスを一度ずつ数えられる。必要なのは100万本までなので、探索木全体が巨大でも途中で打ち切ってよい。
 
-答えは10^6へ達した時点で打ち切ってよいので、指数個になり得る単純pathを最後まで列挙する必要はない。
+### グラフの頂点数と、パスの本数は違う
 
-採用する候補: 現在path上の頂点だけをvisitedにし、進入時に1本を数えて未訪問neighborへDFSし、復帰時にunmarkする。
+求めるのは頂点1を始点とする単純パスの本数である。同じ終点へ着くパスも、途中の頂点列が異なれば別々に数える。通常の到達可能性のDFSのように、一度訪れた頂点を永久に訪問済みにすると、それらを消してしまう。
 
-棄却する候補: 一度訪れた頂点を探索終了までvisitedのままにする通常の到達性DFS。
+例えば三角形のグラフなら、パスは
 
-同じ頂点へ別の単純pathから到達する場合まで捨て、path本数を過小評価する。
+$$
+(1),\quad(1,2),\quad(1,2,3),\quad(1,3),\quad(1,3,2)
+$$
 
-棄却する候補: 上限を考えず全単純pathを列挙してから10^6との最小値を取る。
+の5本。最初に $$1\to2\to3$$ と進んだ後も、頂点1へ戻ったら $$1\to3$$ を新しいパスとして探索しなければならない。一方、現在のパス $$1\to2\to3$$ から1へ戻ると単純パスではなくなるので、その遷移は禁じる。
 
-単純path数は指数的になり得て、答えが早く上限へ達する入力でも探索が終わらない。
+必要なのは「過去に一度でも訪れたか」ではなく、「現在のパスに含まれているか」という情報である。
 
-visited[1]=trueとしてDFS(1)を始め、各呼出しの冒頭でcountを1増やす。countが10^6なら終了flagを立てて全再帰から戻る。各neighborについて未訪問ならmarkして再帰し、戻ったらunmarkする。最後にcountを出力する。
+### DFSの一状態を、そのまま一本として数える
+
+現在のパスを $$P=(1,v_2,\ldots,v_k)$$ とする。末尾 $$v_k$$ で止めれば、これも求める単純パスの一本なので、状態へ入った時点で答えを1増やす。葉へ達したときだけ数えるのではない。最初の $$P=(1)$$ も含める。
+
+さらに伸ばす場合は、末尾の隣接頂点のうち、$$P$$ に含まれていないものを一つ選ぶ。頂点を追加したら使用中にし、その先の探索を終えたら、追加前の状態へ戻す。この解除によって、別の分岐から同じ頂点を使えるようになる。
+
+この探索では、探索木の頂点は元グラフの頂点ではなく、パス全体である。三角形の例の $$P=(1,2,3)$$ と $$P=(1,3)$$ は末尾が同じでも別の状態になる。訪問フラグだけを共有し、その意味を現在の一本へ限定することで、パス列を毎回コピーせず探索できる。
+
+### 答えに上限があることを、計算量の上限へ使う
+
+単純パスは一般には非常に多く、全列挙はできない。しかし出力は本数と $$L=10^6$$ の小さい方でよい。カウンタが $$L$$ へ達した瞬間に、残りの全分岐の探索を終了する。
+
+DFSで数えた状態はすべて異なる合法なパスなので、$$L$$ 状態を見たなら答えが $$L$$ であることは既に確定する。全列挙の完了を待つ必要はない。逆に、$$L$$ 未満で探索を終えた場合は全パスを数え切っている。
+
+一状態で調べる隣接頂点は高々10個である。従って、探索状態数が多いことだけを理由に諦めるのでなく、必要な出力数と、一状態の展開費用を掛けて評価すればよい。
+
+### 深いパスは、明示的なスタックで扱える
+
+頂点数は20万なので、一本のパスだけでも深さが20万になる可能性がある。再帰の深さ制限を避けるなら、各フレームに「現在の頂点」と「次に調べる隣接リストの添字」を持たせる。
+
+非実行の手順を示す。隣接リストを $$g$$、現在のパス上の使用フラグを `used` とする。
+
+```text
+used[1] = true
+stack = [(vertex = 1, next = 0)]
+answer = 1
+while stack is not empty and answer < 1000000:
+    f = stack の一番上
+    if f.next == g[f.vertex] の長さ:
+        used[f.vertex] = false
+        stack を pop
+        continue
+    to = g[f.vertex][f.next]
+    一番上のフレームの next を 1 増やす
+    if used[to]:
+        continue
+    used[to] = true
+    stack へ (to, 0) を push
+    answer を 1 増やす
+```
+
+親の次の隣接位置を更新してから子へ降りるので、子から戻ったときに同じ辺を再度選ばない。終了時のフラグ解除は、そのパスを捨てて親へ戻る操作に対応する。上限で探索そのものを終了した場合は、残るフラグを使って以後の探索をしないので、スタックを最後まで空にする必要はない。
 
 ## 典型の発動条件
 
-### backtracking DFS
+### 列挙の訪問状態は、探索中の一候補に合わせる
 
-発動条件: 単純pathや重複なし列を列挙し、使用済み集合が現在候補にだけ依存するとき。
+到達可能性を調べるなら、訪問済み頂点を全探索で共有できることがある。一方、経路や配置の全列挙では、別の候補が同じ要素を使うことを許すため、使用中の情報を分岐の終了時に戻す必要がある。
 
-再帰の前後で頂点をmark/unmarkしてpath上の重複だけを禁止する。
+本問では頂点の重複を禁じる範囲が「一本のパスの中」なので、フラグの寿命も一本のパスへ合わせる。制約の対象範囲と状態の寿命を対応させると、永久フラグと復元するフラグを使い分けられる。
 
-### 上限付き列挙
+### 上位や一定個数だけの列挙を、出力規模で評価する
 
-発動条件: 必要な答えがmin(候補数,C)で、Cが十分小さいとき。
+全候補が指数個でも、一定個数に達した後の区別が不要なら、列挙を途中で止められる可能性がある。重要なのは、途中の状態が答えとなる対象へ対応するかと、一状態の展開費用が小さいかである。
 
-C件見つけた時点で終了を全再帰へ伝播する。
+本問は全パスのprefixも答えの一本なので、訪れた各状態を数えられ、空振りの深い探索を大量に挟まない。上限 $$L$$ と最大次数 $$\Delta$$ に対して探索は $$O(L\Delta)$$ になる。完成した配置だけが答えになる別問題では、途中の失敗状態が多数あり得るので、同じ評価は自動的には使えない。
 
 ## 問題固有の要素
 
-最大次数10なので、10^6個を見つけるまでの各DFS状態から試すedge数も小さく抑えられる。
-
-別の問題へ持ち帰る視点: 列挙数にcapがある探索では、訪問状態数だけでなく各状態の分岐確認量も合わせて実行可能性を判断する。
+「パスを末尾で止める」だけで各探索状態が答えになることと、次数が10以下であることが、出力上限を実行時間の保証へ変えている。上限だけがあっても、一状態の隣接走査が巨大なら十分ではない。
 
 ## 正当性
 
-頂点vへ入った瞬間のstackは始点1からvまでの新しい単純pathなので、長さ0のpathも含めて各呼出しを1回数えればよい。 visitedはgraph全体の確定情報ではなく現在pathの禁止集合であり、backtrack時の解除が数え上げの核心になる。 単純性を保ちながら異なるpathで同じ頂点を再利用でき、上限到達時には探索全体を直ちに終了できる。
+スタックが表す頂点列は、初期状態では頂点1のみの単純パスである。使用中でない隣接頂点だけを追加するので、遷移後も単純パスであり、一つの追加で一つの新しいパスを数える。
+
+任意の始点1の単純パスは、頂点列の順に対応する分岐を選ぶことで生成される。ある頂点列への生成方法は、その最後の頂点を除いたパスからの追加に限られるので、一度しか数えられない。復元により兄弟の分岐が妨げられないため、打切りがなければ全パスを数える。100万本へ達した場合も、その時点で実際の本数は100万以上と確定するので、求める切り詰めた答えを返せる。
 
 ## 実装上の注意
 
-- 終了flagまたはcount判定を各loopと再帰復帰直後に確認し、10^6到達後に別branchへ進まない。
-- 頂点1だけのpathも数えるため、edgeを選ぶ前に現在状態を加算する。
+- 初期の一頂点パスを1本と数える。辺を一度も使わないパスも対象である。
+- フラグ解除を忘れると、他の経路から同じ頂点へ進めなくなる。逆に子の探索中に解除すると、一本の中で頂点を再使用してしまう。
+- 上限へ達したら全探索を終了する。一つの再帰呼出しだけを抜け、他の分岐を探索し続けない。
+- 再帰を使う場合は、深さが最大 $$N$$ であることを考慮する。明示的なフレームのスタックなら、隣接リストの走査位置も保存する。
 
 ## 復習の核
 
-- 三角形で1→2→3と1→3がともに数えられることを手計算し、2から戻った後に頂点をunmarkする位置と上限終了の伝播を確認する。
+- 数えるのが頂点か経路かを区別し、状態が何を表すか決める。
+- 制約が一候補の内部にだけ課されるなら、使用情報も分岐から戻るときに復元する。
+- 出力の上限を使うときは、訪問状態と答えの一対一対応、展開費用の両方を確かめる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(min(P,10⁶)Δ+N+M)、Pは単純path数、Δ≤10。
+実際のパス数を $$K$$、上限を $$L=10^6$$、最大次数を $$\Delta\leq10$$ とする。グラフの入力と初期化が $$O(N+M)$$、探索で高々 $$\min(K,L)$$ 状態を生成し、各状態で高々 $$\Delta$$ 辺を調べる。全体は $$O(N+M+\Delta\min(K,L))$$ である。
 
 ### 空間
 
-O(N+M)、path visitedとDFS stack。
+隣接リストが $$O(N+M)$$、使用フラグと深さ高々 $$N$$ のスタックが $$O(N)$$。全体は $$O(N+M)$$。既に数えたパスをすべて保存する必要はない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1 \leq N \leq 2 \times 10^5; 0 \leq M \leq \min \left(2 \times 10^5, \frac{N(N-1)}{2}\right); 1 \leq u_i, v_i \leq N; The given graph is simple.; The degree of each vertex in the given graph is at most 10.; All values in the input are integers.
+$$N,M\leq2\times10^5$$ のグラフを一度読み、探索中の隣接確認は高々約1000万回で済む。頂点数に対する指数的な全列挙を完了させる必要はなく、低次数と100万本の上限を合わせて実行可能になる。
 
 ## 出典
 
