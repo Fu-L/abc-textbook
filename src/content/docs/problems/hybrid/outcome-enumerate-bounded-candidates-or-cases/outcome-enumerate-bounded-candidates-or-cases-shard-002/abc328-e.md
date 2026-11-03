@@ -1,7 +1,8 @@
 ---
 title: "ABC328-E — Modulo MST"
 draft: true
-authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"固定size-combination列挙":"典型の発動条件","dsuによるtree判定":"典型の発動条件","非単調mod目的の全候補評価":"典型の発動条件"}
+authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc328-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dsu-components"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-dsu-components"],"sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"任意の全域木は $$N-1$$ 本の辺からなるため、その辺番号を昇順にした組が列挙に一度だけ現れる。DSUで閉路を検出する検査は、閉路のある候補を除き、閉路のない候補をすべて残す。\n\n残った候補は $$N-1$$ 辺の森なので連結であり、全域木である。従って、評価対象は求める全域木の集合と一致する。各木の指定されたコストを直接計算して最小値を取るので、答えは最適値になる。","sourceRevisionIds":["source-abc328-e-problem-63f9831a5e438065409cd34e5cc3e6ef1745e12de308b5a8eea5b1bd357701d2","source-abc328-editorial-7645-86fd80b016d3db116d4260c75791a66123c638e800609b79259ea56b5963dce5"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +13,7 @@ authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md) — 辺追加や同値関係をDSUで統合し、成分代表と必要な成分metadataを一貫して保つ。その発動条件と正当化原理を比較可能な独立教材として学ぶ。
+- [DSUによる連結成分管理・縮約](src/content/docs/learn/graph/dsu-components.md)
 
 この解説で扱わないこと:
 
@@ -20,76 +21,82 @@ authoringUnit: {"problemId":"abc328-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-spanning treeはちょうどN-1 edgeを持つので、まずM本からN-1本を選ぶ全組合せだけを候補にすればよい。
+全域木を作る辺の組を直接列挙し、各組の重みの和を法で割った余りまで計算して比較する。頂点数が8以下なので、全域木に使う7本以下の辺の組は、全部調べられる数に収まる。
 
-N≤8のsimple graphではM≤28で、最大組合せ数C(28,7)=1184040に収まる。
+### 普通の最小全域木と同じ選び方でよいか
 
-選んだN-1 edgeがcycleを持たず全頂点を結べばspanning treeであり、DSUで判定できる。
+全域木とは、全頂点をつなぎ、閉路を持たない辺の集合である。本問のコストは重みの和そのものではなく、それを正整数 $$K$$ で割った余りである。
 
-採用する候補: N-1 edgeの全組合せを列挙し、DSUでtree判定してweight sum mod Kの最小を取る。
+小さい重みから辺を選べば、和が小さい木は作れる。しかし余りの大小は和の大小と一致しない。例えば三角形の重みが1・2・9、$$K=10$$ なら、和が最小の木は1と2を選んで余り3。一方、1と9を選ぶ木は和10、余り0で、こちらが最適になる。
 
-棄却する候補: 通常のKruskal法でweight sum最小spanning treeを作り、その和をmod Kにする。
+従って、通常の最小全域木の貪欲法を、そのまま目的関数だけ変えて使うことはできない。値の大きさに単調性がないと分かったので、制約へ戻って全候補を評価できるか調べる。
 
-mod前の和が小さいtreeがmod後も小さいとは限らず、cut propertyが目的関数に成立しない。
+### すべての辺集合から、必要な本数だけへ絞る
 
-棄却する候補: 全2^M edge subsetを列挙する。
+頂点数が $$N$$ なら、全域木の辺数は必ず $$N-1$$。単純グラフなので辺数は最大 $$M=\binom82=28$$ で、必要な本数は最大7本である。$$2^{28}$$ 個の全部分集合を走査する代わりに、ちょうど7本の組だけなら
 
-tree候補はN-1 edgeに限られるため、不要なsizeのsubsetまで調べると最大2^28へ増える。
+$$
+\binom{28}{7}=1184040
+$$
 
-edge indexからN-1個を選ぶcombination DFSを行う。leafでは新しいDSUを作って各chosen edgeをunionし、既に同rootならtreeでないとして捨てる。同時にsum=(sum+w_i)%Kを更新し、全edgeがcycleなしならanswer=min(answer,sum)とする。graph connected保証により少なくとも1候補は成立する。
+通り。約118万候補を、各候補で高々7本調べる方法が現実的になる。
+
+辺に0から $$M-1$$ の番号を付け、選ぶ番号を昇順に並べて生成する。既に選んだ最後の番号より後から次を選び、残りに必要な本数が残らない位置は試さない。こうすると、同じ辺集合を異なる選択順で繰り返し生成せず、完成できない枝も避けられる。
+
+### 各候補を、木かどうか検査する
+
+選んだ $$N-1$$ 本について、DSUを全頂点が別成分の状態へ初期化する。各辺の両端が既に同じ成分なら、その辺を追加すると閉路ができるので候補を捨てる。別の成分なら併合し、重みを足す。
+
+閉路を作らず $$N-1$$ 回の併合を終えたら、成分数は $$N-(N-1)=1$$ なので全頂点がつながる。辺数が既に決まっているため、閉路がないことの検査だけで全域木だと判定できる。合法な候補について和を $$K$$ で割った余りを求め、最小値を更新する。
 
 ## 典型の発動条件
 
-### 固定size combination列挙
+### 固定本数の組合せを列挙する
 
-発動条件: 全体M≤30程度から解が必ずr個選択で構成されるとき。
+全探索が大きすぎるように見えたら、合法な解のサイズが固定されていないか調べる。本問では $$2^M$$ から $$\binom M{N-1}$$ へ候補を減らせる。順番が意味を持たない選択なら、昇順の番号列を代表として生成することで、順列としての重複も除ける。
 
-r個だけを選ぶDFSで2^Mより候補を削る。
+候補数を評価した後は、候補生成の費用も確認する。全maskを走査して個数が合うものだけ残す方法では、調べるmask数は $$2^M$$ のままである。必要な組だけを直接生成する手順を選ぼう。
 
-### DSUによるtree判定
+### 辺数と連結成分数を結び付ける
 
-発動条件: 選んだundirected edge集合がacyclicか高速に調べるとき。
-
-同component間edgeをcycleとしてrejectする。
-
-### 非単調mod目的の全候補評価
-
-発動条件: 加算値をmodした最終値を最小化し、通常のgreedy順序が使えないとき。
-
-小さい構造制約を利用して完成候補のresidueを比較する。
+森では、別成分を結ぶ一辺を足すたびに成分数が一つ減る。初期 $$N$$ 成分から $$N-1$$ 回すべて成功すれば一成分になる。これが「$$N-1$$ 辺で閉路がなければ木」の理由である。辺数が固定されていない問題では、閉路がないだけで連結とはいえない。
 
 ## 問題固有の要素
 
-頂点数8ではCayleyの完全graph tree数も26万程度、N-1 edge subsetも約118万なので、modulo MSTを無理にgreedy化せず全tree候補を調べられる。
-
-別の問題へ持ち帰る視点: 目的関数が標準最適化則を壊す場合、構造sizeから完成解の列挙上限を先に正確に見積もる。
+法を取ったコストは通常の重み順と合わないが、$$N\leq8$$ と単純グラフという条件が全候補の評価を可能にする。手法名の「MST」に引かれる前に、目的関数と小さい制約を読むことが重要である。
 
 ## 正当性
 
-N-1本を選んだundirected graphではacyclicなら自動的にconnected、connectedなら自動的にacyclicなので、DSUのcycle検出とcomponent確認のどちらでもtree性を判定できる。 costはedge追加ごとに(sum+w)%Kと更新してよく、tree完成時のresidueだけを比較する。 小さいNが保証する約118万候補を直接検査し、modulo目的関数の非単調性を回避できる。
+任意の全域木は $$N-1$$ 本の辺からなるため、その辺番号を昇順にした組が列挙に一度だけ現れる。DSUで閉路を検出する検査は、閉路のある候補を除き、閉路のない候補をすべて残す。
+
+残った候補は $$N-1$$ 辺の森なので連結であり、全域木である。従って、評価対象は求める全域木の集合と一致する。各木の指定されたコストを直接計算して最小値を取るので、答えは最適値になる。
 
 ## 実装上の注意
 
-- combination DFSで残りedge数が必要選択数未満なら枝刈りし、chosen数がN-1の時点で評価する。
-- Kとweight sumは最大10^15級なので64bit整数を使い、modを逐次取る。
+- DSUは候補ごとに初期化する。一つ前の候補の併合を次へ残さない。
+- 重みや $$K$$ は符号付き64bit整数に保存する。高々7本の和も同じ型で計算する。
+- 途中の余りが現在の最小値より大きくても、以降の辺追加で小さくなることがある。重み和の単調性を使った枝刈りはしない。
+- $$K=1$$ や重み0の辺も同じ手順で扱える。合法な木で余り0が得られたら、それより小さいコストはないので探索を終了してもよい。
 
 ## 復習の核
 
-- 通常weight和が小さいtreeとmod後が小さいtreeが異なる3頂点例を作り、Kruskalを棄却する理由とN-1 edge判定を確認する。
+- 最小化でも、法を取ると元の値の大小順が保たれない。
+- 合法な解のサイズが固定なら、全部分集合でなく固定サイズの組だけを作る。
+- $$N-1$$ 本という条件が、DSUの閉路判定を全域木判定へ変える。
 
 ## 計算量と制約
 
 ### 時間
 
-O(C(M,N−1)·Nα(N))、各候補でDSU tree性を検査。
+候補数を $$C=\binom M{N-1}$$ とする。選択した辺番号だけを直接生成し、候補ごとにDSUを初期化して $$N-1$$ 本を処理するので、全体は $$O(M+C(N+(N-1)\alpha(N)))$$。$$\alpha$$ はDSUの償却計算量に現れる逆Ackermann関数である。候補ごとに全 $$M$$ 辺を走査する実装なら、その費用をさらに含める必要がある。
 
 ### 空間
 
-O(N+M)、選択edgeとDSU。
+入力の辺一覧、DSU、生成中の辺番号列を合わせて $$O(M+N)$$。すべての候補を保存せず、その場で評価する。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2\leq N\leq8; N-1\leq M\leq\dfrac{N(N-1)}2; 1\leq K\leq10^{15}; 1\leq u_i\lt v_i\leq N\ (1\leq i\leq M); 0\leq w_i\lt K\ (1\leq i\leq M); The given graph is simple and connected.; All input values are integers.
+$$N\leq8,M\leq28$$ から $$C\leq1184040$$。一候補は定数個の頂点と辺だけを使う。各重みは $$10^{15}$$ 未満であり、木の和は $$7\times10^{15}$$ 未満なので、符号付き64bit整数で保持できる。
 
 ## 出典
 

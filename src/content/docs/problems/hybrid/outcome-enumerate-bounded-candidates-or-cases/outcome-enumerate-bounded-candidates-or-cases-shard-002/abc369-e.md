@@ -1,7 +1,8 @@
 ---
 title: "ABC369-E — Sightseeing Tour"
 draft: true
-authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"全点対最短路による経路segment圧縮":"典型の発動条件","小kの順列向き全探索":"典型の発動条件"}
+authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-002/abc369-e.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-weighted-shortest-path"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-shortest-path"],"sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"どの列挙候補も、最短経路と指定橋を順に連結した実際の移動を表し、全指定橋を少なくとも一回渡る。従って候補の費用が、本来の最適値を下回ることはない。\n\n逆に最適な移動を一つ取り、各指定橋の最初の通過を、その順番と向きで記録する。この組合せは列挙に含まれる。その移動を記録した通過の前後で切り、間を最短路へ置き換えると費用は増えず、指定された通過もすべて残る。よって列挙候補の最小値は最適な移動の費用以下でもあり、両者は等しい。","sourceRevisionIds":["source-abc369-e-problem-91586391e0380c03e57b0037a7cf36736b092e413fd475d1e190499057107efc","source-abc369-editorial-10842-61a4d0201858282fe5bae420312bd8fc0692a6e12ae02a319c95b832ef07e1f1"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +13,7 @@ authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md) — 基本的な明示グラフ探索を土台に、辺重みに応じた緩和・距離確定順を選び、最短距離と計算量を求める。
+- [最短路モデル](src/content/docs/learn/graph/weighted-shortest-path.md)
 
 この解説で扱わないこと:
 
@@ -20,63 +21,87 @@ authoringUnit: {"problemId":"abc369-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-指定橋以外の移動には制約がないので、全頂点pairの通常最短距離を前計算すれば、指定橋間の移動は端点間距離の参照に置き換えられる。
+通るべき橋の順番と向きを決めれば、橋と橋の間は普通の最短路でつなげばよい。大きいグラフの移動は距離表へまとめ、各質問で変わる5本以下の橋の選び方だけを列挙する。
 
-queryで必須な橋は高々5本であり、最適walkはそれらを渡る順列と各橋を渡る向きの全候補から選べる。
+### 経路全体ではなく、必須の通過に注目する
 
-採用する候補: 全点対最短距離を前計算し、各queryで必須橋の順列と向きを列挙して接続距離を評価する。
+島1から島 $$N$$ へ移動し、指定された $$K$$ 本の橋をすべて一回以上渡りたい。何度も同じ島や橋を通ってよく、指定橋を渡る順番と向きも自由である。経路そのものを列挙すると、途中の移動に多数の選択がある。
 
-棄却する候補: queryごとに「何本の指定橋を通過済みか」を状態にして元graph上を最短路探索する。
+しかし $$K\leq5$$ なので、指定橋を渡る順番は $$K!$$ 通り、各橋の向きは2通りずつで $$2^K$$ 通りに収まる。この少数の決定を固定したとき、残る自由な移動をどう最小化するか考えよう。
 
-最大3000 queryで大きいgraph探索を繰り返し、K≤5だから可能な小さな順序列挙を活かせない。
+### 橋の間の移動を、共通の距離表へまとめる
 
-Floyd-Warshallでdist[u][v]を全pairについて求める。各queryのK橋indexをpermutationし、各bit maskで端点方向を決め、島1から各橋入口、橋出口から次入口、最後の出口から島Nまでのdistと橋重みを足す。全候補最小を出力する。
+指定橋の順番と向きを $$x_1\to y_1,\ldots,x_K\to y_K$$ と決める。$$i$$ 番目に明示して渡る指定橋の所要時間を $$w_i$$、任意の島 $$u$$ から $$v$$ へ通常どおり移動する最短時間を $$d[u][v]$$ とすると、この候補の費用は
+
+$$
+d[1][x_1]+\sum_{i=1}^{K}w_i
++\sum_{i=1}^{K-1}d[y_i][x_{i+1}]+d[y_K][N].
+$$
+
+例えば、島1・2・3の間に、橋 `1–2:2`, `2–3:3`, `1–3:10` があるとする。橋 `1–3:10` を必ず渡る質問で、向きを $$1\to3$$ にすると費用は10。反対向き $$3\to1$$ にすると、最初に1から3へ最短時間5で行き、指定橋を10で渡り、最後に1から3へ5で戻るので20になる。向きによって、前後につなぐ距離も変わる。
+
+同じ二島に複数の橋がある場合、通常移動の最短距離には最小の重みを使う。一方、指定橋を渡る部分には、その橋自身の重みを使わなければならない。重い並行橋が指定されていても、安い橋で代用はできない。
+
+### 距離表を作り、質問ごとに小さい探索を行う
+
+島数は $$N\leq400$$ なので、Warshall–Floyd法で全点対最短距離を前計算できる。距離配列は対角を0、直接の橋がない組を十分大きい値で初期化し、各橋で両方向の値を最小化する。中継する島 $$z$$ を外側に置いて
+
+$$
+d[u][v]\leftarrow\min(d[u][v],d[u][z]+d[z][v])
+$$
+
+をすべての $$u,v$$ に適用する。
+
+その後、各質問では指定橋の全順列と向きの全bitmaskを列挙する。島1から始め、次の橋の出発端までの最短距離、その橋の重みを足して到着端へ移り、最後に島 $$N$$ までの最短距離を足す。候補の最小費用を出力する。
 
 ## 典型の発動条件
 
-### 全点対最短路による経路segment圧縮
+### 小さい特別な選択を固定し、残りを既知の最適化へ渡す
 
-発動条件: 多数queryで少数の必須edge・地点を任意順に訪れるとき。
+全体の経路は多くても、必須の訪問先や操作が少数なら、その順番や向きを先に固定できる場合がある。本問では、橋の間の移動に特別な制約がないため、固定後はそれぞれの区間を独立に最短化できる。
 
-制約のない区間をendpoint間distのlookupへ置き換える。
+この分離は、「使った橋を再び使えない」などの制約が加わると壊れる。先の最短移動で何を使ったかが後の選択肢を変えるため、距離だけでは十分な情報にならない。固定した情報だけで残る最適化が閉じるかを確認することが大切である。
 
-### 小Kの順列・向き全探索
+### 多数の質問で共通の前処理を使う
 
-発動条件: 必須対象数だけが非常に小さく、順序とorientationが未知なとき。
-
-permutationとbit maskを直積列挙して各固定caseを評価する。
+橋の通行時間は質問間で変わらない。質問ごとに最短路を計算し直す代わりに、全島対の距離を一度だけ作り、以後は定数時間の取得にする。入力グラフが固定で、小さい端点集合どうしの距離を何度も使うときに候補になる。
 
 ## 問題固有の要素
 
-元graphの辺数は大きいがN=400なので、query前にmetric closureを作ることでqueryをK個の橋だけの問題にできる。
-
-別の問題へ持ち帰る視点: static graph上の多数routing queryでは、端点候補が小さくなる前にmetric closureを検討する。
+指定橋を「一回以上」渡ればよいので、橋の間の通常移動で指定橋を先に渡ってしまっても問題ない。この条件が、指定橋を除外しない距離表を使える理由である。
 
 ## 正当性
 
-順番と向きをx_1→y_1,...,x_K→y_Kと固定すれば、費用はdist(1,x_1)+Σ(edgeCost+dist(y_i,x_{i+1}))+edgeCost_K+dist(y_K,N)で一意に最小化される。 指定橋は通常移動中に先に通ってもよいが、最適walkで「必須として数える最初の通過順」を選べば列挙候補に含まれ、距離表利用は正当である。 大きいgraph部分を共通距離表へ圧縮し、query固有の組合せは小さいKだけに限定できる。
+どの列挙候補も、最短経路と指定橋を順に連結した実際の移動を表し、全指定橋を少なくとも一回渡る。従って候補の費用が、本来の最適値を下回ることはない。
+
+逆に最適な移動を一つ取り、各指定橋の最初の通過を、その順番と向きで記録する。この組合せは列挙に含まれる。その移動を記録した通過の前後で切り、間を最短路へ置き換えると費用は増えず、指定された通過もすべて残る。よって列挙候補の最小値は最適な移動の費用以下でもあり、両者は等しい。
 
 ## 実装上の注意
 
-- 平行辺があればdist初期化をminにし、dist[i][i]=0とする。橋重みは順序によらず一度ずつ足し、64 bitでINF加算を避ける。
+- 並行橋は距離表の初期化で最小値を取るが、橋番号ごとの端点と重みはすべて保存する。
+- 向きを変えたときは出発端と到着端を交換する。橋自体の重みは変わらない。
+- 距離・候補費用・無限大の定数は64bit整数で扱う。無限大どうしの加算によるoverflowを避ける値を選ぶか、未到達の場合は更新を省く。
+- 通常移動中に指定橋を渡ることを禁止しない。同じ橋を複数回渡る候補も合法である。
 
 ## 復習の核
 
-- K=1で両方向の式を手計算し、開始1・終了Nとの接続を確認する。permutation配列はqueryごとに初期sortして全候補を生成する。
+- 少数の必須操作なら、順番と向きを列挙して残りを最短路へ分離できないか考える。
+- 距離へ圧縮してよいのは、区間内の履歴が後の合法性や費用を変えないときである。
+- 既知の最短距離と、番号で指定された辺そのものの費用を区別する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N³+Σ_query K!2ᴷK)、K≤5は指定橋数。
+距離表の初期化と入力が $$O(N^2+M)$$、Warshall–Floyd法が $$O(N^3)$$。一質問は $$K!2^K$$ 候補を各 $$O(K)$$ で評価する。全体は $$O(N^3+M+\sum_{q=1}^{Q}K_qK_q!2^{K_q})$$ である。
 
 ### 空間
 
-O(N²+M)、距離と辺情報。
+全点対距離と橋番号ごとの入力を合わせて $$O(N^2+M)$$。質問を順に処理すれば、追加で必要なのは現在の指定橋と列挙用の $$O(K)$$ 領域だけである。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 400; N-1 \leq M \leq 2 \times 10^5; 1 \leq U_i < V_i \leq N; 1 \leq T_i \leq 10^9; 1 \leq Q \leq 3000; 1 \leq K_i \leq 5; 1 \leq B_{i,1} < B_{i,2} < \cdots < B_{i,K_i} \leq M; All input values are integers.; It is possible to travel between any two islands using some bridges.
+$$N\leq400$$ なので距離更新は最大 $$400^3=64000000$$ 組。$$K\leq5$$ より一質問の候補は高々3840通りで、各候補は5本以下の橋を処理する。$$Q\leq3000$$ でもこの列挙を実行できる。
 
 ## 出典
 
