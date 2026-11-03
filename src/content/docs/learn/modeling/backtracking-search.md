@@ -3,7 +3,7 @@ title: "backtracking・可逆な探索状態"
 description: "「backtracking・可逆な探索状態」で学ぶ概念と、基礎から応用へ進む問題一覧。"
 draft: false
 headingAliases:
-  "backtracking可逆な探索状態": "頂点へ一度着いたことと今の経路で使っていることは違う"
+  "backtracking可逆な探索状態-1": "頂点へ一度着いたことと今の経路で使っていることは違う"
 sidebar:
   order: 2
 ---
