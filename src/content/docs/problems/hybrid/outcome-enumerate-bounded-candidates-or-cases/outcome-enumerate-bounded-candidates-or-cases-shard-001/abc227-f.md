@@ -1,7 +1,8 @@
 ---
 title: "ABC227-F — Treasure Hunting"
 draft: true
-authoringUnit: {"problemId":"abc227-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc227-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8","source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。 値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。 a>Xは採用、a<Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。","sourceRevisionIds":["source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8","source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"k番目の値の有限候補列挙":"典型の発動条件","閾値採用個数付き単調grid-dp":"典型の発動条件"}
+authoringUnit: {"problemId":"abc227-f","docPath":"src/content/docs/problems/hybrid/outcome-enumerate-bounded-candidates-or-cases/outcome-enumerate-bounded-candidates-or-cases-shard-001/abc227-f.md","learningOutcomeIds":["outcome-enumerate-bounded-candidates-or-cases"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-dp-grid-table"],"excludedTopics":["探索空間を二つへ分けて照合するmeet-in-the-middle、および再帰部分問題へ分ける分割統治。"],"tagIds":["tag-bounded-enumeration","tag-grid-table-dp"],"sourceRevisionIds":["source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8","source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"どの経路・どの閾値に対しても、閾値の式はその経路の上位 $$K$$ 個の和以上である。従って、全閾値と経路について最小値を取っても、本来の最適値を下回らない。\n\n本来の最適経路の上位 $$K$$ 番目の値を $$t$$ とする。この値は列挙候補に含まれ、その経路では閾値の式が本来のコストと一致する。その回のDPはその経路以下の候補値を返すので、全体の最小値も本来の最適値以下になる。両方向を合わせると、出力は求める最適値に等しい。","sourceRevisionIds":["source-abc227-editorial-2914-87defb838bebcd1104697af5ba110c6f49f96bee04b0b32ee2bbe32e8f0ce6d8","source-abc227-f-problem-a9a41987be11c4be4182da98bcd5f68243f97b8b98b6fd3c30ed64e420e3e801"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +13,7 @@ authoringUnit: {"problemId":"abc227-f","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [グリッド・多次元表の局所DPを設計する](src/content/docs/learn/dynamic-programming/dp-grid-table.md) — 状態と遷移を定義できることを前提に、グリッドや多次元表の依存方向をDAGとして並べ、局所遷移で埋める。
+- [グリッド・多次元表の局所DPを設計する](src/content/docs/learn/dynamic-programming/dp-grid-table.md)
 
 この解説で扱わないこと:
 
@@ -20,65 +21,112 @@ authoringUnit: {"problemId":"abc227-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-右・下だけの経路でも候補数は二項係数個あるため全経路は試せない。通常の経路DPは加法的なコストを扱えるが、今回は経路上の大きい方K個だけの和であり、そのままでは局所遷移に分解できない。
+経路上の大きい方から $$K$$ 個を、そのままDPの状態に持つのは難しい。代わりに境目の値を一つ固定し、その値を超えた分だけを各マスの費用にする。すると経路全体のコストを、マスごとの和へ変えられる。
 
-大きい方からK番目の値をXと固定すると、Xより大きい通過マスは全て採用し、Xと等しい通過マスから不足分を選んで、ちょうどK個の採用値和として評価できる。Xの候補は盤面に現れる値だけで十分である。
+### 上位の値は、後から入れ替わる
 
-棄却する候補: 経路ごとに通過値を保持し、終点でsortして上位K個を求める。
+右または下へ進む経路上の $$H+W-1$$ 個の値について、大きい方から $$K$$ 個の和を最小化したい。普通のグリッド最短路なら、各マスの費用を足して最小値を残せばよい。しかし上位 $$K$$ 個の和では、後から大きい値が来ると、それまで数えていた値が押し出される。
 
-単調経路の本数が指数的なうえ、通過値集合が同じマスへの履歴を合流させない。
+これまでの上位和だけでは、押し出される値の大きさが分からない。通過した値の集合まで状態に残す代わりに、上位に入るかどうかの境目を先に決められないか考える。
 
-採用する候補: 閾値Xを盤面の各値に固定し、X以上の値をちょうどk個採用した最小和をdp[k][i][j]で求める。
+### 境目を固定すると、超過分の和になる
 
-盤面の各A[p][q]をXとして、dp[k][i][j]を左上から(i,j)まででX以上の値をちょうどk個採用した採用値和の最小値とする。次の値aがXより大きければ採用だけ、小さければ不採用だけ、等しければ両方へ遷移する。始点も同じ規則で初期化し、全Xに対するdp[K][H-1][W-1]の最小を答える。
+ある経路の値を大きい順に $$x_1\geq\cdots\geq x_L$$ とし、$$L=H+W-1$$ とする。任意の値 $$t$$ に対して
+
+$$
+Kt+\sum_{i=1}^{L}\max(x_i-t,0)
+\ \geq\ \sum_{i=1}^{K}x_i
+$$
+
+が成り立つ。上位 $$K$$ 個については $$\max(x_i-t,0)\geq x_i-t$$ なので、そこだけ足しても右辺以上になるためである。
+
+ここで $$t=x_K$$ を選ぼう。上位の値の超過分は $$x_i-t$$、それ以外の超過分は0になるので、等号が成り立つ。従って、その経路の上位和は
+
+$$
+\min_t\left(Kt+\sum_{i=1}^{L}\max(x_i-t,0)\right)
+$$
+
+と書ける。境目と同じ値が複数あっても、超過分はすべて0であり、式はそのまま成立する。
+
+小例として通過値が `4, 5, 2, 3`、$$K=2$$ なら、本来の上位和は9。$$t=4$$ では $$2\times4+(0+1+0+0)=9$$、$$t=5$$ では10となる。固定した境目の式は、常に本来の上位和と一致するわけではない。境目も動かして最小化すると、本来の値へ一致するのである。
+
+### 一つの境目なら、普通の経路DPで解ける
+
+$$t$$ を固定し、マス $$(i,j)$$ の費用を
+
+$$
+c_{i,j}=\max(A_{i,j}-t,0)
+$$
+
+とする。求める候補値は、始点から終点までのこの費用の最小和に $$Kt$$ を足したものになる。
+
+$$dp[i][j]$$ を、始点から $$(i,j)$$ までの最小費用と定義する。始点は $$dp[1][1]=c_{1,1}$$。他のマスは上または左からしか来られないので、存在する前マスについて
+
+$$
+dp[i][j]=c_{i,j}+\min(dp[i-1][j],dp[i][j-1])
+$$
+
+と更新する。上の行から、各行では左から処理すれば、参照する値は既に確定している。
+
+例えば盤面が次の場合を考える。
+
+| 1列目 | 2列目 | 3列目 |
+| --- | --- | --- |
+| 4 | 9 | 1 |
+| 5 | 2 | 3 |
+
+$$K=2,t=4$$ の費用は、上段が `0, 5, 0`、下段が `1, 0, 0`。下・右・右の経路の費用が1なので、候補値は $$2\times4+1=9$$ になる。この経路の通過値が、先ほどの `4, 5, 2, 3` である。
+
+### 境目は、盤面に現れる値だけでよい
+
+ある最適経路に対し、その上位 $$K$$ 番目の値 $$x_K$$ は必ず盤面上のどれかの値である。この値を境目にした回では、その経路の候補値が本来のコストと一致する。
+
+従って全整数を試す必要はない。盤面に現れる値を境目としてそれぞれDPを行い、$$Kt+dp[H][W]$$ の最小値を答える。等しい値を重複して試しても答えは変わらず、先に重複を除いてもよい。
 
 ## 典型の発動条件
 
-### K番目の値の有限候補列挙
+### 上位 $$K$$ 個の和を、閾値と超過分へ分ける
 
-発動条件: 集合や経路の最大側K個の和など、順位で選ばれる要素の総和を最適化するとき。
+上位和は各要素の単純な和でないため、部分解の合成が難しい。そこで一つの閾値 $$t$$ を固定し、共通の土台 $$Kt$$ と、各要素の超過分 $$\max(x-t,0)$$ へ分ける。上位 $$K$$ 番目の値を閾値にできると等号が成立するので、有限候補の閾値を列挙して加法的な問題へ戻せる。
 
-K番目の値Xは入力値のいずれかなので、盤面上の値を外側で全列挙し、各Xに対する最適経路を比較する。
-
-### 閾値・採用個数付き単調grid DP
-
-発動条件: 右・下の単調経路で、閾値以上からちょうどK個を選んだ最小和を求めるとき。
-
-位置(i,j)に採用個数kを加え、値とXの大小に応じて採用・不採用を遷移する。境界a=Xでは両遷移を残す。
+本問の経路以外でも、選んだ対象の上位和を最小化し、閾値固定後の加法的な最適化が解ける場合に候補になる。最大化へ同じ最小化の式を移したり、最適化の順序を根拠なく交換したりしない。ここでは各経路と閾値の両方を最小化している。
 
 ## 問題固有の要素
 
-外側で試す閾値は任意の整数ではなく、K番目の値になり得る盤面上の値HW個に限ればよい。
-
-別の問題へ持ち帰る視点: 順位に依存する目的関数を閾値化したら、最適値が変化する臨界点を入力値から列挙できないか調べる。
+経路長が一定で、右・下への移動だけなので、閾値固定後はDAG上の最短路、すなわち通常のグリッドDPになる。同値の値を「上位へ入れる・入れない」と分類する方法に比べ、超過分の式では同値境界を特別な分岐にせず扱える。
 
 ## 正当性
 
-Xが大きい方からK番目なら、Xより大きい値の個数はK未満で、X以上の値の個数はK以上である。したがって全ての>Xと必要個数の=Xを採用すれば、採用値は上位K個と一致する。 値がXのマスでは採用してkを1増やす遷移と、不採用のまま進む遷移の両方が必要である。片方だけにすると同値Xが複数ある経路で、ちょうどK個を選ぶ解を失う。 a>Xは採用、a<Xは不採用を強制し、a=Xだけ採用・不採用の両遷移を許せば、同値を含む上位K個をちょうど選んだ状態を局所遷移で表せる。
+どの経路・どの閾値に対しても、閾値の式はその経路の上位 $$K$$ 個の和以上である。従って、全閾値と経路について最小値を取っても、本来の最適値を下回らない。
+
+本来の最適経路の上位 $$K$$ 番目の値を $$t$$ とする。この値は列挙候補に含まれ、その経路では閾値の式が本来のコストと一致する。その回のDPはその経路以下の候補値を返すので、全体の最小値も本来の最適値以下になる。両方向を合わせると、出力は求める最適値に等しい。
 
 ## 実装上の注意
 
-- 採用値和は32bitを超えるため64bit整数を使い、始点でもa>X、a<X、a=Xの同じ遷移規則を適用する。
-- 各XのDPはO(HWK)、候補は高々HW個なので全体O(H^2W^2K)、メモリO(HWK)である。同値のXをuniqueにすれば同じDPの重複を省ける。
+- 開始マスと終了マスも費用へ含める。通過するマス数は $$H+W-1$$。
+- 各閾値でDPを初期化し直す。存在しない上・左のマスは参照せず、最小化の初期値には十分大きい値を使う。
+- $$Kt$$ と経路の和は32bit整数を超え得る。積の計算前から64bit整数にする。
+- $$K=H+W-1$$、同じ値ばかりの盤面、1行または1列の盤面でも同じ式を使える。
 
 ## 復習の核
 
-- 「大きい方K個」が見えたら、K番目をXと固定したときに>Xを全採用し、=Xから何個選ぶべきかを小さいソート済み列で確認する。
-- a=Xで採用・不採用の両遷移を実装し、終点で採用個数がちょうどKの状態だけを比較する。
+- 順序統計を含む目的関数は、境目を固定して各要素の加算へ変えられないか考える。
+- 固定した閾値での候補値と、経路の本来のコストを区別し、等号になる閾値の存在を示す。
+- 最適解のある値が盤面上に現れるなら、巨大な整数範囲でなくその候補だけを列挙する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(H²W²K)、HW種類以下の閾値ごとにO(HWK) DP。
+閾値候補は高々 $$HW$$ 個、一回のDPは $$O(HW)$$ なので、全体は $$O(H^2W^2)$$。候補の重複除去に並べ替えを使っても、この上界に収まる。
 
 ### 空間
 
-O(HWK)、閾値一つ分のDP。
+盤面と閾値候補、DP配列を保存して $$O(HW)$$。DPを一行にしても、盤面を保持する全空間は同じ上界になる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: 1 \leq H,W \leq 30; 1 \leq K < H+W; 1 \leq A_{i,j} \leq 10^9; All values in input are integers.
+$$H,W\leq30$$ より、DPのマス更新は高々 $$900^2=810000$$ 回。最大の経路和は $$59\times10^9$$ なので64bit整数で保持できる。閾値は入力の値だけを使い、値域 $$10^9$$ の走査をしない。
 
 ## 出典
 
