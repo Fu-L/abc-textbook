@@ -1,7 +1,8 @@
 ---
 title: "ABC371-E — I Hate Sigma Problems"
 draft: true
-authoringUnit: {"problemId":"abc371-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc371-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9","source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"値 i の出現位置に 0 と N+1 を番兵として加えると、長さ g の各 gap が i を含まない区間を g(g+1)/2 個だけ生む。 全区間数 N(N+1)/2 から非出現区間数を引いた量が、値 i が答えへ 1 を寄与する区間数そのものである。 値 i の非出現区間は隣接する出現位置の間へ一意に属し、全値にわたる出現位置の総数が N なので O(N) で集計できる。","sourceRevisionIds":["source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9","source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"寄与の交換と余事象":"典型の発動条件","出現位置と-gap-の数え上げ":"典型の発動条件"}
+authoringUnit: {"problemId":"abc371-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc371-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9","source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"任意の区間と、その区間に現れる任意の値を取る。その値の最初の位置 $$i$$ は一意であり、直前の出現は区間の左端より前にあるので、$$p_i<l\\leq i\\leq r$$ を満たす。逆にこの条件を満たす区間では $$i$$ がその値の最初の出現になる。従って各区間の各種類は、式 $$(i-p_i)(N-i+1)$$ のどこかへ一度だけ数えられ、その総和は求める値と一致する。","sourceRevisionIds":["source-abc371-e-problem-4317baef9dcf6c77612f151f700251d71ba4de4fd36a0edac3241c3756e9a5d9","source-abc371-editorial-10922-65463ad1e84ad122b219d944a7e2e3b3839270644ebe295fb6e2c39cfd6624ad"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,61 +17,93 @@ authoringUnit: {"problemId":"abc371-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-求める distinct 数の総和は、値ごとに「その値を含む連続部分列の個数」を足す形へ寄与を交換できる。各値の出現回数の総和は N なので、値ごとの処理を出現位置数に比例させれば全体を線形にできる。
+区間の種類数を、各値がその区間へ一度ずつ与える1点の和と見る。同じ値が何度現れても1点なので、区間内で最初に現れる位置へその1点を担当させると、重複なく寄与を数えられる。
 
-採用する候補: 各値について全区間数からその値を含まない区間数を引き、出現位置間の gap ごとに三角数を足す。
+### 出現回数を足すと、何が数え過ぎになるか
 
-棄却する候補: 左端を固定して右へ伸ばし、集合で distinct 数を更新する。
+全 $$O(N^2)$$ 区間の種類数を調べる代わりに、一つの位置が何区間へ入るかを掛ける方法を考えたくなる。しかし $$A=(1,2,1)$$ の全区間 $$(1,3)$$ は、種類数が2なのに三つの位置を数えると3になる。必要なのは要素の個数ではなく、各値につき一度だけの加点である。
 
-一つの左端には O(N) 個の右端があり、distinct 数を定数時間で更新しても O(N^2) となる。
+この重複を避けるには、区間内の同じ値の代表を一つ決めればよい。左端から最初の出現を代表にすれば、直前の出現位置だけで担当範囲を表せる。
 
-各値の出現位置列を作り、番兵を含む隣接位置差から非出現区間数を計算する。全区間数との差を全値について加算し、64 bit 整数で答えを得る。
+### 直前の同じ値を、左端の禁止境界にする
+
+位置 $$i$$ より前で $$A_i$$ が最後に現れる位置を $$p_i$$ とし、存在しなければ0とする。位置 $$i$$ が区間 $$[l,r]$$ 内でその値の最初の出現である条件は
+
+$$
+p_i<l\leq i\leq r\leq N
+$$
+
+である。左端は $$p_i+1,\ldots,i$$ の $$i-p_i$$ 通り、右端は $$i,\ldots,N$$ の $$N-i+1$$ 通り。左右を独立に選べるので、この位置の寄与は
+
+$$
+(i-p_i)(N-i+1)
+$$
+
+になる。これを全位置について足せばよい。
+
+先ほどの $$A=(1,2,1)$$ で具体的に追う。
+
+| 位置 $$i$$ | 値 | 直前 $$p_i$$ | 担当する左端 | 寄与 |
+| --- | --- | --- | --- | --- |
+| 1 | 1 | 0 | 1 | $$1\times3=3$$ |
+| 2 | 2 | 0 | 1、2 | $$2\times2=4$$ |
+| 3 | 1 | 1 | 2、3 | $$2\times1=2$$ |
+
+合計9である。区間 $$(1,3)$$ の値1は位置1が担当し、位置3は担当しない。区間 $$(2,3)$$ の値1は位置3が担当する。このように代表は区間に応じて変わるが、その条件を直前の出現が表している。
+
+### 配列一つで、全ての直前の出現を得る
+
+値 $$x$$ の直前の出現を `last[x]` に保存し、初期値を0にする。左から位置 $$i$$ を処理し、`last[A[i]]` を $$p_i$$ として寄与を加算した後、`last[A[i]]=i` と更新する。更新を先にすると $$p_i=i$$ となるため、参照と加算を済ませてから記録する。
+
+公式解説の「各値が含まれない区間を、出現位置の間の隙間から数える」方法も同じ二重計数を避ける方針である。本稿では、含まれる区間を最初の出現へ直接割り当てることで、走査一回にまとめている。
 
 ## 典型の発動条件
 
-### 寄与の交換と余事象
+### 集合の大きさを、存在を表す1点の総和へ分ける
 
-発動条件: 区間ごとの distinct 数の総和のように、対象ごとの 0/1 寄与へ分解できるとき。
+「種類数」「一度以上使った数」の総和では、要素の各出現でなく値ごとの存在を数える。区間と値の組 $$([l,r],x)$$ を、$$x$$ が区間に含まれるときに一つ数えると、区間側から見れば種類数の総和、値側から見ればその値を含む区間数になる。
 
-区間を列挙せず、各値が含まれる区間数を余事象から数える。
+単に「寄与を考える」だけでなく、何を一単位として数えるかを固定するのが出発点である。頻度そのものを求める問題では出現位置ごとの加算でよいが、存在の問題では重複を消す代表か余事象が必要になる。
 
-### 出現位置と gap の数え上げ
+### 一意な代表を選び、直前・直後で担当領域を区切る
 
-発動条件: ある値を避ける連続区間を数えたいとき。
+区間内の最初の出現を担当にすると、直前の同値位置より後へ左端を制限すればよい。最後の出現を担当にするなら、対称的に直後の同値位置が右端の境界になる。どちらでも、各区間と値の組に代表が一つだけ存在することを先に確認する。
 
-出現位置間の空白を独立な区間として三角数で集計する。
+本問では左右の端点に追加の相関がないため、選択肢を掛けられた。長さ制限などが加わる場合は、同じ担当付けを使えても、端点の数え方はその条件に合わせて変える。
 
 ## 問題固有の要素
 
-distinct 数を値ごとの指示関数へ分解すると二重和の順序を交換できる。
-
-別の問題へ持ち帰る視点: 区間統計の総和では、各要素が寄与する区間を数える視点を最初に試す。
+種類数は、区間の中で一度でも現れた値の数である。この定義から、最初の出現を一つだけ選ぶ担当付けが自然に現れる。値が $$1$$ から $$N$$ までなので、直前位置の管理にも配列を使える。
 
 ## 正当性
 
-値 i の出現位置に 0 と N+1 を番兵として加えると、長さ g の各 gap が i を含まない区間を g(g+1)/2 個だけ生む。 全区間数 N(N+1)/2 から非出現区間数を引いた量が、値 i が答えへ 1 を寄与する区間数そのものである。 値 i の非出現区間は隣接する出現位置の間へ一意に属し、全値にわたる出現位置の総数が N なので O(N) で集計できる。
+任意の区間と、その区間に現れる任意の値を取る。その値の最初の位置 $$i$$ は一意であり、直前の出現は区間の左端より前にあるので、$$p_i<l\leq i\leq r$$ を満たす。逆にこの条件を満たす区間では $$i$$ がその値の最初の出現になる。従って各区間の各種類は、式 $$(i-p_i)(N-i+1)$$ のどこかへ一度だけ数えられ、その総和は求める値と一致する。
 
 ## 実装上の注意
 
-- 番兵 0,N+1 と gap 長 x_{j+1}-x_j-1 を混同せず、N=2×10^5 の総和を 64 bit 整数で保持する。
+- `last` の初期値0は、1始まりの区間の外側に置いた番兵である。
+- 積を計算する前に64bit整数へ変換する。
+- 全て同じ値でも、各位置はその位置から始まる区間を担当し、答えは区間総数になる。
 
 ## 復習の核
 
-- 「各区間に何種類あるか」ではなく「各値が何区間に現れるか」へ和を交換できることと、非出現区間が gap に分割されることを再現する。
+- 種類数の総和を、区間と値の組の個数へ翻訳する。
+- 同じ値の二重計数を、一意な代表で除く。
+- 代表が最初の出現なら、直前の同値位置が左端の境界になる。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N)、値別位置gapの総数N+distinct数。
+`last` の初期化と全位置の走査を合わせて $$O(N)$$。各位置の寄与は定数時間で求める。
 
 ### 空間
 
-O(N)。
+値ごとの直前位置に $$O(N)$$。入力配列を保存しても全体は $$O(N)$$ であり、順に読みながら処理することもできる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 1\leq N\leq 2\times 10^5; 1\leq A_i\leq N; All input values are integers.
+$$N\leq2\times10^5$$ を線形時間で処理する。答えは各区間の長さを足した値 $$N(N+1)(N+2)/6$$ 以下なので、符号付き64bit整数に収まる。
 
 ## 出典
 

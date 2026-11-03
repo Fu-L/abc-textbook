@@ -1,7 +1,8 @@
 ---
 title: "ABC318-E — Sandwiches"
 draft: true
-authoringUnit: {"problemId":"abc318-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc318-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。 中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。 各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。","sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"三つ組の中央固定":"典型の発動条件","頻度ベクトル内積の差分更新":"典型の発動条件"}
+authoringUnit: {"problemId":"abc318-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc318-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"各位置の手順2で、$$L[x]$$ と $$R[x]$$ はそれぞれ中央より左・右の頻度を表す。初期状態から、手順1の右からの除去と手順3の左への追加によってこの状態が作られる。各更新の差分は該当する積の変化そのものなので、$$T=\\sum_xL[x]R[x]$$ も保たれる。よって手順2の式は、その中央を持つ合法な三つ組を漏れなく一度ずつ数える。中央は各三つ組に一つしかないため、全位置の和が答えになる。","sourceRevisionIds":["source-abc318-e-problem-70c4c614fc1f6c6f052372ab7f5a476b184b77ecf4c3f561ff9333ccd64d62b4","source-abc318-editorial-7068-092cf3852f4a8e6d08d5e530476d0cf637d2836240da2dcaa8deef09ead12c1d"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,63 +17,87 @@ authoringUnit: {"problemId":"abc318-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-条件 i<j<k と A_i=A_k≠A_j は中央 j を固定すると、左右で同じ値 x を一つずつ選ぶ積 left[x]right[x] の和から x=A_j だけ除く形になる。
+真ん中の位置を固定すると、等しい値の左端と右端は、値ごとの個数の積で数えられる。ただし全ての値を毎回調べるのは遅い。左右の境界を一つ動かしたとき、変わる値だけで積の総和を更新する。
 
-j を一つ右へ動かすと left/right で変わる値は A_j 一種類だけなので、全 x の積和 total=Σleft[x]right[x] も差分更新できる。
+### 左右が独立になる位置を選ぶ
 
-採用する候補: 中央位置を左から一度走査し、値別左右頻度と内積totalを一点差分で維持する。
+求めるのは $$i<j<k$$、$$A_i=A_k\ne A_j$$ を満たす三つ組の数である。全ての三つ組は多過ぎるが、中央 $$j$$ を固定すれば、左右で必要な条件は「同じ値を選ぶ」だけになる。
 
-棄却する候補: 両端 i,k を同値ごとに列挙し、その間の A_j≠A_i の個数を数える。
+現在位置より左の値 $$x$$ の個数を $$L[x]$$、右の個数を $$R[x]$$ とする。値 $$x$$ を両端に使う組は $$L[x]R[x]$$ 個あり、中央と同じ値だけを除けばよい。従って中央 $$j$$ の寄与は
 
-同じ値が N 回現れる場合に端点対が Θ(N²) となり、間の個数を O(1) で取っても間に合わない。
+$$
+\sum_x L[x]R[x]-L[A_j]R[A_j]
+$$
 
-初期 right を全頻度、left=0,total=0 とする。j を左から処理する際、まず A_j を right から一つ外し total を差分更新する。答えへ total−left[A_j]right[A_j] を加え、次の中央に備えて A_j を left へ一つ加えて total を再度差分更新する。
+である。中央が固定されると、左右の具体的な位置は大小関係を既に満たしているため、同じ値の個数だけを残せる。
+
+例えば $$A=(1,2,1,3,2)$$ で $$j=3$$ を固定すると、左は1と2、右は3と2が各1個。両端を同値にできるのは2だけなので、三つ組 $$(2,3,5)$$ が一つある。中央を $$j=4$$ へ移すと、左の2と右の2から $$(2,4,5)$$ を得る。
+
+### 和全体を持ち、一項だけ変える
+
+中央ごとに全 $$x$$ を走査すると、まだ二乗時間になる。そこで
+
+$$
+T=\sum_x L[x]R[x]
+$$
+
+を一つの変数として持つ。現在位置の値が右側から外れると変わるのは、その値の項だけ。左側へ加わる場合も同様である。
+
+初めは $$L[x]=0$$、$$R[x]$$ を配列全体の頻度とし、$$T=0$$ とする。各位置 $$j$$ の値を $$v=A_j$$ として、次の順に処理する。
+
+1. 中央自身を右側から外す。$$R[v]$$ が1減るので、先に $$T\leftarrow T-L[v]$$ とし、$$R[v]$$ を1減らす。
+2. 今は左・中央・右が正しく分かれている。$$T-L[v]R[v]$$ を答えへ加える。
+3. 次の位置へ進むため、中央を左へ入れる。$$L[v]$$ が1増えるので、$$T\leftarrow T+R[v]$$ とし、$$L[v]$$ を1増やす。
+
+ここで手順3が使うのは、手順1で減らした後の $$R[v]$$ である。先ほどの例の $$j=3$$ では、中央を右から外した後の $$T$$ は1、$$L[1]R[1]=0$$ なので1を加える。中央を左へ入れても、右に1がないため $$T$$ は変わらない。
+
+初端・末端では左右のどちらかが空で、寄与は自動的に0になる。特別に中央の範囲を分けなくても、全位置へ同じ処理を行える。
 
 ## 典型の発動条件
 
-### 三つ組の中央固定
+### 三つ組の中央を固定し、両側を集計する
 
-発動条件: i<j<k の両側要素に対称な条件があり、中央要素が除外条件を持つとき。
+順序付きの三つ組では、中央を固定すると左右の位置条件が別々になることが多い。本問では、両端が同じ値という条件を値 $$x$$ ごとに分類してから掛け算にした。左右の間に別の制約が残る場合は、個数をそのまま掛けず、その制約に必要な情報も集計する。
 
-左右の頻度・集約量を持ち、j ごとの組数を積で表す。
+### 大きい総和を、変更された項だけで保つ
 
-### 頻度ベクトル内積の差分更新
+$$\sum_x f(L[x],R[x])$$ のような量を繰り返し必要とし、境界を動かすたびに少数の $$x$$ だけ変わるなら、総和を再計算せず、古い項を引いて新しい項を足せる。本問の積では差分が特に簡単になり、右を1減らせば $$-L[x]$$、左を1増やせば $$+R[x]$$ となる。
 
-発動条件: 入力indexを一方向に走査すると左右multisetが一点ずつ変わり、Σf_xg_xが毎回必要なとき。
-
-変化する x の旧寄与だけ引き、新寄与だけ足す。
+使う前に、更新する配列だけでなく、総和が「どの時点の左右」を表すかを言葉で決める。中央自身を除外した後に答えを取り、次の回に備えて左へ入れる、という処理順が不変条件を保つ。
 
 ## 問題固有の要素
 
-一見「同値の両端」を選ぶ問題でも、異値条件を持つ中央へ課金すると頻度内積が一走査で更新できる。
-
-別の問題へ持ち帰る視点: 順序付き三つ組は、どの index を固定すると残り二つが独立な左右選択になるか試す。
+両端の値は同じだが、中央はそれと異ならなければならない。全ての同値両端をまとめた $$T$$ から、中央と同じ値の一項だけを引けば、この条件を正確に取り込める。
 
 ## 正当性
 
-total は左右頻度ベクトルの内積であり、一要素を right から減らす/left へ増やす前にその値の旧寄与を引き、更新後寄与を足せばよい。 中央値と同じ x の組は A_i=A_j=A_k となり条件外なので、各 j で left[A_j]right[A_j] を明示的に差し引く。 各 j の寄与 total−left[A_j]right[A_j] を O(1) で得られ、全体 O(N) になる。
+各位置の手順2で、$$L[x]$$ と $$R[x]$$ はそれぞれ中央より左・右の頻度を表す。初期状態から、手順1の右からの除去と手順3の左への追加によってこの状態が作られる。各更新の差分は該当する積の変化そのものなので、$$T=\sum_xL[x]R[x]$$ も保たれる。よって手順2の式は、その中央を持つ合法な三つ組を漏れなく一度ずつ数える。中央は各三つ組に一つしかないため、全位置の和が答えになる。
 
 ## 実装上の注意
 
-- 中央 j を right から除いてから寄与を数え、left へ入れるのは数えた後にする。答えは Θ(N³) なので 64 bit を使う。
+- 中央を右側から外す前に寄与を加えると、同じ位置を端点にも使ってしまう。
+- $$L[v]$$ を増やす際の差分には、中央を除去した後の $$R[v]$$ を使う。
+- 頻度の積、$$T$$、答えを64bit整数にする。全て同じ値なら、毎回 $$T=L[v]R[v]$$ となり答えは0。
 
 ## 復習の核
 
-- 更新順を「rightから除く→数える→leftへ入れる」と言語化する。全要素同値の例で除外項により0になることを確認する。
+- 中央固定で左右の順序制約を消し、必要な値ごとの頻度へ圧縮する。
+- 全体の総和を一項ずつ更新し、値域全体の走査をなくす。
+- 更新の前後で、保持量がどの境界を表すかを明確にする。
 
 ## 計算量と制約
 
 ### 時間
 
-O(N)、左右頻度内積を一要素差分更新。
+頻度の初期化と全位置の走査で $$O(N)$$。中央を一つ進める操作は定数時間である。
 
 ### 空間
 
-O(N)。
+入力配列と左右の頻度配列に $$O(N)$$。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 3\leq N\leq 3\times 10^5; 1\leq A_i \leq N; All input values are integers.
+$$N\leq3\times10^5$$ でも線形時間で処理できる。答えは三つ組の総数 $$\binom N3$$ 以下で、64bit整数に収まる。
 
 ## 出典
 

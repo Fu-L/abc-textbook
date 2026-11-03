@@ -1,7 +1,8 @@
 ---
 title: "ABC365-E — Xor Sigma Problem"
 draft: true
-authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"xorのbit別寄与":"典型の発動条件","prefix-parityの異値pair計数":"典型の発動条件"}
+authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-003/abc365-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"非空区間と、異なる二つの累積添字の順序なしの組は一対一に対応し、区間XORは二つの累積値のXORに等しい。各ビットでは0と1の組を選ぶとき、かつそのときに限り結果が1になるので、そのビットの総寄与は $$2^bz_bo_b$$。全ビットの和は全非空区間の総和を与える。そこから全ての長さ1の区間の寄与を引くため、残る値は要求された長さ2以上の区間の総和である。","sourceRevisionIds":["source-abc365-e-problem-07a2f04c145f7d15a2788f59625115ceb88e52d34710895bf40a3fa79b7f845f","source-abc365-editorial-10607-7955b766683b6962871f47a593281be111da79d04880c6d84ffdc4b1079a5370"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,63 +17,99 @@ authoringUnit: {"problemId":"abc365-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-XORの総和はbitごとの1になる区間数に分解できる。固定bitではAを0/1列Bとみなし、区間XORはprefix XOR Cの両端が異なるかで決まる。
+区間XORを二つの累積XORの組へ変え、さらにビットごとに分ける。一つのビットが1になる条件は、両端の累積値のビットが異なることだけなので、0の個数と1の個数の積で全区間分をまとめられる。
 
-全ての非空区間ならC中の0個数×1個数で数えられるが、問題は長さ2以上だけなので、長さ1区間の寄与ΣB_iを引く必要がある。
+### 区間を作る二つの境界に着目する
 
-採用する候補: 各bitでprefix parityの0,1出現数を数え、異parity pair数から単項区間を除いてbit重みを掛ける。
+長さ2以上の全区間のXORを足す問題である。累積XORを
 
-棄却する候補: 各左端から右へXORを更新し、全長2以上の区間値を足す。
+$$
+P_0=0,\qquad P_i=A_1\oplus\cdots\oplus A_i
+$$
 
-一区間のXORは速く得られても区間数が二次で、同じprefix情報を共有できない。
+と置けば、$$[l,r]$$ のXORは $$P_{l-1}\oplus P_r$$ になる。同じ値のXORが二度現れると消えるため、区間より前の部分を取り除ける。
 
-必要な各bit bについてC=0からA_iのb bitを順にxorし、prefix parity 0/1の個数を数える。同bitが1の全非空区間数cnt0·cnt1からA_iの当該bitが1の個数を引き、2^b倍して答えへ加える。
+これで一区間の計算は定数時間になったが、境界の組はまだ二乗個ある。次に、XORの整数全体ではなく、一つのビットが1になる回数へ分ける。
+
+### ビットが異なる二つは、一つの区間を定める
+
+$$b$$ ビット目について、$$P_0,\ldots,P_N$$ のうち0である個数を $$z_b$$、1である個数を $$o_b$$ とする。このビットが異なる二つの累積値の選び方は $$z_bo_b$$ 個である。
+
+順序を気にしなくてよい理由も確認しよう。二つの添字を選ぶと、小さい方を $$u$$、大きい方を $$v$$ と一意に決められ、非空区間 $$[u+1,v]$$ に対応する。XORは両端の交換で変わらないので、0と1から一つずつ選ぶ積は、全ての非空区間を一度ずつ数えている。
+
+従って全ての非空区間のXORの総和は
+
+$$
+\sum_b 2^b z_bo_b
+$$
+
+になる。ただし、この式には長さ1の区間も含まれる。長さ1の区間のXORは $$A_i$$ 自身なので、最終的な答えは
+
+$$
+\boxed{\sum_b 2^b z_bo_b-\sum_{i=1}^N A_i}
+$$
+
+である。長さ制限を直接組数へ埋め込むより、数えやすい全体を求めて不要な部分を引いた。
+
+### 末尾までの累積値に、最初の0も含める
+
+$$A=(1,3,2)$$ では、累積XORは $$P=(0,1,2,0)$$ となる。
+
+| ビット | 0の個数 | 1の個数 | 全非空区間への寄与 |
+| --- | --- | --- | --- |
+| $$2^0$$ | 3 | 1 | $$1\times3\times1=3$$ |
+| $$2^1$$ | 3 | 1 | $$2\times3\times1=6$$ |
+
+合計9から長さ1の寄与 $$1+3+2=6$$ を引き、答え3。実際、長さ2以上のXORは2、0、1である。先頭の0を省くと、左端が1の区間を数え落とす。
+
+実装では $$P$$ を全て保存する必要はない。現在の累積XORを一つ持ち、最初の $$P_0=0$$ の分を各ビットの0個数へ1ずつ入れておく。入力を左から読み、累積値を更新して、各ビットの個数を増やす。最後に個数の積を計算する。
 
 ## 典型の発動条件
 
-### XORのbit別寄与
+### ビット演算の総和を、ビットごとの回数へ分解する
 
-発動条件: XOR値の総和を多数の区間・pairについて求めるとき。
+非負整数の各ビットを $$v_b\in\{0,1\}$$ とすれば、その値は $$\sum_b2^bv_b$$ と書ける。従って多数のXOR値の総和では、各ビットが1になる回数を求めればよい。XORなら異なるビット、ANDなら両方1、ORなら少なくとも一方1、というように一ビットの条件へ戻す。
 
-各bitを独立なparity問題として数え、最後にbit重みを戻す。
+本問の積は、ビットが違う任意の二境界が使えるから成立する。添字の距離や順序に追加条件が残る問題では、全体の0・1個数だけでは足りず、走査で過去の候補を制限するなどの工夫が必要になる。
 
-### prefix parityの異値pair計数
+### 条件を外して数え、単純な例外を引く
 
-発動条件: 区間xorが1となる端点組数を求めるとき。
-
-prefix値0と1の頻度の積で全組をまとめて数える。
+「境界の差が2以上」という条件を直接数えるより、差が1の組も含めて全て数え、その寄与を引く方が簡単だった。除外した部分の寄与が元の入力の総和になるためである。何を一旦数え過ぎたかを、区間と境界の対応で特定してから補正する。
 
 ## 問題固有の要素
 
-長さ制限を端点pairの添字差として直接数えるより、数えやすい全区間から長さ1だけ引くと簡潔になる。
-
-別の問題へ持ち帰る視点: ほぼ全範囲を求める制約では、補集合が小さければ全体−例外へ変える。
+長さ1を除く条件が、累積値の隣接した組の除外に対応する。そのXORは元の要素へ戻るため、ビットごとの複雑な補正をせず、入力全体の和を一度引けばよい。
 
 ## 正当性
 
-C_0=0を含むN+1個のprefix parityから異なる二値を選ぶ組数はcount0·count1である。 隣接prefix pair C_{i−1} xor C_iはB_iそのものなので、除外すべき長さ1区間のbit寄与をΣB_iで正確に引ける。 区間を列挙せず、全端点pairを二種類の頻度積へ集約できる。
+非空区間と、異なる二つの累積添字の順序なしの組は一対一に対応し、区間XORは二つの累積値のXORに等しい。各ビットでは0と1の組を選ぶとき、かつそのときに限り結果が1になるので、そのビットの総寄与は $$2^bz_bo_b$$。全ビットの和は全非空区間の総和を与える。そこから全ての長さ1の区間の寄与を引くため、残る値は要求された長さ2以上の区間の総和である。
 
 ## 実装上の注意
 
-- prefixには空prefix C_0を必ず含める。A_i<2^27付近までの全bitを扱い、組数×bit値は64 bitで計算する。
+- $$P_0=0$$ を個数に含める。
+- 0と1の積は区間の個数を表す。さらに2で割らない。
+- $$A_i\leq10^8<2^{27}$$ なので、0～26ビットを調べれば十分である。
+- ビットの重み、頻度の積、答えは64bit整数で計算する。
 
 ## 復習の核
 
-- N=2で唯一の長さ2区間と一致するか確認する。全非空区間を数えた式のどこから長さ1を引いたかを明示する。
+- 区間XORを累積XORの二境界へ置き換える。
+- ビットごとの寄与を数え、0・1の組数へ落とす。
+- 長さ1の補正を、元の要素の総和として取り除く。
 
 ## 計算量と制約
 
 ### 時間
 
-O(NB)、Bは値bit長。
+必要なビット数を $$B$$ とすると、累積値の集計に $$O(NB)$$、最後の和に $$O(B)$$。全体は $$O(NB)$$。
 
 ### 空間
 
-O(1)補助、prefix parity counts。
+ストリームとして読むなら、ビットごとの個数と現在の累積値に $$O(B)$$。入力配列を保存する実装では、その領域を含め $$O(N+B)$$ となる。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 2 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 2 \times 10^5; 1 \leq A_i \leq 10^8; All input values are integers.
+$$B=27,N\leq2\times10^5$$ なので約540万回のビット集計で済む。一つの区間XORは $$2^{27}$$ 未満、区間は高々 $$N(N+1)/2$$ 個なので、途中の全非空区間の総和も64bit整数に収まる。
 
 ## 出典
 
