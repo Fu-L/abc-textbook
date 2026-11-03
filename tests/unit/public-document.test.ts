@@ -4,6 +4,25 @@ import { describe, expect, it } from 'vitest';
 import { renderPublicDocument } from '../../src/lib/catalog/render-public-document.js';
 
 describe('accepted document rendering', () => {
+  it('keeps incoming fragments when a manuscript replaces its explanation headings', async () => {
+    const source =
+      '---\nheadingAliases:\n  old-section: 新しい導出\n---\n\n## 新しい導出\n\n本文。';
+    const $ = load(await renderPublicDocument(source, '/abc-textbook/'));
+    expect($('#old-section').next('h2').attr('id')).toBe('新しい導出');
+    expect($('#old-section').attr('aria-hidden')).toBe('true');
+    expect($('h2')).toHaveLength(1);
+    expect($('h2').text()).toBe('新しい導出');
+    expect($('p').text()).toBe('本文。');
+  });
+  it.each([
+    'headingAliases: []',
+    'headingAliases:\n  old: missing',
+    'headingAliases:\n  current: current',
+  ])('rejects an unusable fragment mapping: %s', async (metadata) => {
+    await expect(
+      renderPublicDocument(`---\n${metadata}\n---\n\n## current`, '/'),
+    ).rejects.toThrow();
+  });
   it('preserves code characters, table structure, links, and math in local scroll viewports', async () => {
     const source = await readFile('tests/fixtures/documents/widths.md', 'utf8');
     const $ = load(await renderPublicDocument(source, '/abc-textbook/'));

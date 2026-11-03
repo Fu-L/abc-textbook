@@ -87,6 +87,10 @@ CLIは既存taxonomyへの問題追加を扱い、新Unitの設計・登録や�
 
 ### 数式とコードの記法
 
+全面再執筆で小見出しを改める場合は、Markdown frontmatterの`headingAliases`に
+`旧fragment ID: 新しい見出しのfragment ID`を記すと、公開rendererが新見出しの直前へ旧IDを置く。旧見出しを説明の骨格へ戻す必要はない。対応先は実在する見出し、旧IDはページ内で一意でなければbuildが失敗する。IDは表示見出しそのものではなく、既存rendererが生成した値を確認する。問題原稿をauthoring
+unitから生成する場合は、生成後のfrontmatterへこの対応を保持し、readerの往復と公開表示も確認する。処理を変更した場合は`tests/unit/public-document.test.ts`で互換IDと本文・見出しの保持を検証する。
+
 数式は本文中で `$$1\leq N\leq 2\times 10^5$$` のように明示する。独立した式は、 `$$`
 だけの行で前後を囲む。独立した式の閉じ忘れ、明示した式中の未対応コマンド、`\\leq`
 のような二重エスケープはbuildエラーになる。Markdown正本ではバックスラッシュを一つにする。JSON文字列のエスケープと混同しない。

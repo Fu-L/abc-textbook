@@ -96,6 +96,26 @@ export const renderPublicDocument = async (
       ),
     );
   });
+  // Manuscripts may change their teaching sequence while keeping incoming fragments.
+  const aliases: unknown = frontmatter.headingAliases;
+  if (aliases !== undefined) {
+    if (aliases === null || typeof aliases !== 'object' || Array.isArray(aliases))
+      throw new Error('headingAliases must map old fragment IDs to current heading IDs.');
+    for (const [alias, target] of Object.entries(aliases)) {
+      const heading = $('h2[id], h3[id], h4[id], h5[id], h6[id]').filter(
+        (_, element) => $(element).attr('id') === target,
+      );
+      if (!alias || typeof target !== 'string' || heading.length !== 1)
+        throw new Error(`Unknown heading alias target: ${alias}`);
+      if (
+        $('[id]')
+          .toArray()
+          .some((element) => $(element).attr('id') === alias)
+      )
+        throw new Error(`Duplicate heading alias: ${alias}`);
+      heading.before($('<span></span>').attr({ id: alias, 'aria-hidden': 'true' }));
+    }
+  }
   // Focusable local viewports work without JS; keep code bytes and native table semantics.
   $('pre').attr({ tabindex: '0', role: 'group', 'aria-label': 'コードブロック' });
   $('table').wrap('<div class="table-scroll" tabindex="0" role="group" aria-label="表"></div>');
