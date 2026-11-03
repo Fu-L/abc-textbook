@@ -1,7 +1,8 @@
 ---
 title: "ABC269-F — Numbered Checker"
 draft: true
-authoringUnit: {"problemId":"abc269-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc269-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc269-editorial-4846-ca50d700b0e54577aa1a9ec3da3743af33cf5d02afd035d1be6729315c6ee811","source-abc269-f-problem-2f910c36bdeb03d58b53f7268e5dd5a44bf7c0d463a544ab9903e17b615ab67a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":1,"claims":[{"key":"correctness","text":"row parityが決まれば残るcolumn parityも決まり、[C,D]内の個数・最初の列・最後の列から一行分の和を求められる。 同parityの隣接行はrow indexが2増えるので、各selected cellの値は2M増え、一行和の公差は2M×selected-column-countとなる。 各queryをparity二ケースの定数回の四則演算だけで評価できる。","sourceRevisionIds":["source-abc269-editorial-4846-ca50d700b0e54577aa1a9ec3da3743af33cf5d02afd035d1be6729315c6ee811","source-abc269-f-problem-2f910c36bdeb03d58b53f7268e5dd5a44bf7c0d463a544ab9903e17b615ab67a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"parity別の分解":"典型の発動条件","等差数列の閉形式":"典型の発動条件"}
+authoringUnit: {"problemId":"abc269-f","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-002/abc269-f.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":["unit-modular-arithmetic"],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering","tag-modular-arithmetic"],"sourceRevisionIds":["source-abc269-editorial-4846-ca50d700b0e54577aa1a9ec3da3743af33cf5d02afd035d1be6729315c6ee811","source-abc269-f-problem-2f910c36bdeb03d58b53f7268e5dd5a44bf7c0d463a544ab9903e17b615ab67a"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"非零マスは、奇数行・奇数列の直積と、偶数行・偶数列の直積へ重複なく分割される。各直積では、元の番号を行由来と列由来へ分ける二重和の変形により、$$Mcs+rt$$ がその領域の総和と一致する。\n\n各行列集合の個数と番号和は、公差2の等差数列として正確に求められる。空の集合の寄与を0とすることで一行・一列などの境界も含む。二つの偶奇の寄与を加えるため、質問の長方形内のすべての値を一度ずつ足した答えになる。","sourceRevisionIds":["source-abc269-editorial-4846-ca50d700b0e54577aa1a9ec3da3743af33cf5d02afd035d1be6729315c6ee811","source-abc269-f-problem-2f910c36bdeb03d58b53f7268e5dd5a44bf7c0d463a544ab9903e17b615ab67a"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -12,7 +13,7 @@ authoringUnit: {"problemId":"abc269-f","docPath":"src/content/docs/problems/hybr
 
 先に読む単元:
 
-- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md) — 剰余を正規化して加減乗算し、二分累乗と逆元の存在条件を使って法上の除算や確率を計算する。
+- [法上の四則演算・高速累乗・逆元](src/content/docs/learn/number-theory/modular-arithmetic.md)
 
 この解説で扱わないこと:
 
@@ -20,65 +21,101 @@ authoringUnit: {"problemId":"abc269-f","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-rectangle内の各行ではi+jが偶数の列だけが残り、その値 (i−1)M+j は公差2のarithmetic progressionを成す。
+巨大な長方形を走査する代わりに、行と列を偶奇で分ける。同じ偶奇の行・列だけを組み合わせると、残るマスは二つの直積へ分かれ、番号の和を行番号の和と列番号の和から求められる。
 
-同じparityの行を2行おきに見ると、選ばれる列数は一定で、各行の和も一定公差のarithmetic progressionになる。
+### 規則的な盤面は、配列として保存しない
 
-棄却する候補: 各query rectangleのcellを列挙して、checkerboard上の非零値を加える。
+マス $$(i,j)$$ の元の値は $$M(i-1)+j$$。$$i+j$$ が奇数なら0になるので、残るのは行番号と列番号の偶奇が同じマスである。
 
-N,Mが10^9でrectangle areaに依存する処理はできない。
+例えば $$M=4$$ で、行1から3・列2から4の長方形を切り出すと、非零の値は行1で3、行2で6と8、行3で11。和は28になる。これらは、奇数行と奇数列の組 $$(1,3),(3,3)$$ と、偶数行と偶数列の組 $$(2,2),(2,4)$$ へ分かれる。
 
-採用する候補: rectangleをrow parity別に分け、各parityで列方向と行方向の二段のarithmetic-progression sumを閉形式で求める。
+盤面全体の大きさは $$10^9\times10^9$$ にもなるが、各マスの値と残る条件は座標から直接計算できる。この規則を式にすれば、盤面を一度も作らずに済む。
 
-checkerboard filterを二つのparity classへ分割し、nested arithmetic progression sumsで巨大rectangle queryをO(1)評価する。
+### 一つの偶奇を固定すると、行と列を別々に足せる
+
+ある質問の行範囲を $$[A,B]$$、列範囲を $$[C,D]$$ とする。奇数だけ、または偶数だけを選んだ行集合を $$R$$、同じ偶奇の列集合を $$J$$ とする。
+
+行数を $$r=|R|$$、列数を $$c=|J|$$、行のずらした番号の和を $$s=\sum_{i\in R}(i-1)$$、列番号の和を $$t=\sum_{j\in J}j$$ と置く。この直積内の値の和は
+
+$$
+\sum_{i\in R}\sum_{j\in J}\bigl(M(i-1)+j\bigr)
+=Mcs+rt
+$$
+
+になる。行由来の値 $$M(i-1)$$ は同じ行で $$c$$ 回現れ、列由来の値 $$j$$ は同じ列で $$r$$ 回現れるためである。偶奇を固定したことで、行と列を自由に組み合わせてよくなった。
+
+小例の奇数側は $$R=\{1,3\},J=\{3\}$$ なので、$$r=2,c=1,s=2,t=3$$。寄与は $$4\times1\times2+2\times3=14$$。偶数側は $$r=1,c=2,s=1,t=6$$ で、寄与は $$4\times2\times1+1\times6=14$$。二つを足して28になる。
+
+### 必要なのは、公差2の数列の個数と和
+
+区間 $$[l,u]$$ から指定した偶奇だけを選ぶ。最初の該当値を $$f$$、最後を $$g$$ とし、該当値がなければ個数と和をともに0とする。そうでなければ
+
+$$
+k=\frac{g-f}{2}+1,\qquad
+\text{和}=\frac{k(f+g)}{2}
+$$
+
+である。$$f$$ は $$l$$ が希望の偶奇なら $$l$$、違えば $$l+1$$。$$g$$ も同様に $$u$$ または $$u-1$$ とできる。
+
+これを行と列へ使い、行については番号の和から行数を引いて $$s$$ を得る。奇数側と偶数側の $$Mcs+rt$$ を足せば、一つの質問が定数時間で解ける。
+
+法 $$p=998244353$$ の余りが必要なので、積は途中で剰余を取りながら計算する。等差数列の和の2で割る部分を法の下で計算するなら、整数の割り算でなく2の逆元 $$499122177$$ を掛ける。
 
 ## 典型の発動条件
 
-### parity別の分解
+### 周期条件で分け、直積の形を取り戻す
 
-発動条件: 格子点の採否や式が座標和の偶奇だけで切り替わるとき。
+行と列の組に偶奇などの周期条件が付くと、全体では自由な組合せに見えなくても、剰余類を固定すれば独立になることがある。本問では $$i+j\equiv0\pmod2$$ を「両方奇数」「両方偶数」の二つへ分けた。
 
-odd rowsとeven rowsを別々に扱い、それぞれ対応するcolumn parityだけを数える。
+一般に小さい周期 $$k$$ の条件なら、行・列の剰余類を固定し、許される組だけを足す方法を候補にできる。周期が巨大だったり、残る条件が座標の大小に複雑に依存したりすれば、同じ定数個の集約は使えない。
 
-### 等差数列の閉形式
+### 加法的な値の二重和を、出現回数でまとめる
 
-発動条件: 巨大な連続範囲で値またはblock sumが一定差ずつ変化するとき。
+直積 $$R\times J$$ 上の値が $$f(i)+g(j)$$ なら、
 
-まず一行内の公差2の列を合計し、次に2行おきのrow sumsをもう一度合計する。
+$$
+\sum_{i\in R,j\in J}(f(i)+g(j))
+=|J|\sum_{i\in R}f(i)+|R|\sum_{j\in J}g(j)
+$$
+
+と分離できる。同じ項が何回現れるかを見ることで、二重和を一次元の和へ戻せる。本問の番号の規則はちょうどこの形であり、一次元の和も等差数列の公式で計算できる。
 
 ## 問題固有の要素
 
-rectangleの先頭二行についてrow sumを作れば、それ以降は同じparityごとに公差2Mxで増える。
-
-別の問題へ持ち帰る視点: 二次元のaffine gridに周期maskが掛かるとき、residue classごとに一次元の等差列を入れ子にする。
+行を一つ下げると番号が常に $$M$$ 増えることと、チェッカー模様が座標の偶奇だけで決まることが組み合わさっている。数字の配置と0へ置換する条件を、それぞれ式に分けて見ると分離の方法を探しやすい。
 
 ## 正当性
 
-row parityが決まれば残るcolumn parityも決まり、[C,D]内の個数・最初の列・最後の列から一行分の和を求められる。 同parityの隣接行はrow indexが2増えるので、各selected cellの値は2M増え、一行和の公差は2M×selected-column-countとなる。 各queryをparity二ケースの定数回の四則演算だけで評価できる。
+非零マスは、奇数行・奇数列の直積と、偶数行・偶数列の直積へ重複なく分割される。各直積では、元の番号を行由来と列由来へ分ける二重和の変形により、$$Mcs+rt$$ がその領域の総和と一致する。
+
+各行列集合の個数と番号和は、公差2の等差数列として正確に求められる。空の集合の寄与を0とすることで一行・一列などの境界も含む。二つの偶奇の寄与を加えるため、質問の長方形内のすべての値を一度ずつ足した答えになる。
 
 ## 実装上の注意
 
-- [C,D]内で必要parityを持つ最初の列と個数をfloor/ceilの規約を固定して求め、個数0も同じ式で処理する。
-- 元のcell valueは10^18まで達するため、積をmodulo 998244353へ逐次落とし、2での除算はmodular inverseを使う。
+- 行由来の式は $$M(i-1)$$。行番号の和から行数を引く処理を忘れない。
+- 一行や一列の区間には、片方の偶奇が一つもない場合がある。$$f>g$$ を先に処理する。
+- $$Mcs$$ などを元の整数で一度に掛けると64bitでもあふれる。各因子を法の下へ移し、二因子ずつ掛けて剰余を取る。
+- 法で割った後の数を通常の整数除算で2分の1にしない。法の下では逆元を使い、減算後の余りも非負に直す。
 
 ## 復習の核
 
-- 周期mask付き格子和では、まずresidue classを固定して各行の値がどんな数列になるかを見る。
-- 一行分を閉形式にした後、そのrow sum自体が行方向の等差数列にならないか確認する。
+- 巨大な規則的配列は、要素を生成する式と残る条件へ分けて扱う。
+- 周期条件を固定して直積にすると、行と列を独立に集計できる。
+- 二重和は、各一次元の項が何回現れるかで分離する。
 
 ## 計算量と制約
 
 ### 時間
 
-O(Q)、一rectangleの各parity classはO(1)。
+一質問につき二つの偶奇について、定数回の整数・剰余演算を行う。全体は $$O(Q)$$ である。
 
 ### 空間
 
-O(1)補助。
+質問を読みながら順に処理して出力するなら、作業領域は $$O(1)$$。全質問や盤面を保存する必要はない。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 3 sec; Memory limit: 1024 MiB; Constraints: All values in the input are integers.; 1 \le N,M \le 10^9; 1 \le Q \le 2 \times 10^5; 1 \le A_i \le B_i \le N; 1 \le C_i \le D_i \le M
+$$N,M\leq10^9$$ でも、行数・列数に比例した走査はない。$$Q\leq2\times10^5$$ の質問数だけに比例する。番号そのものは64bitに収まるが、多数のマスの総和は収まらないため、途中から法の下で計算する。
 
 ## 出典
 

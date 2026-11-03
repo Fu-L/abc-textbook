@@ -1,7 +1,8 @@
 ---
 title: "ABC255-E — Lucky Numbers"
 draft: true
-authoringUnit: {"problemId":"abc255-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc255-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":2,"claims":[{"key":"correctness","text":"B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。","sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
+headingAliases: {"一次自由度のアフィン伝播":"典型の発動条件","候補パラメータの頻度最大化":"典型の発動条件"}
+authoringUnit: {"problemId":"abc255-e","docPath":"src/content/docs/problems/hybrid/outcome-reorder-counting-contributions/outcome-reorder-counting-contributions-shard-001/abc255-e.md","learningOutcomeIds":["outcome-reorder-counting-contributions"],"baselineId":"prereq-abc-advanced-v1","baselineVersion":"1.0.0","additionalPrerequisiteUnitIds":[],"excludedTopics":["active集合を時刻・座標順に更新するevent sweep、更新列を逆から読むだけの処理、および成分ごとの解を単に掛け合わせる構造判定。"],"tagIds":["tag-contribution-reordering"],"sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"skill":{"name":"abc-explanation-author","version":"1.1.1","digest":"6bd0cedbc6c90633f956c417ce3444db244ddea7555e936896075a507a3349fa"},"revision":3,"claims":[{"key":"correctness","text":"任意の整数 $$z$$ に対し、示した式の数列はすべての隣接和を満たす。逆に、隣接和を満たす数列は初項から一意に決まるので、この形ですべて表される。\n\n固定した $$z$$ に票を送る組 $$(i,j)$$ は、ちょうど $$A_i=X_j$$ を満たす組である。$$X_j$$ は相異なるため、その組数はラッキーな位置数と等しい。従って最大頻度を選べば、全合法数列の最大得点が得られる。候補に一度も現れない初項の得点は0であり、最大値を逃さない。","sourceRevisionIds":["source-abc255-e-problem-dde0a80c90b6a5ec20e4c943ea1eadc9b486c8ba5a36a2ae222afe2f425ce40a","source-abc255-editorial-4098-edf839c6f7d5786b29be087ec28707fcf812feea7ff84a4db64613ce3cd6ba10"],"authorId":"person-codex","verificationStatus":"verified"}],"examples":[],"exercises":[],"kind":"full","primaryProblemId":null,"differenceSummary":null}
 ---
 
 ## 学習の位置
@@ -16,61 +17,109 @@ authoringUnit: {"problemId":"abc255-e","docPath":"src/content/docs/problems/hybr
 
 ## 考察
 
-A_1=Zと置くと和条件から全項が一意に伝播し、A_i=(-1)^(i+1)Z+B_iというZの係数が±1の形になる。
+数列を一つ選んでラッキーナンバーを数える代わりに、各位置から「自分がラッキーになる初項」へ一票を送る。初項が決まると数列全体が決まるため、同じ初項へ集まった票数が、その数列の得点になる。
 
-採用する候補: 各位置・ラッキーナンバーが要求するZへの投票
+### 自由に選べるのは最初の一個だけ
 
-棄却する候補: Zの数値範囲を走査する
+隣接和を満たす数列は無数にある。しかし $$A_{i+1}=S_i-A_i$$ なので、初項を決めれば、残りは順番に確定する。探索すべき自由度は一つである。
 
-S_i,X_jが±10^9でZ候補範囲は広く、必要な候補は入力から導かれるN M個だけである。
+その自由な初項を $$z$$ とし、初項0から作った基準列を $$b$$ とする。
 
-Bを漸化式で作り、全i,jについて候補Z=(-1)^(i+1)(X_j-B_i)を連想配列で数える。最大頻度を答えとする。
+$$
+b_1=0,\qquad b_{i+1}=S_i-b_i.
+$$
+
+初項を0から $$z$$ へ変えると、次の項は $$-z$$、その次は $$+z$$ だけ動く。従って
+
+$$
+A_i=b_i+\varepsilon_i z,
+\qquad
+\varepsilon_i=\begin{cases}1&i\text{ が奇数},\\-1&i\text{ が偶数}\end{cases}
+$$
+
+と書ける。各位置で独立に値を選ぶ問題ではなく、一本のパラメータに従って全位置が動く問題へ変わった。
+
+### 初項の候補を試すだけでは、まだ二乗になる
+
+位置 $$i$$ をラッキーナンバー $$X_j$$ にしたければ、初項は
+
+$$
+z=\varepsilon_i(X_j-b_i)
+$$
+
+でなければならない。少なくとも一つの位置をラッキーにする初項は、この高々 $$NM$$ 個の候補に含まれる。
+
+ただし各候補で数列を作り直すと、さらに $$N$$ 倍かかる。候補を生成した理由を、そのまま得点の計算へ使えないだろうか。
+
+例えば $$S=(5,7,4)$$、ラッキーナンバーが $$1,3$$ なら、基準列は $$b=(0,5,2,2)$$ になる。
+
+| 位置 | 値の式 | 1になる初項 | 3になる初項 |
+| --- | --- | --- | --- |
+| 1 | $$z$$ | 1 | 3 |
+| 2 | $$5-z$$ | 4 | 2 |
+| 3 | $$2+z$$ | -1 | 1 |
+| 4 | $$2-z$$ | 1 | -1 |
+
+初項1は三回現れる。実際に $$A=(1,4,3,1)$$ とすると、ラッキーな位置は1・3・4の三つである。この表は候補リストであると同時に、各候補が何点を得るかの投票表にもなっている。
+
+### 一致条件を、キーごとの頻度へ集約する
+
+すべての組 $$(i,j)$$ について上の初項を計算し、同じ値の出現回数を数える。その最大頻度が答えになる。
+
+ここで $$X_j$$ が相異なることが効く。同じ位置 $$i$$ から、同じ初項へ二票が送られることはない。固定した初項に集まる票は、ラッキーになる位置と一対一に対応する。異なる位置が同じラッキーナンバーになる場合は、当然別々に数えてよい。
+
+手順は、基準列を作り、$$NM$$ 個の初項候補を配列へ入れ、ソートして同値の連続区間の長さを調べるだけである。平衡二分探索木の連想配列で頻度を加算してもよい。
 
 ## 典型の発動条件
 
-### 一次自由度のアフィン伝播
+### 制約を満たす全体を、少数の自由変数で表す
 
-発動条件: 隣接項の式があり、一つの初期値を決めると全列が決まる。
+隣接関係や差分の等式が並ぶ場合、一つの値から残りを伝播できないかを調べる。すべての変数を探索する前に、制約が自由度をどこまで減らすかを見るのである。
 
-A_1をパラメータZとし、各項を符号付きZと定数B_iへ分離する。
+本問では係数が交互に1と-1になるアフィン式が得られた。一般の線形制約でも、自由変数を残した式を作ると、条件を満たす対象の探索をパラメータ空間へ移せる。ただし、本問では各初項が必ず合法な整数列を作る。別の問題で各要素の上下限などがあれば、その実現可能性も別に確認する。
 
-### 候補パラメータの頻度最大化
+### 候補へ条件を投票し、評価の向きを逆にする
 
-発動条件: 各制約を満たすパラメータ値が一意に求まる。
+「候補ごとに、満たす条件を全部調べる」と重いときは、「条件ごとに、それを満たす候補を生成する」を考える。一条件から少数のキーしか生じなければ、キーの頻度や重みの総和で全候補の得点をまとめて求められる。
 
-位置と目標値の各組が要求するZを数え、最多票のZを選ぶ。
+本問では「位置 $$i$$ が $$X_j$$ に等しい」という条件が、初項を一つだけ指定する。投票数と得点が一致するには、同じ得点要素を重複して投票しないことも必要であり、ラッキーナンバーの相異性がそれを保証している。
 
 ## 問題固有の要素
 
-交互和で現れる符号反転を保ったまま一変数化すると、数列最適化が候補値の同値数え上げへ変わる。
-
-別の問題へ持ち帰る視点: 一自由度の構成で評価条件が等式なら、各評価項目が要求するパラメータ値を列挙して投票問題へ落とせる。
+隣接和の等式では、初項の変化が符号を反転しながら伝わる。そのため、位置ごとの一致条件を整数の初項一つへ戻せる。実際に最初の数項を書き出し、自由部分と定数部分を分けると見つけやすい。
 
 ## 正当性
 
-B_1=0、B_i=S_(i-1)-B_(i-1)とすればZに依存しない部分を線形時間で作れる。 A_i=X_jはZ=(-1)^(i+1)(X_j-B_i)と同値なので、最適Zは必ずこの候補集合に含まれる。 A_i=X_jとなるZを全N M組から計算し、同じZの頻度を数えれば、そのZでラッキーになる位置数を直接最大化できる。
+任意の整数 $$z$$ に対し、示した式の数列はすべての隣接和を満たす。逆に、隣接和を満たす数列は初項から一意に決まるので、この形ですべて表される。
+
+固定した $$z$$ に票を送る組 $$(i,j)$$ は、ちょうど $$A_i=X_j$$ を満たす組である。$$X_j$$ は相異なるため、その組数はラッキーな位置数と等しい。従って最大頻度を選べば、全合法数列の最大得点が得られる。候補に一度も現れない初項の得点は0であり、最大値を逃さない。
 
 ## 実装上の注意
 
-- B_iと候補Zは負になり得るため符号付き64ビットで保持し、iの偶奇による符号を一致させる。X_jは相異なるので一位置が同じZへ二重投票しない。
+- 基準列の初項は0。添字を0始まりにするなら、正符号は偶数添字になる。
+- 基準列は入力の交代和になるため、絶対値が $$10^9$$ を超える。基準列・候補キーとも64bit整数で持つ。
+- 負の初項も正当な候補である。配列の添字へ直接使わず、ソートや連想配列で扱う。
+- 同じ候補値を重複除去してから数えると、得点の情報が失われる。
 
 ## 復習の核
 
-- 小さい範囲のZを全探索した結果と比較し、正負のS・X、偶奇位置、同じZへ多くの位置が集まる例を確認する。
+- 等式で結ばれた数列は、まず自由に選べる変数が何個かを調べる。
+- 候補の評価が重いなら、各条件から成立する候補へ寄与を送る。
+- 頻度を得点に読み替える前に、一つの得点要素からの重複投票がないことを示す。
 
 ## 計算量と制約
 
 ### 時間
 
-平衡map版O(NM log(NM))、M候補値数。hash mapなら期待O(NM)。
+基準列の生成が $$O(N)$$、候補の生成が $$O(NM)$$、そのソートと走査が $$O(NM\log(NM))$$。全体も $$O(NM\log(NM))$$ である。
 
 ### 空間
 
-O(NM)、候補Z頻度。
+入力と基準列、$$NM$$ 個の候補を保持して $$O(NM)$$。基準列を逐次作って候補を追加しても、この上界は同じである。
 
 ### 制約との対応
 
-公式制約の確認範囲: Time limit: 4 sec; Memory limit: 1024 MiB; Constraints: 2 \leq N \leq 10^5; 1 \leq M \leq 10; -10^9 \leq S_i \leq 10^9; -10^9 \leq X_i \leq 10^9; X_1 \lt X_2 \lt \cdots \lt X_M; All values in input are integers.
+$$N\leq10^5,M\leq10$$ なので、候補は高々100万個。値域を全走査せず、実際に得点を生む初項だけを整列する。候補の絶対値は $$O(N\times10^9)$$ であり、64bit整数に収まる。
 
 ## 出典
 
