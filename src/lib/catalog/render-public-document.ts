@@ -107,12 +107,11 @@ export const renderPublicDocument = async (
       );
       if (!alias || typeof target !== 'string' || heading.length !== 1)
         throw new Error(`Unknown heading alias target: ${alias}`);
-      if (
-        $('[id]')
-          .toArray()
-          .some((element) => $(element).attr('id') === alias)
-      )
-        throw new Error(`Duplicate heading alias: ${alias}`);
+      const existing = $('[id]').filter((_, element) => $(element).attr('id') === alias);
+      // Some old h3 headings repeat the document title. Full-document rendering
+      // already retains that fragment on h1; title-free public pages need the alias.
+      if (existing.length === 1 && existing.is('h1')) continue;
+      if (existing.length) throw new Error(`Duplicate heading alias: ${alias}`);
       heading.before($('<span></span>').attr({ id: alias, 'aria-hidden': 'true' }));
     }
   }

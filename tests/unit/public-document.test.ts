@@ -14,6 +14,15 @@ describe('accepted document rendering', () => {
     expect($('h2').text()).toBe('新しい導出');
     expect($('p').text()).toBe('本文。');
   });
+  it('reuses a retained title fragment and restores it when the title is omitted', async () => {
+    const source = '---\nheadingAliases:\n  title: current\n---\n\n# Title\n\n## Current';
+    for (const omitTitle of [false, true]) {
+      const $ = load(await renderPublicDocument(source, '/', omitTitle));
+      expect($('#title')).toHaveLength(1);
+      expect($('#title').is('h1')).toBe(!omitTitle);
+      expect($('#current')).toHaveLength(1);
+    }
+  });
   it.each([
     'headingAliases: []',
     'headingAliases:\n  old: missing',
