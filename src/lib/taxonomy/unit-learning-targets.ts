@@ -22,7 +22,7 @@ export const UNIT_LEARNING_TARGETS: Readonly<Record<string, LearningTarget>> = {
   // モデル変換とアルゴリズム設計
   'unit-chapter-modeling': [
     '緑色',
-    '探索・集計・貪欲法を選ぶ前に、保存すべき条件を言葉にする習慣を付ける。',
+    '探索や集計を選ぶときに、答えに必要な条件と、計算を減らす根拠を言葉にするための入口です。',
   ],
   'unit-normalization': [
     '水色',
