@@ -13,6 +13,7 @@ import {
 } from '../../src/lib/taxonomy/canonical-taxonomy-materialization.js';
 import { loadFinalTaxonomySourceContext } from '../../src/lib/taxonomy/final-taxonomy-build.js';
 import { SINGLE_PROBLEM_TAG_IDS } from '../../src/lib/taxonomy/final-taxonomy-policy.js';
+import { unitLearningTarget } from '../../src/lib/taxonomy/unit-learning-targets.js';
 
 describe('full authored LearningUnit navigation', () => {
   let expected: CanonicalTaxonomyMaterialization;
@@ -61,6 +62,22 @@ describe('full authored LearningUnit navigation', () => {
     expect(result.chapters).toHaveLength(9);
     expect(result.problemHomeById.size).toBe(868);
   });
+
+  it.each(['color', 'rating', 'reason'] as const)(
+    'rejects a chapter learning target whose %s differs from the canonical definition',
+    (field) => {
+      const id = 'unit-chapter-modeling';
+      const output = actual.learningUnits.find(({ value }) => value.id === id);
+      if (!output) throw new Error('Missing chapter fixture');
+      const target = unitLearningTarget(id);
+      const line = `導入対象の目安: **${target.color}（${target.rating}）**。${target.reason}`;
+      expect(output.document).toContain(line);
+      const document = output.document.replace(line, line.replace(target[field], '変更された値'));
+      expect(() => buildLearningPath(withDocument(id, document), expected)).toThrow(
+        `LEARNING_TARGET:${id}`,
+      );
+    },
+  );
 
   it.each(['remove source', 'replace source URL', 'remove taxonomy identity'])(
     'rejects reference drift while allowing authored additions: %s',
